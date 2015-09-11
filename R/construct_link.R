@@ -4,5 +4,5 @@ construct.link <- function(request, type){
 
 link.applications <- function(){}
 link.nodes <- function(){}
-link.users <- function(){}
+link.users <- function(user_id){}
 link.files <- function(){}
