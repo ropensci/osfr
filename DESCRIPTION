@@ -5,7 +5,8 @@ Authors@R: 'Chris Hartgerink <c.hartgerink@gmail.com> [aut, cre]'
 Description: What the package does (one paragraph)
 Depends: R (>= 3.2.1)
 Imports:
-	httr
+	httr,
+	jsonlite
 License: CC-0 v1.0
 BugReports: https://github.com/chartgerink/osfr/issues
 LazyData: true
