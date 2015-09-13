@@ -1,5 +1,6 @@
 #' Retrieve all users and their information from the OSF
 #'
+#' @param id The user_id to search for. If NULL (default), returns all users.
 #' @return Object dataframe including, for each user:
 #' \enumerate{
 #' \item id
@@ -22,10 +23,12 @@
 #' \item nodes
 #' }
 
-get.users.all <- function(){
-  raw <- GET(construct.link("users"))
+get.users <- function(id = NULL){
+  if (is.null(id)){
+    raw <- GET(construct.link("users"))
 
-  result <- fromJSON(content(raw, 'text'))$data
+    result <- fromJSON(content(raw, 'text'))$data
 
-  return(result)
+    return(result)
+  }
 }
