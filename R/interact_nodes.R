@@ -22,7 +22,7 @@
 #' \item registrations
 #' }
 
-nodes.all <- function(){
+get.nodes.all <- function(){
   raw <- GET(construct.link("nodes"))
 
   result <- fromJSON(content(raw, 'text'))$data
@@ -35,7 +35,7 @@ nodes.all <- function(){
 #' @param id The node_id to be deleted.
 #' @return
 
-nodes.delete <- function(id){
+delete.nodes <- function(id){
   link <- construct.link(paste("nodes", id, sep = "/"))
 
   DELETE(link)

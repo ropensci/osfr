@@ -22,7 +22,7 @@
 #' \item nodes
 #' }
 
-users.all <- function(){
+get.users.all <- function(){
   raw <- GET(construct.link("users"))
 
   result <- fromJSON(content(raw, 'text'))$data
