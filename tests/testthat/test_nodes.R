@@ -1,5 +1,5 @@
 library(httr)
-library(jsonlite)
+suppressPackageStartupMessages(library(jsonlite, quietly=TRUE))
 
 context("test nodes functions")
 
