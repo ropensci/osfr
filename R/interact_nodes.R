@@ -1,4 +1,4 @@
-#' Retrieve all public nodes on the OSF
+#' Retrieve nodes viewable to the authenticated account on the OSF
 
 #' @return Object dataframe including, for each node:
 #' \enumerate{
@@ -22,10 +22,16 @@
 #' \item registrations
 #' }
 
-get.nodes.all <- function(){
-  raw <- GET(construct.link("nodes"))
+get.nodes <- function(id = NULL){
+  if (is.null(id)){
+    raw <- GET(construct.link("nodes"))
 
-  result <- fromJSON(content(raw, 'text'))$data
+    result <- fromJSON(content(raw, 'text'))$data
+  } else {
+    raw <- GET(construct.link(paste("nodes", id, sep = '/')))
+
+    result <- fromJSON(content(raw, 'text'))$data
+  }
 
   return(result)
 }
