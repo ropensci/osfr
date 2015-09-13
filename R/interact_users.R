@@ -1,4 +1,4 @@
-#' Retrieve all users and their information from the OSF API
+#' Retrieve all users and their information from the OSF
 #'
 #' @return Object dataframe including, for each user:
 #' \enumerate{
