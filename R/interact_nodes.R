@@ -30,3 +30,13 @@ nodes.all <- function(){
   return(result)
 }
 
+#' Delete a node with its id
+#'
+#' @param id The node_id to be deleted.
+#' @return
+
+nodes.delete <- function(id){
+  link <- construct.link(paste("nodes", id, sep = "/"))
+
+  DELETE(link)
+}
