@@ -36,3 +36,17 @@ get.users <- function(id = NULL){
 
   return(result)
 }
+
+#'
+#'
+#' @param
+#' @return
+
+put.users <- function(){}
+
+#'
+#'
+#' @param
+#' @return
+
+patch.users <- function(){}

@@ -1,4 +1,4 @@
-#' Retrieve nodes viewable to the authenticated account on the OSF
+#' Retrieve nodes viewable to the authenticated account on the OSF.
 
 #' @return Object dataframe including, for each node:
 #' \enumerate{
@@ -35,6 +35,24 @@ get.nodes <- function(id = NULL){
 
   return(result)
 }
+
+#'
+#'
+#' @param
+#' @return
+post.nodes <- function(){}
+
+#'
+#'
+#' @param
+#' @return
+put.nodes <- function(){}
+
+#'
+#'
+#' @param
+#' @return
+patch.nodes <- function(){}
 
 #' Delete a node with its id
 #'

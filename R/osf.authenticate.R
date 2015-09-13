@@ -1,0 +1,1 @@
+osf.authenticate <- function(){}
