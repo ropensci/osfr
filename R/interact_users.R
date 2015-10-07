@@ -1,6 +1,9 @@
 #' Retrieve all users and their information from the OSF
 #'
-#' @param id The user_id to search for. If NULL (default), returns all users.
+#' @param id The user_id to search for. If NULL (default), returns all users;
+#' if "me" returns logged in user (do not forget to authenticate).
+#' @param user The username to log in with (temporary until OAUTH2.0)
+#' @param password The password to log in with (temporary until OAUTH2.0)
 #' @return Object dataframe including, for each user:
 #' \enumerate{
 #' \item id
@@ -23,7 +26,7 @@
 #' \item nodes
 #' }
 
-get.users <- function(id = NULL, user = NULL, password = NULL){
+get.users <- function(id = NULL, user = NULL, password = NULL, nodes = FALSE){
   if (is.null(id)){
     raw <- GET(construct.link("users"))
 
@@ -33,12 +36,20 @@ get.users <- function(id = NULL, user = NULL, password = NULL){
       warning("Please input username")}
     if(is.null(password)){
       warning("Please input password")}
-    raw <- GET(construct.link("users/me"),
+    if(nodes == TRUE){
+      raw <- GET(construct.link("users/me/nodes"),
+                 authenticate(user, password))
+    } else {raw <- GET(construct.link("users/me"),
                authenticate(user, password))
+    }
 
     result <- fromJSON(content(raw, 'text'))
   } else {
-    raw <- GET(construct.link(paste0("users/?filter[id]=", id)))
+    if(nodes == TRUE){
+      raw <- GET(construct.link(paste0("users/?filter[id]=", id, "/nodes")))
+    } else{
+      raw <- GET(construct.link(paste0("users/?filter[id]=", id)))
+      }
 
     result <- fromJSON(content(raw, 'text'))
   }
