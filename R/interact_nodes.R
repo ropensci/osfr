@@ -36,28 +36,16 @@ get.nodes <- function(id = NULL){
   return(result)
 }
 
-#'
-#'
-#' @param
-#' @return
 post.nodes <- function(){}
 
-#'
-#'
-#' @param
-#' @return
 put.nodes <- function(){}
 
-#'
-#'
-#' @param
-#' @return
 patch.nodes <- function(){}
 
 #' Delete a node with its id
 #'
 #' @param id The node_id to be deleted.
-#' @return
+#' @return 1
 
 delete.nodes <- function(id){
   link <- construct.link(paste("nodes", id, sep = "/"))
