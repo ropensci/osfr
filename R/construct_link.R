@@ -6,7 +6,7 @@
 #' construct.link("nodes/NODE_ID/files/")
 
 construct.link <- function(request = NULL){
-  base <- "https://staging2-api.osf.io/v2/"
+  base <- "https://test-api.osf.io/v2/"
 
   result <- paste0(base, request)
 
