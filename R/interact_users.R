@@ -27,7 +27,7 @@ get.users <- function(id = NULL){
   if (is.null(id)){
     raw <- GET(construct.link("users"))
 
-    result <- fromJSON(content(raw, 'text'))$data
+    result <- fromJSON(content(raw, 'text'))
   } else {
     raw <- GET(construct.link(paste0("users/?filter[id]=", id)))
 
