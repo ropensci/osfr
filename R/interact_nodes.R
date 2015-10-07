@@ -26,11 +26,11 @@ get.nodes <- function(id = NULL){
   if (is.null(id)){
     raw <- GET(construct.link("nodes"))
 
-    result <- fromJSON(content(raw, 'text'))$data
+    result <- fromJSON(content(raw, 'text'))
   } else {
     raw <- GET(construct.link(paste("nodes", id, sep = '/')))
 
-    result <- fromJSON(content(raw, 'text'))$data
+    result <- fromJSON(content(raw, 'text'))
   }
 
   return(result)
