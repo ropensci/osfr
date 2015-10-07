@@ -1,3 +1,1 @@
-osf.authenticate <- function(){
-
-}
+osf.authenticate <- function(){}
