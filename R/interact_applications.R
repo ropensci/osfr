@@ -1,4 +1,9 @@
-get.applications <- function(id = NULL, user, password){
+get.applications <- function(id = NULL, user = NULL, password = NULL){
+  if(is.null(user)){
+    warning("Please input username")}
+  if(is.null(password)){
+    warning("Please input password")}
+
   if (is.null(id)){
     raw <- GET(construct.link("applications"), authenticate(user, password))
 

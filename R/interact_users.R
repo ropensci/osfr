@@ -23,9 +23,18 @@
 #' \item nodes
 #' }
 
-get.users <- function(id = NULL){
+get.users <- function(id = NULL, user = NULL, password = NULL){
   if (is.null(id)){
     raw <- GET(construct.link("users"))
+
+    result <- fromJSON(content(raw, 'text'))
+  } else if (id == "me"){
+    if(is.null(user)){
+      warning("Please input username")}
+    if(is.null(password)){
+      warning("Please input password")}
+    raw <- GET(construct.link("users/me"),
+               authenticate(user, password))
 
     result <- fromJSON(content(raw, 'text'))
   } else {
