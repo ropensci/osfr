@@ -63,10 +63,10 @@ delete.nodes <- function(id = NULL, user = NULL, password = NULL){
   if(!temp$status_code == 204){
     cat(sprintf('Deletion of node %s failed, errorcode %s\n',
                 id, temp$status_code))
-    res = FALSE
+    res <- FALSE
   } else {
     cat(sprintf('Deletion of node %s succeeded\n', id))
-    res = TRUE}
+    res <- TRUE}
 
   return(res)
 }
