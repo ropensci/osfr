@@ -30,12 +30,21 @@ get.users <- function(id = NULL, user = NULL, password = NULL, nodes = FALSE){
   return(result)
 }
 
-put.users <- function(id = NULL, user = NULL, password = NULL){}
+put.users <- function(id = NULL, user = NULL, password = NULL){
+
+  # Replace the 'me' string with the actual id
+  if(id == 'me'){
+    id <- get.users(id = id, user = user, password = password)$data$id}
+}
 
 patch.users <- function(id = 'me',
                         user = NULL,
                         password = NULL,
-                        config = list()){
+                        full_name = NULL,
+                        given_name = NULL,
+                        middle_names = NULL,
+                        family_name = NULL,
+                        suffix = NULL){
   # To prevent errors due to not being logged in
   if (is.null(user)){
     stop("Please input username")}
@@ -46,14 +55,15 @@ patch.users <- function(id = 'me',
   if (!(class(id) == 'character' & length(id) == 1)){
     stop('Please use characters and specify only ONE id')}
 
-  # Replace the 'me' string with the actual id
-  if(id == 'me'){
-    id <- get.users(id = id, user = user, password = password)$data$id}
-
   link <- construct.link(paste0('users/', id))
 
-  temp <- httr::PATCH(link, config = config,
-                      httr::authenticate(user, password))
+  edits <- list(full_name = full_name,
+                given_name = given_name,
+                middle_names = middle_names,
+                family_name = family_name,
+                suffix = suffix)
+
+  temp <- httr::PATCH(url = link, body = edits, httr::authenticate(user, password))
 
   if (!temp$status_code == 200){
     cat(sprintf('Patch of user %s failed, errorcode %s\n',
