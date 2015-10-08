@@ -12,3 +12,6 @@ construct.link <- function(request = NULL){
 
   return(result)
 }
+
+
+osf.authenticate <- function(){}
