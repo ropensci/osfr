@@ -1,31 +1,3 @@
-#' Retrieve all users and their information from the OSF
-#'
-#' @param id The user_id to search for. If NULL (default), returns all users;
-#' if "me" returns logged in user (do not forhttr::get to httr::authenticate).
-#' @param user The username to log in with (temporary until OAUTH2.0)
-#' @param password The password to log in with (temporary until OAUTH2.0)
-#' @return Object dataframe including, for each user:
-#' \enumerate{
-#' \item id
-#' \item fullname
-#' \item given_name
-#' \item middle_names
-#' \item family_name
-#' \item suffix
-#' \item date_registered
-#' \item profile_image_url
-#' \item gitHub
-#' \item scholar
-#' \item personal_website
-#' \item twitter
-#' \item linkedIn
-#' \item impactStory
-#' \item orcid
-#' \item researcherId
-#' \item links
-#' \item nodes
-#' }
-
 get.users <- function(id = NULL, user = NULL, password = NULL, nodes = FALSE){
   if (is.null(id)){
     raw <- httr::GET(construct.link("users"))
@@ -61,5 +33,11 @@ put.users <- function(id = NULL, user = NULL, password = NULL){}
 
 patch.users <- function(id = 'me',
                         user = NULL,
-                        password = NULL
-                        ){}
+                        password = NULL,
+                        full_name = NULL,
+                        given_name = NULL,
+                        middle_names = NULL,
+                        family_name = NULL,
+                        suffix = NULL){
+
+}
