@@ -50,17 +50,17 @@ patch.nodes <- function(){}
 #' @return Boolean TRUE if deletion succeeded
 
 delete.nodes <- function(id = NULL, user = NULL, password = NULL){
-  if(is.null(id)){
+  if (is.null(id)){
     break('Please input node to delete')}
-  if(is.null(user)){
+  if (is.null(user)){
     warning("Please input username")}
-  if(is.null(password)){
+  if (is.null(password)){
     warning("Please input password")}
   link <- construct.link(paste("nodes", id, sep = "/"))
 
   temp <- httr::DELETE(link, httr::authenticate(user, password))
 
-  if(!temp$status_code == 204){
+  if (!temp$status_code == 204){
     cat(sprintf('Deletion of node %s failed, errorcode %s\n',
                 id, temp$status_code))
     res <- FALSE

@@ -10,9 +10,10 @@ get.users <- function(id = NULL, user = NULL, password = NULL, nodes = FALSE){
       warning("Please input password")}
     if(nodes == TRUE){
       raw <- httr::GET(construct.link("users/me/nodes"),
-                 httr::authenticate(user, password))
-    } else {raw <- httr::GET(construct.link("users/me"),
-               httr::authenticate(user, password))
+                       httr::authenticate(user, password))
+    } else {
+      raw <- httr::GET(construct.link("users/me"),
+                       httr::authenticate(user, password))
     }
 
     result <- rjson::fromJSON(content(raw, 'text'))
@@ -21,7 +22,7 @@ get.users <- function(id = NULL, user = NULL, password = NULL, nodes = FALSE){
       raw <- httr::GET(construct.link(paste0("users/?filter[id]=", id, "/nodes")))
     } else{
       raw <- httr::GET(construct.link(paste0("users/?filter[id]=", id)))
-      }
+    }
 
     result <- rjson::fromJSON(content(raw, 'text'))
   }
@@ -34,10 +35,33 @@ put.users <- function(id = NULL, user = NULL, password = NULL){}
 patch.users <- function(id = 'me',
                         user = NULL,
                         password = NULL,
-                        full_name = NULL,
-                        given_name = NULL,
-                        middle_names = NULL,
-                        family_name = NULL,
-                        suffix = NULL){
+                        config = list()){
+  # To prevent errors due to not being logged in
+  if (is.null(user)){
+    stop("Please input username")}
+  if (is.null(password)){
+    stop("Please input password")}
+  if (is.null(id)){
+    stop("Please input an id")}
+  if (!(class(id) == 'character' & length(id) == 1)){
+    stop('Please use characters and specify only ONE id')}
 
+  # Replace the 'me' string with the actual id
+  if(id == 'me'){
+    id <- get.users(id = id, user = user, password = password)$data$id}
+
+  link <- construct.link(paste0('users/', id))
+
+  temp <- httr::PATCH(link, config = config,
+                      httr::authenticate(user, password))
+
+  if (!temp$status_code == 200){
+    cat(sprintf('Patch of user %s failed, errorcode %s\n',
+                id, temp$status_code))
+    res <- FALSE
+  } else {
+    cat(sprintf('Patch of user %s succeeded\n', id))
+    res <- TRUE}
+
+  return(res)
 }
