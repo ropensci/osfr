@@ -1,7 +1,7 @@
 #' Retrieve all users and their information from the OSF
 #'
 #' @param id The user_id to search for. If NULL (default), returns all users;
-#' if "me" returns logged in user (do not forget to authenticate).
+#' if "me" returns logged in user (do not forhttr::get to httr::authenticate).
 #' @param user The username to log in with (temporary until OAUTH2.0)
 #' @param password The password to log in with (temporary until OAUTH2.0)
 #' @return Object dataframe including, for each user:
@@ -28,35 +28,38 @@
 
 get.users <- function(id = NULL, user = NULL, password = NULL, nodes = FALSE){
   if (is.null(id)){
-    raw <- GET(construct.link("users"))
+    raw <- httr::GET(construct.link("users"))
 
-    result <- fromJSON(content(raw, 'text'))
+    result <- rjson::fromJSON(content(raw, 'text'))
   } else if (id == "me"){
     if(is.null(user)){
       warning("Please input username")}
     if(is.null(password)){
       warning("Please input password")}
     if(nodes == TRUE){
-      raw <- GET(construct.link("users/me/nodes"),
-                 authenticate(user, password))
-    } else {raw <- GET(construct.link("users/me"),
-               authenticate(user, password))
+      raw <- httr::GET(construct.link("users/me/nodes"),
+                 httr::authenticate(user, password))
+    } else {raw <- httr::GET(construct.link("users/me"),
+               httr::authenticate(user, password))
     }
 
-    result <- fromJSON(content(raw, 'text'))
+    result <- rjson::fromJSON(content(raw, 'text'))
   } else {
     if(nodes == TRUE){
-      raw <- GET(construct.link(paste0("users/?filter[id]=", id, "/nodes")))
+      raw <- httr::GET(construct.link(paste0("users/?filter[id]=", id, "/nodes")))
     } else{
-      raw <- GET(construct.link(paste0("users/?filter[id]=", id)))
+      raw <- httr::GET(construct.link(paste0("users/?filter[id]=", id)))
       }
 
-    result <- fromJSON(content(raw, 'text'))
+    result <- rjson::fromJSON(content(raw, 'text'))
   }
 
   return(result)
 }
 
-put.users <- function(){}
+put.users <- function(id = NULL, user = NULL, password = NULL){}
 
-patch.users <- function(){}
+patch.users <- function(id = 'me',
+                        user = NULL,
+                        password = NULL
+                        ){}

@@ -4,10 +4,15 @@
 \alias{get.users}
 \title{Retrieve all users and their information from the OSF}
 \usage{
-get.users(id = NULL)
+get.users(id = NULL, user = NULL, password = NULL, nodes = FALSE)
 }
 \arguments{
-\item{id}{The user_id to search for. If NULL (default), returns all users.}
+\item{id}{The user_id to search for. If NULL (default), returns all users;
+if "me" returns logged in user (do not forget to authenticate).}
+
+\item{user}{The username to log in with (temporary until OAUTH2.0)}
+
+\item{password}{The password to log in with (temporary until OAUTH2.0)}
 }
 \value{
 Object dataframe including, for each user:

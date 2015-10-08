@@ -1,4 +1,4 @@
-#' Retrieve nodes viewable to the authenticated account on the OSF.
+#' Retrieve nodes viewable to the httr::authenticated account on the OSF.
 
 #' @return Object dataframe including, for each node:
 #' \enumerate{
@@ -24,13 +24,13 @@
 
 get.nodes <- function(id = NULL){
   if (is.null(id)){
-    raw <- GET(construct.link("nodes"))
+    raw <- httr::GET(construct.link("nodes"))
 
-    result <- fromJSON(content(raw, 'text'))
+    result <- rjson::fromJSON(content(raw, 'text'))
   } else {
-    raw <- GET(construct.link(paste("nodes", id, sep = '/')))
+    raw <- httr::GET(construct.link(paste("nodes", id, sep = '/')))
 
-    result <- fromJSON(content(raw, 'text'))
+    result <- rjson::fromJSON(content(raw, 'text'))
   }
 
   return(result)
@@ -58,7 +58,7 @@ delete.nodes <- function(id = NULL, user = NULL, password = NULL){
     warning("Please input password")}
   link <- construct.link(paste("nodes", id, sep = "/"))
 
-  temp <- DELETE(link, authenticate(user, password))
+  temp <- httr::DELETE(link, httr::authenticate(user, password))
 
   if(!temp$status_code == 204){
     cat(sprintf('Deletion of node %s failed, errorcode %s\n',
