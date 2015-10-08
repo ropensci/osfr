@@ -27,6 +27,10 @@ get.users <- function(id = NULL, user = NULL, password = NULL, nodes = FALSE){
     result <- rjson::fromJSON(content(raw, 'text'))
   }
 
+  if (names(results) == 'errors'){
+    stop("Incorrect password")
+  }
+
   return(result)
 }
 
