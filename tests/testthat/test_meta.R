@@ -1,4 +1,4 @@
-context("Authentication procedure")
+context("Interacting with API")
 
 test_that("link construction is functional", {
 	expect_that(construct.link(), matches(".*/v2.?$"))
