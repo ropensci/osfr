@@ -5,13 +5,13 @@ get.applications <- function(id = NULL, user = NULL, password = NULL){
     warning("Please input password")}
 
   if (is.null(id)){
-    raw <- httr::GET(construct.link("applications"), authenticate(user, password))
+    raw <- httr::GET(construct.link("applications"), httr::authenticate(user, password))
 
-    result <- rjson::fromJSON(content(raw, 'text'))
+    result <- rjson::fromJSON(httr::content(raw, 'text'))
   } else {
-    raw <- httr::GET(construct.link(paste0("applications/?filter[id]=", id)), authenticate(user, password))
+    raw <- httr::GET(construct.link(paste0("applications/?filter[id]=", id)), httr::authenticate(user, password))
 
-    result <- rjson::fromJSON(content(raw, 'text'))
+    result <- rjson::fromJSON(httr::content(raw, 'text'))
   }
 
   return(result)

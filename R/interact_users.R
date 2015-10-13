@@ -2,7 +2,7 @@ get.users <- function(id = NULL, user = NULL, password = NULL, nodes = FALSE){
   if (is.null(id)){
     raw <- httr::GET(construct.link("users"))
 
-    result <- rjson::fromJSON(content(raw, 'text'))
+    result <- rjson::fromJSON(httr::content(raw, 'text'))
   } else if (id == "me"){
     if(is.null(user)){
       warning("Please input username")}
@@ -16,7 +16,7 @@ get.users <- function(id = NULL, user = NULL, password = NULL, nodes = FALSE){
                        httr::authenticate(user, password))
     }
 
-    result <- rjson::fromJSON(content(raw, 'text'))
+    result <- rjson::fromJSON(httr::content(raw, 'text'))
   } else {
     if(nodes == TRUE){
       raw <- httr::GET(construct.link(paste0("users/?filter[id]=", id, "/nodes")))
@@ -24,11 +24,7 @@ get.users <- function(id = NULL, user = NULL, password = NULL, nodes = FALSE){
       raw <- httr::GET(construct.link(paste0("users/?filter[id]=", id)))
     }
 
-    result <- rjson::fromJSON(content(raw, 'text'))
-  }
-
-  if (names(result) == 'errors'){
-    stop("Incorrect password")
+    result <- rjson::fromJSON(httr::content(raw, 'text'))
   }
 
   return(result)

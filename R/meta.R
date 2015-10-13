@@ -1,9 +1,28 @@
+#' Welcome function
+#'
+#' @param user User account
+#' @param password Password
+#'
+#' @return Information about OSF version and user in list format
+
+welcome <- function(user = NULL, password = NULL){
+  call <- httr::GET(url = construct.link(), httr::authenticate(user, password))
+
+  res <- rjson::fromJSON(httr::content(call, 'text'))
+
+  if (is.null(res$meta$current_user)) warning("Currently not logged in\n")
+  if (!is.null(res$meta$current_user)) cat(sprintf("Welcome user_id %s",
+                                                   res$meta$current_user$data$id))
+
+  return(res)
+}
+
 #' Construct an API link with proper base
 
 #' @param request The request link to be combined with the base API link.
 #' @return The full request link with proper base
 #' @examples
-#' construct.link("nodes/NODE_ID/files/")
+#' construct.link("nodes/{node_id}/files/")
 
 construct.link <- function(request = NULL){
   base <- "https://test-api.osf.io/v2/"
@@ -13,5 +32,5 @@ construct.link <- function(request = NULL){
   return(result)
 }
 
-
-osf.authenticate <- function(){}
+# Empty function until OAUTH2.0 is implemented
+login <- function(){}
