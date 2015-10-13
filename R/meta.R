@@ -6,7 +6,10 @@
 #' @return Information about OSF version and user in list format
 
 welcome <- function(user = NULL, password = NULL){
-  call <- httr::GET(url = construct.link(), httr::authenticate(user, password))
+  if (is.null(user) | is.null(password)){
+    call <- httr::GET(url = construct.link())
+  } else {
+  call <- httr::GET(url = construct.link(), httr::authenticate(user, password))}
 
   res <- rjson::fromJSON(httr::content(call, 'text'))
 
