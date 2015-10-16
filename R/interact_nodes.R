@@ -99,7 +99,57 @@ post.nodes <- function(user = NULL,
   return(res)
 }
 
-put.nodes <- function(){}
+put.nodes <- function(id = NULL,
+                      user = NULL,
+                      password = NULL,
+                      type = 'nodes',
+                      title = NULL,
+                      description = NULL,
+                      category = 'project',
+                      tags = NULL,
+                      public = 'true'){
+  if(is.null(id)){
+    stop("Requires id")}
+  if(is.null(user)){
+    stop("Requires username")}
+  if(is.null(password)){
+    stop("Requires password")}
+  if(is.null(title)){
+    stop("Requires title")}
+  if(!category %in% c('project',
+                      'hypothesis',
+                      'methods and measures',
+                      'procedure',
+                      'instrumentation',
+                      'data',
+                      'analysis',
+                      'communication',
+                      'other')){
+    stop("Please input proper category, see documentation")}
+
+  link <- construct.link(paste0('nodes/', id, '/'))
+
+  edits <- list(data = list(type = type,
+                            id = id,
+                            attributes = list(
+                              title = title,
+                              description = description,
+                              category = category,
+                              tags = tags,
+                              public = public
+                            )))
+
+  call <- httr::PUT(url = link,
+                     body = edits, encode = "json",
+                     httr::authenticate(user, password))
+
+  if (!call$status_code == 200){
+    stop(sprintf("Update of node %s failed", id))
+  }
+
+  res <- rjson::fromJSON(httr::content(call, 'text'))
+  return(res)
+}
 
 patch.nodes <- function(){}
 
