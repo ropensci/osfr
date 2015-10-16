@@ -28,11 +28,63 @@ test_that("contributors and files extraction functions", {
 	})
 
 test_that("post.nodes operates properly", {
-
-	})
-
-
-test_that("delete.nodes operates properly", {
-	
+	expect_that(class(post.nodes(user = 'h.schwarzenegger@gmail.com',
+		 password = 'testingtesting',
+		  type = 'nodes',
+		   title = 'crap',
+		    description = NULL,
+		     category = 'project',
+		      public = 'true',
+		       tags = c("tfadgfdagdf", "tgfhdjkga"))), matches('list'))
+	expect_that(class(post.nodes(user = 'h.schwarzenegger@gmail.com',
+		 password = 'testingtesting',
+		  type = 'nodes',
+		   title = 'crap',
+		    description = "test")), matches('list'))
+		expect_that(class(post.nodes(user = 'h.schwarzenegger@gmail.com',
+		 password = 'testingtesting',
+		  type = 'nodes',
+		   title = 'crap',
+		    description = "test", category = "hypothesis")), matches('list'))
+		expect_that(class(post.nodes(user = 'h.schwarzenegger@gmail.com',
+		 password = 'testingtesting',
+		  type = 'nodes',
+		   title = 'crap',
+		    description = "test", category = "methods and measures")), matches('list'))
+		expect_that(class(post.nodes(user = 'h.schwarzenegger@gmail.com',
+		 password = 'testingtesting',
+		  type = 'nodes',
+		   title = 'crap',
+		    description = "test", category = "procedure")), matches('list'))
+		expect_that(class(post.nodes(user = 'h.schwarzenegger@gmail.com',
+		 password = 'testingtesting',
+		  type = 'nodes',
+		   title = 'crap',
+		    description = "test", category = "instrumentation")), matches('list'))
+		expect_that(class(post.nodes(user = 'h.schwarzenegger@gmail.com',
+		 password = 'testingtesting',
+		  type = 'nodes',
+		   title = 'crap',
+		    description = "test", category = "data")), matches('list'))
+		expect_that(class(post.nodes(user = 'h.schwarzenegger@gmail.com',
+		 password = 'testingtesting',
+		  type = 'nodes',
+		   title = 'crap',
+		    description = "test", category = "analysis")), matches('list'))
+		expect_that(class(post.nodes(user = 'h.schwarzenegger@gmail.com',
+		 password = 'testingtesting',
+		  type = 'nodes',
+		   title = 'crap',
+		    description = "test", category = "communication")), matches('list'))
+		expect_that(class(post.nodes(user = 'h.schwarzenegger@gmail.com',
+		 password = 'testingtesting',
+		  type = 'nodes',
+		   title = 'crap',
+		    description = "test", category = "other")), matches('list'))
+		expect_that(post.nodes(user = 'h.schwarzenegger@gmail.com',
+		 password = 'testingtesting',
+		  type = 'nodes',
+		   title = 'crap',
+		    description = "test", category = "hypofdthesis"), throws_error("Please input proper category, see documentation"))
 	})
 
