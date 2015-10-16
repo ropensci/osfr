@@ -1,4 +1,9 @@
+# Need to update authentication upon OAUTH2.0 implementation
 context("test nodes functions")
+
+# Implement something along the lines of posting a node and saving the id
+# such that it can be deleted during testing
+# do not want to delete actual nodes
 
 test_that("get.nodes returns for different account types", {
 	expect_that(class(get.nodes(id = NULL))[1], matches('list'))
@@ -21,3 +26,13 @@ test_that("contributors and files extraction functions", {
 	expect_that(get.nodes('nu97z', children = TRUE, contributors = TRUE), throws_error("Specify contributors OR files OR children"))
 	expect_that(get.nodes('nu97z', files = TRUE, children = TRUE, contributors = TRUE), throws_error("Specify contributors OR files OR children"))
 	})
+
+test_that("post.nodes operates properly", {
+
+	})
+
+
+test_that("delete.nodes operates properly", {
+	
+	})
+

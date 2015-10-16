@@ -77,28 +77,26 @@ post.nodes <- function(user = NULL,
                       'other')){
     stop("Please input proper category, see documentation")}
 
-  link <- construct.link('nodes')
+  link <- construct.link('nodes/')
 
-  edits <- list(type = type,
-                attributes = list(
-                  title = title,
-                  description = description,
-                  category = category,
-                  tags = tags,
-                  public = public))
+  edits <- list(data = list(type = type,
+                            attributes = list(
+                              title = title,
+                              description = description,
+                              category = category,
+                              tags = tags,
+                              public = public
+                            )))
 
-  temp <- httr::POST(url = link,
-                     body = edits,
+  call <- httr::POST(url = link,
+                     body = edits, encode = "json",
                      httr::authenticate(user, password))
-
-  if (!temp$status_code == 201){
-    stop(sprintf("Creation of new %s failed", ifelse(category == 'project',
-                                                     'project',
-                                                     'component')))
+  if (!call$status_code == 201){
+    stop(sprintf("Creation of new %s failed", category))
   }
 
-  re
-
+  res <- rjson::fromJSON(httr::content(call, 'text'))
+  return(res)
 }
 
 put.nodes <- function(){}
