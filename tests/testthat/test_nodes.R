@@ -104,6 +104,22 @@ test_that("put.nodes operates properly", {
 		    description = "test", category = "hypofdthesis"), throws_error("Please input proper category, see documentation"))
 	})
 
+test_that("patch.nodes operates properly", {
+	expect_that(class(patch.nodes(id = "jqdn2", user = 'h.schwarzenegger@gmail.com',
+		 password = 'testingtesting',
+		  type = 'nodes',
+		   title = 'From tests',
+		    description = NULL,
+		     category = 'project',
+		      public = 'true',
+		       tags = c("tfadgfdagdf", "tgfhdjkga"))), matches('list'))
+	expect_that(patch.nodes(id = "jqdn2", user = 'h.schwarzenegger@gmail.com',
+		 password = 'testingtesting',
+		  type = 'nodes',
+		   title = 'From tests',
+		    description = "test", category = "hypofdthesis"), throws_error("Please input proper category, see documentation"))
+	})
+
 test_that("nodes are deleted properly", {
 	x = get.users(id = 'me', user = 'h.schwarzenegger@gmail.com', password = 'testingtesting')
 	y = rjson::fromJSON(httr::content(httr::GET(x$data$relationships$nodes$links$related$href), 'text'))
