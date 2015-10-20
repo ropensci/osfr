@@ -88,6 +88,11 @@ test_that("post.nodes operates properly", {
 		    description = "test", category = "hypofdthesis"), throws_error("Please input proper category, see documentation"))
 	})
 
+test_that("get.nodes.contributors works properly", {
+	expect_that(class(get.nodes.contributors('jqdn2', 'tyhc6')), matches('list'))
+	expect_that(class(get.nodes.contributors(node_id = '3hu4n', user_id = 'tyhc6', user = 'h.schwarzenegger@gmail.com', password = 'testingtesting')), matches('list'))
+	})
+
 test_that("put.nodes operates properly", {
 	expect_that(class(put.nodes(id = "jqdn2", user = 'h.schwarzenegger@gmail.com',
 		 password = 'testingtesting',

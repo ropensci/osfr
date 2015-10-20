@@ -52,34 +52,6 @@ get.nodes <- function(id = NULL,
   return(res)
 }
 
-get.nodes.contributors <- function(node_id = NULL,
-                                   user_id = NULL,
-                                   user = NULL,
-                                   password = NULL){
-  if(is.null(user) | is.null(password)){
-    warning("No username/password, if node is private will not return results")}
-  if(is.null(node_id)){
-    stop("Requires node_id")}
-  if(is.null(user_id)){
-    stop("Requires user_id")}
-
-  link <- construct.link(paste0('nodes/', node_id, '/contributors/', user_id, '/'))
-
-  if (!is.null(user) & !is.null(password)){
-    call <- httr::GET(link, httr::authenticate(user = user, password = password))
-  } else {
-    call <- httr::GET(link)
-  }
-
-  if(!call$status_code == 200){
-    stop("Error in retrieving user information")
-  }
-
-  res <- rjson::fromJSON(httr::content(call, 'text'))
-
-  return(res)
-}
-
 post.nodes <- function(user = NULL,
                        password = NULL,
                        type = 'nodes',
@@ -257,6 +229,34 @@ delete.nodes <- function(id = NULL, user = NULL, password = NULL){
   } else {
     cat(sprintf('Deletion of node %s succeeded\n', id))
     res <- TRUE}
+
+  return(res)
+}
+
+get.nodes.contributors <- function(node_id = NULL,
+                                   user_id = NULL,
+                                   user = NULL,
+                                   password = NULL){
+  if(is.null(user) | is.null(password)){
+    warning("No username/password, if node is private will not return results")}
+  if(is.null(node_id)){
+    stop("Requires node_id")}
+  if(is.null(user_id)){
+    stop("Requires user_id")}
+
+  link <- construct.link(paste0('nodes/', node_id, '/contributors/', user_id, '/'))
+
+  if(!is.null(user) & !is.null(password)){
+    call <- httr::GET(link, httr::authenticate(user = user, password = password))
+  } else {
+    call <- httr::GET(link)
+  }
+
+  if(!call$status_code == 200){
+    stop("Error in retrieving user information")
+  }
+
+  res <- rjson::fromJSON(httr::content(call, 'text'))
 
   return(res)
 }
