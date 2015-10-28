@@ -36,4 +36,15 @@ construct.link <- function(request = NULL){
 }
 
 # Empty function until OAUTH2.0 is implemented
-login <- function(){}
+login <- function(key = NULL,
+                  secret = NULL){
+  link <- construct.link('oauth2')
+  osf_endpoint <- httr::oauth_endpoint(base_url = link,
+                                 NULL, "authorize", "access_token")
+  auth_req <- httr::oauth_app("osf", key = key, secret = secret)
+
+  auth_grant <- httr::oauth2.0_token(osf_endpoint, auth_req)
+
+  access_token <- config(token = osfr_token)
+
+}
