@@ -79,14 +79,38 @@ post.nodes <- function(user = NULL,
 
   link <- construct.link('nodes/')
 
-  edits <- list(data = list(type = type,
-                            attributes = list(
-                              title = title,
-                              category = category,
-                              description = description,
-                              tags = tags,
-                              public = public
-                            )))
+  if (is.null(description) & is.null(tags)){
+    edits <- list(data = list(type = type,
+                              attributes = list(
+                                title = title,
+                                category = category,
+                                public = public
+                              )))
+  } else if (is.null(description)){
+    edits <- list(data = list(type = type,
+                              attributes = list(
+                                title = title,
+                                category = category,
+                                tags = tags,
+                                public = public
+                              )))
+  } else if (is.null(tags)){edits <- list(data = list(type = type,
+                                                      attributes = list(
+                                                        title = title,
+                                                        category = category,
+                                                        description = description,
+                                                        public = public
+                                                      )))
+  } else {
+    edits <- list(data = list(type = type,
+                              attributes = list(
+                                title = title,
+                                category = category,
+                                description = description,
+                                tags = tags,
+                                public = public
+                              )))
+  }
 
   call <- httr::POST(url = link,
                      body = edits, encode = "json",
@@ -193,8 +217,8 @@ patch.nodes <- function(id = NULL,
                             )))
 
   call <- httr::PATCH(url = link,
-                    body = edits, encode = "json",
-                    httr::authenticate(user, password))
+                      body = edits, encode = "json",
+                      httr::authenticate(user, password))
 
   if (!call$status_code == 200){
     stop(sprintf("Update of node %s failed", id))
