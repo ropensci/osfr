@@ -33,7 +33,7 @@ get.nodes <- function(id = NULL,
 
   res <- rjson::fromJSON(httr::content(call, 'text'))
 
-  if (names(res) == "errors" & !is.null(id)) stop("Node not found.")
+  if (names(res)[1] == "errors" & !is.null(id)) stop("Node not found.")
   if (sum(c(contributors, files, children)) > 1){stop("Specify contributors OR files OR children")}
 
   if (contributors == TRUE){
@@ -82,8 +82,8 @@ post.nodes <- function(user = NULL,
   edits <- list(data = list(type = type,
                             attributes = list(
                               title = title,
-                              description = description,
                               category = category,
+                              description = description,
                               tags = tags,
                               public = public
                             )))
@@ -91,6 +91,7 @@ post.nodes <- function(user = NULL,
   call <- httr::POST(url = link,
                      body = edits, encode = "json",
                      httr::authenticate(user, password))
+
   if (!call$status_code == 201){
     stop(sprintf("Creation of new %s failed", category))
   }

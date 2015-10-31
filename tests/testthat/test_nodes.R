@@ -81,7 +81,7 @@ test_that("post.nodes operates properly", {
 		  type = 'nodes',
 		   title = 'crap',
 		    description = "test", category = "other")), matches('list'))
-		expect_that(post.nodes(user = 'h.schwarzenegger@gmail.com',
+		expect_that(post.nodes(user  ='h.schwarzenegger@gmail.com',
 		 password = 'testingtesting',
 		  type = 'nodes',
 		   title = 'crap',

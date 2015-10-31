@@ -27,10 +27,14 @@ welcome <- function(user = NULL, password = NULL){
 #' @examples
 #' construct.link("nodes/{node_id}/files/")
 
-construct.link <- function(request = NULL){
+construct.link <- function(request = NULL, login = FALSE){
   base <- "https://test-api.osf.io/v2/"
 
   result <- paste0(base, request)
+
+  if (login == TRUE){
+    result <- paste0("https://accounts.test.osf.io/oauth2/", request)
+  }
 
   return(result)
 }
@@ -38,7 +42,12 @@ construct.link <- function(request = NULL){
 # Empty function until OAUTH2.0 is implemented
 login <- function(key = NULL,
                   secret = NULL){
-  link <- construct.link('oauth2')
+  if (is.null(key) | is.null(secret)){
+    stop("Please input BOTH key and secret for login.")
+  }
+
+  link <- construct.link('authorize', login = TRUE)
+
   osf_endpoint <- httr::oauth_endpoint(base_url = link,
                                  NULL, "authorize", "access_token")
   auth_req <- httr::oauth_app("osf", key = key, secret = secret)
