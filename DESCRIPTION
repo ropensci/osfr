@@ -3,9 +3,10 @@ Title: What the Package Does (one line, title case)
 Version: 0.0.0.9000
 Authors@R: 'Chris Hartgerink <c.hartgerink@gmail.com> [aut, cre]'
 Description: What the package does (one paragraph)
-Depends: R (>= 3.2.1)
+Depends: R (>= 3.2.2)
 Imports: 
 	httr,
+	httpuv,
 	jsonlite
 License: CC-0 v1.0
 BugReports: https://github.com/chartgerink/osfr/issues

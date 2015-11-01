@@ -33,7 +33,7 @@ construct.link <- function(request = NULL, login = FALSE){
   result <- paste0(base, request)
 
   if (login == TRUE){
-    result <- paste0("https://accounts.test.osf.io/oauth2/", request)
+    result <- paste0("https://test-accounts.osf.io/oauth2/", request)
   }
 
   return(result)
@@ -50,10 +50,12 @@ login <- function(key = NULL,
 
   osf_endpoint <- httr::oauth_endpoint(base_url = link,
                                  NULL, "authorize", "access_token")
-  auth_req <- httr::oauth_app("osf", key = key, secret = secret)
+  auth_req <- httr::oauth_app('osf', key = key, secret = secret)
 
-  auth_grant <- httr::oauth2.0_token(osf_endpoint, auth_req)
+  auth_grant <- httr::oauth2.0_token(endpoint = osf_endpoint,
+                                     app = auth_req,
+                                     scope = "*")
 
-  access_token <- config(token = osfr_token)
+  access_token <- httr::config(token = auth_grant)
 
 }
