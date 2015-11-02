@@ -1,3 +1,4 @@
+
 get.users <- function(id = NULL, user = NULL, password = NULL, nodes = FALSE){
   if (is.null(id)){
     raw <- httr::GET(construct.link("users"))
@@ -25,6 +26,17 @@ get.users <- function(id = NULL, user = NULL, password = NULL, nodes = FALSE){
     }
 
     result <- rjson::fromJSON(httr::content(raw, 'text'))
+  }
+
+  while (!is.null(result$links$`next`)){
+    whilst <- rjson::fromJSON(
+      httr::content(
+        httr::GET(
+          result$links$`next`),
+        'text'))
+    result$data <- c(result$data, whilst$data)
+    result$links$`next` <- whilst$links$`next`
+    cat(paste0(result$links$`next`, '\n'))
   }
 
   return(result)
