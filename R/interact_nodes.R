@@ -242,21 +242,46 @@ patch.nodes <- function(id = NULL,
 
 #' Delete a node with its id
 #'
+#' A function to delete a node on the Open Science Framework. This includes all
+#' types of nodes (e.g., communication, hypothesis, etc.) and includes a full
+#' project.
+#'
 #' @param id The node_id to be deleted.
-#' @param user The username to log in with (temporary until OAUTH2.0)
-#' @param password The password to log in with (temporary until OAUTH2.0)
-#' @return Boolean TRUE if deletion succeeded
+#' @param user The username to log in with (temporary until OAUTH2.0).
+#' @param password The password to log in with (temporary until OAUTH2.0).
+#' @param recursive Boolean argument to recursively delete subnodes. Defaults to
+#' FALSE for sake of preventing accidental deletion.
+#' @return Boolean TRUE if deletion succeeded.
 
-delete.nodes <- function(id = NULL, user = NULL, password = NULL){
+delete.nodes <- function(id = NULL, user = NULL, password = NULL, recursive = FALSE){
   if (is.null(id)){
     break('Please input node to delete')}
   if (is.null(user)){
-    warning("Please input username")}
+    warning("Please input username if node is private")}
   if (is.null(password)){
-    warning("Please input password")}
+    warning("Please input password if node is private")}
   link <- construct.link(paste("nodes", id, sep = "/"))
 
   temp <- httr::DELETE(link, httr::authenticate(user, password))
+
+  # For using in following if clause
+  test <- httr::content(temp, 'text')
+
+  if (recursive & grepl("child components must be deleted", test)){
+    id_child <- recurse.nodes(id, user, password)
+
+    # now loop through the remainder for deletion
+    for (child in id_child[1:(length(id_child) - 1)]){
+      link_child <- construct.link(paste('nodes',
+                                            child,
+                                            sep = '/'))
+      httr::DELETE(link_child, httr::authenticate(user, password))
+      cat(sprintf("Deleted child node %s\n", child))
+    }
+
+    # remove parent node retry
+    temp <- httr::DELETE(link, httr::authenticate(user, password))
+  }
 
   if (!temp$status_code == 204){
     cat(sprintf('Deletion of node %s failed, errorcode %s\n',
@@ -297,4 +322,47 @@ get.nodes.contributors <- function(node_id = NULL,
   return(res)
 }
 
+#' Title
+#'
+#' @param id
+#' @param user
+#' @param password
+#'
+#' @return Vector of node ids, first one is always the parent entered as id
+#' @export
+#'
+#' @examples
+recurse.nodes <- function(id = NULL, user = NULL, password = NULL){
+  link_child <- construct.link(paste('nodes', id, 'children', sep = '/'))
 
+  temp_child <- rjson::fromJSON(
+    httr::content(
+      httr::GET(link_child, httr::authenticate(user, password)), 'text'))
+
+  while (!length(temp_child$data) == 0){
+    temp_unlist <- unlist(temp_child$data)
+    sel <- names(temp_unlist) == 'id'
+
+    id = c(id, temp_unlist[sel])
+    link_child <- construct.link(paste('nodes', temp_unlist[sel], 'children', sep = '/'))
+
+    # set temp_child to empty list for next while loop if for loop fails
+    temp_child <- list()
+
+    for (baby in link_child){
+      temp_child <- c(temp_child, rjson::fromJSON(
+        httr::content(
+          httr::GET(baby, httr::authenticate(user, password)), 'text')))
+    }
+  }
+
+  # flip the id order such that the most nested node comes first
+  id <- as.character(id[length(id):1])
+
+  return(id)
+}
+
+# Placeholder functions for making a node fully public or private, including
+# subnodes
+public.nodes <- function(){}
+private.nodes <- function(){}
