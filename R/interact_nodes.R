@@ -364,5 +364,37 @@ recurse.nodes <- function(id = NULL, user = NULL, password = NULL){
 
 # Placeholder functions for making a node fully public or private, including
 # subnodes
-public.nodes <- function(){}
+public.nodes <- function(id = NULL, user = NULL, password = NULL){
+  if(is.null(user) | is.null(password)){
+    stop("No username/password")}
+
+  temp <- recurse.nodes(id, user, password)
+
+  for (id in temp){
+    link <- construct.link(paste('nodes', id, sep = '/'))
+
+    x <- httr::GET(link, httr::authenticate(user, password))
+    x <- rjson::fromJSON(httr::content(x, 'text'))
+
+    edits <- list(data = list(type = "nodes",
+                              id = id,
+                              attributes = list(
+                                title = x$data$attributes$title,
+                                category = ifelse(x$data$attributes$category == '',
+                                                  'project',
+                                                  x$data$attributes$category),
+                                public = TRUE
+                              )))
+
+
+
+    call <- httr::PUT(url = link,
+                        body = edits, encode = "json",
+                        httr::authenticate(user, password))
+
+    if(!call$status_code == 200){
+      stop("Error in making node %s public", id)
+    }
+  }
+}
 private.nodes <- function(){}
