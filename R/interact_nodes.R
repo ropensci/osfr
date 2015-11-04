@@ -49,6 +49,17 @@ get.nodes <- function(id = NULL,
     res <- rjson::fromJSON(httr::content(call, 'text'))
   }
 
+  while (!is.null(res$links$`next`)){
+    whilst <- rjson::fromJSON(
+      httr::content(
+        httr::GET(
+          res$links$`next`),
+        'text'))
+    res$data <- c(res$data, whilst$data)
+    res$links$`next` <- whilst$links$`next`
+    cat(paste0(res$links$`next`, '\n'))
+  }
+
   return(res)
 }
 
