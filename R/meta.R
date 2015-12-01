@@ -58,4 +58,6 @@ login <- function(key = NULL,
 
   access_token <- httr::config(token = auth_grant)
 
+  # https://github.com/hadley/httr/blob/master/vignettes/api-packages.Rmd
+
 }
