@@ -72,7 +72,7 @@ get.nodes <- function(id = NULL,
 #' @param description String, description of project (optional)
 #' @param category String, type of node, options under details
 #' @param tags Vector of strings, tags to be posted on project
-#' @param public String boolean (lowercase), sets project to public or private; defaults to public
+#' @param public Boolean, sets project to public or private; defaults to public
 #'
 #' @return
 #' @export
@@ -85,7 +85,7 @@ post.nodes <- function(user = NULL,
                        description = NULL,
                        category = 'project',
                        tags = NULL,
-                       public = 'true'){
+                       public = TRUE){
   if(is.null(user)){
     stop("Requires username")}
   if(is.null(password)){
@@ -158,7 +158,7 @@ put.nodes <- function(id = NULL,
                       description = NULL,
                       category = 'project',
                       tags = NULL,
-                      public = 'true'){
+                      public = TRUE){
   if(is.null(id)){
     stop("Requires id")}
   if(is.null(user)){
@@ -180,15 +180,26 @@ put.nodes <- function(id = NULL,
 
   link <- construct.link(paste0('nodes/', id, '/'))
 
-  edits <- list(data = list(type = type,
-                            id = id,
-                            attributes = list(
-                              title = title,
-                              description = description,
-                              category = category,
-                              tags = tags,
-                              public = public
-                            )))
+  if (is.null(tags)){
+    edits <- list(data = list(type = type,
+                              attributes = list(
+                                id = id,
+                                title = title,
+                                category = category,
+                                description = description,
+                                public = public
+                              )))
+  } else {
+    edits <- list(data = list(type = type,
+                              attributes = list(
+                                id = id,
+                                title = title,
+                                category = category,
+                                description = description,
+                                tags = tags,
+                                public = public
+                              )))
+  }
 
   call <- httr::PUT(url = link,
                     body = edits, encode = "json",
@@ -232,16 +243,26 @@ patch.nodes <- function(id = NULL,
 
   link <- construct.link(paste0('nodes/', id, '/'))
 
-  edits <- list(data = list(type = type,
-                            id = id,
-                            attributes = list(
-                              title = title,
-                              description = description,
-                              category = category,
-                              tags = tags,
-                              public = public
-                            )))
-
+  if (is.null(tags)){
+    edits <- list(data = list(type = type,
+                              attributes = list(
+                                id = id,
+                                title = title,
+                                category = category,
+                                description = description,
+                                public = public
+                              )))
+  } else {
+    edits <- list(data = list(type = type,
+                              attributes = list(
+                                id = id,
+                                title = title,
+                                category = category,
+                                description = description,
+                                tags = tags,
+                                public = public
+                              )))
+  }
   call <- httr::PATCH(url = link,
                       body = edits, encode = "json",
                       httr::authenticate(user, password))
@@ -288,8 +309,8 @@ delete.nodes <- function(id = NULL, user = NULL, password = NULL, recursive = FA
     # now loop through the remainder for deletion
     for (child in id_child[1:(length(id_child) - 1)]){
       link_child <- construct.link(paste('nodes',
-                                            child,
-                                            sep = '/'))
+                                         child,
+                                         sep = '/'))
       httr::DELETE(link_child, httr::authenticate(user, password))
       cat(sprintf("Deleted child node %s\n", child))
     }
@@ -404,8 +425,8 @@ public.nodes <- function(id = NULL, user = NULL, password = NULL){
 
 
     call <- httr::PUT(url = link,
-                        body = edits, encode = "json",
-                        httr::authenticate(user, password))
+                      body = edits, encode = "json",
+                      httr::authenticate(user, password))
 
     if(!call$status_code == 200){
       stop("Error in making node %s public", id)
