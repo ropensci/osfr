@@ -407,30 +407,27 @@ public.nodes <- function(id = NULL, user = NULL, password = NULL){
   temp <- recurse.nodes(id, user, password)
 
   for (id in temp){
-    link <- construct.link(paste('nodes', id, sep = '/'))
+    link <- construct.link(paste0('nodes/', id, '/'))
 
     x <- httr::GET(link, httr::authenticate(user, password))
     x <- rjson::fromJSON(httr::content(x, 'text'))
 
-    edits <- list(data = list(type = "nodes",
-                              id = id,
+    edits <- list(data = list(type = type,
                               attributes = list(
+                                id = id,
                                 title = x$data$attributes$title,
-                                category = ifelse(x$data$attributes$category == '',
-                                                  'project',
-                                                  x$data$attributes$category),
+                                category = x$data$attributes$category,
                                 public = TRUE
                               )))
-
-
 
     call <- httr::PUT(url = link,
                       body = edits, encode = "json",
                       httr::authenticate(user, password))
 
     if(!call$status_code == 200){
-      stop("Error in making node %s public", id)
+      stop(sprintf("Error in making node %s public", id))
     }
   }
 }
+
 private.nodes <- function(){}
