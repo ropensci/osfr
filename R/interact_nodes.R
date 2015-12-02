@@ -63,6 +63,21 @@ get.nodes <- function(id = NULL,
   return(res)
 }
 
+#' Create a new project
+#'
+#' @param user String, login username
+#' @param password String, login password
+#' @param type Redundant argument, required by API only.
+#' @param title String of project title
+#' @param description String, description of project (optional)
+#' @param category String, type of node, options under details
+#' @param tags Vector of strings, tags to be posted on project
+#' @param public String boolean (lowercase), sets project to public or private; defaults to public
+#'
+#' @return
+#' @export
+#'
+#' @examples
 post.nodes <- function(user = NULL,
                        password = NULL,
                        type = 'nodes',
