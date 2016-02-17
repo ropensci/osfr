@@ -9,7 +9,7 @@ welcome <- function(user = NULL, password = NULL){
   if (is.null(user) | is.null(password)){
     call <- httr::GET(url = construct.link())
   } else {
-  call <- httr::GET(url = construct.link(), httr::authenticate(user, password))}
+    call <- httr::GET(url = construct.link(), httr::authenticate(user, password))}
 
   res <- rjson::fromJSON(httr::content(call, 'text'))
 
@@ -33,31 +33,28 @@ construct.link <- function(request = NULL, login = FALSE){
   result <- paste0(base, request)
 
   if (login == TRUE){
-    result <- paste0("https://test-accounts.osf.io/oauth2/", request)
+    result <- paste0("https://test-accounts.osf.io/login/oauth2", request)
   }
 
   return(result)
 }
 
-# Empty function until OAUTH2.0 is implemented
-login <- function(key = NULL,
-                  secret = NULL){
-  if (is.null(key) | is.null(secret)){
-    stop("Please input BOTH key and secret for login.")
+login <- function(){
+  if (Sys.getenv("OSF_PAT") == ""){
+    input <- readline(prompt = "Visit https://osf.io/settings/tokens/ and create a Personal access token: ")
+
+    Sys.setenv(OSF_PAT = input)
   }
 
-  link <- construct.link('authorize', login = TRUE)
+  return(Sys.getenv("OSF_PAT"))
+}
 
-  osf_endpoint <- httr::oauth_endpoint(base_url = link,
-                                 NULL, "authorize", "access_token")
-  auth_req <- httr::oauth_app('osf', key = key, secret = secret)
+logout <- function(){
+  if (Sys.getenv("OSF_PAT") == ""){
+    cat("Not logged in.")
+  } else{
+    Sys.unsetenv("OSF_PAT")
 
-  auth_grant <- httr::oauth2.0_token(endpoint = osf_endpoint,
-                                     app = auth_req,
-                                     scope = "*")
-
-  access_token <- httr::config(token = auth_grant)
-
-  # https://github.com/hadley/httr/blob/master/vignettes/api-packages.Rmd
-
+    cat("Successfully logged out. Use login() to log back in.")
+  }
 }
