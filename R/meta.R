@@ -1,23 +1,20 @@
 #' Welcome function
 #'
-#' @param user User account
-#' @param password Password
-#'
-#' @return Information about OSF version and user in list format
+#' @return Welcome message of logged in user, if any
 
-welcome <- function(user = NULL, password = NULL){
-  if (is.null(user) | is.null(password)){
+welcome <- function(){
+  if (login() == ""){
     call <- httr::GET(url = construct.link())
   } else {
-    call <- httr::GET(url = construct.link(), httr::authenticate(user, password))}
+    call <- httr::GET(url = construct.link(),
+                      httr::add_headers(Authorization = sprintf("Bearer %s", login())))
+    }
 
   res <- rjson::fromJSON(httr::content(call, 'text'))
 
   if (is.null(res$meta$current_user)) warning("Currently not logged in\n")
   if (!is.null(res$meta$current_user)) cat(sprintf("Welcome user_id %s",
                                                    res$meta$current_user$data$id))
-
-  return(res)
 }
 
 #' Construct an API link with proper base
@@ -27,17 +24,17 @@ welcome <- function(user = NULL, password = NULL){
 #' @examples
 #' construct.link("nodes/{node_id}/files/")
 
-construct.link <- function(request = NULL, login = FALSE){
+construct.link <- function(request = NULL){
   base <- "https://test-api.osf.io/v2/"
 
   result <- paste0(base, request)
 
-  if (login == TRUE){
-    result <- paste0("https://test-accounts.osf.io/login/oauth2", request)
-  }
-
   return(result)
 }
+
+#' Login function
+#'
+#' @return Personal access token from global environment
 
 login <- function(){
   if (Sys.getenv("OSF_PAT") == ""){
@@ -49,12 +46,21 @@ login <- function(){
   return(Sys.getenv("OSF_PAT"))
 }
 
+
+#' Logout function
+#'
+#' @return Logical of successfulness of logout
+
 logout <- function(){
   if (Sys.getenv("OSF_PAT") == ""){
     cat("Not logged in.")
+
+    return(FALSE)
   } else{
     Sys.unsetenv("OSF_PAT")
 
     cat("Successfully logged out. Use login() to log back in.")
+
+    return(TRUE)
   }
 }
