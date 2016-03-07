@@ -1,10 +1,10 @@
-
 #' Return information on an OSF user
 #'
 #' @param id Argument to specify the OSF id ('me' refers to logged in account)
 #' @param nodes Boolean to return the nodes available for that user
 #'
 #' @return List object with account information
+#' @export
 
 get.users <- function(id = NULL, nodes = FALSE){
   if (Sys.getenv("OSF_PAT") == "" & is.null(id)){
@@ -58,6 +58,9 @@ get.users <- function(id = NULL, nodes = FALSE){
 #' @param middle_names
 #' @param family_name
 #' @param suffix
+#'
+#' @return Boolean indicating success of PUTting user information
+#' @export
 
 put.users <- function(id = 'me',
                       type = "users",
@@ -97,7 +100,6 @@ put.users <- function(id = 'me',
     results <- TRUE}
 
   return(results)
-  return(temp)
 }
 
 #' Patch user information
@@ -108,6 +110,9 @@ put.users <- function(id = 'me',
 #' @param middle_names
 #' @param family_name
 #' @param suffix
+#'
+#' @return Boolean of success of patching user information
+#' @export
 
 patch.users <- function(id = 'me',
                         full_name = NULL,
