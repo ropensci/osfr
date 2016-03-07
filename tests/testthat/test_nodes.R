@@ -8,6 +8,10 @@ test_that("nodes are retrieved", {
 
 })
 
+test_that('recurse nodes operates as expected', {
+
+})
+
 #
 # # Implement something along the lines of posting a node and saving the id
 # # such that it can be deleted during testing

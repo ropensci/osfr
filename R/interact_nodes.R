@@ -14,7 +14,7 @@
 #' get.nodes(id = 'me')
 #' get.nodes(id = 'nu97z')
 
-get.nodes <- function(id = NULL,
+get.nodes <- function(id = NULL, # make this loopable?
                       contributors = FALSE,
                       files = FALSE,
                       children = FALSE){ # add a recurse argument?b
@@ -367,26 +367,33 @@ get.nodes.contributors <- function(node_id = NULL,
   return(res)
 }
 
-#' Title
+#' Function to crawl node for all sub-ids.
 #'
-#' @param id
-#' @param user
-#' @param password
+#' @param id Parent node to crawl.
+#' @param login Boolean, indicates whether crawl should occur with login or without.
 #'
 #' @return Vector of node ids, first one is always the parent entered as id
-#' @export
-#'
-#' @examples
-recurse.nodes <- function(id = NULL){
+
+recurse.nodes <- function(id = NULL,
+                          login = FALSE){
   link_child <- construct.link(paste('nodes', id, 'children', sep = '/'))
 
-  temp_child <- rjson::fromJSON(
-    httr::content(
-      httr::GET(link_child,
-                httr::add_headers(Authorization = sprintf('Bearer %s', login())),
-                'text')))
+  if (login == FALSE) {
+    temp_child <- rjson::fromJSON(
+      httr::content(
+        httr::GET(link_child),
+                  'text'))
+  } else {
+    if(Sys.getenv('OSF_PAT') == '') stop('Requires login')
 
-  while (!length(temp_child$data) == 0){
+    temp_child <- rjson::fromJSON(
+      httr::content(
+        httr::GET(link_child,
+                  httr::add_headers(Authorization = sprintf('Bearer %s', login()))),
+                  'text'))
+  }
+
+  while (!length(temp_child$data) == 0) {
     temp_unlist <- unlist(temp_child$data)
     sel <- names(temp_unlist) == 'id'
 
@@ -397,11 +404,20 @@ recurse.nodes <- function(id = NULL){
     temp_child <- list()
 
     for (baby in link_child){
-      temp_child <- c(temp_child, rjson::fromJSON(
-        httr::content(
-          httr::GET(baby,
-                    httr::add_headers(Authorization = sprintf('Bearer %s', login())),
-                    'text'))))
+      if (login == FALSE) {
+        temp_child <- c(temp_child, rjson::fromJSON(
+          httr::content(
+            httr::GET(baby),
+                      'text')))
+      } else {
+        if(Sys.getenv('OSF_PAT') == '') stop('Requires login')
+
+        temp_child <- c(temp_child, rjson::fromJSON(
+          httr::content(
+            httr::GET(baby,
+                      httr::add_headers(Authorization = sprintf('Bearer %s', login()))),
+                      'text')))
+      }
     }
   }
 
