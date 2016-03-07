@@ -285,22 +285,17 @@ patch.nodes <- function(id = NULL,
 #'
 #' A function to delete a node on the Open Science Framework. This includes all
 #' types of nodes (e.g., communication, hypothesis, etc.) and includes a full
-#' project.
+#' project. Note that the function recurses throughout subnodes and deletes these as well.
 #'
 #' @param id The node_id to be deleted.
-#' @param user The username to log in with (temporary until OAUTH2.0).
-#' @param password The password to log in with (temporary until OAUTH2.0).
 #' @param recursive Boolean argument to recursively delete subnodes. Defaults to
 #' FALSE for sake of preventing accidental deletion.
 #' @return Boolean TRUE if deletion succeeded.
 
-delete.nodes <- function(id = NULL, user = NULL, password = NULL, recursive = FALSE){
-  if (is.null(id)){
-    break('Please input node to delete')}
-  if (is.null(user)){
-    warning('Please input username if node is private')}
-  if (is.null(password)){
-    warning('Please input password if node is private')}
+delete.nodes <- function(id = NULL, recursive = FALSE){
+  if (is.null(id)) stop('Please input node to delete')
+  if(Sys.getenv('OSF_PAT') == '') stop('Requires login')
+
   link <- construct.link(paste('nodes', id, sep = '/'))
 
   temp <- httr::DELETE(link,
@@ -310,7 +305,7 @@ delete.nodes <- function(id = NULL, user = NULL, password = NULL, recursive = FA
   test <- httr::content(temp, 'text')
 
   if (recursive & grepl('child components must be deleted', test)){
-    id_child <- recurse.nodes(id, user, password)
+    id_child <- recurse.nodes(id)
 
     # now loop through the remainder for deletion
     for (child in id_child[1:(length(id_child) - 1)]){
@@ -334,35 +329,6 @@ delete.nodes <- function(id = NULL, user = NULL, password = NULL, recursive = FA
   } else {
     cat(sprintf('Deletion of node %s succeeded\n', id))
     res <- TRUE}
-
-  return(res)
-}
-
-get.nodes.contributors <- function(node_id = NULL,
-                                   user_id = NULL,
-                                   user = NULL,
-                                   password = NULL){
-  if(is.null(user) | is.null(password)){
-    warning('No username/password, if node is private will not return results')}
-  if(is.null(node_id)){
-    stop('Requires node_id')}
-  if(is.null(user_id)){
-    stop('Requires user_id')}
-
-  link <- construct.link(paste0('nodes/', node_id, '/contributors/', user_id, '/'))
-
-  if(!is.null(user) & !is.null(password)){
-    call <- httr::GET(link,
-                      httr::add_headers(Authorization = sprintf('Bearer %s', login())))
-  } else {
-    call <- httr::GET(link)
-  }
-
-  if(!call$status_code == 200){
-    stop('Error in retrieving user information')
-  }
-
-  res <- rjson::fromJSON(httr::content(call, 'text'))
 
   return(res)
 }
