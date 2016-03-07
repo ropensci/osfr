@@ -1,10 +1,10 @@
 Package: osfr
 Title: What the Package Does (one line, title case)
 Version: 0.0.0.9000
-Authors@R: 'Chris Hartgerink <c.hartgerink@gmail.com> [aut, cre]'
+Authors@R: 'Chris Hartgerink <chjh@protonmail.com> [aut, cre]'
 Description: What the package does (one paragraph)
 Depends:
-    R (>= 3.2.2)
+    R (>= 3.2.3)
 Imports:
     httr,
     httpuv,
