@@ -34,9 +34,11 @@ construct.link <- function(request = NULL){
   return(result)
 }
 
-#' Login function
+#' Login function; interactive without arguments
 #'
-#' @return Personal access token from global environment
+#' @param pat Personal Access Token (PAT) for fast login.
+#'
+#' @return Personal access token from global environment.
 #' @export
 
 login <- function(pat = NULL){

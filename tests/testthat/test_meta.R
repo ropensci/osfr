@@ -11,6 +11,9 @@ test_that("link construction is functional", {
 test_that("welcome message operates", {
 	expect_that(class(welcome()), matches('list'))
 	expect_warning(welcome(), 'Currently not logged in')
-	expect_that(class(welcome(user = 'h.schwarzenegger@gmail.com',
-			password = 'testingtesting')), matches('list'))
+})
+
+test_that("login sets global environment", {
+  expect_equal(login(pat = '12345'), '12345')
+  expect_true(logout())
 })
