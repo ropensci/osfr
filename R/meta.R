@@ -1,9 +1,10 @@
 #' Welcome function
 #'
 #' @return Welcome message of logged in user, if any
+#' @export
 
 welcome <- function(){
-  if (login() == ""){
+  if (Sys.getenv("OSF_PAT") == ""){
     call <- httr::GET(url = construct.link())
   } else {
     call <- httr::GET(url = construct.link(),
@@ -20,6 +21,7 @@ welcome <- function(){
 #' Construct an API link with proper base
 
 #' @param request The request link to be combined with the base API link.
+#'
 #' @return The full request link with proper base
 #' @examples
 #' construct.link("nodes/{node_id}/files/")
@@ -35,6 +37,7 @@ construct.link <- function(request = NULL){
 #' Login function
 #'
 #' @return Personal access token from global environment
+#' @export
 
 login <- function(){
   if (Sys.getenv("OSF_PAT") == ""){
@@ -50,6 +53,7 @@ login <- function(){
 #' Logout function
 #'
 #' @return Logical of successfulness of logout
+#' @export
 
 logout <- function(){
   if (Sys.getenv("OSF_PAT") == ""){
