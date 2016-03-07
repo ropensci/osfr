@@ -427,13 +427,17 @@ recurse.nodes <- function(id = NULL,
   return(id)
 }
 
-# Placeholder functions for making a node fully public or private, including
-# subnodes
-public.nodes <- function(id = NULL, user = NULL, password = NULL){
-  if(is.null(user) | is.null(password)){
-    stop('No username/password')}
+#' Make node and all subnodes public
+#'
+#' @param id node to crawl and make public, including subnodes
+#'
+#' @return
+#' @export
 
-  temp <- recurse.nodes(id, user, password)
+public.nodes <- function(id = NULL){
+  if(Sys.getenv('OSF_PAT') == '') stop('Requires login')
+
+  temp <- recurse.nodes(id, login = TRUE)
 
   for (id in temp){
     link <- construct.link(paste0('nodes/', id, '/'))
@@ -458,6 +462,45 @@ public.nodes <- function(id = NULL, user = NULL, password = NULL){
       stop('Error in making node %s public', id)
     }
   }
+
+  return(TRUE)
 }
 
-private.nodes <- function(){}
+#' Make node and all subnodes private
+#'
+#' @param id node to crawl and make private, including subnodes
+#'
+#' @return
+#' @export
+
+private.nodes <- function(id = NULL){
+  if(Sys.getenv('OSF_PAT') == '') stop('Requires login')
+
+  temp <- recurse.nodes(id, login = TRUE)
+
+  for (id in temp){
+    link <- construct.link(paste0('nodes/', id, '/'))
+
+    x <- httr::GET(link,
+                   httr::add_headers(Authorization = sprintf('Bearer %s', login())))
+    x <- rjson::fromJSON(httr::content(x, 'text'))
+
+    edits <- list(data = list(type = type,
+                              attributes = list(
+                                id = id,
+                                title = x$data$attributes$title,
+                                category = x$data$attributes$category,
+                                public = FALSE
+                              )))
+
+    call <- httr::PUT(url = link,
+                      body = edits, encode = 'json',
+                      httr::add_headers(Authorization = sprintf('Bearer %s', login())))
+
+    if(!call$status_code == 200){
+      stop('Error in making node %s private', id)
+    }
+  }
+
+  return(TRUE)
+}
