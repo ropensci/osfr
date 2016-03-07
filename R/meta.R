@@ -9,7 +9,7 @@ welcome <- function(){
   } else {
     call <- httr::GET(url = construct.link(),
                       httr::add_headers(Authorization = sprintf("Bearer %s", login())))
-    }
+  }
 
   res <- rjson::fromJSON(httr::content(call, 'text'))
 
@@ -39,11 +39,13 @@ construct.link <- function(request = NULL){
 #' @return Personal access token from global environment
 #' @export
 
-login <- function(){
-  if (Sys.getenv("OSF_PAT") == ""){
-    input <- readline(prompt = "Visit https://osf.io/settings/tokens/ and create a Personal access token: ")
+login <- function(pat = NULL){
+  if (!is.null(pat)) Sys.setenv(OSF_PAT = pat) else{
+    if (Sys.getenv("OSF_PAT") == ""){
+      input <- readline(prompt = "Visit https://osf.io/settings/tokens/ and create a Personal access token: ")
 
-    Sys.setenv(OSF_PAT = input)
+      Sys.setenv(OSF_PAT = input)
+    }
   }
 
   return(Sys.getenv("OSF_PAT"))
