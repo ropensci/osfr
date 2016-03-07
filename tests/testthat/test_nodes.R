@@ -12,6 +12,23 @@ test_that('recurse nodes operates as expected', {
 
 })
 
+test_that('node are created', {
+
+})
+
+test_that('nodes are updated', {
+
+})
+
+test_that('nodes are made public/private', {
+
+})
+
+# This also ensures that all test creations are deleted
+test_that('nodes are deleted', {
+
+})
+
 #
 # # Implement something along the lines of posting a node and saving the id
 # # such that it can be deleted during testing
