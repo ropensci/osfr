@@ -2,51 +2,56 @@
 #'
 #' @param id The id to search for. Use `NULL` to retrieve all,
 #' `me` for logged in account. Maximum of 1 id.
-#' @param user Username to log in with
-#' @param password Password to log in with
 #' @param contributors Boolean to extract the contributors of the node
-#' @param files Boolean to extract links
+#' @param files Boolean to download files
+#' @param children Boolean to retrieve children nodes of id
 #'
 #' @return List object of results
+#' @export
 #'
 #' @examples
 #' get.nodes()
-#' get.nodes(id = 'me', user = 'h.schwarzenegger@gmail.com', 'testingtesting')
+#' get.nodes(id = 'me')
 #' get.nodes(id = 'nu97z')
+
 get.nodes <- function(id = NULL,
-                      user = NULL,
-                      password = NULL,
                       contributors = FALSE,
                       files = FALSE,
-                      children = FALSE){
+                      children = FALSE){ # add a recurse argument?b
   if (is.null(id)){
     call <- httr::GET(construct.link('nodes'))
   } else if (id == 'me'){
-    if(is.null(user)) stop("Requires user")
-    if(is.null(password)) stop("Requires password")
+    if(Sys.getenv('OSF_PAT') == '') stop('Requires login')
 
+    # Does this work? Should test
     call <- httr::GET(construct.link('nodes'),
-                      httr::authenticate(user, password))
+                      httr::add_headers(Authorization = sprintf('Bearer %s', login())))
   } else {
     call <- httr::GET(construct.link(paste('nodes', id, sep = '/')))
   }
 
   res <- rjson::fromJSON(httr::content(call, 'text'))
 
-  if (names(res)[1] == "errors" & !is.null(id)) stop("Node not found.")
-  if (sum(c(contributors, files, children)) > 1){stop("Specify contributors OR files OR children")}
+  if (names(res)[1] == 'errors' & !is.null(id)) stop('Node not found.')
+  if (sum(c(contributors, files, children)) > 1){
+    stop('Specify contributors OR files OR children')
+  }
 
   if (contributors == TRUE){
     call <- httr::GET(res$data$relationships$contributors$links$related$href)
     res <- rjson::fromJSON(httr::content(call, 'text'))
   }
+
   if (files == TRUE){
     call <- httr::GET(res$data$relationships$files$links$related$href)
     res <- rjson::fromJSON(httr::content(call, 'text'))
   }
+
   if (children == TRUE){
     call <- httr::GET(res$data$relationships$children$links$related$href)
     res <- rjson::fromJSON(httr::content(call, 'text'))
+
+    if (is.list(x$data)) stop(sprintf('No children available for node %s', id))
   }
 
   while (!is.null(res$links$`next`)){
@@ -72,11 +77,11 @@ post.nodes <- function(user = NULL,
                        tags = NULL,
                        public = 'true'){
   if(is.null(user)){
-    stop("Requires username")}
+    stop('Requires username')}
   if(is.null(password)){
-    stop("Requires password")}
+    stop('Requires password')}
   if(is.null(title)){
-    stop("Requires title")}
+    stop('Requires title')}
   if(!category %in% c('project',
                       'hypothesis',
                       'methods and measures',
@@ -86,7 +91,7 @@ post.nodes <- function(user = NULL,
                       'analysis',
                       'communication',
                       'other')){
-    stop("Please input proper category, see documentation")}
+    stop('Please input proper category, see documentation')}
 
   link <- construct.link('nodes/')
 
@@ -124,11 +129,11 @@ post.nodes <- function(user = NULL,
   }
 
   call <- httr::POST(url = link,
-                     body = edits, encode = "json",
-                     httr::authenticate(user, password))
+                     body = edits, encode = 'json',
+                     httr::add_headers(Authorization = sprintf('Bearer %s', login())))
 
   if (!call$status_code == 201){
-    stop(sprintf("Creation of new %s failed", category))
+    stop(sprintf('Creation of new %s failed', category))
   }
 
   res <- rjson::fromJSON(httr::content(call, 'text'))
@@ -145,13 +150,13 @@ put.nodes <- function(id = NULL,
                       tags = NULL,
                       public = 'true'){
   if(is.null(id)){
-    stop("Requires id")}
+    stop('Requires id')}
   if(is.null(user)){
-    stop("Requires username")}
+    stop('Requires username')}
   if(is.null(password)){
-    stop("Requires password")}
+    stop('Requires password')}
   if(is.null(title)){
-    stop("Requires title")}
+    stop('Requires title')}
   if(!category %in% c('project',
                       'hypothesis',
                       'methods and measures',
@@ -161,7 +166,7 @@ put.nodes <- function(id = NULL,
                       'analysis',
                       'communication',
                       'other')){
-    stop("Please input proper category, see documentation")}
+    stop('Please input proper category, see documentation')}
 
   link <- construct.link(paste0('nodes/', id, '/'))
 
@@ -176,11 +181,11 @@ put.nodes <- function(id = NULL,
                             )))
 
   call <- httr::PUT(url = link,
-                    body = edits, encode = "json",
-                    httr::authenticate(user, password))
+                    body = edits, encode = 'json',
+                    httr::add_headers(Authorization = sprintf('Bearer %s', login())))
 
   if (!call$status_code == 200){
-    stop(sprintf("Update of node %s failed", id))
+    stop(sprintf('Update of node %s failed', id))
   }
 
   res <- rjson::fromJSON(httr::content(call, 'text'))
@@ -197,13 +202,13 @@ patch.nodes <- function(id = NULL,
                         tags = NULL,
                         public = 'true'){
   if(is.null(id)){
-    stop("Requires id")}
+    stop('Requires id')}
   if(is.null(user)){
-    stop("Requires username")}
+    stop('Requires username')}
   if(is.null(password)){
-    stop("Requires password")}
+    stop('Requires password')}
   if(is.null(title)){
-    stop("Requires title")}
+    stop('Requires title')}
   if(!category %in% c('project',
                       'hypothesis',
                       'methods and measures',
@@ -213,7 +218,7 @@ patch.nodes <- function(id = NULL,
                       'analysis',
                       'communication',
                       'other')){
-    stop("Please input proper category, see documentation")}
+    stop('Please input proper category, see documentation')}
 
   link <- construct.link(paste0('nodes/', id, '/'))
 
@@ -228,11 +233,11 @@ patch.nodes <- function(id = NULL,
                             )))
 
   call <- httr::PATCH(url = link,
-                      body = edits, encode = "json",
-                      httr::authenticate(user, password))
+                      body = edits, encode = 'json',
+                      httr::add_headers(Authorization = sprintf('Bearer %s', login())))
 
   if (!call$status_code == 200){
-    stop(sprintf("Update of node %s failed", id))
+    stop(sprintf('Update of node %s failed', id))
   }
 
   res <- rjson::fromJSON(httr::content(call, 'text'))
@@ -257,30 +262,33 @@ delete.nodes <- function(id = NULL, user = NULL, password = NULL, recursive = FA
   if (is.null(id)){
     break('Please input node to delete')}
   if (is.null(user)){
-    warning("Please input username if node is private")}
+    warning('Please input username if node is private')}
   if (is.null(password)){
-    warning("Please input password if node is private")}
-  link <- construct.link(paste("nodes", id, sep = "/"))
+    warning('Please input password if node is private')}
+  link <- construct.link(paste('nodes', id, sep = '/'))
 
-  temp <- httr::DELETE(link, httr::authenticate(user, password))
+  temp <- httr::DELETE(link,
+                       httr::add_headers(Authorization = sprintf('Bearer %s', login())))
 
   # For using in following if clause
   test <- httr::content(temp, 'text')
 
-  if (recursive & grepl("child components must be deleted", test)){
+  if (recursive & grepl('child components must be deleted', test)){
     id_child <- recurse.nodes(id, user, password)
 
     # now loop through the remainder for deletion
     for (child in id_child[1:(length(id_child) - 1)]){
       link_child <- construct.link(paste('nodes',
-                                            child,
-                                            sep = '/'))
-      httr::DELETE(link_child, httr::authenticate(user, password))
-      cat(sprintf("Deleted child node %s\n", child))
+                                         child,
+                                         sep = '/'))
+      httr::DELETE(link_child,
+                   httr::add_headers(Authorization = sprintf('Bearer %s', login())))
+      cat(sprintf('Deleted child node %s\n', child))
     }
 
     # remove parent node retry
-    temp <- httr::DELETE(link, httr::authenticate(user, password))
+    temp <- httr::DELETE(link,
+                         httr::add_headers(Authorization = sprintf('Bearer %s', login())))
   }
 
   if (!temp$status_code == 204){
@@ -299,22 +307,23 @@ get.nodes.contributors <- function(node_id = NULL,
                                    user = NULL,
                                    password = NULL){
   if(is.null(user) | is.null(password)){
-    warning("No username/password, if node is private will not return results")}
+    warning('No username/password, if node is private will not return results')}
   if(is.null(node_id)){
-    stop("Requires node_id")}
+    stop('Requires node_id')}
   if(is.null(user_id)){
-    stop("Requires user_id")}
+    stop('Requires user_id')}
 
   link <- construct.link(paste0('nodes/', node_id, '/contributors/', user_id, '/'))
 
   if(!is.null(user) & !is.null(password)){
-    call <- httr::GET(link, httr::authenticate(user = user, password = password))
+    call <- httr::GET(link,
+                      httr::add_headers(Authorization = sprintf('Bearer %s', login())))
   } else {
     call <- httr::GET(link)
   }
 
   if(!call$status_code == 200){
-    stop("Error in retrieving user information")
+    stop('Error in retrieving user information')
   }
 
   res <- rjson::fromJSON(httr::content(call, 'text'))
@@ -332,12 +341,14 @@ get.nodes.contributors <- function(node_id = NULL,
 #' @export
 #'
 #' @examples
-recurse.nodes <- function(id = NULL, user = NULL, password = NULL){
+recurse.nodes <- function(id = NULL){
   link_child <- construct.link(paste('nodes', id, 'children', sep = '/'))
 
   temp_child <- rjson::fromJSON(
     httr::content(
-      httr::GET(link_child, httr::authenticate(user, password)), 'text'))
+      httr::GET(link_child,
+                httr::add_headers(Authorization = sprintf('Bearer %s', login())),
+                'text')))
 
   while (!length(temp_child$data) == 0){
     temp_unlist <- unlist(temp_child$data)
@@ -352,7 +363,9 @@ recurse.nodes <- function(id = NULL, user = NULL, password = NULL){
     for (baby in link_child){
       temp_child <- c(temp_child, rjson::fromJSON(
         httr::content(
-          httr::GET(baby, httr::authenticate(user, password)), 'text')))
+          httr::GET(baby,
+                    httr::add_headers(Authorization = sprintf('Bearer %s', login())),
+                    'text'))))
     }
   }
 
@@ -366,17 +379,18 @@ recurse.nodes <- function(id = NULL, user = NULL, password = NULL){
 # subnodes
 public.nodes <- function(id = NULL, user = NULL, password = NULL){
   if(is.null(user) | is.null(password)){
-    stop("No username/password")}
+    stop('No username/password')}
 
   temp <- recurse.nodes(id, user, password)
 
   for (id in temp){
     link <- construct.link(paste('nodes', id, sep = '/'))
 
-    x <- httr::GET(link, httr::authenticate(user, password))
+    x <- httr::GET(link,
+                   httr::add_headers(Authorization = sprintf('Bearer %s', login())))
     x <- rjson::fromJSON(httr::content(x, 'text'))
 
-    edits <- list(data = list(type = "nodes",
+    edits <- list(data = list(type = 'nodes',
                               id = id,
                               attributes = list(
                                 title = x$data$attributes$title,
@@ -389,11 +403,11 @@ public.nodes <- function(id = NULL, user = NULL, password = NULL){
 
 
     call <- httr::PUT(url = link,
-                        body = edits, encode = "json",
-                        httr::authenticate(user, password))
+                      body = edits, encode = 'json',
+                      httr::add_headers(Authorization = sprintf('Bearer %s', login())))
 
     if(!call$status_code == 200){
-      stop("Error in making node %s public", id)
+      stop('Error in making node %s public', id)
     }
   }
 }
