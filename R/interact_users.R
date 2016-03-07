@@ -69,7 +69,7 @@ put.users <- function(id = 'me',
                       middle_names = NULL,
                       family_name = NULL,
                       suffix = NULL){
-  if (Sys.getenv("OSF_PAT")) stop("Please login using the login() function")
+  if (Sys.getenv("OSF_PAT") == "") stop("Please login using the login() function")
   if (is.null(id)) stop("Please input an id")
   if (!(class(id) == 'character' & length(id) == 1)){
     stop('Please use characters and specify only ONE id')}
@@ -121,7 +121,7 @@ patch.users <- function(id = 'me',
                         family_name = NULL,
                         suffix = NULL){
   # To prevent errors due to not being logged in
-  if (Sys.getenv("OSF_PAT")) stop("Please login using the login() function")
+  if (Sys.getenv("OSF_PAT") == '') stop("Please login using the login() function")
   if (is.null(id)){
     stop("Please input an id")}
   if (!(class(id) == 'character' & length(id) == 1)){
