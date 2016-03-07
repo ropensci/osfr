@@ -83,20 +83,14 @@ get.nodes <- function(id = NULL, # make this loopable?
 #' @export
 #'
 #' @examples
-post.nodes <- function(user = NULL,
-                       password = NULL,
-                       type = 'nodes',
+post.nodes <- function(type = 'nodes',
                        title = NULL,
                        description = NULL,
                        category = 'project',
                        tags = NULL,
                        public = TRUE){
-  if(is.null(user)){
-    stop('Requires username')}
-  if(is.null(password)){
-    stop('Requires password')}
-  if(is.null(title)){
-    stop('Requires title')}
+  if(Sys.getenv('OSF_PAT') == '') stop('Requires login')
+  if(is.null(title)) stop('Requires title')
   if(!category %in% c('project',
                       'hypothesis',
                       'methods and measures',
@@ -125,13 +119,14 @@ post.nodes <- function(user = NULL,
                                 tags = tags,
                                 public = public
                               )))
-  } else if (is.null(tags)){edits <- list(data = list(type = type,
-                                                      attributes = list(
-                                                        title = title,
-                                                        category = category,
-                                                        description = description,
-                                                        public = public
-                                                      )))
+  } else if (is.null(tags)){
+    edits <- list(data = list(type = type,
+                              attributes = list(
+                                title = title,
+                                category = category,
+                                description = description,
+                                public = public
+                              )))
   } else {
     edits <- list(data = list(type = type,
                               attributes = list(
@@ -156,8 +151,6 @@ post.nodes <- function(user = NULL,
 }
 
 put.nodes <- function(id = NULL,
-                      user = NULL,
-                      password = NULL,
                       type = 'nodes',
                       title = NULL,
                       description = NULL,
@@ -166,12 +159,8 @@ put.nodes <- function(id = NULL,
                       public = TRUE){
   if(is.null(id)){
     stop('Requires id')}
-  if(is.null(user)){
-    stop('Requires username')}
-  if(is.null(password)){
-    stop('Requires password')}
-  if(is.null(title)){
-    stop('Requires title')}
+  if(Sys.getenv('OSF_PAT') == '') stop('Requires login')
+  if(is.null(title)) stop('Requires title')
   if(!category %in% c('project',
                       'hypothesis',
                       'methods and measures',
@@ -219,8 +208,6 @@ put.nodes <- function(id = NULL,
 }
 
 patch.nodes <- function(id = NULL,
-                        user = NULL,
-                        password = NULL,
                         type = 'nodes',
                         title = NULL,
                         description = NULL,
@@ -229,12 +216,8 @@ patch.nodes <- function(id = NULL,
                         public = 'true'){
   if(is.null(id)){
     stop('Requires id')}
-  if(is.null(user)){
-    stop('Requires username')}
-  if(is.null(password)){
-    stop('Requires password')}
-  if(is.null(title)){
-    stop('Requires title')}
+  if(Sys.getenv('OSF_PAT') == '') stop('Requires login')
+  if(is.null(title)) stop('Requires title')
   if(!category %in% c('project',
                       'hypothesis',
                       'methods and measures',
@@ -348,7 +331,7 @@ recurse.nodes <- function(id = NULL,
     temp_child <- rjson::fromJSON(
       httr::content(
         httr::GET(link_child),
-                  'text'))
+        'text'))
   } else {
     if(Sys.getenv('OSF_PAT') == '') stop('Requires login')
 
@@ -356,7 +339,7 @@ recurse.nodes <- function(id = NULL,
       httr::content(
         httr::GET(link_child,
                   httr::add_headers(Authorization = sprintf('Bearer %s', login()))),
-                  'text'))
+        'text'))
   }
 
   while (!length(temp_child$data) == 0) {
@@ -374,7 +357,7 @@ recurse.nodes <- function(id = NULL,
         temp_child <- c(temp_child, rjson::fromJSON(
           httr::content(
             httr::GET(baby),
-                      'text')))
+            'text')))
       } else {
         if(Sys.getenv('OSF_PAT') == '') stop('Requires login')
 
@@ -382,7 +365,7 @@ recurse.nodes <- function(id = NULL,
           httr::content(
             httr::GET(baby,
                       httr::add_headers(Authorization = sprintf('Bearer %s', login()))),
-                      'text')))
+            'text')))
       }
     }
   }
