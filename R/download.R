@@ -10,7 +10,8 @@
 #' @examples download.osf('zevw2', 'test123.md')
 download.osf <- function(id = NULL,
                          file = NULL,
-                         private = FALSE){
+                         private = FALSE)
+{
   if(is.null(id)) stop('Enter node to download.')
   if(is.null(file)) stop('Enter filename.')
 

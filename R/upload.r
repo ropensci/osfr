@@ -1,0 +1,38 @@
+upload.osf <- function(id = NULL)
+{
+  if(Sys.getenv('OSF_PAT') == '') stop('Requires login, use login()')
+
+}
+
+comment.osf <- function(id = NULL,
+                        txt = NULL)
+{
+  if(Sys.getenv('OSF_PAT') == '') stop('Requires login, use login()')
+  if(is.null(txt)) stop('Empty comment? Seems redundant. Use the txt argument')
+  if(is.null(id)) stop('Enter id to post comment to (osf.io/XXXX)')
+
+  url.osf <- construct.link(sprintf('nodes/%s/comments/', id))
+
+  comment <- list(
+    data = list(
+      type = "comments",
+      attributes = list(
+        content = txt),
+      relationships = list(
+        target = list(
+          data = list(
+            type = 'nodes',
+            id = id
+          )
+        )
+      )
+    )
+  )
+
+
+  httr::POST(url = url.osf,
+             body = rjson::toJSON(comment),
+             httr::add_headers(Authorization = sprintf(
+               'Bearer %s',
+               login())))
+}
