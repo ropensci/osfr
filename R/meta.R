@@ -27,7 +27,7 @@ welcome <- function(){
 #' construct.link("nodes/{node_id}/files/")
 
 construct.link <- function(request = NULL){
-  base <- "https://test-api.osf.io/v2/"
+  base <- "https://api.osf.io/v2/"
 
   result <- paste0(base, request)
 
