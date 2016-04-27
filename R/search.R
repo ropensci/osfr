@@ -27,7 +27,6 @@ search.osf <- function(type = 'nodes', ... = NULL)
 #' @param description Search in node description
 #' @param public Boolean, search whether node is public TRUE/FALSE
 #' @param title Search node titles
-#' @param category Search node categories (see details for options)
 #' @param id Search for node id
 #' @param tags Search node tags
 #' @param private Boolean, search private nodes as well (TRUE) or not (FALSE)
@@ -52,17 +51,27 @@ search.osf <- function(type = 'nodes', ... = NULL)
 search.nodes <- function(description = NULL,
                          public = TRUE,
                          title = NULL,
-                         category = NULL,
                          id = NULL,
                          tags = NULL,
                          private = FALSE)
 {
-  searches <- c(sprintf('filter[description]=%s', paste(description, collapse=',')),
+  searches <- c(ifelse(is.null(description), '',
+                       sprintf('filter[description]=%s',
+                               paste(description,
+                                     collapse=','))),
                 sprintf('filter[public]=%s', public),
-                sprintf('filter[title]=%s', paste(title, collapse=',')),
-                sprintf('filter[category]=%s', paste(category, collapse=',')),
-                sprintf('filter[id]=%s', paste(id, collapse=',')),
-                sprintf('filter[tags]=%s', paste(tags, collapse=',')))
+                ifelse(is.null(title), '',
+                       sprintf('filter[title]=%s',
+                               paste(title,
+                                     collapse=','))),
+                ifelse(is.null(id), '',
+                       sprintf('filter[id]=%s',
+                               paste(id,
+                                     collapse=','))),
+                ifelse(is.null(tags), '',
+                       sprintf('filter[tags]=%s',
+                               paste(tags,
+                                     collapse=','))))
 
   search <- paste(searches, collapse = '&')
 
