@@ -22,16 +22,28 @@ search.osf <- function(type = 'nodes', ... = NULL)
   return(res)
 }
 
-#' Title
+#' Search OSF nodes
 #'
-#' @param description
-#' @param public
-#' @param title
-#' @param category
-#' @param id
-#' @param tags
-#' @param collection
-#' @param private
+#' @param description Search in node description
+#' @param public Boolean, search whether node is public TRUE/FALSE
+#' @param title Search node titles
+#' @param category Search node categories (see details for options)
+#' @param id Search for node id
+#' @param tags Search node tags
+#' @param private Boolean, search private nodes as well (TRUE) or not (FALSE)
+#'
+#' @details The categories available are:
+#' \itemize{
+#' \item project
+#' \item hypothesis
+#' \item methods and measures
+#' \item procedure
+#' \item instrumentation
+#' \item data
+#' \item analysis
+#' \item communication
+#' \item other
+#' }
 #'
 #' @return
 #' @export
