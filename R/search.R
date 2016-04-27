@@ -133,26 +133,20 @@ search.nodes <- function(description = NULL,
   return(res)
 }
 
-#' Title
+#' Search OSF users
 #'
-#' @param full_name
-#' @param family_name
-#' @param date_registered
-#' @param private
+#' @param full_name Search the entire name
+#' @param family_name Search just the family name (full_name encompasses more)
 #'
 #' @return
 #' @export
 #'
 #' @examples
 search.users <- function(full_name = NULL,
-                         family_name = NULL,
-                         date_registered = NULL, # 2016-04-01
-                         private = FALSE)
+                         family_name = NULL)
 {
   searches <- c(sprintf('filter[full_name]=%s', paste(full_name, collapse=',')),
-                sprintf('filter[family_name]=%s', paste(family_name, collapse=','))
-                # sprintf('filter[date_registered]=%s', paste(date_registered, collapse=','))
-  )
+                sprintf('filter[family_name]=%s', paste(family_name, collapse=',')))
 
   search <- paste(searches, collapse = '&')
 
@@ -226,7 +220,7 @@ search.users <- function(full_name = NULL,
                            res$data[[i]]$attributes$middle_names)
     given_name <- ifelse(length(res$data[[i]]$attributes$given_name) == 0,
                          NA,
-                         res$data[[i]]$attributes$given_names)
+                         res$data[[i]]$attributes$given_name)
     full_name <- ifelse(length(res$data[[i]]$attributes$full_name) == 0,
                         NA,
                         res$data[[i]]$attributes$full_name)
