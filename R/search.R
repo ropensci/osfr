@@ -5,12 +5,12 @@ search.osf <- function(type = 'nodes', ... = NULL)
     res <- search.nodes(...)
   } else if (type == 'users')
   {
-    res <- NULL
+    res <- search.users(...)
   } else
   {
-    res <- NULL
+    stop('Please specify type as "nodes" or "users".')
   }
-   return(res)
+  return(res)
 }
 
 search.nodes <- function(description = NULL,
@@ -38,17 +38,17 @@ search.nodes <- function(description = NULL,
   call <- httr::GET(url.osf)
   res <- rjson::fromJSON(httr::content(call, 'text'))
 
-  #   while (!is.null(res$links$`next`))
-  #   {
-  #     whilst <- rjson::fromJSON(
-  #       httr::content(
-  #         httr::GET(
-  #           res$links$`next`),
-  #         'text'))
-  #     res$data <- c(res$data, whilst$data)
-  #     res$links$`next` <- whilst$links$`next`
-  #     cat(paste0(res$links$`next`, '\n'))
-  #   }
+  while (!is.null(res$links$`next`))
+  {
+    whilst <- rjson::fromJSON(
+      httr::content(
+        httr::GET(
+          res$links$`next`),
+        'text'))
+    res$data <- c(res$data, whilst$data)
+    res$links$`next` <- whilst$links$`next`
+    cat(paste0(res$links$`next`, '\n'))
+  }
 
   temp <- unlist(res$data)
 
@@ -110,3 +110,115 @@ search.nodes <- function(description = NULL,
 
   return(res)
 }
+
+search.users <- function(full_name = NULL,
+                         family_name = NULL,
+                         date_registered = NULL, # 2016-04-01
+                         private = FALSE)
+{
+  searches <- c(sprintf('filter[full_name]=%s', paste(full_name, collapse=',')),
+                sprintf('filter[family_name]=%s', paste(family_name, collapse=','))
+                # sprintf('filter[date_registered]=%s', paste(date_registered, collapse=','))
+  )
+
+  search <- paste(searches, collapse = '&')
+
+  url.osf <- construct.link(sprintf('%s/?%s',
+                                    'users',
+                                    search))
+  call <- httr::GET(url.osf)
+  res <- rjson::fromJSON(httr::content(call, 'text'))
+
+  while (!is.null(res$links$`next`))
+  {
+    whilst <- rjson::fromJSON(
+      httr::content(
+        httr::GET(
+          res$links$`next`),
+        'text'))
+    res$data <- c(res$data, whilst$data)
+    res$links$`next` <- whilst$links$`next`
+    cat(paste0(res$links$`next`, '\n'))
+  }
+
+  temp <- unlist(res$data)
+
+  nodes <- NULL
+  institutions <- NULL
+  link_self <- NULL
+  id <- NULL
+  profile_image <- NULL
+  family_name <- NULL
+  suffix <- NULL
+  locale <- NULL
+  date_registered <- NULL
+  middle_names <- NULL
+  given_name <- NULL
+  full_name <- NULL
+  active <- NULL
+  timezone <- NULL
+
+  for (i in 1:length(res$data))
+  {
+    nodes <- ifelse(length(res$data[[i]]$relationships$nodes$links$related$href) == 0,
+                    NA,
+                    res$data[[i]]$relationships$nodes$links$related$href)
+    institutions <- ifelse(length(res$data[[i]]$relationships$institutions$links$related$href) == 0,
+                           NA,
+                           res$data[[i]]$relationships$institutions$links$related$href)
+    link_self <- ifelse(length(res$data[[i]]$links$self) == 0,
+                        NA,
+                        res$data[[i]]$links$self)
+    id <- ifelse(length(res$data[[i]]$id) == 0,
+                 NA,
+                 res$data[[i]]$id)
+    profile_image <- ifelse(length(res$data[[i]]$links$profile_image) == 0,
+                            NA,
+                            res$data[[i]]$links$profile_image)
+    family_name <- ifelse(length(res$data[[i]]$attributes$family_name) == 0,
+                          NA,
+                          res$data[[i]]$attributes$family_name)
+    suffix <- ifelse(length(res$data[[i]]$attributes$suffix) == 0,
+                     NA,
+                     res$data[[i]]$attributes$suffix)
+    locale <- ifelse(length(res$data[[i]]$attributes$locale) == 0,
+                     NA,
+                     res$data[[i]]$attributes$locale)
+    date_registered <- ifelse(length(res$data[[i]]$attributes$date_registered) == 0,
+                              NA,
+                              res$data[[i]]$attributes$date_registered)
+    middle_names <- ifelse(length(res$data[[i]]$attributes$middle_names) == 0,
+                           NA,
+                           res$data[[i]]$attributes$middle_names)
+    given_name <- ifelse(length(res$data[[i]]$attributes$given_names) == 0,
+                         NA,
+                         res$data[[i]]$attributes$given_names)
+    full_name <- ifelse(length(res$data[[i]]$attributes$full_names) == 0,
+                        NA,
+                        res$data[[i]]$attributes$full_names)
+    active <- ifelse(length(res$data[[i]]$attributes$active) == 0,
+                     NA,
+                     res$data[[i]]$attributes$active)
+    timezone <- ifelse(length(res$data[[i]]$attributes$timezone) == 0,
+                       NA,
+                       res$data[[i]]$attributes$timezone)
+  }
+
+  res <- data.frame(nodes,
+                    institutions,
+                    link_self,
+                    id,
+                    profile_image,
+                    family_name,
+                    suffix,
+                    locale,
+                    date_registered,
+                    middle_names,
+                    given_name,
+                    full_name,
+                    active,
+                    timezone)
+
+  return(res)
+}
+
