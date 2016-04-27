@@ -1,3 +1,12 @@
+#' Searching the OSF
+#'
+#' @param type Specifying what type of information to search
+#' @param ... Any arguments from the search.nodes or search.users functions
+#'
+#' @return
+#' @export
+#'
+#' @examples search.osf(title = 'many labs', type = 'nodes')
 search.osf <- function(type = 'nodes', ... = NULL)
 {
   if (type == 'nodes')
@@ -13,13 +22,27 @@ search.osf <- function(type = 'nodes', ... = NULL)
   return(res)
 }
 
+#' Title
+#'
+#' @param description
+#' @param public
+#' @param title
+#' @param category
+#' @param id
+#' @param tags
+#' @param collection
+#' @param private
+#'
+#' @return
+#' @export
+#'
+#' @examples
 search.nodes <- function(description = NULL,
                          public = TRUE,
                          title = NULL,
                          category = NULL,
                          id = NULL,
                          tags = NULL,
-                         collection = FALSE,
                          private = FALSE)
 {
   searches <- c(sprintf('filter[description]=%s', paste(description, collapse=',')),
@@ -27,8 +50,7 @@ search.nodes <- function(description = NULL,
                 sprintf('filter[title]=%s', paste(title, collapse=',')),
                 sprintf('filter[category]=%s', paste(category, collapse=',')),
                 sprintf('filter[id]=%s', paste(id, collapse=',')),
-                sprintf('filter[tags]=%s', paste(tags, collapse=',')),
-                sprintf('filter[collection]=%s', collection))
+                sprintf('filter[tags]=%s', paste(tags, collapse=',')))
 
   search <- paste(searches, collapse = '&')
 
@@ -111,6 +133,17 @@ search.nodes <- function(description = NULL,
   return(res)
 }
 
+#' Title
+#'
+#' @param full_name
+#' @param family_name
+#' @param date_registered
+#' @param private
+#'
+#' @return
+#' @export
+#'
+#' @examples
 search.users <- function(full_name = NULL,
                          family_name = NULL,
                          date_registered = NULL, # 2016-04-01
@@ -126,6 +159,7 @@ search.users <- function(full_name = NULL,
   url.osf <- construct.link(sprintf('%s/?%s',
                                     'users',
                                     search))
+
   call <- httr::GET(url.osf)
   res <- rjson::fromJSON(httr::content(call, 'text'))
 
@@ -190,12 +224,12 @@ search.users <- function(full_name = NULL,
     middle_names <- ifelse(length(res$data[[i]]$attributes$middle_names) == 0,
                            NA,
                            res$data[[i]]$attributes$middle_names)
-    given_name <- ifelse(length(res$data[[i]]$attributes$given_names) == 0,
+    given_name <- ifelse(length(res$data[[i]]$attributes$given_name) == 0,
                          NA,
                          res$data[[i]]$attributes$given_names)
-    full_name <- ifelse(length(res$data[[i]]$attributes$full_names) == 0,
+    full_name <- ifelse(length(res$data[[i]]$attributes$full_name) == 0,
                         NA,
-                        res$data[[i]]$attributes$full_names)
+                        res$data[[i]]$attributes$full_name)
     active <- ifelse(length(res$data[[i]]$attributes$active) == 0,
                      NA,
                      res$data[[i]]$attributes$active)
