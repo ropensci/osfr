@@ -13,7 +13,6 @@ download.osf <- function(id = NULL,
                          private = FALSE)
 {
   if(is.null(id)) stop('Enter node to download.')
-  if(is.null(file)) stop('Enter filename.')
 
   url.osf <- construct.link(sprintf('guids/%s', id))
 
@@ -22,18 +21,16 @@ download.osf <- function(id = NULL,
     if(Sys.getenv('OSF_PAT') == '') stop('Requires login, use login()')
 
     call <- httr::GET(url.osf,
-              httr::add_headers(Authorization = sprintf(
-                'Bearer %s',
-                login())))
-
-
+                      httr::add_headers(Authorization = sprintf(
+                        'Bearer %s',
+                        login())))
   } else
   {
     call <- httr::GET(url.osf)
   }
 
   if (!call$status_code == 200){
-    stop(sprintf('Failed. Sure it is the right node id?', category))
+    stop('Failed. Sure you have access to the file?')
   }
 
   res <- rjson::fromJSON(httr::content(call, 'text'))
