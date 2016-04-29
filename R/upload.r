@@ -4,6 +4,15 @@ upload.osf <- function(id = NULL)
 
 }
 
+#' Comment on a project on the OSF
+#'
+#' @param id OSF id as depicted in link by XXXX, osf.io/XXXX
+#' @param txt Comment text
+#'
+#' @return
+#' @export
+#'
+#' @examples
 comment.osf <- function(id = NULL,
                         txt = NULL)
 {
