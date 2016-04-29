@@ -17,7 +17,7 @@ download.osf <- function(id = NULL,
 
   url.osf <- sprintf('https://osf.io/%s/?action=download', id)
 
-  if (login == TRUE)
+  if (private == TRUE)
   {
     if(Sys.getenv('OSF_PAT') == '') stop('Requires login, use login()')
 
