@@ -17,7 +17,8 @@ comment.osf <- function(id = NULL,
     data = list(
       type = "comments",
       attributes = list(
-        content = txt),
+        content = txt
+      ),
       relationships = list(
         target = list(
           data = list(
@@ -30,9 +31,11 @@ comment.osf <- function(id = NULL,
   )
 
 
-  httr::POST(url = url.osf,
-             body = rjson::toJSON(comment),
+  call <- httr::POST(url = url.osf,
+             body = comment, encode = 'json',
              httr::add_headers(Authorization = sprintf(
                'Bearer %s',
                login())))
+
+  rjson::fromJSON(httr::content(call, 'text'))
 }
