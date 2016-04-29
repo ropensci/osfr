@@ -15,7 +15,7 @@ download.osf <- function(id = NULL,
   if(is.null(id)) stop('Enter node to download.')
   if(is.null(file)) stop('Enter filename.')
 
-  url.osf <- sprintf('https://osf.io/%s/?action=download', id)
+  url.osf <- construct.link(sprintf('guids/%s', id))
 
   if (private == TRUE)
   {
@@ -32,5 +32,12 @@ download.osf <- function(id = NULL,
     call <- httr::GET(url.osf)
   }
 
+  if (!call$status_code == 200){
+    stop(sprintf('Failed. Sure it is the right node id?', category))
+  }
 
+  res <- rjson::fromJSON(httr::content(call, 'text'))
+
+  httr::GET(res$data$links$download,
+            httr::write_disk(file, overwrite = TRUE))
 }
