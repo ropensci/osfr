@@ -47,6 +47,18 @@ login <- function(pat = NULL){
       input <- readline(prompt = "Visit https://osf.io/settings/tokens/ and create a Personal access token: ")
 
       Sys.setenv(OSF_PAT = input)
+
+      if (file.exists(paste0(normalizePath('~/'), '.Renviron')))
+      {
+        write(sprintf('OSF_PAT=%s', input),
+            paste0(normalizePath('~/'), '/.Renviron'),
+            append = TRUE)
+      } else
+      {
+        write(sprintf('OSF_PAT=%s', input),
+            paste0(normalizePath('~/'), '/.Renviron'),
+            append = FALSE)
+      }
     }
   }
 
