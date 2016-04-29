@@ -21,16 +21,16 @@ download.osf <- function(id = NULL,
   {
     if(Sys.getenv('OSF_PAT') == '') stop('Requires login, use login()')
 
-    httr::GET(url.osf,
+    call <- httr::GET(url.osf,
               httr::add_headers(Authorization = sprintf(
                 'Bearer %s',
-                login())),
-              httr::write_disk(file, overwrite = TRUE))
+                login())))
 
 
   } else
   {
-    httr::GET(url.osf,
-              httr::write_disk(file, overwrite = TRUE))
+    call <- httr::GET(url.osf)
   }
+
+
 }
