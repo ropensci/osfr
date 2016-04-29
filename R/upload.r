@@ -41,10 +41,10 @@ comment.osf <- function(id = NULL,
 
 
   call <- httr::POST(url = url.osf,
-             body = comment, encode = 'json',
-             httr::add_headers(Authorization = sprintf(
-               'Bearer %s',
-               login())))
+                     body = comment, encode = 'json',
+                     httr::add_headers(Authorization = sprintf(
+                       'Bearer %s',
+                       login())))
 
   rjson::fromJSON(httr::content(call, 'text'))
 }
