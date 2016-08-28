@@ -26,9 +26,11 @@ welcome <- function(){
 #' @examples
 #' construct.link("nodes/{node_id}/files/")
 
-construct.link <- function(request = NULL){
-  base <- "https://api.osf.io/v2/"
-
+construct.link <- function(request = NULL, test = FALSE){
+  if (test == FALSE)
+    base <- "https://api.osf.io/v2/"
+  if (test == TRUE)
+    base <- "https://test-api.osf.io/v2/"
   result <- paste0(base, request)
 
   return(result)
