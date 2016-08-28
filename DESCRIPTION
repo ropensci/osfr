@@ -1,15 +1,15 @@
 Package: osfr
-Title: What the Package Does (one line, title case)
+Title: API Interface With Open Science Framework
 Version: 0.0.0.9000
-Authors@R: 'Chris Hartgerink <chjh@protonmail.com> [aut, cre]'
-Description: What the package does (one paragraph)
+Authors@R: 'Chris Hartgerink <chjh@protonmail.com>'
+Description: Providing ways to interface with the Open Science Framework inside R. This includes searching through the OSF projects, posting files and comments and more.
 Depends:
-    R (>= 3.2.3)
+    R (>= 3.3.1)
 Imports:
     httr,
     httpuv,
     jsonlite
-License: CC-0 v1.0
+License: CC0 1.0
 BugReports: https://github.com/chartgerink/osfr/issues
 LazyData: true
 Suggests:
