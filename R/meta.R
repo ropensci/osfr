@@ -1,21 +1,32 @@
 #' Welcome function
 #'
+#' @param ... other arguments, only for testing.
+#'
 #' @return Welcome message of logged in user, if any
 #' @export
 
-welcome <- function(){
-  if (Sys.getenv("OSF_PAT") == ""){
-    call <- httr::GET(url = construct.link())
-  } else {
-    call <- httr::GET(url = construct.link(),
+welcome <- function(...)
+{
+  if (Sys.getenv("OSF_PAT") == "")
+  {
+    login()
+    call <- httr::GET(url = construct.link(...))
+  } else
+  {
+    call <- httr::GET(url = construct.link(...),
                       httr::add_headers(Authorization = sprintf("Bearer %s", login())))
   }
 
   res <- rjson::fromJSON(httr::content(call, 'text'))
 
-  if (is.null(res$meta$current_user)) warning("Currently not logged in\n")
-  if (!is.null(res$meta$current_user)) cat(sprintf("Welcome user_id %s",
-                                                   res$meta$current_user$data$id))
+  if (is.null(res$meta$current_user))
+  {
+    warning("Currently not logged in\n")
+  }
+  if (!is.null(res$meta$current_user))
+  {
+    cat(sprintf("Welcome user_id %s", res$meta$current_user$data$id))
+  }
 }
 
 #' Construct an API link with proper base
@@ -53,13 +64,13 @@ login <- function(pat = NULL){
       if (file.exists(paste0(normalizePath('~/'), '.Renviron')))
       {
         write(sprintf('OSF_PAT=%s', input),
-            paste0(normalizePath('~/'), '/.Renviron'),
-            append = TRUE)
+              paste0(normalizePath('~/'), '/.Renviron'),
+              append = TRUE)
       } else
       {
         write(sprintf('OSF_PAT=%s', input),
-            paste0(normalizePath('~/'), '/.Renviron'),
-            append = FALSE)
+              paste0(normalizePath('~/'), '/.Renviron'),
+              append = FALSE)
       }
     }
   }
