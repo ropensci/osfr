@@ -17,7 +17,7 @@ welcome <- function(...)
                       httr::add_headers(Authorization = sprintf("Bearer %s", login())))
   }
 
-  res <- rjson::fromJSON(httr::content(call, 'text'))
+  res <- rjson::fromJSON(httr::content(call, "text", encoding = "UTF-8"))
 
   if (is.null(res$meta$current_user))
   {
@@ -25,7 +25,7 @@ welcome <- function(...)
   }
   if (!is.null(res$meta$current_user))
   {
-    cat(sprintf("Welcome user_id %s", res$meta$current_user$data$id))
+    cat(sprintf("Welcome %s\n", res$meta$current_user$data$attributes$full_name))
   }
 }
 
@@ -49,7 +49,7 @@ construct.link <- function(request = NULL, test = FALSE){
 
 #' Login function; interactive without arguments
 #'
-#' @param pat Personal Access Token (PAT) for fast login.
+#' @param pat Personal Access Token (PAT) for fast login. If no pat is given, function queries for it.
 #'
 #' @return Personal access token from global environment.
 #' @export
@@ -57,7 +57,8 @@ construct.link <- function(request = NULL, test = FALSE){
 login <- function(pat = NULL){
   if (!is.null(pat)) Sys.setenv(OSF_PAT = pat) else{
     if (Sys.getenv("OSF_PAT") == ""){
-      input <- readline(prompt = "Visit https://osf.io/settings/tokens/ and create a Personal access token: ")
+      input <- readline(prompt = "Visit https://osf.io/settings/tokens/
+                        and create a Personal access token: ")
 
       Sys.setenv(OSF_PAT = input)
 
