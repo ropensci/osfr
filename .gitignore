@@ -11,3 +11,4 @@ vignettes/*.html
 vignettes/*.pdf
 .Rproj.user
 .httr-oauth
+.Rprofile
