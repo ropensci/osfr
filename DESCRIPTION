@@ -2,7 +2,9 @@ Package: osfr
 Title: API Interface With Open Science Framework
 Version: 0.0.0.9000
 Authors@R: 'Chris Hartgerink <chjh@protonmail.com> [aut, cre]'
-Description: Providing ways to interface with the Open Science Framework inside R. This includes searching through the OSF projects, posting files and comments and more.
+Description: Providing ways to interface with the Open Science Framework inside
+    R. This includes searching through the OSF projects, posting files and comments
+    and more.
 Depends:
     R (>= 3.3.1)
 Imports:
@@ -14,4 +16,4 @@ BugReports: https://github.com/chartgerink/osfr/issues
 LazyData: true
 Suggests:
     testthat
-RoxygenNote: 5.0.0
+RoxygenNote: 5.0.1
