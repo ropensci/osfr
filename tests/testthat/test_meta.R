@@ -13,11 +13,11 @@ test_that("welcome message operates", {
   # Make sure to have object OSF_PAT_TEST in environment
   # I usually keep it in ~/.Rprofile
   Sys.setenv(OSF_PAT = Sys.getenv("OSF_PAT_TEST"))
-  expect_that(class(welcome(test = TRUE)), matches('NULL'))
+  expect_that(class(suppressMessages(welcome(test = TRUE))), matches('list'))
   logout
 })
-#
-# test_that("login sets global environment", {
-#   expect_equal(login(pat = '12345'), '12345')
-#   expect_true(logout())
-# })
+
+test_that("login sets global environment", {
+  expect_equal(login(pat = '12345'), '12345')
+  expect_true(logout())
+})

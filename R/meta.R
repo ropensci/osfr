@@ -25,8 +25,10 @@ welcome <- function(...)
   }
   if (!is.null(res$meta$current_user))
   {
-    cat(sprintf("Welcome %s\n", res$meta$current_user$data$attributes$full_name))
+    cat(sprintf("Welcome %s", res$meta$current_user$data$attributes$full_name))
   }
+
+  return(res)
 }
 
 #' Construct an API link with proper base
@@ -37,11 +39,17 @@ welcome <- function(...)
 #' @examples
 #' construct.link("nodes/{node_id}/files/")
 
-construct.link <- function(request = NULL, test = FALSE){
+construct.link <- function(request = NULL,
+                           test = FALSE){
   if (test == FALSE)
+  {
     base <- "https://api.osf.io/v2/"
+  }
   if (test == TRUE)
+  {
     base <- "https://test-api.osf.io/v2/"
+  }
+
   result <- paste0(base, request)
 
   return(result)
@@ -55,7 +63,11 @@ construct.link <- function(request = NULL, test = FALSE){
 #' @export
 
 login <- function(pat = NULL){
-  if (!is.null(pat)) Sys.setenv(OSF_PAT = pat) else{
+  if (!is.null(pat))
+  {
+    Sys.setenv(OSF_PAT = pat)
+  } else
+  {
     if (Sys.getenv("OSF_PAT") == ""){
       input <- readline(prompt = "Visit https://osf.io/settings/tokens/
                         and create a Personal access token: ")
@@ -85,15 +97,15 @@ login <- function(pat = NULL){
 #' @return Logical of successfulness of logout
 #' @export
 
-logout <- function(){
-  if (Sys.getenv("OSF_PAT") == ""){
+logout <- function(...){
+  if (Sys.getenv("OSF_PAT") == "")
+  {
     cat("Not logged in.")
 
     return(FALSE)
-  } else{
+  } else
+  {
     Sys.unsetenv("OSF_PAT")
-
-    cat("Successfully logged out. Use login() to log back in.")
 
     return(TRUE)
   }
