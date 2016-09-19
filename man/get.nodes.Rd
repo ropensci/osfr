@@ -4,20 +4,18 @@
 \alias{get.nodes}
 \title{Retrieve nodes associated with id}
 \usage{
-get.nodes(id = NULL, user = NULL, password = NULL, contributors = FALSE,
-  files = FALSE, children = FALSE)
+get.nodes(id = NULL, contributors = FALSE, files = FALSE,
+  children = FALSE)
 }
 \arguments{
 \item{id}{The id to search for. Use `NULL` to retrieve all,
 `me` for logged in account. Maximum of 1 id.}
 
-\item{user}{Username to log in with}
-
-\item{password}{Password to log in with}
-
 \item{contributors}{Boolean to extract the contributors of the node}
 
-\item{files}{Boolean to extract links}
+\item{files}{Boolean to download files}
+
+\item{children}{Boolean to retrieve children nodes of id}
 }
 \value{
 List object of results
@@ -27,7 +25,7 @@ Retrieve nodes associated with id
 }
 \examples{
 get.nodes()
-get.nodes(id = 'me', user = 'h.schwarzenegger@gmail.com', 'testingtesting')
+get.nodes(id = 'me')
 get.nodes(id = 'nu97z')
 }
 

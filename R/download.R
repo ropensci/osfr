@@ -8,13 +8,15 @@
 #' @export
 #'
 #' @examples download.osf('zevw2', 'test123.md')
+
 download.osf <- function(id = NULL,
                          file = NULL,
-                         private = FALSE)
+                         private = FALSE,
+                         ...)
 {
   if(is.null(id)) stop('Enter node to download.')
 
-  url.osf <- construct.link(sprintf('guids/%s', id))
+  url.osf <- construct.link(sprintf('guids/%s', id), ...)
 
   if (private == TRUE)
   {
@@ -33,17 +35,29 @@ download.osf <- function(id = NULL,
     stop('Failed. Sure you have access to the file?')
   }
 
-  res <- rjson::fromJSON(httr::content(call, 'text'))
+  res <- rjson::fromJSON(httr::content(call, 'text', encoding = "UTF-8"))
 
   # Find the filename as on the OSF
   if (is.null(file))
   {
-    txt <- res$data$links$download
+    txt <- res$data$attributes$name
     start <- tail(gregexpr('/', txt)[[1]], 1)
     end <-  nchar(txt)
     file <- substr(txt, start + 1, end)
   }
 
+  cat(sprintf('Saving to filename: %s', file))
+
+  if (private == FALSE)
+  {
   httr::GET(res$data$links$download,
             httr::write_disk(file, overwrite = TRUE))
+  } else
+  {
+    httr::GET(res$data$links$download,
+              httr::add_headers(Authorization = sprintf(
+                'Bearer %s',
+                login())),
+              httr::write_disk(file, overwrite = TRUE))
+  }
 }

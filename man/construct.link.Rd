@@ -4,7 +4,7 @@
 \alias{construct.link}
 \title{Construct an API link with proper base}
 \usage{
-construct.link(request = NULL, login = FALSE)
+construct.link(request = NULL, test = FALSE)
 }
 \arguments{
 \item{request}{The request link to be combined with the base API link.}

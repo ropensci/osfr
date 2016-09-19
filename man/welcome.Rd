@@ -4,15 +4,13 @@
 \alias{welcome}
 \title{Welcome function}
 \usage{
-welcome(user = NULL, password = NULL)
+welcome(...)
 }
 \arguments{
-\item{user}{User account}
-
-\item{password}{Password}
+\item{...}{other arguments, only for testing.}
 }
 \value{
-Information about OSF version and user in list format
+Welcome message of logged in user, if any
 }
 \description{
 Welcome function

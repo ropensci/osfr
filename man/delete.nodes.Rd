@@ -4,19 +4,20 @@
 \alias{delete.nodes}
 \title{Delete a node with its id}
 \usage{
-delete.nodes(id = NULL, user = NULL, password = NULL)
+delete.nodes(id = NULL, recursive = FALSE)
 }
 \arguments{
 \item{id}{The node_id to be deleted.}
 
-\item{user}{The username to log in with (temporary until OAUTH2.0)}
-
-\item{password}{The password to log in with (temporary until OAUTH2.0)}
+\item{recursive}{Boolean argument to recursively delete subnodes. Defaults to
+FALSE for sake of preventing accidental deletion.}
 }
 \value{
-Boolean TRUE if deletion succeeded
+Boolean TRUE if deletion succeeded.
 }
 \description{
-Delete a node with its id
+A function to delete a node on the Open Science Framework. This includes all
+types of nodes (e.g., communication, hypothesis, etc.) and includes a full
+project. Note that the function recurses throughout subnodes and deletes these as well.
 }
 
