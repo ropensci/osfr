@@ -14,7 +14,7 @@ test_that("welcome message operates", {
   # I usually keep it in ~/.Rprofile
   Sys.setenv(OSF_PAT = Sys.getenv("OSF_PAT_TEST"))
   expect_that(class(suppressMessages(welcome(test = TRUE))), matches('list'))
-  logout
+  logout()
 })
 
 test_that("login sets global environment", {

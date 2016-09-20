@@ -1,27 +1,3 @@
-#' Searching the OSF
-#'
-#' @param type Specifying what type of information to search
-#' @param ... Any arguments from the search.nodes or search.users functions
-#'
-#' @return
-#' @export
-#'
-#' @examples search.osf(title = 'many labs', type = 'nodes')
-search.osf <- function(type = 'nodes', ... = NULL)
-{
-  if (type == 'nodes')
-  {
-    res <- search.nodes(...)
-  } else if (type == 'users')
-  {
-    res <- search.users(...)
-  } else
-  {
-    stop('Please specify type as "nodes" or "users".')
-  }
-  return(res)
-}
-
 #' Search OSF nodes
 #'
 #' @param description Search in node description
@@ -48,12 +24,14 @@ search.osf <- function(type = 'nodes', ... = NULL)
 #' @export
 #'
 #' @examples
+
 search.nodes <- function(description = NULL,
                          public = TRUE,
                          title = NULL,
                          id = NULL,
                          tags = NULL,
-                         private = FALSE)
+                         private = FALSE,
+                         ...)
 {
   searches <- c(ifelse(is.null(description), '',
                        sprintf('filter[description]=%s',
@@ -74,12 +52,15 @@ search.nodes <- function(description = NULL,
                                      collapse=','))))
 
   search <- paste(searches, collapse = '&')
+  # Ensure spaces are correct for URL
+  search <- gsub(search, pattern = '\\s', replacement = '%20', perl = TRUE)
 
   url.osf <- construct.link(sprintf('%s/?%s',
                                     'nodes',
-                                    search))
+                                    search),
+                            ...)
   call <- httr::GET(url.osf)
-  res <- rjson::fromJSON(httr::content(call, 'text'))
+  res <- rjson::fromJSON(httr::content(call, 'text', encoding = "UTF-8"))
 
   while (!is.null(res$links$`next`))
   {
@@ -163,20 +144,24 @@ search.nodes <- function(description = NULL,
 #' @export
 #'
 #' @examples
+
 search.users <- function(full_name = NULL,
-                         family_name = NULL)
+                         family_name = NULL,
+                         ...)
 {
   searches <- c(sprintf('filter[full_name]=%s', paste(full_name, collapse=',')),
                 sprintf('filter[family_name]=%s', paste(family_name, collapse=',')))
 
   search <- paste(searches, collapse = '&')
+  # Ensure spaces are correct for URL
+  search <- gsub(search, pattern = '\\s', replacement = '%20', perl = TRUE)
 
   url.osf <- construct.link(sprintf('%s/?%s',
                                     'users',
-                                    search))
+                                    search), ...)
 
   call <- httr::GET(url.osf)
-  res <- rjson::fromJSON(httr::content(call, 'text'))
+  res <- rjson::fromJSON(httr::content(call, 'text', encoding = "UTF-8"))
 
   while (!is.null(res$links$`next`))
   {
@@ -271,3 +256,26 @@ search.users <- function(full_name = NULL,
   return(res)
 }
 
+#' Searching the OSF
+#'
+#' @param type Specifying what type of information to search
+#' @param ... Any arguments from the search.nodes or search.users functions
+#'
+#' @return
+#' @export
+#'
+#' @examples search.osf(title = 'many labs', type = 'nodes')
+search.osf <- function(type = 'nodes', ...)
+{
+  if (type == 'nodes')
+  {
+    res <- search.nodes(...)
+  } else if (type == 'users')
+  {
+    res <- search.users(...)
+  } else
+  {
+    stop('Please specify type as "nodes" or "users".')
+  }
+  return(res)
+}

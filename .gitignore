@@ -12,3 +12,7 @@ vignettes/*.pdf
 .Rproj.user
 .httr-oauth
 .Rprofile
+# ignore test files 
+tests/testthat/porsche 2.jpg
+tests/testthat/test.file.remove
+
