@@ -97,7 +97,8 @@ login <- function(pat = NULL){
 #' @return Logical of successfulness of logout
 #' @export
 
-logout <- function(...){
+logout <- function(...)
+{
   if (Sys.getenv("OSF_PAT") == "")
   {
     cat("Not logged in.")
@@ -109,4 +110,11 @@ logout <- function(...){
 
     return(TRUE)
   }
+}
+
+process_json <- function(x)
+{
+  res <- rjson::fromJSON(httr::content(x, 'text', encoding = "UTF-8"))
+
+  return(res)
 }
