@@ -50,8 +50,8 @@ download.osf <- function(id = NULL,
 
   if (private == FALSE)
   {
-  httr::GET(res$data$links$download,
-            httr::write_disk(file, overwrite = TRUE))
+    httr::GET(res$data$links$download,
+              httr::write_disk(file, overwrite = TRUE))
   } else
   {
     httr::GET(res$data$links$download,

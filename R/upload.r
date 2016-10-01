@@ -3,25 +3,44 @@ upload.osf <- function(id = NULL,
 {
   if (Sys.getenv('OSF_PAT') == '') stop('Requires login, use login()')
   if (is.null(id)) stop('Input component to upload to.')
-  # Check what id property is, stop if NOT project/component
 
-  url.osf <- construct.link(sprintf('nodes/%s', id), ...)
-
-  call <- httr::GET(url.osf)
-
-  if (call$status_code != 200)
+  if (check_type(id) == 'nodes')
   {
-    stop('Not a proper node or something else. Check your id, pretty please.')
+    upload_new()
+  } else if (check_type(id) == 'files')
+  {
+    upload_revision()
+  } else
+  {
+    stop('Something odd happened. Please report a bug with at https://github.com/chartgerink/osfr')
   }
-
-  res <- rjson::fromJSON(httr::content(call, "text", encoding = 'UTF8'))
-
-  httr::PUT(res$data$relationships$files$links$related$href, )
-  res <- rjson::fromJSON(httr::content(call, "text", encoding = 'UTF8'))
 
   return(call)
 }
 
+# url.osf <- construct.link(sprintf('nodes/%s', id), ...)
+#
+# call <- httr::GET(url.osf)
+#
+# if (call$status_code != 200)
+# {
+#   stop('Not a proper node or something else. Check your id, pretty please.')
+# }
+#
+# res <- rjson::fromJSON(httr::content(call, "text", encoding = 'UTF8'))
+#
+# httr::PUT(res$data$relationships$files$links$related$href, )
+# res <- rjson::fromJSON(httr::content(call, "text", encoding = 'UTF8'))
+
+upload_new <- function(id = NULL)
+{
+
+}
+
+upload_revision <- function(id = NULL)
+{
+
+}
 
 #' Comment on a project on the OSF
 #'

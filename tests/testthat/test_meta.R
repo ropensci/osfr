@@ -21,3 +21,12 @@ test_that("login sets global environment", {
   expect_equal(login(pat = '12345'), '12345')
   expect_true(logout())
 })
+
+test_that("check_type functions", {
+  expect_that(check_type(id = 'djxwq', test = TRUE), matches('nodes'))
+  expect_that(check_type(id = 'kjh47', test = TRUE), matches('files'))
+  # Also checkable for private nodes/files
+  Sys.setenv(OSF_PAT = Sys.getenv("OSF_PAT_TEST"))
+  expect_that(check_type(id = '2pf6w', private = TRUE, test = TRUE), matches('files'))
+  logout()
+})
