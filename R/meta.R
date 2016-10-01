@@ -17,7 +17,7 @@ welcome <- function(...)
                       httr::add_headers(Authorization = sprintf("Bearer %s", login())))
   }
 
-  res <- rjson::fromJSON(httr::content(call, "text", encoding = "UTF-8"))
+  res <- process_json(call)
 
   if (is.null(res$meta$current_user))
   {
@@ -150,10 +150,10 @@ check_type <- function(id = NULL,
     stop('Failed. Sure you have access to the id or that it is valid?')
   } else if (call_nodes$status_code == 200)
   {
-    res <- rjson::fromJSON(httr::content(call_nodes, 'text', encoding = "UTF-8"))
+    res <- process_json(call_nodes)
   } else
   {
-    res <- rjson::fromJSON(httr::content(call_files, 'text', encoding = "UTF-8"))
+    res <- process_json(call_files)
   }
 
   return(res$data$type)

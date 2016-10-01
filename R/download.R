@@ -35,7 +35,7 @@ download.osf <- function(id = NULL,
     stop('Failed. Sure you have access to the file?')
   }
 
-  res <- rjson::fromJSON(httr::content(call, 'text', encoding = "UTF-8"))
+  res <- process_json(call)
 
   # Find the filename as on the OSF
   if (is.null(file))
