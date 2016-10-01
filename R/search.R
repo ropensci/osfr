@@ -60,7 +60,7 @@ search.nodes <- function(description = NULL,
                                     search),
                             ...)
   call <- httr::GET(url.osf)
-  res <- rjson::fromJSON(httr::content(call, 'text', encoding = "UTF-8"))
+  res <- process_json(call)
 
   while (!is.null(res$links$`next`))
   {
@@ -161,7 +161,7 @@ search.users <- function(full_name = NULL,
                                     search), ...)
 
   call <- httr::GET(url.osf)
-  res <- rjson::fromJSON(httr::content(call, 'text', encoding = "UTF-8"))
+  res <- process_json(call)
 
   while (!is.null(res$links$`next`))
   {
