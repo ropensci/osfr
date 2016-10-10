@@ -1,4 +1,4 @@
-upload.osf <- function(id = NULL,
+upload_osf <- function(id = NULL,
                        ...)
 {
   if (Sys.getenv('OSF_PAT') == '') stop('Requires login, use login()')
@@ -18,27 +18,17 @@ upload.osf <- function(id = NULL,
   return(call)
 }
 
-# url.osf <- construct.link(sprintf('nodes/%s', id), ...)
-#
-# call <- httr::GET(url.osf)
-#
-# if (call$status_code != 200)
-# {
-#   stop('Not a proper node or something else. Check your id, pretty please.')
-# }
-#
-# res <- rjson::fromJSON(httr::content(call, "text", encoding = 'UTF8'))
-#
-# httr::PUT(res$data$relationships$files$links$related$href, )
-# res <- rjson::fromJSON(httr::content(call, "text", encoding = 'UTF8'))
-
 upload_new <- function(id = NULL)
 {
 
 }
 
-upload_revision <- function(id = NULL)
+upload_revision <- function(id = NULL,
+                            ...)
 {
+  url.osf <- construct.link(sprintf('%s/?%s',
+                                    typ,
+                                    search), ...)
 
 }
 
@@ -53,7 +43,7 @@ upload_revision <- function(id = NULL)
 #'
 #' @examples
 
-comment.osf <- function(id = NULL,
+comment_osf <- function(id = NULL,
                         txt = NULL,
                         ...)
 {
@@ -61,7 +51,7 @@ comment.osf <- function(id = NULL,
   if(is.null(txt)) stop('Empty comment? Seems redundant. Use the txt argument')
   if(is.null(id)) stop('Enter id to post comment to (osf.io/XXXX)')
 
-  url.osf <- construct.link(sprintf('nodes/%s/comments/', id), ...)
+  url.osf <- construct_link(sprintf('nodes/%s/comments/', id), ...)
 
   # Create the JSON body
   comment <- list(

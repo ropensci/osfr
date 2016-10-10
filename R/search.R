@@ -25,7 +25,7 @@
 #'
 #' @examples
 
-search.nodes <- function(description = NULL,
+search_nodes <- function(description = NULL,
                          public = TRUE,
                          title = NULL,
                          id = NULL,
@@ -55,7 +55,7 @@ search.nodes <- function(description = NULL,
   # Ensure spaces are correct for URL
   search <- gsub(search, pattern = '\\s', replacement = '%20', perl = TRUE)
 
-  url.osf <- construct.link(sprintf('%s/?%s',
+  url.osf <- construct_link(sprintf('%s/?%s',
                                     'nodes',
                                     search),
                             ...)
@@ -145,7 +145,7 @@ search.nodes <- function(description = NULL,
 #'
 #' @examples
 
-search.users <- function(full_name = NULL,
+search_users <- function(full_name = NULL,
                          family_name = NULL,
                          ...)
 {
@@ -156,7 +156,7 @@ search.users <- function(full_name = NULL,
   # Ensure spaces are correct for URL
   search <- gsub(search, pattern = '\\s', replacement = '%20', perl = TRUE)
 
-  url.osf <- construct.link(sprintf('%s/?%s',
+  url.osf <- construct_link(sprintf('%s/?%s',
                                     'users',
                                     search), ...)
 
@@ -265,14 +265,14 @@ search.users <- function(full_name = NULL,
 #' @export
 #'
 #' @examples search.osf(title = 'many labs', type = 'nodes')
-search.osf <- function(type = 'nodes', ...)
+search_osf <- function(type = 'nodes', ...)
 {
   if (type == 'nodes')
   {
-    res <- search.nodes(...)
+    res <- search_nodes(...)
   } else if (type == 'users')
   {
-    res <- search.users(...)
+    res <- search_users(...)
   } else
   {
     stop('Please specify type as "nodes" or "users".')

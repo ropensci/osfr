@@ -10,10 +10,10 @@ welcome <- function(...)
   if (Sys.getenv("OSF_PAT") == "")
   {
     login()
-    call <- httr::GET(url = construct.link(...))
+    call <- httr::GET(url = construct_link(...))
   } else
   {
-    call <- httr::GET(url = construct.link(...),
+    call <- httr::GET(url = construct_link(...),
                       httr::add_headers(Authorization = sprintf("Bearer %s", login())))
   }
 
@@ -37,9 +37,9 @@ welcome <- function(...)
 #'
 #' @return The full request link with proper base
 #' @examples
-#' construct.link("nodes/{node_id}/files/")
+#' construct_link("nodes/{node_id}/files/")
 
-construct.link <- function(request = NULL,
+construct_link <- function(request = NULL,
                            test = FALSE){
   if (test == FALSE)
   {

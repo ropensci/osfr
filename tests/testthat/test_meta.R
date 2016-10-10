@@ -1,10 +1,10 @@
 context("Setup API meta-interaction")
 
 test_that("link construction is functional", {
-	expect_that(construct.link(), matches("v2/$"))
-  expect_that(construct.link(test = TRUE), matches("v2/$"))
-	expect_that(construct.link('applications'), matches("applications$"))
-	expect_that(construct.link('applications', test = TRUE), matches("applications$"))
+	expect_that(construct_link(), matches("v2/$"))
+  expect_that(construct_link(test = TRUE), matches("v2/$"))
+	expect_that(construct_link('applications'), matches("applications$"))
+	expect_that(construct_link('applications', test = TRUE), matches("applications$"))
 	})
 
 test_that("welcome message operates", {

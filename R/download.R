@@ -7,16 +7,16 @@
 #' @return
 #' @export
 #'
-#' @examples download.osf('zevw2', 'test123.md')
+#' @examples download_osf('zevw2', 'test123.md')
 
-download.osf <- function(id = NULL,
+download_osf <- function(id = NULL,
                          file = NULL,
                          private = FALSE,
                          ...)
 {
   if(is.null(id)) stop('Enter node to download.')
 
-  url.osf <- construct.link(sprintf('guids/%s', id), ...)
+  url.osf <- construct_link(sprintf('guids/%s', id), ...)
 
   if (private == TRUE)
   {
