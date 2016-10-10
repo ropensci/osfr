@@ -1,7 +1,6 @@
 upload_osf <- function(id = NULL,
                        ...)
 {
-  if (Sys.getenv('OSF_PAT') == '') stop('Requires login, use login()')
   if (is.null(id)) stop('Input component to upload to.')
 
   if (check_type(id) == 'nodes')
@@ -18,18 +17,43 @@ upload_osf <- function(id = NULL,
   return(call)
 }
 
-upload_new <- function(id = NULL)
+upload_new <- function(id = NULL,
+                       ...)
 {
-
+  if (Sys.getenv('OSF_PAT') == '') stop('Requires login, use login()')
 }
 
 upload_revision <- function(id = NULL,
+                            revision = NULL,
                             ...)
 {
-  url.osf <- construct.link(sprintf('%s/?%s',
-                                    typ,
-                                    search), ...)
+  if (is.null(revision)) stop('Please input file to be uploaded as revision.')
 
+  # Assume it is private just in case
+  # Incorporates login check needed anyway
+  typ <- check_type(id, private = TRUE, ...)
+
+  if (typ != 'files') stop('Cannot upload revisions if not a file.')
+
+  url.osf <- construct.link(sprintf('%s/%s',
+                                    typ,
+                                    id), ...)
+
+  call <- httr::GET(url.osf, httr::add_headers(Authorization = sprintf(
+    'Bearer %s',
+    login())))
+  res <- process_json(call)
+
+  upload.osf <- res$data$links$upload
+
+  upload <- httr::PUT(upload.osf, body = httr::upload_file(revision), encode = 'raw',
+             config = httr::add_headers(Authorization = sprintf(
+               'Bearer %s',
+               login())))
+
+  if (upload$status_code != 200) stop('Failed to upload revision')
+
+  return(TRUE)
 }
 
 #' Comment on a project on the OSF
