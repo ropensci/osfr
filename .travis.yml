@@ -6,7 +6,6 @@ env: _R_CHECK_CRAN_INCOMING_=FALSE
 
 r_github_packages:
   - chartgerink/osfr
-  - codecov/example-r
 
 r_packages:
   - covr

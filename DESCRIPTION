@@ -10,7 +10,7 @@ Depends:
 Imports:
     httr,
     httpuv,
-    jsonlite
+    rjson
 License: CC0 1.0
 BugReports: https://github.com/chartgerink/osfr/issues
 LazyData: true
