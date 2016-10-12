@@ -125,8 +125,8 @@ check_type <- function(id = NULL,
 {
   if(is.null(id)) stop('Enter id to check.')
 
-  url.osf.nodes <- construct.link(sprintf('nodes/%s', id), ...)
-  url.osf.files <- construct.link(sprintf('files/%s', id), ...)
+  url.osf.nodes <- construct_link(sprintf('nodes/%s', id), ...)
+  url.osf.files <- construct_link(sprintf('files/%s', id), ...)
 
   if (private == TRUE)
   {
