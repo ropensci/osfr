@@ -55,6 +55,26 @@ construct_link <- function(request = NULL,
   return(result)
 }
 
+construct_link_upload <- function(id = NULL,
+                                  request = NULL,
+                                  test = FALSE)
+{
+  if (test == FALSE)
+  {
+    base <- sprintf("https://files.osf.io/v1/resources/%s/providers/osfstorage/%s",
+                    id,
+                    request)
+  }
+  if (test == TRUE)
+  {
+    base <- sprintf("https://test-files.osf.io/v1/resources/%s/providers/osfstorage/%s",
+                    id,
+                    request)
+  }
+
+  return(base)
+}
+
 #' Login function; interactive without arguments
 #'
 #' @param pat Personal Access Token (PAT) for fast login. If no pat is given, function queries for it.
