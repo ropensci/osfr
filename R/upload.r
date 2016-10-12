@@ -18,16 +18,40 @@ upload_osf <- function(id = NULL,
 }
 
 upload_new <- function(id = NULL,
+                       filename = NULL,
                        ...)
 {
-  if (Sys.getenv('OSF_PAT') == '') stop('Requires login, use login()')
+  if (is.null(filename)) stop('Please input filename to be uploaded.')
+
+  # Assume it is private just in case
+  # Incorporates login check needed anyway
+  typ <- check_type(id, private = TRUE, ...)
+
+  if (typ != 'nodes') stop('Cannot upload new file if no node ID is specified.')
+
+  upload.osf <- construct_link_upload(id,
+                                      request = sprintf("?kind=file&name=%s",
+                                                        filename),
+                                      ...)
+  upload.osf <- gsub(upload.osf, pattern = '\\s', replacement = '%20', perl = TRUE)
+
+  upload <- httr::PUT(upload.osf, body = httr::upload_file(filename), encode = 'raw',
+                      config = httr::add_headers(Authorization = sprintf(
+                        'Bearer %s',
+                        login())))
+
+  if (upload$status_code == 409) stop('Conflict in filename naming.
+                                      Please use upload_revision or change filename')
+  if (upload$status_code != 201) stop('Unsuccessful upload.')
+
+  return(TRUE)
 }
 
 upload_revision <- function(id = NULL,
-                            file = NULL,
+                            filename = NULL,
                             ...)
 {
-  if (is.null(file)) stop('Please input file to be uploaded as revision.')
+  if (is.null(filename)) stop('Please input filename to be uploaded as revision.')
 
   # Assume it is private just in case
   # Incorporates login check needed anyway
@@ -46,10 +70,10 @@ upload_revision <- function(id = NULL,
 
   upload.osf <- res$data$links$upload
 
-  upload <- httr::PUT(upload.osf, body = httr::upload_file(file), encode = 'raw',
-             config = httr::add_headers(Authorization = sprintf(
-               'Bearer %s',
-               login())))
+  upload <- httr::PUT(upload.osf, body = httr::upload_file(filename), encode = 'raw',
+                      config = httr::add_headers(Authorization = sprintf(
+                        'Bearer %s',
+                        login())))
 
   if (upload$status_code != 200) stop('Failed to upload revision')
 
