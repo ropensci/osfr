@@ -24,10 +24,10 @@ upload_new <- function(id = NULL,
 }
 
 upload_revision <- function(id = NULL,
-                            revision = NULL,
+                            file = NULL,
                             ...)
 {
-  if (is.null(revision)) stop('Please input file to be uploaded as revision.')
+  if (is.null(file)) stop('Please input file to be uploaded as revision.')
 
   # Assume it is private just in case
   # Incorporates login check needed anyway
@@ -35,7 +35,7 @@ upload_revision <- function(id = NULL,
 
   if (typ != 'files') stop('Cannot upload revisions if not a file.')
 
-  url.osf <- construct.link(sprintf('%s/%s',
+  url.osf <- construct_link(sprintf('%s/%s',
                                     typ,
                                     id), ...)
 
@@ -46,7 +46,7 @@ upload_revision <- function(id = NULL,
 
   upload.osf <- res$data$links$upload
 
-  upload <- httr::PUT(upload.osf, body = httr::upload_file(revision), encode = 'raw',
+  upload <- httr::PUT(upload.osf, body = httr::upload_file(file), encode = 'raw',
              config = httr::add_headers(Authorization = sprintf(
                'Bearer %s',
                login())))

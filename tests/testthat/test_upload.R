@@ -14,6 +14,8 @@ test_that("Uploading files", {
   expect_error(upload_osf())
   Sys.setenv(OSF_PAT = Sys.getenv("OSF_PAT_TEST"))
   expect_error(upload_osf(id = 'kjh47'))
+  getwd()
+  expect_true(upload_revision(id = 'kjh47', file = 'test_upload1', test = TRUE))
   # expect_that(upload_osf(id = 'djxwq'))
   logout()
 })
