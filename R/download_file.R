@@ -1,24 +1,25 @@
 #' Download files from the OSF
 #'
 #' @param id Specify the node id (osf.io/XXXX)
-#' @param file Specify path to save file. If NULL, defaults to OSF
-#' @param private Boolean to specify whether file is private
+#' @param file Specify path to save file to. If NULL, defaults to OSF filename
+#' @param public Boolean to specify whether file is public
 #'
-#' @return
+#' @return Return filepath for easy processing
 #' @export
 #'
-#' @examples download_osf('zevw2', 'test123.md')
+#' @examples
+#' \dontrun{download_osf('zevw2', 'test123.md')}
 
-download_osf <- function(id = NULL,
+download <- function(id = NULL,
                          file = NULL,
-                         private = FALSE,
+                         public = TRUE,
                          ...)
 {
   if(is.null(id)) stop('Enter node to download.')
 
   url.osf <- construct_link(sprintf('guids/%s', id), ...)
 
-  if (private == TRUE)
+  if (public == FALSE)
   {
     if(Sys.getenv('OSF_PAT') == '') stop('Requires login, use login()')
 
@@ -46,18 +47,24 @@ download_osf <- function(id = NULL,
     file <- substr(txt, start + 1, end)
   }
 
-  cat(sprintf('Saving to filename: %s', file))
+  cat(sprintf('Saving to filename: %s\n', file))
 
-  if (private == FALSE)
+  if (public == TRUE)
   {
-    httr::GET(res$data$links$download,
+    call <- httr::GET(res$data$links$download,
               httr::write_disk(file, overwrite = TRUE))
   } else
   {
-    httr::GET(res$data$links$download,
+    call <- httr::GET(res$data$links$download,
               httr::add_headers(Authorization = sprintf(
                 'Bearer %s',
                 login())),
               httr::write_disk(file, overwrite = TRUE))
   }
+
+  if (call$status_code != 200) stop("Failed to download file.")
+
+  cat("Successfully downloaded file.\n")
+
+  return(file)
 }

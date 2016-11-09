@@ -24,8 +24,8 @@ List object of results
 Retrieve nodes associated with id
 }
 \examples{
-get.nodes()
+\dontrun{get.nodes()
 get.nodes(id = 'me')
-get.nodes(id = 'nu97z')
+get.nodes(id = 'nu97z')}
 }
 

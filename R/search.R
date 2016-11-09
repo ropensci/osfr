@@ -20,10 +20,8 @@
 #' \item other
 #' }
 #'
-#' @return
+#' @return Data frame of nodes
 #' @export
-#'
-#' @examples
 
 search_nodes <- function(description = NULL,
                          public = TRUE,
@@ -140,10 +138,8 @@ search_nodes <- function(description = NULL,
 #' @param full_name Search the entire name
 #' @param family_name Search just the family name (full_name encompasses more)
 #'
-#' @return
+#' @return Data frame of users
 #' @export
-#'
-#' @examples
 
 search_users <- function(full_name = NULL,
                          family_name = NULL,
@@ -261,7 +257,7 @@ search_users <- function(full_name = NULL,
 #' @param type Specifying what type of information to search
 #' @param ... Any arguments from the search.nodes or search.users functions
 #'
-#' @return
+#' @return Data frame of nodes or users
 #' @export
 #'
 #' @examples search.osf(title = 'many labs', type = 'nodes')
