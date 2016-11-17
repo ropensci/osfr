@@ -4,7 +4,7 @@
 #' @param title Title of the component
 #' @param description Description of the component
 #' @param category Category of component, for valid categories
-#'   see \code{\link{process.category}}
+#'   see \code{\link{process_category}}
 #' @param public Boolean of whether the component is supposed to be public
 #'
 #' @return OSF id of created component

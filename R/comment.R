@@ -7,9 +7,9 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{comment(id = '12345', txt = 'This is an example')}
+#' \dontrun{comment_osf(id = '12345', txt = 'This is an example')}
 
-comment <- function(id = NULL,
+comment_osf <- function(id = NULL,
                     txt = NULL,
                     ...)
 {
