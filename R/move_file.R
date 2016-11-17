@@ -16,13 +16,24 @@ move_file <- function(from = NULL,
                       conflict = 'replace',
                       ...)
 {
-  typfrom <- process_type(id = from, ...)
-  typto <- process_type(id = to, ...)
+  if (nchar(from) == 5)
+  {
+    typfrom <- process_type(id = from, ...)
+    typto <- process_type(id = to, ...)
 
-  if (typfrom != 'nodes' & typto != 'nodes') stop('Needs to move from
+    if (typfrom != 'nodes' & typto != 'nodes') stop('Needs to move from
 	                                                node to node')
 
-  url.osf <- process_file_id(from, ...)
+    url.osf <- process_file_id(from, ...)
+  }
+  else
+  {
+    typto <- process_type(id = to, ...)
+
+    if (typto != 'nodes') stop('Needs to move from node to node')
+    url.osf <- from
+  }
+
 
   body <- list(
     action = action,
