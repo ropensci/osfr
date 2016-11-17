@@ -15,7 +15,7 @@ create_component(id = NULL, title = "", description = "", category = "",
 \item{description}{Description of the component}
 
 \item{category}{Category of component, for valid categories
-see \code{\link{process.category}}}
+see \code{\link{process_category}}}
 
 \item{public}{Boolean of whether the component is supposed to be public}
 }

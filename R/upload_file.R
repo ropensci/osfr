@@ -28,8 +28,6 @@ upload_file <- function(id = NULL,
          If the problem persists, consider issuing a bug report on
          github.com/chartgerink/osfr')
   }
-
-  return(TRUE)
 }
 
 

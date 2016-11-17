@@ -3,7 +3,7 @@
 #' @param id Parent OSF id (osf.io/XXXX) to upload to.
 #' @param filename Filename on local machine to upload
 #'
-#' @return Boolean of upload success.
+#' @return Waterbutler URL
 #' @seealso \code{\link{upload_file}}, \code{\link{upload_revision}}
 
 upload_new <- function(id = NULL,
@@ -33,5 +33,7 @@ upload_new <- function(id = NULL,
                                       Please use upload_revision or change filename')
   if (call$status_code != 201) stop('Unsuccessful upload.')
 
-  return(TRUE)
+  res <- process_json(call)
+
+  return(res$data$links$download)
 }

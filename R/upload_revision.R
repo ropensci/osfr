@@ -36,5 +36,7 @@ upload_revision <- function(id = NULL,
 
   if (upload$status_code != 200) stop('Failed to upload revision')
 
-  return(TRUE)
+  res <- process_json(upload)
+
+  return(res$data$links$download)
 }
