@@ -12,7 +12,7 @@ upload_new(id = NULL, filename = NULL, ...)
 \item{filename}{Filename on local machine to upload}
 }
 \value{
-Boolean of upload success.
+Waterbutler URL
 }
 \description{
 Upload a new file to the OSF.
