@@ -8,7 +8,7 @@
 
 get.users <- function(id = NULL, nodes = FALSE){
   if (Sys.getenv("OSF_PAT") == "" & is.null(id)){
-    raw <- httr::GET(construct.link("users"))
+    raw <- httr::GET(construct_link("users"))
 
     result <- rjson::fromJSON(httr::content(raw, 'text'))
   } else if (id == "me"){
@@ -17,10 +17,10 @@ get.users <- function(id = NULL, nodes = FALSE){
       warning("Please login first using the login() function")}
 
     if(nodes == TRUE){
-      raw <- httr::GET(construct.link("users/me/nodes"),
+      raw <- httr::GET(construct_link("users/me/nodes"),
                        httr::add_headers(Authorization = sprintf("Bearer %s", login())))
     } else {
-      raw <- httr::GET(construct.link("users/me"),
+      raw <- httr::GET(construct_link("users/me"),
                        httr::add_headers(Authorization = sprintf("Bearer %s", login())))
     }
 

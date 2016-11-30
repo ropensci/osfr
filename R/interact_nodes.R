@@ -19,15 +19,15 @@ get.nodes <- function(id = NULL, # make this loopable?
                       files = FALSE,
                       children = FALSE){ # add a recurse argument?b
   if (is.null(id)){
-    call <- httr::GET(construct.link('nodes'))
+    call <- httr::GET(construct_link('nodes'))
   } else if (id == 'me'){
     if(Sys.getenv('OSF_PAT') == '') stop('Requires login')
 
     # Does this work? Should test
-    call <- httr::GET(construct.link('nodes'),
+    call <- httr::GET(construct_link('nodes'),
                       httr::add_headers(Authorization = sprintf('Bearer %s', login())))
   } else {
-    call <- httr::GET(construct.link(paste('nodes', id, sep = '/')))
+    call <- httr::GET(construct_link(paste('nodes', id, sep = '/')))
   }
 
   res <- rjson::fromJSON(httr::content(call, 'text'))
