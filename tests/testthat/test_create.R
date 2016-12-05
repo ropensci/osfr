@@ -6,6 +6,7 @@ context("Test creating")
 Sys.setenv(OSF_PAT = Sys.getenv("OSF_PAT_TEST"))
 
 test_that("Creating projects and components", {
+  skip_on_travis()
   x <- create_project(title = "This is an automated test",
                              description = "This is an automated test",
                              test = TRUE)

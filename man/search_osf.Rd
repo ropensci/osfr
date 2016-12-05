@@ -18,6 +18,6 @@ Data frame of nodes or users
 Searching the OSF
 }
 \examples{
-search.osf(title = 'many labs', type = 'nodes')
+\dontrun{search.osf(title = 'many labs', type = 'nodes')}
 }
 

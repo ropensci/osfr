@@ -260,7 +260,7 @@ search_users <- function(full_name = NULL,
 #' @return Data frame of nodes or users
 #' @export
 #'
-#' @examples search.osf(title = 'many labs', type = 'nodes')
+#' @examples \dontrun{search.osf(title = 'many labs', type = 'nodes')}
 search_osf <- function(type = 'nodes', ...)
 {
   if (type == 'nodes')

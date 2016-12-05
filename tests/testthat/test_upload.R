@@ -3,6 +3,7 @@ context("Test upload functions")
 Sys.setenv(OSF_PAT = Sys.getenv("OSF_PAT_TEST"))
 
 test_that("Uploading comments", {
+  skip_on_travis()
   expect_error(comment())
   # Forcing as.character to make test consistent across machines
   expect_true(comment(id = "djxwq", txt = "Tesdsat", test = TRUE))
