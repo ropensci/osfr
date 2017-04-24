@@ -20,4 +20,3 @@ Searching the OSF
 \examples{
 \dontrun{search.osf(title = 'many labs', type = 'nodes')}
 }
-

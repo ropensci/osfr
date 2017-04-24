@@ -17,4 +17,3 @@ Data frame of users
 \description{
 Search OSF users
 }
-

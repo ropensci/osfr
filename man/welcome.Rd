@@ -12,4 +12,3 @@ Welcome message of logged in user, if any
 \description{
 Personalised welcome
 }
-

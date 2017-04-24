@@ -14,4 +14,3 @@ This function ensures that when having used a device, the access token is delete
 This is important to ensure that there is no remainder lying around allowing illicit
 access to your account.
 }
-

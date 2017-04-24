@@ -40,4 +40,3 @@ The categories available are:
 \item other
 }
 }
-

@@ -22,4 +22,3 @@ Download files from the OSF
 \examples{
 \dontrun{download_osf('zevw2', 'test123.md')}
 }
-

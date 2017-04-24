@@ -1,4 +1,4 @@
-#" Function to empty out a component and delete it
+#' Function to empty out a component and delete it
 #'
 #' @param id OSF id (osf.io/xxxx)
 #'

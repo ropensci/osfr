@@ -19,4 +19,3 @@ Waterbutler link
 \description{
 Construct a waterbutler API link with proper base
 }
-

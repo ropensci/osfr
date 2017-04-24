@@ -28,4 +28,3 @@ Create a component within a project
 \seealso{
 \code{\link{create_project}}
 }
-

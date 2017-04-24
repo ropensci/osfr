@@ -1,9 +1,9 @@
 # context("test nodes functions")
 #
 # test_that("nodes are retrieved", {
-#   expect_that(class(get.nodes()), matches('list'))
-#   expect_warning(get.nodes(id = 'me'), 'Requires login') # still requires a succesful login test
-#   expect_error(get.nodes(contributors = TRUE, files = TRUE),
+#   expect_that(class(get_nodes()), matches('list'))
+#   expect_warning(get_nodes(id = 'me'), 'Requires login') # still requires a succesful login test
+#   expect_error(get_nodes(contributors = TRUE, files = TRUE),
 #                'Specify contributors OR files OR children')
 #
 # })
@@ -34,26 +34,26 @@
 # # # such that it can be deleted during testing
 # # # do not want to delete actual nodes
 # #
-# # test_that("get.nodes returns for different account types", {
-# # 	expect_that(class(get.nodes(id = NULL))[1], matches('list'))
-# # 	expect_that(get.nodes(id = 'me'), throws_error('Requires user'))
-# # 	expect_that(get.nodes(id = 'me', user = 'test'), throws_error('Requires password'))
-# # 	expect_that(class(get.nodes(id = 'me', user = 'h.schwarzenegger@gmail.com', 'testingtesting')),	matches('list'))
+# # test_that("get_nodes returns for different account types", {
+# # 	expect_that(class(get_nodes(id = NULL))[1], matches('list'))
+# # 	expect_that(get_nodes(id = 'me'), throws_error('Requires user'))
+# # 	expect_that(get_nodes(id = 'me', user = 'test'), throws_error('Requires password'))
+# # 	expect_that(class(get_nodes(id = 'me', user = 'h.schwarzenegger@gmail.com', 'testingtesting')),	matches('list'))
 # # 	})
 # #
 # # test_that("existence of node is detected", {
-# # 	expect_that(get.nodes(id = '12345'), throws_error('Node not found.'))
-# # 	expect_that(names(get.nodes(id = 'jqdn2')), matches('data'))
+# # 	expect_that(get_nodes(id = '12345'), throws_error('Node not found.'))
+# # 	expect_that(names(get_nodes(id = 'jqdn2')), matches('data'))
 # # 	})
 # #
 # # test_that("contributors and files extraction functions", {
-# # 	expect_that(class(get.nodes('jqdn2', contributors = TRUE)), matches('list'))
-# # 	expect_that(class(get.nodes('jqdn2', files = TRUE)), matches('list'))
-# # 	expect_that(class(get.nodes('jqdn2', children = TRUE)), matches('list'))
-# # 	expect_that(get.nodes('jqdn2', contributors = TRUE, files = TRUE), throws_error("Specify contributors OR files OR children"))
-# # 	expect_that(get.nodes('jqdn2', children = TRUE, files = TRUE), throws_error("Specify contributors OR files OR children"))
-# # 	expect_that(get.nodes('jqdn2', children = TRUE, contributors = TRUE), throws_error("Specify contributors OR files OR children"))
-# # 	expect_that(get.nodes('jqdn2', files = TRUE, children = TRUE, contributors = TRUE), throws_error("Specify contributors OR files OR children"))
+# # 	expect_that(class(get_nodes('jqdn2', contributors = TRUE)), matches('list'))
+# # 	expect_that(class(get_nodes('jqdn2', files = TRUE)), matches('list'))
+# # 	expect_that(class(get_nodes('jqdn2', children = TRUE)), matches('list'))
+# # 	expect_that(get_nodes('jqdn2', contributors = TRUE, files = TRUE), throws_error("Specify contributors OR files OR children"))
+# # 	expect_that(get_nodes('jqdn2', children = TRUE, files = TRUE), throws_error("Specify contributors OR files OR children"))
+# # 	expect_that(get_nodes('jqdn2', children = TRUE, contributors = TRUE), throws_error("Specify contributors OR files OR children"))
+# # 	expect_that(get_nodes('jqdn2', files = TRUE, children = TRUE, contributors = TRUE), throws_error("Specify contributors OR files OR children"))
 # # 	})
 # #
 # # test_that("post.nodes operates properly", {
@@ -117,9 +117,9 @@
 # # 		    description = "test", category = "hypofdthesis"), throws_error("Please input proper category, see documentation"))
 # # 	})
 # #
-# # test_that("get.nodes.contributors works properly", {
-# # 	expect_that(class(get.nodes.contributors('jqdn2', 'tyhc6')), matches('list'))
-# # 	expect_that(class(get.nodes.contributors(node_id = '3hu4n', user_id = 'tyhc6', user = 'h.schwarzenegger@gmail.com', password = 'testingtesting')), matches('list'))
+# # test_that("get_nodes.contributors works properly", {
+# # 	expect_that(class(get_nodes.contributors('jqdn2', 'tyhc6')), matches('list'))
+# # 	expect_that(class(get_nodes.contributors(node_id = '3hu4n', user_id = 'tyhc6', user = 'h.schwarzenegger@gmail.com', password = 'testingtesting')), matches('list'))
 # # 	})
 # #
 # # test_that("put.nodes operates properly", {
@@ -155,7 +155,7 @@
 # # 	})
 # #
 # # test_that("nodes are deleted properly", {
-# # 	x = get.users(id = 'me', user = 'h.schwarzenegger@gmail.com', password = 'testingtesting')
+# # 	x = get_users(id = 'me', user = 'h.schwarzenegger@gmail.com', password = 'testingtesting')
 # # 	y = rjson::fromJSON(httr::content(httr::GET(x$data$relationships$nodes$links$related$href), 'text'))
 # # 	for (i in 1:5){
 # # 		if (y$data[[i]]$id == "jqdn2"){

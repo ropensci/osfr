@@ -20,4 +20,3 @@ Comment on a project on the OSF
 \examples{
 \dontrun{comment_osf(id = '12345', txt = 'This is an example')}
 }
-

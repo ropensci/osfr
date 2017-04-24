@@ -17,4 +17,3 @@ Endpoint of id as character (nodes | files)
 \description{
 Identify type of endpoint for id
 }
-

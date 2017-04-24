@@ -20,4 +20,3 @@ Upload a new file to the OSF.
 \seealso{
 \code{\link{upload_file}}, \code{\link{upload_revision}}
 }
-

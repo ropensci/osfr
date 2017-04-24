@@ -12,4 +12,3 @@ Boolean succes of logout
 \description{
 Logout function
 }
-

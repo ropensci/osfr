@@ -19,4 +19,3 @@ Boolean, deletion succeeded?
 \description{
 Delete a project or file from the OSF
 }
-

@@ -10,9 +10,9 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{get.nodes()
-#' get.nodes(id = 'me')
-#' get.nodes(id = 'nu97z')
+#' \dontrun{get_nodes()
+#' get_nodes(id = 'me')
+#' get_nodes(id = 'nu97z')
 #' }
 get_nodes <- function(
   id = NULL, # make this loopable?

@@ -15,4 +15,3 @@ Parsed JSON object in the form of an R object.
 \description{
 Function to parse API call
 }
-

@@ -15,4 +15,3 @@ Boolean, delete succeeded?
 \description{
 Delete a file based on OSF id
 }
-

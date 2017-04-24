@@ -15,4 +15,3 @@ Personal access token from global environment.
 \description{
 Login function; interactive without arguments
 }
-

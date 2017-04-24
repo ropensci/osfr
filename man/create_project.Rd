@@ -27,4 +27,3 @@ create_project(title = "Testing the OSF project creation")
 \seealso{
 \code{\link{create_component}}
 }
-

@@ -18,4 +18,3 @@ Construct an API link with proper base
 \examples{
 \dontrun{construct_link("nodes/{node_id}/files/")}
 }
-

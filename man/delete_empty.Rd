@@ -15,4 +15,3 @@ Boolean, deletion succeeded?
 \description{
 Function to empty out a component and delete it
 }
-

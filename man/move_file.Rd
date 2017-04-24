@@ -24,4 +24,3 @@ Boolean, moving succeeded?
 \description{
 Move (and copy) files on the OSF
 }
-

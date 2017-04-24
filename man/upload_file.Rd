@@ -21,4 +21,3 @@ Upload a file to the OSF (both new and revised)
 \examples{
 upload_file(id = '12345', filename = 'test.pdf')
 }
-
