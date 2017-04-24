@@ -14,9 +14,9 @@ Imports:
     httr,
     httpuv,
     rjson
-License: CC0
+License: MIT + file LICENSE
 BugReports: https://github.com/chartgerink/osfr/issues
 LazyData: true
 Suggests:
     testthat
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
