@@ -10,6 +10,8 @@ upload_new(id = NULL, filename = NULL, ...)
 \item{id}{Parent OSF id (osf.io/XXXX) to upload to.}
 
 \item{filename}{Filename on local machine to upload}
+
+\item{\ldots}{Additional parameters passed to \code{\link{process_type}} and \code{\link{construct_link_files}}}
 }
 \value{
 Waterbutler URL

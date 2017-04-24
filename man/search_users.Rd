@@ -10,6 +10,8 @@ search_users(full_name = NULL, family_name = NULL, ...)
 \item{full_name}{Search the entire name}
 
 \item{family_name}{Search just the family name (full_name encompasses more)}
+
+\item{\ldots}{Additional parameters passed to \code{\link{construct_link}}}
 }
 \value{
 Data frame of users

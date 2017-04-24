@@ -12,6 +12,8 @@ recurse_node(id = NULL, public = TRUE, maxdepth = 5, ...)
 \item{public}{Boolean, search for only public?}
 
 \item{maxdepth}{Integer, amount of levels deep to crawl}
+
+\item{\ldots}{Additional parameters passed to \code{\link{construct_link}}}
 }
 \value{
 List of OSF ids, with parents as very last.

@@ -17,6 +17,8 @@ move_file(from = NULL, to = NULL, filename = NULL, action = "move",
 \item{action}{Move or copy}
 
 \item{conflict}{Keep old file or replace in case of conflict}
+
+\item{\ldots}{Additional parameters passed to \code{\link{process_type}}}
 }
 \value{
 Boolean, moving succeeded?

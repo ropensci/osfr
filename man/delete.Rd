@@ -12,6 +12,8 @@ delete(id = NULL, recursive = FALSE, maxdepth = 5, ...)
 \item{recursive}{Boolean, if TRUE will go through folder nesting (see \code{maxdepth})}
 
 \item{maxdepth}{Number of nesting levels to go through}
+
+\item{\ldots}{Additional parameters passed to \code{\link{process_type}}, \code{\link{delete_project}}, and \code{\link{delete_file}}}
 }
 \value{
 Boolean, deletion succeeded?

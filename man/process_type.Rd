@@ -10,6 +10,8 @@ process_type(id = NULL, private = FALSE, ...)
 \item{id}{OSF id to check}
 
 \item{private}{Boolean, in case id is private set to TRUE}
+
+\item{\ldots}{Additional parameters passed to \code{\link{construct_link}}}
 }
 \value{
 Endpoint of id as character (nodes | files)

@@ -2,9 +2,9 @@
 #'
 #' @param id OSF id to check
 #' @param private Boolean, in case id is private set to TRUE
+#' @param \ldots Additional parameters passed to \code{\link{construct_link}}
 #'
 #' @return Endpoint of id as character (nodes | files)
-
 process_type <- function(id = NULL, private = FALSE, ...) {
 
   if (is.null(id))

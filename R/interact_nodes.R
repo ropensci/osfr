@@ -57,11 +57,11 @@ get_nodes <- function(
     call <- httr::GET(res$data$relationships$children$links$related$href)
     res <- rjson::fromJSON(httr::content(call, "text"))
 
-    if (is.list(x$data))
+    if (is.list(res$data))
       stop(sprintf("No children available for node %s", id))
   }
 
-  while (!is.null(res$links$`next`)){
+  while (!is.null(res$links$`next`)) {
     whilst <- rjson::fromJSON(
       httr::content(
         httr::GET(res$links$`next`), "text"))

@@ -6,6 +6,7 @@
 #' @param category Category of component, for valid categories
 #'   see \code{\link{process_category}}
 #' @param public Boolean of whether the component is supposed to be public
+#' @param \ldots Additional parameters passed to \code{\link{construct_link}}
 #'
 #' @return OSF id of created component
 #' @export
@@ -24,7 +25,7 @@ create_component <- function(
     stop("Please input project id.")
   process_category(category)
 
-  url.osf <- construct_link(sprintf("nodes/%s/children/", id), ...)
+  url_osf <- construct_link(sprintf("nodes/%s/children/", id), ...)
 
   # Create the JSON body
   body <- list(
@@ -40,7 +41,7 @@ create_component <- function(
   )
 
   call <- httr::POST(
-    url = url.osf,
+    url = url_osf,
     body = body, encode = "json",
     httr::add_headers(Authorization = sprintf("Bearer %s", login())))
 

@@ -5,6 +5,7 @@
 #' @param filename Optional, rename the file
 #' @param action Move or copy
 #' @param conflict Keep old file or replace in case of conflict
+#' @param \ldots Additional parameters passed to \code{\link{process_type}}
 #'
 #' @return Boolean, moving succeeded?
 #' @export
@@ -23,16 +24,15 @@ move_file <- function(
     if (typfrom != "nodes" & typto != "nodes")
       stop("Needs to move from node to node")
 
-    url.osf <- process_file_id(from, ...)
+    url_osf <- process_file_id(from, ...)
   } else {
     typto <- process_type(id = to, ...)
 
     if (typto != "nodes")
       stop("Needs to move from node to node")
 
-    url.osf <- from
+    url_osf <- from
   }
-
 
   body <- list(
     action = action,
@@ -42,11 +42,10 @@ move_file <- function(
     provider = "osfstorage",
     resource = to)
 
-  call <- httr::POST(url.osf,
-                     body = body, encode = "json",
-                     httr::add_headers(Authorization = sprintf(
-                       "Bearer %s",
-                       login())))
+  call <- httr::POST(
+    url_osf,
+    body = body, encode = "json",
+    httr::add_headers(Authorization = sprintf("Bearer %s", login())))
 
   if (call$status_code != 201 & call$status_code != 200)
     stop("Error in moving/copying file.")

@@ -10,6 +10,8 @@ comment_osf(id = NULL, txt = NULL, ...)
 \item{id}{OSF id (osf.io/XXXX)}
 
 \item{txt}{Contents of the comment}
+
+\item{\ldots}{Additional parameters passed to \code{\link{process_type}} and \code{\link{construct_link}}}
 }
 \value{
 Boolean, posting succeeded?

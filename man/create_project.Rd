@@ -12,6 +12,8 @@ create_project(title = "", description = "", public = TRUE, ...)
 \item{description}{Project description}
 
 \item{public}{Boolean, whether project should be public (FALSE for private)}
+
+\item{\ldots}{Additional parameters passed to \code{\link{construct_link}}}
 }
 \value{
 Returns the created project's id

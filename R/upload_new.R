@@ -2,6 +2,7 @@
 #'
 #' @param id Parent OSF id (osf.io/XXXX) to upload to.
 #' @param filename Filename on local machine to upload
+#' @param \ldots Additional parameters passed to \code{\link{process_type}} and \code{\link{construct_link_files}}
 #'
 #' @return Waterbutler URL
 #' @seealso \code{\link{upload_file}}, \code{\link{upload_revision}}

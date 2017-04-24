@@ -10,6 +10,8 @@ process_file_id(id = NULL, private = FALSE, ...)
 \item{id}{OSF id (osf.io/xxxx)}
 
 \item{private}{Boolean, if file is private}
+
+\item{\ldots}{Additional parameters passed to \code{\link{construct_link}}}
 }
 \value{
 Waterbutler URL

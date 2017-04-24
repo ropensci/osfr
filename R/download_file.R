@@ -3,12 +3,15 @@
 #' @param id Specify the node id (osf.io/XXXX)
 #' @param file Specify path to save file to. If NULL, defaults to OSF filename
 #' @param public Boolean to specify whether file is public
+#' @param \ldots Additional parameters passed to \code{\link{construct_link}}
 #'
 #' @return Return filepath for easy processing
-#' @export
-#'
 #' @examples
-#' \dontrun{download_osf('zevw2', 'test123.md')}
+#' \dontrun{
+#' download('zevw2', 'test123.md')
+#' }
+#' @importFrom utils tail
+#' @export
 download <- function(
   id = NULL,
   file = NULL,
@@ -18,17 +21,17 @@ download <- function(
   if (is.null(id))
     stop("Enter node to download.")
 
-  url.osf <- construct_link(sprintf("guids/%s", id), ...)
+  url_osf <- construct_link(sprintf("guids/%s", id), ...)
 
   if (public == FALSE) {
     if (Sys.getenv("OSF_PAT") == "")
       stop("Requires login, use login()")
 
     call <- httr::GET(
-      url.osf,
+      url_osf,
       httr::add_headers(Authorization = sprintf("Bearer %s", login())))
   } else {
-    call <- httr::GET(url.osf)
+    call <- httr::GET(url_osf)
   }
 
   if (!call$status_code == 200)
@@ -39,7 +42,7 @@ download <- function(
   # Find the filename as on the OSF
   if (is.null(file)) {
     txt <- res$data$attributes$name
-    start <- tail(gregexpr("/", txt)[[1]], 1)
+    start <- utils::tail(gregexpr("/", txt)[[1]], 1)
     end <-  nchar(txt)
     file <- substr(txt, start + 1, end)
   }

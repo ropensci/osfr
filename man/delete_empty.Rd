@@ -8,6 +8,8 @@ delete_empty(id, ...)
 }
 \arguments{
 \item{id}{OSF id (osf.io/xxxx)}
+
+\item{\ldots}{Additional parameters passed to \code{\link{construct_link_files}} and \code{\link{construct_link}}}
 }
 \value{
 Boolean, deletion succeeded?

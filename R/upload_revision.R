@@ -2,6 +2,7 @@
 #'
 #' @param id OSF id (osf.io/XXXX) of file to revise
 #' @param filename Local filename to upload as revision
+#' @param \ldots Additional parameters passed to \code{\link{process_type}} and \code{\link{construct_link}}
 #'
 #' @return Boolean of revision success
 #' @seealso \code{\link{upload_file}}, \code{\link{upload_new}}

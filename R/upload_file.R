@@ -3,12 +3,15 @@
 #' @param id OSF id (osf.io/XXXX) to upload to. Specify project to upload new file,
 #'  specify a file to upload a revision
 #' @param filename Local filename to upload
+#' @param \ldots Additional parameters passed to \code{\link{process_type}}, \code{\link{upload_new}}, and \code{\link{upload_revision}}
 #'
 #' @return Boolean of upload success
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' upload_file(id = '12345', filename = 'test.pdf')
+#' }
 upload_file <- function(
   id = NULL,
   filename = NULL,

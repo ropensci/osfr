@@ -11,6 +11,8 @@ upload_file(id = NULL, filename = NULL, ...)
 specify a file to upload a revision}
 
 \item{filename}{Local filename to upload}
+
+\item{\ldots}{Additional parameters passed to \code{\link{process_type}}, \code{\link{upload_new}}, and \code{\link{upload_revision}}}
 }
 \value{
 Boolean of upload success
@@ -19,5 +21,7 @@ Boolean of upload success
 Upload a file to the OSF (both new and revised)
 }
 \examples{
+\dontrun{
 upload_file(id = '12345', filename = 'test.pdf')
+}
 }

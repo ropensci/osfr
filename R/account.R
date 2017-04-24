@@ -1,8 +1,10 @@
 #' Personalised welcome
 #'
+#' @param \ldots Additional parameters passed to \code{\link{construct_link}}
 #' @return Welcome message of logged in user, if any
 #' @export
 welcome <- function(...) {
+
   if (Sys.getenv("OSF_PAT") == "") {
     login()
     call <- httr::GET(url = construct_link(...))
@@ -29,11 +31,11 @@ welcome <- function(...) {
 #'
 #' @return Personal access token from global environment.
 #' @export
-login <- function(pat = NULL){
+login <- function(pat = NULL) {
   if (!is.null(pat)) {
     Sys.setenv(OSF_PAT = pat)
   } else {
-    if (Sys.getenv("OSF_PAT") == ""){
+    if (Sys.getenv("OSF_PAT") == "") {
       input <- readline(prompt = "Visit https://osf.io/settings/tokens/
         and create a Personal access token: ")
 
@@ -58,7 +60,7 @@ login <- function(pat = NULL){
 #'
 #' @return Boolean succes of logout
 #' @export
-logout <- function(...) {
+logout <- function() {
   if (Sys.getenv("OSF_PAT") == "") {
     cat("Not logged in.")
     return(FALSE)
@@ -68,15 +70,16 @@ logout <- function(...) {
   }
 }
 
-#' Cleaning up PAT file
-#'
-#' This function ensures that when having used a device, the access token is deleted.
-#' This is important to ensure that there is no remainder lying around allowing illicit
-#' access to your account.
-#'
-#' @return Boolean of cleanup success.
-#' @export
-cleanup <- function() {
-  fn <- normalizePath("~/.Renviron")
-  if (file.exists(fn)) file.remove(fn)
-}
+# #' Cleaning up PAT file
+# #'
+# #' This function ensures that when having used a device, the access token is deleted.
+# #' This is important to ensure that there is no remainder lying around allowing illicit
+# #' access to your account.
+# #'
+# #' @return Boolean of cleanup success.
+# #' @export
+# cleanup <- function() {
+#   fn <- normalizePath("~/.Renviron")
+#   if (file.exists(fn)) file.remove(fn)
+# }
+# NOTE: this is bad! Users put other things in their .Renviron file and we don't want to delete it

@@ -12,6 +12,8 @@ download(id = NULL, file = NULL, public = TRUE, ...)
 \item{file}{Specify path to save file to. If NULL, defaults to OSF filename}
 
 \item{public}{Boolean to specify whether file is public}
+
+\item{\ldots}{Additional parameters passed to \code{\link{construct_link}}}
 }
 \value{
 Return filepath for easy processing
@@ -20,5 +22,7 @@ Return filepath for easy processing
 Download files from the OSF
 }
 \examples{
-\dontrun{download_osf('zevw2', 'test123.md')}
+\dontrun{
+download('zevw2', 'test123.md')
+}
 }

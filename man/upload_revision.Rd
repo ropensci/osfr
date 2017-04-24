@@ -10,6 +10,8 @@ upload_revision(id = NULL, filename = NULL, ...)
 \item{id}{OSF id (osf.io/XXXX) of file to revise}
 
 \item{filename}{Local filename to upload as revision}
+
+\item{\ldots}{Additional parameters passed to \code{\link{process_type}} and \code{\link{construct_link}}}
 }
 \value{
 Boolean of revision success

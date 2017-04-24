@@ -18,6 +18,8 @@ create_component(id = NULL, title = "", description = "", category = "",
 see \code{\link{process_category}}}
 
 \item{public}{Boolean of whether the component is supposed to be public}
+
+\item{\ldots}{Additional parameters passed to \code{\link{construct_link}}}
 }
 \value{
 OSF id of created component

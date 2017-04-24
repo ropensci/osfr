@@ -6,6 +6,7 @@
 #' @param id Search for node id
 #' @param tags Search node tags
 #' @param private Boolean, search private nodes as well (TRUE) or not (FALSE)
+#' @param \ldots Additional parameters passed to \code{\link{construct_link}}
 #'
 #' @details The categories available are:
 #' \itemize{
@@ -115,6 +116,7 @@ search_nodes <- function(
 #'
 #' @param full_name Search the entire name
 #' @param family_name Search just the family name (full_name encompasses more)
+#' @param \ldots Additional parameters passed to \code{\link{construct_link}}
 #'
 #' @return Data frame of users
 #' @export
@@ -211,7 +213,7 @@ search_users <- function(full_name = NULL, family_name = NULL, ...) {
 #' Searching the OSF
 #'
 #' @param type Specifying what type of information to search
-#' @param ... Any arguments from the search.nodes or search.users functions
+#' @param \ldots Additional parameters passed to \code{\link{search_nodes}} and \code{\link{search_users}}
 #'
 #' @return Data frame of nodes or users
 #' @export

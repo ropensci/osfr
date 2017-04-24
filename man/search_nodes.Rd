@@ -19,6 +19,8 @@ search_nodes(description = NULL, public = TRUE, title = NULL, id = NULL,
 \item{tags}{Search node tags}
 
 \item{private}{Boolean, search private nodes as well (TRUE) or not (FALSE)}
+
+\item{\ldots}{Additional parameters passed to \code{\link{construct_link}}}
 }
 \value{
 Data frame of nodes

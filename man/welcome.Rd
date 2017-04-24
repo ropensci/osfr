@@ -6,6 +6,9 @@
 \usage{
 welcome(...)
 }
+\arguments{
+\item{\ldots}{Additional parameters passed to \code{\link{construct_link}}}
+}
 \value{
 Welcome message of logged in user, if any
 }

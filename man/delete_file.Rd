@@ -8,6 +8,8 @@ delete_file(id = NULL, ...)
 }
 \arguments{
 \item{id}{OSF id (osf.io/XXXX)}
+
+\item{\ldots}{Additional parameters passed to \code{\link{process_file_id}}}
 }
 \value{
 Boolean, delete succeeded?

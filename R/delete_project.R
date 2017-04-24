@@ -3,6 +3,7 @@
 #' @param id OSF id (osf.io/xxxx)
 #' @param recursive Boolean, if TRUE will go through folder nesting (see \code{maxdepth})
 #' @param maxdepth Number of nesting levels to go through
+#' @param \ldots Additional parameters passed to \code{\link{recurse_node}} and \code{\link{delete_empty}}
 #'
 #' @return Boolean, delete succeeded?
 #' @export

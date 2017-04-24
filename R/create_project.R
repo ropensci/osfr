@@ -3,6 +3,7 @@
 #' @param title Project title
 #' @param description Project description
 #' @param public Boolean, whether project should be public (FALSE for private)
+#' @param \ldots Additional parameters passed to \code{\link{construct_link}}
 #'
 #' @return Returns the created project's id
 #' @export
@@ -21,7 +22,7 @@ create_project <- function(
   if (Sys.getenv("OSF_PAT") == "")
     stop("Requires login, use login()")
 
-  url.osf <- construct_link("nodes/", ...)
+  url_osf <- construct_link("nodes/", ...)
 
   # Create the JSON body
   body <- list(
@@ -37,7 +38,7 @@ create_project <- function(
   )
 
   call <- httr::POST(
-    url = url.osf,
+    url = url_osf,
     body = body, encode = "json",
     httr::add_headers(Authorization = sprintf("Bearer %s", login())))
 

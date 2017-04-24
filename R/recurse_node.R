@@ -3,6 +3,7 @@
 #' @param id OSF parent ID (osf.io/xxxx) to crawl
 #' @param public Boolean, search for only public?
 #' @param maxdepth Integer, amount of levels deep to crawl
+#' @param \ldots Additional parameters passed to \code{\link{construct_link}}
 #'
 #' @return List of OSF ids, with parents as very last.
 recurse_node <- function(

@@ -8,6 +8,8 @@ construct_link(request = NULL, test = FALSE)
 }
 \arguments{
 \item{request}{The request link to be combined with the base API link.}
+
+\item{test}{Whether the link should be constructed for testing server}
 }
 \value{
 The full request link with proper base
@@ -16,5 +18,7 @@ The full request link with proper base
 Construct an API link with proper base
 }
 \examples{
-\dontrun{construct_link("nodes/{node_id}/files/")}
+\dontrun{
+construct_link("nodes/{node_id}/files/")
+}
 }
