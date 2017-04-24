@@ -5,17 +5,13 @@
 #' @return The full request link with proper base
 #' @examples
 #' \dontrun{construct_link("nodes/{node_id}/files/")}
-
 construct_link <- function(request = NULL,
                            test = FALSE){
   if (test == FALSE)
-  {
     base <- "https://api.osf.io/v2/"
-  }
+
   if (test == TRUE)
-  {
     base <- "https://test-api.osf.io/v2/"
-  }
 
   result <- paste0(base, request)
 
@@ -29,23 +25,15 @@ construct_link <- function(request = NULL,
 #' @param test Whether the link should be constructed for testing server
 #'
 #' @return Waterbutler link
-
-construct_link_files <- function(id = NULL,
-                                 request = NULL,
-                                 test = FALSE)
-{
-  if (test == FALSE)
-  {
+construct_link_files <- function(id = NULL, request = NULL, test = FALSE) {
+  if (test == FALSE) {
     base <- sprintf("https://files.osf.io/v1/resources/%s/providers/osfstorage/%s",
-                    id,
-                    request)
+      id, request)
   }
 
-  if (test == TRUE)
-  {
+  if (test == TRUE) {
     base <- sprintf("https://test-files.osf.io/v1/resources/%s/providers/osfstorage/%s",
-                    id,
-                    request)
+      id, request)
   }
 
   return(base)

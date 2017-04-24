@@ -22,57 +22,45 @@
 #'
 #' @return Data frame of nodes
 #' @export
+search_nodes <- function(
+  description = NULL,
+  public = TRUE,
+  title = NULL,
+  id = NULL,
+  tags = NULL,
+  private = FALSE,
+  ...) {
 
-search_nodes <- function(description = NULL,
-                         public = TRUE,
-                         title = NULL,
-                         id = NULL,
-                         tags = NULL,
-                         private = FALSE,
-                         ...)
-{
-  searches <- c(ifelse(is.null(description), '',
-                       sprintf('filter[description]=%s',
-                               paste(description,
-                                     collapse=','))),
-                sprintf('filter[public]=%s', public),
-                ifelse(is.null(title), '',
-                       sprintf('filter[title]=%s',
-                               paste(title,
-                                     collapse=','))),
-                ifelse(is.null(id), '',
-                       sprintf('filter[id]=%s',
-                               paste(id,
-                                     collapse=','))),
-                ifelse(is.null(tags), '',
-                       sprintf('filter[tags]=%s',
-                               paste(tags,
-                                     collapse=','))))
+  searches <- c(
+    ifelse(
+      is.null(description), "",
+      sprintf("filter[description]=%s", paste(description, collapse = ","))),
+      sprintf("filter[public]=%s", public),
+    ifelse(is.null(title), "",
+      sprintf("filter[title]=%s", paste(title, collapse = ","))),
+    ifelse(is.null(id), "",
+      sprintf("filter[id]=%s", paste(id, collapse = ","))),
+    ifelse(is.null(tags), "",
+      sprintf("filter[tags]=%s", paste(tags, collapse = ","))))
 
-  search <- paste(searches, collapse = '&')
+  search <- paste(searches, collapse = "&")
   # Ensure spaces are correct for URL
-  search <- gsub(search, pattern = '\\s', replacement = '%20', perl = TRUE)
+  search <- gsub(search, pattern = "\\s", replacement = "%20", perl = TRUE)
 
-  url.osf <- construct_link(sprintf('%s/?%s',
-                                    'nodes',
-                                    search),
-                            ...)
-  call <- httr::GET(url.osf)
+  url_osf <- construct_link(sprintf("%s/?%s", "nodes", search), ...)
+  call <- httr::GET(url_osf)
   res <- process_json(call)
 
-  while (!is.null(res$links$`next`))
-  {
+  while (!is.null(res$links$`next`)) {
     whilst <- rjson::fromJSON(
       httr::content(
-        httr::GET(
-          res$links$`next`),
-        'text'))
+        httr::GET(res$links$`next`), "text"))
     res$data <- c(res$data, whilst$data)
     res$links$`next` <- whilst$links$`next`
-    cat(paste0(res$links$`next`, '\n'))
+    cat(paste0(res$links$`next`, "\n"))
   }
 
-  temp <- unlist(res$data)
+  # temp <- unlist(res$data)
 
   url <- NULL
   id <- NULL
@@ -85,50 +73,40 @@ search_nodes <- function(description = NULL,
   fork <- NULL
   description <- NULL
 
-  for (i in 1:length(res$data))
-  {
+  for (i in 1:length(res$data)) {
     url[i] <- ifelse(length(res$data[[i]]$links$html) == 0,
-                     NA,
-                     res$data[[i]]$links$html)
+      NA, res$data[[i]]$links$html)
     id[i] <- ifelse(length(res$data[[i]]$id) == 0,
-                    NA,
-                    res$data[[i]]$id)
+      NA, res$data[[i]]$id)
     date_created[i] <- ifelse(length(res$data[[i]]$attributes$date_created) == 0,
-                              NA,
-                              res$data[[i]]$attributes$date_created)
+      NA, res$data[[i]]$attributes$date_created)
     date_modified[i] <- ifelse(length(res$data[[i]]$attributes$date_modified) == 0,
-                               NA,
-                               res$data[[i]]$attributes$date_modified)
+      NA, res$data[[i]]$attributes$date_modified)
     title[i] <- ifelse(length(res$data[[i]]$attributes$title) == 0,
-                       NA,
-                       res$data[[i]]$attributes$title)
+      NA, res$data[[i]]$attributes$title)
     registration[i] <- ifelse(length(res$data[[i]]$attributes$tegistration) == 0,
-                              NA,
-                              res$data[[i]]$attributes$tegistration)
+      NA, res$data[[i]]$attributes$tegistration)
     public[i] <- ifelse(length(res$data[[i]]$attributes$public) == 0,
-                        NA,
-                        res$data[[i]]$attributes$public)
+      NA, res$data[[i]]$attributes$public)
     category[i] <- ifelse(length(res$data[[i]]$attributes$category) == 0,
-                          NA,
-                          res$data[[i]]$attributes$category)
+      NA, res$data[[i]]$attributes$category)
     fork[i] <- ifelse(length(res$data[[i]]$attributes$fork) == 0,
-                      NA,
-                      res$data[[i]]$attributes$fork)
+      NA, res$data[[i]]$attributes$fork)
     description[i] <- ifelse(length(res$data[[i]]$attributes$description) == 0,
-                             NA,
-                             res$data[[i]]$attributes$description)
+      NA, res$data[[i]]$attributes$description)
   }
 
-  res <- data.frame(url,
-                    id,
-                    date_created,
-                    date_modified,
-                    title,
-                    registration,
-                    public,
-                    category,
-                    fork,
-                    description)
+  res <- data.frame(
+    url,
+    id,
+    date_created,
+    date_modified,
+    title,
+    registration,
+    public,
+    category,
+    fork,
+    description)
 
   return(res)
 }
@@ -140,38 +118,30 @@ search_nodes <- function(description = NULL,
 #'
 #' @return Data frame of users
 #' @export
+search_users <- function(full_name = NULL, family_name = NULL, ...) {
+  searches <- c(
+    sprintf("filter[full_name]=%s", paste(full_name, collapse = ",")),
+    sprintf("filter[family_name]=%s", paste(family_name, collapse = ",")))
 
-search_users <- function(full_name = NULL,
-                         family_name = NULL,
-                         ...)
-{
-  searches <- c(sprintf('filter[full_name]=%s', paste(full_name, collapse=',')),
-                sprintf('filter[family_name]=%s', paste(family_name, collapse=',')))
-
-  search <- paste(searches, collapse = '&')
+  search <- paste(searches, collapse = "&")
   # Ensure spaces are correct for URL
-  search <- gsub(search, pattern = '\\s', replacement = '%20', perl = TRUE)
+  search <- gsub(search, pattern = "\\s", replacement = "%20", perl = TRUE)
 
-  url.osf <- construct_link(sprintf('%s/?%s',
-                                    'users',
-                                    search), ...)
+  url_osf <- construct_link(sprintf("%s/?%s", "users", search), ...)
 
-  call <- httr::GET(url.osf)
+  call <- httr::GET(url_osf)
   res <- process_json(call)
 
-  while (!is.null(res$links$`next`))
-  {
+  while (!is.null(res$links$`next`)) {
     whilst <- rjson::fromJSON(
       httr::content(
-        httr::GET(
-          res$links$`next`),
-        'text'))
+        httr::GET(res$links$`next`), "text"))
     res$data <- c(res$data, whilst$data)
     res$links$`next` <- whilst$links$`next`
-    cat(paste0(res$links$`next`, '\n'))
+    cat(paste0(res$links$`next`, "\n"))
   }
 
-  temp <- unlist(res$data)
+  # temp <- unlist(res$data)
 
   nodes <- NULL
   institutions <- NULL
@@ -188,66 +158,52 @@ search_users <- function(full_name = NULL,
   active <- NULL
   timezone <- NULL
 
-  for (i in 1:length(res$data))
-  {
+  for (i in 1:length(res$data)) {
     nodes <- ifelse(length(res$data[[i]]$relationships$nodes$links$related$href) == 0,
-                    NA,
-                    res$data[[i]]$relationships$nodes$links$related$href)
+      NA, res$data[[i]]$relationships$nodes$links$related$href)
     institutions <- ifelse(length(res$data[[i]]$relationships$institutions$links$related$href) == 0,
-                           NA,
-                           res$data[[i]]$relationships$institutions$links$related$href)
+      NA, res$data[[i]]$relationships$institutions$links$related$href)
     link_self <- ifelse(length(res$data[[i]]$links$self) == 0,
-                        NA,
-                        res$data[[i]]$links$self)
+      NA, res$data[[i]]$links$self)
     id <- ifelse(length(res$data[[i]]$id) == 0,
-                 NA,
-                 res$data[[i]]$id)
+      NA, res$data[[i]]$id)
     profile_image <- ifelse(length(res$data[[i]]$links$profile_image) == 0,
-                            NA,
-                            res$data[[i]]$links$profile_image)
+      NA, res$data[[i]]$links$profile_image)
     family_name <- ifelse(length(res$data[[i]]$attributes$family_name) == 0,
-                          NA,
-                          res$data[[i]]$attributes$family_name)
+      NA, res$data[[i]]$attributes$family_name)
     suffix <- ifelse(length(res$data[[i]]$attributes$suffix) == 0,
-                     NA,
-                     res$data[[i]]$attributes$suffix)
+      NA, res$data[[i]]$attributes$suffix)
     locale <- ifelse(length(res$data[[i]]$attributes$locale) == 0,
-                     NA,
-                     res$data[[i]]$attributes$locale)
+      NA, res$data[[i]]$attributes$locale)
     date_registered <- ifelse(length(res$data[[i]]$attributes$date_registered) == 0,
-                              NA,
-                              res$data[[i]]$attributes$date_registered)
+      NA, res$data[[i]]$attributes$date_registered)
     middle_names <- ifelse(length(res$data[[i]]$attributes$middle_names) == 0,
-                           NA,
-                           res$data[[i]]$attributes$middle_names)
+      NA, res$data[[i]]$attributes$middle_names)
     given_name <- ifelse(length(res$data[[i]]$attributes$given_name) == 0,
-                         NA,
-                         res$data[[i]]$attributes$given_name)
+      NA, res$data[[i]]$attributes$given_name)
     full_name <- ifelse(length(res$data[[i]]$attributes$full_name) == 0,
-                        NA,
-                        res$data[[i]]$attributes$full_name)
+      NA, res$data[[i]]$attributes$full_name)
     active <- ifelse(length(res$data[[i]]$attributes$active) == 0,
-                     NA,
-                     res$data[[i]]$attributes$active)
+      NA, res$data[[i]]$attributes$active)
     timezone <- ifelse(length(res$data[[i]]$attributes$timezone) == 0,
-                       NA,
-                       res$data[[i]]$attributes$timezone)
+      NA, res$data[[i]]$attributes$timezone)
   }
 
-  res <- data.frame(nodes,
-                    institutions,
-                    link_self,
-                    id,
-                    profile_image,
-                    family_name,
-                    suffix,
-                    locale,
-                    date_registered,
-                    middle_names,
-                    given_name,
-                    full_name,
-                    active,
-                    timezone)
+  res <- data.frame(
+    nodes,
+    institutions,
+    link_self,
+    id,
+    profile_image,
+    family_name,
+    suffix,
+    locale,
+    date_registered,
+    middle_names,
+    given_name,
+    full_name,
+    active,
+    timezone)
 
   return(res)
 }
@@ -261,17 +217,13 @@ search_users <- function(full_name = NULL,
 #' @export
 #'
 #' @examples \dontrun{search.osf(title = 'many labs', type = 'nodes')}
-search_osf <- function(type = 'nodes', ...)
-{
-  if (type == 'nodes')
-  {
+search_osf <- function(type = "nodes", ...) {
+  if (type == "nodes") {
     res <- search_nodes(...)
-  } else if (type == 'users')
-  {
+  } else if (type == "users") {
     res <- search_users(...)
-  } else
-  {
-    stop('Please specify type as "nodes" or "users".')
+  } else {
+    stop("Please specify type as \"nodes\" or \"users\".")
   }
   return(res)
 }

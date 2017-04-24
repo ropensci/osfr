@@ -10,19 +10,21 @@
 #' @return OSF id of created component
 #' @export
 #' @seealso \code{\link{create_project}}
+create_component <- function(
+  id = NULL,
+  title = "",
+  description = "",
+  category = "",
+  public = TRUE,
+  ...) {
 
-create_component <- function(id = NULL,
-                             title = "",
-                             description = "",
-                             category = "",
-                             public = TRUE,
-                             ...)
-{
-  if (Sys.getenv('OSF_PAT') == '') stop('Requires login, use login()')
-  if (is.null(id)) stop('Please input project id.')
+  if (Sys.getenv("OSF_PAT") == "")
+    stop("Requires login, use login()")
+  if (is.null(id))
+    stop("Please input project id.")
   process_category(category)
 
-  url.osf <- construct_link(sprintf('nodes/%s/children/', id), ...)
+  url.osf <- construct_link(sprintf("nodes/%s/children/", id), ...)
 
   # Create the JSON body
   body <- list(
@@ -37,13 +39,13 @@ create_component <- function(id = NULL,
     )
   )
 
-  call <- httr::POST(url = url.osf,
-                     body = body, encode = 'json',
-                     httr::add_headers(Authorization = sprintf(
-                       'Bearer %s',
-                       login())))
+  call <- httr::POST(
+    url = url.osf,
+    body = body, encode = "json",
+    httr::add_headers(Authorization = sprintf("Bearer %s", login())))
 
-  if (call$status_code != 201) stop("Failed in creating new component.")
+  if (call$status_code != 201)
+    stop("Failed in creating new component.")
 
   res <- process_json(call)
   id <- res$data$id

@@ -9,27 +9,21 @@
 #'
 #' @examples
 #' upload_file(id = '12345', filename = 'test.pdf')
+upload_file <- function(
+  id = NULL,
+  filename = NULL,
+  ...) {
 
-upload_file <- function(id = NULL,
-                        filename = NULL,
-                        ...)
-{
-  if (is.null(id)) stop('Input component to upload to.')
+  if (is.null(id))
+    stop("Input component to upload to.")
 
-  if (process_type(id, ...) == 'nodes')
-  {
+  if (process_type(id, ...) == "nodes") {
     upload_new(id, filename, ...)
-  } else if (process_type(id, ...) == 'files')
-  {
+  } else if (process_type(id, ...) == "files") {
     upload_revision(id, filename, ...)
-  } else
-  {
-    stop('Something odd happened. Eat chocolate and life will be better.\n
+  } else {
+    stop("Something odd happened. Eat chocolate and life will be better.\n
          If the problem persists, consider issuing a bug report on
-         github.com/chartgerink/osfr')
+         github.com/chartgerink/osfr")
   }
 }
-
-
-
-

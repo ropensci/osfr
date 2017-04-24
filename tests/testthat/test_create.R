@@ -7,18 +7,19 @@ Sys.setenv(OSF_PAT = Sys.getenv("OSF_PAT_TEST"))
 
 test_that("Creating projects and components", {
   skip_on_travis()
-  x <- create_project(title = "This is an automated test",
-                             description = "This is an automated test",
-                             test = TRUE)
+  x <- create_project(
+    title = "This is an automated test",
+    description = "This is an automated test",
+    test = TRUE)
 
   expect_that(x, matches("[A-Za-z0-9]{5}"))
 
   y <- create_component(id = x,
     title = "Component test",
     description = "jaldskfjlafk",
-    category = 'hypothesis', test = TRUE)
+    category = "hypothesis", test = TRUE)
   expect_that(y, matches("[A-Za-z0-9]{5}"))
-  expect_error(create_component(id = x, category = 'hypoehtesis'))
+  expect_error(create_component(id = x, category = "hypothesis"))
 })
 
 logout()

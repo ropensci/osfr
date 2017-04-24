@@ -15,19 +15,16 @@
 #'
 #' @return Nothing if succeeded
 #' @export
-
-process_category <- function(category = "")
-{
-  if(!category %in% c('project',
-                      'hypothesis',
-                      'methods and measures',
-                      'procedure',
-                      'instrumentation',
-                      'data',
-                      'analysis',
-                      'communication',
-                      'other'))
-  {
-    stop('Please input proper category, see documentation')
+process_category <- function(category = "") {
+  if (!category %in% c("project",
+                      "hypothesis",
+                      "methods and measures",
+                      "procedure",
+                      "instrumentation",
+                      "data",
+                      "analysis",
+                      "communication",
+                      "other")) {
+    stop("Please input proper category, see documentation")
   }
 }

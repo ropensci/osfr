@@ -2,29 +2,23 @@
 #'
 #' @return Welcome message of logged in user, if any
 #' @export
-
-welcome <- function(...)
-{
-  if (Sys.getenv("OSF_PAT") == "")
-  {
+welcome <- function(...) {
+  if (Sys.getenv("OSF_PAT") == "") {
     login()
     call <- httr::GET(url = construct_link(...))
   }
-  else
-  {
+  else {
     call <- httr::GET(url = construct_link(...),
-                      httr::add_headers(Authorization = sprintf("Bearer %s", login())))
+      httr::add_headers(Authorization = sprintf("Bearer %s", login())))
   }
 
   res <- process_json(call)
 
-  if (is.null(res$meta$current_user))
-  {
+  if (is.null(res$meta$current_user)) {
     warning("Currently not logged in\n")
   }
 
-  if (!is.null(res$meta$current_user))
-  {
+  if (!is.null(res$meta$current_user)) {
     cat(sprintf("Welcome %s", res$meta$current_user$data$attributes$full_name))
   }
 }
@@ -35,29 +29,24 @@ welcome <- function(...)
 #'
 #' @return Personal access token from global environment.
 #' @export
-
 login <- function(pat = NULL){
-  if (!is.null(pat))
-  {
+  if (!is.null(pat)) {
     Sys.setenv(OSF_PAT = pat)
-  } else
-  {
+  } else {
     if (Sys.getenv("OSF_PAT") == ""){
       input <- readline(prompt = "Visit https://osf.io/settings/tokens/
-                        and create a Personal access token: ")
+        and create a Personal access token: ")
 
       Sys.setenv(OSF_PAT = input)
 
-      if (file.exists(paste0(normalizePath('~/'), '.Renviron')))
-      {
-        write(sprintf('OSF_PAT=%s', input),
-              paste0(normalizePath('~/'), '/.Renviron'),
+      if (file.exists(paste0(normalizePath("~/"), ".Renviron"))) {
+        write(sprintf("OSF_PAT=%s", input),
+              paste0(normalizePath("~/"), "/.Renviron"),
               append = TRUE)
-      } else
-      {
-        write(sprintf('OSF_PAT=%s', input),
-              paste0(normalizePath('~/'), '/.Renviron'),
-              append = FALSE)
+      } else {
+        write(sprintf("OSF_PAT=%s", input),
+          paste0(normalizePath("~/"), "/.Renviron"),
+          append = FALSE)
       }
     }
   }
@@ -69,18 +58,12 @@ login <- function(pat = NULL){
 #'
 #' @return Boolean succes of logout
 #' @export
-
-logout <- function(...)
-{
-  if (Sys.getenv("OSF_PAT") == "")
-  {
+logout <- function(...) {
+  if (Sys.getenv("OSF_PAT") == "") {
     cat("Not logged in.")
-
     return(FALSE)
-  } else
-  {
+  } else {
     Sys.setenv(OSF_PAT = "")
-
     return(TRUE)
   }
 }
@@ -93,9 +76,7 @@ logout <- function(...)
 #'
 #' @return Boolean of cleanup success.
 #' @export
-
-cleanup <- function()
-{
-  fn <- normalizePath('~/.Renviron')
+cleanup <- function() {
+  fn <- normalizePath("~/.Renviron")
   if (file.exists(fn)) file.remove(fn)
 }

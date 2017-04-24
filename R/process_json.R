@@ -4,10 +4,8 @@
 #'
 #' @return Parsed JSON object in the form of an R object.
 
-process_json <- function(x)
-{
-  res <- rjson::fromJSON(httr::content(x, 'text', encoding = "UTF-8"))
+process_json <- function(x) {
+  res <- rjson::fromJSON(httr::content(x, "text", encoding = "UTF-8"))
 
   return(res)
 }
-

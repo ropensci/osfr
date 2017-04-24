@@ -12,15 +12,16 @@
 #' \dontrun{
 #' create_project(title = "Testing the OSF project creation")
 #' }
+create_project <- function(
+  title = "",
+  description = "",
+  public = TRUE,
+  ...) {
 
-create_project <- function(title = "",
-                           description = "",
-                           public = TRUE,
-                           ...)
-{
-  if(Sys.getenv('OSF_PAT') == '') stop('Requires login, use login()')
+  if (Sys.getenv("OSF_PAT") == "")
+    stop("Requires login, use login()")
 
-  url.osf <- construct_link('nodes/', ...)
+  url.osf <- construct_link("nodes/", ...)
 
   # Create the JSON body
   body <- list(
@@ -28,20 +29,20 @@ create_project <- function(title = "",
       type = "nodes",
       attributes = list(
         title = title,
-        category = 'project',
+        category = "project",
         description = description,
         public = public
       )
     )
   )
 
-  call <- httr::POST(url = url.osf,
-                     body = body, encode = 'json',
-                     httr::add_headers(Authorization = sprintf(
-                       'Bearer %s',
-                       login())))
+  call <- httr::POST(
+    url = url.osf,
+    body = body, encode = "json",
+    httr::add_headers(Authorization = sprintf("Bearer %s", login())))
 
-  if (call$status_code != 201) stop("Failed in creating new project.")
+  if (call$status_code != 201)
+    stop("Failed in creating new project.")
 
   res <- process_json(call)
   id <- res$data$id

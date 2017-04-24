@@ -8,49 +8,48 @@
 #'
 #' @return Boolean, moving succeeded?
 #' @export
+move_file <- function(
+  from = NULL,
+  to = NULL,
+  filename = NULL,
+  action = "move",
+  conflict = "replace",
+  ...) {
 
-move_file <- function(from = NULL,
-                      to = NULL,
-                      filename = NULL,
-                      action = 'move',
-                      conflict = 'replace',
-                      ...)
-{
-  if (nchar(from) == 5)
-  {
+  if (nchar(from) == 5) {
     typfrom <- process_type(id = from, ...)
     typto <- process_type(id = to, ...)
 
-    if (typfrom != 'nodes' & typto != 'nodes') stop('Needs to move from
-	                                                node to node')
+    if (typfrom != "nodes" & typto != "nodes")
+      stop("Needs to move from node to node")
 
     url.osf <- process_file_id(from, ...)
-  }
-  else
-  {
+  } else {
     typto <- process_type(id = to, ...)
 
-    if (typto != 'nodes') stop('Needs to move from node to node')
+    if (typto != "nodes")
+      stop("Needs to move from node to node")
+
     url.osf <- from
   }
 
 
   body <- list(
     action = action,
-    path = '/',
+    path = "/",
     rename = filename,
     conflict = conflict,
-    provider = 'osfstorage',
+    provider = "osfstorage",
     resource = to)
 
   call <- httr::POST(url.osf,
-                     body = body, encode = 'json',
+                     body = body, encode = "json",
                      httr::add_headers(Authorization = sprintf(
-                       'Bearer %s',
+                       "Bearer %s",
                        login())))
 
-  if (call$status_code != 201 & call$status_code != 200) stop("Error in moving/copying file.")
-
+  if (call$status_code != 201 & call$status_code != 200)
+    stop("Error in moving/copying file.")
 
   return(TRUE)
 }

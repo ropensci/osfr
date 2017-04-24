@@ -6,26 +6,22 @@
 #'
 #' @return Boolean, delete succeeded?
 #' @export
+delete_project <- function(
+  id = NULL,
+  recursive = FALSE,
+  maxdepth = 5,
+  ...) {
 
-delete_project <- function(id = NULL,
-                           recursive = FALSE,
-                           maxdepth = 5,
-                           ...)
-{
-  if (recursive == TRUE)
-  {
+  if (recursive == TRUE) {
     del.id <- recurse_node(id, public = FALSE, maxdepth, ...)
 
-    for (each in del.id)
-    {
+    for (each in del.id) {
       delete_empty(each, ...)
-
       cat(sprintf("Deleted subcomponent %s\n", each))
     }
-  }
-  else
-  {
+  } else {
     delete_empty(id, ...)
   }
+
   return(TRUE)
 }

@@ -5,45 +5,43 @@
 #'
 #' @return List object with account information
 #' @export
+get_users <- function(id = NULL, nodes = FALSE) {
 
-get.users <- function(id = NULL, nodes = FALSE){
-  if (Sys.getenv("OSF_PAT") == "" & is.null(id)){
+  if (Sys.getenv("OSF_PAT") == "" & is.null(id)) {
     raw <- httr::GET(construct_link("users"))
-
-    result <- rjson::fromJSON(httr::content(raw, 'text'))
+    result <- rjson::fromJSON(httr::content(raw, "text"))
   } else if (id == "me"){
+    if (Sys.getenv("OSF_PAT") == "")
+      warning("Please login first using the login() function")
 
-    if(Sys.getenv("OSF_PAT") == ""){
-      warning("Please login first using the login() function")}
-
-    if(nodes == TRUE){
-      raw <- httr::GET(construct_link("users/me/nodes"),
-                       httr::add_headers(Authorization = sprintf("Bearer %s", login())))
+    if (nodes == TRUE) {
+      raw <- httr::GET(
+        construct_link("users/me/nodes"),
+        httr::add_headers(Authorization = sprintf("Bearer %s", login())))
     } else {
-      raw <- httr::GET(construct_link("users/me"),
-                       httr::add_headers(Authorization = sprintf("Bearer %s", login())))
+      raw <- httr::GET(
+        construct_link("users/me"),
+        httr::add_headers(Authorization = sprintf("Bearer %s", login())))
     }
 
-    result <- rjson::fromJSON(httr::content(raw, 'text'))
+    result <- rjson::fromJSON(httr::content(raw, "text"))
   } else {
-    if(nodes == TRUE){
-      raw <- httr::GET(construct.link(paste0("users/?filter[id]=", id, "/nodes")))
-    } else{
-      raw <- httr::GET(construct.link(paste0("users/?filter[id]=", id)))
+    if (nodes == TRUE){
+      raw <- httr::GET(construct_link(paste0("users/?filter[id]=", id, "/nodes")))
+    } else {
+      raw <- httr::GET(construct_link(paste0("users/?filter[id]=", id)))
     }
 
-    result <- rjson::fromJSON(httr::content(raw, 'text'))
+    result <- rjson::fromJSON(httr::content(raw, "text"))
   }
 
   while (!is.null(result$links$`next`)){
     whilst <- rjson::fromJSON(
       httr::content(
-        httr::GET(
-          result$links$`next`),
-        'text'))
+        httr::GET(result$links$`next`), "text"))
     result$data <- c(result$data, whilst$data)
     result$links$`next` <- whilst$links$`next`
-    cat(paste0(result$links$`next`, '\n'))
+    cat(paste0(result$links$`next`, "\n"))
   }
 
   return(result)
