@@ -1,8 +1,8 @@
 # osfr: a package to interface with the OSF
 
-[![Build Status](https://travis-ci.org/chartgerink/osfr.svg?branch=master)](https://travis-ci.org/chartgerink/osfr)
+[![Build Status](https://travis-ci.org/hafen/osfr.svg?branch=master)](https://travis-ci.org/hafen/osfr)
 
-[![codecov](https://codecov.io/gh/chartgerink/osfr/branch/master/graph/badge.svg)](https://codecov.io/gh/chartgerink/osfr)
+[![codecov](https://codecov.io/gh/hafen/osfr/branch/master/graph/badge.svg)](https://codecov.io/gh/hafen/osfr)
 
 NOTE: STILL IN ALPHA
 
