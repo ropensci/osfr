@@ -21,7 +21,7 @@ move_file <- function(
     typfrom <- process_type(id = from, ...)
     typto <- process_type(id = to, ...)
 
-    if (typfrom != "nodes" & typto != "nodes")
+    if (typfrom != "nodes" && typto != "nodes")
       stop("Needs to move from node to node")
 
     url_osf <- process_file_id(from, ...)
@@ -47,7 +47,7 @@ move_file <- function(
     body = body, encode = "json",
     httr::add_headers(Authorization = sprintf("Bearer %s", login())))
 
-  if (call$status_code != 201 & call$status_code != 200)
+  if (call$status_code != 201 && call$status_code != 200)
     stop("Error in moving/copying file.")
 
   return(TRUE)

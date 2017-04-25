@@ -4,13 +4,15 @@
 \alias{upload_file}
 \title{Upload a file to the OSF (both new and revised)}
 \usage{
-upload_file(id = NULL, filename = NULL, ...)
+upload_file(id = NULL, filename = NULL, private = FALSE, ...)
 }
 \arguments{
 \item{id}{OSF id (osf.io/XXXX) to upload to. Specify project to upload new file,
 specify a file to upload a revision}
 
 \item{filename}{Local filename to upload}
+
+\item{private}{Boolean, in case id is private set to TRUE}
 
 \item{\ldots}{Additional parameters passed to \code{\link{process_type}}, \code{\link{upload_new}}, and \code{\link{upload_revision}}}
 }

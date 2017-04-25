@@ -14,11 +14,11 @@ delete_project <- function(
   ...) {
 
   if (recursive == TRUE) {
-    del.id <- recurse_node(id, public = FALSE, maxdepth, ...)
+    del_id <- recurse_node(id, public = FALSE, maxdepth, ...)
 
-    for (each in del.id) {
+    for (each in del_id) {
       delete_empty(each, ...)
-      cat(sprintf("Deleted subcomponent %s\n", each))
+      message(sprintf("Deleted subcomponent %s", each))
     }
   } else {
     delete_empty(id, ...)

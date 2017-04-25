@@ -47,7 +47,7 @@ download <- function(
     file <- substr(txt, start + 1, end)
   }
 
-  cat(sprintf("Saving to filename: %s\n", file))
+  message(sprintf("Saving to filename: %s", file))
 
   if (public == TRUE) {
     call <- httr::GET(
@@ -63,7 +63,7 @@ download <- function(
   if (call$status_code != 200)
     stop("Failed to download file.")
 
-  cat("Successfully downloaded file.\n")
+  message("Successfully downloaded file.")
 
   return(file)
 }

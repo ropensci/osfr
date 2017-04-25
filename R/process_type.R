@@ -28,13 +28,16 @@ process_type <- function(id = NULL, private = FALSE, ...) {
     call_files <- httr::GET(url_osf_files)
   }
 
-  if (!call_nodes$status_code == 200 & !call_files$status_code){
+  if (!call_nodes$status_code == 200 && !call_files$status_code) {
     stop("Failed. Sure you have access to the id or that it is valid?")
   } else if (call_nodes$status_code == 200) {
     res <- process_json(call_nodes)
   } else {
     res <- process_json(call_files)
   }
+
+  if (is.null(res$data$type))
+    return("")
 
   return(res$data$type)
 }

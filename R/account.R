@@ -21,7 +21,7 @@ welcome <- function(...) {
   }
 
   if (!is.null(res$meta$current_user)) {
-    cat(sprintf("Welcome %s", res$meta$current_user$data$attributes$full_name))
+    message(sprintf("Welcome %s", res$meta$current_user$data$attributes$full_name))
   }
 }
 
@@ -62,7 +62,7 @@ login <- function(pat = NULL) {
 #' @export
 logout <- function() {
   if (Sys.getenv("OSF_PAT") == "") {
-    cat("Not logged in.")
+    message("Not logged in.")
     return(FALSE)
   } else {
     Sys.setenv(OSF_PAT = "")

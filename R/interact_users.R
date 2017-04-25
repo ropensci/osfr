@@ -7,7 +7,7 @@
 #' @export
 get_users <- function(id = NULL, nodes = FALSE) {
 
-  if (Sys.getenv("OSF_PAT") == "" & is.null(id)) {
+  if (Sys.getenv("OSF_PAT") == "" && is.null(id)) {
     raw <- httr::GET(construct_link("users"))
     result <- rjson::fromJSON(httr::content(raw, "text"))
   } else if (id == "me"){
@@ -41,7 +41,7 @@ get_users <- function(id = NULL, nodes = FALSE) {
         httr::GET(result$links$`next`), "text"))
     result$data <- c(result$data, whilst$data)
     result$links$`next` <- whilst$links$`next`
-    cat(paste0(result$links$`next`, "\n"))
+    message(paste0(result$links$`next`))
   }
 
   return(result)

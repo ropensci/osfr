@@ -25,7 +25,7 @@ upload_new <- function(
     request = sprintf("?kind=file&name=%s", filename), ...)
 
   url_osf <- gsub(url_osf, pattern = "\\s", replacement = "%20", perl = TRUE)
-
+browser()
   call <- httr::PUT(
     url_osf,
     body = httr::upload_file(filename),

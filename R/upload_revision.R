@@ -29,10 +29,10 @@ upload_revision <- function(
 
   res <- process_json(call)
 
-  upload.osf <- res$data$links$upload
+  upload_osf <- res$data$links$upload
 
   upload <- httr::PUT(
-    upload.osf,
+    upload_osf,
     body = httr::upload_file(filename),
     encode = "raw",
     config = httr::add_headers(Authorization = sprintf("Bearer %s", login())))

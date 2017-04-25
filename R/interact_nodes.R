@@ -67,7 +67,7 @@ get_nodes <- function(
         httr::GET(res$links$`next`), "text"))
     res$data <- c(res$data, whilst$data)
     res$links$`next` <- whilst$links$`next`
-    cat(paste0(res$links$`next`, "\n"))
+    message(paste0(res$links$`next`))
   }
 
   return(res)

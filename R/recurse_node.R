@@ -22,7 +22,7 @@ recurse_node <- function(
   i <- 1
   tmp <- sel
 
-  while (!length(res$data) == 0 & i <= maxdepth) {
+  while (!length(res$data) == 0 && i <= maxdepth) {
     for (child.id in tmp) {
       url_osf <- construct_link(sprintf("nodes/%s/children", child.id), ...)
 
