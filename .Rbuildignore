@@ -3,3 +3,4 @@
 ^\.httr-oauth$
 ^\.lintr
 ^\.travis.yml
+^inst/\.lintr$
