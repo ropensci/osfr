@@ -34,26 +34,21 @@ welcome <- function(...) {
 login <- function(pat = NULL) {
   if (!is.null(pat)) {
     Sys.setenv(OSF_PAT = pat)
-  } else {
-    if (Sys.getenv("OSF_PAT") == "") {
+  } else if (Sys.getenv("OSF_PAT") == "") {
+    # Try to read in from a config file...
+    if (file.exists("~/.osf_config")) {
+      Sys.setenv(OSF_PAT = readLines("~/.osf_config")[1])
+    } else {
       input <- readline(prompt = "Visit https://osf.io/settings/tokens/
-        and create a Personal access token: ")
+  and create a Personal access token: ")
 
       Sys.setenv(OSF_PAT = input)
 
-      if (file.exists(paste0(normalizePath("~/"), ".Renviron"))) {
-        write(sprintf("OSF_PAT=%s", input),
-              paste0(normalizePath("~/"), "/.Renviron"),
-              append = TRUE)
-      } else {
-        write(sprintf("OSF_PAT=%s", input),
-          paste0(normalizePath("~/"), "/.Renviron"),
-          append = FALSE)
-      }
+      write(input, "~/.osf_config")
     }
   }
 
-  return(Sys.getenv("OSF_PAT"))
+  invisible(Sys.getenv("OSF_PAT"))
 }
 
 #' Logout function
@@ -70,16 +65,16 @@ logout <- function() {
   }
 }
 
-# #' Cleaning up PAT file
-# #'
-# #' This function ensures that when having used a device, the access token is deleted.
-# #' This is important to ensure that there is no remainder lying around allowing illicit
-# #' access to your account.
-# #'
-# #' @return Boolean of cleanup success.
-# #' @export
-# cleanup <- function() {
-#   fn <- normalizePath("~/.Renviron")
-#   if (file.exists(fn)) file.remove(fn)
-# }
-# NOTE: this is bad! Users put other things in their .Renviron file and we don't want to delete it
+#' Cleaning up PAT file
+#'
+#' This function ensures that when having used a device, the access token is deleted.
+#' This is important to ensure that there is no remainder lying around allowing illicit
+#' access to your account.
+#'
+#' @return Boolean of cleanup success.
+#' @export
+cleanup <- function() {
+  ff <- "~/.osf_config"
+  if (file.exists(ff))
+    file.remove(ff)
+}
