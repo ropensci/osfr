@@ -37,27 +37,27 @@ get_nodes <- function(
 
   res <- rjson::fromJSON(httr::content(call, "text"))
 
-  if (names(res)[1] == "errors" & !is.null(id))
+  if (names(res)[1] == "errors" && !is.null(id))
     stop("Node not found.")
 
   if (sum(c(contributors, files, children)) > 1)
     stop("Specify contributors OR files OR children")
 
-  if (contributors == TRUE) {
+  if (contributors) {
     call <- httr::GET(res$data$relationships$contributors$links$related$href)
     res <- rjson::fromJSON(httr::content(call, "text"))
   }
 
-  if (files == TRUE) {
+  if (files) {
     call <- httr::GET(res$data$relationships$files$links$related$href)
     res <- rjson::fromJSON(httr::content(call, "text"))
   }
 
-  if (children == TRUE) {
+  if (children) {
     call <- httr::GET(res$data$relationships$children$links$related$href)
     res <- rjson::fromJSON(httr::content(call, "text"))
 
-    if (is.list(res$data))
+    if (!is.list(res$data))
       stop(sprintf("No children available for node %s", id))
   }
 
