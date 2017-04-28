@@ -22,10 +22,10 @@ upload_new <- function(
     stop("Cannot upload new file if no node ID is specified.")
 
   url_osf <- construct_link_files(id,
-    request = sprintf("?kind=file&name=%s", filename), ...)
+    request = sprintf("?kind=file&name=%s", basename(filename)), ...)
 
   url_osf <- gsub(url_osf, pattern = "\\s", replacement = "%20", perl = TRUE)
-browser()
+
   call <- httr::PUT(
     url_osf,
     body = httr::upload_file(filename),
