@@ -9,7 +9,7 @@ search_osf(type = "nodes", ...)
 \arguments{
 \item{type}{Specifying what type of information to search}
 
-\item{\ldots}{Additional parameters passed to \code{\link{search_nodes}} and \code{\link{search_users}}}
+\item{\ldots}{additional parameters passed on to \code{\link{search_nodes}} or \code{\link{search_users}}}
 }
 \value{
 Data frame of nodes or users

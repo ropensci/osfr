@@ -4,13 +4,11 @@
 \alias{search_nodes}
 \title{Search OSF nodes}
 \usage{
-search_nodes(description = NULL, public = TRUE, title = NULL, id = NULL,
-  tags = NULL, private = FALSE, ...)
+search_nodes(description = NULL, title = NULL, id = NULL, tags = NULL,
+  private = FALSE)
 }
 \arguments{
 \item{description}{Search in node description}
-
-\item{public}{Boolean, search whether node is public TRUE/FALSE}
 
 \item{title}{Search node titles}
 
@@ -19,8 +17,6 @@ search_nodes(description = NULL, public = TRUE, title = NULL, id = NULL,
 \item{tags}{Search node tags}
 
 \item{private}{Boolean, search private nodes as well (TRUE) or not (FALSE)}
-
-\item{\ldots}{Additional parameters passed to \code{\link{construct_link}}}
 }
 \value{
 Data frame of nodes

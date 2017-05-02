@@ -1,12 +1,10 @@
 #' Search OSF nodes
 #'
 #' @param description Search in node description
-#' @param public Boolean, search whether node is public TRUE/FALSE
 #' @param title Search node titles
 #' @param id Search for node id
 #' @param tags Search node tags
 #' @param private Boolean, search private nodes as well (TRUE) or not (FALSE)
-#' @param \ldots Additional parameters passed to \code{\link{construct_link}}
 #'
 #' @details The categories available are:
 #' \itemize{
@@ -25,18 +23,16 @@
 #' @export
 search_nodes <- function(
   description = NULL,
-  public = TRUE,
   title = NULL,
   id = NULL,
   tags = NULL,
-  private = FALSE,
-  ...) {
+  private = FALSE) {
 
   searches <- c(
     ifelse(
       is.null(description), "",
       sprintf("filter[description]=%s", paste(description, collapse = ","))),
-      sprintf("filter[public]=%s", public),
+      sprintf("filter[public]=%s", !private),
     ifelse(is.null(title), "",
       sprintf("filter[title]=%s", paste(title, collapse = ","))),
     ifelse(is.null(id), "",
@@ -48,7 +44,7 @@ search_nodes <- function(
   # Ensure spaces are correct for URL
   search <- gsub(search, pattern = "\\s", replacement = "%20", perl = TRUE)
 
-  url_osf <- construct_link(sprintf("%s/?%s", "nodes", search), ...)
+  url_osf <- construct_link(sprintf("%s/?%s", "nodes", search))
   call <- httr::GET(url_osf)
   res <- process_json(call)
 
@@ -116,11 +112,10 @@ search_nodes <- function(
 #'
 #' @param full_name Search the entire name
 #' @param family_name Search just the family name (full_name encompasses more)
-#' @param \ldots Additional parameters passed to \code{\link{construct_link}}
 #'
 #' @return Data frame of users
 #' @export
-search_users <- function(full_name = NULL, family_name = NULL, ...) {
+search_users <- function(full_name = NULL, family_name = NULL) {
   searches <- c(
     sprintf("filter[full_name]=%s", paste(full_name, collapse = ",")),
     sprintf("filter[family_name]=%s", paste(family_name, collapse = ",")))
@@ -129,7 +124,7 @@ search_users <- function(full_name = NULL, family_name = NULL, ...) {
   # Ensure spaces are correct for URL
   search <- gsub(search, pattern = "\\s", replacement = "%20", perl = TRUE)
 
-  url_osf <- construct_link(sprintf("%s/?%s", "users", search), ...)
+  url_osf <- construct_link(sprintf("%s/?%s", "users", search))
 
   call <- httr::GET(url_osf)
   res <- process_json(call)
@@ -213,7 +208,7 @@ search_users <- function(full_name = NULL, family_name = NULL, ...) {
 #' Searching the OSF
 #'
 #' @param type Specifying what type of information to search
-#' @param \ldots Additional parameters passed to \code{\link{search_nodes}} and \code{\link{search_users}}
+#' @param \ldots additional parameters passed on to \code{\link{search_nodes}} or \code{\link{search_users}}
 #'
 #' @return Data frame of nodes or users
 #' @export

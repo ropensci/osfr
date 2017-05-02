@@ -5,27 +5,25 @@
 #' @param description Description of the component
 #' @param category Category of component, for valid categories
 #'   see \code{\link{process_category}}
-#' @param public Boolean of whether the component is supposed to be public
-#' @param \ldots Additional parameters passed to \code{\link{construct_link}}
+#' @param private Boolean of whether the component is supposed to be private
 #'
 #' @return OSF id of created component
 #' @export
 #' @seealso \code{\link{create_project}}
 create_component <- function(
-  id = NULL,
+  id,
   title = "",
   description = "",
   category = "",
-  public = TRUE,
-  ...) {
+  private = FALSE) {
 
-  if (Sys.getenv("OSF_PAT") == "")
-    stop("Requires login, use login()")
+  config <- get_config(TRUE)
+
   if (is.null(id))
     stop("Please input project id.")
   process_category(category)
 
-  url_osf <- construct_link(sprintf("nodes/%s/children/", id), ...)
+  url_osf <- construct_link(sprintf("nodes/%s/children/", id))
 
   # Create the JSON body
   body <- list(
@@ -35,7 +33,7 @@ create_component <- function(
         title = title,
         category = category,
         description = description,
-        public = public
+        public = !private
       )
     )
   )
@@ -43,7 +41,7 @@ create_component <- function(
   call <- httr::POST(
     url = url_osf,
     body = body, encode = "json",
-    httr::add_headers(Authorization = sprintf("Bearer %s", login())))
+    config)
 
   if (call$status_code != 201)
     stop("Failed in creating new component.")
@@ -52,4 +50,36 @@ create_component <- function(
   id <- res$data$id
 
   return(id)
+}
+
+# update_component <- function() {
+
+# }
+
+#' Empty out a component and delete it
+#'
+#' @param id OSF id (osf.io/xxxx)
+#'
+#' @return Boolean, deletion succeeded?
+#' @export
+delete_component <- function(id) {
+
+  config <- get_config(TRUE)
+
+  url_osf <- construct_link_files(id, request = "?confirm_delete=1")
+  call <- httr::DELETE(url_osf, config)
+
+  if (call$status_code != 204)
+    stop("Unable to delete node. Maybe it's not empty?
+  You may want to enable recursive = TRUE")
+
+  url_osf <- construct_link(sprintf("nodes/%s", id))
+
+  call <- httr::DELETE(url_osf, config)
+
+  if (call$status_code != 204)
+    stop("Unable to delete node. Maybe it's not empty?
+  You may want to enable recursive = TRUE")
+
+  return(TRUE)
 }

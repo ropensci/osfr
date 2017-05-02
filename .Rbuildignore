@@ -4,3 +4,4 @@
 ^\.lintr
 ^\.travis.yml
 ^inst/\.lintr$
+^_ignore$

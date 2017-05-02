@@ -1,16 +1,15 @@
 #' Personalised welcome
 #'
-#' @param \ldots Additional parameters passed to \code{\link{construct_link}}
 #' @return Welcome message of logged in user, if any
 #' @export
-welcome <- function(...) {
+welcome <- function() {
 
   if (Sys.getenv("OSF_PAT") == "") {
     login()
-    call <- httr::GET(url = construct_link(...))
+    call <- httr::GET(url = construct_link())
   }
   else {
-    call <- httr::GET(url = construct_link(...),
+    call <- httr::GET(url = construct_link(),
       httr::add_headers(Authorization = sprintf("Bearer %s", login())))
   }
 

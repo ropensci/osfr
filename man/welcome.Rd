@@ -4,10 +4,7 @@
 \alias{welcome}
 \title{Personalised welcome}
 \usage{
-welcome(...)
-}
-\arguments{
-\item{\ldots}{Additional parameters passed to \code{\link{construct_link}}}
+welcome()
 }
 \value{
 Welcome message of logged in user, if any
