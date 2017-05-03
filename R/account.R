@@ -77,3 +77,7 @@ cleanup <- function() {
   if (file.exists(ff))
     file.remove(ff)
 }
+
+# setting up token for first time
+# https://osf.io/settings/tokens/create/
+

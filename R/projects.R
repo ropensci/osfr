@@ -46,7 +46,6 @@ create_project <- function(
 }
 
 # update_project <- function() {
-
 # }
 
 #' Delete a project from the OSF

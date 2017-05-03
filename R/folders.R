@@ -4,6 +4,7 @@
 #' @param path Path of the folder to create on OSF.
 #'
 #' @return Waterbutler URL
+#' @export
 create_folder <- function(id, path) {
 
   config <- get_config(TRUE)
@@ -44,14 +45,8 @@ create_folder <- function(id, path) {
   invisible(res$data$links$new_folder)
 }
 
-delete_folder <- function(id, path, recursive = FALSE) {
-
-}
-
-# upload_directory <- function() {
-
+# delete_folder <- function(id, path, recursive = FALSE) {
 # }
 
-# upload_zip <- function() {
-
+# upload_directory <- function() {
 # }

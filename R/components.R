@@ -53,7 +53,6 @@ create_component <- function(
 }
 
 # update_component <- function() {
-
 # }
 
 #' Empty out a component and delete it

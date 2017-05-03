@@ -3,14 +3,14 @@
 #' @param id OSF id (osf.io/XXXX) to upload to. Specify project to upload new file,
 #'  specify a file to upload a revision
 #' @param path Path to file on local machine to upload.
-#' @param dest Name of the destination file on OSF (if \code{NULL}, \code{basename(path)} will be used). Note that this can be used to specify what folder to place files in, e.g. "my_folder/file.png". Also note that if \code{id} is a file ID, this is not necessary
+#' @param dest Name of the destination file on OSF (if \code{NULL}, \code{basename(path)} will be used). Note that this can be used to specify what folder to place files in, e.g. "my_folder/file.png". Also note that if \code{id} is a file ID, this is not necessary.
 #'
 #' @return Boolean of upload success
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' upload_file(id = '12345', filename = 'test.pdf')
+#' upload_file(id = '12345', path = 'test.pdf')
 #' }
 upload_file <- function(id, path, dest = NULL) {
   type <- process_type(id, private = TRUE)
@@ -22,10 +22,10 @@ upload_file <- function(id, path, dest = NULL) {
     fi <- get_file_info(id)
     idx <- which(fi$materialized == pre_slash(dest))
     if (length(idx) != 1) {
-      message("Creating new file...")
+      message("Creating new file on OSF...")
       upload_new(id, path, dest)
     } else {
-      message("Revising file...")
+      message("Revising file on OSF...")
       upload_revision(id, path, dest, fi)
     }
   } else if (type == "files") {
@@ -36,6 +36,40 @@ upload_file <- function(id, path, dest = NULL) {
   If the problem persists, consider issuing a bug report on
   github.com/chartgerink/osfr")
   }
+}
+
+#' Zip up a directory and upload the zip to the OSF (both new and revised)
+#'
+#' @param id OSF id (osf.io/XXXX) to upload to. Specify project to upload new file,
+#'  specify a file to upload a revision
+#' @param path Path to directory on local machine to zip up and upload.
+#' @param dest Name of the destination file on OSF (if \code{NULL}, \code{basename(path)} with a ".zip" suffix will be used). Note that this can be used to specify what folder to place files in, e.g. "my_folder/my_directory.zip". Also note that if \code{id} is a file ID, this is not necessary.
+#'
+#' @return Boolean of upload success
+#' @export
+#' @importFrom utils zip
+#'
+#' @examples
+#' \dontrun{
+#' upload_zip(id = '12345', path = 'my_dir')
+#' }
+upload_zip <- function(id, path, dest = NULL) {
+
+  if (!dir.exists(path))
+    stop("Please specify a valid directory to zip.")
+
+  zp <- tempfile(fileext = ".zip")
+
+  message("Zipping to ", zp, "...")
+  zip(zp, path)
+
+  if (is.null(dest))
+    dest <- paste0(basename(normalizePath(path)), ".zip")
+
+  if (!grepl("\\.zip$", dest))
+    dest <- paste0(dest, ".zip")
+
+  upload_file(id, zp, dest)
 }
 
 # Upload a new file to the OSF.

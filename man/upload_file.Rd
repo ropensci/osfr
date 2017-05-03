@@ -12,7 +12,7 @@ specify a file to upload a revision}
 
 \item{path}{Path to file on local machine to upload.}
 
-\item{dest}{Name of the destination file on OSF (if \code{NULL}, \code{basename(path)} will be used). Note that this can be used to specify what folder to place files in, e.g. "my_folder/file.png". Also note that if \code{id} is a file ID, this is not necessary}
+\item{dest}{Name of the destination file on OSF (if \code{NULL}, \code{basename(path)} will be used). Note that this can be used to specify what folder to place files in, e.g. "my_folder/file.png". Also note that if \code{id} is a file ID, this is not necessary.}
 }
 \value{
 Boolean of upload success
@@ -22,6 +22,6 @@ Upload a file to the OSF (both new and revised)
 }
 \examples{
 \dontrun{
-upload_file(id = '12345', filename = 'test.pdf')
+upload_file(id = '12345', path = 'test.pdf')
 }
 }

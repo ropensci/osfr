@@ -84,6 +84,10 @@ test_that("Deleting files", {
   expect_true(delete_file(proj_id, "test_upload2.png"))
 })
 
+test_that("Uploading folder zip", {
+  upload_zip(proj_id, "tests", "test.zip")
+})
+
 # test_that("Downloading files", {
 #   download_file(id, "test_upload1.png")
 # })
@@ -117,9 +121,6 @@ test_that("Creating folders", {
 # })
 
 # test_that("Uploading folders", {
-# })
-
-# test_that("Uploading folder zip", {
 # })
 
 test_that("Uploading files in private components", {
