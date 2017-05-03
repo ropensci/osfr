@@ -85,7 +85,7 @@ test_that("Deleting files", {
 })
 
 test_that("Uploading folder zip", {
-  upload_zip(proj_id, "tests", "test.zip")
+  upload_zip(proj_id, ".", "test.zip")
 })
 
 # test_that("Downloading files", {
