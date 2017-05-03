@@ -19,7 +19,7 @@ upload_file <- function(id, path, dest = NULL) {
     dest <- basename(path)
 
   if (type == "nodes") {
-    fi <- get_file_info(id)
+    fi <- get_file_info(id, private = TRUE)
     idx <- which(fi$materialized == pre_slash(dest))
     if (length(idx) != 1) {
       message("Creating new file on OSF...")
@@ -98,7 +98,7 @@ upload_new <- function(id, path, dest = NULL) {
 
   # Handle the case of file nested in folder(s)
   if (length(strsplit(dest, "\\/")[[1]]) > 1) {
-    fi <- get_file_info(id)
+    fi <- get_file_info(id, private = TRUE)
     dnm <- paste0(dirname(dest), "/")
     dnm <- pre_slash(dnm)
     idx <- which(fi$materialized == dnm)
@@ -144,7 +144,7 @@ upload_revision <- function(id, path, dest = NULL, fi = NULL) {
     if (is.null(dest))
       stop("Must specify a path when revising a file using a project ID.")
     if (is.null(fi))
-      fi <- get_file_info(id)
+      fi <- get_file_info(id, private = TRUE)
     dest <- pre_slash(dest)
     idx <- which(fi$materialized == dest)
     if (length(idx) != 1)
@@ -191,7 +191,7 @@ delete_file <- function(id, path = NULL) {
   } else {
     if (is.null(path))
       stop("Must specify a path when deleting a file using a project ID.")
-    fi <- get_file_info(id)
+    fi <- get_file_info(id, private = TRUE)
     path <- pre_slash(path)
     idx <- which(fi$materialized == path)
     if (length(idx) != 1)
