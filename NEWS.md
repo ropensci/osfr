@@ -24,7 +24,6 @@ Another change for consistency is to always use the argument `private` where in 
 - Note: unit tests run on the production osf.io since I don't have a PAT for the test server.
 - Added code coverage checking to TravisCI so that code coverage badge now works.
 - Unit tests can be run on TravisCI by specifying a TravisCI environment variable `OSF_PAT_TEST`.
-- Unit
 - Documentation has been updated so that the package passes CRAN check preparatory for a CRAN release.
 - Use a valid open source software license (chose MIT -- CC0 is not appropriate for software -- see http://kbroman.org/pkg_primer/pages/licenses.html).
 - In general,
