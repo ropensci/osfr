@@ -4,7 +4,7 @@
 \alias{logout}
 \title{Logout function}
 \usage{
-logout(...)
+logout()
 }
 \value{
 Boolean succes of logout
@@ -12,4 +12,3 @@ Boolean succes of logout
 \description{
 Logout function
 }
-

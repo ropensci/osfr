@@ -9,7 +9,7 @@ search_osf(type = "nodes", ...)
 \arguments{
 \item{type}{Specifying what type of information to search}
 
-\item{...}{Any arguments from the search.nodes or search.users functions}
+\item{\ldots}{additional parameters passed on to \code{\link{search_nodes}} or \code{\link{search_users}}}
 }
 \value{
 Data frame of nodes or users
@@ -20,4 +20,3 @@ Searching the OSF
 \examples{
 \dontrun{search.osf(title = 'many labs', type = 'nodes')}
 }
-

@@ -4,7 +4,7 @@
 \alias{welcome}
 \title{Personalised welcome}
 \usage{
-welcome(...)
+welcome()
 }
 \value{
 Welcome message of logged in user, if any
@@ -12,4 +12,3 @@ Welcome message of logged in user, if any
 \description{
 Personalised welcome
 }
-

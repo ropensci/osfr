@@ -4,7 +4,7 @@
 \alias{search_users}
 \title{Search OSF users}
 \usage{
-search_users(full_name = NULL, family_name = NULL, ...)
+search_users(full_name = NULL, family_name = NULL)
 }
 \arguments{
 \item{full_name}{Search the entire name}
@@ -17,4 +17,3 @@ Data frame of users
 \description{
 Search OSF users
 }
-

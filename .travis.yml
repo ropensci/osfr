@@ -1,15 +1,12 @@
 language: r
 
-sudo: required
+cache: packages
 
 env: _R_CHECK_CRAN_INCOMING_=FALSE
 
-r_github_packages:
-  - chartgerink/osfr
-
-r_packages:
-  - covr
+r_binary_packages:
+- covr
+- lintr
 
 after_success:
-  - Rscript -e 'covr::codecov()'
-  - bash <(curl -s https://codecov.io/bash)
+- Rscript -e 'covr::codecov()'

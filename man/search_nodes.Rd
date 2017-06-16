@@ -4,13 +4,11 @@
 \alias{search_nodes}
 \title{Search OSF nodes}
 \usage{
-search_nodes(description = NULL, public = TRUE, title = NULL, id = NULL,
-  tags = NULL, private = FALSE, ...)
+search_nodes(description = NULL, title = NULL, id = NULL, tags = NULL,
+  private = FALSE)
 }
 \arguments{
 \item{description}{Search in node description}
-
-\item{public}{Boolean, search whether node is public TRUE/FALSE}
 
 \item{title}{Search node titles}
 
@@ -40,4 +38,3 @@ The categories available are:
 \item other
 }
 }
-
