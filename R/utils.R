@@ -8,9 +8,14 @@
 #' construct_link("nodes/{node_id}/files/")
 #' }
 construct_link <- function(request = NULL) {
-  if (Sys.getenv("OSF_USE_TEST_SERVER") != "") {
+  if (Sys.getenv("OSF_USE_TEST_SERVER") == "test") 
+  {
     base <- "https://test-api.osf.io/v2/"
-  } else {
+  } else if (Sys.getenv("OSF_USE_TEST_SERVER") == "staging")
+  { 
+    base <- "https://staging-api.osf.io/v2/"
+  } else 
+  {
     base <- "https://api.osf.io/v2/"
   }
 
@@ -24,14 +29,20 @@ construct_link <- function(request = NULL) {
 #'
 #' @return Waterbutler link
 construct_link_files <- function(id = NULL, request = NULL) {
-  if (Sys.getenv("OSF_USE_TEST_SERVER") != "") {
+  if (Sys.getenv("OSF_USE_TEST_SERVER") == "test") 
+  {
     base <- sprintf("https://test-files.osf.io/v1/resources/%s/providers/osfstorage/%s",
       id, request)
-  } else {
+  } else if (Sys.getenv("OSF_USE_TEST_SERVER") == "staging")
+  { 
+    base <- sprintf("https://staging-files.osf.io/v1/resources/%s/providers/osfstorage/%s",
+      id, request)
+  } else 
+  {
     base <- sprintf("https://files.osf.io/v1/resources/%s/providers/osfstorage/%s",
       id, request)
   }
-
+  
   return(base)
 }
 
