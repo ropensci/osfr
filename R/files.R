@@ -288,7 +288,7 @@ download_file <- function(id, path = NULL, private = FALSE) {
   res <- process_json(call)
 
   # Find the filename as on the OSF
-  if (is.null(file)) {
+  if (is.null(path)) {
     txt <- res$data$attributes$name
     start <- utils::tail(gregexpr("/", txt)[[1]], 1)
     end <-  nchar(txt)
