@@ -293,7 +293,9 @@ download_file <- function(id, path = NULL, private = FALSE) {
     start <- utils::tail(gregexpr("/", txt)[[1]], 1)
     end <-  nchar(txt)
     file <- substr(txt, start + 1, end)
-  }
+  } else {
+  file <- paste0(path, res$data$attributes$name)
+}
 
   message(paste0("Saving to filename: ", file))
 
