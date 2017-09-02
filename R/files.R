@@ -265,6 +265,7 @@ move_file <- function(
 #' Download files from the OSF
 #'
 #' @param id Specify the node id (osf.io/XXXX)
+#' @param version Specify the OSF version id (string)
 #' @param path Specify path to save file to. If NULL, defaults to OSF filename in \code{\link{tempdir}}
 #' @param private Boolean to specify whether file is private
 #'
@@ -275,7 +276,7 @@ move_file <- function(
 #' }
 #' @importFrom utils tail
 #' @export
-download_file <- function(id, path = NULL, private = FALSE) {
+download_file <- function(id, path = NULL, private = FALSE, version = NULL) {
   config <- get_config(private)
 
   url_osf <- construct_link(paste0("guids/", id))
@@ -295,15 +296,24 @@ download_file <- function(id, path = NULL, private = FALSE) {
     file <- substr(txt, start + 1, end)
   } else {
   file <- paste0(path, res$data$attributes$name)
-}
+  }
 
   message(paste0("Saving to filename: ", file))
 
-  call <- httr::GET(res$data$links$download, config,
-    httr::write_disk(file, overwrite = TRUE))
-
-  if (call$status_code != 200)
+  if (is.null(version)) {
+    call <- httr::GET(res$data$links$download, config,
+            httr::write_disk(file, overwrite = TRUE))
+  } else {
+    call <- httr::GET(paste0(res$data$links$download, "?revision=", version), config,
+                      httr::write_disk(file, overwrite = TRUE))
+  }
+  if (call$status_code == 404) {
+    stop("Version of file does not exist.")
+  }
+  
+  if (call$status_code != 200) {
     stop("Failed to download file.")
+  }
 
   message("Successfully downloaded file.")
 
