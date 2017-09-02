@@ -265,7 +265,7 @@ move_file <- function(
 #' Download files from the OSF
 #'
 #' @param id Specify the node id (osf.io/XXXX)
-#' @param version Specify the version id as a string
+#' @param version Specify the OSF version id (string)
 #' @param path Specify path to save file to. If NULL, defaults to OSF filename in \code{\link{tempdir}}
 #' @param private Boolean to specify whether file is private
 #'
@@ -307,11 +307,13 @@ download_file <- function(id, path = NULL, private = FALSE, version = NULL) {
     call <- httr::GET(paste0(res$data$links$download, "?revision=", version), config,
                       httr::write_disk(file, overwrite = TRUE))
   }
-  if (call$status_code == 404)
-    stop("Version of file does not exists.")
+  if (call$status_code == 404) {
+    stop("Version of file does not exist.")
+  }
   
-  if (call$status_code != 200)
+  if (call$status_code != 200) {
     stop("Failed to download file.")
+  }
 
   message("Successfully downloaded file.")
 
