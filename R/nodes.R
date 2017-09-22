@@ -79,10 +79,12 @@ get_nodes <- function(
 #' @param maxdepth Integer, amount of levels deep to crawl
 #'
 #' @return List of OSF ids, with parents as very last.
+
 recurse_node <- function(
   id = NULL,
-  private = FALSE, # NOTE: not used
-  maxdepth = 5) {
+  private = FALSE,
+  maxdepth = 5,
+  path_id = FALSE) {
 
   config <- get_config(private)
 
@@ -95,6 +97,7 @@ recurse_node <- function(
 
   i <- 1
   tmp <- sel
+  paths <- c()
 
   while (!length(res$data) == 0 && i <= maxdepth) {
     for (child_id in tmp) {
@@ -107,6 +110,11 @@ recurse_node <- function(
       child_sel <- child_sel[names(child_sel) == "data.id"]
 
       sel <- append(sel, child_sel)
+
+      if (path_id == TRUE) {
+        paths <- c(paths, sprintf('%s/%s', id, child_id))
+      	paths <- c(paths, sprintf('%s/%s/%s', id, child_id, child_sel))
+      }
     }
 
     i <- i + 1
@@ -116,6 +124,27 @@ recurse_node <- function(
   sel <- c(as.character(sel[length(sel):1]), id)
 
   sel <- sel[!is.na(sel)]
+  
+  if (path_id == TRUE) {
+      res <- pathify(paths)
+      } else {
+  	res <- unique(sel)
+  }
+  return(res)
+}
 
-  return(unique(sel))
+pathify <- function (x) {
+  id <- stringr::str_extract(pattern = '([A-Za-z0-9]{5})$', string = unique(x))
+  path <- stringr::str_extract_all(pattern = '([A-Za-z0-9]{5})', string = unique(x))
+  obj <- c()
+  for (i in 1:length(path)) {
+    add <- paste(apply(t(path[[i]]),
+      2,
+      function (x) get_nodes(x)$data$attributes$title),
+     collapse ='/')
+    obj <- c(obj, add)
+  }
+    
+  res <- data.frame(path = obj,
+                    id = id, stringsAsFactors = FALSE)
 }
