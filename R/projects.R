@@ -49,6 +49,31 @@ create_project <- function(
 # update_project <- function() {
 # }
 
+clone_project <- function(id, private = FALSE, maxdepth = 5) {
+	get_config(private)
+
+	tmp <- recurse_node(id, private, maxdepth, path_id = TRUE)
+
+	plyr::daply(tmp, "path", .progress = 'text', function (x) {
+		dir.create(x$path, recursive = TRUE)
+
+		files <- get_file_info(x$id)
+
+		apply(files, 1, function (y) {
+			href <- y[which(names(y) == "href")]
+    		path <- y[which(names(y) == "materialized")]
+    		type <- y[which(names(y) == "kind")]
+
+    		if (type == 'folder') {
+    			dir.create(paste0(x$path, path), recursive = TRUE)
+    		} else {
+	 		invisible(httr::GET(href,
+        	    httr::write_disk(paste0(x$path, path), overwrite = TRUE)))
+			}
+	 	})
+	})
+}
+
 #' Delete a project from the OSF
 #'
 #' @param id OSF id (osf.io/xxxx)
@@ -57,6 +82,7 @@ create_project <- function(
 #'
 #' @return Boolean, delete succeeded?
 #' @export
+
 delete_project <- function(id, recursive = FALSE, maxdepth = 5) {
   if (recursive) {
     del_id <- recurse_node(id, private = TRUE, maxdepth)
@@ -77,6 +103,7 @@ delete_project <- function(id, recursive = FALSE, maxdepth = 5) {
 #'
 #' @export
 #' @importFrom utils browseURL
+
 view_project <- function(id) {
   utils::browseURL(paste0("https://osf.io/", id))
 }
