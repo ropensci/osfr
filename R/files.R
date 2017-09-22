@@ -1,6 +1,6 @@
 #' Upload a file to the OSF (both new and revised)
 #'
-#' @param id OSF id (osf.io/XXXX) to upload to. Specify project to upload new file,
+#' @param id OSF id (osf.io/XXXX; just XXXX) to upload to. Specify project to upload new file,
 #'  specify a file to upload a revision
 #' @param path Path to file on local machine to upload.
 #' @param dest Name of the destination file on OSF (if \code{NULL}, \code{basename(path)} will be used). Note that this can be used to specify what folder to place files in, e.g. "my_folder/file.png". Also note that if \code{id} is a file ID, this is not necessary.
@@ -12,6 +12,7 @@
 #' \dontrun{
 #' upload_file(id = '12345', path = 'test.pdf')
 #' }
+
 upload_file <- function(id, path, dest = NULL) {
   type <- process_type(id, private = TRUE)
 
@@ -53,6 +54,7 @@ upload_file <- function(id, path, dest = NULL) {
 #' \dontrun{
 #' upload_zip(id = '12345', path = 'my_dir')
 #' }
+
 upload_zip <- function(id, path, dest = NULL) {
 
   if (!dir.exists(path))
@@ -276,6 +278,7 @@ move_file <- function(
 #' }
 #' @importFrom utils tail
 #' @export
+
 download_file <- function(id, path = NULL, private = FALSE, version = NULL) {
   config <- get_config(private)
 
@@ -343,6 +346,7 @@ process_file_id <- function(id = NULL, private = FALSE) {
 #' @param private Boolean to specify whether to get info for private files
 #'
 #' @export
+
 get_file_info <- function(id, private = FALSE) {
 
   config <- get_config(private)
@@ -375,9 +379,9 @@ get_file_info <- function(id, private = FALSE) {
   files <- process_json(call)$data
   files <- process_files(files)
 
-  if (is.null(files))
-    return(NULL)
-
+  if (is.null(files)) {
+      return(NULL)
+  }
   while (TRUE) {
     idx <- which(files$kind == "folder" & !files$processed)
     if (length(idx) == 0)
@@ -394,5 +398,5 @@ get_file_info <- function(id, private = FALSE) {
 
   files$processed <- NULL
 
-  files
+  return(files)
 }

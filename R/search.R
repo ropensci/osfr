@@ -21,6 +21,7 @@
 #'
 #' @return Data frame of nodes
 #' @export
+
 search_nodes <- function(
   description = NULL,
   title = NULL,

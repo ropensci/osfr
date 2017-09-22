@@ -12,10 +12,11 @@
 #' \dontrun{
 #' create_project(title = "Testing the OSF project creation")
 #' }
+
 create_project <- function(
   title = "",
   description = "",
-  private = FALSE) {
+  private = TRUE) {
 
   config <- get_config(TRUE)
 
