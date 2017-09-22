@@ -1,6 +1,6 @@
 # osfr: R Interface to the Open Science Framework
 
-[![Build Status](https://travis-ci.org/hafen/osfr.svg?branch=master)](https://travis-ci.org/hafen/osfr)
+[![Build Status](https://travis-ci.org/chartgerink/osfr.svg?branch=master)](https://travis-ci.org/chartgerink/osfr)
 
 [![codecov](https://codecov.io/gh/hafen/osfr/branch/master/graph/badge.svg)](https://codecov.io/gh/hafen/osfr)
 
