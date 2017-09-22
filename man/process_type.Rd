@@ -4,7 +4,7 @@
 \alias{process_type}
 \title{Identify type of endpoint for id}
 \usage{
-process_type(id = NULL, private = FALSE)
+process_type(id = NULL, private = TRUE)
 }
 \arguments{
 \item{id}{OSF id to check}

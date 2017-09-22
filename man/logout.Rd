@@ -10,5 +10,8 @@ logout()
 Boolean succes of logout
 }
 \description{
-Logout function
+Log out of the OSF and clean up after yourself for your own security. This 
+ensures that you do not leave a personal access token lying around on the 
+computer for others to abuse without your knowledge (before revoking it, 
+but then the damage is already done).
 }

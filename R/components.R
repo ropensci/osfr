@@ -19,7 +19,7 @@ create_component <- function(
   private = TRUE) {
 
   if (is.null(id)) stop('Please input project id.')
-  
+  config <- get_config(private)
 
   process_category(category)
 

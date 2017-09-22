@@ -4,7 +4,7 @@
 \alias{recurse_node}
 \title{Function to crawl through OSF project}
 \usage{
-recurse_node(id = NULL, private = FALSE, maxdepth = 5)
+recurse_node(id = NULL, private = FALSE, maxdepth = 5, path_id = FALSE)
 }
 \arguments{
 \item{id}{OSF parent ID (osf.io/xxxx) to crawl}
@@ -12,6 +12,8 @@ recurse_node(id = NULL, private = FALSE, maxdepth = 5)
 \item{private}{Boolean, search for private too?}
 
 \item{maxdepth}{Integer, amount of levels deep to crawl}
+
+\item{path_id}{Boolean, whether to return paths and ids}
 }
 \value{
 List of OSF ids, with parents as very last.

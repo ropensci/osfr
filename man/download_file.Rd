@@ -4,7 +4,7 @@
 \alias{download_file}
 \title{Download files from the OSF}
 \usage{
-download_file(id, path = NULL, private = FALSE)
+download_file(id, path = NULL, private = FALSE, version = NULL)
 }
 \arguments{
 \item{id}{Specify the node id (osf.io/XXXX)}
@@ -12,6 +12,8 @@ download_file(id, path = NULL, private = FALSE)
 \item{path}{Specify path to save file to. If NULL, defaults to OSF filename in \code{\link{tempdir}}}
 
 \item{private}{Boolean to specify whether file is private}
+
+\item{version}{Specify the OSF version id (string)}
 }
 \value{
 Return filepath for easy processing

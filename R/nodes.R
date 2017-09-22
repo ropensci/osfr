@@ -77,6 +77,7 @@ get_nodes <- function(
 #' @param id OSF parent ID (osf.io/xxxx) to crawl
 #' @param private Boolean, search for private too?
 #' @param maxdepth Integer, amount of levels deep to crawl
+#' @param path_id Boolean, whether to return paths and ids
 #'
 #' @return List of OSF ids, with parents as very last.
 
@@ -124,7 +125,7 @@ recurse_node <- function(
   sel <- c(as.character(sel[length(sel):1]), id)
 
   sel <- sel[!is.na(sel)]
-  
+
   if (path_id == TRUE) {
       res <- pathify(paths)
       } else {
@@ -144,7 +145,7 @@ pathify <- function (x) {
      collapse ='/')
     obj <- c(obj, add)
   }
-    
+
   res <- data.frame(path = obj,
                     id = id, stringsAsFactors = FALSE)
 }

@@ -13,5 +13,12 @@ login(pat = NULL)
 Personal access token from global environment.
 }
 \description{
-Login function; interactive without arguments
+Function to easily login, either with a prompt when run without arguments, or 
+without prompt when run with arguments or config file (~/.osf_config). If you
+run this function without arguments, the prompt will result in creation of a 
+~/.osf_config file (in your Documents folder for Windows).
+}
+\details{
+For the security of your OSF account, do not forget to delete this file. This
+can be done with the logout() function as well.
 }

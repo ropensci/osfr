@@ -4,10 +4,12 @@
 \alias{construct_link_files}
 \title{Construct a waterbutler API link with proper base}
 \usage{
-construct_link_files(id = NULL, request = NULL)
+construct_link_files(id = NULL, provider = "osfstorage", request = NULL)
 }
 \arguments{
 \item{id}{OSF id}
+
+\item{provider}{Storage provider (osfstorage, github, etc)}
 
 \item{request}{Request for waterbutler}
 }

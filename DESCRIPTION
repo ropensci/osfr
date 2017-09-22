@@ -15,7 +15,8 @@ Imports:
     httr,
     httpuv,
     rjson,
-    stringr
+    stringr,
+    plyr
 License: MIT + file LICENSE
 BugReports: https://github.com/chartgerink/osfr/issues
 LazyData: true

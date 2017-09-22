@@ -7,7 +7,7 @@
 delete_component(id)
 }
 \arguments{
-\item{id}{OSF id (osf.io/xxxx)}
+\item{id}{OSF id (osf.io/xxxx; just XXXX)}
 }
 \value{
 Boolean, deletion succeeded?

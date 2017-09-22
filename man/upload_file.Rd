@@ -7,7 +7,7 @@
 upload_file(id, path, dest = NULL)
 }
 \arguments{
-\item{id}{OSF id (osf.io/XXXX) to upload to. Specify project to upload new file,
+\item{id}{OSF id (osf.io/XXXX; just XXXX) to upload to. Specify project to upload new file,
 specify a file to upload a revision}
 
 \item{path}{Path to file on local machine to upload.}

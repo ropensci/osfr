@@ -11,7 +11,7 @@
 construct_link <- function(request = NULL) {
   if (Sys.getenv('OSF_USE_TEST_SERVER') == 'test') {
     base <- 'https://test-api.osf.io/v2/'
-  } else if (Sys.getenv('OSF_USE_TEST_SERVER') == 'staging') { 
+  } else if (Sys.getenv('OSF_USE_TEST_SERVER') == 'staging') {
     base <- 'https://staging-api.osf.io/v2/'
   } else {
     base <- 'https://api.osf.io/v2/'
@@ -23,6 +23,7 @@ construct_link <- function(request = NULL) {
 #' Construct a waterbutler API link with proper base
 #'
 #' @param id OSF id
+#' @param provider Storage provider (osfstorage, github, etc)
 #' @param request Request for waterbutler
 #'
 #' @return Waterbutler link
@@ -31,14 +32,14 @@ construct_link_files <- function(id = NULL, provider = 'osfstorage', request = N
   if (Sys.getenv('OSF_USE_TEST_SERVER') == 'test') {
     base <- sprintf('https://test-files.osf.io/v1/resources/%s/providers/%s/%s',
       id, provider, request)
-  } else if (Sys.getenv('OSF_USE_TEST_SERVER') == 'staging') { 
+  } else if (Sys.getenv('OSF_USE_TEST_SERVER') == 'staging') {
     base <- sprintf('https://staging-files.osf.io/v1/resources/%s/providers/%s/%s',
       id, provider, request)
   } else {
     base <- sprintf('https://files.osf.io/v1/resources/%s/providers/%s/%s',
       id, provider, request)
   }
-  
+
   return(base)
 }
 

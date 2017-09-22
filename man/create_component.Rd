@@ -5,10 +5,10 @@
 \title{Create a component within a project}
 \usage{
 create_component(id, title = "", description = "", category = "",
-  private = FALSE)
+  private = TRUE)
 }
 \arguments{
-\item{id}{OSF id (osf.io/XXXX) of parent project}
+\item{id}{OSF id (osf.io/XXXX; just XXXX) of parent project}
 
 \item{title}{Title of the component}
 
