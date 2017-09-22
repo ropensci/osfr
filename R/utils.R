@@ -63,17 +63,18 @@ construct_link_files <- function(id = NULL, request = NULL) {
 #'
 #' @return Nothing if succeeded
 #' @export
-process_category <- function(category = "") {
-  if (!category %in% c("project",
-                      "hypothesis",
-                      "methods and measures",
-                      "procedure",
-                      "instrumentation",
-                      "data",
-                      "analysis",
-                      "communication",
-                      "other")) {
-    stop("Please input proper category, see documentation")
+
+process_category <- function(category = '') {
+  if (!category %in% c('project',
+                      'hypothesis',
+                      'methods and measures',
+                      'procedure',
+                      'instrumentation',
+                      'data',
+                      'analysis',
+                      'communication',
+                      'other')) {
+    stop('Please input proper category, see documentation')
   }
 }
 
@@ -82,8 +83,9 @@ process_category <- function(category = "") {
 #' @param x Object containing the result of an API call.
 #'
 #' @return Parsed JSON object in the form of an R object.
+
 process_json <- function(x) {
-  rjson::fromJSON(httr::content(x, "text", encoding = "UTF-8"))
+  rjson::fromJSON(httr::content(x, 'text', encoding = 'UTF-8'))
 }
 
 #' Identify type of endpoint for id
@@ -92,13 +94,12 @@ process_json <- function(x) {
 #' @param private Boolean, in case id is private set to TRUE
 #'
 #' @return Endpoint of id as character (nodes | files)
-process_type <- function(id = NULL, private = FALSE) {
 
-  if (is.null(id))
-    stop("Enter id to check.")
+process_type <- function(id = NULL, private = TRUE) {
+  if (is.null(id)) stop('Enter id to check.')
 
-  url_osf_nodes <- construct_link(sprintf("nodes/%s", id))
-  url_osf_files <- construct_link(sprintf("files/%s", id))
+  url_osf_nodes <- construct_link(sprintf('nodes/%s', id))
+  url_osf_files <- construct_link(sprintf('files/%s', id))
 
   config <- get_config(private)
 
@@ -106,7 +107,7 @@ process_type <- function(id = NULL, private = FALSE) {
   call_files <- httr::GET(url_osf_files, config)
 
   if (!call_nodes$status_code == 200 && !call_files$status_code) {
-    stop("Failed. Are you sure you have access to the id or that it is valid?")
+    stop('Failed. Are you sure you have access to the id or that it is valid?')
   } else if (call_nodes$status_code == 200) {
     res <- process_json(call_nodes)
   } else {
@@ -114,31 +115,27 @@ process_type <- function(id = NULL, private = FALSE) {
   }
 
   if (is.null(res$data$type))
-    return("")
+    return('')
 
   return(res$data$type)
 }
 
 get_config <- function(login_required) {
   config <- list()
-  if (login_required) {
-    config <- httr::add_headers(Authorization = sprintf("Bearer %s", login()))
-    check_login()
-  }
-  config
-}
 
-check_login <- function() {
-  if (Sys.getenv("OSF_PAT") == "")
-    stop("Requires login, use login()", call. = FALSE)
+  if (login_required) {
+    config <- httr::add_headers(Authorization = sprintf('Bearer %s', login()))
+  }
+
+  return(config)
 }
 
 is_valid_osf_id <- function(x) {
-  grepl("[A-Za-z0-9]{5}", x)
+  grepl('[A-Za-z0-9]{5}', x)
 }
 
 pre_slash <- function(x) {
-  if (!substr(x, 1, 1) == "/")
-    x <- paste0("/", x)
+  if (!substr(x, 1, 1) == '/')
+    x <- paste0('/', x)
   x
 }
