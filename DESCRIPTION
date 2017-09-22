@@ -14,7 +14,8 @@ Depends:
 Imports:
     httr,
     httpuv,
-    rjson
+    rjson,
+    stringr
 License: MIT + file LICENSE
 BugReports: https://github.com/chartgerink/osfr/issues
 LazyData: true
