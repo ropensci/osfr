@@ -5,21 +5,19 @@
 #' @return The full request link with proper base
 #' @examples
 #' \dontrun{
-#' construct_link("nodes/{node_id}/files/")
+#' construct_link('nodes/{node_id}/files/')
 #' }
+
 construct_link <- function(request = NULL) {
-  if (Sys.getenv("OSF_USE_TEST_SERVER") == "test") 
-  {
-    base <- "https://test-api.osf.io/v2/"
-  } else if (Sys.getenv("OSF_USE_TEST_SERVER") == "staging")
-  { 
-    base <- "https://staging-api.osf.io/v2/"
-  } else 
-  {
-    base <- "https://api.osf.io/v2/"
+  if (Sys.getenv('OSF_USE_TEST_SERVER') == 'test') {
+    base <- 'https://test-api.osf.io/v2/'
+  } else if (Sys.getenv('OSF_USE_TEST_SERVER') == 'staging') { 
+    base <- 'https://staging-api.osf.io/v2/'
+  } else {
+    base <- 'https://api.osf.io/v2/'
   }
 
-  paste0(base, request)
+  return(paste0(base, request))
 }
 
 #' Construct a waterbutler API link with proper base
@@ -28,19 +26,17 @@ construct_link <- function(request = NULL) {
 #' @param request Request for waterbutler
 #'
 #' @return Waterbutler link
-construct_link_files <- function(id = NULL, request = NULL) {
-  if (Sys.getenv("OSF_USE_TEST_SERVER") == "test") 
-  {
-    base <- sprintf("https://test-files.osf.io/v1/resources/%s/providers/osfstorage/%s",
-      id, request)
-  } else if (Sys.getenv("OSF_USE_TEST_SERVER") == "staging")
-  { 
-    base <- sprintf("https://staging-files.osf.io/v1/resources/%s/providers/osfstorage/%s",
-      id, request)
-  } else 
-  {
-    base <- sprintf("https://files.osf.io/v1/resources/%s/providers/osfstorage/%s",
-      id, request)
+
+construct_link_files <- function(id = NULL, provider = 'osfstorage', request = NULL) {
+  if (Sys.getenv('OSF_USE_TEST_SERVER') == 'test') {
+    base <- sprintf('https://test-files.osf.io/v1/resources/%s/providers/%s/%s',
+      id, provider, request)
+  } else if (Sys.getenv('OSF_USE_TEST_SERVER') == 'staging') { 
+    base <- sprintf('https://staging-files.osf.io/v1/resources/%s/providers/%s/%s',
+      id, provider, request)
+  } else {
+    base <- sprintf('https://files.osf.io/v1/resources/%s/providers/%s/%s',
+      id, provider, request)
   }
   
   return(base)
