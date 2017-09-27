@@ -1,5 +1,7 @@
 #' Personalised welcome
 #'
+#' Function that helps you identify who's logged in, just in case you forget.
+#' 
 #' @return Welcome message of logged in user, if any
 #' @export
 
@@ -8,8 +10,8 @@ welcome <- function() {
     login()
     call <- httr::GET(url = construct_link())
   } else {
-    call <- httr::GET(url = construct_link(),
-      httr::add_headers(Authorization = sprintf('Bearer %s', login())))
+    config <- get_config(TRUE)
+    call <- httr::GET(url = construct_link(), config)
   }
 
   res <- process_json(call)
@@ -41,17 +43,19 @@ welcome <- function() {
 login <- function(pat = NULL) {
   if (!is.null(pat)) {
     Sys.setenv(OSF_PAT = pat)
-  } else if (Sys.getenv('OSF_PAT') == '') {
-    if (file.exists('~/.osf_config')) {
+  } else if (Sys.getenv('OSF_PAT') == '' && file.exists('~/.osf_config')) {
       Sys.setenv(OSF_PAT = readLines('~/.osf_config')[1])
-    } else {
+  } else if (Sys.getenv('OSF_PAT') != '') {
+    NULL
+  } else {
       input <- readline(prompt = 'Visit https://osf.io/settings/tokens/
                   and create a Personal access token: ')
       Sys.setenv(OSF_PAT = input)
+
+      # Write to file in a normalized manner across UNIX and Windows
       connect <- file(normalizePath('~/.osf_config'))
       writeLines(input, connect)
       close(connect)
-    }
   }
 
   invisible(Sys.getenv('OSF_PAT'))
