@@ -10,5 +10,5 @@ welcome()
 Welcome message of logged in user, if any
 }
 \description{
-Personalised welcome
+Function that helps you identify who's logged in, just in case you forget.
 }

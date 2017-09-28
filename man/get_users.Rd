@@ -4,12 +4,12 @@
 \alias{get_users}
 \title{Return information on an OSF user}
 \usage{
-get_users(id = NULL, nodes = FALSE)
+get_users(id = "me", nodes = FALSE)
 }
 \arguments{
-\item{id}{Argument to specify the OSF id ('me' refers to logged in account)}
+\item{id}{String, OSF id (defaults to 'me'; logged in account)}
 
-\item{nodes}{Boolean to return the nodes available for that user}
+\item{nodes}{Boolean, return nodes available for that user?}
 }
 \value{
 List object with account information
