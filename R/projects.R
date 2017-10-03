@@ -14,15 +14,13 @@
 #' }
 
 create_project <- function(
-  title = "",
-  description = "",
+  title,
+  description = '',
   private = TRUE) {
 
   config <- get_config(TRUE)
-
   url_osf <- construct_link("nodes/")
 
-  # Create the JSON body
   body <- list(
     data = list(
       type = "nodes",
@@ -37,8 +35,9 @@ create_project <- function(
 
   call <- httr::POST(url = url_osf, body = body, encode = "json", config)
 
-  if (call$status_code != 201)
+  if (call$status_code != 201) {
     stop("Failed in creating new project.")
+  }
 
   res <- process_json(call)
   id <- res$data$id
@@ -46,32 +45,84 @@ create_project <- function(
   return(id)
 }
 
-# update_project <- function() {
-# }
+#' Update an OSF project
+#'
+#' This updates some of the metadata for an OSF project.
+#' Currently limited to switching a project to public.
+#' Does not yet include making public all subcomponents
+#' or vectorized to make multiple projects public at the
+#' same time.
+#'
+#' @param id OSF id (osf.io/XXXX; just XXXX)
+#' @param private
+#'
+#' @return Boolean of update success
+#' @export
+#'
+
+update_project <- function(id, private = FALSE) {
+  config <- get_config(TRUE)
+  url_osf <- construct_link(sprintf("nodes/%s/", id))
+
+  body <- list(
+    data = list(
+      type = "nodes",
+      id = id,
+      attributes = list(
+        public = !private
+      )
+    )
+  )
+
+  call <- httr::PATCH(url = url_osf, body = body, encode = "json", config)
+  if (call$status_code != 200) {
+    stop("Failed in updating project.")
+  }
+
+  return(TRUE)
+}
+
+#' Clone OSF project to desktop
+#'
+#' This function copies an *entire* project and its
+#' components to the harddrive of the individual
+#' (depth of clone depends on the maxdepth argument).
+#' There is currently no way to estimate the size
+#' before downloading so it might take a while. BUT
+#' there's a progess bar :-) Currently limited to only
+#' files stored on OSF (not via add-ons).
+#'
+#' @param id OSF id (osf.io/XXXX; just XXXX)
+#' @param private clone the project as seen privately?
+#' @param maxdepth how many levels of subcomponents to trawl
+#'
+#' @return Boolean, clone success
+#' @export
+#'
 
 clone_project <- function(id, private = FALSE, maxdepth = 5) {
-	get_config(private)
+  get_config(private)
+  tmp <- recurse_node(id, private, maxdepth, path_id = TRUE)
 
-	tmp <- recurse_node(id, private, maxdepth, path_id = TRUE)
+  plyr::daply(tmp, "path", .progress = 'text', function (x) {
+    dir.create(x$path, recursive = TRUE)
+    files <- get_file_info(x$id)
 
-	plyr::daply(tmp, "path", .progress = 'text', function (x) {
-		dir.create(x$path, recursive = TRUE)
+    apply(files, 1, function (y) {
+      href <- y[which(names(y) == "href")]
+      path <- y[which(names(y) == "materialized")]
+      type <- y[which(names(y) == "kind")]
 
-		files <- get_file_info(x$id)
+      if (type == 'folder') {
+        dir.create(paste0(x$path, path), recursive = TRUE)
+      } else {
+        invisible(httr::GET(href,
+                            httr::write_disk(paste0(x$path, path), overwrite = TRUE)))
+      }
+    })
+  })
 
-		apply(files, 1, function (y) {
-			href <- y[which(names(y) == "href")]
-    		path <- y[which(names(y) == "materialized")]
-    		type <- y[which(names(y) == "kind")]
-
-    		if (type == 'folder') {
-    			dir.create(paste0(x$path, path), recursive = TRUE)
-    		} else {
-	 		invisible(httr::GET(href,
-        	    httr::write_disk(paste0(x$path, path), overwrite = TRUE)))
-			}
-	 	})
-	})
+  return(TRUE)
 }
 
 #' Delete a project from the OSF
@@ -80,7 +131,7 @@ clone_project <- function(id, private = FALSE, maxdepth = 5) {
 #' @param recursive Boolean, if TRUE will go through folder nesting (see \code{maxdepth})
 #' @param maxdepth Number of nesting levels to go through
 #'
-#' @return Boolean, delete succeeded?
+#' @return Boolean, delete success
 #' @export
 
 delete_project <- function(id, recursive = FALSE, maxdepth = 5) {
@@ -99,7 +150,7 @@ delete_project <- function(id, recursive = FALSE, maxdepth = 5) {
 
 #' View an OSF project on osf.io
 #'
-#' @param id OSF id (osf.io/xxxx)
+#' @param id OSF id (osf.io/XXXX; just XXXX)
 #'
 #' @export
 #' @importFrom utils browseURL

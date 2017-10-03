@@ -1,6 +1,6 @@
 context("component operations")
 
-test_that("create component", {
+test_that("create, update, delete", {
   x <- create_project('tmp')
   expect_error(create_component())
   expect_error(create_component(x))
@@ -9,7 +9,8 @@ test_that("create component", {
   expect_is(create_component(x, title = 'Test', description = 'Text', private = FALSE), 'character')
   y <- create_component(x, title = 'Test')
   expect_error(update_component())
-  expect_true(update_component(y))
+  expect_true(update_component(y, private = TRUE))
+  expect_true(update_component(y, private = FALSE))
   expect_error(delete_component())
   expect_true(delete_component(y))
 })
