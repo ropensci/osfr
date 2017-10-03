@@ -1,27 +1,26 @@
 #' Create a component within a project
 #'
 #' @param id OSF id (osf.io/XXXX; just XXXX) of parent project
-#' @param title Title of the component
-#' @param description Description of the component
+#' @param title Title of the component [required]
+#' @param description Description of the component [optional]
 #' @param category Category of component, for valid categories
-#'   see \code{\link{process_category}}
+#'   see \code{\link{process_category}}, defaults to `project`
 #' @param private Boolean of whether the component is supposed to be private
 #'
 #' @return OSF id of created component
+#'
 #' @export
 #' @seealso \code{\link{create_project}}
 
 create_component <- function(
   id,
-  title = '',
+  title,
   description = '',
-  category = '',
+  category = 'project',
   private = TRUE) {
 
-  if (is.null(id)) stop('Please input project id.')
-  config <- get_config(private)
-
   process_category(category)
+  config <- get_config(TRUE)
 
   url_osf <- construct_link(sprintf('nodes/%s/children/', id))
 
@@ -32,7 +31,7 @@ create_component <- function(
         title = title,
         category = category,
         description = description,
-        public = !private
+        public = (!private)
       )
     )
   )
@@ -52,15 +51,30 @@ create_component <- function(
   return(id)
 }
 
-# update_component <- function() {
-# }
+
+#' Update a component on the OSF
+#'
+#' Simply wraps the \code{\link{update_project}} function
+#' because it has the same operations.
+#'
+#' @param id OSF id (osf.io/XXXX; just XXXX)
+#' @param private
+#'
+#' @return Boolean, update success
+#' @export
+#'
+#' @seealso \code{\link{update_project}}
+
+update_component <- function(id, private = FALSE) {
+  update_project(id, private)
+}
 
 
 #' Empty out a component and delete it
 #'
 #' @param id OSF id (osf.io/xxxx; just XXXX)
 #'
-#' @return Boolean, deletion succeeded?
+#' @return Boolean, deletion success
 #' @export
 
 delete_component <- function(id) {
