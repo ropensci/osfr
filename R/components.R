@@ -72,6 +72,11 @@ update_component <- function(id, private = FALSE) {
 
 #' Empty out a component and delete it
 #'
+#' This function removes all containing files of a component and then removes
+#' the component itself. NOTE: it does not request confirmation, so please
+#' handle with care. If you do not have backups of the files, it is easy to
+#' lose everything (in the component).
+#'
 #' @param id OSF id (osf.io/xxxx; just XXXX)
 #'
 #' @return Boolean, deletion success
