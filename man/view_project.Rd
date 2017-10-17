@@ -7,7 +7,7 @@
 view_project(id)
 }
 \arguments{
-\item{id}{OSF id (osf.io/xxxx)}
+\item{id}{OSF id (osf.io/XXXX; just XXXX)}
 }
 \description{
 View an OSF project on osf.io

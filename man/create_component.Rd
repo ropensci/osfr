@@ -4,18 +4,18 @@
 \alias{create_component}
 \title{Create a component within a project}
 \usage{
-create_component(id, title = "", description = "", category = "",
+create_component(id, title, description = "", category = "project",
   private = TRUE)
 }
 \arguments{
 \item{id}{OSF id (osf.io/XXXX; just XXXX) of parent project}
 
-\item{title}{Title of the component}
+\item{title}{Title of the component [required]}
 
-\item{description}{Description of the component}
+\item{description}{Description of the component [optional]}
 
 \item{category}{Category of component, for valid categories
-see \code{\link{process_category}}}
+see \code{\link{process_category}}, defaults to `project`}
 
 \item{private}{Boolean of whether the component is supposed to be private}
 }

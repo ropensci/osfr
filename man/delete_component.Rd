@@ -10,7 +10,7 @@ delete_component(id)
 \item{id}{OSF id (osf.io/xxxx; just XXXX)}
 }
 \value{
-Boolean, deletion succeeded?
+Boolean, deletion success
 }
 \description{
 Empty out a component and delete it

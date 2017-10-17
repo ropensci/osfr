@@ -4,7 +4,7 @@
 \alias{comment_osf}
 \title{Comment on a project on the OSF}
 \usage{
-comment_osf(id = NULL, txt)
+comment_osf(id, txt)
 }
 \arguments{
 \item{id}{OSF id (osf.io/XXXX; just XXXX)}

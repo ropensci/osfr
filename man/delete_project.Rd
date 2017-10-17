@@ -14,7 +14,7 @@ delete_project(id, recursive = FALSE, maxdepth = 5)
 \item{maxdepth}{Number of nesting levels to go through}
 }
 \value{
-Boolean, delete succeeded?
+Boolean, delete success
 }
 \description{
 Delete a project from the OSF

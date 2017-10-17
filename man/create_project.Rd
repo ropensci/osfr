@@ -4,7 +4,7 @@
 \alias{create_project}
 \title{Create a project on the OSF}
 \usage{
-create_project(title = "", description = "", private = TRUE)
+create_project(title, description = "", private = TRUE)
 }
 \arguments{
 \item{title}{Project title}
