@@ -13,17 +13,9 @@
 #' @examples
 #' \dontrun{comment_osf(id = '12345', txt = 'This is an example')}
 
-comment_osf <- function(id = NULL, txt) {
+comment_osf <- function(id, txt) {
 
   config <- get_config(TRUE)
-
-  if (is.null(txt)) {
-    stop("Empty comment? Seems redundant. Use the txt argument")
-  }
-
-  if (is.null(id)) {
-      stop("Enter id to post comment to (osf.io/XXXX)")
-  }
 
   if (process_type(id) != "nodes") {
       stop("Currently unable to post comments to files.")
