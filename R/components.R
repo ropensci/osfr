@@ -58,7 +58,7 @@ create_component <- function(
 #' because it has the same operations.
 #'
 #' @param id OSF id (osf.io/XXXX; just XXXX)
-#' @param private
+#' @param private Set project to private/public (default changes to public)
 #'
 #' @return Boolean, update success
 #' @export

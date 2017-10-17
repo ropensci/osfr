@@ -54,7 +54,7 @@ create_project <- function(
 #' same time.
 #'
 #' @param id OSF id (osf.io/XXXX; just XXXX)
-#' @param private
+#' @param private Set project to private/public (default changes to public)
 #'
 #' @return Boolean of update success
 #' @export
