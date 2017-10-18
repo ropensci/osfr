@@ -92,8 +92,7 @@ process_json <- function(x) {
 #'
 #' @return Endpoint of id as character (nodes | files)
 
-process_type <- function(id = NULL, private = TRUE) {
-  if (is.null(id)) stop('Enter id to check.')
+process_type <- function(id, private = TRUE) {
 
   url_osf_nodes <- construct_link(sprintf('nodes/%s', id))
   url_osf_files <- construct_link(sprintf('files/%s', id))
