@@ -135,3 +135,23 @@ pre_slash <- function(x) {
     x <- paste0('/', x)
   x
 }
+
+#' Materialize Waterbutler URL
+#'
+#' @param url Waterbutler URL, starts with files.osf.io
+#' @param private Boolean, whether or not the file is prvate
+#'
+#' @return OSF id
+
+process_waterbutler <- function(url, private = TRUE) {
+
+  config <- get_config(private)
+
+  url <- sprintf('%s?meta=', url)
+  call <- httr::GET(url, config)
+
+  tmp <- process_json(call)
+  res <- gsub(x = res$data$attributes$materialized, pattern = '/', '')
+
+  return(res)
+}
