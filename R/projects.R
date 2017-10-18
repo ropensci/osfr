@@ -106,7 +106,7 @@ clone_project <- function(id, private = FALSE, maxdepth = 5) {
 
   plyr::daply(tmp, "path", .progress = 'text', function (x) {
     dir.create(x$path, recursive = TRUE)
-    files <- get_file_info(x$id)
+    files <- get_files_info(x$id)
 
     apply(files, 1, function (y) {
       href <- y[which(names(y) == "href")]

@@ -17,7 +17,7 @@ create_folder <- function(id, path) {
 
   # Handle the case of subfolders
   if (length(strsplit(path, "\\/")[[1]]) > 1) {
-    fi <- get_file_info(id)
+    fi <- get_files_info(id)
     dnm <- paste0(dirname(path), "/")
     if (!substr(dnm, 1, 1) == "/")
       dnm <- paste0("/", dnm)
