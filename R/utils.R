@@ -9,7 +9,8 @@
 #' }
 
 construct_link <- function(request = NULL) {
-  if (Sys.getenv('OSF_USE_TEST_SERVER') == 'test') {
+
+    if (Sys.getenv('OSF_USE_TEST_SERVER') == 'test') {
     base <- 'https://test-api.osf.io/v2/'
   } else if (Sys.getenv('OSF_USE_TEST_SERVER') == 'staging') {
     base <- 'https://staging-api.osf.io/v2/'
@@ -116,6 +117,12 @@ process_type <- function(id, private = TRUE) {
   return(res$data$type)
 }
 
+#' Create authorization config
+#'
+#' @param login_required Boolean
+#'
+#' @return configuration for use in httr request
+
 get_config <- function(login_required) {
   config <- list()
 
@@ -126,14 +133,14 @@ get_config <- function(login_required) {
   return(config)
 }
 
-is_valid_osf_id <- function(x) {
-  grepl('[A-Za-z0-9]{5}', x)
-}
+#' Check OSF id
+#'
+#' @param id OSF id (osf.io/xxxx; just xxxx)
+#'
+#' @return Boolean
 
-pre_slash <- function(x) {
-  if (!substr(x, 1, 1) == '/')
-    x <- paste0('/', x)
-  x
+is_valid_osf_id <- function(id) {
+  grepl('[A-Za-z0-9]{5}', id)
 }
 
 #' Materialize Waterbutler URL
@@ -154,4 +161,35 @@ process_waterbutler <- function(url, private = TRUE) {
   res <- gsub(x = res$data$attributes$materialized, pattern = '/', '')
 
   return(res)
+}
+
+#' Processing a file id to waterbutler
+#'
+#' The OSF uses a separate API to handle file requests, for some reason. This
+#' function helps deal with that.
+#'
+#' @param id OSF id (osf.io/xxxx; just xxxx)
+#' @param private Boolean, if file is private
+#'
+#' @return Waterbutler URL
+
+process_file_id <- function(id, private = FALSE) {
+
+  config <- get_config(private)
+
+  url_osf <- construct_link(paste0('files/', id))
+  call <- httr::GET(url = url_osf, config)
+  res <- process_json(call)
+
+  if (call$status_code != 200) {
+    stop('Failed to retrieve information. Sure it is public?')
+  }
+
+  return(res$data$links$download)
+}
+
+pre_slash <- function(x) {
+  if (!substr(x, 1, 1) == '/')
+    x <- paste0('/', x)
+  x
 }
