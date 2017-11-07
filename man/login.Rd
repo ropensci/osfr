@@ -13,9 +13,9 @@ login(pat = NULL)
 Personal access token from global environment.
 }
 \description{
-Function to easily login, either with a prompt when run without arguments, or 
+Function to easily login, either with a prompt when run without arguments, or
 without prompt when run with arguments or config file (~/.osf_config). If you
-run this function without arguments, the prompt will result in creation of a 
+run this function without arguments, the prompt will result in creation of a
 ~/.osf_config file (in your Documents folder for Windows).
 }
 \details{

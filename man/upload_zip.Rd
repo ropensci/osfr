@@ -8,11 +8,11 @@ upload_zip(id, path, dest = NULL)
 }
 \arguments{
 \item{id}{OSF id (osf.io/XXXX) to upload to. Specify project to upload new file,
-specify a file to upload a revision}
+specify a file to upload a revision.}
 
 \item{path}{Path to directory on local machine to zip up and upload.}
 
-\item{dest}{Name of the destination file on OSF (if \code{NULL}, \code{basename(path)} with a ".zip" suffix will be used). Note that this can be used to specify what folder to place files in, e.g. "my_folder/my_directory.zip". Also note that if \code{id} is a file ID, this is not necessary.}
+\item{dest}{Name of the destination file on OSF (if \code{NULL}, \code{basename(path)} with a '.zip' suffix will be used). Note that this can be used to specify what folder to place files in, e.g. 'my_folder/my_directory.zip'. Also note that if \code{id} is a file ID, this is not necessary.}
 }
 \value{
 Boolean of upload success
