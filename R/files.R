@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' upload_file(id = '12345', path = 'test.pdf')
+#' upload_files(id = '12345', path = 'test.pdf')
 #' }
 
 upload_files <- function(id, path, dest = NULL) {
@@ -24,7 +24,7 @@ upload_files <- function(id, path, dest = NULL) {
   }
 
   if (type == 'nodes') {
-    fi <- get_files_info(id, private = TRUE) # why is this necessary? too many calls it seems
+    fi <- get_files_info(id, private = TRUE)
     idx <- which(fi$materialized == pre_slash(dest))
     if (length(idx) != 1) {
       message('Creating new file on OSF...')
@@ -46,7 +46,7 @@ upload_files <- function(id, path, dest = NULL) {
 #' Zip up a directory and upload the zip to the OSF (both new and revised)
 #'
 #' @param id OSF id (osf.io/XXXX) to upload to. Specify project to upload new file,
-#'  specify a file to upload a revision
+#'  specify a file to upload a revision.
 #' @param path Path to directory on local machine to zip up and upload.
 #' @param dest Name of the destination file on OSF (if \code{NULL}, \code{basename(path)} with a '.zip' suffix will be used). Note that this can be used to specify what folder to place files in, e.g. 'my_folder/my_directory.zip'. Also note that if \code{id} is a file ID, this is not necessary.
 #'
@@ -61,21 +61,24 @@ upload_files <- function(id, path, dest = NULL) {
 
 upload_zip <- function(id, path, dest = NULL) {
 
-  if (!dir.exists(path))
+  if (!dir.exists(path)) {
     stop('Please specify a valid directory to zip.')
+  }
 
   zp <- tempfile(fileext = '.zip')
 
   message('Zipping to ', zp, '...')
   zip(zp, path)
 
-  if (is.null(dest))
+  if (is.null(dest)) {
     dest <- paste0(basename(normalizePath(path)), '.zip')
+  }
 
-  if (!grepl('\\.zip$', dest))
+  if (!grepl('\\.zip$', dest)) {
     dest <- paste0(dest, '.zip')
+  }
 
-  upload_file(id, zp, dest)
+  upload_files(id, zp, dest)
 }
 
 #' Upload a new file to the OSF.
@@ -87,7 +90,7 @@ upload_zip <- function(id, path, dest = NULL) {
 #' \code{basename(path)} will be used).
 #'
 #' @return Waterbutler URL
-#' @seealso \code{\link{upload_file}}, \code{\link{upload_revision}}
+#' @seealso \code{\link{upload_files}}, \code{\link{upload_revision}}
 
 upload_new <- function(id, path, name = NULL) {
 
@@ -131,7 +134,7 @@ upload_new <- function(id, path, name = NULL) {
 #' @param path Path to file on local machine to upload.
 #'
 #' @return Boolean, revision success? (invisible)
-#' @seealso \code{\link{upload_file}}, \code{\link{upload_new}}
+#' @seealso \code{\link{upload_files}}, \code{\link{upload_new}}
 
 upload_revision <- function(id, path) {
 
@@ -181,10 +184,10 @@ delete_files <- function(id) {
     stop('Please insert valid OSF id.')
   }
 
-  url_osf <- process_file_id(id)
+  url_osf <- process_file_id(id, private = TRUE)
 
   if (is.null(url_osf)) {
-      stop(sprintf('Could not find a file with associated id %s.', id))
+    stop(sprintf('Could not find a file with associated id %s.', id))
   }
 
   call <- httr::DELETE(url = url_osf, config)
@@ -220,15 +223,17 @@ move_files <- function(
     typfrom <- process_type(id = from)
     typto <- process_type(id = to)
 
-    if (typfrom != 'nodes' && typto != 'nodes')
+    if (typfrom != 'nodes' && typto != 'nodes') {
       stop('File needs to move from node to node')
+    }
 
     url_osf <- process_file_id(from)
   } else {
     typto <- process_type(id = to)
 
-    if (typto != 'nodes')
+    if (typto != 'nodes') {
       stop('File needs to move from node to node')
+    }
 
     url_osf <- from
   }
@@ -246,8 +251,9 @@ move_files <- function(
     body = body, encode = 'json',
     config)
 
-  if (call$status_code != 201 && call$status_code != 200)
+  if (call$status_code != 201 && call$status_code != 200) {
     stop('Error in moving/copying file, from to component to')
+  }
 
   invisible(TRUE)
 }
@@ -274,8 +280,9 @@ download_files <- function(id, path = NULL, private = FALSE, version = NULL) {
 
   call <- httr::GET(url_osf, config)
 
-  if (!call$status_code == 200)
+  if (!call$status_code == 200) {
     stop('Failed. Are you sure you have access to the file?')
+  }
 
   res <- process_json(call)
 
@@ -300,9 +307,7 @@ download_files <- function(id, path = NULL, private = FALSE, version = NULL) {
   }
   if (call$status_code == 404) {
     stop('Version of file does not exist.')
-  }
-
-  if (call$status_code != 200) {
+  } else if (call$status_code != 200) {
     stop('Failed to download file.')
   }
 

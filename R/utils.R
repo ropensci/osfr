@@ -10,7 +10,7 @@
 
 construct_link <- function(request = NULL) {
 
-    if (Sys.getenv('OSF_USE_TEST_SERVER') == 'test') {
+  if (Sys.getenv('OSF_USE_TEST_SERVER') == 'test') {
     base <- 'https://test-api.osf.io/v2/'
   } else if (Sys.getenv('OSF_USE_TEST_SERVER') == 'staging') {
     base <- 'https://staging-api.osf.io/v2/'
@@ -158,7 +158,7 @@ process_waterbutler <- function(url, private = TRUE) {
   call <- httr::GET(url, config)
 
   tmp <- process_json(call)
-  res <- gsub(x = res$data$attributes$materialized, pattern = '/', '')
+  res <- gsub(x = tmp$data$attributes$resource, pattern = '/', '')
 
   return(res)
 }
@@ -192,4 +192,16 @@ pre_slash <- function(x) {
   if (!substr(x, 1, 1) == '/')
     x <- paste0('/', x)
   x
+}
+
+#' Function to correct link into something parsable
+#'
+#' @param x String to correct
+#'
+#' @return Parsable link
+
+rm_space <- function(x) {
+  res <- gsub(x, pattern = "\\s", replacement = "%20", perl = TRUE)
+
+  return(res)
 }

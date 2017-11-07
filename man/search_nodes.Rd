@@ -5,7 +5,7 @@
 \title{Search OSF nodes}
 \usage{
 search_nodes(description = NULL, title = NULL, id = NULL, tags = NULL,
-  private = FALSE)
+  license = NULL, private = FALSE)
 }
 \arguments{
 \item{description}{Search in node description}

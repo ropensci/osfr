@@ -27,6 +27,7 @@ search_nodes <- function(
   title = NULL,
   id = NULL,
   tags = NULL,
+  license = NULL,
   private = FALSE) {
 
   searches <- c(

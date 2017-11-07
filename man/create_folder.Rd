@@ -2,18 +2,18 @@
 % Please edit documentation in R/folders.R
 \name{create_folder}
 \alias{create_folder}
-\title{Upload a new file to the OSF.}
+\title{Create a new folder on OSF project.}
 \usage{
 create_folder(id, path)
 }
 \arguments{
-\item{id}{Parent OSF project id (osf.io/XXXX) to upload to.}
+\item{id}{Parent OSF project id (osf.io/XXXX; just XXXX) to create folder in}
 
-\item{path}{Path of the folder to create on OSF.}
+\item{path}{Name of the folder (cannot handle recursive at the moment).}
 }
 \value{
 Waterbutler URL
 }
 \description{
-Upload a new file to the OSF.
+Create a new folder on OSF project.
 }

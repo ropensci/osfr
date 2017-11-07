@@ -41,7 +41,7 @@ welcome <- function() {
 #' @export
 
 login <- function(pat = NULL) {
-  if (!is.null(Sys.getenv('OSF_PAT'))) {
+  if (!Sys.getenv('OSF_PAT') == '') {
     # do nothing, sufficient for auth purposes
   } else if (!is.null(pat)) {
     Sys.setenv(OSF_PAT = pat)
@@ -50,7 +50,7 @@ login <- function(pat = NULL) {
   } else if (Sys.getenv('OSF_PAT') != '') {
     NULL
   } else {
-      input <- readline(prompt = 'Visit https://osf.io/settings/tokens/
+        input <- readline(prompt = 'Visit https://osf.io/settings/tokens/
                   and create a Personal access token: ')
       Sys.setenv(OSF_PAT = input)
 
