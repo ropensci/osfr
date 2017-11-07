@@ -1,6 +1,7 @@
-context('Test whether logging in, out, and cleaning up works')
+context('account operations')
 
 test_that('login works', {
+  expect_is(login(), 'character') # make sure login works when PAT is in env
   expect_is(login(pat = Sys.getenv('OSF_PAT')), 'character')
   expect_is(login(), 'character')
 })
