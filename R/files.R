@@ -268,7 +268,7 @@ move_files <- function(
 #' @return Return filepath for easy processing
 #' @examples
 #' \dontrun{
-#' download_file('zevw2', 'test123.md')
+#' download_files('zevw2', 'test123.md')
 #' }
 #' @importFrom utils tail
 #' @export
@@ -385,7 +385,7 @@ get_files_info <- function(id, private = FALSE) {
 #' @return Return filepath (online)
 #' @examples
 #' \dontrun{
-#' path_file('zevw2', 'test123.md')
+#' read.csv(path_file("myxcv"))
 #' }
 #' @importFrom utils tail
 #' @export
