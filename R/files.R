@@ -376,3 +376,39 @@ get_files_info <- function(id, private = FALSE) {
 
   return(files)
 }
+
+#' Get file path for the latest version of a file (for direct reading)
+#'
+#' @param id Specify the file id (osf.io/XXXX)
+#' @param private Boolean to specify whether file is private
+#'
+#' @return Return filepath (online)
+#' @examples
+#' \dontrun{
+#' path_file('zevw2', 'test123.md')
+#' }
+#' @importFrom utils tail
+#' @export
+
+path_file <- function(id, private = FALSE) {
+  config <- get_config(private)
+
+  typ <- process_type(id, private = TRUE)
+
+  if (typ == 'nodes') {
+    stop('Specify an OSF id referring to a file.')
+  } else if (typ == 'files') {
+    url_osf <- construct_link(paste0('guids/', id))
+    call <- httr::GET(url_osf, config)
+    res <- process_json(call)
+    } else {
+    stop('Unknown error occurred. Please file issue on GitHub.')
+  }
+
+  if (!call$status_code == 200) {
+    stop('Failed. Are you sure you have access to the file?')
+  }
+
+  return(res$data$links$download)
+}
+
