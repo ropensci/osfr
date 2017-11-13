@@ -35,7 +35,7 @@ upload_files <- function(id, path, dest = NULL) {
     }
   } else if (type == 'files') {
     message('Revising file...')
-    upload_revision(id, path, dest)
+    upload_revision(id, path)
   } else {
     stop('Something odd happened.\n
           If the problem persists, consider issuing a bug report on
