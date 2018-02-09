@@ -2,13 +2,13 @@ Package: osfr
 Title: API to the Open Science Framework
 Version: 0.1.0
 Maintainer: Chris Hartgerink <chjh@protonmail.com>
-Authors@R: c(person("Hartgerink", "Chris", email = "chjh@protonmail.com", role =
+Authors@R: c(person( "Chris","Hartgerink", email = "chjh@protonmail.com", role =
     c("aut", "cre")),
-    person("Nagraj", "VP", email = "vpnagraj@virginia.edu", role =
+    person("VP","Nagraj",  email = "vpnagraj@virginia.edu", role =
     c("aut")),
-    person("Hafen", "Ryan", email = "rhafen@gmail.com", role =
+    person("Ryan","Hafen",  email = "rhafen@gmail.com", role =
     c("aut")),
-    person("Colomb", "Julien", email = "julien.colomb¬fu-berlin.de", role =
+    person("Julien", "Colomb",  email = "julien.colomb¬fu-berlin.de", role =
     c("aut"))
     )
 Description: Providing ways to interface with the Open Science Framework inside
