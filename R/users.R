@@ -34,7 +34,7 @@ get_users <- function(id = 'me', nodes = FALSE) {
   while (!is.null(res$links$`next`)){
     whilst <- rjson::fromJSON(
       httr::content(
-        httr::GET(res$links$`next`), "text"))
+        httr::GET(res$links$`next`), "text"), encoding = "UTF-8")
     res$data <- c(res$data, whilst$data)
     res$links$`next` <- whilst$links$`next`
     message(paste0(res$links$`next`))
