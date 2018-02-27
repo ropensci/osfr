@@ -83,7 +83,7 @@ process_category <- function(category = '') {
 #' @return Parsed JSON object in the form of an R object.
 
 process_json <- function(x) {
-  rjson::fromJSON(httr::content(x, 'text'))
+  rjson::fromJSON(httr::content(x, 'text', encoding = "UTF-8"))
 }
 
 #' Identify type of endpoint for id
