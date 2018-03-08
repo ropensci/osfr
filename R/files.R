@@ -286,7 +286,10 @@ download_files <- function(id, path = NULL, private = FALSE, version = NULL) {
 
   res <- process_json(call)
 
-  # Find the filename as on the OSF
+  # Determine the file name to save the file as.
+  # If no path is provided, use the OSF file name.
+  # If a path is provided, determine if the path is just a folder path or if
+  # the path includes a file name.
   if (is.null(path)) {
     file <- res$data$attributes$name
   } else if (grepl('/$', path)) {
