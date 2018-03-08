@@ -262,7 +262,7 @@ move_files <- function(
 #'
 #' @param id Specify the node id (osf.io/XXXX)
 #' @param version Specify the OSF version id (string)
-#' @param path Specify path to save file to. If NULL, defaults to OSF filename in \code{\link{tempdir}}
+#' @param path Specify path to save file to. If NULL, defaults to OSF filename in the working directory
 #' @param private Boolean to specify whether file is private
 #'
 #' @return Return filepath for easy processing
