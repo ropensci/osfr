@@ -268,7 +268,7 @@ move_files <- function(
 #' @return Return filepath for easy processing
 #' @examples
 #' \dontrun{
-#' download_file('zevw2', 'test123.md')
+#' download_files('5z2bh', 'public_test_file.csv')
 #' }
 #' @importFrom utils tail
 #' @export
