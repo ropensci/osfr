@@ -291,6 +291,8 @@ download_files <- function(id, path = NULL, private = FALSE, version = NULL) {
     file <- res$data$attributes$name
   } else if (grepl('/$', path)) {
     file <- paste0(path, res$data$attributes$name)
+  } else {
+    file <- path
   }
 
   message(paste0('Saving to filename: ', file))
