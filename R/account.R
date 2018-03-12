@@ -55,7 +55,7 @@ login <- function(pat = NULL) {
       Sys.setenv(OSF_PAT = input)
 
       # Write to file in a normalized manner across UNIX and Windows
-      connect <- file(normalizePath('~/.osf_config'))
+      connect <- file(normalizePath('~/.osf_config', mustWork = FALSE))
       writeLines(input, connect)
       close(connect)
   }
