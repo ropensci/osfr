@@ -34,3 +34,14 @@ login <- function (pat, store = FALSE) {
 logout <- function () {
   Sys.setenv(OSF_PAT = '')
 }
+
+#' Authentication function
+#' 
+#' Simple helper function to return the PAT in HTTP requests.
+
+auth <- function () {
+  if (Sys.getenv('OSF_PAT') == '') {
+    stop('Please log in first.')
+  }
+  invisible(Sys.getenv('OSF_PAT'))
+}
