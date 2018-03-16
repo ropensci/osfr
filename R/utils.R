@@ -79,9 +79,11 @@ process_category <- function(category = '') {
 #' @return httr::request configuration
 
 get_config <- function(login) {
-  if (login) {
+  if (!logged_in()) {
+    stop('Not logged in.')
+  } else if (login) {
     config <- httr::add_headers(Authorization = sprintf('Bearer %s', auth()))
-  } else {
+  } else  {
     config <- list()
   }
 
