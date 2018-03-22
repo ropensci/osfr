@@ -3,7 +3,7 @@ download_files <- function () {}
 #' Upload a new file to the OSF.
 #'
 #' @param id Parent OSF project (osf.io/xxxxx).
-#' @param path Path to file. 
+#' @param path Path to file.
 #' @param name Name of the uploaded file (if \code{NULL},
 #' current name will be used).
 #'
@@ -268,7 +268,7 @@ move_files <- function(
 #' @importFrom utils tail
 #' @export
 
-download_files <- function(id, path = NULL, version = NULL) {
+download_files <- function(id, path = NULL, view-only = NULL, version = NULL) {
   config <- get_config(private)
 
   url_osf <- construct_link(paste0('guids/', id))
