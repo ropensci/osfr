@@ -294,6 +294,16 @@ download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
 
     res <- process_json(call)
 
+  } else if (is.null(res$data) && is.null(view_only)) {
+    config <- get_config(TRUE)
+
+    call <- httr::GET(url_osf, config)
+
+    if (!call$status_code == 200) {
+      stop('Failed. Are you sure you have access to the file?')
+    }
+
+    res <- process_json(call)
   }
 
   # Find the filename as on the OSF
