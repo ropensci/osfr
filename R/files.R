@@ -275,10 +275,6 @@ download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
 
   call <- httr::GET(url_osf, config)
 
-  if (!call$status_code == 200) {
-    stop('Failed. Are you sure you have access to the file?')
-  }
-
   res <- process_json(call)
 
   # Check if data from processed json is empty and get the file information
