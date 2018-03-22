@@ -318,7 +318,7 @@ download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
   # Find the filename as on the OSF
   if (is.null(path)) {
     file <- res$data$attributes$name
-  } else {
+  } else if (grepl('/$', path)) {
     file <- paste0(path, res$data$attributes$name)
   }
 
