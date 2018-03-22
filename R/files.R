@@ -281,6 +281,10 @@ download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
 
   res <- process_json(call)
 
+  # Check if data from processed json is empty and get the file information
+  # using authentication. If a view-only link is present, then the file is
+  # downloaded using the view-only link. If no view-only link is present,
+  # then the file is downloaded with the user's login.
   if (is.null(res$data) && !is.null(view_only)) {
     # Remove the view-only tag from the provided view-only link and paste to
     # the file url
