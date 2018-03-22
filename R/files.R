@@ -317,10 +317,7 @@ download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
 
   # Find the filename as on the OSF
   if (is.null(path)) {
-    txt <- res$data$attributes$name
-    start <- utils::tail(gregexpr('/', txt)[[1]], 1)
-    end <-  nchar(txt)
-    file <- substr(txt, start + 1, end)
+    file <- res$data$attributes$name
   } else {
     file <- paste0(path, res$data$attributes$name)
   }
