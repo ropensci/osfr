@@ -281,6 +281,21 @@ download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
 
   res <- process_json(call)
 
+  if (is.null(res$data) && !is.null(view_only)) {
+    # Remove the view-only tag from the provided view-only link and paste to
+    # the file url
+    view_only_url <- paste0(url_osf, '/', gsub(".*/", "", view_only))
+
+    call <- httr::GET(view_only_url, config)
+
+    if (!call$status_code == 200) {
+      stop('Failed. Are you sure you have access to the file?')
+    }
+
+    res <- process_json(call)
+
+  }
+
   # Find the filename as on the OSF
   if (is.null(path)) {
     txt <- res$data$attributes$name
