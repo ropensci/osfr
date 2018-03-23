@@ -1,7 +1,7 @@
 #' Identify whether logged in
 
 logged_in <- function () {
-  if (Sys.getenv('OSF_PAT' == '')) {
+  if (Sys.getenv('OSF_PAT') == '') {
     return(FALSE)
   }
   return(TRUE)
