@@ -4,7 +4,7 @@
 \alias{upload_new}
 \title{Upload a new file to the OSF.}
 \usage{
-upload_new(id, path, name = NULL)
+upload_new(id, path, name = NULL, href_hash = NULL)
 }
 \arguments{
 \item{id}{Parent OSF project id (osf.io/XXXX) to upload to.}
@@ -12,7 +12,9 @@ upload_new(id, path, name = NULL)
 \item{path}{Path to file on local machine to upload. Ensure file has
 proper extension named (i.e., extension sensitive, not like on Linux)}
 
-\item{name}{Name of the destination file on OSF (if \code{NULL},
+\item{name}{Name of the destination file on OSF (if \code{NULL},}
+
+\item{href_hash}{the element that identifies the folder hash of the href from the folder URL. Not use if \code{NULL}.
 \code{basename(path)} will be used).}
 }
 \value{
