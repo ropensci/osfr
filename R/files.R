@@ -278,7 +278,7 @@ move_files <- function(
 #' @export
 
 download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
-  config <- get_config(FALSE)
+  config <- list()
 
   url_osf <- construct_link(paste0('guids/', id))
 
