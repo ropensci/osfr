@@ -328,17 +328,16 @@ get_files_info <- function(id, private = FALSE) {
     do.call(rbind, lapply(files, function(x) {
       data.frame(
         name = fix_null(x$attributes$name),
-        materialized = fix_null(x$attributes$materialized),
+        materialized = fix_null(x$attributes$materialized_path),
         kind = fix_null(x$attributes$kind),
         guid = fix_null(x$attributes$guid), # this isn't populated until it's viewed in OSF
-        resource = fix_null(x$attributes$resource),
         provider = fix_null(x$attributes$provider),
-        content_type = fix_null(x$attributes$contentType), # nolint
-        created_utc = fix_null(x$attributes$created_utc),
-        modified_utc = fix_null(x$attributes$modified_utc),
+        created_utc = fix_null(x$attributes$date_created),
+        modified_utc = fix_null(x$attributes$date_modified),
         downloads = fix_null(x$attributes$extra$downloads),
-        version = fix_null(x$attributes$extra$version),
+        version = fix_null(x$attributes$current_version),
         href = fix_null(x$links$move),
+        folder_link = fix_null(x$relationships$files$links$related$href),
         processed = FALSE,
         stringsAsFactors = FALSE
       )
