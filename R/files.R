@@ -363,6 +363,11 @@ get_files_info <- function(id, private = FALSE) {
     return(NULL)
   }
 
+  # Process all of the nested subfolders.
+  # This is done by calling each of the folder links and processing through
+  # the files. The loop begins with the top level folder, gets everything from
+  # its subfolders, and then repeats the loop through any further nested
+  # folders.
   while (TRUE) {
     idx <- which(files$kind == 'folder' & !files$processed)
     if (length(idx) == 0)
