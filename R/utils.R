@@ -73,6 +73,8 @@ process_category <- function(category = '') {
 }
 
 process_pagination <- function(res, config) {
+  # Create variable to hold original page
+  combined_list <- res$data
 
 }
 
