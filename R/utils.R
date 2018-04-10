@@ -92,6 +92,8 @@ process_pagination <- function(res, config) {
     combined_list <- c(combined_list, new_page$data)
   }
 
+  # Return combined data
+  return(combined_list)
 }
 
 #' Create authorization config
