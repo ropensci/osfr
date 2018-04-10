@@ -84,6 +84,9 @@ process_pagination <- function(res, config) {
 
     # Call down the next page
     new_page <- process_json(httr::GET(next_page_link, config))
+
+    # Save new page next page link to the next page variable
+    next_page_link <- new_page$links$`next`
   }
 
 }
