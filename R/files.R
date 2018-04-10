@@ -347,6 +347,7 @@ get_files_info <- function(id, private = FALSE) {
   # Creates a link to the OSF
   url_osf <- construct_link(request = paste0('nodes/', id, '/files/osfstorage/'))
 
+  # Calls the link
   call <- httr::GET(url_osf, config)
 
   # Process the requested JSON
@@ -355,11 +356,13 @@ get_files_info <- function(id, private = FALSE) {
   # Process pagination
   files <- process_pagination(res, config)
 
+  # Turn JSON into a data frame
   files <- process_files(files)
 
   if (is.null(files)) {
     return(NULL)
   }
+
   while (TRUE) {
     idx <- which(files$kind == 'folder' & !files$processed)
     if (length(idx) == 0)
