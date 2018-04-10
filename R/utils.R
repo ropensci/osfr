@@ -79,6 +79,11 @@ process_pagination <- function(res, config) {
   # Use the first page of the returned data to get the next page link
   next_page_link <- res$links$`next`
 
+  # While next page link is not null, run loop
+  while(!is.null(next_page_link)) {
+
+  }
+
 }
 
 #' Create authorization config
