@@ -72,6 +72,10 @@ process_category <- function(category = '') {
   }
 }
 
+process_pagination <- function(res, config) {
+
+}
+
 #' Create authorization config
 #'
 #' @param login Boolean indicating whether login is required.
