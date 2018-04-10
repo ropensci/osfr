@@ -367,7 +367,7 @@ get_files_info <- function(id, private = FALSE) {
     idx <- which(files$kind == 'folder' & !files$processed)
     if (length(idx) == 0)
       break;
-    res <- lapply(files$href[idx], function(href) {
+    res <- lapply(files$folder_link[idx], function(href) {
       href <- paste0(href, '?kind=file&meta=')
       call <- httr::GET(href, config)
       tmp <- process_json(call)$data
