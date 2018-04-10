@@ -370,6 +370,7 @@ get_files_info <- function(id, private = FALSE) {
     res <- lapply(files$folder_link[idx], function(href) {
       call <- httr::GET(href, config)
       tmp <- process_json(call)
+      pag_tmp <- process_pagination(tmp, config)
       process_files(tmp)
     })
     files$processed <- TRUE
