@@ -371,7 +371,7 @@ get_files_info <- function(id, private = FALSE) {
       call <- httr::GET(href, config)
       tmp <- process_json(call)
       pag_tmp <- process_pagination(tmp, config)
-      process_files(tmp)
+      process_files(pag_tmp)
     })
     files$processed <- TRUE
     files <- do.call(rbind, c(list(files), res))
