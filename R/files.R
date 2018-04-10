@@ -352,6 +352,9 @@ get_files_info <- function(id, private = FALSE) {
   # Process the requested JSON
   res <- process_json(call)
 
+  # Process pagination
+  files <- process_pagination(res, config)
+
   files <- process_files(files)
 
   if (is.null(files)) {
