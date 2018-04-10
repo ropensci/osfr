@@ -72,6 +72,17 @@ process_category <- function(category = '') {
   }
 }
 
+#' Process Pagination
+#'
+#' Processes the paginated data returned by the OSF and returns a list with
+#' all of the pages combined.
+#'
+#' @param res The initial list return from the OSF API and run through
+#' `osfr::process_json()`. Must contain the links section.
+#' @param config The configuration used in the initial call to the OSF API.
+#'
+#' @return List of all of the pages from the API (including the input list).
+
 process_pagination <- function(res, config) {
   # Create variable to hold original page
   combined_list <- res$data
