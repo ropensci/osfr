@@ -3,7 +3,7 @@ download_files <- function () {}
 #' Upload a new file to the OSF.
 #'
 #' @param id Parent OSF project (osf.io/xxxxx).
-#' @param path Path to file. 
+#' @param path Path to file.
 #' @param name Name of the uploaded file (if \code{NULL},
 #' current name will be used).
 #'
