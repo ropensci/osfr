@@ -369,7 +369,7 @@ get_files_info <- function(id, private = FALSE) {
       break;
     res <- lapply(files$folder_link[idx], function(href) {
       call <- httr::GET(href, config)
-      tmp <- process_json(call)$data
+      tmp <- process_json(call)
       process_files(tmp)
     })
     files$processed <- TRUE
