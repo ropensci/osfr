@@ -82,6 +82,8 @@ process_pagination <- function(res, config) {
   # While next page link is not null, run loop
   while(!is.null(next_page_link)) {
 
+    # Call down the next page
+    new_page <- process_json(httr::GET(next_page_link, config))
   }
 
 }
