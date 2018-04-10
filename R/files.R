@@ -344,7 +344,9 @@ get_files_info <- function(id, private = FALSE) {
     }))
   }
 
-  url_osf <- construct_link_files(id = id, request = '?meta=')
+  # Creates a link to the OSF
+  url_osf <- construct_link(request = paste0('nodes/', id, '/files/osfstorage/'))
+
   call <- httr::GET(url_osf, config)
   files <- process_json(call)$data
   files <- process_files(files)
