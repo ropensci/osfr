@@ -76,6 +76,9 @@ process_pagination <- function(res, config) {
   # Create variable to hold original page
   combined_list <- res$data
 
+  # Use the first page of the returned data to get the next page link
+  next_page_link <- res$links$`next`
+
 }
 
 #' Create authorization config
