@@ -87,6 +87,9 @@ process_pagination <- function(res, config) {
 
     # Save new page next page link to the next page variable
     next_page_link <- new_page$links$`next`
+
+    # Combine current pages and new page
+    combined_list <- c(combined_list, new_page$data)
   }
 
 }
