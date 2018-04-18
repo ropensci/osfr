@@ -63,5 +63,5 @@ process_file_id <- function(id, private = FALSE) {
     stop('Failed to retrieve information. Sure it is public?')
   }
 
-  return(res$data$links$download)
+  return(res$data$links$move)
 }
