@@ -28,38 +28,45 @@ upload_files <- function(id, path, dest = NULL) {
  if (type == 'nodes') {
 
     fi <- get_files_info(id, private = TRUE)
-    idx <- which(fi$materialized == pre_slash(dest))
 
-    # check for destination value subfolder
-    if(!is.null(dest)) {
-      fi_folder <- paste0(dirname(dest), "/")
-      dest_fname <- basename(dest)
+    # Added check to see if 'fi' is NULL. If no file exists in a component, this not run.
+    if (!is.null(fi)) {
+      idx <- which(fi$materialized == pre_slash(dest))
 
-      idx_folder <- which(fi$materialized == pre_slash(fi_folder))
+      # check for destination value subfolder
+      if (!is.null(dest)) {
+        fi_folder <- paste0(dirname(dest), "/")
+        dest_fname <- basename(dest)
 
-      hash_folder <- paste0(basename(fi[idx_folder, "href"]), "/")
+        idx_folder <- which(fi$materialized == pre_slash(fi_folder))
 
-      # check for subfolder created and file not there.
-      if (length(idx) != 1 & length(idx_folder) == 1) {
-        message(paste0('Creating new file on OSF in subfolder ', fi_folder  ,' ...'))
-        upload_new(id, path, dest_fname, href_hash = hash_folder)
-        subfolder_file = TRUE
+        hash_folder <- paste0(basename(fi[idx_folder, "href"]), "/")
+
+        # check for subfolder created and file not there.
+        if (length(idx) != 1 & length(idx_folder) == 1) {
+          message(paste0('Creating new file on OSF in subfolder ', fi_folder  ,' ...'))
+          upload_new(id, path, dest_fname, href_hash = hash_folder)
+          subfolder_file = TRUE
+        }
+        if (length(idx_folder) != 1 & dirname(fi_folder) != ".") {
+          stop("subfolders not created. Create subfolder before creating a file in the folder")
+        }
       }
-      if(length(idx_folder) != 1 & dirname(fi_folder) != ".") {
-        stop("subfolders not created. Create subfolder before creating a file in the folder")
-      }
 
-    }
     ### End addition
 
     # changed condition for new file creation
 
-    if (length(idx) != 1 & !subfolder_file) {
+      if (length(idx) != 1 & !subfolder_file) {
+        message('Creating new file on OSF...')
+        upload_new(id, path, dest)
+      } else if (!subfolder_file) {
+        message('Revising file on OSF...')
+        upload_revision(id, path, dest, fi)
+      }
+    } else {
       message('Creating new file on OSF...')
       upload_new(id, path, dest)
-    } else if (!subfolder_file) {
-      message('Revising file on OSF...')
-      upload_revision(id, path, dest, fi)
     }
   } else if (type == 'files') {
     message('Revising file...')
