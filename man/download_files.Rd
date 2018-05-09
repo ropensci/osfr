@@ -9,7 +9,7 @@ download_files(id, path = NULL, private = FALSE, version = NULL)
 \arguments{
 \item{id}{Specify the node id (osf.io/XXXX)}
 
-\item{path}{Specify path to save file to. If NULL, defaults to OSF filename in \code{\link{tempdir}}}
+\item{path}{Specify path to save file to. If NULL, defaults to OSF filename in the working directory}
 
 \item{private}{Boolean to specify whether file is private}
 
@@ -23,6 +23,6 @@ Download files from the OSF
 }
 \examples{
 \dontrun{
-download_file('zevw2', 'test123.md')
+download_files('5z2bh', 'public_test_file.csv')
 }
 }
