@@ -8,4 +8,4 @@ __Please double check any contribution for accidental access tokens; exposed cre
 
 ## R style
 
-This repository adheres to the [R style guide as provided by Hadley Wickham](http://adv-r.had.co.nz/Style.html). This sometimes conflicts with [the Google R style guide](https://google.github.io/styleguide/Rguide.xml), so please be sure to check this out if you are contributing and are used to using the Google style.
+This repository adheres to the [R style guide as provided by Hadley Wickham](http://adv-r.had.co.nz/Style.html). This sometimes conflicts with [the Google R style guide](https://google.github.io/styleguide/Rguide.xml), so please be sure to check this out if you are contributing and are use to using the Google style.
