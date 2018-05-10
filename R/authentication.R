@@ -6,10 +6,12 @@
 #' \code{store} (this saves the PAT in your .Renviron; see also 
 #' \link{\code{logout}}).
 #'
-#' @param pat Personal Access Token (PAT) for fast login. If no pat is given, function queries for it.
-#' @param store If TRUE, store PAT in user's .Renviron.
+#' @param pat Personal Access Token (PAT; \url{https://osf.io/settings/tokens})
+#' @param store If TRUE, store PAT in user's .Renviron
 #'
 #' @export
+#' @example 
+#' login(pat = 'this-is-where-you-place-your-pat', store = FALSE)
 
 login <- function (pat, store = FALSE) {
   # set pat as environment variable
@@ -33,4 +35,15 @@ login <- function (pat, store = FALSE) {
 
 logout <- function () {
   Sys.setenv(OSF_PAT = '')
+}
+
+#' Authentication function
+#' 
+#' Simple helper function to return the PAT in HTTP requests.
+
+auth <- function () {
+  if (Sys.getenv('OSF_PAT') == '') {
+    stop('Please log in first.')
+  }
+  invisible(Sys.getenv('OSF_PAT'))
 }

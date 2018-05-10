@@ -1,3 +1,43 @@
+download_files <- function () {}
+
+#' Upload a new file to the OSF.
+#'
+#' @param id Parent OSF project (osf.io/xxxxx).
+#' @param path Path to file. 
+#' @param name Name of the uploaded file (if \code{NULL},
+#' current name will be used).
+#'
+#' @return Waterbutler URL
+#' @seealso \code{\link{upload_files}}, \code{\link{upload_revised_files}}
+
+upload_new_files <- function(id, path, name = NULL) {
+  if (!file.exists(path)) {
+    stop(sprintf('File %s does not exist on local machine.', path))
+  } else if (is.null(name)) {
+    name <- basename(path)
+  }
+
+  config <- get_config(TRUE)
+  url_osf <- construct_link_files(id, request = paste0(
+    '?kind=file&name=', name))
+  # Ensure proper spaces in URL
+  url_osf <- gsub(url_osf, pattern = '\\s', replacement = '%20', perl = TRUE)
+
+  call <- httr::PUT(url_osf, body = httr::upload_file(path),
+                    encode = 'raw', config = config)
+
+  if (call$status_code == 409) {
+    stop('Conflict in path naming. Please use upload_revised_files or change path')
+  } else if (call$status_code != 201) {
+    stop('Unsuccessful upload.')
+  }
+
+  res <- process_json(call)
+
+  return(res$data$links$download)
+}
+
+
 #' Upload a file to the OSF (both new and revised)
 #'
 #' @param id OSF id (osf.io/XXXX; just XXXX) to upload to. Specify project to
@@ -28,14 +68,14 @@ upload_files <- function(id, path, dest = NULL) {
     idx <- which(fi$materialized == pre_slash(dest))
     if (length(idx) != 1) {
       message('Creating new file on OSF...')
-      upload_new(id, path, dest)
+      upload_new_files(id, path, dest)
     } else {
       message('Revising file on OSF...')
-      upload_revision(id, path, dest, fi)
+      upload_revised_files(id, path, dest, fi)
     }
   } else if (type == 'files') {
     message('Revising file...')
-    upload_revision(id, path)
+    upload_revised_files(id, path)
   } else {
     stop('Something odd happened.\n
           If the problem persists, consider issuing a bug report on
@@ -81,52 +121,7 @@ upload_zip <- function(id, path, dest = NULL) {
   upload_files(id, zp, dest)
 }
 
-#' Upload a new file to the OSF.
-#'
-#' @param id Parent OSF project id (osf.io/XXXX) to upload to.
-#' @param path Path to file on local machine to upload. Ensure file has
-#' proper extension named (i.e., extension sensitive, not like on Linux)
-#' @param name Name of the destination file on OSF (if \code{NULL},
-#' \code{basename(path)} will be used).
-#'
-#' @return Waterbutler URL
-#' @seealso \code{\link{upload_files}}, \code{\link{upload_revision}}
 
-upload_new <- function(id, path, name = NULL) {
-
-  if (!file.exists(path)) {
-    stop(sprintf('File %s does not exist on local machine.', path))
-  }
-
-  if (is.null(name)) {
-    name <- basename(path)
-  }
-
-  config <- get_config(TRUE)
-
-  typ <- process_type(id, private = TRUE)
-  if (typ != 'nodes') {
-    stop('Cannot upload new file if no node ID is specified.')
-  }
-
-  url_osf <- construct_link_files(id, request = paste0('?kind=file&name=',
-                                                       name))
-  # Ensure proper spaces in URL
-  url_osf <- gsub(url_osf, pattern = '\\s', replacement = '%20', perl = TRUE)
-
-  call <- httr::PUT(url_osf, body = httr::upload_file(path),
-                    encode = 'raw', config = config)
-
-  if (call$status_code == 409) {
-    stop('Conflict in path naming. Please use upload_revision or change path')
-  } else if (call$status_code != 201) {
-    stop('Unsuccessful upload.')
-  }
-
-  res <- process_json(call)
-
-  return(res$data$links$download)
-}
 
 #' Upload a revised file to the OSF
 #'
@@ -134,9 +129,9 @@ upload_new <- function(id, path, name = NULL) {
 #' @param path Path to file on local machine to upload.
 #'
 #' @return Boolean, revision success? (invisible)
-#' @seealso \code{\link{upload_files}}, \code{\link{upload_new}}
+#' @seealso \code{\link{upload_files}}, \code{\link{upload_new_files}}
 
-upload_revision <- function(id, path) {
+upload_revised_files <- function(id, path) {
 
   if (!file.exists(path)) {
     stop(sprintf('File %s does not exist on local machine.', path))
