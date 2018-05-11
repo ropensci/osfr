@@ -3,7 +3,7 @@ download_files <- function () {}
 #' Upload a new file to the OSF.
 #'
 #' @param id Parent OSF project (osf.io/xxxxx).
-#' @param path Path to file. 
+#' @param path Path to file.
 #' @param name Name of the uploaded file (if \code{NULL},
 #' current name will be used).
 #'
@@ -255,40 +255,76 @@ move_files <- function(
 
 #' Download files from the OSF
 #'
+#' This function downloads files from the OSF and assumes that the file is
+#' public. For private files, the function checks first for a view-only link.
+#' If no view-only link is provided, the user's login credentials are used.
+#'
+#' For more information on creating a view-only link see:
+#' \url{http://help.osf.io/m/links/l/524049-create-a-view-only-link}.
+#'
+#'
 #' @param id Specify the node id (osf.io/XXXX)
 #' @param version Specify the OSF version id (string)
-#' @param path Specify path to save file to. If NULL, defaults to OSF filename in \code{\link{tempdir}}
-#' @param private Boolean to specify whether file is private
+#' @param path Specify path to save file to. If NULL, defaults to OSF filename in the working directory
+#' @param view_only Specify the view-only link (string)
 #'
 #' @return Return filepath for easy processing
 #' @examples
 #' \dontrun{
-#' download_files('zevw2', 'test123.md')
+#' download_files('5z2bh', 'public_test_file.csv')
+#' download_files('852dp', 'view_only_test_file.csv', view_only = 'https://osf.io/jy9gm/?view_only=a500051f59b14a988415f08539dbd491')
 #' }
 #' @importFrom utils tail
 #' @export
 
-download_files <- function(id, path = NULL, private = FALSE, version = NULL) {
-  config <- get_config(private)
+download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
+  config <- list()
 
   url_osf <- construct_link(paste0('guids/', id))
 
   call <- httr::GET(url_osf, config)
 
-  if (!call$status_code == 200) {
-    stop('Failed. Are you sure you have access to the file?')
-  }
-
   res <- process_json(call)
 
-  # Find the filename as on the OSF
+  # Check if data from processed json is empty and get the file information
+  # using authentication. If a view-only link is present, then the file is
+  # downloaded using the view-only link. If no view-only link is present,
+  # then the file is downloaded with the user's login.
+  if (is.null(res$data) && !is.null(view_only)) {
+    # Remove the view-only tag from the provided view-only link and paste to
+    # the file url
+    view_only_url <- paste0(url_osf, '/', gsub(".*/", "", view_only))
+
+    call <- httr::GET(view_only_url, config)
+
+    if (!call$status_code == 200) {
+      stop('Failed. Are you sure you have access to the file?')
+    }
+
+    res <- process_json(call)
+
+  } else if (is.null(res$data) && is.null(view_only)) {
+    config <- get_config(TRUE)
+
+    call <- httr::GET(url_osf, config)
+
+    if (!call$status_code == 200) {
+      stop('Failed. Are you sure you have access to the file?')
+    }
+
+    res <- process_json(call)
+  }
+
+  # Determine the file name to save the file as.
+  # If no path is provided, use the OSF file name.
+  # If a path is provided, determine if the path is just a folder path or if
+  # the path includes a file name.
   if (is.null(path)) {
-    txt <- res$data$attributes$name
-    start <- utils::tail(gregexpr('/', txt)[[1]], 1)
-    end <-  nchar(txt)
-    file <- substr(txt, start + 1, end)
-  } else {
+    file <- res$data$attributes$name
+  } else if (grepl('/$', path)) {
     file <- paste0(path, res$data$attributes$name)
+  } else {
+    file <- path
   }
 
   message(paste0('Saving to filename: ', file))
