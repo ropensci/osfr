@@ -72,6 +72,41 @@ process_category <- function(category = '') {
   }
 }
 
+#' Process Pagination
+#'
+#' Processes the paginated data returned by the OSF and returns a list with
+#' all of the pages combined.
+#'
+#' @param res The initial list return from the OSF API and run through
+#' `osfr::process_json()`. Must contain the links section.
+#' @param config The configuration used in the initial call to the OSF API.
+#'
+#' @return List of all of the pages from the API (including the input list).
+
+process_pagination <- function(res, config) {
+  # Create variable to hold original page
+  combined_list <- res$data
+
+  # Use the first page of the returned data to get the next page link
+  next_page_link <- res$links$`next`
+
+  # While next page link is not null, run loop
+  while(!is.null(next_page_link)) {
+
+    # Call down the next page
+    new_page <- process_json(httr::GET(next_page_link, config))
+
+    # Save new page next page link to the next page variable
+    next_page_link <- new_page$links$`next`
+
+    # Combine current pages and new page
+    combined_list <- c(combined_list, new_page$data)
+  }
+
+  # Return combined data
+  return(combined_list)
+}
+
 #' Create authorization config
 #'
 #' @param login Boolean indicating whether login is required.
