@@ -23,6 +23,6 @@ Download files from the OSF
 }
 \examples{
 \dontrun{
-download_file('zevw2', 'test123.md')
+download_files('zevw2', 'test123.md')
 }
 }
