@@ -2,10 +2,13 @@ download_files <- function () {}
 
 #' Upload a new file to the OSF.
 #'
-#' @param id Parent OSF project (osf.io/xxxxx).
-#' @param path Path to file.
-#' @param name Name of the uploaded file (if \code{NULL},
-#' current name will be used).
+#' @param id Parent OSF project id (osf.io/XXXX) to upload to.
+#' @param path Path to file on local machine to upload. Ensure file has
+#' proper extension named (i.e., extension sensitive, not like on Linux)
+#' @param name Name of the uploaded file (if \code{NULL}, current name will be
+#' used).
+#' @param href_hash the element that identifies the folder hash of the href from the folder URL. Not use if \code{NULL}.
+#' \code{basename(path)} will be used).
 #'
 #' @return Waterbutler URL
 #' @seealso \code{\link{upload_files}}, \code{\link{upload_revised_files}}
@@ -18,8 +21,15 @@ upload_new_files <- function(id, path, name = NULL) {
   }
 
   config <- get_config(TRUE)
-  url_osf <- construct_link_files(id, request = paste0(
-    '?kind=file&name=', name))
+
+  typ <- process_type(id, private = TRUE)
+  if (typ != 'nodes') {
+    stop('Cannot upload new file if no node ID is specified.')
+  }
+  # default `provider` is 'osfstorage'.
+  url_osf <- construct_link_files(id, request = paste0(href_hash, '?kind=file&name=',
+                                                       name))
+
   # Ensure proper spaces in URL
   url_osf <- gsub(url_osf, pattern = '\\s', replacement = '%20', perl = TRUE)
 
@@ -58,21 +68,53 @@ upload_new_files <- function(id, path, name = NULL) {
 
 upload_files <- function(id, path, dest = NULL) {
   type <- process_type(id, private = TRUE)
+  subfolder_file <- FALSE
 
   if (is.null(dest)) {
     dest <- basename(path)
   }
 
-  if (type == 'nodes') {
+  ## Here we need to check for 'nodes' then have another condition within nodes. see `idx_folder`
+  if (type == "nodes") {
+
     fi <- get_files_info(id, private = TRUE)
-    idx <- which(fi$materialized == pre_slash(dest))
-    if (length(idx) != 1) {
+
+    # Added check to see if 'fi' is NULL. If no file exists in a component, this not run.
+    if (!is.null(fi)) {
+      idx <- which(fi$materialized == pre_slash(dest))
+
+      # check for destination value subfolder
+      if (!is.null(dest)) {
+        fi_folder <- paste0(dirname(dest), "/")
+        dest_fname <- basename(dest)
+
+        idx_folder <- which(fi$materialized == pre_slash(fi_folder))
+
+        hash_folder <- paste0(basename(fi[idx_folder, "href"]), "/")
+
+        # check for subfolder created and file not there.
+        if (length(idx) != 1 & length(idx_folder) == 1) {
+          message(paste0('Creating new file on OSF in subfolder ', fi_folder  ,' ...'))
+          upload_new_files(id, path, dest_fname, href_hash = hash_folder)
+          subfolder_file <- TRUE
+        }
+        if (length(idx_folder) != 1 & dirname(fi_folder) != ".") {
+          stop("subfolders not created. Create subfolder before creating a file in the folder")
+        }
+      }
+    }
+    ### End addition
+
+    # changed condition for new file creation
+
+    if (length(idx) != 1 & !subfolder_file) {
       message('Creating new file on OSF...')
       upload_new_files(id, path, dest)
-    } else {
+    } else if (!subfolder_file) {
       message('Revising file on OSF...')
       upload_revised_files(id, path, dest, fi)
     }
+
   } else if (type == 'files') {
     message('Revising file...')
     upload_revised_files(id, path)
@@ -120,8 +162,6 @@ upload_zip <- function(id, path, dest = NULL) {
 
   upload_files(id, zp, dest)
 }
-
-
 
 #' Upload a revised file to the OSF
 #'
