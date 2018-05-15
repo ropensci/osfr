@@ -22,7 +22,7 @@ upload_new_files <- function(id, path, name = NULL, href_hash = NULL) {
 
   config <- get_config(TRUE)
 
-  typ <- process_type(id, private = TRUE)
+  typ <- process_type(id)
   if (typ != 'nodes') {
     stop('Cannot upload new file if no node ID is specified.')
   }
@@ -67,7 +67,7 @@ upload_new_files <- function(id, path, name = NULL, href_hash = NULL) {
 #' }
 
 upload_files <- function(id, path, dest = NULL) {
-  type <- process_type(id, private = TRUE)
+  type <- process_type(id)
   subfolder_file <- FALSE
 
   if (is.null(dest)) {
@@ -178,7 +178,7 @@ upload_revised_files <- function(id, path) {
   }
 
   config <- get_config(TRUE)
-  typ <- process_type(id, private = TRUE)
+  typ <- process_type(id)
 
   if (typ == 'nodes') {
     stop('Specify an OSF id referring to a file.')
@@ -479,7 +479,7 @@ get_files_info <- function(id, private = FALSE) {
 path_file <- function(id, private = FALSE) {
   config <- get_config(private)
 
-  typ <- process_type(id, private = TRUE)
+  typ <- process_type(id)
 
   if (typ == 'nodes') {
     stop('Specify an OSF id referring to a file.')

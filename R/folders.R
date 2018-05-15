@@ -11,7 +11,7 @@ create_folder <- function(id, path, return = c("sub", "root", "all")[2]) {
 
   config <- get_config(TRUE)
 
-  typ <- process_type(id, private = TRUE)
+  typ <- process_type(id)
   if (typ != "nodes") {
     stop("Cannot create new folder if no node ID is specified.")
   }
