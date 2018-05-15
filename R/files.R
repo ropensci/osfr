@@ -112,7 +112,7 @@ upload_files <- function(id, path, dest = NULL) {
       upload_new_files(id, path, dest)
     } else if (!subfolder_file) {
       message('Revising file on OSF...')
-      upload_revised_files(id, path, dest, fi)
+      upload_revised_files(id, path)
     }
 
   } else if (type == 'files') {
