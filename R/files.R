@@ -13,7 +13,7 @@ download_files <- function () {}
 #' @return Waterbutler URL
 #' @seealso \code{\link{upload_files}}, \code{\link{upload_revised_files}}
 
-upload_new_files <- function(id, path, name = NULL) {
+upload_new_files <- function(id, path, name = NULL, href_hash = NULL) {
   if (!file.exists(path)) {
     stop(sprintf('File %s does not exist on local machine.', path))
   } else if (is.null(name)) {
