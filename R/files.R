@@ -1,5 +1,3 @@
-download_files <- function () {}
-
 #' Upload a new file to the OSF.
 #'
 #' @param id Parent OSF project id (osf.io/XXXX) to upload to.
