@@ -4,13 +4,13 @@
 \alias{get_config}
 \title{Create authorization config}
 \usage{
-get_config(login_required)
+get_config(login)
 }
 \arguments{
-\item{login_required}{Boolean}
+\item{login}{Boolean indicating whether login is required.}
 }
 \value{
-configuration for use in httr request
+httr::request configuration
 }
 \description{
 Create authorization config

@@ -20,9 +20,6 @@ process_category(category = "")
   \item other
 }}
 }
-\value{
-Nothing if succeeded
-}
 \description{
 Processing whether a category is valid
 }
