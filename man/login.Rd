@@ -16,7 +16,7 @@ Login to the Open Science Framework API with a Personal Access Token (PAT).
 By default and for security reasons, the login lasts as long as the current
 session. If you want to store the login across sessions, use argument
 \code{store} (this saves the PAT in your .Renviron; see also
-\link{\code{logout}}).
+\code{\link{logout}}).
 }
 \examples{
 \dontrun{
