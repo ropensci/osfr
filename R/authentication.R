@@ -4,7 +4,7 @@
 #' By default and for security reasons, the login lasts as long as the current
 #' session. If you want to store the login across sessions, use argument
 #' \code{store} (this saves the PAT in your .Renviron; see also
-#' \link{\code{logout}}).
+#' \code{\link{logout}}).
 #'
 #' @param pat Personal Access Token (PAT; \url{https://osf.io/settings/tokens})
 #' @param store If TRUE, store PAT in user's .Renviron
