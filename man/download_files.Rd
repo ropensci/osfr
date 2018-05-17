@@ -30,6 +30,7 @@ For more information on creating a view-only link see:
 \examples{
 \dontrun{
 download_files('5z2bh', 'public_test_file.csv')
-download_files('852dp', 'view_only_test_file.csv', view_only = 'https://osf.io/jy9gm/?view_only=a500051f59b14a988415f08539dbd491')
+download_files('852dp', 'view_only_test_file.csv',
+view_only = 'https://osf.io/jy9gm/?view_only=a500051f59b14a988415f08539dbd491')
 }
 }

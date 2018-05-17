@@ -13,9 +13,6 @@ construct_link(request)
 The full request link with proper base.
 }
 \description{
-Building urls for requests. OSF_USE_SERVER can be specified in the 
+Building urls for requests. OSF_USE_SERVER can be specified in the
 environment to use a test or staging server.
-}
-\examples{
-construct_link('nodes/qpfnw/files/')
 }
