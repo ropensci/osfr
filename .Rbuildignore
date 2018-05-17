@@ -5,3 +5,5 @@
 ^\.travis.yml
 ^inst/\.lintr$
 ^_ignore$
+^CONTRIBUTING\.md$
+^CODE_OF_CONDUCT\.md$
