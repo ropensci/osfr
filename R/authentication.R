@@ -2,16 +2,18 @@
 #'
 #' Login to the Open Science Framework API with a Personal Access Token (PAT).
 #' By default and for security reasons, the login lasts as long as the current
-#' session. If you want to store the login across sessions, use argument 
-#' \code{store} (this saves the PAT in your .Renviron; see also 
-#' \link{\code{logout}}).
+#' session. If you want to store the login across sessions, use argument
+#' \code{store} (this saves the PAT in your .Renviron; see also
+#' \code{\link{logout}}).
 #'
 #' @param pat Personal Access Token (PAT; \url{https://osf.io/settings/tokens})
 #' @param store If TRUE, store PAT in user's .Renviron
 #'
 #' @export
-#' @example 
+#' @examples
+#' \dontrun{
 #' login(pat = 'this-is-where-you-place-your-pat', store = FALSE)
+#' }
 
 login <- function (pat, store = FALSE) {
   # set pat as environment variable
@@ -26,11 +28,11 @@ login <- function (pat, store = FALSE) {
 
 #' Logout of the OSF
 #'
-#' Remove the Personal Access Token that provides access to the Open Science 
-#' Framework API. Removes the \code{OSF_PAT} from session environment, not 
+#' Remove the Personal Access Token that provides access to the Open Science
+#' Framework API. Removes the \code{OSF_PAT} from session environment, not
 #' from the .Renviron file if you stored it with login (that is currently a
 #' manual step).
-#' 
+#'
 #' @export
 
 logout <- function () {
@@ -38,7 +40,7 @@ logout <- function () {
 }
 
 #' Authentication function
-#' 
+#'
 #' Simple helper function to return the PAT in HTTP requests.
 
 auth <- function () {

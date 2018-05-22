@@ -1,14 +1,11 @@
 #' Construct an API link with proper base
-#' 
-#' Building urls for requests. OSF_USE_SERVER can be specified in the 
+#'
+#' Building urls for requests. OSF_USE_SERVER can be specified in the
 #' environment to use a test or staging server.
 #'
 #' @param request The request link to be combined with the base API link.
 #'
 #' @return The full request link with proper base.
-#' 
-#' @examples
-#' construct_link('nodes/qpfnw/files/')
 
 construct_link <- function(request) {
   base <- 'https://api.osf.io/v2/'

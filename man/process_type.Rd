@@ -4,12 +4,10 @@
 \alias{process_type}
 \title{Identify type of endpoint for id}
 \usage{
-process_type(id, private = TRUE)
+process_type(id)
 }
 \arguments{
-\item{id}{OSF id to check}
-
-\item{private}{Boolean, in case id is private set to TRUE}
+\item{id}{OSF id to check (osf.io/xxxxx).}
 }
 \value{
 Endpoint of id as character (nodes | files)

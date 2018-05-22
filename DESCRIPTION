@@ -2,15 +2,21 @@ Package: osfr
 Title: API to the Open Science Framework
 Version: 0.1.0
 Maintainer: Chris Hartgerink <chjh@protonmail.com>
-Author: c(person("Hartgerink", "Chris", email = "chjh@protonmail.com", role =
-    c("aut", "cre")), person("Nagraj", "VP", email = "vpnagraj@virginia.edu", role =
-    c("aut")), person("Hafen", "Ryan", email = "rhafen@gmail.com", role =
-    c("aut")))
+Authors@R: c(person( "Chris","Hartgerink", email = "chjh@protonmail.com", role =
+    c("aut", "cre")),
+    person("VP","Nagraj",  email = "vpnagraj@virginia.edu", role =
+    c("aut")),
+    person("Ryan","Hafen",  email = "rhafen@gmail.com", role =
+    c("aut")),
+    person("Julien", "Colomb",  email = "julien.colomb¬fu-berlin.de", role =
+    c("aut"))
+    )
 Description: Providing ways to interface with the Open Science Framework inside
     R. This includes searching through the OSF projects, posting files and comments
     and more.
+Date: 20180101
 Depends:
-    R (>= 3.3.1)
+    R (>= 3.5.0)
 Imports:
     httr,
     httpuv,

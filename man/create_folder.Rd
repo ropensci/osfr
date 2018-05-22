@@ -4,16 +4,18 @@
 \alias{create_folder}
 \title{Create a new folder on OSF project.}
 \usage{
-create_folder(id, path)
+create_folder(id, path, return = c("sub", "root", "all")[2])
 }
 \arguments{
 \item{id}{Parent OSF project id (osf.io/XXXX; just XXXX) to create folder in}
 
 \item{path}{Name of the folder (cannot handle recursive at the moment).}
+
+\item{return}{Which waterbutler URLs should be returned. Defaults to root to mimick old functions behavior.}
 }
 \value{
-Waterbutler URL
+Waterbutler URL for folder "root", last subfolder "sub", or all folders created "all" depanding on the selection input for `return`
 }
 \description{
-Create a new folder on OSF project.
+Creates a root folder or a root folder and the nested subfolders.  Will also create subfolders in a previously created root folder.
 }

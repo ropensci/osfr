@@ -1,16 +1,17 @@
-download_files <- function () {}
-
 #' Upload a new file to the OSF.
 #'
-#' @param id Parent OSF project (osf.io/xxxxx).
-#' @param path Path to file. 
-#' @param name Name of the uploaded file (if \code{NULL},
-#' current name will be used).
+#' @param id Parent OSF project id (osf.io/XXXX) to upload to.
+#' @param path Path to file on local machine to upload. Ensure file has
+#' proper extension named (i.e., extension sensitive, not like on Linux)
+#' @param name Name of the uploaded file (if \code{NULL}, current name will be
+#' used).
+#' @param href_hash the element that identifies the folder hash of the href from the folder URL. Not use if \code{NULL}.
+#' \code{basename(path)} will be used).
 #'
 #' @return Waterbutler URL
 #' @seealso \code{\link{upload_files}}, \code{\link{upload_revised_files}}
 
-upload_new_files <- function(id, path, name = NULL) {
+upload_new_files <- function(id, path, name = NULL, href_hash = NULL) {
   if (!file.exists(path)) {
     stop(sprintf('File %s does not exist on local machine.', path))
   } else if (is.null(name)) {
@@ -18,8 +19,15 @@ upload_new_files <- function(id, path, name = NULL) {
   }
 
   config <- get_config(TRUE)
-  url_osf <- construct_link_files(id, request = paste0(
-    '?kind=file&name=', name))
+
+  typ <- process_type(id)
+  if (typ != 'nodes') {
+    stop('Cannot upload new file if no node ID is specified.')
+  }
+  # default `provider` is 'osfstorage'.
+  url_osf <- construct_link_files(id, request = paste0(href_hash, '?kind=file&name=',
+                                                       name))
+
   # Ensure proper spaces in URL
   url_osf <- gsub(url_osf, pattern = '\\s', replacement = '%20', perl = TRUE)
 
@@ -57,25 +65,57 @@ upload_new_files <- function(id, path, name = NULL) {
 #' }
 
 upload_files <- function(id, path, dest = NULL) {
-  type <- process_type(id, private = TRUE)
+  type <- process_type(id)
+  subfolder_file <- FALSE
 
   if (is.null(dest)) {
     dest <- basename(path)
   }
 
-  if (type == 'nodes') {
+  ## Here we need to check for 'nodes' then have another condition within nodes. see `idx_folder`
+  if (type == "nodes") {
+
     fi <- get_files_info(id, private = TRUE)
-    idx <- which(fi$materialized == pre_slash(dest))
-    if (length(idx) != 1) {
+
+    # Added check to see if 'fi' is NULL. If no file exists in a component, this not run.
+    if (!is.null(fi)) {
+      idx <- which(fi$materialized == pre_slash(dest))
+
+      # check for destination value subfolder
+      if (!is.null(dest)) {
+        fi_folder <- paste0(dirname(dest), "/")
+        dest_fname <- basename(dest)
+
+        idx_folder <- which(fi$materialized == pre_slash(fi_folder))
+
+        hash_folder <- paste0(basename(fi[idx_folder, "href"]), "/")
+
+        # check for subfolder created and file not there.
+        if (length(idx) != 1 & length(idx_folder) == 1) {
+          message(paste0('Creating new file on OSF in subfolder ', fi_folder  ,' ...'))
+          upload_new_files(id, path, dest_fname, href_hash = hash_folder)
+          subfolder_file <- TRUE
+        }
+        if (length(idx_folder) != 1 & dirname(fi_folder) != ".") {
+          stop("subfolders not created. Create subfolder before creating a file in the folder")
+        }
+      }
+    }
+    ### End addition
+
+    # changed condition for new file creation
+
+    if (length(idx) != 1 & !subfolder_file) {
       message('Creating new file on OSF...')
       upload_new_files(id, path, dest)
-    } else {
+    } else if (!subfolder_file) {
       message('Revising file on OSF...')
-      upload_revised_files(id, path, dest, fi)
+      upload_revised_files(id, path)
     }
+
   } else if (type == 'files') {
     message('Revising file...')
-    upload_revised_files(id, path, dest)
+    upload_revised_files(id, path)
   } else {
     stop('Something odd happened.\n
           If the problem persists, consider issuing a bug report on
@@ -121,8 +161,6 @@ upload_zip <- function(id, path, dest = NULL) {
   upload_files(id, zp, dest)
 }
 
-
-
 #' Upload a revised file to the OSF
 #'
 #' @param id OSF id (osf.io/XXXX; just XXXX) of file to revise
@@ -138,7 +176,7 @@ upload_revised_files <- function(id, path) {
   }
 
   config <- get_config(TRUE)
-  typ <- process_type(id, private = TRUE)
+  typ <- process_type(id)
 
   if (typ == 'nodes') {
     stop('Specify an OSF id referring to a file.')
@@ -255,40 +293,77 @@ move_files <- function(
 
 #' Download files from the OSF
 #'
+#' This function downloads files from the OSF and assumes that the file is
+#' public. For private files, the function checks first for a view-only link.
+#' If no view-only link is provided, the user's login credentials are used.
+#'
+#' For more information on creating a view-only link see:
+#' \url{http://help.osf.io/m/links/l/524049-create-a-view-only-link}.
+#'
+#'
 #' @param id Specify the node id (osf.io/XXXX)
 #' @param version Specify the OSF version id (string)
-#' @param path Specify path to save file to. If NULL, defaults to OSF filename in \code{\link{tempdir}}
-#' @param private Boolean to specify whether file is private
+#' @param path Specify path to save file to. If NULL, defaults to OSF filename in the working directory
+#' @param view_only Specify the view-only link (string)
 #'
 #' @return Return filepath for easy processing
 #' @examples
 #' \dontrun{
-#' download_file('zevw2', 'test123.md')
+#' download_files('5z2bh', 'public_test_file.csv')
+#' download_files('852dp', 'view_only_test_file.csv',
+#'   view_only = 'https://osf.io/jy9gm/?view_only=a500051f59b14a988415f08539dbd491')
 #' }
 #' @importFrom utils tail
 #' @export
 
-download_files <- function(id, path = NULL, private = FALSE, version = NULL) {
-  config <- get_config(private)
+download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
+  config <- list()
 
   url_osf <- construct_link(paste0('guids/', id))
 
   call <- httr::GET(url_osf, config)
 
-  if (!call$status_code == 200) {
-    stop('Failed. Are you sure you have access to the file?')
-  }
-
   res <- process_json(call)
 
-  # Find the filename as on the OSF
+  # Check if data from processed json is empty and get the file information
+  # using authentication. If a view-only link is present, then the file is
+  # downloaded using the view-only link. If no view-only link is present,
+  # then the file is downloaded with the user's login.
+  if (is.null(res$data) && !is.null(view_only)) {
+    # Remove the view-only tag from the provided view-only link and paste to
+    # the file url
+    view_only_url <- paste0(url_osf, '/', gsub(".*/", "", view_only))
+
+    call <- httr::GET(view_only_url, config)
+
+    if (!call$status_code == 200) {
+      stop('Failed. Are you sure you have access to the file?')
+    }
+
+    res <- process_json(call)
+
+  } else if (is.null(res$data) && is.null(view_only)) {
+    config <- get_config(TRUE)
+
+    call <- httr::GET(url_osf, config)
+
+    if (!call$status_code == 200) {
+      stop('Failed. Are you sure you have access to the file?')
+    }
+
+    res <- process_json(call)
+  }
+
+  # Determine the file name to save the file as.
+  # If no path is provided, use the OSF file name.
+  # If a path is provided, determine if the path is just a folder path or if
+  # the path includes a file name.
   if (is.null(path)) {
-    txt <- res$data$attributes$name
-    start <- utils::tail(gregexpr('/', txt)[[1]], 1)
-    end <-  nchar(txt)
-    file <- substr(txt, start + 1, end)
-  } else {
+    file <- res$data$attributes$name
+  } else if (grepl('/$', path)) {
     file <- paste0(path, res$data$attributes$name)
+  } else {
+    file <- path
   }
 
   message(paste0('Saving to filename: ', file))
@@ -328,40 +403,55 @@ get_files_info <- function(id, private = FALSE) {
     do.call(rbind, lapply(files, function(x) {
       data.frame(
         name = fix_null(x$attributes$name),
-        materialized = fix_null(x$attributes$materialized),
+        materialized = fix_null(x$attributes$materialized_path),
         kind = fix_null(x$attributes$kind),
         guid = fix_null(x$attributes$guid), # this isn't populated until it's viewed in OSF
-        resource = fix_null(x$attributes$resource),
         provider = fix_null(x$attributes$provider),
-        content_type = fix_null(x$attributes$contentType), # nolint
-        created_utc = fix_null(x$attributes$created_utc),
-        modified_utc = fix_null(x$attributes$modified_utc),
+        created_utc = fix_null(x$attributes$date_created),
+        modified_utc = fix_null(x$attributes$date_modified),
         downloads = fix_null(x$attributes$extra$downloads),
-        version = fix_null(x$attributes$extra$version),
+        version = fix_null(x$attributes$current_version),
         href = fix_null(x$links$move),
+        folder_link = fix_null(x$relationships$files$links$related$href),
         processed = FALSE,
         stringsAsFactors = FALSE
       )
     }))
   }
 
-  url_osf <- construct_link_files(id = id, request = '?meta=')
+  # Creates a link to the OSF
+  url_osf <- construct_link(request = paste0('nodes/', id, '/files/osfstorage/'))
+
+  # Calls the link
   call <- httr::GET(url_osf, config)
-  files <- process_json(call)$data
+
+  # Process the requested JSON
+  res <- process_json(call)
+
+  # Process pagination
+  files <- process_pagination(res, config)
+
+  # Turn JSON into a data frame
   files <- process_files(files)
 
   if (is.null(files)) {
     return(NULL)
   }
+
+  # Process all of the nested subfolders.
+  # This is done by calling each of the folder links and processing through
+  # the files. The loop begins with the top level folder, gets everything from
+  # its subfolders, and then repeats the loop through any further nested
+  # folders.
   while (TRUE) {
     idx <- which(files$kind == 'folder' & !files$processed)
     if (length(idx) == 0)
       break;
-    res <- lapply(files$href[idx], function(href) {
-      href <- paste0(href, '?kind=file&meta=')
+    res <- lapply(files$folder_link[idx], function(href) {
       call <- httr::GET(href, config)
-      tmp <- process_json(call)$data
-      process_files(tmp)
+      tmp <- process_json(call)
+      pag_tmp <- process_pagination(tmp, config)
+      process_files(pag_tmp)
     })
     files$processed <- TRUE
     files <- do.call(rbind, c(list(files), res))
@@ -371,3 +461,39 @@ get_files_info <- function(id, private = FALSE) {
 
   return(files)
 }
+
+#' Get file path for the latest version of a file (for direct reading)
+#'
+#' @param id Specify the file id (osf.io/XXXX)
+#' @param private Boolean to specify whether file is private
+#'
+#' @return Return filepath (online)
+#' @examples
+#' \dontrun{
+#' read.csv(path_file("myxcv"))
+#' }
+#' @importFrom utils tail
+#' @export
+
+path_file <- function(id, private = FALSE) {
+  config <- get_config(private)
+
+  typ <- process_type(id)
+
+  if (typ == 'nodes') {
+    stop('Specify an OSF id referring to a file.')
+  } else if (typ == 'files') {
+    url_osf <- construct_link(paste0('guids/', id))
+    call <- httr::GET(url_osf, config)
+    res <- process_json(call)
+    } else {
+    stop('Unknown error occurred. Please file issue on GitHub.')
+  }
+
+  if (!call$status_code == 200) {
+    stop('Failed. Are you sure you have access to the file?')
+  }
+
+  return(res$data$links$download)
+}
+

@@ -4,14 +4,14 @@
 \alias{download_files}
 \title{Download files from the OSF}
 \usage{
-download_files(id, path = NULL, private = FALSE, version = NULL)
+download_files(id, path = NULL, view_only = NULL, version = NULL)
 }
 \arguments{
 \item{id}{Specify the node id (osf.io/XXXX)}
 
-\item{path}{Specify path to save file to. If NULL, defaults to OSF filename in \code{\link{tempdir}}}
+\item{path}{Specify path to save file to. If NULL, defaults to OSF filename in the working directory}
 
-\item{private}{Boolean to specify whether file is private}
+\item{view_only}{Specify the view-only link (string)}
 
 \item{version}{Specify the OSF version id (string)}
 }
@@ -19,10 +19,18 @@ download_files(id, path = NULL, private = FALSE, version = NULL)
 Return filepath for easy processing
 }
 \description{
-Download files from the OSF
+This function downloads files from the OSF and assumes that the file is
+public. For private files, the function checks first for a view-only link.
+If no view-only link is provided, the user's login credentials are used.
+}
+\details{
+For more information on creating a view-only link see:
+\url{http://help.osf.io/m/links/l/524049-create-a-view-only-link}.
 }
 \examples{
 \dontrun{
-download_file('zevw2', 'test123.md')
+download_files('5z2bh', 'public_test_file.csv')
+download_files('852dp', 'view_only_test_file.csv',
+  view_only = 'https://osf.io/jy9gm/?view_only=a500051f59b14a988415f08539dbd491')
 }
 }
