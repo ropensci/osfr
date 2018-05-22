@@ -48,7 +48,8 @@ get_nodes <- function(
   }
 
   if (files) {
-    call <- httr::GET(res$data$relationships$files$links$related$href, config)
+    # Change to access actual files id under guid tag within osfstorage
+    call <- httr::GET(paste0(res$data$relationships$files$links$related$href, "/osfstorage/"), config)
     res <- process_json(call)
   }
 
