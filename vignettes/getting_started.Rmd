@@ -34,3 +34,57 @@ OSF as part of your workflow.
 This vignette will introduce you to how to login to OSF through R, how to 
 download files, and how to upload files. At the end of the vignette will be a 
 brief overview of the other functionality provided by `osfr`.
+
+## Authentication
+
+Many of the functions available in `osfr` require the user to log in to OSF. 
+Instead of using your username and password, `osfr` makes use of a personal 
+access token (PAT) that you create through OSF. With this PAT, you 
+can download files from private projects, upload files to projects, create 
+new projects, and more.
+
+### Creating a Personal Access Token (PAT) through OSF
+
+To create a PAT, log in to OSF through a web browser and go to the 
+[OSF settings page](https://osf.io/settings/tokens/) and click the "New token" 
+button. Fill out the form on the following page providing a name for the new 
+token along with what access the token will allow. Once the PAT has been 
+created, save it to a secure location.
+
+*Note: Keep the token you create safe! It acts just like your username and 
+password!*
+
+### How to log in to OSF
+
+To make use of most of the functionality of `osfr`, you will be required to 
+log in to OSF using a PAT. The `login()` function can be used to login to OSF.
+
+```{r, eval = FALSE}
+login("your-personal-access-token")
+```
+
+By default, your PAT is only stored for your current session. To store your 
+login across session, your PAT can be saved to the `.Renviron` file by setting 
+the `store` argument to `TRUE`. 
+
+```{r, eval = FALSE}
+login("your-personal-access-token", store = TRUE)
+```
+
+### How to log out and why
+
+To remove your PAT from the session environment, you can use the `logout()` 
+function.
+
+```{r, eval = FALSE}
+logout()
+```
+
+The `logout()` function will only remove the PAT from the session environment. 
+It will not remove any PAT's stored in the `.Renviron` file. Those must be 
+removed manually.
+
+Remember that your PAT acts just like your username and password! Do not leave 
+your PAT in any files you plan to share with others. This includes leaving your 
+PAT in a file that is uploaded to a file sharing or version control platform 
+(GitHub, BitBucket, Google Drive, etc.).
