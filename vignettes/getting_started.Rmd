@@ -25,7 +25,7 @@ connections to the many services researchers already use to streamline their
 process and increase efficiency. As a flexible repository, it can store and 
 archive research data, protocols, and materials.
 
-`osfr` is a package used to connect with the OSF API. This packages allows you 
+`osfr` is a package used to connect with the OSF API. This package allows you 
 to download files from an OSF project, upload files to an OSF project, and 
 interact with files, folders, projects, and other features of OSF. More 
 importantly, you can interact with OSF directly from R, allowing you to use 
@@ -57,7 +57,7 @@ password!*
 ### How to log in to OSF
 
 To make use of most of the functionality of `osfr`, you will be required to 
-log in to OSF using a PAT. The `login()` function can be used to login to OSF.
+log in to OSF using a PAT. The `login()` function can be used to log in to OSF.
 
 ```{r, eval = FALSE}
 login("your-personal-access-token")
@@ -117,7 +117,7 @@ upload files to OSF.
 The `download_files()` function allows you to download both public and private 
 files from the OSF. To download public files, you only need to provide a GUID 
 for the file you want to download. To download private files that you have 
-access to, you will need to be logged in using a PAT. The location that the 
+access to, you will also need to be logged in using a PAT. The location that the 
 file will be downloaded to can be provided in the optional `path` argument.
 
 ```{r, eval = FALSE}
