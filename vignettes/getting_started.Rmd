@@ -105,3 +105,64 @@ A demo project for using `osfr` can be found at
 is "m5pds". A demo file available in this project can be found at 
 [https://osf.io/5z2bh/](https://osf.io/5z2bh/). The GUID for this demo file is 
 "5z2bh". 
+
+## Files
+
+The primary use case for `osfr` is to interact with the files you have stored 
+on OSF. This package provides functions to help you both download and 
+upload files to OSF. 
+
+### Downloading Files
+
+The `download_files()` function allows you to download both public and private 
+files from the OSF. To download public files, you only need to provide a GUID 
+for the file you want to download. To download private files that you have 
+access to, you will need to be logged in using a PAT. The location that the 
+file will be downloaded to can be provided in the optional `path` argument.
+
+```{r, eval = FALSE}
+download_files('5z2bh', path = 'public_test_file.csv')
+```
+
+If the file being downloaded has multiple versions, the specific version of the 
+file can be downloaded using the `version` argument.
+
+#### View-only Links
+
+OSF allows you to [create view-only links to your projects](http://help.osf.io/m/links_forks/l/524049-create-a-view-only-link-for-a-project) 
+so that private projects can be shared without giving full access to the 
+project. For example, you may want to share some R code that downloads a file 
+from your private project before doing some analysis. To download a file using 
+a view-only link, provide the view-only link to the `view_only` argument.
+
+```{r, eval = FALSE}
+download_files('852dp', path = 'view_only_test_file.csv', view_only = 'https://osf.io/jy9gm/?view_only=a500051f59b14a988415f08539dbd491')
+```
+
+### Uploading Files
+
+`upload_files()` allows you to upload a file from your local machine to 
+OSF. Both new files and revised files can be uploaded to OSF. Revised files 
+that are uploaded to OSF make automatic use of [OSF's versioning 
+capabilities](http://help.osf.io/m/projectfiles/l/524182-file-revisions-and-version-control).
+
+#### New files
+
+To [upload a new file](http://help.osf.io/m/projectfiles/l/482002-upload-files), 
+you must provide a GUID for a project and the local path 
+of the file you are uploading. Optionally, you can provide a destination for 
+the file to specify the folder destination and/or file name of the uploaded 
+file.
+
+```{r, eval = FALSE}
+upload_files('m5pds', path = 'local_file.csv', dest = 'upload_file_on_OSF.csv')
+```
+
+#### Revised files
+
+To upload a revised file, you must provide a GUID for the file and the local 
+path of the file you are uploading.
+
+```{r, eval = FALSE}
+upload_files('5z2bh', path = 'local_file.csv')
+```
