@@ -166,3 +166,46 @@ path of the file you are uploading.
 ```{r, eval = FALSE}
 upload_files('5z2bh', path = 'local_file.csv')
 ```
+
+## Other Functionality
+
+`osfr` allows you to interact with the OSF in a number of other ways. Most of 
+these functions let you interact with files, folders, and projects on OSF.
+
+### Other File Functions
+
+You can use `osfr` to interact with files in the following ways:
+
+* `move_files()` lets you 
+[move a file](http://help.osf.io/m/projectfiles/l/735236-move-files) 
+between projects/components.
+* `upload_zip()` lets you zip up a directory and upload it to OSF.
+* `delete_files()` lets you 
+[delete a file](http://help.osf.io/m/projectfiles/l/741689-delete-a-file) 
+from OSF.
+
+### Projects
+
+You can use `osfr` to interact with projects in the following ways: 
+
+* `create_project()` lets you [create a new OSF project](http://help.osf.io/m/projects/l/481539-create-a-project).
+* `update_project()` lets you [switch a project from private to public](http://help.osf.io/m/projects/l/524048-control-your-privacy-settings).
+* `view_project()` opens up a browser view of a project (requires user to be 
+logged into OSF).
+* `delete_project()` lets you 
+[delete a project](http://help.osf.io/m/projects/l/812227-delete-a-project) 
+from OSF.
+
+There are also several functions that allow you to [create components](http://help.osf.io/m/projects/l/481998-create-components) 
+for your projects. The `create_component()`, `update_component()`, and 
+`delete_component()` functions all perform the same actions as the related 
+project functions, but work with the child components instead.
+
+### Folders
+
+You can use `osfr` to interact with folders in the following ways:
+
+* `create_folder()` lets you 
+[create a folder](http://help.osf.io/m/projectfiles/l/524183-create-and-manage-folders) 
+on OSF.
+* `delete_folder()` lets you delete a folder on OSF.
