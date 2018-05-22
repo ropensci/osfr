@@ -209,3 +209,12 @@ You can use `osfr` to interact with folders in the following ways:
 [create a folder](http://help.osf.io/m/projectfiles/l/524183-create-and-manage-folders) 
 on OSF.
 * `delete_folder()` lets you delete a folder on OSF.
+
+## More Information
+
+For more information on OSF and `osfr` check out:
+
+* [OSF](https://osf.io)
+* [OSF API Documentation](https://developer.osf.io/)
+* [OSF Support](https://osf.io/support/)
+* [osfr GitHub Repository](https://github.com/chartgerink/osfr)
