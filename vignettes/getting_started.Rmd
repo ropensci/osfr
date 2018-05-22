@@ -14,3 +14,23 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+[OSF](https://osf.io) from the [Center for Open Science (COS)](https://cos.io/) 
+is a web application that provides free and open source project management 
+support for researchers across the entire research lifecycle. As a collaboration 
+tool, OSF helps researchers work on projects privately with a limited number of 
+collaborators and make parts of their projects public, or make all the project 
+publicly accessible for broader dissemination. As a workflow system, OSF enables 
+connections to the many services researchers already use to streamline their 
+process and increase efficiency. As a flexible repository, it can store and 
+archive research data, protocols, and materials.
+
+`osfr` is a package used to connect with the OSF API. This packages allows you 
+to download files from an OSF project, upload files to an OSF project, and 
+interact with files, folders, projects, and other features of OSF. More 
+importantly, you can interact with OSF directly from R, allowing you to use 
+OSF as part of your workflow.
+
+This vignette will introduce you to how to login to OSF through R, how to 
+download files, and how to upload files. At the end of the vignette will be a 
+brief overview of the other functionality provided by `osfr`.
