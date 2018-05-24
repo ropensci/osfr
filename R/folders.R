@@ -33,7 +33,9 @@ create_folder <- function(id, path, return = c("sub", "root", "all")[2]) {
     stop("Unsuccessful folder creation.")
   }
 
-## Addition to create subfolders if root folder was already created
+  # If root folder creation is successful, create link to the new folder.
+  # If unsuccessful, check to see if the folder already exists and save link
+  # for the creation of subfolders.
 
   if (call$status_code == 201) {
     res <- process_json(call)
@@ -44,11 +46,6 @@ create_folder <- function(id, path, return = c("sub", "root", "all")[2]) {
     fi_row <- which(fi$materialized == paste0(pre_slash(path_root), "/"))
     res_root_link <- paste0(fi[fi_row, "href"],'?kind=folder')
   }
-
-### end root folder addition check.
-
-
-
 
   # Create subfolders and keep the url json information for each creation.
 
@@ -72,8 +69,10 @@ create_folder <- function(id, path, return = c("sub", "root", "all")[2]) {
   }
   names(res_sub) = path_sub
 
-  # This if else patch depends on the return statement.  Wasn't sure which to default.  So added a return value in
-  # function that can prescribe which is returned.
+  # Check the return parameter. If set to "all", return links to all of new
+  # folders created. If set to "root", return only the link to the lowest level
+  # folder created. If set to "sub", return the links of all of the subfolders
+  # created.
 
   if(return == "all") {
     res_sub_links <- lapply(res_sub, function(x) x$data$links$new_folder)
