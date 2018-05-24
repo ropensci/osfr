@@ -72,16 +72,16 @@ upload_files <- function(id, path, dest = NULL) {
     dest <- basename(path)
   }
 
-  ## Here we need to check for 'nodes' then have another condition within nodes. see `idx_folder`
+  ## Check if id type is 'nodes'
   if (type == "nodes") {
 
     fi <- get_files_info(id, private = TRUE)
 
-    # Added check to see if 'fi' is NULL. If no file exists in a component, this not run.
+    # Check to see if 'fi' is NULL. If no file exists in a component, this not run
     if (!is.null(fi)) {
       idx <- which(fi$materialized == pre_slash(dest))
 
-      # check for destination value subfolder
+      # Check for destination value subfolder
       if (!is.null(dest)) {
         fi_folder <- paste0(dirname(dest), "/")
         dest_fname <- basename(dest)
@@ -90,7 +90,7 @@ upload_files <- function(id, path, dest = NULL) {
 
         hash_folder <- paste0(basename(fi[idx_folder, "href"]), "/")
 
-        # check for subfolder created and file not there.
+        # Check if subfolder created and file not there
         if (length(idx) != 1 & length(idx_folder) == 1) {
           message(paste0('Creating new file on OSF in subfolder ', fi_folder  ,' ...'))
           upload_new_files(id, path, dest_fname, href_hash = hash_folder)
@@ -101,10 +101,9 @@ upload_files <- function(id, path, dest = NULL) {
         }
       }
     }
-    ### End addition
 
-    # changed condition for new file creation
-
+    # Upload new file if file does not exist in directory and it is not a
+    # subfolder file. Otherwise, upload revised file.
     if (length(idx) != 1 & !subfolder_file) {
       message('Creating new file on OSF...')
       upload_new_files(id, path, dest)
@@ -118,8 +117,8 @@ upload_files <- function(id, path, dest = NULL) {
     upload_revised_files(id, path)
   } else {
     stop('Something odd happened.\n
-          If the problem persists, consider issuing a bug report on
-          github.com/chartgerink/osfr')
+         If the problem persists, consider issuing a bug report on
+         github.com/chartgerink/osfr')
   }
 }
 
