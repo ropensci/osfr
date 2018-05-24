@@ -118,7 +118,7 @@ upload_files <- function(id, path, dest = NULL) {
   } else {
     stop('Something odd happened.\n
          If the problem persists, consider issuing a bug report on
-         github.com/chartgerink/osfr')
+         github.com/CenterForOpenScience/osfr')
   }
 }
 
