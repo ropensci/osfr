@@ -1,6 +1,6 @@
 # osfr: R Interface to the Open Science Framework
 
-  [![Build Status](https://travis-ci.org/CenterForOpenScience/osfr.svg?branch=master)](https://travis-ci.org/CenterForOpenScience/osfr)[![codecov](https://codecov.io/gh/chartgerink/osfr/branch/master/graph/badge.svg)](https://codecov.io/gh/chartgerink/osfr)
+  [![Build Status](https://travis-ci.org/CenterForOpenScience/osfr.svg?branch=master)](https://travis-ci.org/CenterForOpenScience/osfr)[![Coverage Status](https://coveralls.io/repos/github/CenterForOpenScience/osfr/badge.svg?branch=master)](https://coveralls.io/github/CenterForOpenScience/osfr?branch=master)
 
 The R package `osfr` interfaces with the [Open Science Framework (OSF)](https://osf.io) to both get information from the OSF and push information to the OSF. If you are looking for a Python client see [`osf-cli`](https://github.com/dib-lab/osf-cli).
 
