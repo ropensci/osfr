@@ -27,5 +27,8 @@ License: MIT + file LICENSE
 BugReports: https://github.com/chartgerink/osfr/issues
 LazyData: true
 Suggests:
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr
