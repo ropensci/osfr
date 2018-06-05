@@ -1,10 +1,9 @@
-#' Comment on a project on the OSF
+#' Comment on a project on OSF
 #'
 #' Provide comments on an OSF project. Please be respectful and inclusive in doing
-#' so and see the Terms of Use of the OSF.
-#' \url{https://github.com/CenterForOpenScience/cos.io/blob/master/TERMS_OF_USE.md}
+#' so and see the \href{https://github.com/CenterForOpenScience/cos.io/blob/master/TERMS_OF_USE.md}{Terms of Use for OSF}.
 #'
-#' @param id OSF id (osf.io/XXXX; just XXXX)
+#' @param id OSF id (osf.io/XXXXX; just XXXXX)
 #' @param txt Contents of the comment
 #'
 #' @return Boolean, posting succeeded?
