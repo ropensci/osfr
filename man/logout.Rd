@@ -7,8 +7,13 @@
 logout()
 }
 \description{
-Remove the Personal Access Token that provides access to the Open Science
-Framework API. Removes the \code{OSF_PAT} from session environment, not
+Remove the Personal Access Token that provides access to the OSF API.
+Removes the \code{OSF_PAT} from session environment, not
 from the .Renviron file if you stored it with login (that is currently a
 manual step).
+}
+\examples{
+\dontrun{
+logout()
+}
 }
