@@ -237,10 +237,10 @@ delete_files <- function(id) {
   invisible(TRUE)
 }
 
-#' Move (and copy) files on the OSF
+#' Move (and copy) files on OSF
 #'
-#' @param from OSF file id to move (osf.io/xxxx; just xxxx)
-#' @param to OSF id to move to (osf.io/xxxx; needs to be component)
+#' @param from OSF file id to move (osf.io/XXXXX; just XXXXX)
+#' @param to OSF id to move to (osf.io/XXXXX; needs to be component)
 #' @param filename Optional, rename the file
 #' @param action 'move' or 'copy'
 #' @param conflict Keep old file or replace in case of conflict
