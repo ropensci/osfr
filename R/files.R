@@ -125,10 +125,14 @@ upload_files <- function(id, path, dest = NULL) {
 
 #' Zip up a directory and upload the zip to the OSF (both new and revised)
 #'
-#' @param id OSF id (osf.io/XXXX) to upload to. Specify project to upload new file,
-#'  specify a file to upload a revision.
+#' @param id OSF id (osf.io/XXXXX) to upload to. Specify a project id to upload
+#' a new zip file. Specify a file id to upload a revised zip file.
 #' @param path Path to directory on local machine to zip up and upload.
-#' @param dest Name of the destination file on OSF (if \code{NULL}, \code{basename(path)} with a '.zip' suffix will be used). Note that this can be used to specify what folder to place files in, e.g. 'my_folder/my_directory.zip'. Also note that if \code{id} is a file ID, this is not necessary.
+#' @param dest Name of the destination file on OSF (if \code{NULL},
+#' \code{basename(path)} with a '.zip' suffix will be used). Note that this can
+#' be used to specify what folder to place files in, e.g.
+#' 'my_folder/my_directory.zip'. Also note that if \code{id} is a file ID, this
+#' is not necessary.
 #'
 #' @return Boolean of upload success
 #' @export
@@ -136,7 +140,8 @@ upload_files <- function(id, path, dest = NULL) {
 #'
 #' @examples
 #' \dontrun{
-#' upload_zip(id = '12345', path = 'my_dir')
+#' upload_zip(id = "12345", path = "my_dir")
+#' upload_zip(id = "12345", path = "my_dir", dest = "my_folder/my_directory.zip")
 #' }
 
 upload_zip <- function(id, path, dest = NULL) {
