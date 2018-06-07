@@ -2,12 +2,12 @@
 % Please edit documentation in R/files.R
 \name{upload_revised_files}
 \alias{upload_revised_files}
-\title{Upload a revised file to the OSF}
+\title{Upload a revised file to OSF}
 \usage{
 upload_revised_files(id, path)
 }
 \arguments{
-\item{id}{OSF id (osf.io/XXXX; just XXXX) of file to revise}
+\item{id}{OSF id (osf.io/XXXXX; just XXXXX) of file to revise}
 
 \item{path}{Path to file on local machine to upload.}
 }
@@ -15,7 +15,7 @@ upload_revised_files(id, path)
 Boolean, revision success? (invisible)
 }
 \description{
-Upload a revised file to the OSF
+Upload a revised file to OSF
 }
 \seealso{
 \code{\link{upload_files}}, \code{\link{upload_new_files}}

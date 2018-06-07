@@ -2,7 +2,7 @@
 % Please edit documentation in R/files.R
 \name{upload_zip}
 \alias{upload_zip}
-\title{Zip up a directory and upload the zip to the OSF (both new and revised)}
+\title{Zip up a directory and upload the zip to OSF (both new and revised)}
 \usage{
 upload_zip(id, path, dest = NULL)
 }
@@ -22,7 +22,7 @@ is not necessary.}
 Boolean of upload success
 }
 \description{
-Zip up a directory and upload the zip to the OSF (both new and revised)
+Zip up a directory and upload the zip to OSF (both new and revised)
 }
 \examples{
 \dontrun{

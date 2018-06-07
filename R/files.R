@@ -123,7 +123,7 @@ upload_files <- function(id, path, dest = NULL) {
   }
 }
 
-#' Zip up a directory and upload the zip to the OSF (both new and revised)
+#' Zip up a directory and upload the zip to OSF (both new and revised)
 #'
 #' @param id OSF id (osf.io/XXXXX) to upload to. Specify a project id to upload
 #' a new zip file. Specify a file id to upload a revised zip file.
@@ -166,9 +166,9 @@ upload_zip <- function(id, path, dest = NULL) {
   upload_files(id, zp, dest)
 }
 
-#' Upload a revised file to the OSF
+#' Upload a revised file to OSF
 #'
-#' @param id OSF id (osf.io/XXXX; just XXXX) of file to revise
+#' @param id OSF id (osf.io/XXXXX; just XXXXX) of file to revise
 #' @param path Path to file on local machine to upload.
 #'
 #' @return Boolean, revision success? (invisible)
