@@ -2,7 +2,7 @@
 % Please edit documentation in R/projects.R
 \name{create_project}
 \alias{create_project}
-\title{Create a project on the OSF}
+\title{Create a project on OSF}
 \usage{
 create_project(title, description = "", private = TRUE)
 }
@@ -11,18 +11,19 @@ create_project(title, description = "", private = TRUE)
 
 \item{description}{Project description}
 
-\item{private}{Boolean, whether project should be private}
+\item{private}{Boolean, whether project should be private (defaults to
+\code{TRUE})}
 }
 \value{
 Returns the created project's id
 }
 \description{
-Create a project on the OSF
+Create a project on OSF
 }
 \examples{
 \dontrun{
-create_project(title = "Testing the OSF project creation")
-}
+create_project(title = "New Private OSF Project")
+create_project(title = "New Public OSF Project", private = FALSE)}
 }
 \seealso{
 \code{\link{create_component}}
