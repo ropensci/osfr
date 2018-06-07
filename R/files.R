@@ -296,9 +296,9 @@ move_files <- function(
   invisible(TRUE)
 }
 
-#' Download files from the OSF
+#' Download files from OSF
 #'
-#' This function downloads files from the OSF and assumes that the file is
+#' This function downloads files from OSF and assumes that the file is
 #' public. For private files, the function checks first for a view-only link.
 #' If no view-only link is provided, the user's login credentials are used.
 #'
@@ -306,9 +306,10 @@ move_files <- function(
 #' \url{http://help.osf.io/m/links/l/524049-create-a-view-only-link}.
 #'
 #'
-#' @param id Specify the node id (osf.io/XXXX)
+#' @param id Specify the file id (osf.io/XXXXX)
 #' @param version Specify the OSF version id (string)
-#' @param path Specify path to save file to. If NULL, defaults to OSF filename in the working directory
+#' @param path Specify path to save file to. If \code{NULL}, defaults to OSF
+#' filename in the working directory
 #' @param view_only Specify the view-only link (string)
 #'
 #' @return Return filepath for easy processing

@@ -2,14 +2,15 @@
 % Please edit documentation in R/files.R
 \name{download_files}
 \alias{download_files}
-\title{Download files from the OSF}
+\title{Download files from OSF}
 \usage{
 download_files(id, path = NULL, view_only = NULL, version = NULL)
 }
 \arguments{
-\item{id}{Specify the node id (osf.io/XXXX)}
+\item{id}{Specify the file id (osf.io/XXXXX)}
 
-\item{path}{Specify path to save file to. If NULL, defaults to OSF filename in the working directory}
+\item{path}{Specify path to save file to. If \code{NULL}, defaults to OSF
+filename in the working directory}
 
 \item{view_only}{Specify the view-only link (string)}
 
@@ -19,7 +20,7 @@ download_files(id, path = NULL, view_only = NULL, version = NULL)
 Return filepath for easy processing
 }
 \description{
-This function downloads files from the OSF and assumes that the file is
+This function downloads files from OSF and assumes that the file is
 public. For private files, the function checks first for a view-only link.
 If no view-only link is provided, the user's login credentials are used.
 }
