@@ -494,15 +494,15 @@ get_files_info <- function(id, private = FALSE) {
   return(files)
 }
 
-#' Get file path for the latest version of a file (for direct reading)
+#' Get file download link for the latest version of a file (for direct reading)
 #'
-#' @param id Specify the file id (osf.io/XXXX)
+#' @param id Specify the file id (osf.io/XXXXX)
 #' @param private Boolean to specify whether file is private
 #'
-#' @return Return filepath (online)
+#' @return Return download link (online)
 #' @examples
 #' \dontrun{
-#' read.csv(path_file("myxcv"))
+#' read.csv(path_file("5z2bh"))
 #' }
 #' @importFrom utils tail
 #' @export
