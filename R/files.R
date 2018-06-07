@@ -209,7 +209,7 @@ upload_revised_files <- function(id, path) {
 
 #' Delete a file based on OSF id
 #'
-#' @param id OSF id (osf.io/XXXX; just XXXX)
+#' @param id OSF id (osf.io/XXXXX; just XXXXX)
 #'
 #' @return Boolean, delete succeeded?
 #' @export
