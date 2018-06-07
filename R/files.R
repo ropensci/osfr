@@ -46,22 +46,23 @@ upload_new_files <- function(id, path, name = NULL, href_hash = NULL) {
 }
 
 
-#' Upload a file to the OSF (both new and revised)
+#' Upload a file to OSF (both new and revised)
 #'
-#' @param id OSF id (osf.io/XXXX; just XXXX) to upload to. Specify project to
-#' upload a new file, specify a file to upload a revision.
+#' @param id OSF id (osf.io/XXXXX; just XXXXX) to upload to. Specify a project
+#' id to upload a new file. Specify a file id to upload a revised file.
 #' @param path Path to file on local machine to upload.
 #' @param dest Name of the destination file on OSF (if \code{NULL},
 #' \code{basename(path)} will be used). Note that this can be
-#'  used to specify what folder to place files in, e.g. 'my_folder/file.png'.
-#'  Also note that if \code{id} is a file ID, this is not necessary.
+#' used to specify what folder to place files in, e.g. 'my_folder/file.png'.
+#' Also note that if \code{id} is a file ID, this is not necessary.
 #'
-#' @return Link if new file created
+#' @return Link to new file if a new file is created
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' upload_files(id = '12345', path = 'test.pdf')
+#' upload_files(id = "12345", path = "test.pdf")
+#' upload_files(id = "12345", path = "test.pdf", dest = "my_folder/test.pdf")
 #' }
 
 upload_files <- function(id, path, dest = NULL) {
