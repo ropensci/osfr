@@ -392,12 +392,38 @@ download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
   return(file)
 }
 
-#' Get data frame of information about all files in an OSF node
+#' Get file information
 #'
-#' @param id OSF id (osf.io/XXXX) for the node (project or component) to get file info for
+#' This function creates a data frame containing the information about all of
+#' the files and folders in an OSF node (project or component).
+#'
+#' Note that the file GUID will not populate until the file has been viewed on
+#' OSF through a browser.
+#'
+#' The data frame will contain the following information:
+#' \itemize{
+#'   \item name: Name of file/folder
+#'   \item materialized: The materialized path of the file on OSF (i.e. "my_folder/my_file.csv")
+#'   \item kind: Whether it is a file or a folder
+#'   \item guid: The GUID of the file (for more information see \href{http://help.osf.io/m/faqs/l/726460-faqs#what-s-a-globally-unique-identifier-guid-what-metadata-is-maintained-about-them}{this FAQ on GUID's}).
+#'   \item provider: The provider the file is stored on
+#'   \item created_utc: The time the file was created (UTC timezone)
+#'   \item modified_utc: The last time the file was modified (UTC timezone)
+#'   \item downloads: The number of times the file has been downloaded
+#'   \item version: The most recent version number of the file
+#'   \item href: A WaterButler link to the file for direct manipulation (downloads, uploads, moving, etc.).
+#'   \item folder_link: An OSF API link to the folder
+#' }
+#'
+#' @param id OSF id (osf.io/XXXXX) for the node (project or component) to get
+#' file info for
 #' @param private Boolean to specify whether to get info for private files
 #'
 #' @export
+#' @examples
+#' \dontrun{
+#' get_files_info(id = "m5pds")
+#' }
 
 get_files_info <- function(id, private = FALSE) {
 
