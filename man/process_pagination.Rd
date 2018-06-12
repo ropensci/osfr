@@ -7,7 +7,7 @@
 process_pagination(res, config)
 }
 \arguments{
-\item{res}{The initial list return from the OSF API and run through
+\item{res}{The initial list returned from the OSF API and run through
 `osfr::process_json()`. Must contain the links section.}
 
 \item{config}{The configuration used in the initial call to the OSF API.}
@@ -16,6 +16,6 @@ process_pagination(res, config)
 List of all of the pages from the API (including the input list).
 }
 \description{
-Processes the paginated data returned by the OSF and returns a list with
+Processes the paginated data returned by the OSF API and returns a list with
 all of the pages combined.
 }
