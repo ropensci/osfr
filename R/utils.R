@@ -53,6 +53,9 @@ process_json <- function(x) {
 
 #' Processing whether a category is valid
 #'
+#' This functions throws an error if the provided category is not a valid
+#' category for OSF.
+#'
 #' @param category Category to check for validity. Valid categories:
 #' \itemize{
 #'   \item project

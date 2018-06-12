@@ -21,5 +21,6 @@ process_category(category = "")
 }}
 }
 \description{
-Processing whether a category is valid
+This functions throws an error if the provided category is not a valid
+category for OSF.
 }
