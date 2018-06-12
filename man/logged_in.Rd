@@ -2,10 +2,14 @@
 % Please edit documentation in R/utils.R
 \name{logged_in}
 \alias{logged_in}
-\title{Identify whether logged in}
+\title{Identify whether user is logged in}
 \usage{
 logged_in()
 }
+\value{
+Boolean indicating logged in status
+}
 \description{
-Identify whether logged in
+This function identifies whether the user has logged in by providing a
+personal access token (PAT).
 }
