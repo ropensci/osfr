@@ -1,4 +1,9 @@
-#' Identify whether logged in
+#' Identify whether user is logged in
+#'
+#' This function identifies whether the user has logged in by providing a
+#' personal access token (PAT).
+#'
+#' @return Boolean indicating logged in status
 
 logged_in <- function () {
   if (Sys.getenv('OSF_PAT') == '') {
