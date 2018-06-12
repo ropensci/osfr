@@ -1,12 +1,12 @@
-#' Upload a new file to the OSF.
+#' Upload a new file to OSF.
 #'
-#' @param id Parent OSF project id (osf.io/XXXX) to upload to.
+#' @param id OSF project id (osf.io/XXXXX) to upload to.
 #' @param path Path to file on local machine to upload. Ensure file has
 #' proper extension named (i.e., extension sensitive, not like on Linux)
-#' @param name Name of the uploaded file (if \code{NULL}, current name will be
-#' used).
-#' @param href_hash the element that identifies the folder hash of the href from the folder URL. Not use if \code{NULL}.
+#' @param name Name of the uploaded file (if \code{NULL},
 #' \code{basename(path)} will be used).
+#' @param href_hash Folder hash of the href from the folder URL. Not used
+#' if \code{NULL}.
 #'
 #' @return Waterbutler URL
 #' @seealso \code{\link{upload_files}}, \code{\link{upload_revised_files}}
@@ -46,22 +46,23 @@ upload_new_files <- function(id, path, name = NULL, href_hash = NULL) {
 }
 
 
-#' Upload a file to the OSF (both new and revised)
+#' Upload a file to OSF (both new and revised)
 #'
-#' @param id OSF id (osf.io/XXXX; just XXXX) to upload to. Specify project to
-#' upload a new file, specify a file to upload a revision.
+#' @param id OSF id (osf.io/XXXXX; just XXXXX) to upload to. Specify a project
+#' id to upload a new file. Specify a file id to upload a revised file.
 #' @param path Path to file on local machine to upload.
 #' @param dest Name of the destination file on OSF (if \code{NULL},
 #' \code{basename(path)} will be used). Note that this can be
-#'  used to specify what folder to place files in, e.g. 'my_folder/file.png'.
-#'  Also note that if \code{id} is a file ID, this is not necessary.
+#' used to specify what folder to place files in, e.g. 'my_folder/file.png'.
+#' Also note that if \code{id} is a file ID, this is not necessary.
 #'
-#' @return Link if new file created
+#' @return Link to new file if a new file is created
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' upload_files(id = '12345', path = 'test.pdf')
+#' upload_files(id = "12345", path = "test.pdf")
+#' upload_files(id = "12345", path = "test.pdf", dest = "my_folder/test.pdf")
 #' }
 
 upload_files <- function(id, path, dest = NULL) {
@@ -122,12 +123,16 @@ upload_files <- function(id, path, dest = NULL) {
   }
 }
 
-#' Zip up a directory and upload the zip to the OSF (both new and revised)
+#' Zip up a directory and upload the zip to OSF (both new and revised)
 #'
-#' @param id OSF id (osf.io/XXXX) to upload to. Specify project to upload new file,
-#'  specify a file to upload a revision.
+#' @param id OSF id (osf.io/XXXXX) to upload to. Specify a project id to upload
+#' a new zip file. Specify a file id to upload a revised zip file.
 #' @param path Path to directory on local machine to zip up and upload.
-#' @param dest Name of the destination file on OSF (if \code{NULL}, \code{basename(path)} with a '.zip' suffix will be used). Note that this can be used to specify what folder to place files in, e.g. 'my_folder/my_directory.zip'. Also note that if \code{id} is a file ID, this is not necessary.
+#' @param dest Name of the destination file on OSF (if \code{NULL},
+#' \code{basename(path)} with a '.zip' suffix will be used). Note that this can
+#' be used to specify what folder to place files in, e.g.
+#' 'my_folder/my_directory.zip'. Also note that if \code{id} is a file ID, this
+#' is not necessary.
 #'
 #' @return Boolean of upload success
 #' @export
@@ -135,7 +140,8 @@ upload_files <- function(id, path, dest = NULL) {
 #'
 #' @examples
 #' \dontrun{
-#' upload_zip(id = '12345', path = 'my_dir')
+#' upload_zip(id = "12345", path = "my_dir")
+#' upload_zip(id = "12345", path = "my_dir", dest = "my_folder/my_directory.zip")
 #' }
 
 upload_zip <- function(id, path, dest = NULL) {
@@ -160,9 +166,9 @@ upload_zip <- function(id, path, dest = NULL) {
   upload_files(id, zp, dest)
 }
 
-#' Upload a revised file to the OSF
+#' Upload a revised file to OSF
 #'
-#' @param id OSF id (osf.io/XXXX; just XXXX) of file to revise
+#' @param id OSF id (osf.io/XXXXX; just XXXXX) of file to revise
 #' @param path Path to file on local machine to upload.
 #'
 #' @return Boolean, revision success? (invisible)
@@ -203,7 +209,7 @@ upload_revised_files <- function(id, path) {
 
 #' Delete a file based on OSF id
 #'
-#' @param id OSF id (osf.io/XXXX; just XXXX)
+#' @param id OSF id (osf.io/XXXXX; just XXXXX)
 #'
 #' @return Boolean, delete succeeded?
 #' @export
@@ -231,10 +237,10 @@ delete_files <- function(id) {
   invisible(TRUE)
 }
 
-#' Move (and copy) files on the OSF
+#' Move (and copy) files on OSF
 #'
-#' @param from OSF file id to move (osf.io/xxxx; just xxxx)
-#' @param to OSF id to move to (osf.io/xxxx; needs to be component)
+#' @param from OSF file id to move (osf.io/XXXXX; just XXXXX)
+#' @param to OSF id to move to (osf.io/XXXXX; needs to be component)
 #' @param filename Optional, rename the file
 #' @param action 'move' or 'copy'
 #' @param conflict Keep old file or replace in case of conflict
@@ -290,9 +296,9 @@ move_files <- function(
   invisible(TRUE)
 }
 
-#' Download files from the OSF
+#' Download files from OSF
 #'
-#' This function downloads files from the OSF and assumes that the file is
+#' This function downloads files from OSF and assumes that the file is
 #' public. For private files, the function checks first for a view-only link.
 #' If no view-only link is provided, the user's login credentials are used.
 #'
@@ -300,9 +306,10 @@ move_files <- function(
 #' \url{http://help.osf.io/m/links/l/524049-create-a-view-only-link}.
 #'
 #'
-#' @param id Specify the node id (osf.io/XXXX)
+#' @param id Specify the file id (osf.io/XXXXX)
 #' @param version Specify the OSF version id (string)
-#' @param path Specify path to save file to. If NULL, defaults to OSF filename in the working directory
+#' @param path Specify path to save file to. If \code{NULL}, defaults to OSF
+#' filename in the working directory
 #' @param view_only Specify the view-only link (string)
 #'
 #' @return Return filepath for easy processing
@@ -385,12 +392,38 @@ download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
   return(file)
 }
 
-#' Get data frame of information about all files in an OSF node
+#' Get file information
 #'
-#' @param id OSF id (osf.io/XXXX) for the node (project or component) to get file info for
+#' This function creates a data frame containing the information about all of
+#' the files and folders in an OSF node (project or component).
+#'
+#' Note that the file GUID will not populate until the file has been viewed on
+#' OSF through a browser.
+#'
+#' The data frame will contain the following information:
+#' \itemize{
+#'   \item name: Name of file/folder
+#'   \item materialized: The materialized path of the file on OSF (i.e. "my_folder/my_file.csv")
+#'   \item kind: Whether it is a file or a folder
+#'   \item guid: The GUID of the file (for more information see \href{http://help.osf.io/m/faqs/l/726460-faqs#what-s-a-globally-unique-identifier-guid-what-metadata-is-maintained-about-them}{this FAQ on GUID's}).
+#'   \item provider: The provider the file is stored on
+#'   \item created_utc: The time the file was created (UTC timezone)
+#'   \item modified_utc: The last time the file was modified (UTC timezone)
+#'   \item downloads: The number of times the file has been downloaded
+#'   \item version: The most recent version number of the file
+#'   \item href: A WaterButler link to the file for direct manipulation (downloads, uploads, moving, etc.).
+#'   \item folder_link: An OSF API link to the folder
+#' }
+#'
+#' @param id OSF id (osf.io/XXXXX) for the node (project or component) to get
+#' file info for
 #' @param private Boolean to specify whether to get info for private files
 #'
 #' @export
+#' @examples
+#' \dontrun{
+#' get_files_info(id = "m5pds")
+#' }
 
 get_files_info <- function(id, private = FALSE) {
 
@@ -461,15 +494,15 @@ get_files_info <- function(id, private = FALSE) {
   return(files)
 }
 
-#' Get file path for the latest version of a file (for direct reading)
+#' Get file download link for the latest version of a file (for direct reading)
 #'
-#' @param id Specify the file id (osf.io/XXXX)
+#' @param id Specify the file id (osf.io/XXXXX)
 #' @param private Boolean to specify whether file is private
 #'
-#' @return Return filepath (online)
+#' @return Return download link (online)
 #' @examples
 #' \dontrun{
-#' read.csv(path_file("myxcv"))
+#' read.csv(path_file("5z2bh"))
 #' }
 #' @importFrom utils tail
 #' @export

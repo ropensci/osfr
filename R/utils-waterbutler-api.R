@@ -24,7 +24,7 @@ construct_link_files <- function(id = NULL, provider = 'osfstorage', request = N
 #' Materialize Waterbutler URL
 #'
 #' @param url Waterbutler URL, starts with files.osf.io
-#' @param private Boolean, whether or not the file is prvate
+#' @param private Boolean, whether or not the file is private
 #'
 #' @return OSF id
 
@@ -43,8 +43,7 @@ process_waterbutler <- function(url, private = TRUE) {
 
 #' Processing a file id to waterbutler
 #'
-#' The OSF uses a separate API to handle file requests, for some reason. This
-#' function helps deal with that.
+#' This function retrieves a WaterButler link for a given file id.
 #'
 #' @param id OSF id (osf.io/xxxx; just xxxx)
 #' @param private Boolean, if file is private

@@ -15,6 +15,5 @@ process_file_id(id, private = FALSE)
 Waterbutler URL
 }
 \description{
-The OSF uses a separate API to handle file requests, for some reason. This
-function helps deal with that.
+This function retrieves a WaterButler link for a given file id.
 }

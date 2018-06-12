@@ -7,7 +7,7 @@
 delete_files(id)
 }
 \arguments{
-\item{id}{OSF id (osf.io/XXXX; just XXXX)}
+\item{id}{OSF id (osf.io/XXXXX; just XXXXX)}
 }
 \value{
 Boolean, delete succeeded?

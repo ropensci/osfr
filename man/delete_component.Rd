@@ -7,14 +7,19 @@
 delete_component(id)
 }
 \arguments{
-\item{id}{OSF id (osf.io/xxxx; just XXXX)}
+\item{id}{OSF id (osf.io/XXXXX; just XXXXX)}
 }
 \value{
 Boolean, deletion success
 }
 \description{
-This function removes all containing files of a component and then removes
+This function removes all files contained in a component and then removes
 the component itself. NOTE: it does not request confirmation, so please
 handle with care. If you do not have backups of the files, it is easy to
 lose everything (in the component).
+}
+\examples{
+\dontrun{
+delete_component("12345")
+}
 }

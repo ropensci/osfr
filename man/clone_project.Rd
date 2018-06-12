@@ -7,7 +7,7 @@
 clone_project(id, private = FALSE, maxdepth = 5)
 }
 \arguments{
-\item{id}{OSF id (osf.io/XXXX; just XXXX)}
+\item{id}{OSF id (osf.io/XXXXX; just XXXXX)}
 
 \item{private}{clone the project as seen privately?}
 
@@ -17,11 +17,15 @@ clone_project(id, private = FALSE, maxdepth = 5)
 Boolean, clone success
 }
 \description{
-This function copies an *entire* project and its
+This function copies an \emph{entire} project and its
 components to the harddrive of the individual
 (depth of clone depends on the maxdepth argument).
 There is currently no way to estimate the size
 before downloading so it might take a while. BUT
 there's a progess bar :-) Currently limited to only
 files stored on OSF (not via add-ons).
+}
+\examples{
+\dontrun{
+clone_project(id = "12345")}
 }

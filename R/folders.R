@@ -1,11 +1,19 @@
-#' Create a new folder on OSF project.
+#' Create a new folder in an OSF project.
 #'
-#' @param id Parent OSF project id (osf.io/XXXX; just XXXX) to create folder in
+#' Creates a root folder or a root folder and the nested subfolders. Will also
+#' create subfolders in a previously created root folder.
+#'
+#' @param id Parent OSF project id (osf.io/XXXXX; just XXXXX) to create folder in
 #' @param path Name of the folder (cannot handle recursive at the moment).
-#' @param return Which waterbutler URLs should be returned. Defaults to root to mimick old functions behavior.
-#' @description Creates a root folder or a root folder and the nested subfolders.  Will also create subfolders in a previously created root folder.
-#' @return Waterbutler URL for folder "root", last subfolder "sub", or all folders created "all" depanding on the selection input for `return`
+#' @param return Which waterbutler URLs should be returned. Defaults to root.
+#'
+#' @return Waterbutler URL for folder "root", last subfolder "sub", or all
+#' folders created "all" depanding on the selection input for \code{return}
 #' @export
+#' @examples
+#' \dontrun{
+#' create_folder(id = "12345", path = "my_folder")
+#' create_folder(id = "12345", path = "my_folder/my_subfolder")}
 
 create_folder <- function(id, path, return = c("sub", "root", "all")[2]) {
 
@@ -91,7 +99,7 @@ create_folder <- function(id, path, return = c("sub", "root", "all")[2]) {
 
 }
 
-#' Delete a folder on the OSF
+#' Delete a folder on OSF
 #'
 #' @param url Waterbutler link
 #'

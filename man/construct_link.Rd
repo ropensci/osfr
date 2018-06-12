@@ -16,3 +16,7 @@ The full request link with proper base.
 Building urls for requests. OSF_USE_SERVER can be specified in the
 environment to use a test or staging server.
 }
+\examples{
+\dontrun{
+construct_link("nodes/")}
+}

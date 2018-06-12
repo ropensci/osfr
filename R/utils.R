@@ -1,4 +1,9 @@
-#' Identify whether logged in
+#' Identify whether user is logged in
+#'
+#' This function identifies whether the user has logged in by providing a
+#' personal access token (PAT).
+#'
+#' @return Boolean indicating logged in status
 
 logged_in <- function () {
   if (Sys.getenv('OSF_PAT') == '') {
@@ -8,6 +13,9 @@ logged_in <- function () {
 }
 
 #' Identify type of endpoint for id
+#'
+#' This function takes an OSF id and returns the type of endpoint for that id.
+#' Only returns types for the nodes and files endpoints.
 #'
 #' @param id OSF id to check (osf.io/xxxxx).
 #'
@@ -45,6 +53,9 @@ process_json <- function(x) {
 
 #' Processing whether a category is valid
 #'
+#' This functions throws an error if the provided category is not a valid
+#' category for OSF.
+#'
 #' @param category Category to check for validity. Valid categories:
 #' \itemize{
 #'   \item project
@@ -74,10 +85,10 @@ process_category <- function(category = '') {
 
 #' Process Pagination
 #'
-#' Processes the paginated data returned by the OSF and returns a list with
+#' Processes the paginated data returned by the OSF API and returns a list with
 #' all of the pages combined.
 #'
-#' @param res The initial list return from the OSF API and run through
+#' @param res The initial list returned from the OSF API and run through
 #' `osfr::process_json()`. Must contain the links section.
 #' @param config The configuration used in the initial call to the OSF API.
 #'

@@ -2,23 +2,23 @@
 % Please edit documentation in R/files.R
 \name{path_file}
 \alias{path_file}
-\title{Get file path for the latest version of a file (for direct reading)}
+\title{Get file download link for the latest version of a file (for direct reading)}
 \usage{
 path_file(id, private = FALSE)
 }
 \arguments{
-\item{id}{Specify the file id (osf.io/XXXX)}
+\item{id}{Specify the file id (osf.io/XXXXX)}
 
 \item{private}{Boolean to specify whether file is private}
 }
 \value{
-Return filepath (online)
+Return download link (online)
 }
 \description{
-Get file path for the latest version of a file (for direct reading)
+Get file download link for the latest version of a file (for direct reading)
 }
 \examples{
 \dontrun{
-read.csv(path_file("myxcv"))
+read.csv(path_file("5z2bh"))
 }
 }

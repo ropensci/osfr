@@ -2,27 +2,27 @@
 % Please edit documentation in R/files.R
 \name{upload_new_files}
 \alias{upload_new_files}
-\title{Upload a new file to the OSF.}
+\title{Upload a new file to OSF.}
 \usage{
 upload_new_files(id, path, name = NULL, href_hash = NULL)
 }
 \arguments{
-\item{id}{Parent OSF project id (osf.io/XXXX) to upload to.}
+\item{id}{OSF project id (osf.io/XXXXX) to upload to.}
 
 \item{path}{Path to file on local machine to upload. Ensure file has
 proper extension named (i.e., extension sensitive, not like on Linux)}
 
-\item{name}{Name of the uploaded file (if \code{NULL}, current name will be
-used).}
-
-\item{href_hash}{the element that identifies the folder hash of the href from the folder URL. Not use if \code{NULL}.
+\item{name}{Name of the uploaded file (if \code{NULL},
 \code{basename(path)} will be used).}
+
+\item{href_hash}{Folder hash of the href from the folder URL. Not used
+if \code{NULL}.}
 }
 \value{
 Waterbutler URL
 }
 \description{
-Upload a new file to the OSF.
+Upload a new file to OSF.
 }
 \seealso{
 \code{\link{upload_files}}, \code{\link{upload_revised_files}}

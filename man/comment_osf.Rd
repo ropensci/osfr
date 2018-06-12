@@ -2,12 +2,12 @@
 % Please edit documentation in R/comments.R
 \name{comment_osf}
 \alias{comment_osf}
-\title{Comment on a project on the OSF}
+\title{Comment on a project on OSF}
 \usage{
 comment_osf(id, txt)
 }
 \arguments{
-\item{id}{OSF id (osf.io/XXXX; just XXXX)}
+\item{id}{OSF id (osf.io/XXXXX; just XXXXX)}
 
 \item{txt}{Contents of the comment}
 }
@@ -16,8 +16,7 @@ Boolean, posting succeeded?
 }
 \description{
 Provide comments on an OSF project. Please be respectful and inclusive in doing
-so and see the Terms of Use of the OSF.
-\url{https://github.com/CenterForOpenScience/cos.io/blob/master/TERMS_OF_USE.md}
+so and see the \href{https://github.com/CenterForOpenScience/cos.io/blob/master/TERMS_OF_USE.md}{Terms of Use for OSF}.
 }
 \examples{
 \dontrun{comment_osf(id = '12345', txt = 'This is an example')}

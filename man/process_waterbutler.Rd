@@ -9,7 +9,7 @@ process_waterbutler(url, private = TRUE)
 \arguments{
 \item{url}{Waterbutler URL, starts with files.osf.io}
 
-\item{private}{Boolean, whether or not the file is prvate}
+\item{private}{Boolean, whether or not the file is private}
 }
 \value{
 OSF id

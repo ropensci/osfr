@@ -2,29 +2,30 @@
 % Please edit documentation in R/files.R
 \name{upload_files}
 \alias{upload_files}
-\title{Upload a file to the OSF (both new and revised)}
+\title{Upload a file to OSF (both new and revised)}
 \usage{
 upload_files(id, path, dest = NULL)
 }
 \arguments{
-\item{id}{OSF id (osf.io/XXXX; just XXXX) to upload to. Specify project to
-upload a new file, specify a file to upload a revision.}
+\item{id}{OSF id (osf.io/XXXXX; just XXXXX) to upload to. Specify a project
+id to upload a new file. Specify a file id to upload a revised file.}
 
 \item{path}{Path to file on local machine to upload.}
 
 \item{dest}{Name of the destination file on OSF (if \code{NULL},
 \code{basename(path)} will be used). Note that this can be
- used to specify what folder to place files in, e.g. 'my_folder/file.png'.
- Also note that if \code{id} is a file ID, this is not necessary.}
+used to specify what folder to place files in, e.g. 'my_folder/file.png'.
+Also note that if \code{id} is a file ID, this is not necessary.}
 }
 \value{
-Link if new file created
+Link to new file if a new file is created
 }
 \description{
-Upload a file to the OSF (both new and revised)
+Upload a file to OSF (both new and revised)
 }
 \examples{
 \dontrun{
-upload_files(id = '12345', path = 'test.pdf')
+upload_files(id = "12345", path = "test.pdf")
+upload_files(id = "12345", path = "test.pdf", dest = "my_folder/test.pdf")
 }
 }

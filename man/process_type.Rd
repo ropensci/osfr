@@ -13,5 +13,6 @@ process_type(id)
 Endpoint of id as character (nodes | files)
 }
 \description{
-Identify type of endpoint for id
+This function takes an OSF id and returns the type of endpoint for that id.
+Only returns types for the nodes and files endpoints.
 }

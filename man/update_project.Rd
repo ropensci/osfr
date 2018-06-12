@@ -21,3 +21,7 @@ Does not yet include making public all subcomponents
 or vectorized to make multiple projects public at the
 same time.
 }
+\examples{
+\dontrun{
+update_project(id = "12345")}
+}
