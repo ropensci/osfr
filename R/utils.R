@@ -14,6 +14,9 @@ logged_in <- function () {
 
 #' Identify type of endpoint for id
 #'
+#' This function takes an OSF id and returns the type of endpoint for that id.
+#' Only returns types for the nodes and files endpoints.
+#'
 #' @param id OSF id to check (osf.io/xxxxx).
 #'
 #' @return Endpoint of id as character (nodes | files)
