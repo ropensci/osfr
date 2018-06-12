@@ -6,6 +6,10 @@
 #' @param request The request link to be combined with the base API link.
 #'
 #' @return The full request link with proper base.
+#'
+#' @examples
+#' \dontrun{
+#' construct_link("nodes/")}
 
 construct_link <- function(request) {
   base <- 'https://api.osf.io/v2/'
