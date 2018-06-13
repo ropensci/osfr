@@ -543,6 +543,11 @@ path_file <- function(id, private = FALSE) {
     res <- process_json(call)
   }
 
+  # Check if returned information is of type "files"
+  if (res$data$type != "files") {
+    stop("Please specify an OSF id referring to a file.")
+  }
+
   return(res$data$links$download)
 }
 
