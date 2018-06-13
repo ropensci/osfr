@@ -508,7 +508,7 @@ get_files_info <- function(id, private = FALSE) {
 #' @export
 
 path_file <- function(id, private = FALSE) {
-  config <- get_config(private)
+  config <- list()
 
   typ <- process_type(id)
 
