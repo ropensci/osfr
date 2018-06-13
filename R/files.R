@@ -507,7 +507,7 @@ get_files_info <- function(id, private = FALSE) {
 #' @importFrom utils tail
 #' @export
 
-path_file <- function(id, private = FALSE) {
+path_file <- function(id, view_only = NULL) {
   config <- list()
 
   url_osf <- construct_link(paste0('guids/', id))
