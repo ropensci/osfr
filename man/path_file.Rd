@@ -4,12 +4,12 @@
 \alias{path_file}
 \title{Get file download link for the latest version of a file (for direct reading)}
 \usage{
-path_file(id, private = FALSE)
+path_file(id, view_only = NULL)
 }
 \arguments{
 \item{id}{Specify the file id (osf.io/XXXXX)}
 
-\item{private}{Boolean to specify whether file is private}
+\item{view_only}{Specify the view-only link (string)}
 }
 \value{
 Return download link (online)
@@ -20,5 +20,10 @@ Get file download link for the latest version of a file (for direct reading)
 \examples{
 \dontrun{
 read.csv(path_file("5z2bh"))
+read.csv(path_file('852dp', 'view_only_test_file.csv',
+  view_only = 'https://osf.io/jy9gm/?view_only=a500051f59b14a988415f08539dbd491'))
 }
+}
+\seealso{
+\code{\link{download_files}}
 }

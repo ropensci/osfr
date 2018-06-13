@@ -497,15 +497,18 @@ get_files_info <- function(id, private = FALSE) {
 #' Get file download link for the latest version of a file (for direct reading)
 #'
 #' @param id Specify the file id (osf.io/XXXXX)
-#' @param private Boolean to specify whether file is private
+#' @param view_only Specify the view-only link (string)
 #'
 #' @return Return download link (online)
 #' @examples
 #' \dontrun{
 #' read.csv(path_file("5z2bh"))
+#' read.csv(path_file('852dp', 'view_only_test_file.csv',
+#'   view_only = 'https://osf.io/jy9gm/?view_only=a500051f59b14a988415f08539dbd491'))
 #' }
 #' @importFrom utils tail
 #' @export
+#' @seealso \code{\link{download_files}}
 
 path_file <- function(id, view_only = NULL) {
   config <- list()
