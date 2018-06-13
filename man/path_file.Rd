@@ -20,7 +20,7 @@ Get file download link for the latest version of a file (for direct reading)
 \examples{
 \dontrun{
 read.csv(path_file("5z2bh"))
-read.csv(path_file('852dp', 'view_only_test_file.csv',
+read.csv(path_file('852dp',
   view_only = 'https://osf.io/jy9gm/?view_only=a500051f59b14a988415f08539dbd491'))
 }
 }

@@ -503,7 +503,7 @@ get_files_info <- function(id, private = FALSE) {
 #' @examples
 #' \dontrun{
 #' read.csv(path_file("5z2bh"))
-#' read.csv(path_file('852dp', 'view_only_test_file.csv',
+#' read.csv(path_file('852dp',
 #'   view_only = 'https://osf.io/jy9gm/?view_only=a500051f59b14a988415f08539dbd491'))
 #' }
 #' @importFrom utils tail
