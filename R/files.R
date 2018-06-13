@@ -514,6 +514,35 @@ path_file <- function(id, private = FALSE) {
   call <- httr::GET(url_osf, config)
   res <- process_json(call)
 
+  # Check if data from processed json is empty and get the file information
+  # using authentication. If a view-only link is present, then the file is
+  # downloaded using the view-only link. If no view-only link is present,
+  # then the file is downloaded with the user's login.
+  if (is.null(res$data) && !is.null(view_only)) {
+    # Remove the view-only tag from the provided view-only link and paste to
+    # the file url
+    view_only_url <- paste0(url_osf, '/', gsub(".*/", "", view_only))
+
+    call <- httr::GET(view_only_url, config)
+
+    if (!call$status_code == 200) {
+      stop('Failed. Are you sure you have access to the file?')
+    }
+
+    res <- process_json(call)
+
+  } else if (is.null(res$data) && is.null(view_only)) {
+    config <- get_config(TRUE)
+
+    call <- httr::GET(url_osf, config)
+
+    if (!call$status_code == 200) {
+      stop('Failed. Are you sure you have access to the file?')
+    }
+
+    res <- process_json(call)
+  }
+
   if (!call$status_code == 200) {
     stop('Failed. Are you sure you have access to the file?')
   }
