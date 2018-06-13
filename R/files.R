@@ -360,6 +360,11 @@ download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
     res <- process_json(call)
   }
 
+  # Check if returned information is of type "files"
+  if (res$data$type != "files") {
+    stop("Please specify an OSF id referring to a file.")
+  }
+
   # Determine the file name to save the file as.
   # If no path is provided, use the OSF file name.
   # If a path is provided, determine if the path is just a folder path or if
