@@ -543,10 +543,6 @@ path_file <- function(id, private = FALSE) {
     res <- process_json(call)
   }
 
-  if (!call$status_code == 200) {
-    stop('Failed. Are you sure you have access to the file?')
-  }
-
   return(res$data$links$download)
 }
 
