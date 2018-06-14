@@ -360,6 +360,11 @@ download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
     res <- process_json(call)
   }
 
+  # Check if returned information is of type "files"
+  if (res$data$type != "files") {
+    stop("Please specify an OSF id referring to a file.")
+  }
+
   # Determine the file name to save the file as.
   # If no path is provided, use the OSF file name.
   # If a path is provided, determine if the path is just a folder path or if
@@ -497,33 +502,58 @@ get_files_info <- function(id, private = FALSE) {
 #' Get file download link for the latest version of a file (for direct reading)
 #'
 #' @param id Specify the file id (osf.io/XXXXX)
-#' @param private Boolean to specify whether file is private
+#' @param view_only Specify the view-only link (string)
 #'
 #' @return Return download link (online)
 #' @examples
 #' \dontrun{
 #' read.csv(path_file("5z2bh"))
+#' read.csv(path_file('852dp',
+#'   view_only = 'https://osf.io/jy9gm/?view_only=a500051f59b14a988415f08539dbd491'))
 #' }
 #' @importFrom utils tail
 #' @export
+#' @seealso \code{\link{download_files}}
 
-path_file <- function(id, private = FALSE) {
-  config <- get_config(private)
+path_file <- function(id, view_only = NULL) {
+  config <- list()
 
-  typ <- process_type(id)
+  url_osf <- construct_link(paste0('guids/', id))
+  call <- httr::GET(url_osf, config)
+  res <- process_json(call)
 
-  if (typ == 'nodes') {
-    stop('Specify an OSF id referring to a file.')
-  } else if (typ == 'files') {
-    url_osf <- construct_link(paste0('guids/', id))
-    call <- httr::GET(url_osf, config)
+  # Check if data from processed json is empty and get the file information
+  # using authentication. If a view-only link is present, then the file is
+  # downloaded using the view-only link. If no view-only link is present,
+  # then the file is downloaded with the user's login.
+  if (is.null(res$data) && !is.null(view_only)) {
+    # Remove the view-only tag from the provided view-only link and paste to
+    # the file url
+    view_only_url <- paste0(url_osf, '/', gsub(".*/", "", view_only))
+
+    call <- httr::GET(view_only_url, config)
+
+    if (!call$status_code == 200) {
+      stop('Failed. Are you sure you have access to the file?')
+    }
+
     res <- process_json(call)
-    } else {
-    stop('Unknown error occurred. Please file issue on GitHub.')
+
+  } else if (is.null(res$data) && is.null(view_only)) {
+    config <- get_config(TRUE)
+
+    call <- httr::GET(url_osf, config)
+
+    if (!call$status_code == 200) {
+      stop('Failed. Are you sure you have access to the file?')
+    }
+
+    res <- process_json(call)
   }
 
-  if (!call$status_code == 200) {
-    stop('Failed. Are you sure you have access to the file?')
+  # Check if returned information is of type "files"
+  if (res$data$type != "files") {
+    stop("Please specify an OSF id referring to a file.")
   }
 
   return(res$data$links$download)
