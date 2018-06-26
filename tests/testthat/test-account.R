@@ -4,7 +4,7 @@ test_that("login works", {
   # Get an error if login does not have a PAT
   expect_error(login())
 
-  # Login changes the environmental variable to the PAT
+  # login() changes the environmental variable to the PAT
   Sys.setenv(OSF_PAT = "")
   login(pat = osf_pat)
   expect_equal(osf_pat, Sys.getenv("OSF_PAT"))
