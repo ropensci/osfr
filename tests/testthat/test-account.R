@@ -16,6 +16,13 @@ test_that("auth works", {
   expect_equal(auth(), osf_pat)
 })
 
+test_that("logout works", {
+  # logout() sets the system environment variable OSF_PAT to ""
+  login(pat = osf_pat)
+  logout()
+  expect_equal(Sys.getenv("OSF_PAT"), "")
+})
+
 # test_that('login works', {
 #   expect_is(login(), 'character') # make sure login works when PAT is in env
 #   expect_is(login(pat = Sys.getenv('OSF_PAT')), 'character')
