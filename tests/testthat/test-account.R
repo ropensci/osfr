@@ -1,4 +1,4 @@
-context('account operations')
+context('authentication functions')
 
 test_that("login works", {
   # Get an error if login does not have a PAT
