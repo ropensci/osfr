@@ -23,4 +23,9 @@ from the .Renviron file if it has been stored. Removing the PAT from the
 
 ## Removed Features
 
+* `welcome()` has been removed.
+* The search functions `search_nodes()`, `search_users()`, and `search_osf()` 
+have been removed and will be returned in a future release.
+* `get_users()` has been removed and will be returned in a future release.
+
 ## Minor Fixes
