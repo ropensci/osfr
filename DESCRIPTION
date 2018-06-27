@@ -9,6 +9,8 @@ Authors@R: c(person( "Chris","Hartgerink", email = "chjh@protonmail.com", role =
     person("Ryan","Hafen",  email = "rhafen@gmail.com", role =
     c("aut")),
     person("Julien", "Colomb",  email = "julien.colomb¬fu-berlin.de", role =
+    c("aut")), 
+    person("Brian", "Richards", email = "brian.g.richards@gmail.com", role = 
     c("aut"))
     )
 Description: Providing ways to interface with the Open Science Framework inside
