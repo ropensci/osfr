@@ -39,5 +39,9 @@ have been removed and will be returned in a future release.
 
 ## Minor Fixes
 
+* `create_folder()` now allows for the creation of sub-folders. 
 * `get_files_info()` should now return a GUID for every file that has been 
 previously viewed on OSF using a browswer.
+* `get_nodes()` with the `files` argument set to `TRUE` now returns information 
+on all of the nodes in osfstorage instead of a listing of possible storage 
+providers.
