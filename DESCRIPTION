@@ -1,6 +1,6 @@
 Package: osfr
 Title: API to the Open Science Framework
-Version: 0.1.0
+Version: 0.1.0.9000
 Maintainer: Chris Hartgerink <chjh@protonmail.com>
 Authors@R: c(person( "Chris","Hartgerink", email = "chjh@protonmail.com", role =
     c("aut", "cre")),
