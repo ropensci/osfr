@@ -19,7 +19,16 @@ from the .Renviron file if it has been stored. Removing the PAT from the
 
 ### Files
 
-## New Features
+* `download_files()` no longer uses the `private` argument to check whether a 
+file is public or private. All files are initially assumed to be public. If the 
+file cannot be accessed, the file is assumed to be private and is downloaded 
+using the user's login information.
+* `download_files()` can now accept view-only links as additional credentials 
+when downloading private files.
+* `upload_files()` can now be used to upload a new file to a sub-folder in the 
+OSF directory.
+* `path_file()` is a new function that acts similarly to `download_files()`, but 
+returns the file download link instead of the file itself.
 
 ## Removed Features
 
