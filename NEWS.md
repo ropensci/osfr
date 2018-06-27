@@ -30,6 +30,13 @@ OSF directory.
 * `path_file()` is a new function that acts similarly to `download_files()`, but 
 returns the file download link instead of the file itself.
 
+### Vignettes
+
+* A "Getting Started with osfr" vignette is now available. This vignette covers 
+information on how to log into OSF using `osfr`, how to use the basic 
+functionality of `osfr`, and a brief overview of other provided functionality. 
+The vignette also contains links to relevant guides from the OSF support page.
+
 ## Removed Features
 
 * `welcome()` has been removed.
