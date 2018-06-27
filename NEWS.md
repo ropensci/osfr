@@ -38,3 +38,6 @@ have been removed and will be returned in a future release.
 * `get_users()` has been removed and will be returned in a future release.
 
 ## Minor Fixes
+
+* `get_files_info()` should now return a GUID for every file that has been 
+previously viewed on OSF using a browswer.
