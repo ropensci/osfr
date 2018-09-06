@@ -19,6 +19,8 @@ create_project <- function(
   description = '',
   private = TRUE) {
 
+  if (missing(title)) stop("Specify a project title")
+
   config <- get_config(TRUE)
   url_osf <- construct_link("nodes/")
 
