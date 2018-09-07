@@ -13,10 +13,10 @@
 
 construct_link <- function(request) {
   base <- 'https://api.osf.io/v2/'
-  # TEMPORARILY DISABLE SINCE TEST SERVER APPEARS TO BE DOWN
-  # if (!Sys.getenv('OSF_USE_SERVER') == '') {
-  #   base <- sprintf('https://%s-api.osf.io/v2/', Sys.getenv('OSF_USE_SERVER'))
-  # }
+
+  if (!Sys.getenv('OSF_USE_SERVER') == '') {
+    base <- sprintf('https://api.%s.osf.io/v2/', Sys.getenv('OSF_USE_SERVER'))
+  }
 
   return(paste0(base, request))
 }
