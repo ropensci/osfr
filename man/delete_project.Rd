@@ -2,12 +2,12 @@
 % Please edit documentation in R/projects.R
 \name{delete_project}
 \alias{delete_project}
-\title{Delete a project from the OSF}
+\title{Delete a project from OSF}
 \usage{
 delete_project(id, recursive = FALSE, maxdepth = 5)
 }
 \arguments{
-\item{id}{OSF id (osf.io/xxxx)}
+\item{id}{OSF id (osf.io/XXXXX)}
 
 \item{recursive}{Boolean, if TRUE will go through folder nesting (see \code{maxdepth})}
 
@@ -17,5 +17,9 @@ delete_project(id, recursive = FALSE, maxdepth = 5)
 Boolean, delete success
 }
 \description{
-Delete a project from the OSF
+Delete a project from OSF
+}
+\examples{
+\dontrun{
+delete_project(id = "12345")}
 }

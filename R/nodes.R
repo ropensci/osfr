@@ -1,5 +1,11 @@
 #' Retrieve nodes associated with id
 #'
+#' This function retrieves the JSON returned by the OSF API for a given OSF id.
+#' If the \code{contributors}, \code{files}, or \code{children} arguments are
+#' set to \code{TRUE}, then the linked JSON for that category is returned. Note
+#' that only one of \code{contributors}, \code{files}, and \code{children} can
+#' be selected.
+#'
 #' @param id The id to search for. Use `NULL` to retrieve all,
 #' `me` for logged in account. Maximum of 1 id.
 #' @param contributors Boolean to extract the contributors of the node
@@ -11,9 +17,10 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{get_nodes()
+#' \dontrun{
+#' get_nodes()
 #' get_nodes(id = 'me')
-#' get_nodes(id = 'nu97z')
+#' get_nodes(id = 'm5pds')
 #' }
 
 get_nodes <- function(
@@ -48,7 +55,8 @@ get_nodes <- function(
   }
 
   if (files) {
-    call <- httr::GET(res$data$relationships$files$links$related$href, config)
+    # Change to access actual files id under guid tag within osfstorage
+    call <- httr::GET(paste0(res$data$relationships$files$links$related$href, "/osfstorage/"), config)
     res <- process_json(call)
   }
 
@@ -74,7 +82,7 @@ get_nodes <- function(
 
 #' Function to crawl through OSF project
 #'
-#' @param id OSF parent ID (osf.io/xxxx) to crawl
+#' @param id OSF parent ID (osf.io/XXXXX) to crawl
 #' @param private Boolean, search for private too?
 #' @param maxdepth Integer, amount of levels deep to crawl
 #' @param path_id Boolean, whether to return paths and ids

@@ -2,26 +2,31 @@
 % Please edit documentation in R/files.R
 \name{upload_zip}
 \alias{upload_zip}
-\title{Zip up a directory and upload the zip to the OSF (both new and revised)}
+\title{Zip up a directory and upload the zip to OSF (both new and revised)}
 \usage{
 upload_zip(id, path, dest = NULL)
 }
 \arguments{
-\item{id}{OSF id (osf.io/XXXX) to upload to. Specify project to upload new file,
-specify a file to upload a revision.}
+\item{id}{OSF id (osf.io/XXXXX) to upload to. Specify a project id to upload
+a new zip file. Specify a file id to upload a revised zip file.}
 
 \item{path}{Path to directory on local machine to zip up and upload.}
 
-\item{dest}{Name of the destination file on OSF (if \code{NULL}, \code{basename(path)} with a '.zip' suffix will be used). Note that this can be used to specify what folder to place files in, e.g. 'my_folder/my_directory.zip'. Also note that if \code{id} is a file ID, this is not necessary.}
+\item{dest}{Name of the destination file on OSF (if \code{NULL},
+\code{basename(path)} with a '.zip' suffix will be used). Note that this can
+be used to specify what folder to place files in, e.g.
+'my_folder/my_directory.zip'. Also note that if \code{id} is a file ID, this
+is not necessary.}
 }
 \value{
 Boolean of upload success
 }
 \description{
-Zip up a directory and upload the zip to the OSF (both new and revised)
+Zip up a directory and upload the zip to OSF (both new and revised)
 }
 \examples{
 \dontrun{
-upload_zip(id = '12345', path = 'my_dir')
+upload_zip(id = "12345", path = "my_dir")
+upload_zip(id = "12345", path = "my_dir", dest = "my_folder/my_directory.zip")
 }
 }

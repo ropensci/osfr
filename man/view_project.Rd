@@ -7,8 +7,13 @@
 view_project(id)
 }
 \arguments{
-\item{id}{OSF id (osf.io/XXXX; just XXXX)}
+\item{id}{OSF id (osf.io/XXXXX; just XXXXX)}
 }
 \description{
-View an OSF project on osf.io
+This function opens the project in a web browser. If the project is private,
+you will be asked to log into OSF from the browser.
+}
+\examples{
+\dontrun{
+view_project(id = "m5pds")}
 }

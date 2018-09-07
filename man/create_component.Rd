@@ -8,7 +8,7 @@ create_component(id, title, description = "", category = "project",
   private = TRUE)
 }
 \arguments{
-\item{id}{OSF id (osf.io/XXXX; just XXXX) of parent project}
+\item{id}{OSF id (osf.io/XXXXX; just XXXXX) of parent project}
 
 \item{title}{Title of the component [required]}
 
@@ -23,7 +23,13 @@ see \code{\link{process_category}}, defaults to `project`}
 OSF id of created component
 }
 \description{
-Create a component within a project
+This function creates a new component within a project. New components can
+be created as private or public components using the \code{private} argument.
+}
+\examples{
+\dontrun{
+create_component("12345", "New Test Component")
+}
 }
 \seealso{
 \code{\link{create_project}}

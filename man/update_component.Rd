@@ -7,7 +7,7 @@
 update_component(id, private = FALSE)
 }
 \arguments{
-\item{id}{OSF id (osf.io/XXXX; just XXXX)}
+\item{id}{OSF id (osf.io/XXXXX; just XXXXX)}
 
 \item{private}{Set project to private/public (default changes to public)}
 }
@@ -15,8 +15,15 @@ update_component(id, private = FALSE)
 Boolean, update success
 }
 \description{
-Simply wraps the \code{\link{update_project}} function
-because it has the same operations.
+This function updates the private/public status of a component. By default,
+the function turns a private component into a public component. This
+function simply wraps the \code{\link{update_project}} function
+as it has the same operations.
+}
+\examples{
+\dontrun{
+update_component("12345")
+}
 }
 \seealso{
 \code{\link{update_project}}

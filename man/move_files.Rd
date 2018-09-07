@@ -2,15 +2,15 @@
 % Please edit documentation in R/files.R
 \name{move_files}
 \alias{move_files}
-\title{Move (and copy) files on the OSF}
+\title{Move (and copy) files on OSF}
 \usage{
 move_files(from = NULL, to = NULL, filename = NULL, action = "move",
   conflict = "replace")
 }
 \arguments{
-\item{from}{OSF file id to move (osf.io/xxxx; just xxxx)}
+\item{from}{OSF file id to move (osf.io/XXXXX; just XXXXX)}
 
-\item{to}{OSF id to move to (osf.io/xxxx; needs to be component)}
+\item{to}{OSF id to move to (osf.io/XXXXX; needs to be component)}
 
 \item{filename}{Optional, rename the file}
 
@@ -22,5 +22,5 @@ move_files(from = NULL, to = NULL, filename = NULL, action = "move",
 Boolean, moving succeeded? (invisible)
 }
 \description{
-Move (and copy) files on the OSF
+Move (and copy) files on OSF
 }

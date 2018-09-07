@@ -2,7 +2,7 @@
 % Please edit documentation in R/folders.R
 \name{delete_folder}
 \alias{delete_folder}
-\title{Delete a folder on the OSF}
+\title{Delete a folder on OSF}
 \usage{
 delete_folder(url)
 }
@@ -13,7 +13,7 @@ delete_folder(url)
 Boolean, deletion success?
 }
 \description{
-Delete a folder on the OSF
+Delete a folder on OSF
 }
 \seealso{
 \code{\link{create_folder}}

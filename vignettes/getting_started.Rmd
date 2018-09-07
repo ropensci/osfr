@@ -1,0 +1,220 @@
+---
+title: "Getting Started with osfr"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with osfr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+[OSF](https://osf.io) from the [Center for Open Science (COS)](https://cos.io/) 
+is a web application that provides free and open source project management 
+support for researchers across the entire research lifecycle. As a collaboration 
+tool, OSF helps researchers work on projects privately with a limited number of 
+collaborators and make parts of their projects public, or make all the project 
+publicly accessible for broader dissemination. As a workflow system, OSF enables 
+connections to the many services researchers already use to streamline their 
+process and increase efficiency. As a flexible repository, it can store and 
+archive research data, protocols, and materials.
+
+`osfr` is a package used to connect with the OSF API. This package allows you 
+to download files from an OSF project, upload files to an OSF project, and 
+interact with files, folders, projects, and other features of OSF. More 
+importantly, you can interact with OSF directly from R, allowing you to use 
+OSF as part of your workflow.
+
+This vignette will introduce you to how to login to OSF through R, how to 
+download files, and how to upload files. At the end of the vignette will be a 
+brief overview of the other functionality provided by `osfr`.
+
+## Authentication
+
+Many of the functions available in `osfr` require the user to log in to OSF. 
+Instead of using your username and password, `osfr` makes use of a personal 
+access token (PAT) that you create through OSF. With this PAT, you 
+can download files from private projects, upload files to projects, create 
+new projects, and more.
+
+### Creating a Personal Access Token (PAT) through OSF
+
+To create a PAT, log in to OSF through a web browser and go to the 
+[OSF settings page](https://osf.io/settings/tokens/) and click the "New token" 
+button. Fill out the form on the following page providing a name for the new 
+token along with what access the token will allow. Once the PAT has been 
+created, save it to a secure location.
+
+*Note: Keep the token you create safe! It acts just like your username and 
+password!*
+
+### How to log in to OSF
+
+To make use of most of the functionality of `osfr`, you will be required to 
+log in to OSF using a PAT. The `login()` function can be used to log in to OSF.
+
+```{r, eval = FALSE}
+login("your-personal-access-token")
+```
+
+By default, your PAT is only stored for your current session. To store your 
+login across session, your PAT can be saved to the `.Renviron` file by setting 
+the `store` argument to `TRUE`. 
+
+```{r, eval = FALSE}
+login("your-personal-access-token", store = TRUE)
+```
+
+### How to log out and why
+
+To remove your PAT from the session environment, you can use the `logout()` 
+function.
+
+```{r, eval = FALSE}
+logout()
+```
+
+The `logout()` function will only remove the PAT from the session environment. 
+It will not remove any PAT's stored in the `.Renviron` file. Those must be 
+removed manually.
+
+Remember that your PAT acts just like your username and password! Do not leave 
+your PAT in any files you plan to share with others. This includes leaving your 
+PAT in a file that is uploaded to a file sharing or version control platform 
+(GitHub, BitBucket, Google Drive, etc.).
+
+## Interacting with OSF and GUIDs
+
+Every project and file is assigned a [globally unique identifier (GUID)](http://help.osf.io/m/faqs/l/726460-faqs#what-s-a-globally-unique-identifier-guid-what-metadata-is-maintained-about-them) 
+on OSF. This GUID provides a stable link to the object it is assigned to. The 
+GUID is used throughout the functions in `osfr` to address projects and files. 
+To get the GUID, navigate to the project or file on OSF in a web browser. 
+The GUID is the five character string at the end of the url for the project or 
+file.
+
+### Demo Project
+
+A demo project for using `osfr` can be found at 
+[https://osf.io/m5pds/](https://osf.io/m5pds/). The GUID for this demo project 
+is "m5pds". A demo file available in this project can be found at 
+[https://osf.io/5z2bh/](https://osf.io/5z2bh/). The GUID for this demo file is 
+"5z2bh". 
+
+## Files
+
+The primary use case for `osfr` is to interact with the files you have stored 
+on OSF. This package provides functions to help you both download and 
+upload files to OSF. 
+
+### Downloading Files
+
+The `download_files()` function allows you to download both public and private 
+files from the OSF. To download public files, you only need to provide a GUID 
+for the file you want to download. To download private files that you have 
+access to, you will also need to be logged in using a PAT. The location that the 
+file will be downloaded to can be provided in the optional `path` argument.
+
+```{r, eval = FALSE}
+download_files('5z2bh', path = 'public_test_file.csv')
+```
+
+If the file being downloaded has multiple versions, the specific version of the 
+file can be downloaded using the `version` argument.
+
+#### View-only Links
+
+OSF allows you to [create view-only links to your projects](http://help.osf.io/m/links_forks/l/524049-create-a-view-only-link-for-a-project) 
+so that private projects can be shared without giving full access to the 
+project. For example, you may want to share some R code that downloads a file 
+from your private project before doing some analysis. To download a file using 
+a view-only link, provide the view-only link to the `view_only` argument.
+
+```{r, eval = FALSE}
+download_files('852dp', path = 'view_only_test_file.csv', view_only = 'https://osf.io/jy9gm/?view_only=a500051f59b14a988415f08539dbd491')
+```
+
+### Uploading Files
+
+`upload_files()` allows you to upload a file from your local machine to 
+OSF. Both new files and revised files can be uploaded to OSF. Revised files 
+that are uploaded to OSF make automatic use of [OSF's versioning 
+capabilities](http://help.osf.io/m/projectfiles/l/524182-file-revisions-and-version-control).
+
+#### New files
+
+To [upload a new file](http://help.osf.io/m/projectfiles/l/482002-upload-files), 
+you must provide a GUID for a project and the local path 
+of the file you are uploading. Optionally, you can provide a destination for 
+the file to specify the folder destination and/or file name of the uploaded 
+file.
+
+```{r, eval = FALSE}
+upload_files('m5pds', path = 'local_file.csv', dest = 'upload_file_on_OSF.csv')
+```
+
+#### Revised files
+
+To upload a revised file, you must provide a GUID for the file and the local 
+path of the file you are uploading.
+
+```{r, eval = FALSE}
+upload_files('5z2bh', path = 'local_file.csv')
+```
+
+## Other Functionality
+
+`osfr` allows you to interact with the OSF in a number of other ways. Most of 
+these functions let you interact with files, folders, and projects on OSF.
+
+### Other File Functions
+
+You can use `osfr` to interact with files in the following ways:
+
+* `move_files()` lets you 
+[move a file](http://help.osf.io/m/projectfiles/l/735236-move-files) 
+between projects/components.
+* `upload_zip()` lets you zip up a directory and upload it to OSF.
+* `delete_files()` lets you 
+[delete a file](http://help.osf.io/m/projectfiles/l/741689-delete-a-file) 
+from OSF.
+
+### Projects
+
+You can use `osfr` to interact with projects in the following ways: 
+
+* `create_project()` lets you [create a new OSF project](http://help.osf.io/m/projects/l/481539-create-a-project).
+* `update_project()` lets you [switch a project from private to public](http://help.osf.io/m/projects/l/524048-control-your-privacy-settings).
+* `view_project()` opens up a browser view of a project (requires user to be 
+logged into OSF).
+* `delete_project()` lets you 
+[delete a project](http://help.osf.io/m/projects/l/812227-delete-a-project) 
+from OSF.
+
+There are also several functions that allow you to [create components](http://help.osf.io/m/projects/l/481998-create-components) 
+for your projects. The `create_component()`, `update_component()`, and 
+`delete_component()` functions all perform the same actions as the related 
+project functions, but work with the child components instead.
+
+### Folders
+
+You can use `osfr` to interact with folders in the following ways:
+
+* `create_folder()` lets you 
+[create a folder](http://help.osf.io/m/projectfiles/l/524183-create-and-manage-folders) 
+on OSF.
+* `delete_folder()` lets you delete a folder on OSF.
+
+## More Information
+
+For more information on OSF and `osfr` check out:
+
+* [OSF](https://osf.io)
+* [OSF API Documentation](https://developer.osf.io/)
+* [OSF Support](https://osf.io/support/)
+* [osfr GitHub Repository](https://github.com/CenterForOpenScience/osfr)

@@ -9,4 +9,4 @@ r_binary_packages:
 - lintr
 
 after_success:
-- Rscript -e 'covr::codecov()'
+- Rscript -e 'covr::coveralls()'

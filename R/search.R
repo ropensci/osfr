@@ -5,6 +5,7 @@
 #' @param id Search for node id
 #' @param tags Search node tags
 #' @param private Boolean, search private nodes as well (TRUE) or not (FALSE)
+#' @param license not used in function
 #'
 #' @details The categories available are:
 #' \itemize{
