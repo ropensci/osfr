@@ -20,7 +20,7 @@ Date: 20180101
 Depends: R (>= 3.1.0)
 Imports:
     httr,
-    rjson,
+    jsonlite,
     stringr,
     plyr
 License: MIT + file LICENSE

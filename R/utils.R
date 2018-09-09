@@ -48,7 +48,7 @@ process_type <- function(id) {
 #' @return Parsed JSON object in the form of an R object.
 
 process_json <- function(x) {
-  rjson::fromJSON(httr::content(x, 'text', encoding = "UTF-8"))
+  jsonlite::fromJSON(httr::content(x, 'text', encoding = 'UTF-8'))
 }
 
 #' Processing whether a category is valid
