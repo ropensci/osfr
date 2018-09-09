@@ -39,8 +39,9 @@ comment_osf <- function(id, txt) {
   call <- httr::POST(url = url_osf, body = comment, encode = "json", config)
 
   if (!call$status_code == 201) {
-      stop(sprintf("Posting comment to node %s failed.", id))
-    }
+    http_error(call$status_code,
+               sprintf("Posting comment to node %s failed.", id))
+  }
 
   return(TRUE)
 }

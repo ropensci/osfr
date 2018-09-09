@@ -59,7 +59,8 @@ process_file_id <- function(id, private = FALSE) {
   res <- process_json(call)
 
   if (call$status_code != 200) {
-    stop('Failed to retrieve information. Sure it is public?')
+    http_error(call$status_code,
+               'Failed to retrieve information. Sure it is public?')
   }
 
   return(res$data$links$move)

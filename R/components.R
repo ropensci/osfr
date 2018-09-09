@@ -49,7 +49,7 @@ create_component <- function(
     config)
 
   if (call$status_code != 201) {
-  	stop('Failed to create new component')
+  	http_error(call$status_code, 'Failed to create new component.')
   }
 
   res <- process_json(call)
@@ -106,17 +106,20 @@ delete_component <- function(id) {
   call <- httr::DELETE(url_osf, config)
 
   if (call$status_code != 204){
-  	stop('Unable to delete node. Maybe it is not empty?
-      You may want to enable recursive = TRUE')
+  	http_error(call$status_code,
+               'Unable to delete node. Maybe it is not empty? ',
+               'You may want to set recursive = TRUE.')
   }
 
   url_osf <- construct_link(sprintf('nodes/%s', id))
 
   call <- httr::DELETE(url_osf, config)
 
-  if (call$status_code != 204)
-    stop('Unable to delete node. Maybe it is not empty?
-  You may want to enable recursive = TRUE')
+  if (call$status_code != 204) {
+    http_error(call$status_code,
+               'Unable to delete node. Maybe it is not empty? ',
+               'You may want to enable recursive = TRUE.')
+  }
 
   return(TRUE)
 }

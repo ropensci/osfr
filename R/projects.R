@@ -39,7 +39,7 @@ create_project <- function(
   call <- httr::POST(url = url_osf, body = body, encode = "json", config)
 
   if (call$status_code != 201) {
-    stop("Failed in creating new project.")
+    http_error(call$status_code, "Failed in creating new project.")
   }
 
   res <- process_json(call)
@@ -81,7 +81,7 @@ update_project <- function(id, private = FALSE) {
 
   call <- httr::PATCH(url = url_osf, body = body, encode = "json", config)
   if (call$status_code != 200) {
-    stop("Failed in updating project.")
+    http_error(call$status_code, "Failed to update project.")
   }
 
   return(TRUE)

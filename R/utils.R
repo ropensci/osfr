@@ -163,3 +163,10 @@ rm_space <- function(x) {
 
   return(res)
 }
+
+#' Stop execution with HTTP status code
+http_error <- function(code, ...) {
+  args <- list(...)
+  msg <- sprintf("\n       HTTP status code %i.", code)
+  stop(args, msg, call. = FALSE)
+}
