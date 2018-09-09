@@ -21,16 +21,14 @@ test_that("create components", {
 # view_project not tested
 # won't be implemented either.
 
-# x <- create_project('tmp')
-#
-# test_that("update project", {
-# expect_error(update_project())
-# expect_true(update_project(x, private = FALSE))
-# })
+test_that("update project", {
+  expect_error(update_project())
+  expect_true(update_project(p1, private = TRUE))
+})
 
 # test_that("clone project", {
 #   expect_error(clone_project())
-#   expect_true(clone_project(x))
+#   expect_true(clone_project(p1))
 # })
 
 test_that("delete projects", {
