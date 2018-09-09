@@ -8,7 +8,7 @@ Authors@R: c(person( "Chris","Hartgerink", email = "chjh@protonmail.com", role =
     c("aut")),
     person("Ryan","Hafen",  email = "rhafen@gmail.com", role =
     c("aut")),
-    person("Julien", "Colomb",  email = "julien.colomb¬fu-berlin.de", role =
+    person("Julien", "Colomb",  email = "julien.colomb@fu-berlin.de", role =
     c("aut")), 
     person("Brian", "Richards", email = "brian.g.richards@gmail.com", role = 
     c("aut"))
@@ -31,5 +31,5 @@ Suggests:
     testthat,
     knitr,
     rmarkdown
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 VignetteBuilder: knitr
