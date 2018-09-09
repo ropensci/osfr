@@ -31,6 +31,12 @@ test_that("update project", {
 #   expect_true(clone_project(p1))
 # })
 
+test_that("get nodes", {
+  # error because it's private
+  expect_error(get_nodes(p1))
+  expect_equal(class(get_nodes(p1, private = TRUE)), "list")
+})
+
 test_that("delete projects", {
   expect_error(delete_project())
   expect_true(delete_project(p2))
