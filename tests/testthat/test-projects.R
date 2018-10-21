@@ -1,6 +1,6 @@
 context("project operations")
 
-login(osf_pat)
+login(test_pat)
 
 # public project
 p1 <- create_project(title = 'osfr-p1', description = 'Text', private = FALSE)
