@@ -19,6 +19,7 @@ Description: Providing ways to interface with the Open Science Framework inside
 Date: 20180101
 Depends: R (>= 3.1.0)
 Imports:
+    crul,
     httr,
     jsonlite,
     stringr,
