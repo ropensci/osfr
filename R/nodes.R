@@ -144,77 +144,17 @@ get_nodes <- function(
 #' Function to crawl through OSF project
 #'
 #' @param id OSF parent ID (osf.io/XXXXX) to crawl
-#' @param private Boolean, search for private too?
 #' @param maxdepth Integer, amount of levels deep to crawl
-#' @param path_id Boolean, whether to return paths and ids
 #'
-#' @return List of OSF ids, with parents as very last.
+#' @return Character vector of OSF IDs for children of the parent, with the
+#'   parent ID listed last. If there are no child nodes to recurse, the parent
+#'   ID is returned.
 
-recurse_node <- function(
-  id = NULL,
-  private = FALSE,
-  maxdepth = 5,
-  path_id = FALSE) {
-
-  config <- get_config(private)
-
-  url_osf <- construct_link(sprintf("nodes/%s/children", id))
-  call <- httr::GET(url_osf, config)
-  res <- process_json(call)
-
-  sel <- unlist(res)
-  sel <- sel[names(sel) == "data.id"]
-
-  i <- 1
-  tmp <- sel
-  paths <- c()
-
-  while (!length(res$data) == 0 && i <= maxdepth) {
-    for (child_id in tmp) {
-      url_osf <- construct_link(sprintf("nodes/%s/children", child_id))
-
-      child_call <- httr::GET(url_osf, config)
-      child_res <- process_json(child_call)
-
-      child_sel <- unlist(child_res)
-      child_sel <- child_sel[names(child_sel) == "data.id"]
-
-      sel <- append(sel, child_sel)
-
-      if (path_id == TRUE) {
-        paths <- c(paths, sprintf('%s/%s', id, child_id))
-      	paths <- c(paths, sprintf('%s/%s/%s', id, child_id, child_sel))
-      }
-    }
-
-    i <- i + 1
-  }
-
-  # flip the id order such that the most nested node comes first
-  sel <- c(as.character(sel[length(sel):1]), id)
-
-  sel <- sel[!is.na(sel)]
-
-  if (path_id == TRUE) {
-      res <- pathify(paths)
-      } else {
-  	res <- unique(sel)
-  }
-  return(res)
+recurse_node <- function(id, maxdepth = 5) {
+  node_tree <- recurse_tree(id, maxdepth)
+  simplify_tree(
+    setNames(list(node_tree), id)
+  )
 }
 
-pathify <- function (x) {
-  id <- stringr::str_extract(pattern = '([A-Za-z0-9]{5})$', string = unique(x))
-  path <- stringr::str_extract_all(pattern = '([A-Za-z0-9]{5})', string = unique(x))
-  obj <- c()
-  for (i in 1:length(path)) {
-    add <- paste(apply(t(path[[i]]),
-      2,
-      function (x) get_nodes(x)$data$attributes$title),
-     collapse ='/')
-    obj <- c(obj, add)
-  }
 
-  res <- data.frame(path = obj,
-                    id = id, stringsAsFactors = FALSE)
-}
