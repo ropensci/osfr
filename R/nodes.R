@@ -27,6 +27,40 @@ create_node <- function(
 }
 
 
+# Update a node
+update_node <- function(
+  id,
+  title = NULL,
+  description = NULL,
+  private = NULL) {
+
+  if (missing(id)) stop("Must specify a node identifier")
+  public <- if (is.logical(private)) !private else NULL
+
+  body <- list(
+    data = list(
+      type = "nodes",
+      id = id,
+      attributes = list()
+    )
+  )
+
+  attrs <- list(title = title, description = description, public = public)
+  body$data$attributes <- utils::modifyList(body$data$attributes, attrs)
+
+  if (length(body$data$attributes) == 0) {
+    stop("No updated attribute values specified")
+  }
+
+  cli <- osf_cli()
+  path <- osf_path(sprintf('nodes/%s/', id))
+  res <- cli$patch(path, body = body, encode = "json")
+  res$raise_for_status()
+
+  jsonlite::fromJSON(res$parse("UTF-8"))
+}
+
+
 #' Retrieve nodes associated with id
 #'
 #' This function retrieves the JSON returned by the OSF API for a given OSF id.

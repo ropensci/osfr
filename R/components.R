@@ -55,8 +55,9 @@ create_component <- function(
 #' update_component("12345")
 #' }
 
-update_component <- function(id, private = FALSE) {
-  update_project(id, private)
+update_component <- function(id, title = NULL, description = NULL, private = NULL) {
+  out <- update_node(id, title, description, private)
+  out$data$id
 }
 
 

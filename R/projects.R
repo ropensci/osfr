@@ -42,26 +42,9 @@ create_project <- function(
 #' \dontrun{
 #' update_project(id = "12345")}
 
-update_project <- function(id, private = FALSE) {
-  config <- get_config(TRUE)
-  url_osf <- construct_link(sprintf("nodes/%s/", id))
-
-  body <- list(
-    data = list(
-      type = "nodes",
-      id = id,
-      attributes = list(
-        public = !private
-      )
-    )
-  )
-
-  call <- httr::PATCH(url = url_osf, body = body, encode = "json", config)
-  if (call$status_code != 200) {
-    http_error(call$status_code, "Failed to update project.")
-  }
-
-  return(TRUE)
+update_project <- function(id, title = NULL, description = NULL, private = NULL) {
+  out <- update_node(id, title, description, private)
+  out$data$id
 }
 
 #' Clone OSF project to desktop
