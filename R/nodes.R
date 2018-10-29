@@ -1,3 +1,32 @@
+# Create a new node
+create_node <- function(
+  path,
+  title,
+  description = '',
+  private = TRUE) {
+
+  if (missing(title)) stop("Specify a node title")
+
+  body <- list(
+    data = list(
+      type = "nodes",
+      attributes = list(
+        title = title,
+        category = "project",
+        description = description,
+        public = !private
+      )
+    )
+  )
+
+  cli <- osf_cli()
+  res <- cli$post(path, body = body, encode = "json")
+  res$raise_for_status()
+
+  jsonlite::fromJSON(res$parse("UTF-8"))
+}
+
+
 #' Retrieve nodes associated with id
 #'
 #' This function retrieves the JSON returned by the OSF API for a given OSF id.

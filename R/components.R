@@ -26,36 +26,13 @@ create_component <- function(
   category = 'project',
   private = TRUE) {
 
+  if (missing(id)) stop("Specify ID of a parent project")
+  if (missing(title)) stop("Specify a component title")
   process_category(category)
-  config <- get_config(TRUE)
+  path <- osf_path(sprintf('nodes/%s/children/', id))
 
-  url_osf <- construct_link(sprintf('nodes/%s/children/', id))
-
-  body <- list(
-    data = list(
-      type = 'nodes',
-      attributes = list(
-        title = title,
-        category = category,
-        description = description,
-        public = (!private)
-      )
-    )
-  )
-
-  call <- httr::POST(
-    url = url_osf,
-    body = body, encode = 'json',
-    config)
-
-  if (call$status_code != 201) {
-  	http_error(call$status_code, 'Failed to create new component.')
-  }
-
-  res <- process_json(call)
-  id <- res$data$id
-
-  return(id)
+  out <- create_node(path, title, description, private)
+  out$data$id
 }
 
 

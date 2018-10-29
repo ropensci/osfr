@@ -20,32 +20,9 @@ create_project <- function(
   private = TRUE) {
 
   if (missing(title)) stop("Specify a project title")
-
-  config <- get_config(TRUE)
-  url_osf <- construct_link("nodes/")
-
-  body <- list(
-    data = list(
-      type = "nodes",
-      attributes = list(
-        title = title,
-        category = "project",
-        description = description,
-        public = !private
-      )
-    )
-  )
-
-  call <- httr::POST(url = url_osf, body = body, encode = "json", config)
-
-  if (call$status_code != 201) {
-    http_error(call$status_code, "Failed in creating new project.")
-  }
-
-  res <- process_json(call)
-  id <- res$data$id
-
-  return(id)
+  path <- osf_path("nodes/")
+  out <- create_node(path, title, description, private)
+  out$data$id
 }
 
 #' Update an OSF project
