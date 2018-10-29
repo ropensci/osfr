@@ -2,45 +2,40 @@ context("project operations")
 
 login(test_pat)
 
-# public project
-p1 <- create_project(title = 'osfr-p1', description = 'Text', private = FALSE)
-# private project
-p2 <- create_project(title = 'osfr-p2')
+p1 <- create_project(title = "osfr-project-tests", "Test project operations")
 
 test_that("create projects", {
-  expect_error(create_project(), regexp = 'Specify a project title')
+  expect_error(create_project(), "Specify a project title")
   expect_true(is_valid_osf_id(p1))
-  expect_true(is_valid_osf_id(p2))
 })
-
-test_that("create components", {
-  c1 <- create_component(p1, title = 'osfr-component')
-  expect_true(is_valid_osf_id(c1))
-})
-
-# view_project not tested
-# won't be implemented either.
-
-test_that("update project", {
-  expect_error(update_project())
-  expect_true(update_project(p1, private = TRUE))
-})
-
-# test_that("clone project", {
-#   expect_error(clone_project())
-#   expect_true(clone_project(p1))
-# })
 
 test_that("get nodes", {
-  # error because it's private
-  expect_error(get_nodes(p1))
-  expect_equal(class(get_nodes(p1, private = TRUE)), "list")
+  expect_error(get_nodes(p1, private = FALSE))
+  nodes <- get_nodes(p1, private = TRUE)
+  expect_is(nodes, "list")
 })
 
-test_that("delete projects", {
-  expect_error(delete_project())
-  expect_true(delete_project(p2))
-
-  expect_error(delete_project(p1))
-  expect_true(delete_project(p1, recursive = TRUE))
+test_that("update project assertions", {
+  expect_error(update_project(),   "Must specify a node identifier")
+  expect_error(update_project(p1), "No updated attribute values specified")
 })
+
+test_that("update project title", {
+  title <- "osfr-p1-updated"
+  p1 <- update_project(p1, title = title)
+  p1_attrs <- get_nodes(p1, private = TRUE)$data$attributes
+  expect_match(p1_attrs$title, title)
+})
+
+test_that("update project privacy", {
+  p1 <- update_project(p1, private = FALSE)
+  p1_attrs <- get_nodes(p1, private = TRUE)$data$attributes
+  expect_true(p1_attrs$public)
+})
+
+test_that("project deletion", {
+  out <- delete_project(p1)
+  expect_match(out, p1)
+  expect_error(delete_project(p1), "The requested node is no longer available")
+})
+
