@@ -92,31 +92,6 @@ clone_project <- function(id, private = FALSE, maxdepth = 5) {
   return(TRUE)
 }
 
-#' Delete a project from OSF
-#'
-#' @param id OSF id (osf.io/XXXXX)
-#' @param recursive Boolean, if TRUE will go through folder nesting (see \code{maxdepth})
-#' @param maxdepth Number of nesting levels to go through
-#'
-#' @return Boolean, delete success
-#' @export
-#' @examples
-#' \dontrun{
-#' delete_project(id = "12345")}
-
-delete_project <- function(id, recursive = FALSE, maxdepth = 5) {
-  if (recursive) {
-    del_id <- recurse_node(id, private = TRUE, maxdepth)
-    for (each in del_id) {
-      delete_component(each)
-      message(sprintf("Deleted subcomponent %s", each))
-    }
-  } else {
-    delete_component(id)
-  }
-
-  return(TRUE)
-}
 
 #' View an OSF project on osf.io
 #'
