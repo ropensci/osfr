@@ -1,37 +1,23 @@
 #' Delete a project or component
 #'
 #' Functions to \strong{permanently} delete a project or component from OSF,
-#' including any uploaded files, wiki content, or comments contained therein. NOTE: this
-#' process does not request confirmation, so please handle with care. If you do
-#' not have backups of the files, it is easy to lose everything (in the
-#' component).
+#' including any uploaded files, wiki content, or comments contained therein.
+#' This process does not request confirmation, so please \strong{handle with
+#' care}. This functionality is limited to contributors with admin-level
+#' permissions.
 #'
-#' @section: Recursion
-#' A node cannot be deleted if it contains any sub-components.
+#' If the project or component contains sub-components, those must be deleted
+#' first. Setting \code{recursive = TRUE} will attempt to remove the hierarchy
+#' of sub-components before deleting the top-level entity.
 #'
-#' @section: Permissions
-#' Deletion is limited to users with admin-level rights.
+#' @param id the OSF entity's unique identifier
+#' @param recursive remove sub-components before deleting the top-level entity
 #'
-#' @param id OSF id (osf.io/XXXXX)
-#' @param recursive should child nodes be deleted recursively?
-#'
-#' @section Projects:
-#' If a project contains any components, those must be deleted first before proceeding.
-#'
-#' However, if I a project contains any files they will not prevent deletion.
-#'
-#' @section Components
-#'
-#'
-#' @name delete
-#' @return Boolean, delete success
+#' @return the deleted entity's unique identifier (invisibly)
 #' @examples
 #' \dontrun{
-#' delete_project(id = "12345")}
-NULL
-
+#' delete_project(id = "y7w8p")}
 #' @export
-#' @rdname delete
 delete_project <- function(id, recursive = FALSE) {
   if (recursive) {
     child_ids <- recurse_node(id)
@@ -48,8 +34,8 @@ delete_project <- function(id, recursive = FALSE) {
   delete_node(id)
 }
 
+#' @rdname delete_project
 #' @export
-#' @rdname delete
 delete_component <- function(id, recursive = FALSE) {
   delete_project(id, recursive)
 }
