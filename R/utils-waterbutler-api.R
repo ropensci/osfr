@@ -65,3 +65,38 @@ process_file_id <- function(id, private = FALSE) {
 
   return(res$data$links$move)
 }
+
+
+# Appends API version to a specificed path
+# id: OSF project guid
+# provider: storage provider (default: osfstorage)
+#
+wb_path <- function(id, provider = "osfstorage") {
+  sprintf("v%i/resources/%s/providers/%s/", floor(.wb_api_version), id, provider)
+}
+
+# Construct the WaterButler API Client
+wb_cli <- function(pat = osf_pat()) {
+
+  url <- ifelse(Sys.getenv('OSF_USE_SERVER') == "test",
+                   "https://files.us.test.osf.io",
+                   "https://files.osf.io")
+
+  headers <- list(
+    `User-Agent` = user_agent()
+  )
+
+  if (!is.null(pat)) {
+    headers$Authorization = sprintf('Bearer %s', pat)
+  }
+
+  crul::HttpClient$new(
+    url = url,
+    opts = list(
+      timeout = 5,
+      encode = "raw"
+    ),
+    headers = headers
+  )
+}
+

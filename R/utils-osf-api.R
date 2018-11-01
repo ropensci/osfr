@@ -53,7 +53,7 @@ user_agent <- function(agent = "osfr") {
 
 # Appends API version to a specificed path
 osf_path <- function(path) {
-  sprintf("v%s/%s", floor(.api_version), path)
+  sprintf("v%s/%s", floor(.osf_api_version), path)
 }
 
 # Construct the OSF API Client
@@ -67,7 +67,7 @@ osf_cli <- function(pat = osf_pat()) {
 
   headers <- list(
     `User-Agent` = user_agent(),
-    `Accept-Header` = sprintf("application/vnd.api+json;version=%s", .api_version)
+    `Accept-Header` = sprintf("application/vnd.api+json;version=%s", .osf_api_version)
   )
 
   if (!is.null(pat)) {
