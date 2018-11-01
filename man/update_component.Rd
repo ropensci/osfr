@@ -4,7 +4,8 @@
 \alias{update_component}
 \title{Update a component on the OSF}
 \usage{
-update_component(id, private = FALSE)
+update_component(id, title = NULL, description = NULL,
+  private = NULL)
 }
 \arguments{
 \item{id}{OSF id (osf.io/XXXXX; just XXXXX)}

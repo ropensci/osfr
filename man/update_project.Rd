@@ -4,7 +4,7 @@
 \alias{update_project}
 \title{Update an OSF project}
 \usage{
-update_project(id, private = FALSE)
+update_project(id, title = NULL, description = NULL, private = NULL)
 }
 \arguments{
 \item{id}{OSF id (osf.io/XXXX; just XXXX)}

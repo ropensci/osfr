@@ -4,10 +4,13 @@
 \alias{clone_project}
 \title{Clone OSF project to desktop}
 \usage{
-clone_project(id, private = FALSE, maxdepth = 5)
+clone_project(id, path = getwd(), private = FALSE, maxdepth = 5)
 }
 \arguments{
 \item{id}{OSF id (osf.io/XXXXX; just XXXXX)}
+
+\item{path}{a valid file path pointing to the location where the project will
+be cloned. This is your current working directy by default.}
 
 \item{private}{clone the project as seen privately?}
 

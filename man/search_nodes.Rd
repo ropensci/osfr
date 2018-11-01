@@ -4,8 +4,8 @@
 \alias{search_nodes}
 \title{Search OSF nodes}
 \usage{
-search_nodes(description = NULL, title = NULL, id = NULL, tags = NULL,
-  license = NULL, private = FALSE)
+search_nodes(description = NULL, title = NULL, id = NULL,
+  tags = NULL, license = NULL, private = FALSE)
 }
 \arguments{
 \item{description}{Search in node description}

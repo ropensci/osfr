@@ -4,8 +4,8 @@
 \alias{move_files}
 \title{Move (and copy) files on OSF}
 \usage{
-move_files(from = NULL, to = NULL, filename = NULL, action = "move",
-  conflict = "replace")
+move_files(from = NULL, to = NULL, filename = NULL,
+  action = "move", conflict = "replace")
 }
 \arguments{
 \item{from}{OSF file id to move (osf.io/XXXXX; just XXXXX)}
