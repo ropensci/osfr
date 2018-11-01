@@ -23,6 +23,7 @@ Imports:
     httr,
     jsonlite,
     stringr,
+    cli,
     plyr
 License: MIT + file LICENSE
 BugReports: https://github.com/chartgerink/osfr/issues
