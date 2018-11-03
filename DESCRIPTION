@@ -22,7 +22,7 @@ Imports:
     crul,
     httr,
     jsonlite,
-    stringr,
+    stringi,
     cli,
     plyr
 License: MIT + file LICENSE
