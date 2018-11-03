@@ -17,8 +17,7 @@ osf_upload <- function(id, path, name = NULL, overwrite = FALSE) {
     stop('Cannot upload new file if no node ID is specified.')
   }
 
-  if (!file.exists(path))
-    stop(sprintf('File %s does not exist on local machine.', path))
+  if (!file.exists(path)) stop(sprintf("File does not exist:\n %s", path))
 
   if (is.null(name)) name <- basename(path)
   query <- list(kind = "file", name = name)
