@@ -32,8 +32,9 @@ simplify_tree <- function(x) {
   stopifnot(is.list(x))
 
   paths <- stringi::stri_split_fixed(names(unlist(x)), pattern = ".")
-  node_list <- map(paths, function(x) {
-    setNames(x, imap_chr(x, ~ paste0(x[seq_len(.y)], collapse = "/")))
+
+  node_list <- purrr::map(paths, function(x) {
+    setNames(x, purrr::imap_chr(x, ~ paste0(x[seq_len(.y)], collapse = "/")))
   })
 
   nodes <- unlist(node_list)
