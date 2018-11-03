@@ -22,7 +22,14 @@ create_project <- function(
   if (missing(title)) stop("Specify a project title")
   path <- osf_path("nodes/")
   out <- create_node(path, title, description, private)
-  out$data$id
+
+  structure(
+    .Data = out$data$id,
+    links = out$data$links,
+    attributes = out$data$attributes,
+    relationships = out$data$relationships,
+    class = paste0("osf_", out$data$attributes$category)
+  )
 }
 
 #' Update an OSF project

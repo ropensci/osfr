@@ -40,7 +40,7 @@ update_node <- function(
   body <- list(
     data = list(
       type = "nodes",
-      id = id,
+      id = as.character(id),
       attributes = list()
     )
   )
