@@ -9,6 +9,7 @@ print.osf_file <- function(x, ...) {
     "<osf_file>",
     paste("  name:", attrs$name),
     paste("  parent:", attrs$resource),
+    paste("  version:", attrs$extra$version),
     paste("  modified:", strftime(modified, "%x %X"))
   )
 
