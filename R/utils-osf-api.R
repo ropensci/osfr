@@ -83,3 +83,45 @@ osf_cli <- function(pat = osf_pat()) {
     headers = headers
   )
 }
+
+
+
+# OSF API request functions -----------------------------------------------
+
+.osf_request <- function(method, path, query = list(), verbose = FALSE) {
+  method <- match.arg(method, c("get", "put", "patch"))
+  cli <- osf_cli()
+  method <- cli[[method]]
+  method(path, query)
+}
+
+.osf_paginated_request <- function(method, path, query = list(), n_max = Inf, verbose = FALSE) {
+  items <- list()
+  i <- 1
+  total <- 0
+
+  repeat {
+    res <- .osf_request(method, path, query = list(page = i))
+    out <- jsonlite::fromJSON(res$parse("UTF-8"), simplifyVector = FALSE)
+    total <- total + length(out$data)
+    items <- c(items, out$data)
+    if (verbose && i == 2) message("Items retrieved so far:")
+    if (verbose && i > 1) message(total, appendLF = TRUE)
+    if (is.null(out$links$`next`) || total >= n_max) {
+      if (verbose && i > 1) message("")
+      break
+    }
+    i <- i + 1
+  }
+  items
+}
+
+
+
+# OSF API endpoints -------------------------------------------------------
+
+.osf_node_retrieve <- function(id) {
+  res <- .osf_request("get", osf_path(sprintf("nodes/%s/", id)))
+  res$raise_for_status()
+  jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
+}
