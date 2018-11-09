@@ -10,6 +10,6 @@
 #' @name osfr
 #'
 #' @importFrom stringi stri_split_fixed
-#' @importFrom purrr map imap_chr
+#' @importFrom purrr map map_df imap_chr %||%
 #' @importFrom tibble tibble
 NULL
