@@ -20,13 +20,15 @@ as_osf_tbl_file.default <- function(x)
 as_osf_tbl_file.data.frame <- function(x) new_osf_tbl_file(x)
 
 as_osf_tbl_file.list <- function(x) {
-  purrr::map_df(x,
-    ~ tibble::tibble(
-      name          = .x$attributes$name,
-      id            = .x$id,
-      # path          = .x$attributes$materialized_path,
-      # kind          = .x$attributes$kind,
-      meta          = list(.x[c("attributes", "links", "relationships")])
+  new_osf_tbl_file(
+      purrr::map_df(x,
+      ~ tibble::tibble(
+        name          = .x$attributes$name,
+        id            = .x$id,
+        # path          = .x$attributes$materialized_path,
+        # kind          = .x$attributes$kind,
+        meta          = list(.x[c("attributes", "links", "relationships")])
+      )
     )
   )
 }

@@ -1,8 +1,13 @@
 # Appends API version to a specificed path
-# id: OSF project guid
+# id: OSF project guid (e.g., fa9dm)
+# fid: waterbutler file/folder id (e.g., 5beaf8e7a6a9af00166b4243)
 # provider: storage provider (default: osfstorage)
-wb_path <- function(id, provider = "osfstorage") {
-  sprintf("v%i/resources/%s/providers/%s/", floor(.wb_api_version), id, provider)
+wb_path <- function(id, fid = NULL, provider = "osfstorage") {
+  if (is.null(fid)){
+    sprintf("v%i/resources/%s/providers/%s/", floor(.wb_api_version), id, provider)
+  } else {
+    sprintf("v%i/resources/%s/providers/%s/%s/", floor(.wb_api_version), id, provider, fid)
+  }
 }
 
 # Construct the WaterButler API Client
@@ -37,6 +42,7 @@ wb_cli <- function(pat = osf_pat()) {
   cli <- wb_cli()
   res <- cli$get(path, query, ...)
   res$raise_for_status()
+
   jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
 }
 
@@ -50,11 +56,23 @@ wb_cli <- function(pat = osf_pat()) {
 
 # Waterbutler API action endpoints ----------------------------------------
 # https://waterbutler.readthedocs.io/en/latest/api.html#actions
+
+# empty data$list() is returned when resource doesn't exist
 wb_get_info <- function(id) {
   .wb_get(wb_path(id), query = list(meta = ""))
 }
 
-wb_create_subfolder <- function(id, name) {
-  .wb_put(wb_path(id), query = list(kind = "folder", name = name))
+# id: OSF project/component GUID
+# name: name of the new directory
+# fid: waterbutler folder id (e.g., 5beaf8e7a6a9af00166b4243)
+# v1/resources/fa9dm/providers/osfstorage/5beaf8e7a6a9af00166b4243/?kind=folder
+wb_create_folder <- function(id, name, fid) {
+  .wb_put(wb_path(id, fid), query = list(kind = "folder", name = name))
+}
+
+# url: new_folder link for the existing parent folder
+wb_create_subfolder <- function(id, name, parent_id) {
+  path <- file.path(wb_path(id), parent_id)
+  .wb_put(path, query = list(kind = "folder", name = name))
 }
 
