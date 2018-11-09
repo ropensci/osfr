@@ -11,4 +11,5 @@
 #'
 #' @importFrom stringi stri_split_fixed
 #' @importFrom purrr map imap_chr
+#' @importFrom tibble tibble
 NULL
