@@ -48,7 +48,7 @@ process_type <- function(id) {
 #' @return Parsed JSON object in the form of an R object.
 
 process_json <- function(x) {
-  rjson::fromJSON(httr::content(x, 'text', encoding = "UTF-8"))
+  jsonlite::fromJSON(httr::content(x, 'text', encoding = 'UTF-8'))
 }
 
 #' Processing whether a category is valid
@@ -162,4 +162,13 @@ rm_space <- function(x) {
   res <- gsub(x, pattern = "\\s", replacement = "%20", perl = TRUE)
 
   return(res)
+}
+
+#' Stop execution with HTTP status code
+#' @param code HTTP status code
+#' @inheritParams base::stop
+http_error <- function(code, ...) {
+  args <- list(...)
+  msg <- sprintf("\n       HTTP status code %i.", code)
+  stop(args, msg, call. = FALSE)
 }

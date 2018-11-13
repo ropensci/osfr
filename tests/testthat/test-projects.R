@@ -1,36 +1,46 @@
 context("project operations")
 
-# test_that("create project", {
-#   expect_error(create_project())
-#   expect_true(grepl(create_project(title = 'Test',
-#      description = 'Text', private = FALSE),
-#       pattern = '[A-Za-z0-9]{5}'))
-#   expect_true(grepl(create_project(title = 'Test'),
-#     pattern = '[A-Za-z0-9]{5}'))
-#   expect_true(grepl(create_project(title = 'Test',
-#      description = 'Text'), pattern = '[A-Za-z0-9]{5}'))
-# })
+login(osf_pat)
 
-# # view_project not tested
-# # won't be implemented either
+# public project
+p1 <- create_project(title = 'osfr-p1', description = 'Text', private = FALSE)
+# private project
+p2 <- create_project(title = 'osfr-p2')
 
-# x <- create_project('tmp')
+test_that("create projects", {
+  expect_error(create_project(), regexp = 'Specify a project title')
+  expect_true(is_valid_osf_id(p1))
+  expect_true(is_valid_osf_id(p2))
+})
 
-# test_that("update project", {
-  
-#   expect_error(update_project())
-#   expect_true(update_project(x, private = FALSE))
-# })
+test_that("create components", {
+  c1 <- create_component(p1, title = 'osfr-component')
+  expect_true(is_valid_osf_id(c1))
+})
+
+# view_project not tested
+# won't be implemented either.
+
+test_that("update project", {
+  expect_error(update_project())
+  expect_true(update_project(p1, private = TRUE))
+})
 
 # test_that("clone project", {
 #   expect_error(clone_project())
-#   expect_true(clone_project(x))
+#   expect_true(clone_project(p1))
 # })
 
-# test_that("delete project", {
-#   expect_error(delete_project())
-#   # add a node for recursive
-#   create_component(x, title = 'Test')
-#   expect_error(delete_project(x))
-#   expect_true(delete_project(x, recursive = TRUE))
-# })
+test_that("get nodes", {
+  # error because it's private
+  expect_error(get_nodes(p1))
+  expect_equal(class(get_nodes(p1, private = TRUE)), "list")
+})
+
+test_that("delete projects", {
+  expect_error(delete_project())
+  expect_true(delete_project(p2))
+
+  expect_error(delete_project(p1))
+  expect_true(delete_project(p1, recursive = TRUE))
+})

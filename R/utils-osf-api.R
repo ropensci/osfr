@@ -13,8 +13,9 @@
 
 construct_link <- function(request) {
   base <- 'https://api.osf.io/v2/'
+
   if (!Sys.getenv('OSF_USE_SERVER') == '') {
-    base <- sprintf('https://%s-api.osf.io/v2/', Sys.getenv('OSF_USE_SERVER'))
+    base <- sprintf('https://api.%s.osf.io/v2/', Sys.getenv('OSF_USE_SERVER'))
   }
 
   return(paste0(base, request))

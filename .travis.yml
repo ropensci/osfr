@@ -1,12 +1,9 @@
 language: r
-
+sudo: false
 cache: packages
-
-env: _R_CHECK_CRAN_INCOMING_=FALSE
-
-r_binary_packages:
-- covr
-- lintr
-
-after_success:
-- Rscript -e 'covr::coveralls()'
+r:
+  - oldrel
+  - release
+  - devel
+# after_success:
+# - Rscript -e 'covr::coveralls()'

@@ -7,10 +7,10 @@
 #' @return Waterbutler link
 
 construct_link_files <- function(id = NULL, provider = 'osfstorage', request = NULL) {
-  if (Sys.getenv('OSF_USE_TEST_SERVER') == 'test') {
-    base <- sprintf('https://test-files.osf.io/v1/resources/%s/providers/%s/%s',
+  if (Sys.getenv('OSF_USE_SERVER') == 'test') {
+    base <- sprintf('https://files.us.test.osf.io/v1/resources/%s/providers/%s/%s',
       id, provider, request)
-  } else if (Sys.getenv('OSF_USE_TEST_SERVER') == 'staging') {
+  } else if (Sys.getenv('OSF_USE_SERVER') == 'staging') {
     base <- sprintf('https://staging-files.osf.io/v1/resources/%s/providers/%s/%s',
       id, provider, request)
   } else {
@@ -59,7 +59,8 @@ process_file_id <- function(id, private = FALSE) {
   res <- process_json(call)
 
   if (call$status_code != 200) {
-    stop('Failed to retrieve information. Sure it is public?')
+    http_error(call$status_code,
+               'Failed to retrieve information. Sure it is public?')
   }
 
   return(res$data$links$move)
