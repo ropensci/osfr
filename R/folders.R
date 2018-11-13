@@ -38,7 +38,7 @@ create_folder <- function(id, path, return = c("sub", "root", "all")[2]) {
   if (call$status_code == 409) {
     warning("Conflict in folder naming. Root folder with this name already exists.")
   } else if (call$status_code != 201) {
-    stop("Unsuccessful folder creation.")
+    http_error(call$status_code, "Unsuccessful folder creation.")
   }
 
   # If root folder creation is successful, create link to the new folder.
@@ -66,9 +66,9 @@ create_folder <- function(id, path, return = c("sub", "root", "all")[2]) {
     call_sub <- httr::PUT(url_osf_sub, config = config)
 
     if (call_sub$status_code == 409) {
-      stop("Conflict in sub folder naming. A subfolder with this name already exists.")
+      http_error(call_sub$status_code, "A subfolder with this name already exists.")
     } else if (call_sub$status_code != 201) {
-      stop("Unsuccessful subfolder creation.")
+      http_error(call_sub$status_code, "Unsuccessful subfolder creation.")
     }
 
     res_sub[[i]] <- process_json(call_sub)
@@ -113,7 +113,9 @@ delete_folder <- function(url) {
   call <- httr::DELETE(url, config = config)
 
   if (call$status_code != 204) {
-    stop('Failed to delete folder. Be sure to specify Waterbutler link.')
+    http_error(call$status_code,
+               'Failed to delete folder. ',
+               'Be sure to specify Waterbutler link.')
   }
 
   return(TRUE)

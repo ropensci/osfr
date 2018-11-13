@@ -69,9 +69,7 @@ get_nodes <- function(
   }
 
   while (!is.null(res$links$`next`)) {
-    whilst <- rjson::fromJSON(
-      httr::content(
-        httr::GET(res$links$`next`, config), "text", encoding = "UTF-8"))
+    whilst <- process_json(httr::GET(res$links$`next`, config))
     res$data <- c(res$data, whilst$data)
     res$links$`next` <- whilst$links$`next`
     message(paste0(res$links$`next`))

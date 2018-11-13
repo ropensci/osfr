@@ -35,9 +35,11 @@ upload_new_files <- function(id, path, name = NULL, href_hash = NULL) {
                     encode = 'raw', config = config)
 
   if (call$status_code == 409) {
-    stop('Conflict in path naming. Please use upload_revised_files or change path')
+    http_error(call$status_code,
+               'Conflict in path naming. ',
+               'Please use upload_revised_files or change path.')
   } else if (call$status_code != 201) {
-    stop('Unsuccessful upload.')
+    http_error(call$status_code, 'Unsuccessful upload.')
   }
 
   res <- process_json(call)
@@ -201,7 +203,7 @@ upload_revised_files <- function(id, path) {
     config = config)
 
   if (call$status_code != 200) {
-    stop('Failed to upload revision')
+    http_error(call$status_code, 'Failed to upload revision.')
   }
 
   invisible(TRUE)
@@ -231,7 +233,7 @@ delete_files <- function(id) {
   call <- httr::DELETE(url = url_osf, config)
 
   if (call$status_code != 204) {
-    stop(sprintf('Failed to delete file %s.', id), call. = FALSE)
+    http_error(call$status_code, sprintf('Failed to delete file %s.', id))
   }
 
   invisible(TRUE)
@@ -290,7 +292,7 @@ move_files <- function(
     config)
 
   if (call$status_code != 201 && call$status_code != 200) {
-    stop('Error in moving/copying file, from to component to')
+    http_error(call$status_code, 'Error in moving/copying file.')
   }
 
   invisible(TRUE)
@@ -343,7 +345,8 @@ download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
     call <- httr::GET(view_only_url, config)
 
     if (!call$status_code == 200) {
-      stop('Failed. Are you sure you have access to the file?')
+      http_error(call$status_code,
+                 'Are you sure you have access to the file?')
     }
 
     res <- process_json(call)
@@ -354,7 +357,8 @@ download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
     call <- httr::GET(url_osf, config)
 
     if (!call$status_code == 200) {
-      stop('Failed. Are you sure you have access to the file?')
+      http_error(call$status_code,
+                 'Are you sure you have access to the file?')
     }
 
     res <- process_json(call)
@@ -387,9 +391,9 @@ download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
                       httr::write_disk(file, overwrite = TRUE))
   }
   if (call$status_code == 404) {
-    stop('Version of file does not exist.')
+    http_error(call$status_code, 'Version of file does not exist.')
   } else if (call$status_code != 200) {
-    stop('Failed to download file.')
+    http_error(call$status_code, 'Failed to download file.')
   }
 
   message('Successfully downloaded file.')
@@ -534,7 +538,8 @@ path_file <- function(id, view_only = NULL) {
     call <- httr::GET(view_only_url, config)
 
     if (!call$status_code == 200) {
-      stop('Failed. Are you sure you have access to the file?')
+      http_error(call$status_code,
+                 'Are you sure you have access to the file?')
     }
 
     res <- process_json(call)
@@ -545,7 +550,8 @@ path_file <- function(id, view_only = NULL) {
     call <- httr::GET(url_osf, config)
 
     if (!call$status_code == 200) {
-      stop('Failed. Are you sure you have access to the file?')
+      http_error(call$status_code,
+                 'Are you sure you have access to the file?')
     }
 
     res <- process_json(call)
