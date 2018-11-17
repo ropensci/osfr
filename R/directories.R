@@ -57,7 +57,7 @@ osf_ls <- function(id, path = NULL, path_id = NULL, n_max = Inf) {
 #' @export
 #' @examples
 #' \dontrun{
-#' proj <- create_project("Making Directories")
+#' proj <- osf_project("Making Directories")
 #' osf_mkdir(proj, "data")
 #' osf_mkdir(proj, "data/raw_data")
 #' osf_mkdir(proj, "super_raw_data", parent_id = "5be5e6a6fe3eca00188178f0")

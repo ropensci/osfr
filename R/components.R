@@ -13,7 +13,7 @@
 #' @return OSF id of created component
 #'
 #' @export
-#' @seealso \code{\link{create_project}}
+#' @seealso \code{\link{osf_project}}
 #' @examples
 #' \dontrun{
 #' create_component("12345", "New Test Component")

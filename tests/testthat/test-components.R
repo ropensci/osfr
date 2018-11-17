@@ -1,8 +1,13 @@
 context("component operations")
 
-p1 <- create_project(title = "osfr-component-tests")
+
+# setup -------------------------------------------------------------------
+p1 <- osf_project(title = "osfr-component-tests")
 c1 <- create_component(p1, title = "component-1")
 
+
+
+# tests -------------------------------------------------------------------
 test_that("create component", {
   expect_error(create_component(), "Specify ID of a parent project")
   expect_true(is_valid_osf_id(c1))

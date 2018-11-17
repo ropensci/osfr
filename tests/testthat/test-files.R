@@ -4,7 +4,7 @@ context("Files")
 txt.file <- tempfile(pattern = "test-file-", fileext = ".txt")
 writeLines("Lorem ipsum dolor sit amet, consectetur", con = txt.file)
 
-p1 <- create_project("File Tests")
+p1 <- osf_project("File Tests")
 
 
 # tests -------------------------------------------------------------------

@@ -1,5 +1,6 @@
-#' Create a project on OSF
+#' Create or retrieve an OSF project
 #'
+#' @param id GUID of an existing OSF project
 #' @param title Project title
 #' @param description Project description
 #' @param private Boolean, whether project should be private (defaults to
@@ -11,17 +12,19 @@
 #'
 #' @examples
 #' \dontrun{
-#' create_project(title = "New Private OSF Project")
-#' create_project(title = "New Public OSF Project", private = FALSE)}
+#' # create a new project
+#' proj <- osf_project(title = "New Private OSF Project")
+#' # update/retrieve project details
+#' osf_project(proj$id)}
 
-create_project <- function(
-  title,
-  description = '',
-  private = TRUE) {
-
-  if (missing(title)) stop("Specify a project title")
-  path <- osf_path("nodes/")
-  out <- create_node(path, title, description, private)
+osf_project <- function(id = NULL, title = NULL, description = '', private = TRUE) {
+  if (!is.null(id)) {
+    out <- .osf_node_retrieve(id)
+  } else if (!is.null(title)) {
+    out <- create_node(osf_path("nodes/"), title, description, private)
+  } else {
+    stop("Provide an ID to retrieve a project or a title to create a project")
+  }
   as_osf_tbl_node(out['data'])
 }
 

@@ -2,23 +2,23 @@ context("project operations")
 
 login(test_pat)
 
-p1 <- create_project(title = "osfr-project-tests", "Test project operations")
+p1 <- osf_project(title = "osfr-project-tests", description = "Is good.")
 
-test_that("create projects", {
-  expect_error(create_project(), "Specify a project title")
-  expect_true(is_valid_osf_id(p1))
+test_that("create project", {
+  expect_error(osf_project(), "Provide an ID to retrieve a project")
+  expect_s3_class(p1, "osf_tbl_node")
 })
 
 test_that("get nodes", {
-  expect_error(get_nodes(p1, private = FALSE))
-  nodes <- get_nodes(p1, private = TRUE)
+  expect_error(get_nodes(p1$id, private = FALSE))
+  nodes <- get_nodes(p1$id, private = TRUE)
   expect_is(nodes, "list")
 })
 
-test_that("update project assertions", {
-  expect_error(update_project(),   "Must specify a node identifier")
-  expect_error(update_project(p1), "No updated attribute values specified")
-})
+# test_that("update project assertions", {
+#   expect_error(update_project(),   "Must specify a node identifier")
+#   expect_error(update_project(p1), "No updated attribute values specified")
+# })
 
 test_that("update project title", {
   title <- "osfr-p1-updated"
