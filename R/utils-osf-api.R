@@ -88,11 +88,11 @@ osf_cli <- function(pat = osf_pat()) {
 
 # OSF API request functions -----------------------------------------------
 
-.osf_request <- function(method, path, query = list(), verbose = FALSE) {
+.osf_request <- function(method, path, query = list(), body = NULL, verbose = FALSE, ...) {
   method <- match.arg(method, c("get", "put", "patch"))
   cli <- osf_cli()
   method <- cli[[method]]
-  method(path, query)
+  method(path, query, body = body, ...)
 }
 
 .osf_paginated_request <- function(method, path, query = list(), n_max = Inf, verbose = FALSE) {
