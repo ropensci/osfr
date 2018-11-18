@@ -2,10 +2,10 @@ context("project operations")
 
 login(test_pat)
 
-p1 <- osf_project(title = "osfr-project-tests", description = "Is good.")
+p1 <- osf_project_create(title = "osfr-project-tests")
 
 test_that("create project", {
-  expect_error(osf_project(), "Provide an ID to retrieve a project")
+  expect_error(osf_project_create(), "Must specify a title")
   expect_s3_class(p1, "osf_tbl_node")
 })
 
@@ -15,20 +15,21 @@ test_that("get nodes", {
   expect_is(nodes, "list")
 })
 
-# test_that("update project assertions", {
-#   expect_error(update_project(),   "Must specify a node identifier")
-#   expect_error(update_project(p1), "No updated attribute values specified")
-# })
+test_that("update project assertions", {
+  expect_error(osf_project_update(), "Must specify ID of a project to update")
+  expect_error(osf_project_update(p1), "No updated attribute values specified")
+})
 
 test_that("update project title", {
   title <- "osfr-p1-updated"
-  p1 <- update_project(p1, title = title)
-  p1_attrs <- get_nodes(p1, private = TRUE)$data$attributes
+  p1 <- osf_project_update(p1, title = title)
+
+  p1_attrs <- get_nodes(p1$id, private = TRUE)$data$attributes
   expect_match(p1_attrs$title, title)
 })
 
 test_that("update project privacy", {
-  p1 <- update_project(p1, private = FALSE)
+  p1 <- osf_project_update(p1, private = FALSE)
   p1_attrs <- get_nodes(p1, private = TRUE)$data$attributes
   expect_true(p1_attrs$public)
 })

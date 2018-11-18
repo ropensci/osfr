@@ -30,7 +30,7 @@ osf_project_create <- function(title = NULL, description = '', private = TRUE) {
 #' @rdname node-create
 osf_component_create <- function(id, title = NULL, description = '', private = TRUE) {
   if (missing(id)) stop("Must specify ID of a parent project")
-  path <- osf_path(sprintf("nodes/%s/children/", id))
+  path <- osf_path(sprintf("nodes/%s/children/", as_id(id)))
   out <- node_create(path, title, description, private)
   as_osf_tbl_node(out['data'])
 }

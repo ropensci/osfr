@@ -46,7 +46,7 @@ node_update <- function(
   title = NULL,
   description = NULL,
   private = NULL) {
-
+  id <- as_id(id)
   public <- if (is.logical(private)) !private else NULL
 
   body <- list(

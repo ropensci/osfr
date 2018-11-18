@@ -12,6 +12,7 @@
 #' @param path_id OSF unique identifier assigned to a directory
 
 osf_ls <- function(id, path = NULL, path_id = NULL, n_max = Inf) {
+  id <- as_id(id)
 
   if (is.null(path_id)) {
     url_path <- sprintf("nodes/%s/files/osfstorage/", id)
@@ -64,6 +65,7 @@ osf_ls <- function(id, path = NULL, path_id = NULL, n_max = Inf) {
 #' }
 
 osf_mkdir <- function(id, path, parent_id = NULL, verbose = FALSE) {
+  id <- as_id(id)
   path_root <- fs::path_split(path)[[1]][1]
   items <- osf_ls(id, path_id = parent_id)
 
