@@ -1,15 +1,8 @@
 osf_tbl_file <- function(x = NULL) {
-  x <- x %||% tibble::tibble(
-    name = character(),
-    id = character(),
-    metadata = list()
-  )
-  new_osf_tbl_file(x)
+  x <- x %||% list(name = character(), id = character(), metadata = list())
+  new_osf_tbl(x, class = "osf_tbl_file")
 }
 
-new_osf_tbl_file <- function(x) {
-  structure(x, class = c("osf_tbl_file", "tbl_df", "tbl", "data.frame"))
-}
 
 # expects a list, where each item is OSF entity represented as a list
 as_osf_tbl_file <- function(x, ...) UseMethod("as_osf_tbl_file")

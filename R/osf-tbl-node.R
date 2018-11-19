@@ -1,14 +1,6 @@
 osf_tbl_node <- function(x = NULL) {
-  x <- x %||% tibble::tibble(
-    title = character(),
-    id = character(),
-    metadata = list()
-  )
-  new_osf_tbl_node(x)
-}
-
-new_osf_tbl_node <- function(x) {
-  structure(x, class = c("osf_tbl_node", "tbl_df", "tbl", "data.frame"))
+  x <- x %||% list(title = character(), id = character(), metadata = list())
+  new_osf_tbl(x, class = "osf_tbl_node")
 }
 
 # expects a list, where each item is OSF entity represented as a list
