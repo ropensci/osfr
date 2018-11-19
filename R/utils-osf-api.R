@@ -89,7 +89,7 @@ osf_cli <- function(pat = osf_pat()) {
 # OSF API request functions -----------------------------------------------
 
 .osf_request <- function(method, path, query = list(), body = NULL, verbose = FALSE, ...) {
-  method <- match.arg(method, c("get", "put", "patch"))
+  method <- match.arg(method, c("get", "put", "patch", "delete"))
   cli <- osf_cli()
   method <- cli[[method]]
   method(path, query, body = body, ...)
@@ -125,6 +125,17 @@ osf_cli <- function(pat = osf_pat()) {
   res <- .osf_request("get", osf_path(sprintf("nodes/%s/", id)))
   res$raise_for_status()
   jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
+}
+
+# e.g., .osf_node_delete("k35ut)
+.osf_node_delete <- function(id) {
+  res <- .osf_request("delete", osf_path(sprintf("nodes/%s/", id)))
+
+  # since this endpoint doesn't return any useful info we'll return TRUE if
+  # successful or the error message if not
+  if (res$status_code == 204) return(TRUE)
+  out <- jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
+  http_error(res$status_code, out$errors[[1]]$detail)
 }
 
 # e.g., .osf_file_retrieve("5be5e1fdfe3eca00188178c3")

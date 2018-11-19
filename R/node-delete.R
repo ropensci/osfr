@@ -14,42 +14,53 @@
 #' @param recursive remove sub-components before deleting the top-level entity
 #'
 #' @return the deleted entity's unique identifier (invisibly)
+#' @name node-delete
 #' @examples
 #' \dontrun{
 #' delete_project(id = "y7w8p")}
+NULL
+
+#' @rdname node-delete
 #' @export
-delete_project <- function(id, recursive = FALSE) {
+osf_project_delete <- function(id = NULL, recursive = FALSE, verbose = FALSE) {
+  node_delete(id, recursive)
+
+}
+
+#' @rdname node-delete
+#' @export
+osf_component_delete <- function(id = NULL, recursive = FALSE, verbose = FALSE) {
+  node_delete(id, recursive)
+}
+
+# Delete a single node
+node_delete <- function(id, recursive = FALSE, verbose = FALSE) {
+  if (is.null(id)) stop("Must specify a node identifier")
+  id <- as_id(id)
+
   if (recursive) {
     child_ids <- recurse_node(id)
+    if (verbose) {
+      message(
+        sprintf("Retrieved %i child nodes under %s", length(child_ids), id))
+    }
 
     # reverse to begin with the most deeply nested node
     for (i in rev(seq_along(child_ids))) {
       child <- child_ids[i]
       message(sprintf("Deleting %s", names(child)))
       if (child == id) break
-      delete_node(child)
-      message(sprintf("Deleted subcomponent %s", names(child)))
+      .osf_node_delete(child)
+      if (verbose) {
+        message(sprintf("Deleted subcomponent %s", names(child)))
+      }
+
     }
   }
-  delete_node(id)
-}
 
-#' @rdname delete_project
-#' @export
-delete_component <- function(id, recursive = FALSE) {
-  delete_project(id, recursive)
-}
-
-# Delete a single node
-delete_node <- function(id) {
-  if (missing(id)) stop("Must specify a node identifier")
-  cli <- osf_cli()
-  path <- osf_path(sprintf('nodes/%s/', id))
-  res <- cli$delete(path)
-
-  if (res$status_code == 204) return(invisible(id))
-
-  # Print error codes
-  out <- jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
-  http_error(res$status_code, out$errors[[1]]$detail)
+  out <- .osf_node_delete(id)
+  if (isTRUE(out)) {
+    if (verbose) message(sprintf("Deleted node %s", id))
+    return(TRUE)
+  }
 }
