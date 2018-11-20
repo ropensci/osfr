@@ -77,7 +77,7 @@ osf_cli <- function(pat = osf_pat()) {
   crul::HttpClient$new(
     url = url,
     opts = list(
-      timeout = 5,
+      timeout = 10,
       encode = "json"
     ),
     headers = headers
@@ -139,6 +139,11 @@ osf_cli <- function(pat = osf_pat()) {
   http_error(res$status_code, out$errors[[1]]$detail)
 }
 
+# list all child nodes
+.osf_node_children <- function(id, n_max = Inf, verbose = FALSE) {
+  path <- osf_path(sprintf("nodes/%s/children/", id))
+  .osf_paginated_request("get", path, n_max = n_max, verbose = verbose)
+}
 
 # list user's nodes
 .osf_user_nodes <- function(id, n_max = Inf, verbose = FALSE) {
