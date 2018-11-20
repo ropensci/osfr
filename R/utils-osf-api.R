@@ -95,6 +95,7 @@ osf_cli <- function(pat = osf_pat()) {
   method(path, query, body = body, ...)
 }
 
+# TODO: .osf_request and .osf_paginated_request returns should be consistent
 .osf_paginated_request <- function(method, path, query = list(), n_max = Inf, verbose = FALSE) {
   items <- list()
   i <- 1
@@ -146,7 +147,7 @@ osf_cli <- function(pat = osf_pat()) {
 }
 
 # e.g., .osf_file_retrieve("5be5e1fdfe3eca00188178c3")
-.osf_file_retrieve <- function(id ) {
+.osf_file_retrieve <- function(id) {
   res <- .osf_request("get", osf_path(sprintf("files/%s/", id)))
   res$raise_for_status()
   jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
