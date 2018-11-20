@@ -15,6 +15,7 @@ as_id.character <- function(x) {
   structure(x, class = "osf_id")
 }
 
-as_id.osf_tbl_file <- function(x) as_id(x$id)
 as_id.osf_tbl_node <- function(x) as_id(x$id)
+as_id.osf_tbl_file <- function(x) as_id(x$id)
+as_id.osf_tbl_user <- function(x) as_id(x$id)
 as_id.osf_id <- function(x) x

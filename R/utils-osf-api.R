@@ -138,6 +138,11 @@ osf_cli <- function(pat = osf_pat()) {
   http_error(res$status_code, out$errors[[1]]$detail)
 }
 
+
+# list user's nodes
+.osf_user_nodes <- function(id, n_max = Inf, verbose = FALSE) {
+  path <- osf_path(sprintf("users/%s/nodes/", id))
+  .osf_paginated_request("get", path, n_max = n_max, verbose = verbose)
 }
 
 # e.g., .osf_file_retrieve("5be5e1fdfe3eca00188178c3")

@@ -12,13 +12,13 @@ as_osf_tbl_node.default <- function(x)
 as_osf_tbl_node.data.frame <- function(x) new_osf_tbl_node(x)
 
 as_osf_tbl_node.list <- function(x) {
-  new_osf_tbl_node(
+  new_osf_tbl(
     purrr::map_df(x,
                   ~ tibble::tibble(
                     title         = .x$attributes$title,
                     id            = .x$id,
                     meta          = list(.x[c("attributes", "links", "relationships")])
-                  )
-    )
+                  )),
+    class = "osf_tbl_node"
   )
 }
