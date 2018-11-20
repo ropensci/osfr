@@ -25,3 +25,8 @@ as_osf_tbl.list <- function(x) {
     )
   )
 }
+
+#' @export
+`[.osf_tbl` <- function(x, i, j, drop = FALSE) {
+  structure(NextMethod(), class = class(x))
+}
