@@ -138,12 +138,6 @@ osf_cli <- function(pat = osf_pat()) {
   http_error(res$status_code, out$errors[[1]]$detail)
 }
 
-# Retrieves the details for a given user
-.osf_user_retrieve <- function(id = "me") {
-  path <- osf_path(sprintf("/users/%s/", id))
-  res <- .osf_request("get", path)
-  res$raise_for_status()
-  jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
 }
 
 # e.g., .osf_file_retrieve("5be5e1fdfe3eca00188178c3")

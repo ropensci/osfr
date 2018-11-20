@@ -1,3 +1,15 @@
+
+osf_user_retrieve <- function(id = "me") {
+  path <- osf_path(sprintf("/users/%s/", id))
+  res <- .osf_request("get", path)
+  res$raise_for_status()
+
+  out <- jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
+
+  as_osf_tbl_user(out['data'])
+}
+
+
 #' Return information on an OSF user
 #'
 #' @param id String, OSF id (defaults to 'me'; logged in account)
