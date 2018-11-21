@@ -15,16 +15,13 @@ osf_component_update(id, title = NULL, description = NULL,
 \arguments{
 \item{id}{OSF id (osf.io/XXXXX; just XXXXX)}
 
-\item{private}{Set project to private/public (default changes to public)}
-}
-\value{
-Boolean, update success
+\item{title, description}{Change the title or description}
+
+\item{private}{Change privacy settings to private or public}
 }
 \description{
-This function updates the private/public status of a component. By default,
-the function turns a private component into a public component. This
-function simply wraps the \code{\link{update_project}} function
-as it has the same operations.
+Update the title or description of a project or component. You can also
+change the privacy settings from public to private (or vice versa).
 }
 \examples{
 \dontrun{
