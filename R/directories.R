@@ -76,7 +76,7 @@ osf_mkdir <- function(id, path, parent_id = NULL, verbose = FALSE) {
         sprintf("%s (%s) already exists in node %s", path_root, parent_id ,id))
     }
   } else {
-    new_dir <- wb_create_folder(id, path_root, parent_id)
+    new_dir <- .wb_create_folder(id, path_root, parent_id)
     parent_id <- gsub("/", "", new_dir$data$attributes$path, fixed = TRUE)
     if (verbose) {
       message(

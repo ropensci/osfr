@@ -10,6 +10,7 @@ wb_path <- function(id, fid = NULL, provider = "osfstorage") {
   }
 }
 
+
 # Construct the WaterButler API Client
 wb_cli <- function(pat = osf_pat()) {
 
@@ -36,21 +37,14 @@ wb_cli <- function(pat = osf_pat()) {
 }
 
 
+
 # Waterbutler request functions -------------------------------------------
 
-.wb_get <- function(path, query = list(), ...) {
+.wb_request <- function(method, path, query = list(), body = NULL, verbose = FALSE, ...) {
+  method <- match.arg(method, c("get", "put", "patch", "delete"))
   cli <- wb_cli()
-  res <- cli$get(path, query, ...)
-  res$raise_for_status()
-
-  jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
-}
-
-.wb_put <- function(path, query = list(), body = NULL, ...) {
-  cli <- wb_cli()
-  res <- cli$put(path, query, body, ...)
-  res$raise_for_status()
-  jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
+  method <- cli[[method]]
+  method(path, query, body = body, ...)
 }
 
 
@@ -58,21 +52,28 @@ wb_cli <- function(pat = osf_pat()) {
 # https://waterbutler.readthedocs.io/en/latest/api.html#actions
 
 # empty data$list() is returned when resource doesn't exist
-wb_get_info <- function(id) {
-  .wb_get(wb_path(id), query = list(meta = ""))
+.wb_get_info <- function(id) {
+  res <- .wb_request("get", wb_path(id), query = list(meta = ""))
+  res$raise_for_status()
+  jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
 }
 
 # id: OSF project/component GUID
 # name: name of the new directory
 # fid: waterbutler folder id (e.g., 5beaf8e7a6a9af00166b4243)
 # v1/resources/fa9dm/providers/osfstorage/5beaf8e7a6a9af00166b4243/?kind=folder
-wb_create_folder <- function(id, name, fid) {
-  .wb_put(wb_path(id, fid), query = list(kind = "folder", name = name))
+.wb_create_folder <- function(id, name, fid) {
+  query <- list(kind = "folder", name = name)
+  res <- .wb_request("put", wb_path(id, fid), query = query)
+  res$raise_for_status()
+  jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
 }
 
 # url: new_folder link for the existing parent folder
-wb_create_subfolder <- function(id, name, parent_id) {
-  path <- file.path(wb_path(id), parent_id)
-  .wb_put(path, query = list(kind = "folder", name = name))
-}
+# wb_create_subfolder <- function(id, name, parent_id) {
+#   path <- file.path(wb_path(id), parent_id)
+#   .wb_put(path, query = list(kind = "folder", name = name))
+# }
+
+
 
