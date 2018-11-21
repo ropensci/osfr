@@ -9,12 +9,6 @@ test_that("create project", {
   expect_s3_class(p1, "osf_tbl_node")
 })
 
-test_that("get nodes", {
-  expect_error(get_nodes(p1$id, private = FALSE))
-  nodes <- get_nodes(p1$id, private = TRUE)
-  expect_is(nodes, "list")
-})
-
 test_that("update project assertions", {
   expect_error(osf_project_update(), "Must specify ID of a project to update")
   expect_error(osf_project_update(p1), "No updated attribute values specified")
@@ -24,19 +18,19 @@ test_that("update project title", {
   title <- "osfr-p1-updated"
   p1 <- osf_project_update(p1, title = title)
 
-  p1_attrs <- get_nodes(p1$id, private = TRUE)$data$attributes
+  p1_attrs <- p1$meta[[1]]$attributes
   expect_match(p1_attrs$title, title)
 })
 
 test_that("update project privacy", {
   p1 <- osf_project_update(p1, private = FALSE)
-  p1_attrs <- get_nodes(p1, private = TRUE)$data$attributes
+  p1_attrs <- p1$meta[[1]]$attributes
   expect_true(p1_attrs$public)
 })
 
 test_that("project deletion", {
-  out <- delete_project(p1)
-  expect_match(out, p1)
-  expect_error(delete_project(p1), "The requested node is no longer available")
+  out <- osf_project_delete(p1)
+  expect_true(out)
+  expect_error(.osf_node_retrieve(p1$id), "Gone")
 })
 
