@@ -75,5 +75,24 @@ wb_cli <- function(pat = osf_pat()) {
 #   .wb_put(path, query = list(kind = "folder", name = name))
 # }
 
+# Upload a new file
+# id: OSF node or waterbulder folder to upload
+# name: desired name of the file
+# body: raw file data
+.wb_file_upload <- function(id, name, body) {
+  query <- list(kind = "file", name = name)
+  res <- .wb_request("put", wb_path(id), query = query, body = body)
+
+  if (res$status_code == 409) {
+    http_error(
+      res$status_code,
+      sprintf("File or folder already exists: %s", name)
+    )
+  }
+
+  res$raise_for_status()
+  jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
+}
+
 
 
