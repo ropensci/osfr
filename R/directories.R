@@ -10,6 +10,8 @@
 #' @param id OSF project/component GUID
 #' @param path list files within the specified subdirectory path
 #' @param path_id OSF unique identifier assigned to a directory
+#'
+#' @export
 
 osf_ls <- function(id, path = NULL, path_id = NULL, n_max = Inf) {
   id <- as_id(id)
