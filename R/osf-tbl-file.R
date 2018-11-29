@@ -10,7 +10,7 @@ as_osf_tbl_file <- function(x, ...) UseMethod("as_osf_tbl_file")
 as_osf_tbl_file.default <- function(x)
   stop("No methods available to coerce this object into an osf_tbl_file")
 
-as_osf_tbl_file.data.frame <- function(x) new_osf_tbl_file(x)
+as_osf_tbl_file.data.frame <- function(x) new_osf_tbl(x)
 
 as_osf_tbl_file.list <- function(x) {
   new_osf_tbl(
