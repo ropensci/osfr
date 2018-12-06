@@ -369,16 +369,12 @@ download_files <- function(id, path = NULL, view_only = NULL, version = NULL) {
     stop("Please specify an OSF id referring to a file.")
   }
 
-  # Determine the file name to save the file as.
-  # If no path is provided, use the OSF file name.
-  # If a path is provided, determine if the path is just a folder path or if
-  # the path includes a file name.
+  # Use file.path() and normalize.path(..., mustWork = TRUE) to create more reliable cross-platform behaviour
   if (is.null(path)) {
     file <- res$data$attributes$name
-  } else if (grepl('/$', path)) {
-    file <- paste0(path, res$data$attributes$name)
   } else {
-    file <- path
+    # This will throw an error if path is non-existing on the machine
+    file <- file.path(normalizePath(path, mustWork=TRUE) , res$data$attributes$name)
   }
 
   message(paste0('Saving to filename: ', file))
