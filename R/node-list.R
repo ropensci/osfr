@@ -7,12 +7,13 @@ osf_node_ls <- function(id, n_max = 10) {
 }
 
 #' @export
-osf_node_ls.character <- function(id, n_max = 10) osf_node_ls(as_id(id))
+osf_node_ls.character <- function(id, n_max = 10) osf_node_ls(as_id(id), n_max)
 
 #' @export
 osf_node_ls.osf_id <- function(id, n_max = 10) {
 
   # determine if provided ID maps to a user or node
+  # TODO: refactor to avoid type checking
   out <- try(.osf_node_retrieve(id), silent = TRUE)
   if (inherits(out, "try-error")) {
     out <- .osf_user_retrieve(id)
@@ -22,7 +23,7 @@ osf_node_ls.osf_id <- function(id, n_max = 10) {
     nodes = as_osf_tbl_node(out['data']),
     users = as_osf_tbl_user(out['data'])
   )
-  osf_node_ls(out)
+  osf_node_ls(out, n_max)
 }
 
 #' @export
