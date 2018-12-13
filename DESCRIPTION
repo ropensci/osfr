@@ -25,6 +25,7 @@ Imports:
     stringi,
     purrr,
     cli,
+    tibble,
     plyr
 License: MIT + file LICENSE
 BugReports: https://github.com/chartgerink/osfr/issues
