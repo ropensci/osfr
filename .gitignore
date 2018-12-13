@@ -14,4 +14,5 @@ vignettes/*.pdf
 .httr-oauth
 .Rprofile
 _ignore
+*.DS_Store
 inst/doc
