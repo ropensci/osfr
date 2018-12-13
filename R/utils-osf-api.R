@@ -103,7 +103,8 @@ osf_cli <- function(pat = osf_pat()) {
 
   repeat {
     res <- .osf_request(method, path, query = list(page = i))
-    out <- jsonlite::fromJSON(res$parse("UTF-8"), simplifyVector = FALSE)
+    out <- process_response(res)
+
     total <- total + length(out$data)
     items <- c(items, out$data)
     if (verbose && i == 2) message("Items retrieved so far:")
@@ -118,14 +119,13 @@ osf_cli <- function(pat = osf_pat()) {
 }
 
 
-
 # OSF API endpoints -------------------------------------------------------
 
 # e.g., .osf_node_retrieve("k35ut)
 .osf_node_retrieve <- function(id) {
   res <- .osf_request("get", osf_path(sprintf("nodes/%s/", id)))
   res$raise_for_status()
-  jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
+  process_response(res)
 }
 
 # e.g., .osf_node_delete("k35ut)
@@ -135,7 +135,7 @@ osf_cli <- function(pat = osf_pat()) {
   # since this endpoint doesn't return any useful info we'll return TRUE if
   # successful or the error message if not
   if (res$status_code == 204) return(TRUE)
-  out <- jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
+  out <- process_response(res)
   http_error(res$status_code, out$errors[[1]]$detail)
 }
 
@@ -155,5 +155,5 @@ osf_cli <- function(pat = osf_pat()) {
 .osf_file_retrieve <- function(id) {
   res <- .osf_request("get", osf_path(sprintf("files/%s/", id)))
   res$raise_for_status()
-  jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
+  process_response(res)
 }

@@ -67,5 +67,5 @@ node_update <- function(
   path <- osf_path(sprintf('nodes/%s/', id))
   res <- .osf_request("patch", path, body = body, encode = "json")
   res$raise_for_status()
-  jsonlite::fromJSON(res$parse("UTF-8"))
+  process_response(res)
 }

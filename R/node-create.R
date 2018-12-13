@@ -60,7 +60,6 @@ node_create <- function(
   cli <- osf_cli()
   res <- cli$post(path, body = body, encode = "json")
   res$raise_for_status()
-
-  jsonlite::fromJSON(res$parse("UTF-8"))
+  process_response(res)
 }
 
