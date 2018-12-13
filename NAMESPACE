@@ -3,7 +3,6 @@
 S3method("[",osf_tbl)
 S3method(as_osf_tbl,data.frame)
 S3method(as_osf_tbl,default)
-S3method(osf_get,default)
 S3method(osf_node_ls,character)
 S3method(osf_node_ls,osf_id)
 S3method(osf_node_ls,osf_tbl_node)
