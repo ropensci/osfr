@@ -1,26 +1,14 @@
-# Return IDs for children of specified parent node or NULL if childless.
-node_children <- function(id) {
-  cli <- osf_cli()
-  path <- osf_path(sprintf("nodes/%s/children/", id))
-  res <- cli$get(path)
-  res$raise_for_status()
-
-  out <- jsonlite::fromJSON(res$parse("UTF-8"))
-  if (length(out$data) == 0) return(NULL)
-  out$data[, "id"]
-}
-
-
 # Recursive function to traverse the nodes nested within the provided parent ID.
 # Returns a nested list in which the name of each element corresponds to the
 # relevant node ID. Each path terminates with a character vector of length 1
 # containing the ID of the most deeply nested node.
 recurse_tree <- function(id, maxdepth = 5) {
   if (maxdepth == 1) return(id)
-  child_ids <- node_children(id)
-  if (is.null(child_ids)) return(id)
+  # TODO: use consistent argument names for number of items to return
+  children <- osf_node_ls(id, n_max = maxdepth)
+  if (length(children) == 0) return(id)
   purrr::map(
-    .x = setNames(child_ids, child_ids),
+    .x = setNames(children$id, children$id),
     .f = recurse_tree,
     maxdepth = maxdepth - 1
   )

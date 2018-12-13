@@ -24,7 +24,6 @@ NULL
 #' @export
 osf_project_delete <- function(id = NULL, recursive = FALSE, verbose = FALSE) {
   node_delete(id, recursive)
-
 }
 
 #' @rdname node-delete
