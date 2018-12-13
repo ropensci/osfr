@@ -7,7 +7,7 @@
 osf_upload(id, path, name = NULL, overwrite = FALSE)
 }
 \arguments{
-\item{id}{OSF project id (osf.io/XXXXX) to upload to.}
+\item{id}{an \code{osf_tbl_node} or OSF node ID, or an \code{osf_tbl_file} containing a single folder or waterbutler folder ID}
 
 \item{path}{Path to file on local machine to upload. Ensure file has
 proper extension named (i.e., extension sensitive, not like on Linux)}
