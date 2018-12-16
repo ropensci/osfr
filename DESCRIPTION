@@ -24,7 +24,6 @@ Imports:
     jsonlite,
     stringi,
     purrr,
-    cli,
     tibble,
     dplyr,
     plyr
