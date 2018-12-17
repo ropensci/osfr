@@ -22,23 +22,6 @@ construct_link <- function(request) {
 }
 
 
-#' Retrieve OSF personal access token.
-#'
-#' A OSF personal access token
-#' Looks in env var \code{OSF_PAT}
-#'
-#' @keywords internal
-#' @noRd
-osf_pat <- function(quiet = TRUE) {
-  pat <- Sys.getenv('OSF_PAT')
-  if (!nzchar(pat)) return(NULL)
-
-  if (!quiet) {
-    message("Using OSF PAT from envvar OSF_PAT")
-  }
-  pat
-}
-
 # Return a version specific user agent
 user_agent <- function(agent = "osfr") {
   version <- system.file("DESCRIPTION", package = "osfr", mustWork = FALSE)
@@ -57,7 +40,7 @@ osf_path <- function(path) {
 }
 
 # Construct the OSF API Client
-osf_cli <- function(pat = osf_pat()) {
+osf_cli <- function(pat = getOption("osfr.pat")) {
   server <- Sys.getenv('OSF_USE_SERVER')
   url <- if (nzchar(server)) {
     sprintf("https://api.%s.osf.io", server)

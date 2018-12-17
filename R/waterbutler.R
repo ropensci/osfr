@@ -12,7 +12,7 @@ wb_path <- function(id, fid = NULL, provider = "osfstorage") {
 
 
 # Construct the WaterButler API Client
-wb_cli <- function(pat = osf_pat()) {
+wb_cli <- function(pat = getOption("osfr.pat")) {
 
   url <- ifelse(Sys.getenv('OSF_USE_SERVER') == "test",
                    "https://files.us.test.osf.io",
