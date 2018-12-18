@@ -21,6 +21,11 @@ osf_upload <- function(id, path, name = NULL, overwrite = FALSE) {
   if (is.null(name)) name <- basename(path)
   out <- .wb_file_upload(id, name, body = crul::upload(path))
 
+  # the metadata returned by waterbutler is a subset of what's returned by osf
+  # so this extra call to osf allows us to return a consistent osf_tbl_file
+  file_id <- strsplit(out$data$id, split = "/", fixed = TRUE)[[1]][2]
+  out <- .osf_file_retrieve(file_id)
+
   as_osf_tbl_file(out['data'])
 }
 
