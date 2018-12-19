@@ -87,6 +87,7 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
   repeat {
     res <- .osf_request(method, path, query = list(page = i))
     out <- process_response(res)
+    raise_error(out)
 
     total <- total + length(out$data)
     items <- c(items, out$data)
@@ -107,7 +108,6 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
 # e.g., .osf_node_retrieve("k35ut)
 .osf_node_retrieve <- function(id) {
   res <- .osf_request("get", osf_path(sprintf("nodes/%s/", id)))
-  res$raise_for_status()
   process_response(res)
 }
 
@@ -119,7 +119,7 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
   # successful or the error message if not
   if (res$status_code == 204) return(TRUE)
   out <- process_response(res)
-  http_error(res$status_code, out$errors[[1]]$detail)
+  raise_error(out)
 }
 
 # list all child nodes
@@ -137,6 +137,5 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
 # e.g., .osf_file_retrieve("5be5e1fdfe3eca00188178c3")
 .osf_file_retrieve <- function(id) {
   res <- .osf_request("get", osf_path(sprintf("files/%s/", id)))
-  res$raise_for_status()
   process_response(res)
 }

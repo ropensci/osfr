@@ -57,9 +57,9 @@ node_create <- function(
     )
   )
 
-  cli <- osf_cli()
-  res <- cli$post(path, body = body, encode = "json")
-  res$raise_for_status()
-  process_response(res)
+  res <- .osf_request("post", path, body = body, encode = "json")
+  out <- process_response(res)
+  raise_error(out)
+  out
 }
 

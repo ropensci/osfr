@@ -1,24 +1,49 @@
-#' Process a response from the OSF API
+#' Process OSF API responses
+#'
+#' Convert HttpResponse objects to R lists.
+#'
+#' JSON objects returned by succesful requests are converted to lists and
+#' undergo some additional processing. Currently this only includes converting
+#' embedded dates to POSIXct objects.
+#'
+#' When a request fails the OSF API will return a JSON object with a key
+#' \code{errors} containing error messages and additional information about the
+#' failure. These are also converted to lists and returned without erroring so
+#' that the parent functions can determine how to proceed.
+#'
+#' @section
 #'
 #' @param res
 #'
 #' @return list
 #'
+#' @noRd
 #' @importFrom jsonlite fromJSON
 process_response <- function(res) {
   stopifnot(class(res)[1] == "HttpResponse")
   out <- jsonlite::fromJSON(res$parse("UTF-8"), simplifyVector = FALSE)
 
-  if (is.null(out$data)) {
-    return(out)
-
-  # Process accordingly if response includes multiple entities or single entity
-  } else if(rlang::is_named(out$data)) {
-    out$data <- parse_datetime_attrs(out$data)
+  if (is.null(out$errors)) {
+    # process successful responses
+    out["data"] <- purrr::modify_depth(
+      out["data"],
+      .f = parse_datetime_attrs,
+      .depth = ifelse(is_entity_collection(out), 2, 1)
+    )
   } else {
-    out$data <- purrr::map(out$data, parse_datetime_attrs)
+    # process failed responses
+    out$errors
+    out$status_code <- res$status_code
   }
+
   out
+}
+
+#' Stop and report API errors
+#' @param x list returned by \code{process_response()}
+#' @noRd
+raise_error <- function(x) {
+  if (!is.null(x$errors)) http_error(x$status_code, x$errors[[1]]$detail)
 }
 
 # Convert datetime attributes to POSIXct objects
@@ -43,3 +68,5 @@ parse_datetime <- function(x) {
   as.POSIXct(x, format = "%Y-%m-%dT%X", tz = "UTC")
 }
 
+# https://developer.osf.io/#tag/Entities-and-Entity-Collections
+is_entity_collection <- function(x) is.null(names(x$data))
