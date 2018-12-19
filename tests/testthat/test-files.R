@@ -10,7 +10,7 @@ p1 <- osf_project_create("File Tests")
 # tests -------------------------------------------------------------------
 
 test_that("non-existent file is detected", {
-  expect_error(osf_upload(p1, "non-existent-file"), "File does not exist")
+  expect_error(osf_upload(p1, "non-existent-file"), "Can't find file")
 })
 
 test_that("file is uploaded to project root", {
@@ -19,5 +19,5 @@ test_that("file is uploaded to project root", {
 })
 
 test_that("upload fails if the file already exists", {
-  expect_error(osf_upload(p1, txt.file), "File or folder already exists")
+  expect_error(osf_upload(p1, txt.file), "Cannot complete action: file or folder")
 })
