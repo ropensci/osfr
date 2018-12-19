@@ -22,21 +22,48 @@
 process_response <- function(res) {
   stopifnot(class(res)[1] == "HttpResponse")
   out <- jsonlite::fromJSON(res$parse("UTF-8"), simplifyVector = FALSE)
+  domain <- crul::url_parse(res$url)$domain
 
-  if (is.null(out$errors)) {
-    # process successful responses
-    out["data"] <- purrr::modify_depth(
-      out["data"],
-      .f = parse_datetime_attrs,
-      .depth = ifelse(is_entity_collection(out), 2, 1)
-    )
+  if (grepl("files", domain)) {
+    out <- .process_wb_response(out)
   } else {
-    # process failed responses
-    out$errors
-    out$status_code <- res$status_code
+    out <- .process_osf_response(out)
   }
 
+  if (!is.null(out$errors)) out$status_code <- res$status_code
   out
+}
+
+.process_osf_response <- function(x) {
+  if (is.null(x$errors)) {
+    # process dates in successful responses
+    x["data"] <- purrr::modify_depth(
+      x["data"],
+      .f = parse_datetime_attrs,
+      .depth = ifelse(is_entity_collection(x), 2, 1)
+    )
+  }
+
+  x
+}
+
+.process_wb_response <- function(x) {
+
+  # waterbutler errors contain a key code with the http status code and a key
+  # message with the error message
+  if (is.null(x$code)) {
+    # waterbutler returns modified and modified_utc, to be consistent with osf
+    # responses we store the `modified_utc` value in the `modified`
+    x$data$attributes$modified <- parse_datetime(x$data$attributes$modified_utc)
+    x$data$attributes$modified_utc <- NULL
+
+  } else {
+    # reformat waterbutler's error response to be consistent with OSF's
+    x <- list(
+      errors = list(list(detail = x$message))
+    )
+  }
+  x
 }
 
 #' Stop and report API errors
@@ -54,7 +81,7 @@ parse_datetime_attrs <- function(x) {
   stopifnot("attributes" %in% names(x))
 
   x$attributes <-  purrr::modify_at(x$attributes,
-      .at = c("date_registered", "date_created", "date_modified"),
+      .at = c("date_registered", "date_created", "date_modified", "modified_utc"),
       .f = parse_datetime
   )
 
@@ -63,6 +90,8 @@ parse_datetime_attrs <- function(x) {
 
 # Some OSF responses contain empty date fields e.g., creating new folders
 # this wrapper around as.POSIXct will pass through NULLs instead of erroring
+#
+# Staring with API v2.2 all date fields are standardized to UTC
 parse_datetime <- function(x) {
   if(is.null(x)) return(x)
   as.POSIXct(x, format = "%Y-%m-%dT%X", tz = "UTC")

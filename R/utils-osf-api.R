@@ -113,13 +113,13 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
 
 # e.g., .osf_node_delete("k35ut)
 .osf_node_delete <- function(id) {
-  res <- .osf_request("delete", osf_path(sprintf("nodes/%s/", id)))
+  path <- osf_path(sprintf("nodes/%s/", id))
+  res <- .osf_request("delete", path)
 
   # since this endpoint doesn't return any useful info we'll return TRUE if
   # successful or the error message if not
   if (res$status_code == 204) return(TRUE)
-  out <- process_response(res)
-  raise_error(out)
+  raise_error(process_response(res))
 }
 
 # list all child nodes
