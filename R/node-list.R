@@ -11,19 +11,12 @@ osf_node_ls.character <- function(id, n_max = 10) osf_node_ls(as_id(id), n_max)
 
 #' @export
 osf_node_ls.osf_id <- function(id, n_max = 10) {
-
-  # determine if provided ID maps to a user or node
-  # TODO: refactor to avoid type checking
-  out <- try(.osf_node_retrieve(id), silent = TRUE)
-  if (inherits(out, "try-error")) {
-    out <- .osf_user_retrieve(id)
-  }
-
-  out <- switch(out$data$type,
-    nodes = as_osf_tbl_node(out['data']),
-    users = as_osf_tbl_user(out['data'])
+  out <- switch(id_type(id),
+    nodes = .osf_node_children(id, n_max),
+    users = .osf_user_nodes(id, n_max),
+    abort("The provided ID must correspond to an OSF node or user.")
   )
-  osf_node_ls(out, n_max)
+  as_osf_tbl_node(out)
 }
 
 #' @export
