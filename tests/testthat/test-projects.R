@@ -1,7 +1,5 @@
 context("project operations")
 
-login(test_pat)
-
 p1 <- osf_project_create(title = "osfr-project-tests")
 
 test_that("create project", {
