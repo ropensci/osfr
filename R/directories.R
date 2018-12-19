@@ -10,10 +10,14 @@
 #' @param id OSF project/component GUID
 #' @param path list files within the specified subdirectory path
 #' @param path_id OSF unique identifier assigned to a directory
+#' @param type filter response to include only \code{"files"} or
+#'   \code{"folders"}
+#' @param pattern filter response to include entities whose name contain the
+#'   specified pattern
 #'
 #' @export
 
-osf_ls <- function(id, path = NULL, path_id = NULL, n_max = Inf) {
+osf_ls <- function(id, path = NULL, path_id = NULL, type = "any", pattern = NULL, n_max = Inf) {
   id <- as_id(id)
 
   if (is.null(path_id)) {
@@ -22,9 +26,24 @@ osf_ls <- function(id, path = NULL, path_id = NULL, n_max = Inf) {
     url_path <- sprintf("nodes/%s/files/osfstorage/%s/", id, path_id)
   }
 
+  # TODO: filter processing should be handled in an external function
+  filters <- list()
+  if (type != "any") {
+    type <- match.arg(type, c("file", "folder"))
+    filters$kind <- type
+  }
+  if (is.character(pattern)) {
+    filters$name <- pattern
+  }
+
+  if (!rlang::is_empty(filters)) {
+    names(filters) <- sprintf("filter[%s]", names(filters))
+  }
+
   items <- .osf_paginated_request(
     method = "get",
     path = osf_path(url_path),
+    query = filters,
     n_max = n_max,
     verbose = FALSE
   )

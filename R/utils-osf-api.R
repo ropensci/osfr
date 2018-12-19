@@ -85,7 +85,8 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
   total <- 0
 
   repeat {
-    res <- .osf_request(method, path, query = list(page = i))
+    query <- modifyList(query, list(page = i))
+    res <- .osf_request(method, path, query = query)
     out <- process_response(res)
     raise_error(out)
 
