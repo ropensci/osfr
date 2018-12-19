@@ -1,12 +1,8 @@
 
 #' @export
 osf_user_retrieve <- function(id = "me") {
-  path <- osf_path(sprintf("/users/%s/", id))
-  res <- .osf_request("get", path)
-  res$raise_for_status()
-
-  out <- process_response(res)
-
+  out <- .osf_user_retrieve(id)
+  raise_error(out)
   as_osf_tbl_user(out['data'])
 }
 

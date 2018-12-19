@@ -72,7 +72,7 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
 # OSF API request functions -----------------------------------------------
 
 .osf_request <- function(method, path, query = list(), body = NULL, verbose = FALSE, ...) {
-  method <- match.arg(method, c("get", "put", "patch", "delete"))
+  method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
   cli <- osf_cli()
   method <- cli[[method]]
   method(path, query, body = body, ...)
@@ -127,6 +127,14 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
   path <- osf_path(sprintf("nodes/%s/children/", id))
   .osf_paginated_request("get", path, n_max = n_max, verbose = verbose)
 }
+
+# retrieve user info
+.osf_user_retrieve <- function(id) {
+  path <- osf_path(sprintf("/users/%s/", id))
+  res <- .osf_request("get", path)
+  process_response(res)
+}
+
 
 # list user's nodes
 .osf_user_nodes <- function(id, n_max = Inf, verbose = FALSE) {
