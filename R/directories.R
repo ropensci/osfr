@@ -49,9 +49,9 @@ osf_ls <- function(id, path = NULL, path_id = NULL, type = "any", pattern = NULL
   )
 
   if (rlang::is_empty(items)) {
-    out <- osf_tbl_file()
+    out <- osf_tbl(subclass = "osf_tbl_file")
   } else {
-    out <- as_osf_tbl_file(items)
+    out <- as_osf_tbl(items, subclass = "osf_tbl_file")
   }
 
   # recurse if path contains subdirectories
@@ -115,7 +115,7 @@ osf_mkdir <- function(id, path, parent_id = NULL, verbose = FALSE) {
     }
     out <- osf_mkdir(id, path = path_next, parent_id = parent_id)
   } else {
-    out <- as_osf_tbl_file(.osf_file_retrieve(parent_id)[1])
+    out <- as_osf_tbl(.osf_file_retrieve(parent_id)[1], "osf_tbl_file")
   }
   out
 }

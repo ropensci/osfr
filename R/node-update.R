@@ -25,7 +25,7 @@ osf_project_update <- function(id,
                                private = NULL) {
   if (missing(id)) stop("Must specify ID of a project to update")
   out <- node_update(id, title, description, private)
-  as_osf_tbl_node(out['data'])
+  as_osf_tbl(out['data'], "osf_tbl_node")
 }
 
 #' @export
@@ -36,7 +36,7 @@ osf_component_update <- function(id,
                                  private = NULL) {
   if (missing(id)) stop("Must specify ID of a component to update")
   out <- node_update(id, title, description, private)
-  as_osf_tbl_node(out['data'])
+  as_osf_tbl(out['data'], "osf_tbl_node")
 }
 
 
