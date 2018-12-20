@@ -19,6 +19,9 @@ osf_component_update(id, title = NULL, description = NULL,
 
 \item{private}{Change privacy settings to private or public}
 }
+\value{
+\code{osf_tbl_node}
+}
 \description{
 Update the title or description of a project or component. You can also
 change the privacy settings from public to private (or vice versa).
@@ -28,7 +31,4 @@ change the privacy settings from public to private (or vice versa).
 proj <- osf_project_create("temporary-title", private = TRUE)
 proj <- osf_project_update(proj$id, title = "Final Title", private = FALSE)
 }
-}
-\seealso{
-\code{\link{update_project}}
 }

@@ -7,10 +7,9 @@
 #' @param title,description Change the title or description
 #' @param private Change privacy settings to private or public
 #'
-#' @return
+#' @return \code{osf_tbl_node}
 #' @name node-update
 #'
-#' @seealso \code{\link{update_project}}
 #' @examples
 #' \dontrun{
 #' proj <- osf_project_create("temporary-title", private = TRUE)
