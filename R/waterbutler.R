@@ -82,16 +82,17 @@ wb_cli <- function(pat = getOption("osfr.pat")) {
 .wb_file_upload <- function(id, name, body) {
   query <- list(kind = "file", name = name)
   res <- .wb_request("put", wb_path(id), query = query, body = body)
+  process_response(res)
+}
 
-  if (res$status_code == 409) {
-    http_error(
-      res$status_code,
-      sprintf("File or folder already exists: %s", name)
-    )
-  }
-
-  res$raise_for_status()
-  jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
+# Update an existing file
+# fid: waterbutler file id
+.wb_file_update <- function(id, fid, body) {
+  query <- list(kind = "file")
+  # remove trailing slash for file IDs
+  path <- sub("\\/$", "", wb_path(id, fid))
+  res <- .wb_request("put", path, query = query, body = body)
+  process_response(res)
 }
 
 
