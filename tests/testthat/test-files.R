@@ -1,4 +1,4 @@
-context("Files")
+context("Uploading")
 
 # setup -------------------------------------------------------------------
 txt.file <- tempfile(pattern = "test-file-", fileext = ".txt")
@@ -20,4 +20,9 @@ test_that("file is uploaded to project root", {
 
 test_that("upload fails if the file already exists", {
   expect_error(osf_upload(p1, txt.file), "Cannot complete action: file or folder")
+})
+
+test_that("upload can overwrite existing files", {
+  f2 <- osf_upload(p1, txt.file, overwrite = TRUE)
+  expect_s3_class(f2, "osf_tbl_file")
 })

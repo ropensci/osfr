@@ -48,7 +48,7 @@ osf_upload.osf_id <- function(x, path, name = NULL, overwrite = FALSE) {
   # file already exists at destination
   if (!is.null(out$status_code)) {
     if (out$status_code == 409 && overwrite) {
-      file <- osf_ls(p1, type = "file", pattern = name)
+      file <- osf_ls(x, type = "file", pattern = name)
       # check for an exact match because the OSF filter is based on substring
       # matching, which can return multiple hits
       file <- file[file$name == name, ]
