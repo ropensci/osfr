@@ -4,7 +4,8 @@
 \alias{osf_ls}
 \title{List files and folders}
 \usage{
-osf_ls(id, path = NULL, path_id = NULL, n_max = Inf)
+osf_ls(id, path = NULL, path_id = NULL, type = "any",
+  pattern = NULL, n_max = Inf)
 }
 \arguments{
 \item{id}{OSF project/component GUID}
@@ -12,6 +13,12 @@ osf_ls(id, path = NULL, path_id = NULL, n_max = Inf)
 \item{path}{list files within the specified subdirectory path}
 
 \item{path_id}{OSF unique identifier assigned to a directory}
+
+\item{type}{filter response to include only \code{"files"} or
+\code{"folders"}}
+
+\item{pattern}{filter response to include entities whose name contain the
+specified pattern}
 }
 \description{
 List the files and folders in the top-level of an OSF Project or Component.

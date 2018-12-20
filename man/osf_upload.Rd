@@ -4,16 +4,19 @@
 \alias{osf_upload}
 \title{Upload to OSF}
 \usage{
-osf_upload(id, path, name = NULL, overwrite = FALSE)
+osf_upload(x, path, name = NULL, overwrite = FALSE)
 }
 \arguments{
-\item{id}{an \code{osf_tbl_node} or OSF node ID, or an \code{osf_tbl_file} containing a single folder or waterbutler folder ID}
+\item{x}{something that identifies a valid OSF upload destination. This can
+be one of the following: an \code{osf_tbl_node} with a single project or
+component, an \code{osf_tbl_file} with a single directory, an OSF ID
+referencing a project, component, or directory}
 
-\item{path}{Path to file on local machine to upload. Ensure file has
-proper extension named (i.e., extension sensitive, not like on Linux)}
+\item{path}{Path to file on local machine to upload. Ensure file has proper
+extension named (i.e., extension sensitive, not like on Linux)}
 
-\item{name}{Name of the uploaded file (if \code{NULL},
-\code{basename(path)} will be used).}
+\item{name}{Name of the uploaded file (if \code{NULL}, \code{basename(path)}
+will be used).}
 }
 \value{
 Waterbutler URL

@@ -25,6 +25,8 @@ Imports:
     stringi,
     purrr,
     tibble,
+    rlang,
+    fs,
     dplyr,
     plyr
 License: MIT + file LICENSE
