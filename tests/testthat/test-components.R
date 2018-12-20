@@ -1,4 +1,4 @@
-context("component operations")
+context("Component operations")
 
 
 # setup -------------------------------------------------------------------

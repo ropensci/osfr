@@ -1,4 +1,4 @@
-context("Test utilities")
+context("Recursion utilities")
 
 tree <- list(
   n0 = list(

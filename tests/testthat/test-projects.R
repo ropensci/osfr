@@ -1,4 +1,4 @@
-context("project operations")
+context("Project operations")
 
 p1 <- osf_project_create(title = "osfr-project-tests")
 
