@@ -20,15 +20,13 @@ Date: 20180101
 Depends: R (>= 3.1.0)
 Imports:
     crul,
-    httr,
     jsonlite,
     stringi,
     purrr,
     tibble,
     rlang,
     fs,
-    dplyr,
-    plyr
+    dplyr
 License: MIT + file LICENSE
 BugReports: https://github.com/chartgerink/osfr/issues
 LazyData: true
