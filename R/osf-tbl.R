@@ -11,7 +11,7 @@ new_osf_tbl <- function(x, class = NULL) {
 
 #' @export
 # expects a list, where each item is OSF entity represented as a list
-as_osf_tbl <- function(x, ...) UseMethod("as_osf_tbl")
+as_osf_tbl <- function(x) UseMethod("as_osf_tbl")
 
 #' @export
 as_osf_tbl.default <- function(x)

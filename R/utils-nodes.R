@@ -10,7 +10,7 @@
 recurse_node <- function(id, maxdepth = 5) {
   node_tree <- recurse_tree(id, maxdepth)
   simplify_tree(
-    setNames(list(node_tree), id)
+    set_names(list(node_tree), id)
   )
 }
 
@@ -24,7 +24,7 @@ recurse_tree <- function(id, maxdepth = 5) {
   children <- osf_node_ls(id, n_max = maxdepth)
   if (length(children) == 0) return(id)
   purrr::map(
-    .x = setNames(children$id, children$id),
+    .x = set_names(children$id, children$id),
     .f = recurse_tree,
     maxdepth = maxdepth - 1
   )
@@ -38,7 +38,7 @@ simplify_tree <- function(x) {
   paths <- stringi::stri_split_fixed(names(unlist(x)), pattern = ".")
 
   node_list <- purrr::map(paths, function(x) {
-    setNames(x, purrr::imap_chr(x, ~ paste0(x[seq_len(.y)], collapse = "/")))
+    set_names(x, purrr::imap_chr(x, ~ paste0(x[seq_len(.y)], collapse = "/")))
   })
 
   nodes <- unlist(node_list)

@@ -57,7 +57,7 @@ node_update <- function(
   )
 
   attrs <- list(title = title, description = description, public = public)
-  body$data$attributes <- utils::modifyList(body$data$attributes, attrs)
+  body$data$attributes <- modifyList(body$data$attributes, attrs)
 
   if (length(body$data$attributes) == 0) {
     stop("No updated attribute values specified")

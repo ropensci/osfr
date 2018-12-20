@@ -15,10 +15,10 @@ osf_open.default <- function(id) {
 osf_open.character <- function(id) osf_open(as_id(id))
 
 #' @export
-osf_open.osf_id <- function(id) utils::browseURL(osf_url(id))
+osf_open.osf_id <- function(id) browseURL(osf_url(id))
 
 #' @export
-osf_open.osf_tbl <- function(id) utils::browseURL(id$meta[[1]]$links$html)
+osf_open.osf_tbl <- function(id) browseURL(id$meta[[1]]$links$html)
 
 #' @export
 osf_open.osf_tbl_file <- function(id) {
@@ -27,7 +27,7 @@ osf_open.osf_tbl_file <- function(id) {
   parent_id <- id$meta[[1]]$relationships$node$data$id
   provider <- id$meta[[1]]$attributes$provider
   file_url <- osf_url(sprintf("%s/files/%s/%s", parent_id, provider, id$id[1]))
-  utils::browseURL(file_url)
+  browseURL(file_url)
 }
 
 
