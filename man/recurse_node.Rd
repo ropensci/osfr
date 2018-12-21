@@ -13,8 +13,8 @@ recurse_node(id, maxdepth = 5)
 }
 \value{
 Character vector of OSF IDs for children of the parent, with the
-  parent ID listed last. If there are no child nodes to recurse, the parent
-  ID is returned.
+parent ID listed last. If there are no child nodes to recurse, the parent
+ID is returned.
 }
 \description{
 Function to crawl through OSF project

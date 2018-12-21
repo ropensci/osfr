@@ -14,6 +14,9 @@ osf_component_delete(id = NULL, recursive = FALSE, verbose = FALSE)
 \item{id}{the OSF entity's unique identifier}
 
 \item{recursive}{remove sub-components before deleting the top-level entity}
+
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{FALSE})}
 }
 \value{
 the deleted entity's unique identifier (invisibly)

@@ -3,9 +3,21 @@
 \name{osf_tbl}
 \alias{osf_tbl}
 \title{OSF Tibbles}
-\usage{
-osf_tbl(x = NULL)
-}
 \description{
-OSF Tibbles
+\code{osf_tbl} objects are specialized data frames based on the
+\link[tibble:tibble-package]{tibble} class. Each row of an \code{osf_tbl} represents a
+single OSF entity, which could be a user, project, component, directory, or
+file. An \code{osf_tbl} must also include the following 3 variables:
+\itemize{
+\item \code{name}: the name or title of the OSF entity
+\item \code{id}: the unique identifier assigned to the entity by OSF
+\item \code{meta}: a list-column that stores the processed response returned by the OSF API
 }
+}
+\section{}{
+ Acknowledgments:
+Our implementation of the \code{osf_tbl} class is based on
+\link[googledrive:dribble]{dribble} objects from the
+\link[googledrive:googledrive-package]{googledrive} package.
+}
+

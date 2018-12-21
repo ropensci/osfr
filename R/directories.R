@@ -14,10 +14,15 @@
 #'   \code{"folders"}
 #' @param pattern filter response to include entities whose name contain the
 #'   specified pattern
+#' @template n_max
 #'
 #' @export
 
 osf_ls <- function(id, path = NULL, path_id = NULL, type = "any", pattern = NULL, n_max = Inf) {
+
+  # hack
+  if (inherits(id, "osf_tbl_user") || type == "node") return(osf_node_ls(id, n_max))
+
   id <- as_id(id)
 
   if (is.null(path_id)) {
@@ -72,7 +77,8 @@ osf_ls <- function(id, path = NULL, path_id = NULL, type = "any", pattern = NULL
 #'
 #' @param id Parent OSF project id (osf.io/XXXXX; just XXXXX) to create folder in
 #' @param path Name for the new folder
-#' @param parent Target path for the new folder
+#' @param parent_id Target path for the new folder
+#' @template verbose
 #'
 #' @return Waterbutler URL for folder "root", last subfolder "sub", or all
 #' folders created "all" depanding on the selection input for \code{return}

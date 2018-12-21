@@ -11,7 +11,10 @@ osf_mkdir(id, path, parent_id = NULL, verbose = FALSE)
 
 \item{path}{Name for the new folder}
 
-\item{parent}{Target path for the new folder}
+\item{parent_id}{Target path for the new folder}
+
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{FALSE})}
 }
 \value{
 Waterbutler URL for folder "root", last subfolder "sub", or all

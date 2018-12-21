@@ -6,6 +6,27 @@
 \usage{
 as_id(x)
 }
+\arguments{
+\item{x}{An \code{osf_tbl}, OSF URL, or a generic string containing a GUID or
+Waterbutler ID.}
+}
+\value{
+A character vector with class \code{osf_id}
+}
 \description{
-Retrieves unique identifiers from OSF objects.
+Extract GUIDs and Waterbutler IDs from various types of inputs. Valid looking
+IDs are returned as \code{osf_id} objects.
+}
+\section{Identifier types}{
+
+There are 2 types of identifiers you'll encounter on OSF. The first is the
+globally unique identifier, or GUID, that OSF assigns to every entity. A
+valid OSF GUID consists of 5 alphanumeric characters. The second type of
+identifier is specific to files stored on OSF. All file operations on OSF are
+handled via Waterbutler. A valid Waterbutler ID consists of 24 alphanumeric
+characters.
+}
+
+\examples{
+as_id("https://osf.io/egzt9/")
 }

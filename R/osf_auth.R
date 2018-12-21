@@ -59,7 +59,7 @@
 #' O'Reilly Press. \url{https://csgillespie.github.io/efficientR}.
 #'
 #' @export
-osf_auth <- function(token = NULL, verbose = TRUE) {
+osf_auth <- function(token = NULL) {
 
   if (is.null(token)) {
     env_pat <- Sys.getenv("OSF_PAT")
@@ -70,12 +70,10 @@ osf_auth <- function(token = NULL, verbose = TRUE) {
     source <- "provided token"
   }
 
-  if (verbose) {
-    if (is.null(token)) {
-      warning("No PAT found. See ?osf_auth for help")
-    } else {
-      message("Registered PAT from the ", source)
-    }
+  if (is.null(token)) {
+    warning("No PAT found. See ?osf_auth for help")
+  } else {
+    message("Registered PAT from the ", source)
   }
 
   options(osfr.pat = token)

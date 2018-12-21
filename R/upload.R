@@ -1,17 +1,21 @@
-#' Upload to OSF
+#' Upload files to OSF
 #'
-#' @param x something that identifies a valid OSF upload destination. This can
-#'   be one of the following: an \code{osf_tbl_node} with a single project or
-#'   component, an \code{osf_tbl_file} with a single directory, an OSF ID
-#'   referencing a project, component, or directory
+#' @param x Something that identifies a valid OSF upload destination. This can
+#'   be one of the following:
+#'   * an \code{osf_tbl_node} with a single project or
+#'   component
+#'   * an \code{osf_tbl_file} with a single directory
+#'   * an OSF ID referencing a project, component, or directory
 #' @param path Path to file on local machine to upload. Ensure file has proper
 #'   extension named (i.e., extension sensitive, not like on Linux)
-#' @param name Name of the uploaded file (if \code{NULL}, \code{basename(path)}
+#' @param name Name of the uploaded file (if `NULL`, `basename(path)`
 #'   will be used).
+#' @param overwrite Logical, overwrite an existing file with the same name
+#'   (default `FALSE`)? If `TRUE`, OSF will automatically update the file and
+#'   record the previous version.
 #'
-#' @return Waterbutler URL
+#' @return \code{osf_tbl_file}
 #' @export
-#' @seealso \code{\link{upload_files}}, \code{\link{upload_revised_files}}
 #' @importFrom crul upload
 #' @importFrom fs is_file
 

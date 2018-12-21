@@ -2,28 +2,33 @@
 % Please edit documentation in R/upload.R
 \name{osf_upload}
 \alias{osf_upload}
-\title{Upload to OSF}
+\title{Upload files to OSF}
 \usage{
 osf_upload(x, path, name = NULL, overwrite = FALSE)
 }
 \arguments{
-\item{x}{something that identifies a valid OSF upload destination. This can
-be one of the following: an \code{osf_tbl_node} with a single project or
-component, an \code{osf_tbl_file} with a single directory, an OSF ID
-referencing a project, component, or directory}
+\item{x}{Something that identifies a valid OSF upload destination. This can
+be one of the following:
+\itemize{
+\item an \code{osf_tbl_node} with a single project or
+component
+\item an \code{osf_tbl_file} with a single directory
+\item an OSF ID referencing a project, component, or directory
+}}
 
 \item{path}{Path to file on local machine to upload. Ensure file has proper
 extension named (i.e., extension sensitive, not like on Linux)}
 
 \item{name}{Name of the uploaded file (if \code{NULL}, \code{basename(path)}
 will be used).}
+
+\item{overwrite}{Logical, overwrite an existing file with the same name
+(default \code{FALSE})? If \code{TRUE}, OSF will automatically update the file and
+record the previous version.}
 }
 \value{
-Waterbutler URL
+\code{osf_tbl_file}
 }
 \description{
-Upload to OSF
-}
-\seealso{
-\code{\link{upload_files}}, \code{\link{upload_revised_files}}
+Upload files to OSF
 }

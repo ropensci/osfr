@@ -12,6 +12,7 @@
 #'
 #' @param id the OSF entity's unique identifier
 #' @param recursive remove sub-components before deleting the top-level entity
+#' @template verbose
 #'
 #' @return the deleted entity's unique identifier (invisibly)
 #' @name node-delete

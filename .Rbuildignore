@@ -5,5 +5,6 @@
 ^\.travis.yml
 ^inst/\.lintr$
 ^_ignore$
+^man-roxygen$
 ^CONTRIBUTING\.md$
 ^CODE_OF_CONDUCT\.md$

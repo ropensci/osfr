@@ -6,6 +6,9 @@
 \usage{
 osf_user_retrieve(id = "me")
 }
+\arguments{
+\item{id}{A valid OSF GUID}
+}
 \description{
 Retrieve OSF user information
 }

@@ -4,7 +4,7 @@
 \alias{osf_auth}
 \title{OSF User Authentication}
 \usage{
-osf_auth(token = NULL, verbose = TRUE)
+osf_auth(token = NULL)
 }
 \arguments{
 \item{token}{OSF personal access token}
@@ -32,13 +32,13 @@ and using it to authenticate \pkg{osfr}.
 
 
 \enumerate{
-  \item Navigate to \url{https://osf.io/settings/tokens/}
-  \item Click the \emph{New token} button and provide a descriptive name
-  \item Select the scopes (i.e., permissions) you'd like to grant \pkg{osfr}
-  \item Click the \emph{Create} button to generate your PAT
-  \item If successful, your 70 character token will be displayed along with several important warnings you should definitely read over carefully
-  \item You read those warnings, right?
-  \item Copy your token and keep it in a safe place
+\item Navigate to \url{https://osf.io/settings/tokens/}
+\item Click the \emph{New token} button and provide a descriptive name
+\item Select the scopes (i.e., permissions) you'd like to grant \pkg{osfr}
+\item Click the \emph{Create} button to generate your PAT
+\item If successful, your 70 character token will be displayed along with several important warnings you should definitely read over carefully
+\item You read those warnings, right?
+\item Copy your token and keep it in a safe place
 }
 }
 

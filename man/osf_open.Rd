@@ -4,7 +4,11 @@
 \alias{osf_open}
 \title{View on OSF}
 \usage{
-osf_open(id)
+osf_open(x)
+}
+\arguments{
+\item{x}{Something that identifies an OSF entity. This could be an \link{osf_tbl},
+an OSF URL, or a generic string containing a GUID or Waterbutler ID.}
 }
 \description{
 View a project, component, file or user profile on osf.io with your default

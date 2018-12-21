@@ -1,4 +1,5 @@
 #' Retrieve OSF user information
+#' @param id A valid OSF GUID
 #'
 #' @export
 osf_user_retrieve <- function(id = "me") {

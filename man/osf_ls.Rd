@@ -19,6 +19,8 @@ osf_ls(id, path = NULL, path_id = NULL, type = "any",
 
 \item{pattern}{filter response to include entities whose name contain the
 specified pattern}
+
+\item{n_max}{Number of results to return from OSF.}
 }
 \description{
 List the files and folders in the top-level of an OSF Project or Component.
