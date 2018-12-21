@@ -13,5 +13,5 @@
 #' @importFrom purrr map map_df imap_chr set_names %||%
 #' @importFrom tibble tibble
 #' @importFrom rlang abort warn
-#' @importFrom utils modifyList browseURL
+#' @importFrom utils head tail modifyList browseURL
 NULL

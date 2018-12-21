@@ -36,7 +36,7 @@ as_id.character <- function(x) {
     abort(paste(
       c(
         "Detected invalid OSF identifiers. See `?as_id` for more information.",
-        sprintf("* Result %i is invalid", which(head(invalid_ids, 10)))
+        sprintf("* Result %i is invalid", which(utils::head(invalid_ids, 10)))
       ),
       collapse = "\n"
     ))

@@ -13,6 +13,6 @@ is_osf_url <- function(url) grepl("osf.io", tolower(url), fixed = TRUE)
 extract_osf_id <- function(url) {
   stopifnot(is_osf_url(url))
   path <- crul::url_parse(url)$path
-  purrr::map_chr(fs::path_split(path), tail, 1)
+  purrr::map_chr(fs::path_split(path), utils::tail, 1)
 }
 
