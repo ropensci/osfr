@@ -1,23 +1,54 @@
 #' Extract OSF identifiers
 #'
-#' Retrieves unique identifiers from OSF objects.
+#' Extract GUIDs and Waterbutler IDs from various types of inputs. Valid looking
+#' IDs are returned as \code{osf_id} objects.
+#'
+#' @section Identifier types:
+#' There are 2 types of identifiers you'll encounter on OSF. The first is the
+#' globally unique identifier, or GUID, that OSF assigns to every entity. A
+#' valid OSF GUID consists of 5 alphanumeric characters. The second type of
+#' identifier is specific to files stored on OSF. All file operations on OSF are
+#' handled via Waterbutler. A valid Waterbutler ID consists of 24 alphanumeric
+#' characters.
+#'
+#' @param x An \code{osf_tbl}, OSF URL, or a generic string containing a GUID or
+#'   Waterbutler ID.
+#'
+#' @return A character vector with class \code{osf_id}
+#' @examples
+#' as_id("https://osf.io/egzt9/")
+#' @export
 as_id <- function(x) UseMethod("as_id")
 
+#' @export
 as_id.character <- function(x) {
 
   # extract GUID from URLs
-  if (grepl("osf.io", x, fixed = TRUE)) {
-    x <- gsub("/", "", crul::url_parse(x)$path, fixed = TRUE)
-  }
+  ids <- purrr::map_chr(
+    tolower(x),
+    ~ ifelse(is_osf_url(.x), extract_osf_id(.x), .x)
+  )
 
   # verify length is consistent with OSF GUID or waterbutler identifier
-  if (!nchar(x) %in% c(5, 24)) abort("`x` is not a valid OSF ID.")
-  structure(x, class = "osf_id")
+  invalid_ids <- !nchar(ids) %in% c(5L, 24L)
+
+  if (any(invalid_ids)) {
+    abort(paste(
+      c(
+        "Detected invalid OSF identifiers. See `?as_id` for more information.",
+        sprintf("* Result %i is invalid", which(head(invalid_ids, 10)))
+      ),
+      collapse = "\n"
+    ))
+  }
+
+  structure(ids, class = "osf_id")
 }
 
-as_id.osf_tbl_node <- function(x) as_id(x$id)
-as_id.osf_tbl_file <- function(x) as_id(x$id)
-as_id.osf_tbl_user <- function(x) as_id(x$id)
+#' @export
+as_id.osf_tbl <- function(x) as_id(x$id)
+
+#' @export
 as_id.osf_id <- function(x) x
 
 
