@@ -17,11 +17,18 @@
 NULL
 
 osf_tbl <- function(x = NULL, subclass = NULL) {
-  x <- x %||% list(name = character(), id = character(), metadata = list())
+  if (is.list(x) && rlang::is_empty(x)) x <- NULL
+
+  x <- x %||% tibble::tibble(
+    name = character(),
+    id = character(),
+    metadata = list()
+  )
   new_osf_tbl(x, subclass)
 }
 
 new_osf_tbl <- function(x, subclass = NULL) {
+  stopifnot(inherits(x, "data.frame"))
   tibble::new_tibble(x, subclass = c(subclass, "osf_tbl"))
 }
 
@@ -35,22 +42,28 @@ as_osf_tbl.data.frame <- function(x, subclass = NULL) new_osf_tbl(x, subclass)
 
 as_osf_tbl.list <- function(x, subclass = NULL) {
 
-  get_name <- switch(subclass,
-    osf_tbl_node = function(x) x$attributes$title,
-    osf_tbl_file = function(x) x$attributes$name,
-    osf_tbl_user = function(x) x$attributes$full_name
+  # handle empty lists returned by e.g. .osf_node_children() for childless nodes
+  if (rlang::is_empty(x)) return(osf_tbl(subclass = subclass))
+
+  name_field <- switch(subclass,
+    osf_tbl_node = "title",
+    osf_tbl_file = "name",
+    osf_tbl_user = "full_name"
   )
 
-  tbl <- purrr::map_df(
-    x,
-    ~ list(
-      name = get_name(.x),
-      id   = .x$id,
-      meta = list(.x[c("attributes", "links", "relationships")])
-    )
-  )
+  # I know what you're thinking: why not just map_df this? This approach is
+  # about 30% slower than map_df but doesn't require dplyr. Other suggestions
+  # are welcome.
+  vars <- purrr::map(x, ~ list(
+    name = .x$attributes[[name_field]],
+    id = .x$id,
+    meta = .x[c("attributes", "links", "relationships")]
+  ))
 
-  new_osf_tbl(tbl, subclass)
+  out <- tibble::new_tibble(purrr::transpose(vars), nrow = length(vars))
+  out$name <- as.character(out$name)
+  out$id   <- as.character(out$id)
+  new_osf_tbl(out, subclass)
 }
 
 #' @export

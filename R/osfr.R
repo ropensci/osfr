@@ -10,7 +10,7 @@
 #' @name osfr
 #'
 #' @importFrom stringi stri_split_fixed
-#' @importFrom purrr map map_df imap_chr set_names %||%
+#' @importFrom purrr map imap_chr transpose set_names %||%
 #' @importFrom tibble tibble
 #' @importFrom rlang abort warn
 #' @importFrom utils head tail modifyList browseURL
