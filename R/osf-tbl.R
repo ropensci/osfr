@@ -14,6 +14,7 @@
 #' [googledrive][googledrive::googledrive-package] package.
 #'
 #' @name osf_tbl
+#' @aliases osf_tbl_node osf_tbl_file osf_tbl_user
 NULL
 
 osf_tbl <- function(x = NULL, subclass = NULL) {
