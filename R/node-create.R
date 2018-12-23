@@ -1,7 +1,19 @@
 #' Create a new OSF project or component
 #'
-#' @param id GUID of the existing OSF project or component in which the new
-#'   component will be created
+#' Both projects and components can be created with `osf_node_create()`. To
+#' create a new top-level project leave `x = NULL`. To create a new component
+#' use `x` to specify the existing parent project or component in which the new
+#' component will be created.
+#'
+#' @section: OSF Nodes:
+#' On OSF, projects and components are both implemented as *nodes* within the
+#' system; this explains why they are functionally identical on
+#' <https://www.osf.io>. The only distinction between the two is projects exist
+#' at the top-level of an organizational hierarchy and components are
+#' sub-projects within a parent project. As such, the same suite of `osfr`
+#' functions can be used to manage both projects and components.
+#'
+#' @template input-osf-node
 #' @param title,description Set a title (required) and, optionally, a description
 #' @param private Boolean, should it be private (defaults to \code{TRUE})
 #'
@@ -28,9 +40,9 @@ osf_project_create <- function(title = NULL, description = '', private = TRUE) {
 
 #' @export
 #' @rdname node-create
-osf_component_create <- function(id, title = NULL, description = '', private = TRUE) {
-  if (missing(id)) stop("Must specify ID of a parent project")
-  path <- osf_path(sprintf("nodes/%s/children/", as_id(id)))
+osf_component_create <- function(x, title = NULL, description = '', private = TRUE) {
+  if (missing(x)) stop("Must specify ID of a parent project")
+  path <- osf_path(sprintf("nodes/%s/children/", as_id(x)))
   out <- node_create(path, title, description, private)
   as_osf_tbl(out['data'], "osf_tbl_node")
 }
