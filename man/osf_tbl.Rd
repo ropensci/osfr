@@ -7,18 +7,39 @@
 \alias{osf_tbl_user}
 \title{OSF Tibbles}
 \description{
-\code{osf_tbl} objects are specialized data frames based on the
-\link[tibble:tibble-package]{tibble} class. Each row of an \code{osf_tbl} represents a
-single OSF entity, which could be a user, project, component, directory, or
-file. An \code{osf_tbl} must also include the following 3 variables:
+Items retrieved from OSF are represented as \code{osf_tbl} objects, specialized
+data frames based on the \link[tibble:tibble-package]{tibble} class. See below
+for additional details.
+}
+\details{
+Each row of an \code{osf_tbl} represents a single OSF entity, which could be a
+user, project, component, directory, or file. An \code{osf_tbl} must include
+the following 3 variables:
 \itemize{
-\item \code{name}: the name or title of the OSF entity
-\item \code{id}: the unique identifier assigned to the entity by OSF
-\item \code{meta}: a list-column that stores the processed response returned by the OSF API
+\item \code{name}: the name or title of the entity
+\item \code{id}: the unique identifier assigned to the entity
+\item \code{meta}: a list-column that stores the processed response returned by
+OSF's API
+}
+
+The \code{meta} column is primarily intended for use by \code{osfr}'s functions and
+should not be altered by users.
+}
+\section{Subclasses}{
+
+
+An \code{osf_tbl} is the parent class of 3 subclasses that are used to represent
+each of OSF's main entities: users, nodes (i.e., projects and components) and
+files. These subclasses are
+\itemize{
+\item users
 }
 }
-\section{}{
- Acknowledgments: Our implementation of the \code{osf_tbl} class is based
+
+\section{Acknowledgements}{
+
+
+Our implementation of the \code{osf_tbl} class is based
 on \code{dribble} objects from the
 \href{https://googledrive.tidyverse.org}{googledrive} package.
 }

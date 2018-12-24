@@ -1,16 +1,32 @@
 #' OSF Tibbles
 #'
-#' `osf_tbl` objects are specialized data frames based on the
-#' [tibble][tibble::tibble-package] class. Each row of an `osf_tbl` represents a
-#' single OSF entity, which could be a user, project, component, directory, or
-#' file. An `osf_tbl` must also include the following 3 variables:
-#' * `name`: the name or title of the OSF entity
-#' * `id`: the unique identifier assigned to the entity by OSF
-#' * `meta`: a list-column that stores the processed response returned by the OSF API
+#' Items retrieved from OSF are represented as `osf_tbl` objects, specialized
+#' data frames based on the [tibble][tibble::tibble-package] class. See below
+#' for additional details.
 #'
-#' @section: Acknowledgments: Our implementation of the `osf_tbl` class is based
-#' on `dribble` objects from the
-#' [googledrive](https://googledrive.tidyverse.org) package.
+#' Each row of an `osf_tbl` represents a single OSF entity, which could be a
+#' user, project, component, directory, or file. An `osf_tbl` must include
+#' the following 3 variables:
+#'
+#' * `name`: the name or title of the entity
+#' * `id`: the unique identifier assigned to the entity
+#' * `meta`: a list-column that stores the processed response returned by
+#' OSF's API
+#'
+#' The `meta` column is primarily intended for use by `osfr`'s functions and
+#' should not be altered by users.
+#'
+#' @section Subclasses:
+#'
+#' An `osf_tbl` is the parent class of 3 subclasses that are used to represent
+#' each of OSF's main entities: `osf_tbl_user` for users, `osf_tbl_node` for
+#' nodes (i.e., projects and components) and `osf_tbl_file` for files and
+#' directories.
+#'
+#' @section Acknowledgements:
+#'
+#' Our implementation of the `osf_tbl` class is based on `dribble` objects from
+#' the [googledrive](https://googledrive.tidyverse.org) package.
 #'
 #' @name osf_tbl
 #' @aliases osf_tbl_node osf_tbl_file osf_tbl_user
