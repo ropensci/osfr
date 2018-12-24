@@ -8,10 +8,9 @@
 #' * `id`: the unique identifier assigned to the entity by OSF
 #' * `meta`: a list-column that stores the processed response returned by the OSF API
 #'
-#' @section: Acknowledgments:
-#' Our implementation of the `osf_tbl` class is based on
-#' [dribble][googledrive::dribble] objects from the
-#' [googledrive][googledrive::googledrive-package] package.
+#' @section: Acknowledgments: Our implementation of the `osf_tbl` class is based
+#' on `dribble` objects from the
+#' [googledrive](https://googledrive.tidyverse.org) package.
 #'
 #' @name osf_tbl
 #' @aliases osf_tbl_node osf_tbl_file osf_tbl_user

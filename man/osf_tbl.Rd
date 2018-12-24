@@ -2,6 +2,9 @@
 % Please edit documentation in R/osf-tbl.R
 \name{osf_tbl}
 \alias{osf_tbl}
+\alias{osf_tbl_node}
+\alias{osf_tbl_file}
+\alias{osf_tbl_user}
 \title{OSF Tibbles}
 \description{
 \code{osf_tbl} objects are specialized data frames based on the
@@ -15,9 +18,8 @@ file. An \code{osf_tbl} must also include the following 3 variables:
 }
 }
 \section{}{
- Acknowledgments:
-Our implementation of the \code{osf_tbl} class is based on
-\link[googledrive:dribble]{dribble} objects from the
-\link[googledrive:googledrive-package]{googledrive} package.
+ Acknowledgments: Our implementation of the \code{osf_tbl} class is based
+on \code{dribble} objects from the
+\href{https://googledrive.tidyverse.org}{googledrive} package.
 }
 

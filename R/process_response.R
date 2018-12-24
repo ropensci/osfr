@@ -11,9 +11,7 @@
 #' failure. These are also converted to lists and returned without erroring so
 #' that the parent functions can determine how to proceed.
 #'
-#' @section
-#'
-#' @param res
+#' @param res HTTP response from the OSF or Waterbutler API
 #'
 #' @return list
 #'

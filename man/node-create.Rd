@@ -8,7 +8,7 @@
 \usage{
 osf_project_create(title = NULL, description = "", private = TRUE)
 
-osf_component_create(id, title = NULL, description = "",
+osf_component_create(x, title = NULL, description = "",
   private = TRUE)
 }
 \arguments{
@@ -16,15 +16,28 @@ osf_component_create(id, title = NULL, description = "",
 
 \item{private}{Boolean, should it be private (defaults to \code{TRUE})}
 
-\item{id}{GUID of the existing OSF project or component in which the new
-component will be created}
+\item{x}{Something that identifies an existing OSF node. This could be an
+\link{osf_tbl_node}, or an OSF project or component's URL or GUID.}
 }
 \value{
 An object of class \code{osf_tbl_node} with one row per item.
 }
 \description{
-Create a new OSF project or component
+Both projects and components can be created with \code{osf_node_create()}. To
+create a new top-level project leave \code{x = NULL}. To create a new component
+use \code{x} to specify the existing parent project or component in which the new
+component will be created.
 }
+\section{}{
+ OSF Nodes:
+On OSF, projects and components are both implemented as \emph{nodes} within the
+system; this explains why they are functionally identical on
+\url{https://www.osf.io}. The only distinction between the two is projects exist
+at the top-level of an organizational hierarchy and components are
+sub-projects within a parent project. As such, the same suite of \code{osfr}
+functions can be used to manage both projects and components.
+}
+
 \examples{
 \dontrun{
 # create a new project
