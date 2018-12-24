@@ -5,7 +5,10 @@
 #' @param id An OSF identifier corresponding to an OSF user, project, component,
 #'   or file.
 #' @return an `osf_tbl_user`, `osf_tbl_node`, or `osf_tbl_file`
-#' @example osf_retrieve("dguxh")
+#' @examples
+#' \dontrun{
+#'  osf_retrieve("dguxh")
+#' }
 #' @export
 
 osf_retrieve <- function(id) {
