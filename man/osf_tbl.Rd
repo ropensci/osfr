@@ -29,18 +29,15 @@ should not be altered by users.
 
 
 An \code{osf_tbl} is the parent class of 3 subclasses that are used to represent
-each of OSF's main entities: users, nodes (i.e., projects and components) and
-files. These subclasses are
-\itemize{
-\item users
-}
+each of OSF's main entities: \code{osf_tbl_user} for users, \code{osf_tbl_node} for
+nodes (i.e., projects and components) and \code{osf_tbl_file} for files and
+directories.
 }
 
 \section{Acknowledgements}{
 
 
-Our implementation of the \code{osf_tbl} class is based
-on \code{dribble} objects from the
-\href{https://googledrive.tidyverse.org}{googledrive} package.
+Our implementation of the \code{osf_tbl} class is based on \code{dribble} objects from
+the \href{https://googledrive.tidyverse.org}{googledrive} package.
 }
 
