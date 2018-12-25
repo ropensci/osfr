@@ -1,6 +1,9 @@
 #' Retrieve an entity from OSF based on its identifier
 #'
-#' Use `osf_retrieve()` to create an `osf_tbl` for an existing OSF entity.
+#' Use `osf_retrieve()` to create an `osf_tbl` for an existing OSF entity based
+#' on its unique identifier. Usually this is a 5-character global unique
+#' identifier (GUID) but for files or directories could be a 24-character
+#' Waterbutler ID.
 #'
 #' @param id An OSF identifier corresponding to an OSF user, project, component,
 #'   or file.
