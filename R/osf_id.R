@@ -60,6 +60,7 @@ id_type <- function(id) {
 
   # is it a waterbutler ID?
   if (nchar(id) == 24) return("files")
+  if (id == "me") return("users")
 
   out <- .osf_node_retrieve(id)
   if (is.null(out$errors)) return(out$data$type)

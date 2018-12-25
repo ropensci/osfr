@@ -6,7 +6,7 @@
 #' Waterbutler ID.
 #'
 #' @param id An OSF identifier corresponding to an OSF user, project, component,
-#'   or file.
+#'   or file. Set `id = "me"` to retrieve your own OSF profile.
 #' @return an `osf_tbl_user`, `osf_tbl_node`, or `osf_tbl_file`
 #' @examples
 #' \dontrun{
@@ -15,12 +15,11 @@
 #' @export
 
 osf_retrieve <- function(id) {
-  id <- as_id(id)
-
   if (length(id) > 1) {
     warn(sprintf("Retrieving only the first ID of %i", length(id)))
   }
 
+  id <- ifelse(id != "me", as_id(id), structure("me", class = "osf_id"))
   type <- id_type(id)
   subclass <- paste0("osf_tbl_", sub("s$", "", type))
 

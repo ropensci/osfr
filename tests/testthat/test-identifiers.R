@@ -20,3 +20,7 @@ test_that("GUIDs and Waterbutler IDs are detected in OSF URLs", {
   )
   expect_s3_class(as_id(urls), "osf_id")
 })
+
+test_that("special identifier 'me' is recognized", {
+  expect_match(id_type("me"), "users")
+})
