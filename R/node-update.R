@@ -25,7 +25,7 @@ osf_project_update <- function(id,
                                private = NULL) {
   if (missing(id)) stop("Must specify ID of a project to update")
   out <- node_update(id, title, description, private)
-  as_osf_tbl(out['data'], "osf_tbl_node")
+  as_osf_tbl(out["data"], "osf_tbl_node")
 }
 
 #' @export
@@ -36,7 +36,7 @@ osf_component_update <- function(id,
                                  private = NULL) {
   if (missing(id)) stop("Must specify ID of a component to update")
   out <- node_update(id, title, description, private)
-  as_osf_tbl(out['data'], "osf_tbl_node")
+  as_osf_tbl(out["data"], "osf_tbl_node")
 }
 
 
@@ -63,7 +63,7 @@ node_update <- function(
     stop("No updated attribute values specified")
   }
 
-  path <- osf_path(sprintf('nodes/%s/', id))
+  path <- osf_path(sprintf("nodes/%s/", id))
   res <- .osf_request("patch", path, body = body, encode = "json")
   res$raise_for_status()
   process_response(res)

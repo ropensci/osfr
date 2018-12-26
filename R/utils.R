@@ -16,4 +16,3 @@ extract_osf_id <- function(url) {
   path <- crul::url_parse(url)$path
   purrr::map_chr(fs::path_split(path), utils::tail, 1)
 }
-

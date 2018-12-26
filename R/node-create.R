@@ -32,19 +32,19 @@ NULL
 
 #' @export
 #' @rdname node-create
-osf_project_create <- function(title = NULL, description = '', private = TRUE) {
+osf_project_create <- function(title = NULL, description = "", private = TRUE) {
   path <- osf_path("nodes/")
   out <- node_create(path, title, description, private)
-  as_osf_tbl(out['data'], "osf_tbl_node")
+  as_osf_tbl(out["data"], "osf_tbl_node")
 }
 
 #' @export
 #' @rdname node-create
-osf_component_create <- function(x, title = NULL, description = '', private = TRUE) {
+osf_component_create <- function(x, title = NULL, description = "", private = TRUE) {
   if (missing(x)) stop("Must specify ID of a parent project")
   path <- osf_path(sprintf("nodes/%s/children/", as_id(x)))
   out <- node_create(path, title, description, private)
-  as_osf_tbl(out['data'], "osf_tbl_node")
+  as_osf_tbl(out["data"], "osf_tbl_node")
 }
 
 
@@ -52,7 +52,7 @@ osf_component_create <- function(x, title = NULL, description = '', private = TR
 node_create <- function(
   path,
   title = NULL,
-  description = '',
+  description = "",
   private = TRUE) {
 
   if (is.null(title)) stop("Must specify a title")
@@ -74,4 +74,3 @@ node_create <- function(
   raise_error(out)
   out
 }
-

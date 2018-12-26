@@ -25,10 +25,7 @@ test_that("tree coercion to character vector", {
 test_that("coerce tree leaf", {
   expect_error(simplify_tree(tree$n0$n03), "is.list\\(x\\) is not TRUE")
   expect_equal(
-    simplify_tree(tree$n0['n03']),
+    simplify_tree(tree$n0["n03"]),
     c(n03 = "n03")
   )
 })
-
-
-

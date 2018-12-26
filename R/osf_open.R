@@ -35,7 +35,7 @@ osf_open.osf_tbl_file <- function(x) {
 
 # OSF URL that accounts for $OSF_USE_SERVER
 osf_url <- function(id = NULL) {
-  server <- Sys.getenv('OSF_USE_SERVER')
+  server <- Sys.getenv("OSF_USE_SERVER")
   url <- if (nzchar(server)) {
     sprintf("https://%s.osf.io", server)
   } else {

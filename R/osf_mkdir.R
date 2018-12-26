@@ -27,14 +27,14 @@ osf_mkdir <- function(id, path, parent_id = NULL, verbose = FALSE) {
     parent_id <- items$id[which(items$name == path_root)]
     if (verbose) {
       message(
-        sprintf("%s (%s) already exists in node %s", path_root, parent_id ,id))
+        sprintf("%s (%s) already exists in node %s", path_root, parent_id, id))
     }
   } else {
     new_dir <- .wb_create_folder(id, path_root, parent_id)
     parent_id <- gsub("/", "", new_dir$data$attributes$path, fixed = TRUE)
     if (verbose) {
       message(
-        sprintf("Created %s (%s) in node %s", path_root, parent_id ,id))
+        sprintf("Created %s (%s) in node %s", path_root, parent_id, id))
     }
   }
 

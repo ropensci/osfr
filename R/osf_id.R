@@ -73,5 +73,3 @@ id_type <- function(id) {
 
   stop("No OSF entity found for ID ", id)
 }
-
-

@@ -23,4 +23,3 @@ osf_node_ls.osf_tbl_user <- function(id, n_max = 10) {
   out <- .osf_user_nodes(as_id(id), n_max)
   as_osf_tbl(out, "osf_tbl_node")
 }
-

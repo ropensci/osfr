@@ -31,4 +31,3 @@ test_that("project deletion", {
   out <- .osf_node_retrieve(p1$id)
   expect_equal(out$status_code, 410)
 })
-

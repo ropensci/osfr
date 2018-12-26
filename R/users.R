@@ -31,5 +31,5 @@ osf_retrieve <- function(id) {
   )
   raise_error(out)
 
-  as_osf_tbl(out['data'], subclass)
+  as_osf_tbl(out["data"], subclass)
 }

@@ -66,8 +66,5 @@ osf_upload.osf_id <- function(x, path, name = NULL, overwrite = FALSE) {
   file_id <- strsplit(out$data$id, split = "/", fixed = TRUE)[[1]][2]
   out <- .osf_file_retrieve(file_id)
 
-  as_osf_tbl(out['data'], "osf_tbl_file")
+  as_osf_tbl(out["data"], "osf_tbl_file")
 }
-
-
-

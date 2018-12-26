@@ -14,7 +14,7 @@ wb_path <- function(id, fid = NULL, provider = "osfstorage") {
 # Construct the WaterButler API Client
 wb_cli <- function(pat = getOption("osfr.pat")) {
 
-  url <- ifelse(Sys.getenv('OSF_USE_SERVER') == "test",
+  url <- ifelse(Sys.getenv("OSF_USE_SERVER") == "test",
                    "https://files.us.test.osf.io",
                    "https://files.osf.io")
 
@@ -23,7 +23,7 @@ wb_cli <- function(pat = getOption("osfr.pat")) {
   )
 
   if (!is.null(pat)) {
-    headers$Authorization = sprintf('Bearer %s', pat)
+    headers$Authorization <- sprintf("Bearer %s", pat)
   }
 
   crul::HttpClient$new(
@@ -94,6 +94,3 @@ wb_cli <- function(pat = getOption("osfr.pat")) {
   res <- .wb_request("put", path, query = query, body = body)
   process_response(res)
 }
-
-
-

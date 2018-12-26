@@ -17,7 +17,7 @@ osf_path <- function(path) {
 
 # Construct the OSF API Client
 osf_cli <- function(pat = getOption("osfr.pat")) {
-  server <- Sys.getenv('OSF_USE_SERVER')
+  server <- Sys.getenv("OSF_USE_SERVER")
   url <- if (nzchar(server)) {
     sprintf("https://api.%s.osf.io", server)
   } else {
@@ -30,7 +30,7 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
   )
 
   if (!is.null(pat)) {
-    headers$Authorization = sprintf('Bearer %s', pat)
+    headers$Authorization <- sprintf("Bearer %s", pat)
   }
 
   crul::HttpClient$new(

@@ -91,7 +91,7 @@ parse_datetime_attrs <- function(x) {
 #
 # Staring with API v2.2 all date fields are standardized to UTC
 parse_datetime <- function(x) {
-  if(is.null(x)) return(x)
+  if (is.null(x)) return(x)
   as.POSIXct(x, format = "%Y-%m-%dT%X", tz = "UTC")
 }
 

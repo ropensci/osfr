@@ -11,4 +11,3 @@ test_that("empty list returns empty osf_tbl", {
   expect_s3_class(out, "osf_tbl")
   expect_equal(nrow(out), 0)
 })
-

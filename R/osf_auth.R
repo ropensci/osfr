@@ -79,4 +79,3 @@ osf_auth <- function(token = NULL) {
   options(osfr.pat = token)
   invisible(token)
 }
-
