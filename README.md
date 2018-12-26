@@ -1,4 +1,4 @@
-# osfr
+# osfr2
 
 [![Build Status](https://travis-ci.org/aaronwolen/osfr.svg?branch=master)](https://travis-ci.org/aaronwolen/osfr)
 
@@ -11,6 +11,8 @@ OSF (Open Science Framework, <https://osf.io>) is a free and open source project
 ## Installation
 
 This package is currently under heavy development and is apt to undergo significant changes until a stable version has been submitted to CRAN. You've been warned.
+
+Also note this version of osfr has been temporarily renamed to *osfr2*.
 
 ``` r
 # install.packages("devtools")

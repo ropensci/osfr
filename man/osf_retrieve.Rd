@@ -8,13 +8,16 @@ osf_retrieve(id)
 }
 \arguments{
 \item{id}{An OSF identifier corresponding to an OSF user, project, component,
-or file.}
+or file. Set \code{id = "me"} to retrieve your own OSF profile.}
 }
 \value{
 an \code{osf_tbl_user}, \code{osf_tbl_node}, or \code{osf_tbl_file}
 }
 \description{
-Use \code{osf_retrieve()} to create an \code{osf_tbl} for an existing OSF entity.
+Use \code{osf_retrieve()} to create an \code{osf_tbl} for an existing OSF entity based
+on its unique identifier. Usually this is a 5-character global unique
+identifier (GUID) but for files or directories could be a 24-character
+Waterbutler ID.
 }
 \examples{
 \dontrun{
