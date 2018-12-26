@@ -5,5 +5,5 @@ r:
   - oldrel
   - release
   - devel
-# after_success:
-# - Rscript -e 'covr::coveralls()'
+after_success:
+  - Rscript -e "covr::codecov()"

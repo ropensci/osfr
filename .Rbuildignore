@@ -1,4 +1,6 @@
+^codecov\.yml$
 ^.*\.Rproj$
 ^\.travis.yml
 ^_ignore$
 ^man-roxygen$
+^\.Rproj\.user$
