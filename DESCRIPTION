@@ -1,6 +1,6 @@
 Package: osfr2
 Title: R Interface to OSF
-Version: 0.1.1.9000
+Version: 0.1.1.9001
 Maintainer: Aaron Wolen <aaron@wolen.com>
 Authors@R: c(
     person("Chris","Hartgerink",, "chjh@protonmail.com", role = c("aut", "cre")),
