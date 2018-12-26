@@ -10,26 +10,48 @@
 #' @return an `osf_tbl_user`, `osf_tbl_node`, or `osf_tbl_file`
 #' @examples
 #' \dontrun{
-#'  osf_retrieve("dguxh")
+#'  osf_retrieve_user("me")
 #' }
+#' @name osf_retrieve
+NULL
+
 #' @export
+#' @rdname osf_retrieve
+osf_retrieve_user <- function(id) {
+  stopifnot(is.character(id))
+  id <- make_single(id)
 
-osf_retrieve <- function(id) {
-  if (length(id) > 1) {
-    warn(sprintf("Retrieving only the first ID of %i", length(id)))
-  }
+  # accommodate special case of 'me' id
+  id <- switch(id, me = structure(id, class = "osf_id"), as_id(id))
 
-  id <- ifelse(id != "me", as_id(id), structure("me", class = "osf_id"))
-  type <- id_type(id)
-  subclass <- paste0("osf_tbl_", sub("s$", "", type))
-
-  out <- switch(
-    type,
-    nodes = .osf_node_retrieve(id),
-    users = .osf_user_retrieve(id),
-    files = .osf_file_retrieve(id)
-  )
+  out <- .osf_user_retrieve(id)
   raise_error(out)
 
-  as_osf_tbl(out["data"], subclass)
+  as_osf_tbl(out["data"], "osf_tbl_user")
+}
+
+#' @export
+#' @rdname osf_retrieve
+osf_retrieve_node <- function(id) {
+  stopifnot(is.character(id))
+  id <- make_single(id)
+  id <- as_id(id)
+
+  out <- .osf_node_retrieve(id)
+  raise_error(out)
+
+  as_osf_tbl(out["data"], "osf_tbl_node")
+}
+
+#' @export
+#' @rdname osf_retrieve
+osf_retrieve_file <- function(id) {
+  stopifnot(is.character(id))
+  id <- make_single(id)
+  id <- as_id(id)
+
+  out <- .osf_file_retrieve(id)
+  raise_error(out)
+
+  as_osf_tbl(out["data"], "osf_tbl_file")
 }
