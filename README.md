@@ -1,21 +1,22 @@
-# osfr: R Interface to the Open Science Framework
+# osfr
 
-  [![Build Status](https://travis-ci.org/CenterForOpenScience/osfr.svg?branch=master)](https://travis-ci.org/CenterForOpenScience/osfr)[![Coverage Status](https://coveralls.io/repos/github/CenterForOpenScience/osfr/badge.svg?branch=master)](https://coveralls.io/github/CenterForOpenScience/osfr?branch=master)
+[![Build Status](https://travis-ci.org/aaronwolen/osfr.svg?branch=master)](https://travis-ci.org/aaronwolen/osfr)
 
-The R package `osfr` interfaces with the [Open Science Framework (OSF)](https://osf.io) to both get information from the OSF and push information to the OSF. If you are looking for a Python client see [`osf-cli`](https://github.com/dib-lab/osf-cli).
+## Overview
 
-To install, you currently have to have [`devtools`](https://github.com/hadley/devtools) installed, considering the package is not yet available on CRAN. When it it available on CRAN, we will celebrate here :palm_tree: Install and login is as follows from `R`:
+osfr provides a suite of functions for interacting with [OSF][osf] that is primarily focused on project management workflows. 
 
-```R
-devtools::install_github('CenterForOpenScience/osfr')
+OSF (Open Science Framework, <https://osf.io>) is a free and open source project management repository designed to support researchers of all technical backgrounds. The service includes unlimited cloud storage and file version history, providing a centralized location for your research materials that can be kept private, shared with select collaborators, or made publicly available with citable DOIs. 
 
-login()
+## Installation
+
+This package is currently under heavy development and is apt to undergo significant changes until a stable version has been submitted to CRAN. You've been warned.
+
+``` r
+# install.packages("devtools")
+devtools::install_github("aaronwolen/osfr")
 ```
 
-Considering this software is still very much in development, please don't use it to build anything that requires stability. Code might very well break still throughout the development process. When `v1.0.0` comes around, that's when it is reasonable to start building on this reliably (that's when it will also be on CRAN).
-
-# Contributing
-
-Contributions are definitely welcome! There have been some great uninvited contributions, that have made the project much better. If you're looking for ways to contribute, [the issues](https://github.com/CenterForOpenScience/osfr/issues) is always a good place to start. If you notice a typo, also please submit a PR! And most of all, this project should not only be for those that control [the ephemeral skill of using `git`](https://imgs.xkcd.com/comics/git.png) so if you want to contribute you can also always e-mail to [brian.g.richards@gmail.com](mailto:brian.g.richards@gmail.com).
-
-Note that for this project there is a clear [Code of Conduct](CODE_OF_CONDUCT.md) and that in contributing to the project you are expected to keep to these guidelines. If you are contributing to the project, please also keep an eye out for problems and don't turn your back on harassment, inappropriate comments etc.
+<!-- links -->
+osf: https://osf.io "Open Science Framework"
+cos: https://cos.io "Center for Open Science"
