@@ -20,5 +20,5 @@ devtools::install_github("aaronwolen/osfr")
 ```
 
 <!-- links -->
-osf: https://osf.io "Open Science Framework"
-cos: https://cos.io "Center for Open Science"
+[osf]: https://osf.io "Open Science Framework"
+[cos]: https://cos.io "Center for Open Science"
