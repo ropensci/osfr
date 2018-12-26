@@ -1,9 +1,6 @@
+^codecov\.yml$
 ^.*\.Rproj$
-^\.Rproj\.user$
-^\.httr-oauth$
-^\.lintr
 ^\.travis.yml
-^inst/\.lintr$
 ^_ignore$
-^CONTRIBUTING\.md$
-^CODE_OF_CONDUCT\.md$
+^man-roxygen$
+^\.Rproj\.user$

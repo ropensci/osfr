@@ -1,42 +1,35 @@
-#' Return information on an OSF user
+#' Retrieve an entity from OSF based on its identifier
 #'
-#' @param id String, OSF id (defaults to 'me'; logged in account)
-#' @param nodes Boolean, return nodes available for that user?
+#' Use `osf_retrieve()` to create an `osf_tbl` for an existing OSF entity based
+#' on its unique identifier. Usually this is a 5-character global unique
+#' identifier (GUID) but for files or directories could be a 24-character
+#' Waterbutler ID.
 #'
-#' @return List object with account information
+#' @param id An OSF identifier corresponding to an OSF user, project, component,
+#'   or file. Set `id = "me"` to retrieve your own OSF profile.
+#' @return an `osf_tbl_user`, `osf_tbl_node`, or `osf_tbl_file`
+#' @examples
+#' \dontrun{
+#'  osf_retrieve("dguxh")
+#' }
 #' @export
 
-get_users <- function(id = 'me', nodes = FALSE) {
-  if (Sys.getenv('OSF_PAT') == '' && is.null(id)) {
-    call <- httr::GET(construct_link("users"))
-    res <- process_json(call)
-  } else if (id == 'me'){
-    if (Sys.getenv("OSF_PAT") == "") {
-      warning("Please login first using the login() function")
-    }
-
-    config <- get_config(TRUE)
-    url <- ifelse(nodes == TRUE, 'users/me/nodes', 'users/me')
-    call <- httr::GET(construct_link(url), config)
-    call <- httr::GET(construct_link(url), config)
-
-    res <- process_json(call)
-  } else {
-    if (nodes == TRUE){
-      call <- httr::GET(construct_link(paste0("users/?filter[id]=", id, "/nodes")))
-    } else {
-      call <- httr::GET(construct_link(paste0("users/?filter[id]=", id)))
-    }
-
-    res <- process_json(call)
+osf_retrieve <- function(id) {
+  if (length(id) > 1) {
+    warn(sprintf("Retrieving only the first ID of %i", length(id)))
   }
 
-  while (!is.null(res$links$`next`)){
-    whilst <- process_json(httr::GET(res$links$`next`))
-    res$data <- c(res$data, whilst$data)
-    res$links$`next` <- whilst$links$`next`
-    message(paste0(res$links$`next`))
-  }
+  id <- ifelse(id != "me", as_id(id), structure("me", class = "osf_id"))
+  type <- id_type(id)
+  subclass <- paste0("osf_tbl_", sub("s$", "", type))
 
-  return(res)
+  out <- switch(
+    type,
+    nodes = .osf_node_retrieve(id),
+    users = .osf_user_retrieve(id),
+    files = .osf_file_retrieve(id)
+  )
+  raise_error(out)
+
+  as_osf_tbl(out["data"], subclass)
 }

@@ -1,46 +1,33 @@
-context("project operations")
+context("Project operations")
 
-login(osf_pat)
+p1 <- osf_project_create(title = "osfr-project-tests")
 
-# public project
-p1 <- create_project(title = 'osfr-p1', description = 'Text', private = FALSE)
-# private project
-p2 <- create_project(title = 'osfr-p2')
-
-test_that("create projects", {
-  expect_error(create_project(), regexp = 'Specify a project title')
-  expect_true(is_valid_osf_id(p1))
-  expect_true(is_valid_osf_id(p2))
+test_that("create project", {
+  expect_error(osf_project_create(), "Must specify a title")
+  expect_s3_class(p1, "osf_tbl_node")
 })
 
-test_that("create components", {
-  c1 <- create_component(p1, title = 'osfr-component')
-  expect_true(is_valid_osf_id(c1))
+test_that("update project assertions", {
+  expect_error(osf_project_update(), "Must specify ID of a project to update")
+  expect_error(osf_project_update(p1), "No updated attribute values specified")
 })
 
-# view_project not tested
-# won't be implemented either.
+test_that("update project title", {
+  title <- "osfr-p1-updated"
+  p1 <- osf_project_update(p1, title = title)
 
-test_that("update project", {
-  expect_error(update_project())
-  expect_true(update_project(p1, private = TRUE))
+  p1_attrs <- p1$meta[[1]]$attributes
+  expect_match(p1_attrs$title, title)
 })
 
-# test_that("clone project", {
-#   expect_error(clone_project())
-#   expect_true(clone_project(p1))
-# })
-
-test_that("get nodes", {
-  # error because it's private
-  expect_error(get_nodes(p1))
-  expect_equal(class(get_nodes(p1, private = TRUE)), "list")
+test_that("update project privacy", {
+  p1 <- osf_project_update(p1, private = FALSE)
+  p1_attrs <- p1$meta[[1]]$attributes
+  expect_true(p1_attrs$public)
 })
 
-test_that("delete projects", {
-  expect_error(delete_project())
-  expect_true(delete_project(p2))
-
-  expect_error(delete_project(p1))
-  expect_true(delete_project(p1, recursive = TRUE))
+test_that("project deletion", {
+  expect_true(osf_project_delete(p1))
+  out <- .osf_node_retrieve(p1$id)
+  expect_equal(out$status_code, 410)
 })

@@ -1,22 +1,126 @@
-#' Construct an API link with proper base
-#'
-#' Building urls for requests. OSF_USE_SERVER can be specified in the
-#' environment to use a test or staging server.
-#'
-#' @param request The request link to be combined with the base API link.
-#'
-#' @return The full request link with proper base.
-#'
-#' @examples
-#' \dontrun{
-#' construct_link("nodes/")}
+# Return a version specific user agent
+user_agent <- function(agent = "osfr") {
+  version <- system.file("DESCRIPTION", package = "osfr", mustWork = FALSE)
+  if (file.exists(version)) {
+    version <- base::read.dcf(version, "Version")
+    sprintf("%s v%s", agent, version)
+  } else {
+    agent
+  }
+}
 
-construct_link <- function(request) {
-  base <- 'https://api.osf.io/v2/'
 
-  if (!Sys.getenv('OSF_USE_SERVER') == '') {
-    base <- sprintf('https://api.%s.osf.io/v2/', Sys.getenv('OSF_USE_SERVER'))
+# Appends API version to a specificed path
+osf_path <- function(path) {
+  sprintf("v%s/%s", floor(.osf_api_version), path)
+}
+
+# Construct the OSF API Client
+osf_cli <- function(pat = getOption("osfr.pat")) {
+  server <- Sys.getenv("OSF_USE_SERVER")
+  url <- if (nzchar(server)) {
+    sprintf("https://api.%s.osf.io", server)
+  } else {
+    "https://api.osf.io"
   }
 
-  return(paste0(base, request))
+  headers <- list(
+    `User-Agent` = user_agent(),
+    `Accept-Header` = sprintf("application/vnd.api+json;version=%s", .osf_api_version)
+  )
+
+  if (!is.null(pat)) {
+    headers$Authorization <- sprintf("Bearer %s", pat)
+  }
+
+  crul::HttpClient$new(
+    url = url,
+    opts = list(
+      timeout = 10,
+      encode = "json"
+    ),
+    headers = headers
+  )
+}
+
+
+
+# OSF API request functions -----------------------------------------------
+
+.osf_request <- function(method, path, query = list(), body = NULL, verbose = FALSE, ...) {
+  method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
+  cli <- osf_cli()
+  method <- cli[[method]]
+  method(path, query, body = body, ...)
+}
+
+# TODO: .osf_request and .osf_paginated_request returns should be consistent
+.osf_paginated_request <- function(method, path, query = list(), n_max = Inf, verbose = FALSE) {
+  items <- list()
+  i <- 1
+  total <- 0
+
+  repeat {
+    query <- modifyList(query, list(page = i))
+    res <- .osf_request(method, path, query = query)
+    out <- process_response(res)
+    raise_error(out)
+
+    total <- total + length(out$data)
+    items <- c(items, out$data)
+    if (verbose && i == 2) message("Items retrieved so far:")
+    if (verbose && i > 1) message(total, appendLF = TRUE)
+    if (is.null(out$links$`next`) || total >= n_max) {
+      if (verbose && i > 1) message("")
+      break
+    }
+    i <- i + 1
+  }
+  items
+}
+
+
+# OSF API endpoints -------------------------------------------------------
+
+# e.g., .osf_node_retrieve("k35ut)
+.osf_node_retrieve <- function(id) {
+  res <- .osf_request("get", osf_path(sprintf("nodes/%s/", id)))
+  process_response(res)
+}
+
+# e.g., .osf_node_delete("k35ut)
+.osf_node_delete <- function(id) {
+  path <- osf_path(sprintf("nodes/%s/", id))
+  res <- .osf_request("delete", path)
+
+  # since this endpoint doesn't return any useful info we'll return TRUE if
+  # successful or the error message if not
+  if (res$status_code == 204) return(TRUE)
+  raise_error(process_response(res))
+}
+
+# list all child nodes
+.osf_node_children <- function(id, n_max = Inf, verbose = FALSE) {
+  path <- osf_path(sprintf("nodes/%s/children/", id))
+  .osf_paginated_request("get", path, n_max = n_max, verbose = verbose)
+}
+
+# retrieve user info
+.osf_user_retrieve <- function(id) {
+  path <- osf_path(sprintf("/users/%s/", id))
+  res <- .osf_request("get", path)
+  process_response(res)
+}
+
+
+# list user's nodes
+.osf_user_nodes <- function(id, n_max = Inf, verbose = FALSE) {
+  path <- osf_path(sprintf("users/%s/nodes/", id))
+  .osf_paginated_request("get", path, n_max = n_max, verbose = verbose)
+}
+
+# e.g., .osf_file_retrieve("5be5e1fdfe3eca00188178c3")
+.osf_file_retrieve <- function(id) {
+  res <- .osf_request("get", osf_path(sprintf("files/%s/", id)))
+  process_response(res)
 }

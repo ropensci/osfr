@@ -1,67 +1,96 @@
-#' Construct a Waterbutler API link with proper base
-#'
-#' @param id OSF id
-#' @param provider Storage provider (osfstorage, github, etc)
-#' @param request Request for waterbutler
-#'
-#' @return Waterbutler link
-
-construct_link_files <- function(id = NULL, provider = 'osfstorage', request = NULL) {
-  if (Sys.getenv('OSF_USE_SERVER') == 'test') {
-    base <- sprintf('https://files.us.test.osf.io/v1/resources/%s/providers/%s/%s',
-      id, provider, request)
-  } else if (Sys.getenv('OSF_USE_SERVER') == 'staging') {
-    base <- sprintf('https://staging-files.osf.io/v1/resources/%s/providers/%s/%s',
-      id, provider, request)
+# Appends API version to a specificed path
+# id: OSF project guid (e.g., fa9dm)
+# fid: waterbutler file/folder id (e.g., 5beaf8e7a6a9af00166b4243)
+# provider: storage provider (default: osfstorage)
+wb_path <- function(id, fid = NULL, provider = "osfstorage") {
+  if (is.null(fid)){
+    sprintf("v%i/resources/%s/providers/%s/", floor(.wb_api_version), id, provider)
   } else {
-    base <- sprintf('https://files.osf.io/v1/resources/%s/providers/%s/%s',
-      id, provider, request)
+    sprintf("v%i/resources/%s/providers/%s/%s/", floor(.wb_api_version), id, provider, fid)
   }
-
-  return(base)
 }
 
-#' Materialize Waterbutler URL
-#'
-#' @param url Waterbutler URL, starts with files.osf.io
-#' @param private Boolean, whether or not the file is private
-#'
-#' @return OSF id
 
-process_waterbutler <- function(url, private = TRUE) {
+# Construct the WaterButler API Client
+wb_cli <- function(pat = getOption("osfr.pat")) {
 
-  config <- get_config(private)
+  url <- ifelse(Sys.getenv("OSF_USE_SERVER") == "test",
+                   "https://files.us.test.osf.io",
+                   "https://files.osf.io")
 
-  url <- sprintf('%s?meta=', url)
-  call <- httr::GET(url, config)
+  headers <- list(
+    `User-Agent` = user_agent()
+  )
 
-  tmp <- process_json(call)
-  res <- gsub(x = tmp$data$attributes$resource, pattern = '/', '')
-
-  return(res)
-}
-
-#' Processing a file id to waterbutler
-#'
-#' This function retrieves a WaterButler link for a given file id.
-#'
-#' @param id OSF id (osf.io/xxxx; just xxxx)
-#' @param private Boolean, if file is private
-#'
-#' @return Waterbutler URL
-
-process_file_id <- function(id, private = FALSE) {
-
-  config <- get_config(private)
-
-  url_osf <- construct_link(paste0('files/', id))
-  call <- httr::GET(url = url_osf, config)
-  res <- process_json(call)
-
-  if (call$status_code != 200) {
-    http_error(call$status_code,
-               'Failed to retrieve information. Sure it is public?')
+  if (!is.null(pat)) {
+    headers$Authorization <- sprintf("Bearer %s", pat)
   }
 
-  return(res$data$links$move)
+  crul::HttpClient$new(
+    url = url,
+    opts = list(
+      timeout = 5,
+      encode = "raw"
+    ),
+    headers = headers
+  )
+}
+
+
+
+# Waterbutler request functions -------------------------------------------
+
+.wb_request <- function(method, path, query = list(), body = NULL, verbose = FALSE, ...) {
+  method <- match.arg(method, c("get", "put", "patch", "delete"))
+  cli <- wb_cli()
+  method <- cli[[method]]
+  method(path, query, body = body, ...)
+}
+
+
+# Waterbutler API action endpoints ----------------------------------------
+# https://waterbutler.readthedocs.io/en/latest/api.html#actions
+
+# empty data$list() is returned when resource doesn't exist
+.wb_get_info <- function(id) {
+  res <- .wb_request("get", wb_path(id), query = list(meta = ""))
+  res$raise_for_status()
+  jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
+}
+
+# id: OSF project/component GUID
+# name: name of the new directory
+# fid: waterbutler folder id (e.g., 5beaf8e7a6a9af00166b4243)
+# v1/resources/fa9dm/providers/osfstorage/5beaf8e7a6a9af00166b4243/?kind=folder
+.wb_create_folder <- function(id, name, fid) {
+  query <- list(kind = "folder", name = name)
+  res <- .wb_request("put", wb_path(id, fid), query = query)
+  res$raise_for_status()
+  jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
+}
+
+# url: new_folder link for the existing parent folder
+# wb_create_subfolder <- function(id, name, parent_id) {
+#   path <- file.path(wb_path(id), parent_id)
+#   .wb_put(path, query = list(kind = "folder", name = name))
+# }
+
+# Upload a new file
+# id: OSF node or waterbulder folder to upload
+# name: desired name of the file
+# body: raw file data
+.wb_file_upload <- function(id, name, body) {
+  query <- list(kind = "file", name = name)
+  res <- .wb_request("put", wb_path(id), query = query, body = body)
+  process_response(res)
+}
+
+# Update an existing file
+# fid: waterbutler file id
+.wb_file_update <- function(id, fid, body) {
+  query <- list(kind = "file")
+  # remove trailing slash for file IDs
+  path <- sub("\\/$", "", wb_path(id, fid))
+  res <- .wb_request("put", path, query = query, body = body)
+  process_response(res)
 }
