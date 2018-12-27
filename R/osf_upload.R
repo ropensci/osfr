@@ -1,11 +1,7 @@
 #' Upload files to OSF
 #'
-#' @param x Something that identifies a valid OSF upload destination. This can
-#'   be one of the following:
-#'   * an \code{osf_tbl_node} with a single project or
-#'   component
-#'   * an \code{osf_tbl_file} with a single directory
-#'   * an OSF ID referencing a project, component, or directory
+#' @param x an \code{osf_tbl_node} with a single project or
+#'   component, \code{osf_tbl_file} with a single directory
 #' @param path Path to file on local machine to upload. Ensure file has proper
 #'   extension named (i.e., extension sensitive, not like on Linux)
 #' @param name Name of the uploaded file (if `NULL`, `basename(path)`
@@ -14,49 +10,34 @@
 #'   (default `FALSE`)? If `TRUE`, OSF will automatically update the file and
 #'   record the previous version.
 #'
-#' @return \code{osf_tbl_file}
+#' @return \code{osf_tbl_file} containing uploaded file
 #' @export
 #' @importFrom crul upload
 #' @importFrom fs is_file
 
 osf_upload <- function(x, path, name = NULL, overwrite = FALSE) {
   if (!file.exists(path)) abort(sprintf("Can't find file:\n %s", path))
-  if (!is_file(path)) abort("`path` must be a file")
+  if (!is_file(path)) abort("`path` must point to a file")
   UseMethod("osf_upload")
 }
 
 #' @export
-osf_upload.character <- function(x, path, name = NULL, overwrite = FALSE) {
+osf_upload.osf_tbl_node <- function(x, path, name = NULL, overwrite = FALSE) {
+  x <- make_single(x)
   id <- as_id(x)
-  if (!id_type(id) %in% c("files", "nodes")) {
-    abort(sprintf("%s does not identify a valid upload destination."))
-  }
-
-  osf_upload(id, path, name, overwrite)
-}
-
-#' @export
-osf_upload.osf_tbl <- function(x, path, name = NULL, overwrite = FALSE) {
-  if (inherits(x, "osf_tbl_user")) {
-    abort("An `osf_tbl_user` is not a valid upload destination.")
-  }
-
-  osf_upload(as_id(x), path, name, overwrite)
-}
-
-#' @export
-osf_upload.osf_id <- function(x, path, name = NULL, overwrite = FALSE) {
   if (is.null(name)) name <- basename(path)
-  out <- .wb_file_upload(x, name, body = crul::upload(path))
+
+  out <- .wb_file_upload(id, name, body = crul::upload(path))
 
   # file already exists at destination
   if (!is.null(out$status_code)) {
     if (out$status_code == 409 && overwrite) {
-      file <- osf_ls(x, type = "file", pattern = name)
+      items <- osf_ls_files(x, type = "file", pattern = name)
+
       # check for an exact match because the OSF filter is based on substring
       # matching, which can return multiple hits
-      file <- file[file$name == name, ]
-      out <- .wb_file_update(x, file$id[1], body = crul::upload(path))
+      file <- items[items$name == name, ]
+      out <- .wb_file_update(id, file$id[1], body = crul::upload(path))
     }
   }
   raise_error(out)
@@ -68,3 +49,4 @@ osf_upload.osf_id <- function(x, path, name = NULL, overwrite = FALSE) {
 
   as_osf_tbl(out["data"], "osf_tbl_file")
 }
+
