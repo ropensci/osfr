@@ -22,11 +22,12 @@ recurse_node <- function(id, maxdepth = 5) {
 recurse_tree <- function(id, maxdepth = 5) {
   if (maxdepth == 1) return(id)
   # TODO: use consistent argument names for number of items to return
-  children <- osf_node_ls(id, n_max = maxdepth)
+  children <- .osf_node_children(id, n_max = maxdepth)
+  child_ids <- purrr::map_chr(children, "id")
 
-  if (nrow(children) == 0) return(id)
+  if (is_empty(child_ids)) return(id)
   purrr::map(
-    .x = set_names(children$id, children$id),
+    .x = set_names(child_ids, child_ids),
     .f = recurse_tree,
     maxdepth = maxdepth - 1
   )

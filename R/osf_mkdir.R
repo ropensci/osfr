@@ -2,53 +2,99 @@
 #'
 #' Creates a new folder in an OSF project or component.
 #'
-#' @param id Parent OSF project id (osf.io/XXXXX; just XXXXX) to create folder in
-#' @param path Name for the new folder
-#' @param parent_id Target path for the new folder
+#' @param x an [`osf_tbl_node`] representing an OSF project or component or an
+#'   [`osf_tbl_file`] containing a directory
+#' @param path Name for the new directory
 #' @template verbose
 #'
-#' @return Waterbutler URL for folder "root", last subfolder "sub", or all
-#' folders created "all" depanding on the selection input for \code{return}
+#' @return an [`osf_tbl_file`] containing the last directory of the path
 #' @export
 #' @examples
 #' \dontrun{
-#' proj <- osf_project("Making Directories")
-#' osf_mkdir(proj, "data")
+#' proj <- osf_project_create("Directory Example")
 #' osf_mkdir(proj, "data/raw_data")
-#' osf_mkdir(proj, "super_raw_data", parent_id = "5be5e6a6fe3eca00188178f0")
 #' }
 
-osf_mkdir <- function(id, path, parent_id = NULL, verbose = FALSE) {
-  id <- as_id(id)
-  path_root <- fs::path_split(path)[[1]][1]
-  items <- osf_ls(id, path_id = parent_id)
+osf_mkdir <- function(x, path, verbose = FALSE) {
+  UseMethod("osf_mkdir")
+}
 
-  if (path_root %in% items$name) {
-    parent_id <- items$id[which(items$name == path_root)]
-    if (verbose) {
-      message(
-        sprintf("%s (%s) already exists in node %s", path_root, parent_id, id))
-    }
+# TODO: DRY out the osf_tbl_node and osf_tbl_file methods
+
+#' @export
+osf_mkdir.osf_tbl_node <- function(x, path, verbose = FALSE) {
+
+  x <- make_single(x)
+  id <- as_id(x)
+
+  # does path root already exist?
+  path_root <- fs::path_split(path)[[1]][1]
+  items <- osf_ls_files(x, type = "folder", pattern = path_root)
+  dir_root <- items[which(items$name == path_root), ]
+
+  if (nrow(dir_root) == 0) {
+    res <- .wb_create_folder(id = id, name = path_root)
+    raise_error(res)
+    dir_id <- gsub("/", "", res$data$attributes$path, fixed = TRUE)
+    dir_root <- osf_retrieve_file(dir_id)
+    msg <- sprintf("Created %s (%s) in node %s", path_root, dir_id, id)
   } else {
-    new_dir <- .wb_create_folder(id, path_root, parent_id)
-    parent_id <- gsub("/", "", new_dir$data$attributes$path, fixed = TRUE)
-    if (verbose) {
-      message(
-        sprintf("Created %s (%s) in node %s", path_root, parent_id, id))
-    }
+    msg <- sprintf("%s already exists in node %s", path_root, id)
   }
+
+  if (verbose) message(msg)
 
   # recurse to the next-level if there is a subfolder
   path_next <- fs::path_rel(path, path_root)
-  if (path_next != ".") {
-    if (verbose) {
-      message(
-        sprintf("Continuing from %s to the next subfolder: %s",
-                path_root, path_next))
-    }
-    out <- osf_mkdir(id, path = path_next, parent_id = parent_id)
+  if (path_next == ".") {
+    out <- dir_root
   } else {
-    out <- as_osf_tbl(.osf_file_retrieve(parent_id)[1], "osf_tbl_file")
+    msg <- sprintf("Continuing from %s to the next subfolder: %s", path_root, path_next)
+    if (verbose) message(msg)
+    out <- osf_mkdir(dir_root, path_next, verbose)
+  }
+  out
+}
+
+#' @export
+osf_mkdir.osf_tbl_file <- function(x, path, verbose = FALSE) {
+  x <- make_single(x)
+  id <- as_id(x)
+
+  if (get_attr(x, "kind") == "file") {
+    abort("Can't create directories within a file.")
+  }
+
+  # does path root already exist?
+  path_root <- fs::path_split(path)[[1]][1]
+  items <- osf_ls_files(x, type = "folder", pattern = path_root)
+  dir_root <- items[which(items$name == path_root), ]
+
+  if (nrow(dir_root) == 0) {
+    parent_id <- get_relation(x, "root")
+    res <- .wb_create_folder(id = parent_id, name = path_root, fid = id)
+    raise_error(res)
+
+    dir_id <- gsub("/", "", res$data$attributes$path, fixed = TRUE)
+    dir_root <- osf_retrieve_file(dir_id)
+    msg <- sprintf("Created subdirectory %s (%s) in directory %s (%s)",
+                   path_root, dir_id, x$name, id)
+  } else {
+    msg <- sprintf("Subdirectory %s (%s) already exists in directory %s (%s)",
+                   path_root, items$id, x$name, id)
+  }
+
+  if (verbose) message(msg)
+
+  # recurse to the next-level if there is a subfolder
+  path_next <- fs::path_rel(path, path_root)
+  if (path_next == ".") {
+    out <- dir_root
+  } else {
+    msg <- sprintf("Continuing from %s to the next subdirectory: %s",
+                   path_root, path_next)
+    if (verbose) message(msg)
+    out <- osf_mkdir(dir_root, path_next, verbose)
   }
   out
 }

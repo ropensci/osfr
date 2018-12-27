@@ -7,14 +7,8 @@
 osf_upload(x, path, name = NULL, overwrite = FALSE)
 }
 \arguments{
-\item{x}{Something that identifies a valid OSF upload destination. This can
-be one of the following:
-\itemize{
-\item an \code{osf_tbl_node} with a single project or
-component
-\item an \code{osf_tbl_file} with a single directory
-\item an OSF ID referencing a project, component, or directory
-}}
+\item{x}{an \code{osf_tbl_node} with a single project or
+component, \code{osf_tbl_file} with a single directory}
 
 \item{path}{Path to file on local machine to upload. Ensure file has proper
 extension named (i.e., extension sensitive, not like on Linux)}
@@ -27,7 +21,7 @@ will be used).}
 record the previous version.}
 }
 \value{
-\code{osf_tbl_file}
+\code{osf_tbl_file} containing uploaded file
 }
 \description{
 Upload files to OSF

@@ -10,7 +10,7 @@ c1 <- osf_component_create(p1, title = "component-1")
 test_that("create component", {
   expect_error(osf_component_create(), "Must specify ID of a parent project")
   expect_s3_class(c1, "osf_tbl_node")
-  expect_match(c1$id, osf_node_ls(p1)$id[1])
+  expect_match(c1$id, osf_ls_nodes(p1)$id[1])
 })
 
 test_that("update component title", {

@@ -8,15 +8,14 @@ p1 <- osf_project_create(title = "osfr-component-tests")
 # tests -------------------------------------------------------------------
 
 test_that("empty project/folder returns a osf_tbl_file with 0 rows", {
-  out <- osf_ls(p1)
+  out <- osf_ls_files(p1)
   expect_s3_class(out, "osf_tbl_file")
   expect_equal(nrow(out), 0)
 })
 
 test_that("listing a non-existent folder errors", {
-  expect_error(osf_ls(p1, path = "data"), "Path does not exist")
+  expect_error(osf_ls_files(p1, path = "data"), "Can't find path")
 })
-
 
 test_that("create a top-level directory", {
   d1 <- osf_mkdir(p1, path = "dir1")
@@ -25,7 +24,7 @@ test_that("create a top-level directory", {
 })
 
 test_that("list a top-level directory", {
-  out <- osf_ls(p1)
+  out <- osf_ls_files(p1)
   expect_s3_class(out, "osf_tbl_file")
   expect_equal(nrow(out), 1)
   expect_equal(out$name, "dir1")
@@ -39,16 +38,16 @@ test_that("create a subdirectory within an existing directory", {
 })
 
 test_that("list a subdirectory", {
-  out <- osf_ls(p1)
+  out <- osf_ls_files(p1)
   expect_equal(nrow(out), 1)
   expect_equal(out$name, "dir1")
 
-  out <- osf_ls(p1, path = "dir1")
+  out <- osf_ls_files(p1, path = "dir1")
   expect_equal(nrow(out), 1)
   expect_equal(out$name, "dir11")
 })
 
-test_that("create a subdirectory within an non-existent directory", {
+test_that("create a subdirectory within an non-existent parent directory", {
   d21 <- osf_mkdir(p1, path = "dir2/dir21")
   expect_s3_class(d21, "osf_tbl_file")
   expect_equal(d21$name, "dir21")
@@ -56,3 +55,7 @@ test_that("create a subdirectory within an non-existent directory", {
   d2_attrs <- d21$meta[[1]]$attributes
   expect_equal(d2_attrs$materialized_path, "/dir2/dir21/")
 })
+
+
+# cleanup -----------------------------------------------------------------
+osf_project_delete(p1, recursive = TRUE)
