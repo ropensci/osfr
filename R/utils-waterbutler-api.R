@@ -60,13 +60,13 @@ wb_cli <- function(pat = getOption("osfr.pat")) {
 
 # id: OSF project/component GUID
 # name: name of the new directory
-# fid: waterbutler folder id (e.g., 5beaf8e7a6a9af00166b4243)
+# fid: waterbutler folder id (e.g., 5beaf8e7a6a9af00166b4243) if creating a
+#   subfolder within an existing folder
 # v1/resources/fa9dm/providers/osfstorage/5beaf8e7a6a9af00166b4243/?kind=folder
-.wb_create_folder <- function(id, name, fid) {
+.wb_create_folder <- function(id, name, fid = NULL) {
   query <- list(kind = "folder", name = name)
   res <- .wb_request("put", wb_path(id, fid), query = query)
-  res$raise_for_status()
-  jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
+  process_response(res)
 }
 
 # url: new_folder link for the existing parent folder
