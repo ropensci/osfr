@@ -56,7 +56,9 @@ A better approach is to store your PAT as an environment variable called
 \var{OSF_PAT}. Doing so will allow \pkg{osfr} to detect and utilize the token
 automatically without any need to manually call \code{osf_auth()}. One way to
 accomplish this is by creating an \file{.Renviron} file in your home or
-working directory that defines the \var{OSF_PAT} variable. For example:
+working directory that defines the \var{OSF_PAT} variable. For new users we
+suggest adding to your home directory so it is easily accessible across all
+your projects. For example:
 
 \preformatted{
 OSF_PAT=a22JKLgdAEx9wms...
