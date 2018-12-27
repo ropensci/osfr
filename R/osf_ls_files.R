@@ -61,8 +61,8 @@ osf_ls_files.osf_tbl_file <-
            n_max = 10) {
   x <- make_single(x)
 
-  if (get_attr(x, "kind") == "file") {
-    abort("Can't list files within a file.")
+  if (is_osf_file(x)) {
+    abort("Listing an `osf_tbl_file` requires a directory\n* `x` contains a file")
   }
 
   # list files using extracted API endpoint
