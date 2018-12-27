@@ -4,30 +4,26 @@
 \alias{osf_mkdir}
 \title{Create a OSF folder}
 \usage{
-osf_mkdir(id, path, parent_id = NULL, verbose = FALSE)
+osf_mkdir(x, path, verbose = FALSE)
 }
 \arguments{
-\item{id}{Parent OSF project id (osf.io/XXXXX; just XXXXX) to create folder in}
+\item{x}{an \code{\link{osf_tbl_node}} representing an OSF project or component or an
+\code{\link{osf_tbl_file}} containing a directory}
 
-\item{path}{Name for the new folder}
-
-\item{parent_id}{Target path for the new folder}
+\item{path}{Name for the new directory}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 (default \code{FALSE})}
 }
 \value{
-Waterbutler URL for folder "root", last subfolder "sub", or all
-folders created "all" depanding on the selection input for \code{return}
+an \code{\link{osf_tbl_file}} containing the last directory of the path
 }
 \description{
 Creates a new folder in an OSF project or component.
 }
 \examples{
 \dontrun{
-proj <- osf_project("Making Directories")
-osf_mkdir(proj, "data")
+proj <- osf_project_create("Directory Example")
 osf_mkdir(proj, "data/raw_data")
-osf_mkdir(proj, "super_raw_data", parent_id = "5be5e6a6fe3eca00188178f0")
 }
 }
