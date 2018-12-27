@@ -6,7 +6,7 @@
 #' @param x an `osf_tbl_node` or `osf_tbl_user`
 #' @template n_max
 #'
-#' @return [`osf_tbl_node`]
+#' @return an [`osf_tbl_node`]
 #' @examples
 #' \dontrun{
 #' user <- osf_retrieve_user("me")

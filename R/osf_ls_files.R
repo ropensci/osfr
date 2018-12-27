@@ -13,6 +13,7 @@
 #'   specified pattern
 #' @template n_max
 #'
+#' @return an [`osf_tbl_file`] with `x`'s top-level files and directories
 #' @export
 osf_ls_files <-
   function(x,

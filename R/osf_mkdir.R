@@ -7,7 +7,7 @@
 #' @param path Name for the new directory
 #' @template verbose
 #'
-#' @return an [`osf_tbl_file`] containing the last directory of the path
+#' @return an [`osf_tbl_file`] containing the last directory specified in `path`
 #' @export
 #' @examples
 #' \dontrun{

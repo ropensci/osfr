@@ -1,7 +1,7 @@
 #' Upload files to OSF
 #'
-#' @param x an \code{osf_tbl_node} with a single project or
-#'   component, \code{osf_tbl_file} with a single directory
+#' @param x an [`osf_tbl_node`] with a single project or
+#'   component, or an [`osf_tbl_file`] with a single directory
 #' @param path Path to file on local machine to upload. Ensure file has proper
 #'   extension named (i.e., extension sensitive, not like on Linux)
 #' @param name Name of the uploaded file (if `NULL`, `basename(path)`
@@ -10,7 +10,7 @@
 #'   (default `FALSE`)? If `TRUE`, OSF will automatically update the file and
 #'   record the previous version.
 #'
-#' @return \code{osf_tbl_file} containing uploaded file
+#' @return an [`osf_tbl_file`] containing uploaded file
 #' @export
 #' @importFrom crul upload
 #' @importFrom fs is_file
