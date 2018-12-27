@@ -71,8 +71,7 @@ osf_mkdir.osf_tbl_file <- function(x, path, verbose = FALSE) {
   dir_root <- items[which(items$name == path_root), ]
 
   if (nrow(dir_root) == 0) {
-    parent_id <- get_relation(x, "root")
-    res <- .wb_create_folder(id = parent_id, name = path_root, fid = id)
+    res <- .wb_create_folder(id = get_parent_id(x), name = path_root, fid = id)
     raise_error(res)
 
     dir_id <- gsub("/", "", res$data$attributes$path, fixed = TRUE)
