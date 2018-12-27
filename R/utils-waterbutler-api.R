@@ -29,7 +29,6 @@ wb_cli <- function(pat = getOption("osfr.pat")) {
   crul::HttpClient$new(
     url = url,
     opts = list(
-      timeout = 5,
       encode = "raw"
     ),
     headers = headers
