@@ -36,6 +36,14 @@ test_that("upload can overwrite existing files", {
   expect_s3_class(f1, "osf_tbl_file")
 })
 
+test_that("file can be uploaded to a directory", {
+  d1 <- osf_mkdir(p1, "data")
+  out <- osf_upload(d1, txt.file)
+})
+
+test_that("attempting to list an osf_tbl_file with a file errors", {
+  expect_error(osf_ls_files(f1), "Listing an `osf_tbl_file` requires a dir")
+})
 
 # cleanup -----------------------------------------------------------------
 osf_project_delete(p1, recursive = TRUE)
