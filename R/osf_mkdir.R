@@ -30,7 +30,7 @@ osf_mkdir.osf_tbl_node <- function(x, path, verbose = FALSE) {
   # does path root already exist?
   path_root <- fs::path_split(path)[[1]][1]
   items <- osf_ls_files(x, type = "folder", pattern = path_root)
-  dir_root <- items[which(items$name == path_root),]
+  dir_root <- items[which(items$name == path_root), ]
 
   if (nrow(dir_root) == 0) {
     res <- .wb_create_folder(id = id, name = path_root)
@@ -68,7 +68,7 @@ osf_mkdir.osf_tbl_file <- function(x, path, verbose = FALSE) {
   # does path root already exist?
   path_root <- fs::path_split(path)[[1]][1]
   items <- osf_ls_files(x, type = "folder", pattern = path_root)
-  dir_root <- items[which(items$name == path_root),]
+  dir_root <- items[which(items$name == path_root), ]
 
   if (nrow(dir_root) == 0) {
     parent_id <- get_relation(x, "root")
@@ -98,5 +98,3 @@ osf_mkdir.osf_tbl_file <- function(x, path, verbose = FALSE) {
   }
   out
 }
-
-

@@ -49,4 +49,3 @@ osf_upload.osf_tbl_node <- function(x, path, name = NULL, overwrite = FALSE) {
 
   as_osf_tbl(out["data"], "osf_tbl_file")
 }
-

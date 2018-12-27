@@ -59,4 +59,3 @@ test_that("create a subdirectory within an non-existent parent directory", {
 
 # cleanup -----------------------------------------------------------------
 osf_project_delete(p1, recursive = TRUE)
-

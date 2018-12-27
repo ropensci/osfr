@@ -97,6 +97,3 @@ osf_ls_files.osf_tbl_file <-
   }
   return(osf_dir)
 }
-
-
-
