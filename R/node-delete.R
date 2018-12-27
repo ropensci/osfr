@@ -1,13 +1,13 @@
 #' Delete a project or component
 #'
-#' Functions to \strong{permanently} delete a project or component from OSF,
+#' Functions to *permanently* delete a project or component from OSF,
 #' including any uploaded files, wiki content, or comments contained therein.
-#' This process does not request confirmation, so please \strong{handle with
-#' care}. This functionality is limited to contributors with admin-level
+#' This process does not request confirmation, so please **handle with
+#' care**. This functionality is limited to contributors with admin-level
 #' permissions.
 #'
 #' If the project or component contains sub-components, those must be deleted
-#' first. Setting \code{recursive = TRUE} will attempt to remove the hierarchy
+#' first. Setting `recursive = TRUE` will attempt to remove the hierarchy
 #' of sub-components before deleting the top-level entity.
 #'
 #' @param id the OSF entity's unique identifier

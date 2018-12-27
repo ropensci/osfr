@@ -10,6 +10,17 @@ http_error <- function(code, ...) {
 
 is_osf_url <- function(url) grepl("osf.io", tolower(url), fixed = TRUE)
 
+is_osf_dir <- function(x) {
+  stopifnot(inherits(x, "osf_tbl_file"))
+  get_attr(x, "kind") == "folder"
+}
+
+is_osf_file <- function(x) {
+  stopifnot(inherits(x, "osf_tbl_file"))
+  get_attr(x, "kind") == "file"
+}
+
+
 # extract OSF and Waterbutler identifiers from known URL schemes
 extract_osf_id <- function(url) {
   stopifnot(is_osf_url(url))

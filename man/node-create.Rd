@@ -14,13 +14,13 @@ osf_component_create(x, title = NULL, description = "",
 \arguments{
 \item{title, description}{Set a title (required) and, optionally, a description}
 
-\item{private}{Boolean, should it be private (defaults to \code{TRUE})}
+\item{private}{Boolean, should it be private (defaults to `TRUE``)}
 
 \item{x}{Something that identifies an existing OSF node. This could be an
 \link{osf_tbl_node}, or an OSF project or component's URL or GUID.}
 }
 \value{
-An object of class \code{osf_tbl_node} with one row per item.
+an \code{\link{osf_tbl_node}}
 }
 \description{
 Both projects and components can be created with \code{osf_node_create()}. To

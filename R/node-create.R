@@ -15,9 +15,9 @@
 #'
 #' @template input-osf-node
 #' @param title,description Set a title (required) and, optionally, a description
-#' @param private Boolean, should it be private (defaults to \code{TRUE})
+#' @param private Boolean, should it be private (defaults to `TRUE``)
 #'
-#' @return An object of class \code{osf_tbl_node} with one row per item.
+#' @return an [`osf_tbl_node`]
 #' @name node-create
 #'
 #' @examples

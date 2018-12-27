@@ -31,3 +31,14 @@ get_link <- function(x, field) {
   stopifnot(field %in% names(fields))
   purrr::pluck(x$meta[[1]], fields[[field]])
 }
+
+
+# Retrieve the parent node's GUID for a component, file or directory
+get_parent_id <- function(x) {
+  stopifnot(inherits(x, "osf_tbl"))
+  parent_id <- switch(class(x)[1],
+    osf_tbl_file = function(x) x$meta[[1]]$relationships$node$data$id,
+    osf_tbl_node = function(x) x$meta[[1]]$relationships$parent$data$id
+  )
+  purrr::pluck(x, parent_id)
+}
