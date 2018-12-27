@@ -13,7 +13,7 @@
 #' @return an [`osf_tbl_file`] containing uploaded file
 #' @export
 #' @importFrom crul upload
-#' @importFrom fs is_file is_dir
+#' @importFrom fs is_file is_dir path_dir
 
 osf_upload <- function(x, path, name = NULL, overwrite = FALSE) {
   if (!file.exists(path)) abort(sprintf("Can't find file:\n %s", path))
@@ -24,6 +24,7 @@ osf_upload <- function(x, path, name = NULL, overwrite = FALSE) {
 #' @export
 osf_upload.osf_tbl_node <- function(x, path, name = NULL, overwrite = FALSE) {
   if (is.null(name)) name <- basename(path)
+  name <- check_upload_name(name)
   x <- make_single(x)
 
   # check if filename already exists at destination
@@ -42,6 +43,7 @@ osf_upload.osf_tbl_node <- function(x, path, name = NULL, overwrite = FALSE) {
 #' @export
 osf_upload.osf_tbl_file <- function(x, path, name = NULL, overwrite = FALSE) {
   if (is.null(name)) name <- basename(path)
+  name <- check_upload_name(name)
   x <- make_single(x)
 
   if (is_osf_file(x)) {
@@ -60,6 +62,14 @@ osf_upload.osf_tbl_file <- function(x, path, name = NULL, overwrite = FALSE) {
   as_osf_tbl(out["data"], "osf_tbl_file")
 }
 
+check_upload_name <- function(x) {
+  path <- fs::path_dir(x)
+  if (path != ".") {
+    x <- basename(x)
+    warn(sprintf("Removing path information (%s) from uploaded file name", path))
+  }
+  x
+}
 
 upload_file <- function(id, path, name, dir_id = NULL) {
   res <- .wb_file_upload(id, name, crul::upload(path), dir_id)

@@ -36,6 +36,13 @@ test_that("upload can overwrite existing files", {
   expect_s3_class(f1, "osf_tbl_file")
 })
 
+test_that("user is warned that path info is removed from upload name", {
+  expect_warning(
+    osf_upload(p1, txt.file, name = "path/file.txt"),
+    "Removing path information"
+  )
+})
+
 test_that("file can be uploaded to a directory", {
   d1 <- osf_mkdir(p1, "data")
   out <- osf_upload(d1, txt.file)
