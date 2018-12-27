@@ -3,7 +3,7 @@
 #' List the projects or components associated with a user or in the top-level of
 #' an OSF project or component.
 #'
-#' @param x an `osf_tbl_node` or `osf_tbl_user`
+#' @param x an [`osf_tbl_node`] or [`osf_tbl_user`]
 #' @template n_max
 #'
 #' @return an [`osf_tbl_node`]

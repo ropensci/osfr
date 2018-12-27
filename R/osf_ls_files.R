@@ -1,16 +1,16 @@
 #' List files and folders
 #'
 #' List the files and folders in the top-level of an OSF project, component, or
-#' directory. Specify a \code{path} to list the contents of a
-#' particular subdirectory.
+#' directory. Specify a `path` to list the contents of a particular
+#' subdirectory.
 #'
 #' @param x an [`osf_tbl_node`] representing an OSF project or component or an
 #'   [`osf_tbl_file`] containing a directory
 #' @param path list files within the specified subdirectory path
-#' @param type filter response to include only \code{"files"} or
-#'   \code{"folders"}
-#' @param pattern filter response to include entities whose name contain the
-#'   specified pattern
+#' @param type filter query to include only `"files"` or
+#'   `"folders"`
+#' @param pattern filter query for entities whose name contains the
+#'   specified `pattern`
 #' @template n_max
 #'
 #' @return an [`osf_tbl_file`] with `x`'s top-level files and directories

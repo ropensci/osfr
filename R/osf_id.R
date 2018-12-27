@@ -1,7 +1,7 @@
 #' Extract OSF identifiers
 #'
 #' Extract GUIDs and Waterbutler IDs from various types of inputs. Valid looking
-#' IDs are returned as \code{osf_id} objects.
+#' IDs are returned as `osf_id` objects.
 #'
 #' @section Identifier types:
 #' There are 2 types of identifiers you'll encounter on OSF. The first is the
@@ -11,10 +11,10 @@
 #' handled via Waterbutler. A valid Waterbutler ID consists of 24 alphanumeric
 #' characters.
 #'
-#' @param x An \code{osf_tbl}, OSF URL, or a generic string containing a GUID or
+#' @param x An `osf_tbl`, OSF URL, or a generic string containing a GUID or
 #'   Waterbutler ID.
 #'
-#' @return A character vector with class \code{osf_id}
+#' @return A character vector with class `osf_id`
 #' @examples
 #' as_id("https://osf.io/egzt9/")
 #' @export
