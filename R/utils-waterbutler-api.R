@@ -76,21 +76,22 @@ wb_cli <- function(pat = getOption("osfr.pat")) {
 # }
 
 # Upload a new file
-# id: OSF node or waterbulder folder to upload
+# id: OSF node
 # name: desired name of the file
 # body: raw file data
-.wb_file_upload <- function(id, name, body) {
+# dir_id: optional, waterbutler ID for directory to upload to
+.wb_file_upload <- function(id, name, body, dir_id = NULL) {
   query <- list(kind = "file", name = name)
-  res <- .wb_request("put", wb_path(id), query = query, body = body)
+  res <- .wb_request("put", wb_path(id, dir_id), query = query, body = body)
   process_response(res)
 }
 
 # Update an existing file
-# fid: waterbutler file id
-.wb_file_update <- function(id, fid, body) {
+# file_id: waterbutler file id for existing file
+.wb_file_update <- function(id, file_id, body) {
   query <- list(kind = "file")
   # remove trailing slash for file IDs
-  path <- sub("\\/$", "", wb_path(id, fid))
+  path <- sub("\\/$", "", wb_path(id, file_id))
   res <- .wb_request("put", path, query = query, body = body)
   process_response(res)
 }

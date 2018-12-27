@@ -25,7 +25,7 @@ test_that("uploaded file can be retrieved", {
 })
 
 test_that("upload fails if the file already exists", {
-  expect_error(osf_upload(p1, txt.file), "Cannot complete action: file or folder")
+  expect_error(osf_upload(p1, txt.file), "File already exists at destination")
 })
 
 writeLines("Lorem ipsum dolor sit amet, consectetur, ea duo posse", txt.file)
@@ -39,6 +39,7 @@ test_that("upload can overwrite existing files", {
 test_that("file can be uploaded to a directory", {
   d1 <- osf_mkdir(p1, "data")
   out <- osf_upload(d1, txt.file)
+  expect_s3_class(out, "osf_tbl_file")
 })
 
 test_that("attempting to list an osf_tbl_file with a file errors", {
