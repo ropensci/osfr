@@ -22,7 +22,7 @@ osf_component_delete(id = NULL, recursive = FALSE, verbose = FALSE)
 the deleted entity's unique identifier (invisibly)
 }
 \description{
-Functions to \strong{permanently} delete a project or component from OSF,
+Functions to \emph{permanently} delete a project or component from OSF,
 including any uploaded files, wiki content, or comments contained therein.
 This process does not request confirmation, so please \strong{handle with
 care}. This functionality is limited to contributors with admin-level

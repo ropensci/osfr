@@ -13,16 +13,19 @@ osf_ls_files(x, path = NULL, type = "any", pattern = NULL,
 
 \item{path}{list files within the specified subdirectory path}
 
-\item{type}{filter response to include only \code{"files"} or
+\item{type}{filter query to include only \code{"files"} or
 \code{"folders"}}
 
-\item{pattern}{filter response to include entities whose name contain the
-specified pattern}
+\item{pattern}{filter query for entities whose name contains the
+specified \code{pattern}}
 
 \item{n_max}{Number of results to return from OSF.}
 }
+\value{
+an \code{\link{osf_tbl_file}} with \code{x}'s top-level files and directories
+}
 \description{
 List the files and folders in the top-level of an OSF project, component, or
-directory. Specify a \code{path} to list the contents of a
-particular subdirectory.
+directory. Specify a \code{path} to list the contents of a particular
+subdirectory.
 }

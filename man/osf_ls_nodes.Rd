@@ -7,12 +7,12 @@
 osf_ls_nodes(x, n_max = 10)
 }
 \arguments{
-\item{x}{an \code{osf_tbl_node} or \code{osf_tbl_user}}
+\item{x}{an \code{\link{osf_tbl_node}} or \code{\link{osf_tbl_user}}}
 
 \item{n_max}{Number of results to return from OSF.}
 }
 \value{
-\code{\link{osf_tbl_node}}
+an \code{\link{osf_tbl_node}}
 }
 \description{
 List the projects or components associated with a user or in the top-level of

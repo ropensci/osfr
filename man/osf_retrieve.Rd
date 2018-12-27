@@ -18,7 +18,7 @@ osf_retrieve_file(id)
 or file. Set \code{id = "me"} to retrieve your own OSF profile.}
 }
 \value{
-an \code{osf_tbl_user}, \code{osf_tbl_node}, or \code{osf_tbl_file}
+an \code{\link{osf_tbl_user}}, \code{\link{osf_tbl_node}}, or \code{\link{osf_tbl_file}}
 }
 \description{
 Use \code{osf_retrieve()} to create an \code{osf_tbl} for an existing OSF entity based

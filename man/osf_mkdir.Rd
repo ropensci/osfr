@@ -16,7 +16,7 @@ osf_mkdir(x, path, verbose = FALSE)
 (default \code{FALSE})}
 }
 \value{
-an \code{\link{osf_tbl_file}} containing the last directory of the path
+an \code{\link{osf_tbl_file}} containing the last directory specified in \code{path}
 }
 \description{
 Creates a new folder in an OSF project or component.
