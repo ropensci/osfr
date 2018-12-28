@@ -1,7 +1,16 @@
-#' Download files and folders from OSF
+#' Download an OSF files or folder
 #'
-#' @param path Local path for the downloaded file. The default is to use the
-#'   remote file's name.
+#' Files stored in OSF projects, components, or folders can be downloaded
+#' locally by providing the appropriate [`osf_tbl_file`] to `osf_download()`.
+#' Directories are downloaded as zip files.
+#'
+#' @param an [`osf_tbl_file`] containing a file or directory
+#' @param path Local path where the downloaded file will be saved. The default
+#'   is to use the remote file's name.
+#' @param overwrite Logical, if the local path already exists should it be
+#'   replaced with the downloaded file?
+#'
+#' @importFrom fs path_ext_set
 
 osf_download <- function(x, path = NULL, overwrite = FALSE) {
   NextMethod("osf_download")
@@ -9,11 +18,15 @@ osf_download <- function(x, path = NULL, overwrite = FALSE) {
 
 osf_download.osf_tbl_file <- function(x, path = NULL, overwrite = FALSE) {
   x <- make_single(x)
+  if (is.null(path)) path <- x$name
+
   if (is_osf_dir(x)) {
-    abort("Downloading an `osf_tbl_file` requires a file\n* `x` contains a directory")
+    type <- "folder"
+    path <- fs::path_ext_set(path, "zip")
+  } else {
+    type <- "file"
   }
 
-  if (is.null(path)) path <- x$name
   if (file.exists(path) && !overwrite) {
     abort("A file exists at the specified path and `overwrite` is `FALSE`")
   }
@@ -22,7 +35,8 @@ osf_download.osf_tbl_file <- function(x, path = NULL, overwrite = FALSE) {
     id = get_parent_id(x),
     fid = as_id(x),
     path = path,
-    type = ifelse(is_osf_dir(x), "folder", "file"),
+    type = type,
+    zip = type == "folder"
   )
   invisible(out)
 }
