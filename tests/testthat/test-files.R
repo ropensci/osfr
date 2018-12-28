@@ -47,7 +47,7 @@ d1 <- osf_mkdir(p1, "data")
 f2 <- osf_upload(d1, txt.file)
 
 test_that("file can be uploaded to a directory", {
-  expect_s3_class(out, "osf_tbl_file")
+  expect_s3_class(f2, "osf_tbl_file")
 })
 
 test_that("attempting to list an osf_tbl_file with a file errors", {
@@ -59,7 +59,7 @@ context("Downloading")
 
 outfile <- tempfile(fileext = ".txt")
 
-test_that("file can be downloaded from a project", {
+test_that("a file can be downloaded from a project", {
   expect_true(osf_download(f1, path = outfile))
   expect_true(file.exists(outfile))
 })
@@ -69,10 +69,21 @@ test_that("an existing file won't be overwritten", {
   expect_true(osf_download(f1, path = outfile, overwrite = TRUE))
 })
 
-test_that("file can be downloaded from a directory", {
+test_that("a file can be downloaded from a directory", {
   outfile <- tempfile(fileext = ".txt")
   expect_true(osf_download(f2, path = outfile))
   expect_true(file.exists(outfile))
+})
+
+test_that("a directory can be downloaded as a zip file", {
+  outfile <- tempfile(fileext = ".zip")
+  expect_true(osf_download(d1, path = outfile))
+  expect_true(file.exists(outfile))
+
+  expect_match(
+    unzip(outfile, list = TRUE)$Name[1],
+    basename(txt.file)
+  )
 })
 
 
