@@ -7,8 +7,7 @@
 #' @param x an [`osf_tbl_node`] representing an OSF project or component or an
 #'   [`osf_tbl_file`] containing a directory
 #' @param path list files within the specified subdirectory path
-#' @param type filter query to include only `"files"` or
-#'   `"folders"`
+#' @param type filter query to include only `"file"` or `"folder"`
 #' @param pattern filter query for entities whose name contains the
 #'   specified `pattern`
 #' @template n_max
@@ -33,23 +32,7 @@ osf_ls_files.osf_tbl_node <-
            n_max = 10) {
 
   x <- make_single(x)
-  api_path <- osf_path(sprintf("nodes/%s/files/osfstorage/", as_id(x)))
-
-  path <- path %||% "."
-  if (path == ".") {
-    out <- .osf_list_files(api_path, type, pattern, n_max)
-    items <- as_osf_tbl(out, subclass = "osf_tbl_file")
-    return(items)
-  }
-
-  # look for specified path within the parent node
-  path_root <- fs::path_split(path)[[1]][1]
-  osf_dir <- .osf_dir_exists(api_path, path_root, n_max)
-
-  # list files within the next subdirectory
-  next_path <- fs::path_rel(path, path_root)
-  out <- osf_ls_files(osf_dir, next_path, type, pattern, n_max)
-  out
+ .osf_list_files(x, path, type, pattern, n_max)
 }
 
 #' @export
@@ -59,42 +42,58 @@ osf_ls_files.osf_tbl_file <-
            type = "any",
            pattern = NULL,
            n_max = 10) {
-  x <- make_single(x)
 
+  x <- make_single(x)
   if (is_osf_file(x)) {
     abort("Listing an `osf_tbl_file` requires a directory\n* `x` contains a file")
   }
+ .osf_list_files(x, path, type, pattern, n_max)
+}
 
-  # list files using extracted API endpoint
-  url <- get_relation(x, "files")
-  api_path <- crul::url_parse(url)$path
 
-  path <- path %||% "."
-  if (path == ".") {
-    out <- .osf_list_files(api_path, type, pattern, n_max)
-    items <- as_osf_tbl(out, subclass = "osf_tbl_file")
-    return(items)
-  }
+.osf_list_files <- function(x, path, type, pattern, n_max) {
 
-  # look for specified path within the root directory
-  path_root <- fs::path_split(path)[[1]][1]
-  osf_dir <- .osf_dir_exists(api_path, path_root, n_max)
+  # manually construct path for nodes because the provided files endpoint is
+  # for listing storage providers
+  api_path <- switch(class(x)[1],
+    osf_tbl_node = osf_path(sprintf("nodes/%s/files/osfstorage/", as_id(x))),
+    osf_tbl_file = crul::url_parse(get_relation(x, "files"))$path
+  )
 
   # recurse if path contains subdirectories
-  next_path <- fs::path_rel(path, path_root)
-  out <- osf_ls_files(osf_dir, next_path, type, pattern, n_max)
-  out
+  path <- path %||% "."
+  if (path != ".") {
+    path_root <- fs::path_split(path)[[1]][1]
+    root_dir <- find_exact_match(x, name = path_root, type = "folder")
+    if (nrow(root_dir) == 0) {
+      abort(sprintf("Can't find path `%s` within `%s`", path, x$name))
+    }
+
+    next_path <- fs::path_rel(path, path_root)
+    res <- .osf_list_files(root_dir, next_path, type, pattern, n_max)
+    return(as_osf_tbl(res, "osf_tbl_file"))
   }
 
-
-# error if the specified directory doesn't exist or return the osf_tbl_file
-.osf_dir_exists <- function(path, dirname, n_max) {
-  out <- .osf_list_files(path, type = "folder", pattern = dirname, n_max)
-  items <- as_osf_tbl(out, subclass = "osf_tbl_file")
-  osf_dir <- items[items$name == dirname, ]
-
-  if (nrow(osf_dir) == 0) {
-    abort(sprintf("Can't find path `%s`. Are you sure it exists?", dirname))
+  # TODO: filter processing should be handled by a general external function
+  filters <- list()
+  if (type != "any") {
+    type <- match.arg(type, c("file", "folder"))
+    filters$kind <- type
   }
-  return(osf_dir)
+  if (is.character(pattern)) {
+    filters$name <- pattern
+  }
+  if (!is_empty(filters)) {
+    names(filters) <- sprintf("filter[%s]", names(filters))
+  }
+
+  res <- .osf_paginated_request(
+    method = "get",
+    path = api_path,
+    query = filters,
+    n_max = n_max,
+    verbose = FALSE
+  )
+
+  as_osf_tbl(res, subclass = "osf_tbl_file")
 }

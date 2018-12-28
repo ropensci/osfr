@@ -1,13 +1,25 @@
-# Appends API version to a specificed path
-# id: OSF project guid (e.g., fa9dm)
-# fid: waterbutler file/folder id (e.g., 5beaf8e7a6a9af00166b4243)
-# provider: storage provider (default: osfstorage)
-wb_path <- function(id, fid = NULL, provider = "osfstorage") {
-  if (is.null(fid)){
-    sprintf("v%i/resources/%s/providers/%s/", floor(.wb_api_version), id, provider)
+#' Generate Waterbutler API paths
+#'
+#' @param id GUID for an OSF project or component
+#' @param fid waterbutler identifier for a file or folder
+#' @param provider storage provider (default: osfstorage)
+#' @param type indicate whether the provided `fid` refers to a `"folder"` (the
+#'   default) or `"file"`. This is significant because the path must always have
+#'   a trailing flash when referring to a folder
+#'
+#' @noRd
+wb_path <- function(id, fid = NULL, provider = "osfstorage", type = "folder") {
+  type <- match.arg(type, c("folder", "file"))
+  api_v <- floor(.wb_api_version)
+  if (is.null(fid)) {
+    out <- sprintf("v%i/resources/%s/providers/%s/", api_v, id, provider)
   } else {
-    sprintf("v%i/resources/%s/providers/%s/%s/", floor(.wb_api_version), id, provider, fid)
+    out <- sprintf("v%i/resources/%s/providers/%s/%s/", api_v, id, provider, fid)
   }
+  switch(type,
+    file = sub("\\/$", "", out),
+    folder = out
+  )
 }
 
 
@@ -50,47 +62,70 @@ wb_cli <- function(pat = getOption("osfr.pat")) {
 # Waterbutler API action endpoints ----------------------------------------
 # https://waterbutler.readthedocs.io/en/latest/api.html#actions
 
-# empty data$list() is returned when resource doesn't exist
-.wb_get_info <- function(id) {
-  res <- .wb_request("get", wb_path(id), query = list(meta = ""))
-  res$raise_for_status()
-  jsonlite::fromJSON(res$parse("UTF-8"), FALSE)
-}
 
-# id: OSF project/component GUID
-# name: name of the new directory
-# fid: waterbutler folder id (e.g., 5beaf8e7a6a9af00166b4243) if creating a
-#   subfolder within an existing folder
-# v1/resources/fa9dm/providers/osfstorage/5beaf8e7a6a9af00166b4243/?kind=folder
+#' Create a folder or subfolder
+#'
+#' @param id GUID for an OSF project or component
+#' @param name Name of the new directory
+#' @param fid Optional, provide a Waterbutler folder ID to create the new folder
+#'   within the specified existing folder
+#'
+#' @noRd
 .wb_create_folder <- function(id, name, fid = NULL) {
   query <- list(kind = "folder", name = name)
   res <- .wb_request("put", wb_path(id, fid), query = query)
   process_response(res)
 }
 
-# url: new_folder link for the existing parent folder
-# wb_create_subfolder <- function(id, name, parent_id) {
-#   path <- file.path(wb_path(id), parent_id)
-#   .wb_put(path, query = list(kind = "folder", name = name))
-# }
-
-# Upload a new file
-# id: OSF node
-# name: desired name of the file
-# body: raw file data
-# dir_id: optional, waterbutler ID for directory to upload to
-.wb_file_upload <- function(id, name, body, dir_id = NULL) {
+#' Upload a new file
+#'
+#' @inheritParams .wb_create_folder
+#' @param name Name of the uploaded file
+#' @param body Raw file data
+#' @param fid: Optional, Waterbutler folder ID to upload the file directly to
+#'   the specified existing folder
+#'
+#' @noRd
+.wb_file_upload <- function(id, name, body, fid = NULL) {
   query <- list(kind = "file", name = name)
-  res <- .wb_request("put", wb_path(id, dir_id), query = query, body = body)
+  res <- .wb_request("put", wb_path(id, fid), query = query, body = body)
   process_response(res)
 }
 
-# Update an existing file
-# file_id: waterbutler file id for existing file
-.wb_file_update <- function(id, file_id, body) {
+#' Update an existing file
+#'
+#' @inheritParams .wb_create_folder
+#' @inheritParams .wb_file_upload
+#' @param fid Existing file's Waterbutler ID
+#'
+#' @noRd
+.wb_file_update <- function(id, fid, body) {
   query <- list(kind = "file")
-  # remove trailing slash for file IDs
-  path <- sub("\\/$", "", wb_path(id, file_id))
+  path <- wb_path(id, fid, type = "file")
   res <- .wb_request("put", path, query = query, body = body)
   process_response(res)
+}
+
+#' Download a file
+#'
+#' @inheritParams .wb_create_folder
+#' @param fid Waterbutler ID for the file or folder to download
+#' @param path local path where the downloaded file will be saved
+#' @param type indicate whether downloading a `"file"` or `"folder"`
+#' @param zip Logical, should the downloaded contents be zipped? Only applies to
+#'   folders.
+#'
+#' @noRd
+.wb_download <- function(id, fid, path, type, zip = FALSE) {
+  type <- match.arg(type, c("file", "folder"))
+  query <- list()
+  if (zip) query$zip <- ""
+  res <- .wb_request("get", wb_path(id, fid, type = type), query, disk = path)
+  if (res$status_code == 200) return(TRUE)
+  if (res$status_code == 404) {
+    msg <- sprintf("The requested %s (%s) could not be found in node `%s`",
+                   type, fid, id)
+    abort(msg)
+  }
+  res$raise_for_status()
 }

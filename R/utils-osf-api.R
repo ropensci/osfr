@@ -124,29 +124,3 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
   res <- .osf_request("get", osf_path(sprintf("files/%s/", id)))
   process_response(res)
 }
-
-
-# unlike the other low-level API functions, this requires a pre-constructed path
-.osf_list_files <- function(path, type, pattern, n_max) {
-
-  # TODO: filter processing should be handled by a general external function
-  filters <- list()
-  if (type != "any") {
-    type <- match.arg(type, c("file", "folder"))
-    filters$kind <- type
-  }
-  if (is.character(pattern)) {
-    filters$name <- pattern
-  }
-  if (!is_empty(filters)) {
-    names(filters) <- sprintf("filter[%s]", names(filters))
-  }
-
-  .osf_paginated_request(
-    method = "get",
-    path = path,
-    query = filters,
-    n_max = n_max,
-    verbose = FALSE
-  )
-}

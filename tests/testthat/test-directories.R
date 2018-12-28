@@ -47,7 +47,7 @@ test_that("list a subdirectory", {
   expect_equal(out$name, "dir11")
 })
 
-test_that("create a subdirectory within an non-existent parent directory", {
+test_that("create a subdirectory within a non-existent parent directory", {
   d21 <- osf_mkdir(p1, path = "dir2/dir21")
   expect_s3_class(d21, "osf_tbl_file")
   expect_equal(d21$name, "dir21")
