@@ -1,13 +1,25 @@
-# Appends API version to a specificed path
-# id: OSF project guid (e.g., fa9dm)
-# fid: waterbutler file/folder id (e.g., 5beaf8e7a6a9af00166b4243)
-# provider: storage provider (default: osfstorage)
-wb_path <- function(id, fid = NULL, provider = "osfstorage") {
-  if (is.null(fid)){
-    sprintf("v%i/resources/%s/providers/%s/", floor(.wb_api_version), id, provider)
+#' Generate Waterbutler API paths
+#'
+#' @param id GUID for an OSF project or component
+#' @param fid waterbutler identifier for a file or folder
+#' @param provider storage provider (default: osfstorage)
+#' @param type indicate whether the provided `fid` refers to a `"folder"` (the
+#'   default) or `"file"`. This is significant because the path must always have
+#'   a trailing flash when referring to a folder
+#'
+#' @noRd
+wb_path <- function(id, fid = NULL, provider = "osfstorage", type = "folder") {
+  type <- match.arg(type, c("folder", "file"))
+  api_v <- floor(.wb_api_version)
+  if (is.null(fid)) {
+    out <- sprintf("v%i/resources/%s/providers/%s/", api_v, id, provider)
   } else {
-    sprintf("v%i/resources/%s/providers/%s/%s/", floor(.wb_api_version), id, provider, fid)
+    out <- sprintf("v%i/resources/%s/providers/%s/%s/", api_v, id, provider, fid)
   }
+  switch(type,
+    file = sub("\\/$", "", out),
+    folder = out
+  )
 }
 
 
@@ -89,8 +101,7 @@ wb_cli <- function(pat = getOption("osfr.pat")) {
 # file_id: waterbutler file id for existing file
 .wb_file_update <- function(id, file_id, body) {
   query <- list(kind = "file")
-  # remove trailing slash for file IDs
-  path <- sub("\\/$", "", wb_path(id, file_id))
+  path <- wb_path(id, file_id, type = "file")
   res <- .wb_request("put", path, query = query, body = body)
   process_response(res)
 }
