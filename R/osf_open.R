@@ -24,12 +24,17 @@ osf_open.osf_tbl <- function(x) browseURL(x$meta[[1]]$links$html)
 
 #' @export
 osf_open.osf_tbl_file <- function(x) {
-  # a guid is not assigned to a file until it has been viewed directly on OSF
-  # so we manually construct a url that triggers the OSF's file view
-  parent_id <- x$meta[[1]]$relationships$node$data$id
-  provider <- x$meta[[1]]$attributes$provider
-  file_url <- osf_url(sprintf("%s/files/%s/%s", parent_id, provider, x$id[1]))
-  browseURL(file_url)
+  parent_id <- get_parent_id(x)
+  if (is_osf_dir(x)) {
+    # there is no directory view so we redirect to the parent node's file view
+    url <- osf_url(sprintf("%s/files/", parent_id))
+  } else {
+    # a guid is not assigned to a file until it has been viewed directly on OSF
+    # so we manually construct a url that triggers the OSF's file view
+    provider <- get_attr(x, "provider")
+    url <- osf_url(sprintf("%s/files/%s/%s", parent_id, provider, as_id(x)))
+  }
+  browseURL(url)
 }
 
 

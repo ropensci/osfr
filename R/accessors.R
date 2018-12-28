@@ -12,7 +12,8 @@ get_relation <- function(x, field) {
 # Extract attributes from an OSF entity
 get_attr <- function(x, field) {
   fields <- list(
-    kind = function(x) x$attributes$kind
+    kind = function(x) x$attributes$kind,
+    provider = function(x) x$attributes$provider
   )
   stopifnot(field %in% names(fields))
   purrr::pluck(x$meta[[1]], fields[[field]])
