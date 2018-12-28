@@ -105,3 +105,16 @@ wb_cli <- function(pat = getOption("osfr.pat")) {
   res <- .wb_request("put", path, query = query, body = body)
   process_response(res)
 }
+
+# type: specify whether fid refers to a "file" or "folder"
+.wb_download <- function(id, fid, path, type, zip = FALSE) {
+  type <- match.arg(type, c("file", "folder"))
+  res <- .wb_request("get", wb_path(id, fid, type = type), disk = path)
+  if (res$status_code == 200) return(TRUE)
+  if (res$status_code == 404) {
+    msg <- sprintf("The requested %s (%s) could not be found in node `%s`",
+                   type, fid, id)
+    abort(msg)
+  }
+  res$raise_for_status()
+}
