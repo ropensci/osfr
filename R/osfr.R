@@ -9,6 +9,7 @@
 #' @docType package
 #' @name osfr
 #'
+#' @importFrom crul HttpClient url_parse
 #' @importFrom stringi stri_split_fixed
 #' @importFrom purrr map imap_chr pluck set_names transpose %||%
 #' @importFrom tibble tibble
