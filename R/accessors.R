@@ -26,7 +26,8 @@ get_link <- function(x, field) {
     new_folder = function(x) x$links$new_folder,
     move = function(x) x$links$move,
     upload = function(x) x$links$upload,
-    delete = function(x) x$links$delete
+    delete = function(x) x$links$delete,
+    download = function(x) x$links$download
   )
   stopifnot(field %in% names(fields))
   purrr::pluck(x$meta[[1]], fields[[field]])
