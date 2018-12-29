@@ -4,6 +4,7 @@
 #' an OSF project or component.
 #'
 #' @param x an [`osf_tbl_node`] or [`osf_tbl_user`]
+#' @template filter-pattern
 #' @template n_max
 #'
 #' @return an [`osf_tbl_node`]
@@ -13,20 +14,20 @@
 #' osf_ls_nodes(user)
 #' }
 #' @export
-osf_ls_nodes <- function(x, n_max = 10) UseMethod("osf_ls_nodes")
+osf_ls_nodes <- function(x, pattern = NULL, n_max = 10) UseMethod("osf_ls_nodes")
 
 #' @export
-osf_ls_nodes.osf_tbl_node <- function(x, n_max = 10) {
+osf_ls_nodes.osf_tbl_node <- function(x, pattern = NULL, n_max = 10) {
   x <- make_single(x)
-  out <- .osf_node_children(as_id(x), n_max = n_max)
+  out <- .osf_node_children(as_id(x), n_max, filter_nodes(pattern = pattern))
   raise_error(out)
   as_osf_tbl(out, "osf_tbl_node")
 }
 
 #' @export
-osf_ls_nodes.osf_tbl_user <- function(x, n_max = 10) {
+osf_ls_nodes.osf_tbl_user <- function(x, pattern = NULL, n_max = 10) {
   x <- make_single(x)
-  out <- .osf_user_nodes(as_id(x), n_max = n_max)
+  out <- .osf_user_nodes(as_id(x), n_max, filter_nodes(pattern = pattern))
   raise_error(out)
   as_osf_tbl(out, "osf_tbl_node")
 }

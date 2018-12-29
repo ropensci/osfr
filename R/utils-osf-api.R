@@ -100,9 +100,9 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
 }
 
 # list all child nodes
-.osf_node_children <- function(id, n_max = Inf, verbose = FALSE) {
+.osf_node_children <- function(id, n_max, query = list(), verbose = FALSE) {
   path <- osf_path(sprintf("nodes/%s/children/", id))
-  .osf_paginated_request("get", path, n_max = n_max, verbose = verbose)
+  .osf_paginated_request("get", path, query, n_max = n_max, verbose = verbose)
 }
 
 # retrieve user info
@@ -114,9 +114,9 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
 
 
 # list user's nodes
-.osf_user_nodes <- function(id, n_max = Inf, verbose = FALSE) {
+.osf_user_nodes <- function(id, n_max, query = list(), verbose = FALSE) {
   path <- osf_path(sprintf("users/%s/nodes/", id))
-  .osf_paginated_request("get", path, n_max = n_max, verbose = verbose)
+  .osf_paginated_request("get", path, query, n_max = n_max, verbose = verbose)
 }
 
 # e.g., .osf_file_retrieve("5be5e1fdfe3eca00188178c3")

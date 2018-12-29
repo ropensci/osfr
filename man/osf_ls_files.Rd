@@ -15,8 +15,9 @@ osf_ls_files(x, path = NULL, type = "any", pattern = NULL,
 
 \item{type}{filter query to include only \code{"file"} or \code{"folder"}}
 
-\item{pattern}{filter query for entities whose name contains the
-specified \code{pattern}}
+\item{pattern}{character string used to filter for results that contain the
+substring \code{"pattern"} in their name. Note this is a fixed, case-insensitive
+search.}
 
 \item{n_max}{Number of results to return from OSF.}
 }

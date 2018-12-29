@@ -7,9 +7,8 @@
 #' @param x an [`osf_tbl_node`] representing an OSF project or component or an
 #'   [`osf_tbl_file`] containing a directory
 #' @param path list files within the specified subdirectory path
-#' @param type filter query to include only `"file"` or `"folder"`
-#' @param pattern filter query for entities whose name contains the
-#'   specified `pattern`
+#' @template filter-type
+#' @template filter-pattern
 #' @template n_max
 #'
 #' @return an [`osf_tbl_file`] with `x`'s top-level files and directories
@@ -74,23 +73,10 @@ osf_ls_files.osf_tbl_file <-
     return(as_osf_tbl(res, "osf_tbl_file"))
   }
 
-  # TODO: filter processing should be handled by a general external function
-  filters <- list()
-  if (type != "any") {
-    type <- match.arg(type, c("file", "folder"))
-    filters$kind <- type
-  }
-  if (is.character(pattern)) {
-    filters$name <- pattern
-  }
-  if (!is_empty(filters)) {
-    names(filters) <- sprintf("filter[%s]", names(filters))
-  }
-
   res <- .osf_paginated_request(
     method = "get",
     path = api_path,
-    query = filters,
+    query = filter_files(pattern, type),
     n_max = n_max,
     verbose = FALSE
   )
