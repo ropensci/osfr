@@ -23,6 +23,7 @@ License: MIT + file LICENSE
 BugReports: https://github.com/centerforopenscience/osfr/issues
 LazyData: true
 Suggests:
+    dplyr,
     testthat,
     knitr,
     rmarkdown,
