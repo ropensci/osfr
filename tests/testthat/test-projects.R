@@ -1,9 +1,9 @@
 context("Project operations")
 
-p1 <- osf_project_create(title = "osfr-project-tests")
+p1 <- osf_create_project(title = "osfr-project-tests")
 
 test_that("create project", {
-  expect_error(osf_project_create(), "Must specify a title")
+  expect_error(osf_create_project(), "Must define a title")
   expect_s3_class(p1, "osf_tbl_node")
 })
 

@@ -2,7 +2,7 @@ context("Directories")
 
 
 # setup -------------------------------------------------------------------
-p1 <- osf_project_create(title = "osfr-component-tests")
+p1 <- osf_create_project(title = "osfr-component-tests")
 
 
 # tests -------------------------------------------------------------------

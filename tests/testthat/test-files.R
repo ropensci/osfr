@@ -4,7 +4,7 @@ context("Uploading")
 txt.file <- file.path(tempdir(), "osfr-test-file.txt")
 writeLines("Lorem ipsum dolor sit amet, consectetur", txt.file)
 
-p1 <- osf_project_create("File Tests")
+p1 <- osf_create_project("File Tests")
 
 
 # tests -------------------------------------------------------------------
