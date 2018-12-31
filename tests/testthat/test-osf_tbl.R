@@ -33,4 +33,3 @@ test_that("osf_tbls with incorrect column types are detected", {
   user_tbl$id <- as.factor(user_tbl$id)
   expect_false(has_osf_tbl_coltypes(user_tbl))
 })
-
