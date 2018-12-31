@@ -82,6 +82,42 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
 
 # OSF API endpoints -------------------------------------------------------
 
+#' Create a new project or component
+#' @param id GUID for an existing OSF project or component. If defined, the
+#'   corresponding node will serve as the parent for the new subcomponent. If
+#'   left undefined a top-level project will be created instead.
+#' @param title Required, title for the new node
+#' @param description Optional, description for the new node
+#' @param public Logical, should the new node be publicly available (`TRUE`) or
+#'   private (`FALSE`)
+#' @noRd
+.osf_node_create <- function(id = NULL, title, description = NULL, public = FALSE) {
+  if (missing(title)) abort("A title must be provided.")
+
+  if (is.null(id)) {
+    path <- osf_path("nodes/")
+  } else {
+    path <- osf_path(sprintf("nodes/%s/children/", id))
+  }
+
+  body <- list(
+    data = list(
+      type = "nodes",
+      attributes = list(
+        title = title,
+        category = "project",
+        description = description %||% "",
+        public = public
+      )
+    )
+  )
+
+  res <- .osf_request("post", path, body = body, encode = "json")
+  out <- process_response(res)
+  raise_error(out)
+  out
+}
+
 # e.g., .osf_node_retrieve("k35ut)
 .osf_node_retrieve <- function(id) {
   res <- .osf_request("get", osf_path(sprintf("nodes/%s/", id)))

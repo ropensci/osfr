@@ -11,7 +11,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' proj <- osf_project_create("Directory Example")
+#' proj <- osf_create_project("Directory Example")
 #' osf_mkdir(proj, "data/raw_data")
 #' }
 

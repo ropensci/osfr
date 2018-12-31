@@ -1,76 +1,68 @@
-#' Create a new OSF project or component
+#' Create a new project or component on OSF
 #'
-#' Both projects and components can be created with `osf_node_create()`. To
-#' create a new top-level project leave `x = NULL`. To create a new component
-#' use `x` to specify the existing parent project or component in which the new
-#' component will be created.
+#' Use `osf_create_project()` to create a new top-level project on OSF. A nested
+#' component can be created by providing an [`osf_tbl_node`] referencing an
+#' existing project or component to `osf_create_component()`'s `x` argument.
 #'
 #' @section: OSF Nodes:
-#' On OSF, projects and components are both implemented as *nodes* within the
-#' system; this explains why they are functionally identical on
-#' <https://www.osf.io>. The only distinction between the two is projects exist
-#' at the top-level of an organizational hierarchy and components are
-#' sub-projects within a parent project. As such, the same suite of `osfr`
-#' functions can be used to manage both projects and components.
+#' Both projects and components are implemented as *nodes* within OSF, which
+#' explains why they are functionally identical. The only distinction between
+#' the two is projects exist at the top-level of an organizational hierarchy,
+#' and components are nested within a parent project or another component. As
+#' such, osfr uses the same S3 class to represent both projects and components:
+#' an [`osf_tbl_node`].
 #'
-#' @template input-osf-node
-#' @param title,description Set a title (required) and, optionally, a description
-#' @param private Boolean, should it be private (defaults to `TRUE``)
+#' @references
+#' 1. OSF Guides: Create a Project.
+#' <http://help.osf.io/m/projects/l/481539-create-a-project>.
+#' 2. OSF Guides: Create a Component.
+#' <http://help.osf.io/m/projects/l/481998-create-components>
 #'
-#' @return an [`osf_tbl_node`]
-#' @name node-create
+#' @param x An [`osf_tbl_node`] with a single OSF project or component that will
+#'   serve as the new sub-component's parent node.
+#' @param title,description Set a title (required) and, optionally, a
+#'   description.
+#' @param public Logical, should it be publicly available (`TRUE`) or private
+#'   (`FALSE`, the default)?
+#'
+#' @return an [`osf_tbl_node`] containing the new OSF project or component
 #'
 #' @examples
 #' \dontrun{
-#' # create a new project
-#' proj <- osf_project(title = "New Private OSF Project")
+#' # create a new private project
+#' project <- osf_create_project(title = "Private OSF Project")
 #'
-#' # update/retrieve project details
-#' osf_project(proj$id)
+#' # create a new component
+#' component <- osf_create_component(project, title = "Project Data")
 #' }
+#' @name osf_create
 NULL
 
 #' @export
-#' @rdname node-create
-osf_project_create <- function(title = NULL, description = "", private = TRUE) {
-  path <- osf_path("nodes/")
-  out <- node_create(path, title, description, private)
+#' @rdname osf_create
+osf_create_project <- function(title, description = NULL, public = FALSE) {
+  if (missing(title)) abort("Must define a title for the new project.")
+
+  out <- .osf_node_create(
+    title = title,
+    description = description,
+    public = public
+  )
   as_osf_tbl(out["data"], "osf_tbl_node")
 }
 
 #' @export
-#' @rdname node-create
-osf_component_create <- function(x, title = NULL, description = "", private = TRUE) {
-  if (missing(x)) stop("Must specify ID of a parent project")
-  path <- osf_path(sprintf("nodes/%s/children/", as_id(x)))
-  out <- node_create(path, title, description, private)
-  as_osf_tbl(out["data"], "osf_tbl_node")
-}
+#' @rdname osf_create
+osf_create_component <- function(x, title, description = NULL, public = FALSE) {
+  if (missing(x) || !inherits(x, "osf_tbl_node"))
+    abort("`x` must be an `osf_tbl_node` referencing an existing project/component. ")
+  if (missing(title)) abort("Must define a title for the new component.")
 
-
-# Create a new node
-node_create <- function(
-  path,
-  title = NULL,
-  description = "",
-  private = TRUE) {
-
-  if (is.null(title)) stop("Must specify a title")
-
-  body <- list(
-    data = list(
-      type = "nodes",
-      attributes = list(
-        title = title,
-        category = "project",
-        description = description,
-        public = !private
-      )
-    )
+  out <- .osf_node_create(
+    id = as_id(x),
+    title = title,
+    description = description,
+    public = public
   )
-
-  res <- .osf_request("post", path, body = body, encode = "json")
-  out <- process_response(res)
-  raise_error(out)
-  out
+  as_osf_tbl(out["data"], "osf_tbl_node")
 }
