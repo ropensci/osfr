@@ -12,12 +12,14 @@ is_osf_url <- function(url) grepl("osf.io", tolower(url), fixed = TRUE)
 
 is_osf_dir <- function(x) {
   stopifnot(inherits(x, "osf_tbl_file"))
-  get_attr(x, "kind") == "folder"
+  kind <- get_meta(x, "attributes", "kind")
+  kind == "folder"
 }
 
 is_osf_file <- function(x) {
   stopifnot(inherits(x, "osf_tbl_file"))
-  get_attr(x, "kind") == "file"
+  kind <- get_meta(x, "attributes", "kind")
+  kind == "file"
 }
 
 #' Return an OSF file or folder based on name matching
@@ -62,4 +64,35 @@ make_single <- function(x) {
     x <- head(x, 1)
   }
   x
+}
+
+
+#' Convenience functions for developers to switch between accounts
+#'
+#' Use these functions to:
+#' * switch between OSF's test and production servers
+#' * switch between your development and standard PAT
+#'
+#' Assumes your home directory contains a `.Renviron` file that defines
+#' `OSF_PAT` with your standard PAT, and your current working directory contains
+#' another `.Renviron` file with the PAT you use for `test.osf.io`.
+#' @noRd
+NULL
+
+osf_dev_on <- function() {
+  renviron <- normalizePath(".Renviron")
+  stopifnot(file.exists(renviron))
+  stopifnot(readRenviron(renviron))
+  Sys.setenv(OSF_USE_SERVER = "test")
+  message("osfr development mode enabled.")
+  osf_auth()
+}
+
+osf_dev_off <- function() {
+  renviron <- normalizePath("~/.Renviron")
+  stopifnot(file.exists(renviron))
+  stopifnot(readRenviron(renviron))
+  Sys.unsetenv("OSF_USE_SERVER")
+  message("osfr development mode disabled.")
+  osf_auth()
 }
