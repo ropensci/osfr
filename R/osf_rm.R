@@ -21,7 +21,6 @@
 #' project <- osf_create_project("My Short-Lived Project")
 #' osf_rm(project)
 #' }
-NULL
 
 #' @export
 osf_rm <- function(x, recursive = FALSE, verbose = FALSE) {
