@@ -60,10 +60,7 @@ osf_mkdir.osf_tbl_node <- function(x, path, verbose = FALSE) {
 osf_mkdir.osf_tbl_file <- function(x, path, verbose = FALSE) {
   x <- make_single(x)
   id <- as_id(x)
-
-  if (get_attr(x, "kind") == "file") {
-    abort("Can't create directories within a file.")
-  }
+  if (is_osf_file(x)) abort("Can't create directories within a file.")
 
   # does path root already exist?
   path_root <- fs::path_split(path)[[1]][1]
