@@ -27,7 +27,7 @@ test_that("update project privacy", {
 })
 
 test_that("project deletion", {
-  expect_true(osf_project_delete(p1))
+  expect_true(osf_rm(p1))
   out <- .osf_node_retrieve(p1$id)
   expect_equal(out$status_code, 410)
 })
