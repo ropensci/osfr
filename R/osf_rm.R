@@ -21,13 +21,13 @@
 #' project <- osf_create_project("My Short-Lived Project")
 #' osf_rm(project)
 #' }
-
+#'
 #' @export
 osf_rm <- function(x, recursive = FALSE, verbose = FALSE) {
   UseMethod("osf_rm")
 }
 
-
+#' @export
 osf_rm.osf_tbl_node <- function(x, recursive = FALSE, verbose = FALSE) {
   x <- make_single(x)
   id <- as_id(x)

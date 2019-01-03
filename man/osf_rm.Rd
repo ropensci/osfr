@@ -34,4 +34,5 @@ of sub-components before deleting the top-level entity.
 project <- osf_create_project("My Short-Lived Project")
 osf_rm(project)
 }
+
 }
