@@ -1,3 +1,20 @@
+#' Extract metadata values from OSF entity lists
+#'
+#' @param x an [`osf_tbl`] object
+#' @param ... list of accessors passed to [`purrr::pluck()`]
+#'
+#' @examples
+#' me <- osf_retrieve_user("me")
+#' get_meta(me, "attributes", "full_name")
+#'
+#' @noRd
+get_meta <- function(x, ...) {
+  stopifnot(inherits(x, "osf_tbl"))
+  stopifnot(is.list(x$meta))
+  purrr::map_chr(x$meta, purrr::pluck, ...)
+}
+
+
 # Extract relationships from an OSF entity
 get_relation <- function(x, field) {
   fields <- list(
@@ -7,31 +24,6 @@ get_relation <- function(x, field) {
   stopifnot(field %in% names(fields))
   purrr::pluck(x$meta[[1]], fields[[field]])
 }
-
-
-# Extract attributes from an OSF entity
-get_attr <- function(x, field) {
-  fields <- list(
-    kind = function(x) x$attributes$kind
-  )
-  stopifnot(field %in% names(fields))
-  purrr::pluck(x$meta[[1]], fields[[field]])
-}
-
-
-# Extract links from an OSF entity
-get_link <- function(x, field) {
-  fields <- list(
-    info = function(x) x$links$info,
-    new_folder = function(x) x$links$new_folder,
-    move = function(x) x$links$move,
-    upload = function(x) x$links$upload,
-    delete = function(x) x$links$delete
-  )
-  stopifnot(field %in% names(fields))
-  purrr::pluck(x$meta[[1]], fields[[field]])
-}
-
 
 # Retrieve the parent node's GUID for a component, file or directory
 get_parent_id <- function(x) {

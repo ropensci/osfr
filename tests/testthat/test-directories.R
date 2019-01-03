@@ -2,7 +2,7 @@ context("Directories")
 
 
 # setup -------------------------------------------------------------------
-p1 <- osf_project_create(title = "osfr-component-tests")
+p1 <- osf_create_project(title = "osfr-component-tests")
 
 
 # tests -------------------------------------------------------------------
@@ -47,7 +47,7 @@ test_that("list a subdirectory", {
   expect_equal(out$name, "dir11")
 })
 
-test_that("create a subdirectory within an non-existent parent directory", {
+test_that("create a subdirectory within a non-existent parent directory", {
   d21 <- osf_mkdir(p1, path = "dir2/dir21")
   expect_s3_class(d21, "osf_tbl_file")
   expect_equal(d21$name, "dir21")
@@ -58,4 +58,4 @@ test_that("create a subdirectory within an non-existent parent directory", {
 
 
 # cleanup -----------------------------------------------------------------
-osf_project_delete(p1, recursive = TRUE)
+osf_rm(p1, recursive = TRUE)

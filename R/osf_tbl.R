@@ -86,3 +86,58 @@ as_osf_tbl.list <- function(x, subclass = NULL) {
 `[.osf_tbl` <- function(x, i, j, drop = FALSE) {
   structure(NextMethod(), class = class(x))
 }
+
+#' Rebuild osf_tbl if it passes all validation tests
+#' @noRd
+rebuild_osf_tbl <- function(x) {
+  if (is.data.frame(x) &&
+      has_osf_tbl_colnames(x) &&
+      has_osf_tbl_coltypes(x)) {
+    # TODO: add check to verify all rows have the same type
+    type <- determine_entity_type(x$meta[[1]])
+    subclass <- sprintf("osf_tbl_%s", type)
+    return(as_osf_tbl(x, subclass = subclass))
+  } else {
+   return(x)
+  }
+}
+
+#' Check the data frame contains the required columns
+#' @return logical
+#' @noRd
+has_osf_tbl_colnames <- function(x) {
+  required <- c("name", "id", "meta")
+  missing <- setdiff(required, colnames(x))
+  is_empty(missing)
+}
+
+#' Check that required columns are the correct type
+#' @return logical
+#' @noRd
+has_osf_tbl_coltypes <- function(x) {
+  expected <- c(name = "character", id = "character", meta = "list")
+  found <- vapply(x[names(expected)], FUN = typeof, FUN.VALUE = character(1L))
+  incorrect <- found[expected != found]
+  is_empty(incorrect)
+}
+
+#' Determine OSF entity list type
+#'
+#' @param x OSF entity list containing links, relationships, and attributes
+#'   slots
+#' @return scalar character vector: "user", "node", or "file"
+#' @noRd
+
+determine_entity_type <- function(x) {
+  stopifnot(is.list(x) && rlang::is_named(x))
+  required_slots <- c("attributes", "links", "attributes")
+  stopifnot(all(required_slots %in% names(x)))
+
+  test_slots <- c(user = "family_name", node = "category", file = "kind")
+  matched <- test_slots %in% names(x$attributes)
+  if (sum(matched) == 1) {
+    names(test_slots)[matched]
+  } else {
+    abort("Could not determine `x`'s entity type.")
+  }
+}

@@ -4,10 +4,14 @@
 \alias{osf_ls_nodes}
 \title{List projects or components}
 \usage{
-osf_ls_nodes(x, n_max = 10)
+osf_ls_nodes(x, pattern = NULL, n_max = 10)
 }
 \arguments{
 \item{x}{an \code{\link{osf_tbl_node}} or \code{\link{osf_tbl_user}}}
+
+\item{pattern}{character string used to filter for results that contain the
+substring \code{"pattern"} in their name. Note this is a fixed, case-insensitive
+search.}
 
 \item{n_max}{Number of results to return from OSF.}
 }

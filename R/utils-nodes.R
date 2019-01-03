@@ -6,8 +6,7 @@
 #' @return Character vector of OSF IDs for children of the parent, with the
 #'   parent ID listed last. If there are no child nodes to recurse, the parent
 #'   ID is returned.
-#'  @noRd
-
+#' @noRd
 recurse_node <- function(id, maxdepth = 5) {
   node_tree <- recurse_tree(id, maxdepth)
   simplify_tree(

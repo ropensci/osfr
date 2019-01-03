@@ -28,7 +28,7 @@ change the privacy settings from public to private (or vice versa).
 }
 \examples{
 \dontrun{
-proj <- osf_project_create("temporary-title", private = TRUE)
+proj <- osf_create_project("temporary-title", private = TRUE)
 proj <- osf_project_update(proj$id, title = "Final Title", private = FALSE)
 }
 }

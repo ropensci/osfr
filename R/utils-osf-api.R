@@ -82,6 +82,42 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
 
 # OSF API endpoints -------------------------------------------------------
 
+#' Create a new project or component
+#' @param id GUID for an existing OSF project or component. If defined, the
+#'   corresponding node will serve as the parent for the new subcomponent. If
+#'   left undefined a top-level project will be created instead.
+#' @param title Required, title for the new node
+#' @param description Optional, description for the new node
+#' @param public Logical, should the new node be publicly available (`TRUE`) or
+#'   private (`FALSE`)
+#' @noRd
+.osf_node_create <- function(id = NULL, title, description = NULL, public = FALSE) {
+  if (missing(title)) abort("A title must be provided.")
+
+  if (is.null(id)) {
+    path <- osf_path("nodes/")
+  } else {
+    path <- osf_path(sprintf("nodes/%s/children/", id))
+  }
+
+  body <- list(
+    data = list(
+      type = "nodes",
+      attributes = list(
+        title = title,
+        category = "project",
+        description = description %||% "",
+        public = public
+      )
+    )
+  )
+
+  res <- .osf_request("post", path, body = body, encode = "json")
+  out <- process_response(res)
+  raise_error(out)
+  out
+}
+
 # e.g., .osf_node_retrieve("k35ut)
 .osf_node_retrieve <- function(id) {
   res <- .osf_request("get", osf_path(sprintf("nodes/%s/", id)))
@@ -100,9 +136,9 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
 }
 
 # list all child nodes
-.osf_node_children <- function(id, n_max = Inf, verbose = FALSE) {
+.osf_node_children <- function(id, n_max, query = list(), verbose = FALSE) {
   path <- osf_path(sprintf("nodes/%s/children/", id))
-  .osf_paginated_request("get", path, n_max = n_max, verbose = verbose)
+  .osf_paginated_request("get", path, query, n_max = n_max, verbose = verbose)
 }
 
 # retrieve user info
@@ -114,39 +150,13 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
 
 
 # list user's nodes
-.osf_user_nodes <- function(id, n_max = Inf, verbose = FALSE) {
+.osf_user_nodes <- function(id, n_max, query = list(), verbose = FALSE) {
   path <- osf_path(sprintf("users/%s/nodes/", id))
-  .osf_paginated_request("get", path, n_max = n_max, verbose = verbose)
+  .osf_paginated_request("get", path, query, n_max = n_max, verbose = verbose)
 }
 
 # e.g., .osf_file_retrieve("5be5e1fdfe3eca00188178c3")
 .osf_file_retrieve <- function(id) {
   res <- .osf_request("get", osf_path(sprintf("files/%s/", id)))
   process_response(res)
-}
-
-
-# unlike the other low-level API functions, this requires a pre-constructed path
-.osf_list_files <- function(path, type, pattern, n_max) {
-
-  # TODO: filter processing should be handled by a general external function
-  filters <- list()
-  if (type != "any") {
-    type <- match.arg(type, c("file", "folder"))
-    filters$kind <- type
-  }
-  if (is.character(pattern)) {
-    filters$name <- pattern
-  }
-  if (!is_empty(filters)) {
-    names(filters) <- sprintf("filter[%s]", names(filters))
-  }
-
-  .osf_paginated_request(
-    method = "get",
-    path = path,
-    query = filters,
-    n_max = n_max,
-    verbose = FALSE
-  )
 }

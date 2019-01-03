@@ -12,12 +12,31 @@ is_osf_url <- function(url) grepl("osf.io", tolower(url), fixed = TRUE)
 
 is_osf_dir <- function(x) {
   stopifnot(inherits(x, "osf_tbl_file"))
-  get_attr(x, "kind") == "folder"
+  kind <- get_meta(x, "attributes", "kind")
+  kind == "folder"
 }
 
 is_osf_file <- function(x) {
   stopifnot(inherits(x, "osf_tbl_file"))
-  get_attr(x, "kind") == "file"
+  kind <- get_meta(x, "attributes", "kind")
+  kind == "file"
+}
+
+#' Return an OSF file or folder based on name matching
+#'
+#' Useful in situations where we need to know if a file or directory already
+#' exists on OSF and want to retrieve it without knowing its ID. This is just a
+#' wrapper around `osf_ls_files` that verifies a returned entity's name exactly
+#' matches the specified `name` argument. This isn't possible with
+#' `osf_ls_files` since OSF API uses substring matching.
+#'
+#' @param name string containing the exact name to be matched against
+#' @return an [`osf_tbl_file`] containing a single matching entity or zero rows
+#'   if no match was found
+#' @noRd
+find_exact_match <- function(x, name, type = "files") {
+  items <- osf_ls_files(x, pattern = name, type = type)
+  items[items$name == name, ]
 }
 
 
@@ -45,4 +64,35 @@ make_single <- function(x) {
     x <- head(x, 1)
   }
   x
+}
+
+
+#' Convenience functions for developers to switch between accounts
+#'
+#' Use these functions to:
+#' * switch between OSF's test and production servers
+#' * switch between your development and standard PAT
+#'
+#' Assumes your home directory contains a `.Renviron` file that defines
+#' `OSF_PAT` with your standard PAT, and your current working directory contains
+#' another `.Renviron` file with the PAT you use for `test.osf.io`.
+#' @noRd
+NULL
+
+osf_dev_on <- function() {
+  renviron <- normalizePath(".Renviron")
+  stopifnot(file.exists(renviron))
+  stopifnot(readRenviron(renviron))
+  Sys.setenv(OSF_USE_SERVER = "test")
+  message("osfr development mode enabled.")
+  osf_auth()
+}
+
+osf_dev_off <- function() {
+  renviron <- normalizePath("~/.Renviron")
+  stopifnot(file.exists(renviron))
+  stopifnot(readRenviron(renviron))
+  Sys.unsetenv("OSF_USE_SERVER")
+  message("osfr development mode disabled.")
+  osf_auth()
 }

@@ -1,6 +1,6 @@
-#' Delete a project or component
+#' OSF Delete
 #'
-#' Functions to *permanently* delete a project or component from OSF,
+#' Use `osf_rm()`  to *permanently* delete a project or component from OSF,
 #' including any uploaded files, wiki content, or comments contained therein.
 #' This process does not request confirmation, so please **handle with
 #' care**. This functionality is limited to contributors with admin-level
@@ -10,33 +10,27 @@
 #' first. Setting `recursive = TRUE` will attempt to remove the hierarchy
 #' of sub-components before deleting the top-level entity.
 #'
-#' @param id the OSF entity's unique identifier
+#' @param x an [`osf_tbl_node`]
 #' @param recursive remove sub-components before deleting the top-level entity
 #' @template verbose
 #'
-#' @return the deleted entity's unique identifier (invisibly)
-#' @name node-delete
+#' @return Invisibly returns `TRUE` if deletion was successful.
+#'
 #' @examples
 #' \dontrun{
-#' osf_project_delete(id = "y7w8p")}
-NULL
-
-#' @rdname node-delete
+#' project <- osf_create_project("My Short-Lived Project")
+#' osf_rm(project)
+#' }
+#'
 #' @export
-osf_project_delete <- function(id = NULL, recursive = FALSE, verbose = FALSE) {
-  node_delete(id, recursive)
+osf_rm <- function(x, recursive = FALSE, verbose = FALSE) {
+  UseMethod("osf_rm")
 }
 
-#' @rdname node-delete
 #' @export
-osf_component_delete <- function(id = NULL, recursive = FALSE, verbose = FALSE) {
-  node_delete(id, recursive)
-}
-
-# Delete a single node
-node_delete <- function(id, recursive = FALSE, verbose = FALSE) {
-  if (is.null(id)) stop("Must specify a node identifier")
-  id <- as_id(id)
+osf_rm.osf_tbl_node <- function(x, recursive = FALSE, verbose = FALSE) {
+  x <- make_single(x)
+  id <- as_id(x)
 
   if (recursive) {
     child_ids <- recurse_node(id)
@@ -61,6 +55,6 @@ node_delete <- function(id, recursive = FALSE, verbose = FALSE) {
   out <- .osf_node_delete(id)
   if (isTRUE(out)) {
     if (verbose) message(sprintf("Deleted node %s", id))
-    return(TRUE)
+    invisible(TRUE)
   }
 }

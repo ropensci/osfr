@@ -4,7 +4,7 @@ context("Uploading")
 txt.file <- file.path(tempdir(), "osfr-test-file.txt")
 writeLines("Lorem ipsum dolor sit amet, consectetur", txt.file)
 
-p1 <- osf_project_create("File Tests")
+p1 <- osf_create_project("File Tests")
 
 
 # tests -------------------------------------------------------------------
@@ -43,15 +43,49 @@ test_that("user is warned that path info is removed from upload name", {
   )
 })
 
+d1 <- osf_mkdir(p1, "data")
+f2 <- osf_upload(d1, txt.file)
+
 test_that("file can be uploaded to a directory", {
-  d1 <- osf_mkdir(p1, "data")
-  out <- osf_upload(d1, txt.file)
-  expect_s3_class(out, "osf_tbl_file")
+  expect_s3_class(f2, "osf_tbl_file")
 })
 
 test_that("attempting to list an osf_tbl_file with a file errors", {
   expect_error(osf_ls_files(f1), "Listing an `osf_tbl_file` requires a dir")
 })
 
+
+context("Downloading")
+
+outfile <- tempfile(fileext = ".txt")
+
+test_that("a file can be downloaded from a project", {
+  expect_true(osf_download(f1, path = outfile))
+  expect_true(file.exists(outfile))
+})
+
+test_that("an existing file won't be overwritten", {
+  expect_error(osf_download(f1, path = outfile), "A file exists at the specified")
+  expect_true(osf_download(f1, path = outfile, overwrite = TRUE))
+})
+
+test_that("a file can be downloaded from a directory", {
+  outfile <- tempfile(fileext = ".txt")
+  expect_true(osf_download(f2, path = outfile))
+  expect_true(file.exists(outfile))
+})
+
+test_that("a directory can be downloaded as a zip file", {
+  outfile <- tempfile(fileext = ".zip")
+  expect_true(osf_download(d1, path = outfile))
+  expect_true(file.exists(outfile))
+
+  expect_match(
+    unzip(outfile, list = TRUE)$Name[1],
+    basename(txt.file)
+  )
+})
+
+
 # cleanup -----------------------------------------------------------------
-osf_project_delete(p1, recursive = TRUE)
+osf_rm(p1, recursive = TRUE)
