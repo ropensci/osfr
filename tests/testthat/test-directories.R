@@ -2,7 +2,7 @@ context("Directories")
 
 
 # setup -------------------------------------------------------------------
-p1 <- osf_project_create(title = "osfr-component-tests")
+p1 <- osf_create_project(title = "osfr-component-tests")
 
 
 # tests -------------------------------------------------------------------
@@ -58,4 +58,4 @@ test_that("create a subdirectory within a non-existent parent directory", {
 
 
 # cleanup -----------------------------------------------------------------
-osf_project_delete(p1, recursive = TRUE)
+osf_rm(p1, recursive = TRUE)

@@ -4,7 +4,7 @@ context("Uploading")
 txt.file <- file.path(tempdir(), "osfr-test-file.txt")
 writeLines("Lorem ipsum dolor sit amet, consectetur", txt.file)
 
-p1 <- osf_project_create("File Tests")
+p1 <- osf_create_project("File Tests")
 
 
 # tests -------------------------------------------------------------------
@@ -88,4 +88,4 @@ test_that("a directory can be downloaded as a zip file", {
 
 
 # cleanup -----------------------------------------------------------------
-osf_project_delete(p1, recursive = TRUE)
+osf_rm(p1, recursive = TRUE)

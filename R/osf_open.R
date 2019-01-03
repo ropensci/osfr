@@ -31,7 +31,7 @@ osf_open.osf_tbl_file <- function(x) {
   } else {
     # a guid is not assigned to a file until it has been viewed directly on OSF
     # so we manually construct a url that triggers the OSF's file view
-    provider <- get_attr(x, "provider")
+    provider <- get_meta(x, "attributes", "provider")
     url <- osf_url(sprintf("%s/files/%s/%s", parent_id, provider, as_id(x)))
   }
   browseURL(url)
