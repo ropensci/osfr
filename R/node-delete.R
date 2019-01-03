@@ -18,7 +18,7 @@
 #' @name node-delete
 #' @examples
 #' \dontrun{
-#' delete_project(id = "y7w8p")}
+#' osf_project_delete(id = "y7w8p")}
 NULL
 
 #' @rdname node-delete
