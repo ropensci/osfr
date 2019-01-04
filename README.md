@@ -22,10 +22,6 @@ file version history, providing a centralized location for your research
 materials that can be kept private, shared with select collaborators, or
 made publicly available with citable DOIs.
 
-OSF is developed by the [Center for Open
-Science](https://cos.io "Center for Open Science") in Charlottesville,
-VA.
-
 ## Installation
 
 This package is currently under development and is apt to undergo
@@ -118,6 +114,9 @@ files using `osf_download()`.
 
 ### Creating projects
 
+*Note: You must authenticate osfr to interact with OSF on your behalf.
+See `?osf_auth` for more information.*
+
 Creating a *project* is the first step towards managing your research
 with OSF. You can add folders, files, even sub-projects (called
 *components*) to a project, and organize them in whatever fashion best
@@ -130,15 +129,14 @@ my_project
 #> # A tibble: 1 x 3
 #>   name                       id    meta      
 #>   <chr>                      <chr> <list>    
-#> 1 Motor Trend Car Road Tests w8gt3 <list [3]>
+#> 1 Motor Trend Car Road Tests 4ap6m <list [3]>
 ```
 
 Using a combination of `osf_create_component()`, `osf_mkdir()`, and
 `osf_upload()`, you can easily implement your preferred organizational
 structure for a project and populate it with files. Note that osfr’s
-functions are
-[pipe-friendly](https://magrittr.tidyverse.org "magrittr: A Forward-Pipe Operator"),
-meaning they can be arranged together in pipelines:
+functions are [pipe-friendly](https://magrittr.tidyverse.org), meaning
+they can be arranged together in pipelines:
 
 ``` r
 library(magrittr)
@@ -154,5 +152,21 @@ my_project %>%
 ```
 
 ![Screenshot of the uploaded file on OSF](man/figures/screen-shot.png)
+
+## Acknowledgments
+
+OSF is developed by the [Center for Open
+Science](https://cos.io "Center for Open Science") in Charlottesville,
+VA.
+
+The original version of osfr was developed by @chartgerink. The current
+version was developed by @aaronwolen and is *heavily* inspired by
+@jennybc and @lucymcgowan’s excellent
+[googledrive](https://googledrive.tidyverse.org) package. Seriously, we
+borrowed a lot of great ideas from them. Other important resources
+include [http testing](https://ropensci.github.io/http-testing-book/) by
+Scott Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley
+Wickham. Development was also greatly facilitated by OSF’s excellent
+[API documentation](https://developer.osf.io "OSF API Documentation").
 
 <!-- links -->
