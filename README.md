@@ -28,7 +28,7 @@ VA.
 
 ## Installation
 
-This package is currently under heavy development and is apt to undergo
+This package is currently under development and is apt to undergo
 significant changes until a stable version has been submitted to CRAN.
 You’ve been warned.
 
@@ -43,8 +43,11 @@ devtools::install_github("aaronwolen/osfr")
 
 There are 3 main types of OSF entities that osfr can work with:
 
-1.  **nodes:** both projects and components (i.e., sub-projects) are
-    referred to as nodes
+1.  **nodes:** both
+    [projects](http://help.osf.io/m/projects/l/481539-create-a-project "OSF: Create a Project")
+    and
+    [components](http://help.osf.io/m/projects/l/481998-create-components "OSF: Create a Component")
+    (i.e., sub-projects) are referred to as nodes
 2.  **files:** this includes both files *and* folders stored on OSF
 3.  **users:** individuals with OSF accounts
 
@@ -127,7 +130,7 @@ my_project
 #> # A tibble: 1 x 3
 #>   name                       id    meta      
 #>   <chr>                      <chr> <list>    
-#> 1 Motor Trend Car Road Tests pxdsf <list [3]>
+#> 1 Motor Trend Car Road Tests w8gt3 <list [3]>
 ```
 
 Using a combination of `osf_create_component()`, `osf_mkdir()`, and
@@ -143,37 +146,13 @@ library(magrittr)
 write.csv(mtcars, "mtcars.csv")
 
 # upload to the rawdata folder in the "Car Data" project component
-my_project %>% 
-  osf_create_component("Car Data") %>% 
-  osf_mkdir("rawdata") %>% 
-  osf_upload("mtcars.csv") %>% 
+my_project %>%
+  osf_create_component("Car Data") %>%
+  osf_mkdir("rawdata") %>%
+  osf_upload("mtcars.csv") %>%
   osf_open()
 ```
 
 ![Screenshot of the uploaded file on OSF](man/figures/screen-shot.png)
-
-## Functions
-
-|                       |  |
-| --------------------- |  |
-| `osf_retrieve_node()` |  |
-
-## Function names
-
-All osfr function names start with the prefix `osf_` to avoid namespace
-clashes for common operations and improve discoverability when using
-IDEs with autocomplete functionality. Functions that perform common
-filesystem operations are named for their Unix counterparts. For
-example, `osf_mkdir()` is used to create new directories.
-
-`osf_*()` functions return one of the 3 `osf_tbl` subclasses based on
-the 3 primary types of OSF entities: nodes, users, and files. For
-operations where more than 1 entity type could be returned,
-type-specific functions are provided. and named by adding a suffix based
-on the OSF entity type. For example when provided an `osf_tbl_node`
-representing an OSF project:
-
-  - `osf_ls_files()` lists the files/folders
-  - `osf_ls_nodes()` lists the project’s sub-components
 
 <!-- links -->
