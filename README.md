@@ -39,25 +39,49 @@ Also note this version of osfr has been temporarily renamed to *osfr2*.
 devtools::install_github("aaronwolen/osfr")
 ```
 
+## Getting started
+
+There are 3 main types of OSF entities that osfr can work with:
+
+1.  **nodes:** both projects and components (i.e., sub-projects) are
+    referred to as nodes
+2.  **files:** this includes both files *and* folders stored on OSF
+3.  **users:** individuals with OSF accounts
+
+osfr represents these entities within `osf_tbl`s—specialized tibbles
+that provide useful information about the entities like their `name` and
+unique `id` for users, and API data in the `meta` column that’s
+necessary for osfr’s internal functions. Otherwise, they’re just
+`data.frames` and can be manipulated using standard functions from base
+R or dplyr.
+
+## Usage examples
+
 ### Accessing Open Research Materials
 
-Many researchers use OSF to archive and share their work.
+Many researchers use OSF to archive and share their work. If you come
+across a paper that cites an OSF repository, osfr can be used to explore
+the project and download the associated files—you only need the
+project’s URL or GUID to get started. In this case, we’re retrieving
+the Cancer Reproducibility Project (<https://osf.io/e81xl/>):
 
 ``` r
 library(osfr2)
-#> Automatically registered OSF personal access token
-cancer_proj <- osf_retrieve_node("https://osf.io/e81xl/")
+
+cr_project <- osf_retrieve_node("e81xl")
+cr_project
+#> # A tibble: 1 x 3
+#>   name                                    id    meta      
+#>   <chr>                                   <chr> <list>    
+#> 1 Reproducibility Project: Cancer Biology e81xl <list [3]>
 ```
 
-``` r
-osf_ls_nodes(cancer_proj)
-#> # A tibble: 2 x 3
-#>   name                                      id    meta      
-#>   <chr>                                     <chr> <list>    
-#> 1 Replication Studies                       p7ayb <list [3]>
-#> 2 Data collection and publishing guidelines a5imq <list [3]>
+This returns an `osf_tbl_node` object with 1 row for the OSF project we
+retrieved. Let’s list the files that have been uploaded to this project:
 
-osf_ls_files(cancer_proj)
+``` r
+cr_files <- osf_ls_files(cr_project)
+cr_files
 #> # A tibble: 4 x 3
 #>   name                                    id                     meta     
 #>   <chr>                                   <chr>                  <list>   
@@ -67,23 +91,72 @@ osf_ls_files(cancer_proj)
 #> 4 METHOD_to_select_papers.txt             553e671b8c5e4a219919e… <list [3…
 ```
 
-### Creating and Populating Projects
+This returns an `osf_tbl_file` with 1 row for each of the uploaded
+files. We can examine any of these files directly on OSF with
+`osf_open()`, which opens the corresponding file’s view in your default
+browser.
+
+We can also list the components nested within the top-level of this
+project:
+
+``` r
+cr_comps <- osf_ls_nodes(cr_project)
+cr_comps
+#> # A tibble: 2 x 3
+#>   name                                      id    meta      
+#>   <chr>                                     <chr> <list>    
+#> 1 Replication Studies                       p7ayb <list [3]>
+#> 2 Data collection and publishing guidelines a5imq <list [3]>
+```
+
+We could continue this pattern of exploration and list the files
+contained within *these* projects. You can also download local copies of
+files using `osf_download()`.
+
+### Creating projects
 
 Creating a *project* is the first step towards managing your research
 with OSF. You can add folders, files, even sub-projects (called
 *components*) to a project, and organize them in whatever fashion best
 suits your workflow. Many of these initial setup operations can be
-performed directly with
-osfr.
+performed directly with osfr.
 
 ``` r
-project <- osf_create_project(title = "Gender and Political Identification")
-project
+my_project <- osf_create_project(title = "Motor Trend Car Road Tests")
+my_project
 #> # A tibble: 1 x 3
-#>   name                                id    meta      
-#>   <chr>                               <chr> <list>    
-#> 1 Gender and Political Identification rcmy3 <list [3]>
+#>   name                       id    meta      
+#>   <chr>                      <chr> <list>    
+#> 1 Motor Trend Car Road Tests pxdsf <list [3]>
 ```
+
+Using a combination of `osf_create_component()`, `osf_mkdir()`, and
+`osf_upload()`, you can easily implement your preferred organizational
+structure for a project and populate it with files. Note that osfr’s
+functions are
+[pipe-friendly](https://magrittr.tidyverse.org "magrittr: A Forward-Pipe Operator"),
+meaning they can be arranged together in pipelines:
+
+``` r
+library(magrittr)
+# create a local copy of mtcars
+write.csv(mtcars, "mtcars.csv")
+
+# upload to the rawdata folder in the "Car Data" project component
+my_project %>% 
+  osf_create_component("Car Data") %>% 
+  osf_mkdir("rawdata") %>% 
+  osf_upload("mtcars.csv") %>% 
+  osf_open()
+```
+
+![Screenshot of the uploaded file on OSF](man/figures/screen-shot.png)
+
+## Functions
+
+|                       |  |
+| --------------------- |  |
+| `osf_retrieve_node()` |  |
 
 ## Function names
 
