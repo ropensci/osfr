@@ -16,3 +16,4 @@ vignettes/*.pdf
 _ignore
 *.DS_Store
 inst/doc
+docs/
