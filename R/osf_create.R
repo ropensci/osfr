@@ -4,7 +4,7 @@
 #' component can be created by providing an [`osf_tbl_node`] referencing an
 #' existing project or component to `osf_create_component()`'s `x` argument.
 #'
-#' @section: OSF Nodes:
+#' @section: OSF Nodes
 #' Both projects and components are implemented as *nodes* within OSF, which
 #' explains why they are functionally identical. The only distinction between
 #' the two is projects exist at the top-level of an organizational hierarchy,
