@@ -24,7 +24,7 @@ osfr2:::osf_dev_off()
 
 osfr provides a suite of functions for interacting with [OSF][osf] that are primarily focused on project management workflows.
 
-OSF (Open Science Framework, <https://osf.io>) is a free and [open source][osf-gh] project management repository designed to support researchers of all technical backgrounds. The service includes unlimited cloud storage and file version history, providing a centralized location for your research materials that can be kept private, shared with select collaborators, or made publicly available with citable DOIs.
+OSF (<https://osf.io>) is a free and [open source][osf-gh] project management repository designed to support researchers of all technical backgrounds. The service includes unlimited cloud storage and file version history, providing a centralized location for all your research materials that can be kept private, shared with select collaborators, or made publicly available with citable DOIs.
 
 ## Installation
 
@@ -51,7 +51,7 @@ osfr represents these entities within `osf_tbl`s---specialized tibbles that prov
 
 ### Accessing Open Research Materials
 
-Many researchers use OSF to archive and share their work. If you come across a paper that cites an OSF repository, osfr can be used to explore the project and download the associated files---you only need the project's URL or GUID to get started. In this case, we're retrieving the Cancer Reproducibility Project (<https://osf.io/e81xl/>):
+Many researchers use OSF to archive and share their work. If you come across a paper that cites an OSF repository, osfr can be used to explore the project and download the associated files---you only need the project's URL or GUID (global unique identifier) to get started. In this case, we're retrieving the Cancer Reproducibility Project (<https://osf.io/e81xl/>):
 
 ```{r message=FALSE}
 library(osfr2)
@@ -67,7 +67,7 @@ cr_files <- osf_ls_files(cr_project)
 cr_files
 ```
 
-This returns an `osf_tbl_file` with 1 row for each of the uploaded files. We can examine any of these files directly on OSF with `osf_open()`, which opens the corresponding file's view in your default browser.
+This returns an `osf_tbl_file` with 1 row for each of the files stored in osf-storage. OSF allows for other resources, like GitHub repos and dropbox folders, to be connected to projects, but currently the osfr package only indexes files stored locally in osf-storage. We can examine any of these files directly on OSF with `osf_open()`, which opens the corresponding file's view in your default browser.
 
 We can also list the components nested within the top-level of this project:
 
@@ -115,7 +115,7 @@ osf_rm(my_project, recursive = TRUE, verbose = FALSE)
 
 OSF is developed by the [Center for Open Science][cos] in Charlottesville, VA.
 
-The original version of osfr was developed by @chartgerink. The current version was developed by @aaronwolen and is *heavily* inspired by @jennybc and @lucymcgowan's excellent [googledrive][] package. Seriously, we borrowed a lot of great ideas from them. Other important resources include [http testing](https://ropensci.github.io/http-testing-book/) by Scott Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley Wickham. Development was also greatly facilitated by OSF's excellent [API documentation][osf-api].
+The original version of osfr was developed by @chartgerink and further developed by @bgrich. The current version was developed by @aaronwolen and is *heavily* inspired by @jennybc and @lucymcgowan's excellent [googledrive][] package. Seriously, we borrowed a lot of great ideas from them. Other important resources include [http testing](https://ropensci.github.io/http-testing-book/) by Scott Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley Wickham. Development was also greatly facilitated by OSF's excellent [API documentation][osf-api].
 
 <!-- links -->
 [osf]: https://osf.io "Open Science Framework"
