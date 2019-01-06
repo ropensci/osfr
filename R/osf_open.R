@@ -1,9 +1,21 @@
-#' View on OSF
+#' Open on OSF
 #'
-#' View a project, component, file or user profile on osf.io with your default
+#' View a project, component, file, or user profile on OSF with your default
 #' web browser.
 #'
-#' @template input-osf-entity
+#' @param x one of the following:
+#'   * an OSF URL, or a generic string containing a GUID or Waterbutler ID.
+#'   * an [`osf_tbl_node`] with a single project or component.
+#'   * an [`osf_tbl_file`] with a single file or directory.
+#'   * an [`osf_tbl_user`] with a single OSF user.
+#'
+#' @examples
+#' # Navigate to a project based on its GUID
+#' osf_open("e81xl")
+#'
+#' # You can also provide an osf_tbl subclass
+#' crp_file <- osf_retrieve_file("ucpye")
+#' osf_open(crp_file)
 #'
 #' @export
 osf_open <- function(x) UseMethod("osf_open")
