@@ -1,4 +1,4 @@
-#' List projects or components
+#' List projects or components on OSF
 #'
 #' List the projects or components associated with a user or contained in the
 #' top-level of another OSF project or component.
@@ -16,6 +16,7 @@
 #' user <- osf_retrieve_user("me")
 #' osf_ls_nodes(user)
 #' }
+#' @seealso [`osf_ls_files()`] to generate a list of files and files
 #' @export
 osf_ls_nodes <- function(x, pattern = NULL, n_max = 10) UseMethod("osf_ls_nodes")
 

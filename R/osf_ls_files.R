@@ -22,7 +22,7 @@
 #' # List the files in the first directory
 #' osf_ls_files(files[1, ])
 #' }
-#'
+#' @seealso [`osf_ls_nodes()`] to generate a list of projects and components
 #' @export
 osf_ls_files <-
   function(x,
