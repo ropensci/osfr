@@ -2,14 +2,17 @@
 % Please edit documentation in R/osf_ls_files.R
 \name{osf_ls_files}
 \alias{osf_ls_files}
-\title{List files and folders}
+\title{List files and directories on OSF}
 \usage{
 osf_ls_files(x, path = NULL, type = "any", pattern = NULL,
   n_max = 10)
 }
 \arguments{
-\item{x}{an \code{\link{osf_tbl_node}} representing an OSF project or component or an
-\code{\link{osf_tbl_file}} containing a directory}
+\item{x}{one of the following:
+\itemize{
+\item an \code{\link{osf_tbl_node}} with a single project or component.
+\item an \code{\link{osf_tbl_file}} with a single directory.
+}}
 
 \item{path}{list files within the specified subdirectory path}
 
@@ -25,7 +28,20 @@ search.}
 an \code{\link{osf_tbl_file}} with \code{x}'s top-level files and directories
 }
 \description{
-List the files and folders in the top-level of an OSF project, component, or
+List the files and directories in the top-level of an OSF project, component, or
 directory. Specify a \code{path} to list the contents of a particular
 subdirectory.
+}
+\examples{
+\dontrun{
+# List the files and folders from https://osf.io/gep9v/
+project <- osf_retrieve_node("gep9v")
+files <- osf_ls_files(project)
+
+# List the files in the first directory
+osf_ls_files(files[1, ])
+}
+}
+\seealso{
+\code{\link[=osf_ls_nodes]{osf_ls_nodes()}} to generate a list of projects and components
 }

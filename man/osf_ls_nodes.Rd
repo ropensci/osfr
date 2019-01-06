@@ -2,12 +2,16 @@
 % Please edit documentation in R/osf_ls_nodes.R
 \name{osf_ls_nodes}
 \alias{osf_ls_nodes}
-\title{List projects or components}
+\title{List projects or components on OSF}
 \usage{
 osf_ls_nodes(x, pattern = NULL, n_max = 10)
 }
 \arguments{
-\item{x}{an \code{\link{osf_tbl_node}} or \code{\link{osf_tbl_user}}}
+\item{x}{one of the following:
+\itemize{
+\item an \code{\link{osf_tbl_node}} with a single project or component.
+\item an \code{\link{osf_tbl_user}} with a single OSF user.
+}}
 
 \item{pattern}{character string used to filter for results that contain the
 substring \code{"pattern"} in their name. Note this is a fixed, case-insensitive
@@ -19,12 +23,16 @@ search.}
 an \code{\link{osf_tbl_node}}
 }
 \description{
-List the projects or components associated with a user or in the top-level of
-an OSF project or component.
+List the projects or components associated with a user or contained in the
+top-level of another OSF project or component.
 }
 \examples{
 \dontrun{
+# List your recent projects and components
 user <- osf_retrieve_user("me")
 osf_ls_nodes(user)
 }
+}
+\seealso{
+\code{\link[=osf_ls_files]{osf_ls_files()}} to generate a list of files and files
 }
