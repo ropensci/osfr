@@ -23,7 +23,7 @@
 #' \dontrun{
 #' # Download a single file
 #' analysis_plan <- osf_retrieve_file("2ryha")
-#' analysis_plan <- osf_download(analysis_plan, path = "plan_wave1.docx)
+#' analysis_plan <- osf_download(analysis_plan, path = "plan_wave1.docx")
 #'
 #' # Verify the file was downloaded locally
 #' file.exists(analysis_plan$local_path)
