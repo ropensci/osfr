@@ -12,7 +12,7 @@
 #' @template filter-pattern
 #' @template n_max
 #'
-#' @return an [`osf_tbl_file`] with `x`'s top-level files and directories
+#' @return an [`osf_tbl_file`] with one row for each file or directory
 #' @examples
 #' \dontrun{
 #' # List the files and folders from https://osf.io/gep9v/

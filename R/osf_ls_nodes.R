@@ -9,7 +9,7 @@
 #' @template filter-pattern
 #' @template n_max
 #'
-#' @return an [`osf_tbl_node`]
+#' @return an [`osf_tbl_node`] with one row for each OSF project or component
 #' @examples
 #' \dontrun{
 #' # List your recent projects and components
