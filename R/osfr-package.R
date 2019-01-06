@@ -1,13 +1,8 @@
-#' osfr: A package for interacting with OSF from the Center for Open Science.
+#' osfr: R interface to OSF
 #'
-#' The osfr package helps you document your research as you go by creating
-#' projects, uploading and downloading files, and much more.
-#'
-#' Suggestions for improvements or bug reports are always welcome at
-#' \url{https://github.com/CenterForOpenScience/osfr}
-#'
-#' @docType package
-#' @name osfr
+#' osfr provides a suite of functions for interacting with
+#' [OSF](https://www.osf.io) that are primarily focused on project management
+#' workflows.
 #'
 #' @importFrom crul HttpClient url_parse
 #' @importFrom stringi stri_split_fixed
@@ -15,4 +10,4 @@
 #' @importFrom tibble tibble
 #' @importFrom rlang abort warn is_empty is_scalar_character
 #' @importFrom utils head tail modifyList browseURL
-NULL
+"_PACKAGE"
