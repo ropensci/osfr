@@ -1,17 +1,28 @@
-#' List files and folders
+#' List files and directories on OSF
 #'
-#' List the files and folders in the top-level of an OSF project, component, or
+#' List the files and directories in the top-level of an OSF project, component, or
 #' directory. Specify a `path` to list the contents of a particular
 #' subdirectory.
 #'
-#' @param x an [`osf_tbl_node`] representing an OSF project or component or an
-#'   [`osf_tbl_file`] containing a directory
+#' @param x one of the following:
+#'   * an [`osf_tbl_node`] with a single project or component.
+#'   * an [`osf_tbl_file`] with a single directory.
 #' @param path list files within the specified subdirectory path
 #' @template filter-type
 #' @template filter-pattern
 #' @template n_max
 #'
 #' @return an [`osf_tbl_file`] with `x`'s top-level files and directories
+#' @examples
+#' \dontrun{
+#' # List the files and folders from https://osf.io/gep9v/
+#' project <- osf_retrieve_node("gep9v")
+#' files <- osf_ls_files(project)
+#'
+#' # List the files in the first directory
+#' osf_ls_files(files[1, ])
+#' }
+#'
 #' @export
 osf_ls_files <-
   function(x,
