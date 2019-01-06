@@ -20,7 +20,7 @@ search.}
 \item{n_max}{Number of results to return from OSF.}
 }
 \value{
-an \code{\link{osf_tbl_node}}
+an \code{\link{osf_tbl_node}} with one row for each OSF project or component
 }
 \description{
 List the projects or components associated with a user or contained in the

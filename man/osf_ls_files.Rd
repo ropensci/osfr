@@ -25,7 +25,7 @@ search.}
 \item{n_max}{Number of results to return from OSF.}
 }
 \value{
-an \code{\link{osf_tbl_file}} with \code{x}'s top-level files and directories
+an \code{\link{osf_tbl_file}} with one row for each file or directory
 }
 \description{
 List the files and directories in the top-level of an OSF project, component, or

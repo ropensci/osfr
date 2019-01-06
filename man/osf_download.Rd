@@ -2,12 +2,12 @@
 % Please edit documentation in R/osf_download.R
 \name{osf_download}
 \alias{osf_download}
-\title{Download an OSF file or folder}
+\title{Download a file or folder from OSF}
 \usage{
 osf_download(x, path = NULL, overwrite = FALSE)
 }
 \arguments{
-\item{x}{an \code{\link{osf_tbl_file}} containing a file or directory}
+\item{x}{an \code{\link{osf_tbl_file}} containing a single file or directory.}
 
 \item{path}{Local path where the downloaded file will be saved. The default
 is to use the remote file's name.}
@@ -16,16 +16,29 @@ is to use the remote file's name.}
 replaced with the downloaded file?}
 }
 \value{
-\code{TRUE}, invisibly if download succeeded
+an \code{\link{osf_tbl_file}} with a new column, \code{"local_path"}, containing the
+downloaded file's path
 }
 \description{
-Files stored in OSF projects, components, or folders can be downloaded
-locally by providing the appropriate \code{\link{osf_tbl_file}} to \code{osf_download()}.
-Note that directories are downloaded as zip files.
+Files stored on OSF can be downloaded locally by providing an
+\code{\link{osf_tbl_file}} that contains the OSF file of interest. If the
+\code{\link{osf_tbl_file}} contains a directory, a zip file containing the OSF
+directory's contents will be downloaded.
+}
+\details{
+By default files are downloaded to your current working directory with the
+same filename used on OSF. The \code{path} argument can be used to specify a
+different destination and a different filename for the downloaded file.
+However, the directory portion of \code{path} must reference an existing
+directory.
 }
 \examples{
 \dontrun{
-analysis_plan <- osf_retrieve_file("79b2n")
-osf_download(analysis_plan)
+# Download a single file
+analysis_plan <- osf_retrieve_file("2ryha")
+analysis_plan <- osf_download(analysis_plan, path = "plan_wave1.docx")
+
+# Verify the file was downloaded locally
+file.exists(analysis_plan$local_path)
 }
 }

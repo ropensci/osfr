@@ -1,15 +1,14 @@
 Package: osfr2
 Title: R Interface to OSF
-Version: 0.1.1.9006
-Maintainer: Aaron Wolen <aaron@wolen.com>
+Version: 0.1.1.9007
 Authors@R: c(
-    person("Chris","Hartgerink",, "chjh@protonmail.com", role = c("aut", "cre")),
-    person("Aaron", "Wolen",, "aaron@wolen.com", role = "aut"),
+    person("Aaron", "Wolen",, "aaron@wolen.com", role = c("aut", "cre")),
+    person("Chris","Hartgerink",, "chjh@protonmail.com", role = "aut"),
     person("VP","Nagraj",, "vpnagraj@virginia.edu", role = "ctb"),
     person("Ryan","Hafen",, "rhafen@gmail.com", role = "ctb"),
     person("Julien", "Colomb",, "julien.colomb@fu-berlin.de", role = "ctb"), 
     person("Brian", "Richards",, "brian.g.richards@gmail.com", role = "ctb"))
-Description: Manage OSF Projects from R.
+Description: R interface to OSF.
 Depends: R (>= 3.1.0)
 Imports:
     crul,

@@ -2,15 +2,29 @@
 % Please edit documentation in R/osf_open.R
 \name{osf_open}
 \alias{osf_open}
-\title{View on OSF}
+\title{Open on OSF}
 \usage{
 osf_open(x)
 }
 \arguments{
-\item{x}{Something that identifies an OSF entity. This could be an \link{osf_tbl},
-an OSF URL, or a generic string containing a GUID or Waterbutler ID.}
+\item{x}{one of the following:
+\itemize{
+\item an OSF URL, or a generic string containing a GUID or Waterbutler ID.
+\item an \code{\link{osf_tbl_node}} with a single project or component.
+\item an \code{\link{osf_tbl_file}} with a single file or directory.
+\item an \code{\link{osf_tbl_user}} with a single OSF user.
+}}
 }
 \description{
-View a project, component, file or user profile on osf.io with your default
+View a project, component, file, or user profile on OSF with your default
 web browser.
+}
+\examples{
+# Navigate to a project based on its GUID
+osf_open("e81xl")
+
+# You can also provide an osf_tbl subclass
+crp_file <- osf_retrieve_file("ucpye")
+osf_open(crp_file)
+
 }
