@@ -8,6 +8,7 @@
 #'   * an [`osf_tbl_user`] with a single OSF user.
 #' @template filter-pattern
 #' @template n_max
+#' @template verbose
 #'
 #' @return an [`osf_tbl_node`] with one row for each OSF project or component
 #' @examples
@@ -18,20 +19,34 @@
 #' }
 #' @seealso [`osf_ls_files()`] to generate a list of files and files
 #' @export
-osf_ls_nodes <- function(x, pattern = NULL, n_max = 10) UseMethod("osf_ls_nodes")
+osf_ls_nodes <-
+  function(x,
+           pattern = NULL,
+           n_max = 10,
+           verbose = FALSE) {
+  UseMethod("osf_ls_nodes")
+}
 
 #' @export
-osf_ls_nodes.osf_tbl_node <- function(x, pattern = NULL, n_max = 10) {
+osf_ls_nodes.osf_tbl_node <-
+  function(x,
+           pattern = NULL,
+           n_max = 10,
+           verbose = FALSE) {
   x <- make_single(x)
-  out <- .osf_node_children(as_id(x), n_max, filter_nodes(pattern = pattern))
+  out <- .osf_node_children(as_id(x), n_max, filter_nodes(pattern = pattern), verbose)
   raise_error(out)
   as_osf_tbl(out, "osf_tbl_node")
 }
 
 #' @export
-osf_ls_nodes.osf_tbl_user <- function(x, pattern = NULL, n_max = 10) {
+osf_ls_nodes.osf_tbl_user <-
+  function(x,
+           pattern = NULL,
+           n_max = 10,
+           verbose = FALSE) {
   x <- make_single(x)
-  out <- .osf_user_nodes(as_id(x), n_max, filter_nodes(pattern = pattern))
+  out <- .osf_user_nodes(as_id(x), n_max, filter_nodes(pattern = pattern), verbose)
   raise_error(out)
   as_osf_tbl(out, "osf_tbl_node")
 }
