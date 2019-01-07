@@ -96,3 +96,31 @@ osf_dev_off <- function() {
   message("osfr development mode disabled.")
   osf_auth()
 }
+
+
+#' Include an interactive menu to confirm action
+#'
+#' Use \code{yesno_menu} to confirm an otherwise permanent change to an OSF node.
+#' Typically embedded within a function, a question specific to the function
+#' task is prespecified for the title argument of \code{menu()}.
+#'
+#' @param question A \code{character} specific to the action needing verification.
+#' @param node_id A \code{character} indicating OSF node under consideration.
+#' @return A \code{logical} verifying intent.
+#' @examples
+#' question <- "Are you sure you want to permanently change node"
+#' node <- "z756a"
+#' yesno_menu(question, node)
+#' @noRd
+
+
+yesno_menu <- function(question, node_id) {
+  yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah", "I agree", "Absolutely", "Yes, 100%")
+  nos <- c("No way", "Not yet", "I forget", "No", "Nope", "Uhhhh... Maybe?", "No. That's my final answer")
+
+  qs <- c(sample(yeses, 1), sample(nos, 2))
+  rand <- sample(length(qs))
+
+  menu(qs[rand], title= sprintf("%s, %s ?", question, node)) == which(rand == 1)
+}
+
