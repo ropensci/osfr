@@ -117,11 +117,11 @@ osf_dev_off <- function() {
 
 yesno_menu <- function(question, id) {
   yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah", "I agree", "Absolutely", "Yes, 100%")
-  nos <- c("No way", "Not yet", "I forget", "No", "Nope", "Uhhhh... Maybe?", "No. That's my final answer")
+  nos <- c("No way", "Not yet", "I forget", "No", "Nope", "Uhhhh... Maybe?",
+           "No. That's my final answer")
 
   qs <- c(sample(yeses, 1), sample(nos, 2))
   rand <- sample(length(qs))
 
-  menu(qs[rand], title= sprintf("%s, %s ?", question, id)) == which(rand == 1)
+  menu(qs[rand], title = sprintf("%s, %s ?", question, id)) == which(rand == 1)
 }
-
