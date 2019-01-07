@@ -20,11 +20,12 @@ View a project, component, file, or user profile on OSF with your default
 web browser.
 }
 \examples{
+\dontrun{
 # Navigate to a project based on its GUID
 osf_open("e81xl")
 
 # You can also provide an osf_tbl subclass
 crp_file <- osf_retrieve_file("ucpye")
 osf_open(crp_file)
-
+}
 }

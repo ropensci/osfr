@@ -10,13 +10,14 @@
 #'   * an [`osf_tbl_user`] with a single OSF user.
 #'
 #' @examples
+#' \dontrun{
 #' # Navigate to a project based on its GUID
 #' osf_open("e81xl")
 #'
 #' # You can also provide an osf_tbl subclass
 #' crp_file <- osf_retrieve_file("ucpye")
 #' osf_open(crp_file)
-#'
+#' }
 #' @export
 osf_open <- function(x) UseMethod("osf_open")
 
