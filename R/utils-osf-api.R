@@ -55,10 +55,10 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
 }
 
 # TODO: .osf_request and .osf_paginated_request returns should be consistent
-.osf_paginated_request <- function(method, path, query = list(), n_max = Inf, verbose = FALSE) {
+.osf_paginated_request <- function(method, path, query = list(), n_max = 100, verbose = FALSE) {
   items <- list()
   i <- 1
-  total <- 0
+  retrieved <- 0
 
   repeat {
     query <- modifyList(query, list(page = i))
@@ -66,12 +66,19 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
     out <- process_response(res)
     raise_error(out)
 
-    total <- total + length(out$data)
+    total <- out$links$meta$total
+    n_max <- ifelse(is.infinite(n_max), total, n_max)
+
+    retrieved <- retrieved + length(out$data)
     items <- c(items, out$data)
-    if (verbose && i == 2) message("Items retrieved so far:")
-    if (verbose && i > 1) message(total, appendLF = TRUE)
-    if (is.null(out$links$`next`) || total >= n_max) {
-      if (verbose && i > 1) message("")
+
+    if (verbose && n_max > 10) {
+      if (i == 1) message(sprintf("Retrieving %i of %i available items:", n_max, total))
+      message(sprintf("..retrieved %i items", retrieved), appendLF = TRUE)
+    }
+
+    if (is.null(out$links$`next`) || retrieved >= n_max) {
+      if (verbose && i > 1 && n_max > 10) message("..done")
       break
     }
     i <- i + 1
