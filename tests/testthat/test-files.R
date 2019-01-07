@@ -60,24 +60,35 @@ context("Downloading")
 outfile <- tempfile(fileext = ".txt")
 
 test_that("a file can be downloaded from a project", {
-  expect_true(osf_download(f1, path = outfile))
+  out <- osf_download(f1, path = outfile)
+  expect_s3_class(out, "osf_tbl_file")
+  expect_identical(out$local_path, outfile)
   expect_true(file.exists(outfile))
 })
 
 test_that("an existing file won't be overwritten", {
   expect_error(osf_download(f1, path = outfile), "A file exists at the specified")
-  expect_true(osf_download(f1, path = outfile, overwrite = TRUE))
+  expect_s3_class(osf_download(f1, path = outfile, overwrite = TRUE), "osf_tbl_file")
+})
+
+test_that("a non-existant path throws an error", {
+  expect_error(
+    osf_download(f1, path = "ddd/test.txt"),
+    "The directory specified in `path` does not exist.")
 })
 
 test_that("a file can be downloaded from a directory", {
   outfile <- tempfile(fileext = ".txt")
-  expect_true(osf_download(f2, path = outfile))
+  out <- osf_download(f2, path = outfile)
+  expect_s3_class(out, "osf_tbl_file")
+  expect_identical(out$local_path, outfile)
   expect_true(file.exists(outfile))
 })
 
 test_that("a directory can be downloaded as a zip file", {
   outfile <- tempfile(fileext = ".zip")
-  expect_true(osf_download(d1, path = outfile))
+  out <- osf_download(d1, path = outfile)
+  expect_s3_class(out, "osf_tbl_file")
   expect_true(file.exists(outfile))
 
   expect_match(

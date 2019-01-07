@@ -1,18 +1,22 @@
-#' List projects or components
+#' List projects or components on OSF
 #'
-#' List the projects or components associated with a user or in the top-level of
-#' an OSF project or component.
+#' List the projects or components associated with a user or contained in the
+#' top-level of another OSF project or component.
 #'
-#' @param x an [`osf_tbl_node`] or [`osf_tbl_user`]
+#' @param x one of the following:
+#'   * an [`osf_tbl_node`] with a single project or component.
+#'   * an [`osf_tbl_user`] with a single OSF user.
 #' @template filter-pattern
 #' @template n_max
 #'
-#' @return an [`osf_tbl_node`]
+#' @return an [`osf_tbl_node`] with one row for each OSF project or component
 #' @examples
 #' \dontrun{
+#' # List your recent projects and components
 #' user <- osf_retrieve_user("me")
 #' osf_ls_nodes(user)
 #' }
+#' @seealso [`osf_ls_files()`] to generate a list of files and files
 #' @export
 osf_ls_nodes <- function(x, pattern = NULL, n_max = 10) UseMethod("osf_ls_nodes")
 

@@ -7,7 +7,8 @@
 #'
 #' @param id An OSF identifier corresponding to an OSF user, project, component,
 #'   or file. Set `id = "me"` to retrieve your own OSF profile.
-#' @return an [`osf_tbl_user`], [`osf_tbl_node`], or [`osf_tbl_file`]
+#' @return an [`osf_tbl_user`], [`osf_tbl_node`], or [`osf_tbl_file`] containing
+#'   the corresponding OSF entity
 #' @examples
 #' \dontrun{
 #'  osf_retrieve_user("me")

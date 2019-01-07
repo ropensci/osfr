@@ -29,7 +29,7 @@ component can be created by providing an \code{\link{osf_tbl_node}} referencing 
 existing project or component to \code{osf_create_component()}'s \code{x} argument.
 }
 \section{}{
- OSF Nodes:
+ OSF Nodes
 Both projects and components are implemented as \emph{nodes} within OSF, which
 explains why they are functionally identical. The only distinction between
 the two is projects exist at the top-level of an organizational hierarchy,

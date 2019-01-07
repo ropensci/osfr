@@ -13,13 +13,6 @@ test_that("create component", {
   expect_match(c1$id, osf_ls_nodes(p1)$id[1])
 })
 
-test_that("update component title", {
-  title <- "component-1-updated"
-  c1 <- osf_component_update(c1, title = title)
-  c1_attrs <- c1$meta[[1]]$attributes
-  expect_match(c1_attrs$title, title)
-})
-
 test_that("add nested components", {
   c11 <- osf_create_component(c1, title = "component-1-1")
   expect_s3_class(c11, "osf_tbl_node")
