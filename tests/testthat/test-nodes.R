@@ -45,3 +45,7 @@ test_that("non-empty project can be recursively deleted", {
   out <- osf_rm(p1, recursive = TRUE)
   expect_true(out)
 })
+
+
+# cleanup -----------------------------------------------------------------
+osf_rm(p1, recursive = TRUE)
