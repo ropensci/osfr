@@ -19,6 +19,16 @@
 #' @importFrom jsonlite fromJSON
 process_response <- function(res) {
   stopifnot(class(res)[1] == "HttpResponse")
+
+  if (res$status_code > 500) {
+    abort(paste0(
+      "Encountered an unexpected error with the OSF API\n",
+      "Please report this at https://github.com/aaronwolen/osfr/issues\n",
+      "* Status code: ", res$status_code, "\n",
+      "* Request: ", res$request$url$url
+    ))
+  }
+
   out <- jsonlite::fromJSON(res$parse("UTF-8"), simplifyVector = FALSE)
   domain <- crul::url_parse(res$url)$domain
 
