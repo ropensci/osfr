@@ -4,7 +4,7 @@
 \alias{osf_ls_nodes}
 \title{List projects or components on OSF}
 \usage{
-osf_ls_nodes(x, pattern = NULL, n_max = 10)
+osf_ls_nodes(x, pattern = NULL, n_max = 10, verbose = FALSE)
 }
 \arguments{
 \item{x}{one of the following:
@@ -18,6 +18,9 @@ substring \code{"pattern"} in their name. Note this is a fixed, case-insensitive
 search.}
 
 \item{n_max}{Number of results to return from OSF.}
+
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{FALSE})}
 }
 \value{
 an \code{\link{osf_tbl_node}} with one row for each OSF project or component

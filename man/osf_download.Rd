@@ -4,7 +4,7 @@
 \alias{osf_download}
 \title{Download a file or folder from OSF}
 \usage{
-osf_download(x, path = NULL, overwrite = FALSE)
+osf_download(x, path = NULL, overwrite = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{x}{an \code{\link{osf_tbl_file}} containing a single file or directory.}
@@ -14,6 +14,9 @@ is to use the remote file's name.}
 
 \item{overwrite}{Logical, if the local path already exists should it be
 replaced with the downloaded file?}
+
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{FALSE})}
 }
 \value{
 an \code{\link{osf_tbl_file}} with a new column, \code{"local_path"}, containing the
