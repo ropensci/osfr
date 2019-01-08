@@ -16,6 +16,7 @@
 #'   is to use the remote file's name.
 #' @param overwrite Logical, if the local path already exists should it be
 #'   replaced with the downloaded file?
+#' @template verbose
 #'
 #' @return an [`osf_tbl_file`] with a new column, `"local_path"`, containing the
 #'   downloaded file's path
@@ -31,12 +32,21 @@
 #' @export
 #' @importFrom fs path_ext_set
 
-osf_download <- function(x, path = NULL, overwrite = FALSE) {
+osf_download <-
+  function(x,
+           path = NULL,
+           overwrite = FALSE,
+           verbose = FALSE) {
   UseMethod("osf_download")
 }
 
 #' @export
-osf_download.osf_tbl_file <- function(x, path = NULL, overwrite = FALSE) {
+osf_download.osf_tbl_file <-
+  function(x,
+           path = NULL,
+           overwrite = FALSE,
+           verbose = FALSE) {
+
   x <- make_single(x)
   if (is.null(path)) path <- x$name
 
@@ -62,6 +72,8 @@ osf_download.osf_tbl_file <- function(x, path = NULL, overwrite = FALSE) {
     type = type,
     zip = type == "folder"
   )
+
+  if (verbose) message(sprintf("Downloaded OSF %s to %s", type, path))
 
   if ("local_path" %in% names(x)) {
     x$local_path <- path
