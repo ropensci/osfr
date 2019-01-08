@@ -88,17 +88,24 @@ as_osf_tbl.list <- function(x, subclass = NULL) {
 }
 
 #' Rebuild osf_tbl if it passes all validation tests
+
+#' Validate and rebuild osf_tbl
+#'
+#' Return an osf_tbl with the proper subclass if the input meets all of the
+#' requirements to be a valid osf_tbl. Otherwise, strip the osf_tbl class
+#' and subclass before returning.
 #' @noRd
 rebuild_osf_tbl <- function(x) {
   if (is.data.frame(x) &&
       has_osf_tbl_colnames(x) &&
-      has_osf_tbl_coltypes(x)) {
-    # TODO: add check to verify all rows have the same type
-    type <- determine_entity_type(x$meta[[1]])
-    subclass <- sprintf("osf_tbl_%s", type)
+      has_osf_tbl_coltypes(x) &&
+      has_uniform_entity_type(x)) {
+    subclass <- sprintf("osf_tbl_%s", determine_entity_type(x$meta[[1]]))
     return(as_osf_tbl(x, subclass = subclass))
   } else {
-   return(x)
+    # remove osf_tbl classes
+    classes <- class(x)[!grepl("osf_tbl", class(x), fixed = TRUE)]
+    structure(x, class = classes)
   }
 }
 
@@ -119,6 +126,14 @@ has_osf_tbl_coltypes <- function(x) {
   found <- vapply(x[names(expected)], FUN = typeof, FUN.VALUE = character(1L))
   incorrect <- found[expected != found]
   is_empty(incorrect)
+}
+
+#' Check that all rows are of the same OSF entity type
+#' @return logical
+#' @noRd
+has_uniform_entity_type <- function(x) {
+  types <- vapply(x$meta, determine_entity_type, FUN.VALUE = character(1))
+  length(unique(types)) == 1
 }
 
 #' Determine OSF entity list type
