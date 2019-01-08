@@ -11,7 +11,8 @@
 get_meta <- function(x, ...) {
   stopifnot(inherits(x, "osf_tbl"))
   stopifnot(is.list(x$meta))
-  purrr::map_chr(x$meta, purrr::pluck, ...)
+  out <- lapply(x$meta, purrr::pluck, ...)
+  unlist(out, use.names = FALSE, recursive = FALSE)
 }
 
 
