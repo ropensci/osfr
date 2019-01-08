@@ -36,17 +36,16 @@ osf_rm.osf_tbl_node <- function(x, recursive = FALSE, verbose = FALSE) {
     child_ids <- recurse_node(id, maxdepth = Inf)
     if (verbose) {
       message(
-        sprintf("Retrieved %i child nodes under %s", length(child_ids), id))
+        sprintf("Retrieved %i components under node: %s", length(child_ids), id))
     }
 
     # reverse to begin with the most deeply nested node
     for (i in rev(seq_along(child_ids))) {
       child <- child_ids[i]
-      message(sprintf("Deleting %s", names(child)))
       if (child == id) break
       .osf_node_delete(child)
       if (verbose) {
-        message(sprintf("Deleted subcomponent %s", names(child)))
+        message(sprintf("Deleted component %s", names(child)))
       }
 
     }
