@@ -37,9 +37,9 @@ osf_mkdir.osf_tbl_node <- function(x, path, verbose = FALSE) {
     raise_error(res)
     dir_id <- gsub("/", "", res$data$attributes$path, fixed = TRUE)
     dir_root <- osf_retrieve_file(dir_id)
-    msg <- sprintf("Created %s (%s) in node %s", path_root, dir_id, id)
+    msg <- sprintf("Created directory '%s/' in node %s", path_root, id)
   } else {
-    msg <- sprintf("%s already exists in node %s", path_root, id)
+    msg <- sprintf("Directory '%s/' already exists in node %s", path_root, id)
   }
 
   if (verbose) message(msg)
@@ -49,8 +49,6 @@ osf_mkdir.osf_tbl_node <- function(x, path, verbose = FALSE) {
   if (path_next == ".") {
     out <- dir_root
   } else {
-    msg <- sprintf("Continuing from %s to the next subfolder: %s", path_root, path_next)
-    if (verbose) message(msg)
     out <- osf_mkdir(dir_root, path_next, verbose)
   }
   out
@@ -73,11 +71,11 @@ osf_mkdir.osf_tbl_file <- function(x, path, verbose = FALSE) {
 
     dir_id <- gsub("/", "", res$data$attributes$path, fixed = TRUE)
     dir_root <- osf_retrieve_file(dir_id)
-    msg <- sprintf("Created subdirectory %s (%s) in directory %s (%s)",
-                   path_root, dir_id, x$name, id)
+    msg <- sprintf("Created sub-directory '%s/' in directory '%s/'",
+                   path_root, x$name)
   } else {
-    msg <- sprintf("Subdirectory %s (%s) already exists in directory %s (%s)",
-                   path_root, items$id, x$name, id)
+    msg <- sprintf("Sub-directory '%s/' already exists in directory '%s/'",
+                   path_root, x$name)
   }
 
   if (verbose) message(msg)
@@ -87,9 +85,6 @@ osf_mkdir.osf_tbl_file <- function(x, path, verbose = FALSE) {
   if (path_next == ".") {
     out <- dir_root
   } else {
-    msg <- sprintf("Continuing from %s to the next subdirectory: %s",
-                   path_root, path_next)
-    if (verbose) message(msg)
     out <- osf_mkdir(dir_root, path_next, verbose)
   }
   out
