@@ -84,7 +84,7 @@ osf_ls_files.osf_tbl_file <-
     }
 
     next_path <- fs::path_rel(path, path_root)
-    res <- .osf_list_files(root_dir, next_path, type, pattern, n_max)
+    res <- .osf_list_files(root_dir, next_path, type, pattern, n_max, verbose)
     return(as_osf_tbl(res, "osf_tbl_file"))
   }
 
