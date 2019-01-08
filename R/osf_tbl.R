@@ -87,7 +87,11 @@ as_osf_tbl.list <- function(x, subclass = NULL) {
   structure(NextMethod(), class = class(x))
 }
 
-#' Rebuild osf_tbl if it passes all validation tests
+#' @export
+rbind.osf_tbl <- function(..., deparse.level = 1)  {
+  out <- base::rbind.data.frame(..., deparse.level = deparse.level)
+  rebuild_osf_tbl(out)
+}
 
 #' Validate and rebuild osf_tbl
 #'
