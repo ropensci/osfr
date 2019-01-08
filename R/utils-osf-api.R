@@ -36,7 +36,6 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
   crul::HttpClient$new(
     url = url,
     opts = list(
-      timeout = 10,
       encode = "json"
     ),
     headers = headers
