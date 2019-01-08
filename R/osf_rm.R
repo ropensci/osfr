@@ -33,7 +33,7 @@ osf_rm.osf_tbl_node <- function(x, recursive = FALSE, verbose = FALSE) {
   id <- as_id(x)
 
   if (recursive) {
-    child_ids <- recurse_node(id)
+    child_ids <- recurse_node(id, maxdepth = Inf)
     if (verbose) {
       message(
         sprintf("Retrieved %i child nodes under %s", length(child_ids), id))
