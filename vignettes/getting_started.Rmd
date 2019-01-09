@@ -17,20 +17,21 @@ knitr::opts_chunk$set(
 
 This vignette provides a quick tour of the `osfr` package.
 
-[OSF](https://osf.io), developed by the [Center for Open Science (COS)](https://cos.io/), is a free, open source, web application that provides a space for researchers to collaborative store, manage, and share their research materials (e.g. data, code/analysis scripts, protocols).Files can be kept private, shared with a specific group of researchers, or made publically available with citable DOIs so researchers can get credit for their work.
+[OSF](https://osf.io), developed by the [Center for Open Science (COS)](https://cos.io/), is a free, open source, web application that provides a space for researchers to collaboratively store, manage, and share their research materials (e.g. data, code, protocols). Files can be kept private, shared with a specific group of researchers, or made publicly available with citable DOIs so researchers can get credit for their work.
 
-Currently, the `osfr` is allows researchers to create and modify project, components, and files through the OSF API.
+`osfr` allows researchers to create and modify projects, components, and files through OSF's API.
 
 ## Working with projects/components
 
-Most work on the OSF is organized around `projects`. `Projects` can `files`, groups of files in `folders`, and/or files in subsections of a project called `components`. Collectively `projects` and `components` are called `nodes`. 
+Most work on OSF is organized around ***projects***. Projects can contain *files*, groups of files in *directories*, and/or files in subsections of a project called ***components***. Collectively projects and components are called ***nodes***.
 
 ### Creating a new project/component
 
-At the start of a new research project or study we'll want to set up a new private project on the OSF to store all the files related to the project. We can add multiple nested `components` or `folders` to create whatever structure will suite our workflow. Different components have different DOIs and can have differential privacy settings, so we may want to put similar files in their own `components` to organize the project.
+At the start of a new research project or study we'll want to set up a new private project on OSF to store all the files related to the project. We can add multiple nested components or directories to create whatever structure will suite our workflow. Different components can have different DOIs and different privacy settings, so we may want to put similar files in their own components to organize the project.
 
-We'll first create a new project and save its identifier information.
-*Note: You'll need to be authenticated to create `nodes`. See the `osf_auth()` function documentation or `auth` vignette for more information.*
+We'll first create a new *project* and save its identifier information.
+
+*Note: You'll need to be authenticated to create `nodes`. See the `osf_auth()` function documentation or the `auth` vignette for more information.*
 
 ```{r message=FALSE}
 library(osfr2)
@@ -39,7 +40,7 @@ car_project <- osf_create_project("Motor Trend Car Road Tests")
 car_project
 ```
 
-After the project is created we'll create two nested `components`, one for data and one for analysis scripts.
+After the project is created we'll create two nested *components*, one for data and one for analysis scripts.
 
 ```{r message = FALSE}
 library(magrittr)
@@ -49,14 +50,14 @@ car_project %>%
   osf_create_component('Analysis Scripts')
 ```
 
-Because of the piping above, we've accidently created a project with the `analysis scripts` component nested within the `data` componet, which is not what we wanted. We can delete the analysis scripts component, recreate it nested under the overall project, and then check what components we have under the main project to make sure the structure is what we want.
+Because of the piping above, we've accidentally created a project with the `analysis scripts` component nested within the `data` component, which is not what we wanted. We can delete the analysis scripts component, recreate it under the top-level project, and then list the components we have under the main project to make sure the structure is what we want.
 
 ```{r message = FALSE}
-osf_ls_nodes(car_project) %>% 
+osf_ls_nodes(car_project) %>%
   osf_ls_nodes() %>%
   osf_rm()
 
-car_project %>%
+scripts_component <- car_project %>%
   osf_create_component('Analysis Scripts')
 
 osf_ls_nodes(car_project)
@@ -64,11 +65,11 @@ osf_ls_nodes(car_project)
 
 ## Working With Files
 
-In general, files exist in projects, components, and/or folders on the OSF. Files can be housed on `OSF Storage` or in another service that is connected to an OSF project (e.g. github, dropbox, googledrive). Currently, the `osfr` package only supports interacting with files on `OSF Storage`. 
+In general, files can exist in projects, components, and/or directories on the OSF. Files can be stored on *OSF's Storage* or in another service that is connected to an OSF project (e.g. github, dropbox, googledrive). However, `osfr` currently only supports interacting with files on OSF Storage.
 
 ### Uploading/Updating files
 
-To add our data file to the `Data` component within our broader project, we'll need to retrieve and pass the information about that component to the `osf_upload()` function so the file is uploaded to the correct part of the project. 
+To add our data file to the *Data* component within our broader project, we'll need to retrieve and pass the information about that component to the `osf_upload()` function so the file is uploaded to the correct part of the project.
 
 ```{r}
 library(stringr)
@@ -76,7 +77,7 @@ library(stringr)
 write.csv(mtcars, "mtcars.csv")
 
 car_project %>%
-  osf_ls_nodes(car_project) %>% 
+  osf_ls_nodes(car_project) %>%
   subset(str_detect(name, "Data")) %>%
   osf_upload("mtcars.csv")
 ```
@@ -85,19 +86,19 @@ OSF also version controls files, which means that if we were to make a change to
 
 ### Downloading files
 
-We can download files from any public node or private node that we have access to and can identify files to download in two different ways. 
+We can download files from any public node or private node that we have access to and can identify files to download in two different ways.
 
-1. If we know where the file is located, but don't remember it's GUID, we can use the `osf_ls_files` function to list all the files within a node and then pipe the results into the `osf_download_files` function.
+1. If we know where the file is located, but don't remember it's GUID, we can use the `osf_ls_files` function to list all the files within a node and then pipe the results to `osf_download()`.
 
 ```{r message = FALSE}
 car_project %>%
-  osf_ls_nodes(car_project) %>% 
+  osf_ls_nodes(car_project) %>%
   subset(str_detect(name, "Data")) %>%
   osf_ls_files() %>%
   osf_download( ,overwrite = TRUE)
 ```
 
-2. For a public file that we may have seen references in a published article, we may already have the GUID of the file. 
+2. For a public file that we may have seen referenced in a published article, we may already have the GUID of the file.
 
 ```{r eval = FALSE}
 data_file <- osf_retrieve_file("") #GUID would go in inside the quotations
