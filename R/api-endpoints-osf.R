@@ -13,9 +13,9 @@
   if (missing(title)) abort("A title must be provided.")
 
   if (is.null(id)) {
-    path <- osf_path("nodes/")
+    path <- .osf_api_path("nodes/")
   } else {
-    path <- osf_path(sprintf("nodes/%s/children/", id))
+    path <- .osf_api_path(sprintf("nodes/%s/children/", id))
   }
 
   body <- list(
@@ -38,13 +38,13 @@
 
 # e.g., .osf_node_retrieve("k35ut)
 .osf_node_retrieve <- function(id) {
-  res <- .osf_request("get", osf_path(sprintf("nodes/%s/", id)))
+  res <- .osf_request("get", .osf_api_path(sprintf("nodes/%s/", id)))
   process_response(res)
 }
 
 # e.g., .osf_node_delete("k35ut)
 .osf_node_delete <- function(id) {
-  path <- osf_path(sprintf("nodes/%s/", id))
+  path <- .osf_api_path(sprintf("nodes/%s/", id))
   res <- .osf_request("delete", path)
 
   # since this endpoint doesn't return any useful info we'll return TRUE if
@@ -55,13 +55,13 @@
 
 # list all child nodes
 .osf_node_children <- function(id, n_max, query = list(), verbose = FALSE) {
-  path <- osf_path(sprintf("nodes/%s/children/", id))
+  path <- .osf_api_path(sprintf("nodes/%s/children/", id))
   .osf_paginated_request("get", path, query, n_max = n_max, verbose = verbose)
 }
 
 # retrieve user info
 .osf_user_retrieve <- function(id) {
-  path <- osf_path(sprintf("/users/%s/", id))
+  path <- .osf_api_path(sprintf("/users/%s/", id))
   res <- .osf_request("get", path)
   process_response(res)
 }
@@ -69,12 +69,12 @@
 
 # list user's nodes
 .osf_user_nodes <- function(id, n_max, query = list(), verbose = FALSE) {
-  path <- osf_path(sprintf("users/%s/nodes/", id))
+  path <- .osf_api_path(sprintf("users/%s/nodes/", id))
   .osf_paginated_request("get", path, query, n_max = n_max, verbose = verbose)
 }
 
 # e.g., .osf_file_retrieve("5be5e1fdfe3eca00188178c3")
 .osf_file_retrieve <- function(id) {
-  res <- .osf_request("get", osf_path(sprintf("files/%s/", id)))
+  res <- .osf_request("get", .osf_api_path(sprintf("files/%s/", id)))
   process_response(res)
 }

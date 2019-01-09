@@ -70,7 +70,7 @@ osf_ls_files.osf_tbl_file <-
   # manually construct path for nodes because the provided files endpoint is
   # for listing storage providers
   api_path <- switch(class(x)[1],
-    osf_tbl_node = osf_path(sprintf("nodes/%s/files/osfstorage/", as_id(x))),
+    osf_tbl_node = .osf_api_path(sprintf("nodes/%s/files/osfstorage/", as_id(x))),
     osf_tbl_file = crul::url_parse(get_relation(x, "files"))$path
   )
 

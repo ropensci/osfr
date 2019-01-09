@@ -12,7 +12,7 @@
 #' @noRd
 .wb_create_folder <- function(id, name, fid = NULL) {
   query <- list(kind = "folder", name = name)
-  res <- .wb_request("put", wb_path(id, fid), query = query)
+  res <- .wb_request("put", .wb_api_path(id, fid), query = query)
   process_response(res)
 }
 
@@ -27,7 +27,7 @@
 #' @noRd
 .wb_file_upload <- function(id, name, body, fid = NULL) {
   query <- list(kind = "file", name = name)
-  res <- .wb_request("put", wb_path(id, fid), query = query, body = body)
+  res <- .wb_request("put", .wb_api_path(id, fid), query = query, body = body)
   process_response(res)
 }
 
@@ -40,7 +40,7 @@
 #' @noRd
 .wb_file_update <- function(id, fid, body) {
   query <- list(kind = "file")
-  path <- wb_path(id, fid, type = "file")
+  path <- .wb_api_path(id, fid, type = "file")
   res <- .wb_request("put", path, query = query, body = body)
   process_response(res)
 }
@@ -59,7 +59,7 @@
   type <- match.arg(type, c("file", "folder"))
   query <- list()
   if (zip) query$zip <- ""
-  res <- .wb_request("get", wb_path(id, fid, type = type), query, disk = path)
+  res <- .wb_request("get", .wb_api_path(id, fid, type = type), query, disk = path)
   if (res$status_code == 200) return(TRUE)
   if (res$status_code == 404) {
     msg <- sprintf("The requested %s (%s) could not be found in node `%s`",

@@ -11,12 +11,12 @@ user_agent <- function(agent = "osfr") {
 
 
 # Appends API version to a specificed path
-osf_path <- function(path) {
+.osf_api_path <- function(path) {
   sprintf("v%s/%s", floor(.osf_api_version), path)
 }
 
 # Construct the OSF API Client
-osf_cli <- function(pat = getOption("osfr.pat")) {
+.osf_cli <- function(pat = getOption("osfr.pat")) {
   server <- Sys.getenv("OSF_USE_SERVER")
   url <- if (nzchar(server)) {
     sprintf("https://api.%s.osf.io", server)
@@ -48,7 +48,7 @@ osf_cli <- function(pat = getOption("osfr.pat")) {
 
 .osf_request <- function(method, path, query = list(), body = NULL, verbose = FALSE, ...) {
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
-  cli <- osf_cli()
+  cli <- .osf_cli()
   method <- cli[[method]]
   method(path, query, body = body, ...)
 }

@@ -8,7 +8,7 @@
 #'   a trailing flash when referring to a folder
 #'
 #' @noRd
-wb_path <- function(id, fid = NULL, provider = "osfstorage", type = "folder") {
+.wb_api_path <- function(id, fid = NULL, provider = "osfstorage", type = "folder") {
   type <- match.arg(type, c("folder", "file"))
   api_v <- floor(.wb_api_version)
   if (is.null(fid)) {
@@ -24,7 +24,7 @@ wb_path <- function(id, fid = NULL, provider = "osfstorage", type = "folder") {
 
 
 # Construct the WaterButler API Client
-wb_cli <- function(pat = getOption("osfr.pat")) {
+.wb_cli <- function(pat = getOption("osfr.pat")) {
 
   url <- ifelse(Sys.getenv("OSF_USE_SERVER") == "test",
                    "https://files.us.test.osf.io",
@@ -53,7 +53,7 @@ wb_cli <- function(pat = getOption("osfr.pat")) {
 
 .wb_request <- function(method, path, query = list(), body = NULL, verbose = FALSE, ...) {
   method <- match.arg(method, c("get", "put", "patch", "delete"))
-  cli <- wb_cli()
+  cli <- .wb_cli()
   method <- cli[[method]]
   method(path, query, body = body, ...)
 }
