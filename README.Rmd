@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 osfr2:::osf_dev_off()
 ```
 
-# osfr2
+# osfr <a href="https://github.com/aaronwolen/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
 [![Build Status](https://travis-ci.org/aaronwolen/osfr.svg?branch=master)](https://travis-ci.org/aaronwolen/osfr)
 [![Coverage status](https://codecov.io/gh/aaronwolen/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/aaronwolen/osfr?branch=master)
@@ -108,7 +108,7 @@ my_project %>%
 
 ```{r cleanup, include=FALSE}
 unlink("mtcars.csv")
-osf_rm(my_project, recursive = TRUE, verbose = FALSE)
+osf_rm(my_project, recursive = TRUE)
 ```
 
 ## Acknowledgments

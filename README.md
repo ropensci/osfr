@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# osfr2
+# osfr <a href="https://github.com/aaronwolen/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
 [![Build
 Status](https://travis-ci.org/aaronwolen/osfr.svg?branch=master)](https://travis-ci.org/aaronwolen/osfr)
@@ -14,13 +14,13 @@ osfr provides a suite of functions for interacting with
 [OSF](https://osf.io "Open Science Framework") that are primarily
 focused on project management workflows.
 
-OSF (Open Science Framework, <https://osf.io>) is a free and [open
+OSF (<https://osf.io>) is a free and [open
 source](https://github.com/CenterForOpenScience/osf.io "OSF's GitHub Repository")
 project management repository designed to support researchers of all
 technical backgrounds. The service includes unlimited cloud storage and
-file version history, providing a centralized location for your research
-materials that can be kept private, shared with select collaborators, or
-made publicly available with citable DOIs.
+file version history, providing a centralized location for all your
+research materials that can be kept private, shared with select
+collaborators, or made publicly available with citable DOIs.
 
 ## Installation
 
@@ -61,8 +61,9 @@ R or dplyr.
 Many researchers use OSF to archive and share their work. If you come
 across a paper that cites an OSF repository, osfr can be used to explore
 the project and download the associated files—you only need the
-project’s URL or GUID to get started. In this case, we’re retrieving
-the Cancer Reproducibility Project (<https://osf.io/e81xl/>):
+project’s URL or GUID (global unique identifier) to get started. In
+this case, we’re retrieving the Cancer Reproducibility Project
+(<https://osf.io/e81xl/>):
 
 ``` r
 library(osfr2)
@@ -82,18 +83,20 @@ retrieved. Let’s list the files that have been uploaded to this project:
 cr_files <- osf_ls_files(cr_project)
 cr_files
 #> # A tibble: 4 x 3
-#>   name                                    id                     meta     
-#>   <chr>                                   <chr>                  <list>   
-#> 1 Adjustment of 50 studies to 37 studies… 565602398c5e4a3877d72… <list [3…
-#> 2 papers_and_keywords.xlsx                553e671b8c5e4a219919e… <list [3…
-#> 3 Full_dataset_of_papers_formatted.xls    553e671b8c5e4a219919e… <list [3…
-#> 4 METHOD_to_select_papers.txt             553e671b8c5e4a219919e… <list [3…
+#>   name                                     id                     meta     
+#>   <chr>                                    <chr>                  <list>   
+#> 1 Adjustment of 50 studies to 37 studies.… 565602398c5e4a3877d72… <list [3…
+#> 2 papers_and_keywords.xlsx                 553e671b8c5e4a219919e… <list [3…
+#> 3 Full_dataset_of_papers_formatted.xls     553e671b8c5e4a219919e… <list [3…
+#> 4 METHOD_to_select_papers.txt              553e671b8c5e4a219919e… <list [3…
 ```
 
-This returns an `osf_tbl_file` with 1 row for each of the uploaded
-files. We can examine any of these files directly on OSF with
-`osf_open()`, which opens the corresponding file’s view in your default
-browser.
+This returns an `osf_tbl_file` with 1 row for each of the files stored
+in osf-storage. OSF allows for other resources, like GitHub repos and
+dropbox folders, to be connected to projects, but currently the osfr
+package only indexes files stored locally in osf-storage. We can examine
+any of these files directly on OSF with `osf_open()`, which opens the
+corresponding file’s view in your default browser.
 
 We can also list the components nested within the top-level of this
 project:
@@ -129,7 +132,7 @@ my_project
 #> # A tibble: 1 x 3
 #>   name                       id    meta      
 #>   <chr>                      <chr> <list>    
-#> 1 Motor Trend Car Road Tests 4ap6m <list [3]>
+#> 1 Motor Trend Car Road Tests r2tzf <list [3]>
 ```
 
 Using a combination of `osf_create_component()`, `osf_mkdir()`, and
@@ -159,9 +162,9 @@ OSF is developed by the [Center for Open
 Science](https://cos.io "Center for Open Science") in Charlottesville,
 VA.
 
-The original version of osfr was developed by @chartgerink. The current
-version was developed by @aaronwolen and is *heavily* inspired by
-@jennybc and @lucymcgowan’s excellent
+The original version of osfr was developed by @chartgerink and further
+developed by @bgrich. The current version was developed by @aaronwolen
+and is *heavily* inspired by @jennybc and @lucymcgowan’s excellent
 [googledrive](https://googledrive.tidyverse.org) package. Seriously, we
 borrowed a lot of great ideas from them. Other important resources
 include [http testing](https://ropensci.github.io/http-testing-book/) by
