@@ -1,6 +1,6 @@
 # Return a version specific user agent
 user_agent <- function(agent = "osfr") {
-  version <- system.file("DESCRIPTION", package = "osfr", mustWork = FALSE)
+  version <- system.file("DESCRIPTION", package = "osfr2", mustWork = FALSE)
   if (file.exists(version)) {
     version <- base::read.dcf(version, "Version")
     sprintf("%s v%s", agent, version)
