@@ -1,3 +1,13 @@
+#' Pipe operator
+#'
+#' @name %>%
+#' @rdname pipe
+#' @keywords internal
+#' @export
+#' @importFrom purrr %>%
+#' @usage lhs \%>\% rhs
+NULL
+
 #' Stop execution with HTTP status code
 #' @param code HTTP status code
 #' @inheritParams base::stop
