@@ -15,200 +15,94 @@ knitr::opts_chunk$set(
 )
 ```
 
-[OSF](https://osf.io) from the [Center for Open Science (COS)](https://cos.io/) 
-is a web application that provides free and open source project management 
-support for researchers across the entire research lifecycle. As a collaboration 
-tool, OSF helps researchers work on projects privately with a limited number of 
-collaborators and make parts of their projects public, or make all the project 
-publicly accessible for broader dissemination. As a workflow system, OSF enables 
-connections to the many services researchers already use to streamline their 
-process and increase efficiency. As a flexible repository, it can store and 
-archive research data, protocols, and materials.
+This vignette provides a quick tour of the `osfr` package.
 
-`osfr` is a package used to connect with the OSF API. This package allows you 
-to download files from an OSF project, upload files to an OSF project, and 
-interact with files, folders, projects, and other features of OSF. More 
-importantly, you can interact with OSF directly from R, allowing you to use 
-OSF as part of your workflow.
+[OSF](https://osf.io), developed by the [Center for Open Science (COS)](https://cos.io/), is a free, open source, web application that provides a space for researchers to collaborative store, manage, and share their research materials (e.g. data, code/analysis scripts, protocols).Files can be kept private, shared with a specific group of researchers, or made publically available with citable DOIs so researchers can get credit for their work.
 
-This vignette will introduce you to how to login to OSF through R, how to 
-download files, and how to upload files. At the end of the vignette will be a 
-brief overview of the other functionality provided by `osfr`.
+Currently, the `osfr` is allows researchers to create and modify project, components, and files through the OSF API.
 
-## Authentication
+## Working with projects/components
 
-Many of the functions available in `osfr` require the user to log in to OSF. 
-Instead of using your username and password, `osfr` makes use of a personal 
-access token (PAT) that you create through OSF. With this PAT, you 
-can download files from private projects, upload files to projects, create 
-new projects, and more.
+Most work on the OSF is organized around `projects`. `Projects` can `files`, groups of files in `folders`, and/or files in subsections of a project called `components`. Collectively `projects` and `components` are called `nodes`. 
 
-### Creating a Personal Access Token (PAT) through OSF
+### Creating a new project/component
 
-To create a PAT, log in to OSF through a web browser and go to the 
-[OSF settings page](https://osf.io/settings/tokens/) and click the "New token" 
-button. Fill out the form on the following page providing a name for the new 
-token along with what access the token will allow. Once the PAT has been 
-created, save it to a secure location.
+At the start of a new research project or study we'll want to set up a new private project on the OSF to store all the files related to the project. We can add multiple nested `components` or `folders` to create whatever structure will suite our workflow. Different components have different DOIs and can have differential privacy settings, so we may want to put similar files in their own `components` to organize the project.
 
-*Note: Keep the token you create safe! It acts just like your username and 
-password!*
+We'll first create a new project and save its identifier information.
+*Note: You'll need to be authenticated to create `nodes`. See the `osf_auth()` function documentation or `auth` vignette for more information.*
 
-### How to log in to OSF
+```{r message=FALSE}
+library(osfr2)
 
-To make use of most of the functionality of `osfr`, you will be required to 
-log in to OSF using a PAT. The `login()` function can be used to log in to OSF.
-
-```{r, eval = FALSE}
-login("your-personal-access-token")
+car_project <- osf_create_project("Motor Trend Car Road Tests")
+car_project
 ```
 
-By default, your PAT is only stored for your current session. To store your 
-login across session, your PAT can be saved to the `.Renviron` file by setting 
-the `store` argument to `TRUE`. 
+After the project is created we'll create two nested `components`, one for data and one for analysis scripts.
 
-```{r, eval = FALSE}
-login("your-personal-access-token", store = TRUE)
+```{r message = FALSE}
+library(magrittr)
+
+car_project %>%
+  osf_create_component('Data') %>%
+  osf_create_component('Analysis Scripts')
 ```
 
-### How to log out and why
+Because of the piping above, we've accidently created a project with the `analysis scripts` component nested within the `data` componet, which is not what we wanted. We can delete the analysis scripts component, recreate it nested under the overall project, and then check what components we have under the main project to make sure the structure is what we want.
 
-To remove your PAT from the session environment, you can use the `logout()` 
-function.
+```{r message = FALSE}
+osf_ls_nodes(car_project) %>% 
+  osf_ls_nodes() %>%
+  osf_rm()
 
-```{r, eval = FALSE}
-logout()
+car_project %>%
+  osf_create_component('Analysis Scripts')
+
+osf_ls_nodes(car_project)
 ```
 
-The `logout()` function will only remove the PAT from the session environment. 
-It will not remove any PAT's stored in the `.Renviron` file. Those must be 
-removed manually.
+## Working With Files
 
-Remember that your PAT acts just like your username and password! Do not leave 
-your PAT in any files you plan to share with others. This includes leaving your 
-PAT in a file that is uploaded to a file sharing or version control platform 
-(GitHub, BitBucket, Google Drive, etc.).
+In general, files exist in projects, components, and/or folders on the OSF. Files can be housed on `OSF Storage` or in another service that is connected to an OSF project (e.g. github, dropbox, googledrive). Currently, the `osfr` package only supports interacting with files on `OSF Storage`. 
 
-## Interacting with OSF and GUIDs
+### Uploading/Updating files
 
-Every project and file is assigned a [globally unique identifier (GUID)](http://help.osf.io/m/faqs/l/726460-faqs#what-s-a-globally-unique-identifier-guid-what-metadata-is-maintained-about-them) 
-on OSF. This GUID provides a stable link to the object it is assigned to. The 
-GUID is used throughout the functions in `osfr` to address projects and files. 
-To get the GUID, navigate to the project or file on OSF in a web browser. 
-The GUID is the five character string at the end of the url for the project or 
-file.
+To add our data file to the `Data` component within our broader project, we'll need to retrieve and pass the information about that component to the `osf_upload()` function so the file is uploaded to the correct part of the project. 
 
-### Demo Project
+```{r}
+library(stringr)
 
-A demo project for using `osfr` can be found at 
-[https://osf.io/m5pds/](https://osf.io/m5pds/). The GUID for this demo project 
-is "m5pds". A demo file available in this project can be found at 
-[https://osf.io/5z2bh/](https://osf.io/5z2bh/). The GUID for this demo file is 
-"5z2bh". 
+write.csv(mtcars, "mtcars.csv")
 
-## Files
-
-The primary use case for `osfr` is to interact with the files you have stored 
-on OSF. This package provides functions to help you both download and 
-upload files to OSF. 
-
-### Downloading Files
-
-The `download_files()` function allows you to download both public and private 
-files from the OSF. To download public files, you only need to provide a GUID 
-for the file you want to download. To download private files that you have 
-access to, you will also need to be logged in using a PAT. The location that the 
-file will be downloaded to can be provided in the optional `path` argument.
-
-```{r, eval = FALSE}
-download_files('5z2bh', path = 'public_test_file.csv')
+car_project %>%
+  osf_ls_nodes(car_project) %>% 
+  subset(str_detect(name, "Data")) %>%
+  osf_upload("mtcars.csv")
 ```
 
-If the file being downloaded has multiple versions, the specific version of the 
-file can be downloaded using the `version` argument.
+OSF also version controls files, which means that if we were to make a change to the `mtcars.csv` file [perhaps we collected more data] we could automatically create a 2nd version of the dataset by using the `osf_upload()` function and set `overwrite = T`. As long as the file we're uploading has the same file name as a file in that particular section of the project, then a new version will be created.
 
-#### View-only Links
+### Downloading files
 
-OSF allows you to [create view-only links to your projects](http://help.osf.io/m/links_forks/l/524049-create-a-view-only-link-for-a-project) 
-so that private projects can be shared without giving full access to the 
-project. For example, you may want to share some R code that downloads a file 
-from your private project before doing some analysis. To download a file using 
-a view-only link, provide the view-only link to the `view_only` argument.
+We can download files from any public node or private node that we have access to and can identify files to download in two different ways. 
 
-```{r, eval = FALSE}
-download_files('852dp', path = 'view_only_test_file.csv', view_only = 'https://osf.io/jy9gm/?view_only=a500051f59b14a988415f08539dbd491')
+1. If we know where the file is located, but don't remember it's GUID, we can use the `osf_ls_files` function to list all the files within a node and then pipe the results into the `osf_download_files` function.
+
+```{r message = FALSE}
+car_project %>%
+  osf_ls_nodes(car_project) %>% 
+  subset(str_detect(name, "Data")) %>%
+  osf_ls_files() %>%
+  osf_download( ,overwrite = TRUE)
 ```
 
-### Uploading Files
+2. For a public file that we may have seen references in a published article, we may already have the GUID of the file. 
 
-`upload_files()` allows you to upload a file from your local machine to 
-OSF. Both new files and revised files can be uploaded to OSF. Revised files 
-that are uploaded to OSF make automatic use of [OSF's versioning 
-capabilities](http://help.osf.io/m/projectfiles/l/524182-file-revisions-and-version-control).
-
-#### New files
-
-To [upload a new file](http://help.osf.io/m/projectfiles/l/482002-upload-files), 
-you must provide a GUID for a project and the local path 
-of the file you are uploading. Optionally, you can provide a destination for 
-the file to specify the folder destination and/or file name of the uploaded 
-file.
-
-```{r, eval = FALSE}
-upload_files('m5pds', path = 'local_file.csv', dest = 'upload_file_on_OSF.csv')
+```{r eval = FALSE}
+data_file <- osf_retrieve_file("") #GUID would go in inside the quotations
+osf_download(data_file, overwrite = TRUE)
 ```
-
-#### Revised files
-
-To upload a revised file, you must provide a GUID for the file and the local 
-path of the file you are uploading.
-
-```{r, eval = FALSE}
-upload_files('5z2bh', path = 'local_file.csv')
-```
-
-## Other Functionality
-
-`osfr` allows you to interact with the OSF in a number of other ways. Most of 
-these functions let you interact with files, folders, and projects on OSF.
-
-### Other File Functions
-
-You can use `osfr` to interact with files in the following ways:
-
-* `move_files()` lets you 
-[move a file](http://help.osf.io/m/projectfiles/l/735236-move-files) 
-between projects/components.
-* `upload_zip()` lets you zip up a directory and upload it to OSF.
-* `delete_files()` lets you 
-[delete a file](http://help.osf.io/m/projectfiles/l/741689-delete-a-file) 
-from OSF.
-
-### Projects
-
-You can use `osfr` to interact with projects in the following ways: 
-
-* `create_project()` lets you [create a new OSF project](http://help.osf.io/m/projects/l/481539-create-a-project).
-* `update_project()` lets you [switch a project from private to public](http://help.osf.io/m/projects/l/524048-control-your-privacy-settings).
-* `view_project()` opens up a browser view of a project (requires user to be 
-logged into OSF).
-* `delete_project()` lets you 
-[delete a project](http://help.osf.io/m/projects/l/812227-delete-a-project) 
-from OSF.
-
-There are also several functions that allow you to [create components](http://help.osf.io/m/projects/l/481998-create-components) 
-for your projects. The `create_component()`, `update_component()`, and 
-`delete_component()` functions all perform the same actions as the related 
-project functions, but work with the child components instead.
-
-### Folders
-
-You can use `osfr` to interact with folders in the following ways:
-
-* `create_folder()` lets you 
-[create a folder](http://help.osf.io/m/projectfiles/l/524183-create-and-manage-folders) 
-on OSF.
-* `delete_folder()` lets you delete a folder on OSF.
 
 ## More Information
 
