@@ -33,3 +33,11 @@ test_that("osf_tbls with incorrect column types are detected", {
   user_tbl$id <- as.factor(user_tbl$id)
   expect_false(has_osf_tbl_coltypes(user_tbl))
 })
+
+proj_tbl <- osf_retrieve_node("brfza")
+
+test_that("can't combine osf_tbls with different subclasses", {
+  proj_tbl$foo <- "barr"
+  out <- rbind(user_tbl, proj_tbl)
+  expect_identical(class(out), c("tbl_df", "tbl", "data.frame"))
+})

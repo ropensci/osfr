@@ -21,7 +21,7 @@ recurse_node <- function(id, maxdepth = 5) {
 recurse_tree <- function(id, maxdepth = 5) {
   if (maxdepth == 1) return(id)
   # TODO: use consistent argument names for number of items to return
-  children <- .osf_node_children(id, n_max = maxdepth)
+  children <- .osf_node_children(id, n_max = Inf)
   child_ids <- purrr::map_chr(children, "id")
 
   if (is_empty(child_ids)) return(id)

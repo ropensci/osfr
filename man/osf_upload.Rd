@@ -4,7 +4,7 @@
 \alias{osf_upload}
 \title{Upload files to OSF}
 \usage{
-osf_upload(x, path, name = NULL, overwrite = FALSE)
+osf_upload(x, path, name = NULL, overwrite = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{x}{an \code{\link{osf_tbl_node}} with a single project or
@@ -19,6 +19,9 @@ will be used).}
 \item{overwrite}{Logical, overwrite an existing file with the same name
 (default \code{FALSE})? If \code{TRUE}, OSF will automatically update the file and
 record the previous version.}
+
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{FALSE})}
 }
 \value{
 an \code{\link{osf_tbl_file}} containing uploaded file

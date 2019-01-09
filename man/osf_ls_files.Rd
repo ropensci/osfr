@@ -5,7 +5,7 @@
 \title{List files and directories on OSF}
 \usage{
 osf_ls_files(x, path = NULL, type = "any", pattern = NULL,
-  n_max = 10)
+  n_max = 10, verbose = FALSE)
 }
 \arguments{
 \item{x}{one of the following:
@@ -23,6 +23,9 @@ substring \code{"pattern"} in their name. Note this is a fixed, case-insensitive
 search.}
 
 \item{n_max}{Number of results to return from OSF.}
+
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{FALSE})}
 }
 \value{
 an \code{\link{osf_tbl_file}} with one row for each file or directory

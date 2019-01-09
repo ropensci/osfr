@@ -1,64 +1,3 @@
-#' Generate Waterbutler API paths
-#'
-#' @param id GUID for an OSF project or component
-#' @param fid waterbutler identifier for a file or folder
-#' @param provider storage provider (default: osfstorage)
-#' @param type indicate whether the provided `fid` refers to a `"folder"` (the
-#'   default) or `"file"`. This is significant because the path must always have
-#'   a trailing flash when referring to a folder
-#'
-#' @noRd
-wb_path <- function(id, fid = NULL, provider = "osfstorage", type = "folder") {
-  type <- match.arg(type, c("folder", "file"))
-  api_v <- floor(.wb_api_version)
-  if (is.null(fid)) {
-    out <- sprintf("v%i/resources/%s/providers/%s/", api_v, id, provider)
-  } else {
-    out <- sprintf("v%i/resources/%s/providers/%s/%s/", api_v, id, provider, fid)
-  }
-  switch(type,
-    file = sub("\\/$", "", out),
-    folder = out
-  )
-}
-
-
-# Construct the WaterButler API Client
-wb_cli <- function(pat = getOption("osfr.pat")) {
-
-  url <- ifelse(Sys.getenv("OSF_USE_SERVER") == "test",
-                   "https://files.us.test.osf.io",
-                   "https://files.osf.io")
-
-  headers <- list(
-    `User-Agent` = user_agent()
-  )
-
-  if (!is.null(pat)) {
-    headers$Authorization <- sprintf("Bearer %s", pat)
-  }
-
-  crul::HttpClient$new(
-    url = url,
-    opts = list(
-      encode = "raw"
-    ),
-    headers = headers
-  )
-}
-
-
-
-# Waterbutler request functions -------------------------------------------
-
-.wb_request <- function(method, path, query = list(), body = NULL, verbose = FALSE, ...) {
-  method <- match.arg(method, c("get", "put", "patch", "delete"))
-  cli <- wb_cli()
-  method <- cli[[method]]
-  method(path, query, body = body, ...)
-}
-
-
 # Waterbutler API action endpoints ----------------------------------------
 # https://waterbutler.readthedocs.io/en/latest/api.html#actions
 
@@ -73,7 +12,7 @@ wb_cli <- function(pat = getOption("osfr.pat")) {
 #' @noRd
 .wb_create_folder <- function(id, name, fid = NULL) {
   query <- list(kind = "folder", name = name)
-  res <- .wb_request("put", wb_path(id, fid), query = query)
+  res <- .wb_request("put", .wb_api_path(id, fid), query = query)
   process_response(res)
 }
 
@@ -88,7 +27,7 @@ wb_cli <- function(pat = getOption("osfr.pat")) {
 #' @noRd
 .wb_file_upload <- function(id, name, body, fid = NULL) {
   query <- list(kind = "file", name = name)
-  res <- .wb_request("put", wb_path(id, fid), query = query, body = body)
+  res <- .wb_request("put", .wb_api_path(id, fid), query = query, body = body)
   process_response(res)
 }
 
@@ -101,7 +40,7 @@ wb_cli <- function(pat = getOption("osfr.pat")) {
 #' @noRd
 .wb_file_update <- function(id, fid, body) {
   query <- list(kind = "file")
-  path <- wb_path(id, fid, type = "file")
+  path <- .wb_api_path(id, fid, type = "file")
   res <- .wb_request("put", path, query = query, body = body)
   process_response(res)
 }
@@ -120,7 +59,7 @@ wb_cli <- function(pat = getOption("osfr.pat")) {
   type <- match.arg(type, c("file", "folder"))
   query <- list()
   if (zip) query$zip <- ""
-  res <- .wb_request("get", wb_path(id, fid, type = type), query, disk = path)
+  res <- .wb_request("get", .wb_api_path(id, fid, type = type), query, disk = path)
   if (res$status_code == 200) return(TRUE)
   if (res$status_code == 404) {
     msg <- sprintf("The requested %s (%s) could not be found in node `%s`",
