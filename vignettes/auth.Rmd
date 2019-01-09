@@ -1,8 +1,8 @@
 ---
-title: "Obtaining and using access tokens"
+title: "Authenticating osfr"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Getting Started with osfr}
+  %\VignetteIndexEntry{Authenticating osfr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -13,24 +13,24 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, comment = "#>", collapse = TRUE
 
 ## osfr
 
-This vignette covers how to obtain and use an OSF personal access token (PAT) for use in the `osfr` package. 
+This vignette covers how to obtain and use an OSF *personal access token* (PAT) for use with `osfr`.
 
-PATs are required to upload files, create projects/components, access information about your private projects, or download files in your private projects. PATs are not required for accessing information about public projects or downloading public files, but authentication with a PAT will increase the rate limit on the API. 
+PATs are required to upload files, create projects/components, access information about your private projects, or download files in your private projects. PATs are not required for accessing information about public projects or downloading public files, but authentication with a PAT will increase the rate limit on the API.
 
 Unauthenticated requests are limited to 100 per hour; Authenticated requests are limited to 10,000 per day. So, if you are planning to make a large number of calls to the API, we suggest authenticating with a PAT even if one is not required for the functions you are running.
 
 ## Creating an OSF PAT
 
-- To create an OSF PAT, log into OSF through your browser, navigate to the [OSF settings page](https://osf.io/settings/tokens/), and click the `create token` button. You will need to create a PAT with at least osf.read_full scope; if you want to be able to edit information through the package, you will also need the PAT to have osf.write_full. Once the PAT is created, save it in a safe space. 
+To create an OSF PAT, log into OSF through your browser, navigate to the [OSF settings page](https://osf.io/settings/tokens/), and click the **create token** button. You will need to create a PAT with at least `osf.read_full` scope; if you want to be able to edit information through the package, you will also need the PAT to have `osf.write_full` permissions. Once the PAT is created, save it in a safe space.
 
 ## Using your PAT
 
 You can authenticate in two different ways:
 
-1. To authenticate at the start of each new R session, call the `osf_auth` function in the console at the start of the session and paste in your PAT. Your PAT functions like a password, so it should **not** be hard coded into any scripts.
+1. Call the `osf_auth()` function in the console at the start of each new session and paste in your PAT. Your PAT functions like a password, so it should **not** be hard coded into any scripts.
 
-2. To automatically authenticate, you can store you the PAT as an environment variable names `OSF_PAT`. One way to do this is to create a `.Renviron` file in your home or working directory an include a definition of the `OSF_PAT` variable. 
+2. To automatically authenticate, store you the PAT as an environment variable named `OSF_PAT`. One way to do this is to create a `.Renviron` file in your home or project working directory, and include a definition of the `OSF_PAT` variable.
 
 ## Removing a PAT
 
-If your PAT has accidently been publically released in the world, you should deactivate that PAT. To do this, navigate to the [OSF settings page](https://osf.io/settings/tokens/) and click on the `x` to the right of the PAT you want to deactivate. You can then create a new PAT and reauthenticate. 
+If your PAT has accidentally been publicly released in the world, you should deactivate that PAT. To do this, navigate to the [OSF settings page](https://osf.io/settings/tokens/) and click on the :x: to the right of the PAT you want to deactivate. You can then create a new PAT and reauthenticate.
