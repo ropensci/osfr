@@ -95,9 +95,12 @@ rbind.osf_tbl <- function(..., deparse.level = 1)  {
 
 #' Validate and rebuild osf_tbl
 #'
-#' Return an osf_tbl with the proper subclass if the input meets all of the
-#' requirements to be a valid osf_tbl. Otherwise, strip the osf_tbl class
-#' and subclass before returning.
+#' Return an osf_tbl with the proper subclass *if* the input meets all of the
+#' requirements for a valid osf_tbl. Otherwise, the object is returned as a
+#' standard tibble.
+#'
+#' @param x an [`osf_tbl`]
+#' @return an [`osf_tbl`] or [`tibble`]
 #' @noRd
 rebuild_osf_tbl <- function(x) {
   if (is.data.frame(x) &&
@@ -108,8 +111,7 @@ rebuild_osf_tbl <- function(x) {
     return(as_osf_tbl(x, subclass = subclass))
   } else {
     # remove osf_tbl classes
-    classes <- class(x)[!grepl("osf_tbl", class(x), fixed = TRUE)]
-    structure(x, class = classes)
+    tibble::new_tibble(x, nrow = nrow(x))
   }
 }
 
