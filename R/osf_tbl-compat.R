@@ -1,3 +1,17 @@
+# Export methods to be compatible with the osf_tbl classes
+
+#' @export
+`[.osf_tbl` <- function(x, i, j, drop = FALSE) {
+  structure(NextMethod(), class = class(x))
+}
+
+#' @export
+rbind.osf_tbl <- function(..., deparse.level = 1)  {
+  out <- base::rbind.data.frame(..., deparse.level = deparse.level)
+  rebuild_osf_tbl(out)
+}
+
+
 # dplyr compatibility is adapted from dtplyr and googledrive
 # https://github.com/hadley/dtplyr/blob/master/R/compat-dplyr-0.6.0.R
 # https://github.com/tidyverse/googledrive/blob/master/R/dplyr-compat.R

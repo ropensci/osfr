@@ -82,17 +82,6 @@ as_osf_tbl.list <- function(x, subclass = NULL) {
   new_osf_tbl(out, subclass)
 }
 
-#' @export
-`[.osf_tbl` <- function(x, i, j, drop = FALSE) {
-  structure(NextMethod(), class = class(x))
-}
-
-#' @export
-rbind.osf_tbl <- function(..., deparse.level = 1)  {
-  out <- base::rbind.data.frame(..., deparse.level = deparse.level)
-  rebuild_osf_tbl(out)
-}
-
 #' Validate and rebuild osf_tbl
 #'
 #' Return an osf_tbl with the proper subclass *if* the input meets all of the
