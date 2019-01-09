@@ -72,6 +72,9 @@ make_single <- function(x) {
     msg <- "This is not a vectorized function. Only the first %s of %i will be used."
     warn(sprintf(msg, entity, n))
     x <- head(x, 1)
+  } else if (n == 0) {
+    object <- switch(entity, row = "data frame", element = "vector")
+    abort(sprintf("Can't proceed because this %s is empty.", object))
   }
   x
 }
