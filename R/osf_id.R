@@ -1,7 +1,7 @@
 #' Extract OSF identifiers
 #'
-#' Extract GUIDs and Waterbutler IDs from various types of inputs. Valid looking
-#' IDs are returned as `osf_id` objects.
+#' Extract OSF GUIDs and Waterbutler IDs from various types of inputs. Valid
+#' looking IDs are returned as `osf_id` objects.
 #'
 #' @section Identifier types:
 #' There are 2 types of identifiers you'll encounter on OSF. The first is the
@@ -14,9 +14,16 @@
 #' @param x An `osf_tbl`, OSF URL, or a generic string containing a GUID or
 #'   Waterbutler ID.
 #'
-#' @return A character vector with class `osf_id`
+#' @return A character vector with class `osf_id`.
 #' @examples
-#' as_id("https://osf.io/egzt9/")
+#' # extract a GUID from an OSF URL
+#' proj_id <- as_id("https://osf.io/7zqxp/")
+#'
+#' # extract waterbutler IDs from an `osf_tbl_file`` with multiple files
+#' osf_retrieve_node(proj_id) %>%
+#'   osf_ls_files() %>%
+#'   as_id()
+#'
 #' @export
 as_id <- function(x) UseMethod("as_id")
 

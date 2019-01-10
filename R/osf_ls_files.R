@@ -1,29 +1,37 @@
 #' List files and directories on OSF
 #'
-#' List the files and directories in the top-level of an OSF project, component, or
-#' directory. Specify a `path` to list the contents of a particular
+#' List the files and directories in the top-level of an OSF project, component,
+#' or directory. Specify a `path` to list the contents of a particular
 #' subdirectory.
 #'
-#' @param x one of the following:
-#'   * an [`osf_tbl_node`] with a single project or component.
-#'   * an [`osf_tbl_file`] with a single directory.
-#' @param path list files within the specified subdirectory path
+#' @param x One of the following:
+#'   * An [`osf_tbl_node`] with a single project or component.
+#'   * An [`osf_tbl_file`] with a single directory.
+#' @param path List files within the specified subdirectory path.
 #' @template filter-type
 #' @template filter-pattern
 #' @template n_max
 #' @template verbose
 #'
-#' @return an [`osf_tbl_file`] with one row for each file or directory
+#' @return An [`osf_tbl_file`] with one row for each file or directory.
 #' @examples
 #' \dontrun{
-#' # List the files and folders from https://osf.io/gep9v/
-#' project <- osf_retrieve_node("gep9v")
-#' files <- osf_ls_files(project)
+#' # Retrieve the Psychology Reproducibility Project from OSF
+#' pysch_rp <- osf_retrieve_node("ezum7")
 #'
-#' # List the files in the first directory
-#' osf_ls_files(files[1, ])
+#' # List all files and directories
+#' osf_ls_files(pysch_rp)
+#'
+#' # ...only the directories
+#' osf_ls_files(pysch_rp, type = "folder")
+#'
+#' # ...only PDF files
+#' osf_ls_files(pysch_rp, type = "file", pattern = "pdf")
+#'
+#' # List the contents of the first directory
+#' osf_ls_files(pysch_rp, path = "RPP_SI_Figures")
 #' }
-#' @seealso [`osf_ls_nodes()`] to generate a list of projects and components
+#' @seealso [`osf_ls_nodes()`] to generate a list of projects and components.
 #' @export
 osf_ls_files <-
   function(x,

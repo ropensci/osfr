@@ -4,20 +4,27 @@
 #' top-level of another OSF project or component.
 #'
 #' @param x one of the following:
-#'   * an [`osf_tbl_node`] with a single project or component.
-#'   * an [`osf_tbl_user`] with a single OSF user.
+#'   * An [`osf_tbl_node`] with a single project or component.
+#'   * An [`osf_tbl_user`] with a single OSF user.
 #' @template filter-pattern
 #' @template n_max
 #' @template verbose
 #'
-#' @return an [`osf_tbl_node`] with one row for each OSF project or component
+#' @return An [`osf_tbl_node`] with one row for each OSF project or component.
 #' @examples
 #' \dontrun{
 #' # List your recent projects and components
-#' user <- osf_retrieve_user("me")
-#' osf_ls_nodes(user)
+#' osf_retrieve_user("me") %>%
+#'   osf_ls_nodes()
+#'
+#' # List the first 10 components in the #ScanAllFish project
+#' fish_ctscans <- osf_retrieve_node("ecmz4")
+#' osf_ls_nodes(fish_ctscans)
+#'
+#' # Now just the components with scans of species from the Sphyrna genus
+#' osf_ls_nodes(fish_ctscans, pattern = "Sphyrna")
 #' }
-#' @seealso [`osf_ls_files()`] to generate a list of files and files
+#' @seealso [`osf_ls_files()`] to generate a list of files and files.
 #' @export
 osf_ls_nodes <-
   function(x,

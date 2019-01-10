@@ -1,4 +1,4 @@
-#' OSF Delete
+#' Delete projects or components from OSF
 #'
 #' Use `osf_rm()`  to *permanently* delete a project or component from OSF,
 #' including any uploaded files, wiki content, or comments contained therein.

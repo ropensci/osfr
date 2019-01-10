@@ -1,10 +1,10 @@
 #' Create a new project or component on OSF
 #'
 #' Use `osf_create_project()` to create a new top-level project on OSF. A nested
-#' component can be created by providing an [`osf_tbl_node`] referencing an
+#' component can be created by providing an [`osf_tbl_node`] containing an
 #' existing project or component to `osf_create_component()`'s `x` argument.
 #'
-#' @section: OSF Nodes
+#' @section: OSF nodes
 #' Both projects and components are implemented as *nodes* within OSF, which
 #' explains why they are functionally identical. The only distinction between
 #' the two is projects exist at the top-level of an organizational hierarchy,
@@ -16,7 +16,7 @@
 #' 1. OSF Guides: Create a Project.
 #' <http://help.osf.io/m/projects/l/481539-create-a-project>.
 #' 2. OSF Guides: Create a Component.
-#' <http://help.osf.io/m/projects/l/481998-create-components>
+#' <http://help.osf.io/m/projects/l/481998-create-components>.
 #'
 #' @param x An [`osf_tbl_node`] with a single OSF project or component that will
 #'   serve as the new sub-component's parent node.
@@ -25,14 +25,14 @@
 #' @param public Logical, should it be publicly available (`TRUE`) or private
 #'   (`FALSE`, the default)?
 #'
-#' @return an [`osf_tbl_node`] containing the new OSF project or component
+#' @return An [`osf_tbl_node`] containing the new project or component.
 #'
 #' @examples
 #' \dontrun{
-#' # create a new private project
-#' project <- osf_create_project(title = "Private OSF Project")
+#' # create a new public project
+#' project <- osf_create_project(title = "Private OSF Project", public = TRUE)
 #'
-#' # create a new component
+#' # add a private component to the new project
 #' component <- osf_create_component(project, title = "Project Data")
 #' }
 #' @name osf_create
