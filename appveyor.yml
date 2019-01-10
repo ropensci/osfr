@@ -16,6 +16,7 @@ cache:
 # Adapt as necessary starting from here
 
 environment:
+  PKGTYPE: win.binary
   matrix:
     - R_VERSION: stable
       R_ARCH: x64
