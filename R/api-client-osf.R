@@ -17,7 +17,7 @@ user_agent <- function(agent = "osfr") {
 
 # Construct the OSF API Client
 .osf_cli <- function(pat = getOption("osfr.pat")) {
-  server <- Sys.getenv("OSF_USE_SERVER")
+  server <- Sys.getenv("OSF_SERVER")
   url <- if (nzchar(server)) {
     sprintf("https://api.%s.osf.io", server)
   } else {

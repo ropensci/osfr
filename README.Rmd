@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 
-Sys.unsetenv(c("OSF_USE_SERVER", "OSF_PAT"))
+Sys.unsetenv(c("OSF_SERVER", "OSF_PAT"))
 ```
 
 # osfr <a href="https://github.com/aaronwolen/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>

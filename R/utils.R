@@ -96,7 +96,7 @@ osf_dev_on <- function() {
   renviron <- normalizePath(".Renviron")
   stopifnot(file.exists(renviron))
   stopifnot(readRenviron(renviron))
-  Sys.setenv(OSF_USE_SERVER = "test")
+  Sys.setenv(OSF_SERVER = "test")
   message("osfr development mode enabled.")
   osf_auth()
 }
@@ -105,7 +105,7 @@ osf_dev_off <- function() {
   renviron <- normalizePath("~/.Renviron")
   stopifnot(file.exists(renviron))
   stopifnot(readRenviron(renviron))
-  Sys.unsetenv("OSF_USE_SERVER")
+  Sys.unsetenv("OSF_SERVER")
   message("osfr development mode disabled.")
   osf_auth()
 }
