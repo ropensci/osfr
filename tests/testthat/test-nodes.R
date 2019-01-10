@@ -41,11 +41,11 @@ test_that("nested nodes can be created", {
 context("Node deletion")
 
 test_that("deleting non-empty project/component fails", {
-  expect_error(osf_rm(p1), "Any child components must be deleted")
-  expect_error(osf_rm(c1), "Any child components must be deleted")
+  expect_error(osf_rm(p1, check = FALSE), "Any child components must be deleted")
+  expect_error(osf_rm(c1, check = FALSE), "Any child components must be deleted")
 })
 
 test_that("non-empty project can be recursively deleted", {
-  out <- osf_rm(p1, recursive = TRUE)
+  out <- osf_rm(p1, recursive = TRUE, check = FALSE)
   expect_true(out)
 })

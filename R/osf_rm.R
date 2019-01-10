@@ -11,7 +11,10 @@
 #' of sub-components before deleting the top-level entity.
 #'
 #' @param x an [`osf_tbl_node`]
-#' @param recursive remove sub-components before deleting the top-level entity
+#' @param recursive Remove all sub-components before deleting the top-level entity.
+#' @param check If `FALSE` deletion will proceed without opening the project or
+#'   component, and asking for your verification. This basically removes your
+#'   safety net.
 #' @template verbose
 #'
 #' @return Invisibly returns `TRUE` if deletion was successful.
@@ -23,12 +26,12 @@
 #' }
 #'
 #' @export
-osf_rm <- function(x, recursive = FALSE, verbose = FALSE) {
+osf_rm <- function(x, recursive = FALSE, verbose = FALSE, check = TRUE) {
   UseMethod("osf_rm")
 }
 
 #' @export
-osf_rm.osf_tbl_node <- function(x, recursive = FALSE, verbose = FALSE) {
+osf_rm.osf_tbl_node <- function(x, recursive = FALSE, verbose = FALSE, check = TRUE) {
   x <- make_single(x)
   id <- as_id(x)
 
@@ -43,6 +46,9 @@ osf_rm.osf_tbl_node <- function(x, recursive = FALSE, verbose = FALSE) {
     for (i in rev(seq_along(child_ids))) {
       child <- child_ids[i]
       if (child == id) break
+      if (check) {
+        if (!rm_check(child)) return(invisible())
+      }
       .osf_node_delete(child)
       if (verbose) {
         message(sprintf("Deleted component %s", names(child)))
@@ -51,9 +57,18 @@ osf_rm.osf_tbl_node <- function(x, recursive = FALSE, verbose = FALSE) {
     }
   }
 
+  if (check) {
+    if (!rm_check(child)) return(invisible())
+  }
   out <- .osf_node_delete(id)
   if (isTRUE(out)) {
     if (verbose) message(sprintf("Deleted node %s", id))
     invisible(TRUE)
   }
+}
+
+rm_check <- function(id) {
+  osf_open(id)
+  question <- sprintf("I just opened node '%s' in your browser.\nAre you sure you want to PERMANENTLY delete it?", id)
+  yesno_menu(question)
 }
