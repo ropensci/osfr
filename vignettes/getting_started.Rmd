@@ -123,7 +123,7 @@ We can download files from any public or private node that we have access to and
     ```
 
 ```{r cleanup, include=FALSE}
-osf_rm(car_project, recursive = TRUE)
+osf_rm(car_project, recursive = TRUE, check = FALSE)
 unlink("mtcars.csv")
 ```
 
