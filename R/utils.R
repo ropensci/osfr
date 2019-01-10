@@ -117,24 +117,21 @@ osf_dev_off <- function() {
 #' Typically embedded within a function, a question specific to the function
 #' task is prespecified for the title argument of \code{menu()}.
 #'
-#' @param question A \code{character} specific to the action needing verification.
-#' @param node_id A \code{character} indicating OSF node under consideration.
-#' @return A \code{logical} verifying intent.
+#' @param question A character describing the action needing verification.
+#' @return A `logical` verifying intent.
 #' @examples
-#' question <- "Are you sure you want to permanently change node"
-#' node <- "z756a"
-#' yesno_menu(question, node)
+#' question <- "Are you sure you want to permanently delete?"
+#' yesno_menu(question)
 #' @importFrom utils menu
 #' @noRd
 
-
-yesno_menu <- function(question, id) {
-  yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah", "I agree", "Absolutely", "Yes, 100%")
-  nos <- c("No way", "Not yet", "I forget", "No", "Nope", "Uhhhh... Maybe?",
+yesno_menu <- function(question) {
+  yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah", "Absolutely", "Yes, 100%")
+  nos <- c("No way", "Not yet", "I don't think so", "No", "Nope", "Uhhhh... Maybe?",
            "No. That's my final answer")
 
   qs <- c(sample(yeses, 1), sample(nos, 2))
   rand <- sample(length(qs))
 
-  menu(qs[rand], title = sprintf("%s, %s ?", question, id)) == which(rand == 1)
+  menu(qs[rand], title = question) == which(rand == 1)
 }
