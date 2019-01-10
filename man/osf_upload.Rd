@@ -21,7 +21,7 @@ will be used).}
 record the previous version.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
-(default \code{FALSE})}
+about interactions with the OSF API (default \code{FALSE}).}
 }
 \value{
 an \code{\link{osf_tbl_file}} containing uploaded file

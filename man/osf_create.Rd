@@ -21,15 +21,15 @@ description.}
 serve as the new sub-component's parent node.}
 }
 \value{
-an \code{\link{osf_tbl_node}} containing the new OSF project or component
+An \code{\link{osf_tbl_node}} containing the new project or component.
 }
 \description{
 Use \code{osf_create_project()} to create a new top-level project on OSF. A nested
-component can be created by providing an \code{\link{osf_tbl_node}} referencing an
+component can be created by providing an \code{\link{osf_tbl_node}} containing an
 existing project or component to \code{osf_create_component()}'s \code{x} argument.
 }
 \section{}{
- OSF Nodes
+ OSF nodes
 Both projects and components are implemented as \emph{nodes} within OSF, which
 explains why they are functionally identical. The only distinction between
 the two is projects exist at the top-level of an organizational hierarchy,
@@ -40,10 +40,10 @@ an \code{\link{osf_tbl_node}}.
 
 \examples{
 \dontrun{
-# create a new private project
-project <- osf_create_project(title = "Private OSF Project")
+# create a new public project
+project <- osf_create_project(title = "Private OSF Project", public = TRUE)
 
-# create a new component
+# add a private component to the new project
 component <- osf_create_component(project, title = "Project Data")
 }
 }
@@ -52,6 +52,6 @@ component <- osf_create_component(project, title = "Project Data")
 \item OSF Guides: Create a Project.
 \url{http://help.osf.io/m/projects/l/481539-create-a-project}.
 \item OSF Guides: Create a Component.
-\url{http://help.osf.io/m/projects/l/481998-create-components}
+\url{http://help.osf.io/m/projects/l/481998-create-components}.
 }
 }

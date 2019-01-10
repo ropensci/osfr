@@ -2,7 +2,7 @@
 % Please edit documentation in R/osf_rm.R
 \name{osf_rm}
 \alias{osf_rm}
-\title{OSF Delete}
+\title{Delete projects or components from OSF}
 \usage{
 osf_rm(x, recursive = FALSE, verbose = FALSE)
 }
@@ -12,7 +12,7 @@ osf_rm(x, recursive = FALSE, verbose = FALSE)
 \item{recursive}{remove sub-components before deleting the top-level entity}
 
 \item{verbose}{Logical, indicating whether to print informative messages
-(default \code{FALSE})}
+about interactions with the OSF API (default \code{FALSE}).}
 }
 \value{
 Invisibly returns \code{TRUE} if deletion was successful.

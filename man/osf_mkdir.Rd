@@ -2,28 +2,43 @@
 % Please edit documentation in R/osf_mkdir.R
 \name{osf_mkdir}
 \alias{osf_mkdir}
-\title{Create a OSF folder}
+\title{Create directories on OSF}
 \usage{
 osf_mkdir(x, path, verbose = FALSE)
 }
 \arguments{
-\item{x}{an \code{\link{osf_tbl_node}} representing an OSF project or component or an
-\code{\link{osf_tbl_file}} containing a directory}
+\item{x}{One of the following:
+\itemize{
+\item An \code{\link{osf_tbl_node}} with a single OSF project or component.
+\item An \code{\link{osf_tbl_file}} containing a single directory.
+}}
 
-\item{path}{Name for the new directory}
+\item{path}{Name of the new directory or a path ending with the new directory.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
-(default \code{FALSE})}
+about interactions with the OSF API (default \code{FALSE}).}
 }
 \value{
-an \code{\link{osf_tbl_file}} containing the last directory specified in \code{path}
+An \code{\link{osf_tbl_file}} with one row containing the leaf directory
+specified in \code{path}.
 }
 \description{
-Creates a new folder in an OSF project or component.
+Use \code{osf_mkdir()} to create a new directory on OSF. Directories can be added
+to projects, components, or nested within existing directories on OSF. If
+\code{path} contains multiple directories (e.g., \code{"data/rawdata"}) the
+intermediate-level directories will be created if needed.
 }
 \examples{
 \dontrun{
 proj <- osf_create_project("Directory Example")
-osf_mkdir(proj, "data/raw_data")
+
+# add directory to the top-level of the Directory Example project
+data_dir <- osf_mkdir(proj, path = "data")
+
+# add a subdirectory nested within data/
+osf_mkdir(data_dir, path = "rawdata")
+
+# recursively create multiple directory levels within data/
+osf_mkdir(data_dir, path = "samples/pcr/qc")
 }
 }

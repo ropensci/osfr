@@ -16,6 +16,7 @@
 #'
 #' @return A character vector with class `osf_id`.
 #' @examples
+#' \dontrun{
 #' # extract a GUID from an OSF URL
 #' proj_id <- as_id("https://osf.io/7zqxp/")
 #'
@@ -23,7 +24,7 @@
 #' osf_retrieve_node(proj_id) %>%
 #'   osf_ls_files() %>%
 #'   as_id()
-#'
+#' }
 #' @export
 as_id <- function(x) UseMethod("as_id")
 

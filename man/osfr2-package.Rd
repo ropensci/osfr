@@ -27,10 +27,8 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item VP Nagraj \email{vpnagraj@virginia.edu} [contributor]
-  \item Ryan Hafen \email{rhafen@gmail.com} [contributor]
-  \item Julien Colomb \email{julien.colomb@fu-berlin.de} [contributor]
-  \item Brian Richards \email{brian.g.richards@gmail.com} [contributor]
+  \item Timothy York \email{timothy.york@vcuhealth.org} [contributor]
+  \item Courtney Soderberg \email{courtney@cos.io} [contributor]
 }
 
 }

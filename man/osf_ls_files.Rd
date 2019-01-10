@@ -8,43 +8,52 @@ osf_ls_files(x, path = NULL, type = "any", pattern = NULL,
   n_max = 10, verbose = FALSE)
 }
 \arguments{
-\item{x}{one of the following:
+\item{x}{One of the following:
 \itemize{
-\item an \code{\link{osf_tbl_node}} with a single project or component.
-\item an \code{\link{osf_tbl_file}} with a single directory.
+\item An \code{\link{osf_tbl_node}} with a single project or component.
+\item An \code{\link{osf_tbl_file}} with a single directory.
 }}
 
-\item{path}{list files within the specified subdirectory path}
+\item{path}{List files within the specified subdirectory path.}
 
-\item{type}{filter query to include only \code{"file"} or \code{"folder"}}
+\item{type}{Filter query by type. Set to \code{"file"} to list only files, or
+\code{"folder"}to list only folders}
 
-\item{pattern}{character string used to filter for results that contain the
-substring \code{"pattern"} in their name. Note this is a fixed, case-insensitive
+\item{pattern}{Character string used to filter for results that contain the
+substring \code{"pattern"} in their name. \emph{Note:} this is a fixed, case-insensitive
 search.}
 
 \item{n_max}{Number of results to return from OSF.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
-(default \code{FALSE})}
+about interactions with the OSF API (default \code{FALSE}).}
 }
 \value{
-an \code{\link{osf_tbl_file}} with one row for each file or directory
+An \code{\link{osf_tbl_file}} with one row for each file or directory.
 }
 \description{
-List the files and directories in the top-level of an OSF project, component, or
-directory. Specify a \code{path} to list the contents of a particular
+List the files and directories in the top-level of an OSF project, component,
+or directory. Specify a \code{path} to list the contents of a particular
 subdirectory.
 }
 \examples{
 \dontrun{
-# List the files and folders from https://osf.io/gep9v/
-project <- osf_retrieve_node("gep9v")
-files <- osf_ls_files(project)
+# Retrieve the Psychology Reproducibility Project from OSF
+pysch_rp <- osf_retrieve_node("ezum7")
 
-# List the files in the first directory
-osf_ls_files(files[1, ])
+# List all files and directories
+osf_ls_files(pysch_rp)
+
+# ...only the directories
+osf_ls_files(pysch_rp, type = "folder")
+
+# ...only PDF files
+osf_ls_files(pysch_rp, type = "file", pattern = "pdf")
+
+# List the contents of the first directory
+osf_ls_files(pysch_rp, path = "RPP_SI_Figures")
 }
 }
 \seealso{
-\code{\link[=osf_ls_nodes]{osf_ls_nodes()}} to generate a list of projects and components
+\code{\link[=osf_ls_nodes]{osf_ls_nodes()}} to generate a list of projects and components.
 }

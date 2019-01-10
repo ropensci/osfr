@@ -9,21 +9,21 @@ osf_ls_nodes(x, pattern = NULL, n_max = 10, verbose = FALSE)
 \arguments{
 \item{x}{one of the following:
 \itemize{
-\item an \code{\link{osf_tbl_node}} with a single project or component.
-\item an \code{\link{osf_tbl_user}} with a single OSF user.
+\item An \code{\link{osf_tbl_node}} with a single project or component.
+\item An \code{\link{osf_tbl_user}} with a single OSF user.
 }}
 
-\item{pattern}{character string used to filter for results that contain the
-substring \code{"pattern"} in their name. Note this is a fixed, case-insensitive
+\item{pattern}{Character string used to filter for results that contain the
+substring \code{"pattern"} in their name. \emph{Note:} this is a fixed, case-insensitive
 search.}
 
 \item{n_max}{Number of results to return from OSF.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
-(default \code{FALSE})}
+about interactions with the OSF API (default \code{FALSE}).}
 }
 \value{
-an \code{\link{osf_tbl_node}} with one row for each OSF project or component
+An \code{\link{osf_tbl_node}} with one row for each OSF project or component.
 }
 \description{
 List the projects or components associated with a user or contained in the
@@ -32,10 +32,17 @@ top-level of another OSF project or component.
 \examples{
 \dontrun{
 # List your recent projects and components
-user <- osf_retrieve_user("me")
-osf_ls_nodes(user)
+osf_retrieve_user("me") \%>\%
+  osf_ls_nodes()
+
+# List the first 10 components in the #ScanAllFish project
+fish_ctscans <- osf_retrieve_node("ecmz4")
+osf_ls_nodes(fish_ctscans)
+
+# Now just the components with scans of species from the Sphyrna genus
+osf_ls_nodes(fish_ctscans, pattern = "Sphyrna")
 }
 }
 \seealso{
-\code{\link[=osf_ls_files]{osf_ls_files()}} to generate a list of files and files
+\code{\link[=osf_ls_files]{osf_ls_files()}} to generate a list of files and files.
 }
