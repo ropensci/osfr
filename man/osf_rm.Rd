@@ -4,15 +4,19 @@
 \alias{osf_rm}
 \title{Delete projects or components from OSF}
 \usage{
-osf_rm(x, recursive = FALSE, verbose = FALSE)
+osf_rm(x, recursive = FALSE, verbose = FALSE, check = TRUE)
 }
 \arguments{
 \item{x}{an \code{\link{osf_tbl_node}}}
 
-\item{recursive}{remove sub-components before deleting the top-level entity}
+\item{recursive}{Remove all sub-components before deleting the top-level entity.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 about interactions with the OSF API (default \code{FALSE}).}
+
+\item{check}{If \code{FALSE} deletion will proceed without opening the project or
+component, and asking for your verification. This basically removes your
+safety net.}
 }
 \value{
 Invisibly returns \code{TRUE} if deletion was successful.
