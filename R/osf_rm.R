@@ -58,7 +58,7 @@ osf_rm.osf_tbl_node <- function(x, recursive = FALSE, verbose = FALSE, check = T
   }
 
   if (check) {
-    if (!rm_check(child)) return(invisible())
+    if (!rm_check(id)) return(invisible())
   }
   out <- .osf_node_delete(id)
   if (isTRUE(out)) {
@@ -69,6 +69,9 @@ osf_rm.osf_tbl_node <- function(x, recursive = FALSE, verbose = FALSE, check = T
 
 rm_check <- function(id) {
   osf_open(id)
-  question <- sprintf("I just opened node '%s' in your browser.\nAre you sure you want to PERMANENTLY delete it?", id)
+  question <- sprintf(
+    "I just opened node '%s' in your browser.\nAre you sure you want to PERMANENTLY delete it?",
+    id
+  )
   yesno_menu(question)
 }
