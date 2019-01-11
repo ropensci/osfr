@@ -43,10 +43,10 @@ devtools::install_github("aaronwolen/osfr")
 
 ### Accessing Open Research Materials
 
-Many researchers use OSF to archive and share their work. If you come
-across a paper that cites an OSF repository, osfr can be used to explore
-the project and download the associated files—you only need the
-project’s URL or GUID (global unique identifier) to get started.
+Many researchers use OSF to archive and share their work. You can use
+osfr to explore publicly accessible projects and download the associated
+files—all you need to get started is the project’s URL or GUID (global
+unique identifier).
 
 Here we’ll retrieve the main project for the Cancer Reproducibility
 Project (<https://osf.io/e81xl/>).
@@ -99,17 +99,17 @@ osfr is compatible with the [pipe
 operator](https://magrittr.tidyverse.org) and
 [dplyr](https://dplyr.tidyverse.org), providing a powerful set of tools
 for working with `osf_tbl`s. Here, we’re listing the sub-components
-nested within the *Replication Studies* component, filtering for
-[*Study 19*](https://osf.io/7zqxp/) and then listing the files uploaded
-to that study’s component.
+nested within the *Replication Studies* component, filtering for a
+specific study ([*Study 19*](https://osf.io/7zqxp/)) and then listing
+the files uploaded to that study’s component.
 
 ``` r
 library(dplyr)
 
-cr_project %>% 
-  osf_ls_nodes() %>% 
-  filter(name == "Replication Studies") %>% 
-  osf_ls_nodes(pattern = "Study 19") %>% 
+cr_project %>%
+  osf_ls_nodes() %>%
+  filter(name == "Replication Studies") %>%
+  osf_ls_nodes(pattern = "Study 19") %>%
   osf_ls_files()
 #> # A tibble: 6 x 3
 #>   name                                    id                      meta     
@@ -122,9 +122,8 @@ cr_project %>%
 #> 6 Study_19_Correction_Letter.docx         5a56569125719b000ff28b… <list [3…
 ```
 
-We could continue this pattern of exploration and list the files
-contained within *these* projects. You can also download local copies of
-files using `osf_download()`.
+We could continue this pattern of exploration and even download local
+copies of project files using `osf_download()`.
 
 ### Managing Projects
 
@@ -145,7 +144,7 @@ example in which we:
 # create an external data file
 write.csv(mtcars, "mtcars.csv")
 
-osf_create_project(title = "Motor Trend Car Road Tests") %>% 
+osf_create_project(title = "Motor Trend Car Road Tests") %>%
   osf_create_component("Car Data") %>%
   osf_mkdir("rawdata") %>%
   osf_upload("mtcars.csv") %>%
@@ -166,12 +165,12 @@ There are 3 main types of OSF entities that osfr can work with:
 2.  **files:** this includes both files *and* folders stored on OSF
 3.  **users:** individuals with OSF accounts
 
-osfr represents these entities within `osf_tbl`s—specialized tibbles
-that provide useful information about the entities like their `name` and
-unique `id` for users, and API data in the `meta` column that’s
-necessary for osfr’s internal functions. Otherwise, they’re just
-`data.frames` and can be manipulated using standard functions from base
-R or dplyr.
+osfr represents these entities within `osf_tbl`s—specialized data frames
+built on the tibble class that provide useful information about the
+entities like their `name` and unique `id` for users, and API data in
+the `meta` column that’s necessary for osfr’s internal functions.
+Otherwise, they’re just `data.frames` and can be manipulated using
+standard functions from base R or dplyr.
 
 ## Acknowledgments
 
@@ -179,13 +178,13 @@ OSF is developed by the [Center for Open
 Science](https://cos.io "Center for Open Science") in Charlottesville,
 VA.
 
-The original version of osfr was developed by
-\[@chartgerink\][chris](https://github.com/chartgerink) and further
-developed by \[@bgrich\][brian](https://github.com/bgrich) and
-\[@hafen\][ryan](https://github.com/hafen). The current version was
-developed by \[@aaronwolen\][aaron](https://github.com/aaronwolen) and
-is *heavily* inspired by \[@jennybc\][jenny](https://github.com/jennybc)
-and \[@lucymcgowan\][lucy](https://github.com/lucy)’s excellent
+The original version of osfr was developed by [Chris
+Chartgerink](https://github.com/chartgerink) and further developed by
+[Brian Richards](https://github.com/bgrich) and [Ryan
+Hafen](https://github.com/hafen). The current version was developed by
+[Aaron Wolen](https://github.com/aaronwolen) and is *heavily* inspired
+by [Jennifer Bryan](https://github.com/jennybc) and [Lucy D’Agostino
+McGowan](https://github.com/lucymcgowan)’s excellent
 [googledrive](https://googledrive.tidyverse.org) package. Seriously, we
 borrowed a lot of great ideas from them. Other important resources
 include [http testing](https://ropensci.github.io/http-testing-book/) by
@@ -193,6 +192,8 @@ Scott Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley
 Wickham. Development was also greatly facilitated by OSF’s excellent
 [API documentation](https://developer.osf.io "OSF API Documentation").
 
-Big thanks to Rusty Speidel for designing our logo.
+Big thanks to Rusty Speidel for designing our logo and [Tim
+Errington](https://github.com/timerrington) for his feedback during
+development.
 
 <!-- links -->

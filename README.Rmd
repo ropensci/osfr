@@ -45,7 +45,7 @@ devtools::install_github("aaronwolen/osfr")
 
 ### Accessing Open Research Materials
 
-Many researchers use OSF to archive and share their work. If you come across a paper that cites an OSF repository, osfr can be used to explore the project and download the associated files---you only need the project's URL or GUID (global unique identifier) to get started. 
+Many researchers use OSF to archive and share their work. You can use osfr to explore publicly accessible projects and download the associated files---all you need to get started is the project's URL or GUID (global unique identifier).
 
 Here we'll retrieve the main project for the Cancer Reproducibility Project (<https://osf.io/e81xl/>).
 
@@ -70,20 +70,19 @@ This project contains 2 ***components***: *Replication Studies* and *Data collec
 osf_ls_nodes(cr_project)
 ```
 
-osfr is compatible with the [pipe operator][magrittr] and [dplyr][], providing a powerful set of tools for working with `osf_tbl`s. Here, we're listing the sub-components nested within the *Replication Studies* component, filtering for [*Study 19*](https://osf.io/7zqxp/) and then listing the files uploaded to that study's component. 
+osfr is compatible with the [pipe operator][magrittr] and [dplyr][], providing a powerful set of tools for working with `osf_tbl`s. Here, we're listing the sub-components nested within the *Replication Studies* component, filtering for a specific study ([*Study 19*](https://osf.io/7zqxp/)) and then listing the files uploaded to that study's component.
 
 ```{r message=FALSE}
 library(dplyr)
 
-cr_project %>% 
-  osf_ls_nodes() %>% 
-  filter(name == "Replication Studies") %>% 
-  osf_ls_nodes(pattern = "Study 19") %>% 
+cr_project %>%
+  osf_ls_nodes() %>%
+  filter(name == "Replication Studies") %>%
+  osf_ls_nodes(pattern = "Study 19") %>%
   osf_ls_files()
 ```
 
-We could continue this pattern of exploration and list the files contained within *these* projects. You can also download local copies of files using `osf_download()`.
-
+We could continue this pattern of exploration and even download local copies of project files using `osf_download()`.
 
 ### Managing Projects
 
@@ -99,7 +98,7 @@ You can use osfr to create projects, add sub-components, create directories, and
 # create an external data file
 write.csv(mtcars, "mtcars.csv")
 
-osf_create_project(title = "Motor Trend Car Road Tests") %>% 
+osf_create_project(title = "Motor Trend Car Road Tests") %>%
   osf_create_component("Car Data") %>%
   osf_mkdir("rawdata") %>%
   osf_upload("mtcars.csv") %>%
@@ -116,16 +115,15 @@ There are 3 main types of OSF entities that osfr can work with:
 2. **files:** this includes both files *and* folders stored on OSF
 3. **users:** individuals with OSF accounts
 
-osfr represents these entities within `osf_tbl`s---specialized tibbles that provide  useful information about the entities like their `name` and unique `id` for users, and API data in the `meta` column that's necessary for osfr's internal functions. Otherwise, they're just `data.frames` and can be manipulated using standard functions from base R or dplyr.
-
+osfr represents these entities within `osf_tbl`s---specialized data frames built on the tibble class that provide useful information about the entities like their `name` and unique `id` for users, and API data in the `meta` column that's necessary for osfr's internal functions. Otherwise, they're just `data.frames` and can be manipulated using standard functions from base R or dplyr.
 
 ## Acknowledgments
 
 OSF is developed by the [Center for Open Science][cos] in Charlottesville, VA.
 
-The original version of osfr was developed by [@chartgerink][chris] and further developed by [@bgrich][brian] and [@hafen][ryan]. The current version was developed by [@aaronwolen][aaron] and is *heavily* inspired by [@jennybc][jenny] and [@lucymcgowan][lucy]'s excellent [googledrive][] package. Seriously, we borrowed a lot of great ideas from them. Other important resources include [http testing](https://ropensci.github.io/http-testing-book/) by Scott Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley Wickham. Development was also greatly facilitated by OSF's excellent [API documentation][osf-api]. 
+The original version of osfr was developed by [Chris Chartgerink][chris] and further developed by [Brian Richards][brian] and [Ryan Hafen][ryan]. The current version was developed by [Aaron Wolen][aaron] and is *heavily* inspired by [Jennifer Bryan][jenny] and [Lucy D'Agostino McGowan][lucy]'s excellent [googledrive][] package. Seriously, we borrowed a lot of great ideas from them. Other important resources include [http testing](https://ropensci.github.io/http-testing-book/) by Scott Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley Wickham. Development was also greatly facilitated by OSF's excellent [API documentation][osf-api].
 
-Big thanks to Rusty Speidel for designing our logo.
+Big thanks to Rusty Speidel for designing our logo and [Tim Errington][tim] for his feedback during development.
 
 <!-- links -->
 [osf]: https://osf.io "Open Science Framework"
@@ -138,11 +136,13 @@ Big thanks to Rusty Speidel for designing our logo.
 [magrittr]: https://magrittr.tidyverse.org
 [dplyr]: https://dplyr.tidyverse.org
 [googledrive]: https://googledrive.tidyverse.org
+[tibble]: https://tibble.tidyverse.org
 
 [chris]: https://github.com/chartgerink
 [brian]: https://github.com/bgrich
 [ryan]: https://github.com/hafen
 [aaron]: https://github.com/aaronwolen
 [jenny]: https://github.com/jennybc
-[lucy]: https://github.com/lucy
+[lucy]: https://github.com/lucymcgowan
+[tim]: https://github.com/timerrington
 
