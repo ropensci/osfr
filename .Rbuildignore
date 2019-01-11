@@ -1,15 +1,22 @@
 ^\.github$
-^appveyor\.yml$
 ^Meta$
 ^doc$
 ^data-raw$
 ^README\.Rmd$
-^codecov\.yml$
-^.*\.Rproj$
-^\.travis.yml
-^\.lintr
-inst/.lintr$
 ^_ignore$
 ^man-roxygen$
+
+# rstudio
+^.*\.Rproj$
 ^\.Rproj\.user$
 
+# CI
+^\.travis.yml
+^appveyor\.yml$
+^codecov\.yml$
+^\.lintr
+inst/.lintr$
+
+# pkgdown
+^docs$
+^inst/_pkgdown\.yml$
