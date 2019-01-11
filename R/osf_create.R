@@ -24,6 +24,20 @@
 #'   description.
 #' @param public Logical, should it be publicly available (`TRUE`) or private
 #'   (`FALSE`, the default)?
+#' @param category Character string, specify a category to change the icon
+#'   displayed on OSF. The defaults are `"project"` for projects and
+#'   `"uncategorized"` for components. The specified category can be easily
+#'   changed later on OSF. Valid category options include:
+#' * analysis
+#' * communication
+#' * data
+#' * hypothesis
+#' * instrumentation
+#' * methods and measures
+#' * procedure
+#' * project
+#' * software
+#' * other
 #'
 #' @return An [`osf_tbl_node`] containing the new project or component.
 #'
@@ -40,20 +54,32 @@ NULL
 
 #' @export
 #' @rdname osf_create
-osf_create_project <- function(title, description = NULL, public = FALSE) {
+osf_create_project <-
+  function(title,
+           description = NULL,
+           public = FALSE,
+           category = "project") {
+
   if (missing(title)) abort("Must define a title for the new project.")
 
   out <- .osf_node_create(
     title = title,
     description = description,
-    public = public
+    public = public,
+    category = category
   )
   as_osf_tbl(out["data"], "osf_tbl_node")
 }
 
 #' @export
 #' @rdname osf_create
-osf_create_component <- function(x, title, description = NULL, public = FALSE) {
+osf_create_component <-
+  function(x,
+           title,
+           description = NULL,
+           public = FALSE,
+           category = NULL) {
+
   if (missing(x) || !inherits(x, "osf_tbl_node"))
     abort("`x` must be an `osf_tbl_node` referencing an existing project/component. ")
   if (missing(title)) abort("Must define a title for the new component.")
@@ -62,7 +88,8 @@ osf_create_component <- function(x, title, description = NULL, public = FALSE) {
     id = as_id(x),
     title = title,
     description = description,
-    public = public
+    public = public,
+    category = category
   )
   as_osf_tbl(out["data"], "osf_tbl_node")
 }
