@@ -47,7 +47,7 @@ project or component). Because projects and components are functionally
 identical, osfr uses the same \code{\link{osf_tbl_node}} class to represent both.
 }
 
-\section{Acknowledgements}{
+\section{Acknowledgments}{
 
 
 Our implementation of the \code{osf_tbl} class is based on \code{dribble} objects from
