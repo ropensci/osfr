@@ -1,16 +1,11 @@
 #' Create a new project or component on OSF
 #'
+#' @description
 #' Use `osf_create_project()` to create a new top-level project on OSF. A nested
 #' component can be created by providing an [`osf_tbl_node`] containing an
 #' existing project or component to `osf_create_component()`'s `x` argument.
 #'
-#' @section: OSF nodes
-#' Both projects and components are implemented as *nodes* within OSF, which
-#' explains why they are functionally identical. The only distinction between
-#' the two is projects exist at the top-level of an organizational hierarchy,
-#' and components are nested within a parent project or another component. As
-#' such, osfr uses the same S3 class to represent both projects and components:
-#' an [`osf_tbl_node`].
+#' @inheritSection osf_tbl OSF nodes
 #'
 #' @references
 #' 1. OSF Guides: Create a Project.

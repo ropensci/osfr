@@ -8,20 +8,30 @@
 #' user, project, component, directory, or file. An `osf_tbl` must include
 #' the following 3 variables:
 #'
-#' * `name`: the name or title of the entity
-#' * `id`: the unique identifier assigned to the entity
-#' * `meta`: a list-column that stores the processed response returned by
-#' OSF's API
+#' 1. `name`: the name or title of the entity.
+#' 2. `id`: the unique identifier assigned to the entity.
+#' 3. `meta`: a list-column that stores the processed response returned by OSF's
+#' API.
 #'
 #' The `meta` column is primarily intended for use by `osfr`'s functions and
 #' should not be altered by users.
 #'
 #' @section Subclasses:
 #'
-#' An `osf_tbl` is the parent class of 3 subclasses that are used to represent
-#' each of OSF's main entities: `osf_tbl_user` for users, `osf_tbl_node` for
-#' nodes (i.e., projects and components) and `osf_tbl_file` for files and
-#' directories.
+#' `osf_tbl` is the parent class of 3 subclasses that are used to represent
+#' each of OSF's main entities:
+#'
+#' 1. `osf_tbl_user` for users.
+#' 2. `osf_tbl_file` for files and directories.
+#' 2. `osf_tbl_node` for projects and components.
+#'
+#' @section OSF nodes:
+#'
+#' Projects and components are both implemented as *nodes* on OSF. The only
+#' distinction between the two is that a project is a top-level node, and a
+#' component must have a parent node (i.e., must be a sub-component of another
+#' project or component). Because projects and components are functionally
+#' identical, osfr uses the same [`osf_tbl_node`] class to represent both.
 #'
 #' @section Acknowledgements:
 #'
