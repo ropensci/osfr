@@ -5,9 +5,9 @@ Authors@R: c(
     person("Aaron", "Wolen",, "aaron@wolen.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-2542-2202")),
     person("Chris","Hartgerink",, "chjh@protonmail.com", role = "aut"),
-    person("Timothy", "York",, "timothy.york@vcuhealth.org", role = "ctb"),
+    person("Timothy", "York",, "timothypyork@gmail.com", role = "ctb"),
     person("Courtney", "Soderberg",, "courtney@cos.io", role = "ctb"))
-Description: R interface to OSF.
+Description: Manage your projects and access open research materials and data on OSF.
 Depends: R (>= 3.1.0)
 Imports:
     crul,

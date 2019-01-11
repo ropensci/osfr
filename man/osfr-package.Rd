@@ -27,7 +27,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Timothy York \email{timothy.york@vcuhealth.org} [contributor]
+  \item Timothy York \email{timothypyork@gmail.com} [contributor]
   \item Courtney Soderberg \email{courtney@cos.io} [contributor]
 }
 
