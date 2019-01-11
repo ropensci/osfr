@@ -16,5 +16,5 @@ check_category <- function(x) {
     "software",
     "other"
   )
-  match.arg(x, tolower(categories))
+  match.arg(tolower(x), categories)
 }

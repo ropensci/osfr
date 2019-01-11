@@ -37,6 +37,28 @@ test_that("nested nodes can be created", {
   expect_match(get_parent_id(c12), c1$id)
 })
 
+context("Node categories")
+
+test_that("default project category is 'project'", {
+  expect_match(get_meta(p1, "attributes", "category"), "project")
+})
+
+test_that("default component category is empty (i.e., uncategorized)", {
+  expect_match(get_meta(c1, "attributes", "category"), "")
+})
+
+test_that("an invalid or ambiguous category errors", {
+  expect_error(osf_create_project("Bad category", category = "pr"))
+  expect_error(osf_create_component(p1, "Bad category", category = "pr"))
+})
+
+p2 <- osf_create_project("osfr-project-category-test", category = "Analysis")
+c2 <- osf_create_component(p2, "osfr-component-category-test", category = "Data")
+
+test_that("a valid category can be specified", {
+  expect_match(get_meta(p2, "attributes", "category"), "analysis")
+  expect_match(get_meta(c2, "attributes", "category"), "data")
+})
 
 context("Node deletion")
 
@@ -47,5 +69,7 @@ test_that("deleting non-empty project/component fails", {
 
 test_that("non-empty project can be recursively deleted", {
   out <- osf_rm(p1, recursive = TRUE, check = FALSE)
+  expect_true(out)
+  out <- osf_rm(p2, recursive = TRUE, check = FALSE)
   expect_true(out)
 })
