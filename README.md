@@ -8,7 +8,7 @@ Status](https://travis-ci.org/centerforopenscience/osfr.svg?branch=master)](http
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/aaronwolen/osfr?branch=master&svg=true)](https://ci.appveyor.com/project/aaronwolen/osfr)
 [![Coverage
-status](https://codecov.io/gh/aaronwolen/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/aaronwolen/osfr?branch=master)
+status](https://codecov.io/gh/centerforopenscience/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/centerforopenscience/osfr?branch=master)
 
 ## Overview
 
