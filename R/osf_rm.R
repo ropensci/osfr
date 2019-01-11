@@ -1,20 +1,22 @@
 #' Delete projects or components from OSF
 #'
-#' Use `osf_rm()`  to *permanently* delete a project or component from OSF,
+#' @description
+#' Use `osf_rm()` to *permanently* delete a project or component from OSF,
 #' including any uploaded files, wiki content, or comments contained therein.
-#' This process does not request confirmation, so please **handle with
-#' care**. This functionality is limited to contributors with admin-level
-#' permissions.
+#' Because this process is irreversible, osfr will first open the item in your
+#' web browser so you can verify the item before proceeding.
 #'
 #' If the project or component contains sub-components, those must be deleted
 #' first. Setting `recursive = TRUE` will attempt to remove the hierarchy
 #' of sub-components before deleting the top-level entity.
 #'
+#' *Note: This functionality is limited to contributors with admin-level
+#' permissions.*
+#'
 #' @param x an [`osf_tbl_node`]
 #' @param recursive Remove all sub-components before deleting the top-level entity.
-#' @param check If `FALSE` deletion will proceed without opening the project or
-#'   component, and asking for your verification. This basically removes your
-#'   safety net.
+#' @param check If `FALSE` deletion will proceed without opening the item or
+#'   requesting verification---this effectively removes your safety net.
 #' @template verbose
 #'
 #' @return Invisibly returns `TRUE` if deletion was successful.
