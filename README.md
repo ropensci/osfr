@@ -4,7 +4,7 @@
 
 The R package `osfr` interfaces with the [Open Science Framework (OSF)](https://osf.io) to both get information from the OSF and push information to the OSF. If you are looking for a Python client see [`osf-cli`](https://github.com/dib-lab/osf-cli).
 
-To install, you currently have to have [`devtools`](https://github.com/hadley/devtools) installed, considering the package is not yet available on CRAN. When it it available on CRAN, we will celebrate here :palm_tree: Install and login is as follows from `R`:
+To install, you currently have to have [`devtools`](https://github.com/hadley/devtools) installed, considering the package is not yet available on CRAN. When it is available on CRAN, we will celebrate here :palm_tree: Install and login is as follows from `R`:
 
 ```R
 devtools::install_github('CenterForOpenScience/osfr')
