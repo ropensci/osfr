@@ -179,16 +179,19 @@ OSF is developed by the [Center for Open
 Science](https://cos.io "Center for Open Science") in Charlottesville,
 VA.
 
-The original version of osfr was developed by @chartgerink and further
-developed by @bgrich and @hafen. The current version was developed by
-@aaronwolen and is *heavily* inspired by @jennybc and @lucymcgowan’s
-excellent [googledrive](https://googledrive.tidyverse.org) package.
-Seriously, we borrowed a lot of great ideas from them. Other important
-resources include [http
-testing](https://ropensci.github.io/http-testing-book/) by Scott
-Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley Wickham.
-Development was also greatly facilitated by OSF’s excellent [API
-documentation](https://developer.osf.io "OSF API Documentation").
+The original version of osfr was developed by
+\[@chartgerink\][chris](https://github.com/chartgerink) and further
+developed by \[@bgrich\][brian](https://github.com/bgrich) and
+\[@hafen\][ryan](https://github.com/hafen). The current version was
+developed by \[@aaronwolen\][aaron](https://github.com/aaronwolen) and
+is *heavily* inspired by \[@jennybc\][jenny](https://github.com/jennybc)
+and \[@lucymcgowan\][lucy](https://github.com/lucy)’s excellent
+[googledrive](https://googledrive.tidyverse.org) package. Seriously, we
+borrowed a lot of great ideas from them. Other important resources
+include [http testing](https://ropensci.github.io/http-testing-book/) by
+Scott Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley
+Wickham. Development was also greatly facilitated by OSF’s excellent
+[API documentation](https://developer.osf.io "OSF API Documentation").
 
 Big thanks to Rusty Speidel for designing our logo.
 

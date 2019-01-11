@@ -123,7 +123,7 @@ osfr represents these entities within `osf_tbl`s---specialized tibbles that prov
 
 OSF is developed by the [Center for Open Science][cos] in Charlottesville, VA.
 
-The original version of osfr was developed by @chartgerink and further developed by @bgrich and @hafen. The current version was developed by @aaronwolen and is *heavily* inspired by @jennybc and @lucymcgowan's excellent [googledrive][] package. Seriously, we borrowed a lot of great ideas from them. Other important resources include [http testing](https://ropensci.github.io/http-testing-book/) by Scott Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley Wickham. Development was also greatly facilitated by OSF's excellent [API documentation][osf-api]. 
+The original version of osfr was developed by [@chartgerink][chris] and further developed by [@bgrich][brian] and [@hafen][ryan]. The current version was developed by [@aaronwolen][aaron] and is *heavily* inspired by [@jennybc][jenny] and [@lucymcgowan][lucy]'s excellent [googledrive][] package. Seriously, we borrowed a lot of great ideas from them. Other important resources include [http testing](https://ropensci.github.io/http-testing-book/) by Scott Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley Wickham. Development was also greatly facilitated by OSF's excellent [API documentation][osf-api]. 
 
 Big thanks to Rusty Speidel for designing our logo.
 
@@ -138,3 +138,11 @@ Big thanks to Rusty Speidel for designing our logo.
 [magrittr]: https://magrittr.tidyverse.org
 [dplyr]: https://dplyr.tidyverse.org
 [googledrive]: https://googledrive.tidyverse.org
+
+[chris]: https://github.com/chartgerink
+[brian]: https://github.com/bgrich
+[ryan]: https://github.com/hafen
+[aaron]: https://github.com/aaronwolen
+[jenny]: https://github.com/jennybc
+[lucy]: https://github.com/lucy
+
