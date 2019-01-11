@@ -4,7 +4,7 @@
 # osfr <a href="https://github.com/centerforopenscience/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
 [![Build
-Status](https://travis-ci.org/CenterForOpenScience/osfr.svg?branch=master)](https://travis-ci.org/CenterForOopenScience/osfr)
+Status](https://travis-ci.org/CenterForOpenScience/osfr.svg?branch=master)](https://travis-ci.org/CenterForOpenScience/osfr)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/aaronwolen/osfr?branch=master&svg=true)](https://ci.appveyor.com/project/aaronwolen/osfr)
 [![Coverage
