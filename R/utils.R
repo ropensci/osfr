@@ -1,50 +1,60 @@
-#' Construct an API link with proper base
+#' Identify whether user is logged in
 #'
-#' @param request The request link to be combined with the base API link.
+#' This function identifies whether the user has logged in by providing a
+#' personal access token (PAT).
 #'
-#' @return The full request link with proper base
-#' @examples
-#' \dontrun{
-#' construct_link('nodes/{node_id}/files/')
-#' }
+#' @return Boolean indicating logged in status
 
-construct_link <- function(request = NULL) {
-
-  if (Sys.getenv('OSF_USE_TEST_SERVER') == 'test') {
-    base <- 'https://test-api.osf.io/v2/'
-  } else if (Sys.getenv('OSF_USE_TEST_SERVER') == 'staging') {
-    base <- 'https://staging-api.osf.io/v2/'
-  } else {
-    base <- 'https://api.osf.io/v2/'
+logged_in <- function () {
+  if (Sys.getenv('OSF_PAT') == '') {
+    return(FALSE)
   }
-
-  return(paste0(base, request))
+  return(TRUE)
 }
 
-#' Construct a waterbutler API link with proper base
+#' Identify type of endpoint for id
 #'
-#' @param id OSF id
-#' @param provider Storage provider (osfstorage, github, etc)
-#' @param request Request for waterbutler
+#' This function takes an OSF id and returns the type of endpoint for that id.
+#' Only returns types for the nodes and files endpoints.
 #'
-#' @return Waterbutler link
+#' @param id OSF id to check (osf.io/xxxxx).
+#'
+#' @return Endpoint of id as character (nodes | files)
 
-construct_link_files <- function(id = NULL, provider = 'osfstorage', request = NULL) {
-  if (Sys.getenv('OSF_USE_TEST_SERVER') == 'test') {
-    base <- sprintf('https://test-files.osf.io/v1/resources/%s/providers/%s/%s',
-      id, provider, request)
-  } else if (Sys.getenv('OSF_USE_TEST_SERVER') == 'staging') {
-    base <- sprintf('https://staging-files.osf.io/v1/resources/%s/providers/%s/%s',
-      id, provider, request)
+process_type <- function(id) {
+  config <- get_config(logged_in())
+  call_nodes <- httr::GET(construct_link(sprintf('nodes/%s', id)), config)
+  call_files <- httr::GET(construct_link(sprintf('files/%s', id)), config)
+
+  if (!call_nodes$status_code == 200 && !call_files$status_code) {
+    stop('Failed. Are you sure you have access to the id or that it is valid?')
+  } else if (call_nodes$status_code == 200) {
+    res <- process_json(call_nodes)
   } else {
-    base <- sprintf('https://files.osf.io/v1/resources/%s/providers/%s/%s',
-      id, provider, request)
+    res <- process_json(call_files)
   }
 
-  return(base)
+  if (is.null(res$data$type)) {
+    return('')
+  }
+
+  return(res$data$type)
+}
+
+#' Function to parse API call
+#'
+#' @param x Object containing the result of an API call.
+#'
+#' @return Parsed JSON object in the form of an R object.
+
+process_json <- function(x) {
+  jsonlite::fromJSON(httr::content(x, 'text', encoding = 'UTF-8'))
 }
 
 #' Processing whether a category is valid
+#'
+#' This functions throws an error if the provided category is not a valid
+#' category for OSF.
 #'
 #' @param category Category to check for validity. Valid categories:
 #' \itemize{
@@ -58,9 +68,6 @@ construct_link_files <- function(id = NULL, provider = 'osfstorage', request = N
 #'   \item communication
 #'   \item other
 #' }
-#'
-#' @return Nothing if succeeded
-#' @export
 
 process_category <- function(category = '') {
   if (!category %in% c('project',
@@ -76,58 +83,54 @@ process_category <- function(category = '') {
   }
 }
 
-#' Function to parse API call
+#' Process Pagination
 #'
-#' @param x Object containing the result of an API call.
+#' Processes the paginated data returned by the OSF API and returns a list with
+#' all of the pages combined.
 #'
-#' @return Parsed JSON object in the form of an R object.
-
-process_json <- function(x) {
-  rjson::fromJSON(httr::content(x, 'text', encoding = "UTF-8"))
-}
-
-#' Identify type of endpoint for id
+#' @param res The initial list returned from the OSF API and run through
+#' `osfr::process_json()`. Must contain the links section.
+#' @param config The configuration used in the initial call to the OSF API.
 #'
-#' @param id OSF id to check
-#' @param private Boolean, in case id is private set to TRUE
-#'
-#' @return Endpoint of id as character (nodes | files)
+#' @return List of all of the pages from the API (including the input list).
 
-process_type <- function(id, private = TRUE) {
+process_pagination <- function(res, config) {
+  # Create variable to hold original page
+  combined_list <- res$data
 
-  url_osf_nodes <- construct_link(sprintf('nodes/%s', id))
-  url_osf_files <- construct_link(sprintf('files/%s', id))
+  # Use the first page of the returned data to get the next page link
+  next_page_link <- res$links$`next`
 
-  config <- get_config(private)
+  # While next page link is not null, run loop
+  while(!is.null(next_page_link)) {
 
-  call_nodes <- httr::GET(url_osf_nodes, config)
-  call_files <- httr::GET(url_osf_files, config)
+    # Call down the next page
+    new_page <- process_json(httr::GET(next_page_link, config))
 
-  if (!call_nodes$status_code == 200 && !call_files$status_code) {
-    stop('Failed. Are you sure you have access to the id or that it is valid?')
-  } else if (call_nodes$status_code == 200) {
-    res <- process_json(call_nodes)
-  } else {
-    res <- process_json(call_files)
+    # Save new page next page link to the next page variable
+    next_page_link <- new_page$links$`next`
+
+    # Combine current pages and new page
+    combined_list <- c(combined_list, new_page$data)
   }
 
-  if (is.null(res$data$type))
-    return('')
-
-  return(res$data$type)
+  # Return combined data
+  return(combined_list)
 }
 
 #' Create authorization config
 #'
-#' @param login_required Boolean
+#' @param login Boolean indicating whether login is required.
 #'
-#' @return configuration for use in httr request
+#' @return httr::request configuration
 
-get_config <- function(login_required) {
-  config <- list()
-
-  if (login_required) {
-    config <- httr::add_headers(Authorization = sprintf('Bearer %s', login()))
+get_config <- function(login) {
+  if (!logged_in()) {
+    stop('Not logged in.')
+  } else if (login) {
+    config <- httr::add_headers(Authorization = sprintf('Bearer %s', auth()))
+  } else  {
+    config <- list()
   }
 
   return(config)
@@ -140,52 +143,7 @@ get_config <- function(login_required) {
 #' @return Boolean
 
 is_valid_osf_id <- function(id) {
-  grepl('[A-Za-z0-9]{5}', id)
-}
-
-#' Materialize Waterbutler URL
-#'
-#' @param url Waterbutler URL, starts with files.osf.io
-#' @param private Boolean, whether or not the file is prvate
-#'
-#' @return OSF id
-
-process_waterbutler <- function(url, private = TRUE) {
-
-  config <- get_config(private)
-
-  url <- sprintf('%s?meta=', url)
-  call <- httr::GET(url, config)
-
-  tmp <- process_json(call)
-  res <- gsub(x = tmp$data$attributes$resource, pattern = '/', '')
-
-  return(res)
-}
-
-#' Processing a file id to waterbutler
-#'
-#' The OSF uses a separate API to handle file requests, for some reason. This
-#' function helps deal with that.
-#'
-#' @param id OSF id (osf.io/xxxx; just xxxx)
-#' @param private Boolean, if file is private
-#'
-#' @return Waterbutler URL
-
-process_file_id <- function(id, private = FALSE) {
-
-  config <- get_config(private)
-
-  url_osf <- construct_link(paste0('files/', id))
-  call <- httr::GET(url = url_osf, config)
-  res <- process_json(call)
-
-  if (call$status_code != 200) {
-    stop('Failed to retrieve information. Sure it is public?')
-  }
-
-  return(res$data$links$download)
+  grepl('\\w{5}', id)
 }
 
 pre_slash <- function(x) {
@@ -204,4 +162,13 @@ rm_space <- function(x) {
   res <- gsub(x, pattern = "\\s", replacement = "%20", perl = TRUE)
 
   return(res)
+}
+
+#' Stop execution with HTTP status code
+#' @param code HTTP status code
+#' @inheritParams base::stop
+http_error <- function(code, ...) {
+  args <- list(...)
+  msg <- sprintf("\n       HTTP status code %i.", code)
+  stop(args, msg, call. = FALSE)
 }

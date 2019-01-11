@@ -5,6 +5,7 @@
 #' @param id Search for node id
 #' @param tags Search node tags
 #' @param private Boolean, search private nodes as well (TRUE) or not (FALSE)
+#' @param license not used in function
 #'
 #' @details The categories available are:
 #' \itemize{
@@ -51,9 +52,7 @@ search_nodes <- function(
   res <- process_json(call)
 
   while (!is.null(res$links$`next`)) {
-    whilst <- rjson::fromJSON(
-      httr::content(
-        httr::GET(res$links$`next`), "text", encoding = "UTF-8"))
+    whilst <- process_json(httr::GET(res$links$`next`))
     res$data <- c(res$data, whilst$data)
     res$links$`next` <- whilst$links$`next`
     message(paste0(res$links$`next`))
@@ -132,9 +131,7 @@ search_users <- function(full_name = NULL, family_name = NULL) {
   res <- process_json(call)
 
   while (!is.null(res$links$`next`)) {
-    whilst <- rjson::fromJSON(
-      httr::content(
-        httr::GET(res$links$`next`), "text", encoding = "UTF-8"))
+    whilst <- process_json(httr::GET(res$links$`next`))
     res$data <- c(res$data, whilst$data)
     res$links$`next` <- whilst$links$`next`
     message(paste0(res$links$`next`))

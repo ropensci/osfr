@@ -6,6 +6,7 @@
 # RStudio files
 .Rproj.user/
 .RData
+.Renviron
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
@@ -13,3 +14,4 @@ vignettes/*.pdf
 .httr-oauth
 .Rprofile
 _ignore
+inst/doc

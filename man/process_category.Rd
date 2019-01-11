@@ -20,9 +20,7 @@ process_category(category = "")
   \item other
 }}
 }
-\value{
-Nothing if succeeded
-}
 \description{
-Processing whether a category is valid
+This functions throws an error if the provided category is not a valid
+category for OSF.
 }

@@ -7,7 +7,7 @@
 recurse_node(id = NULL, private = FALSE, maxdepth = 5, path_id = FALSE)
 }
 \arguments{
-\item{id}{OSF parent ID (osf.io/xxxx) to crawl}
+\item{id}{OSF parent ID (osf.io/XXXXX) to crawl}
 
 \item{private}{Boolean, search for private too?}
 

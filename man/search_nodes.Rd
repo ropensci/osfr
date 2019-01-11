@@ -16,6 +16,8 @@ search_nodes(description = NULL, title = NULL, id = NULL, tags = NULL,
 
 \item{tags}{Search node tags}
 
+\item{license}{not used in function}
+
 \item{private}{Boolean, search private nodes as well (TRUE) or not (FALSE)}
 }
 \value{

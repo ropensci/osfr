@@ -23,11 +23,16 @@ get_nodes(id = NULL, contributors = FALSE, files = FALSE,
 List object of results
 }
 \description{
-Retrieve nodes associated with id
+This function retrieves the JSON returned by the OSF API for a given OSF id.
+If the \code{contributors}, \code{files}, or \code{children} arguments are
+set to \code{TRUE}, then the linked JSON for that category is returned. Note
+that only one of \code{contributors}, \code{files}, and \code{children} can
+be selected.
 }
 \examples{
-\dontrun{get_nodes()
+\dontrun{
+get_nodes()
 get_nodes(id = 'me')
-get_nodes(id = 'nu97z')
+get_nodes(id = 'm5pds')
 }
 }

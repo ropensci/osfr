@@ -4,13 +4,12 @@
 \name{osfr}
 \alias{osfr}
 \alias{osfr-package}
-\title{osfr: A package for interacting with the Open Science Framework.}
+\title{osfr: A package for interacting with OSF from the Center for Open Science.}
 \description{
-The osfr package helps you document your research as you go, which
-includes creating projects, uploading files, cloning projects to your
-desktop in one fell swoop, and much more.
+The osfr package helps you document your research as you go by creating
+projects, uploading and downloading files, and much more.
 }
 \details{
-Suggestions for improvements or bug reports always welcome at
-https://github.com/chartgerink/osfr
+Suggestions for improvements or bug reports are always welcome at
+\url{https://github.com/CenterForOpenScience/osfr}
 }

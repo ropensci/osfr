@@ -1,8 +1,9 @@
-#' Create a project on the OSF
+#' Create a project on OSF
 #'
 #' @param title Project title
 #' @param description Project description
-#' @param private Boolean, whether project should be private
+#' @param private Boolean, whether project should be private (defaults to
+#' \code{TRUE})
 #'
 #' @return Returns the created project's id
 #' @export
@@ -10,13 +11,15 @@
 #'
 #' @examples
 #' \dontrun{
-#' create_project(title = "Testing the OSF project creation")
-#' }
+#' create_project(title = "New Private OSF Project")
+#' create_project(title = "New Public OSF Project", private = FALSE)}
 
 create_project <- function(
   title,
   description = '',
   private = TRUE) {
+
+  if (missing(title)) stop("Specify a project title")
 
   config <- get_config(TRUE)
   url_osf <- construct_link("nodes/")
@@ -36,7 +39,7 @@ create_project <- function(
   call <- httr::POST(url = url_osf, body = body, encode = "json", config)
 
   if (call$status_code != 201) {
-    stop("Failed in creating new project.")
+    http_error(call$status_code, "Failed in creating new project.")
   }
 
   res <- process_json(call)
@@ -58,7 +61,9 @@ create_project <- function(
 #'
 #' @return Boolean of update success
 #' @export
-#'
+#' @examples
+#' \dontrun{
+#' update_project(id = "12345")}
 
 update_project <- function(id, private = FALSE) {
   config <- get_config(TRUE)
@@ -76,7 +81,7 @@ update_project <- function(id, private = FALSE) {
 
   call <- httr::PATCH(url = url_osf, body = body, encode = "json", config)
   if (call$status_code != 200) {
-    stop("Failed in updating project.")
+    http_error(call$status_code, "Failed to update project.")
   }
 
   return(TRUE)
@@ -84,7 +89,7 @@ update_project <- function(id, private = FALSE) {
 
 #' Clone OSF project to desktop
 #'
-#' This function copies an *entire* project and its
+#' This function copies an \emph{entire} project and its
 #' components to the harddrive of the individual
 #' (depth of clone depends on the maxdepth argument).
 #' There is currently no way to estimate the size
@@ -92,13 +97,15 @@ update_project <- function(id, private = FALSE) {
 #' there's a progess bar :-) Currently limited to only
 #' files stored on OSF (not via add-ons).
 #'
-#' @param id OSF id (osf.io/XXXX; just XXXX)
+#' @param id OSF id (osf.io/XXXXX; just XXXXX)
 #' @param private clone the project as seen privately?
 #' @param maxdepth how many levels of subcomponents to trawl
 #'
 #' @return Boolean, clone success
 #' @export
-#'
+#' @examples
+#' \dontrun{
+#' clone_project(id = "12345")}
 
 clone_project <- function(id, private = FALSE, maxdepth = 5) {
   get_config(private)
@@ -125,14 +132,17 @@ clone_project <- function(id, private = FALSE, maxdepth = 5) {
   return(TRUE)
 }
 
-#' Delete a project from the OSF
+#' Delete a project from OSF
 #'
-#' @param id OSF id (osf.io/xxxx)
+#' @param id OSF id (osf.io/XXXXX)
 #' @param recursive Boolean, if TRUE will go through folder nesting (see \code{maxdepth})
 #' @param maxdepth Number of nesting levels to go through
 #'
 #' @return Boolean, delete success
 #' @export
+#' @examples
+#' \dontrun{
+#' delete_project(id = "12345")}
 
 delete_project <- function(id, recursive = FALSE, maxdepth = 5) {
   if (recursive) {
@@ -150,10 +160,16 @@ delete_project <- function(id, recursive = FALSE, maxdepth = 5) {
 
 #' View an OSF project on osf.io
 #'
-#' @param id OSF id (osf.io/XXXX; just XXXX)
+#' This function opens the project in a web browser. If the project is private,
+#' you will be asked to log into OSF from the browser.
+#'
+#' @param id OSF id (osf.io/XXXXX; just XXXXX)
 #'
 #' @export
 #' @importFrom utils browseURL
+#' @examples
+#' \dontrun{
+#' view_project(id = "m5pds")}
 
 view_project <- function(id) {
   utils::browseURL(paste0("https://osf.io/", id))
