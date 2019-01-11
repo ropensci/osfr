@@ -2,8 +2,8 @@
 #'
 #' @param x an [`osf_tbl_node`] with a single project or
 #'   component, or an [`osf_tbl_file`] with a single directory
-#' @param path Path to file on local machine to upload. Ensure file has proper
-#'   extension named (i.e., extension sensitive, not like on Linux)
+#' @param path Path to a local file. Ensure the file has a proper
+#'   file extension (e.g., `.docx`) to ensure it's rendered properly on OSF.
 #' @param name Name of the uploaded file (if `NULL`, `basename(path)`
 #'   will be used).
 #' @param overwrite Logical, overwrite an existing file with the same name
@@ -12,6 +12,27 @@
 #' @template verbose
 #'
 #' @return an [`osf_tbl_file`] containing uploaded file
+#'
+#' @examples
+#' \dontrun{
+#' # Create an example file to upload to our example project
+#' write.csv(iris, file = "iris.csv")
+#' project <- osf_create_project("Flower Data")
+#'
+#' # Upload the first version
+#' osf_upload(project,"iris.csv")
+#'
+#' # Modify the data file, upload version 2, and view it on OSF
+#' write.csv(subset(iris, Species != "setosa"), file = "iris.csv")
+#' project %>%
+#'   osf_upload("iris.csv", overwrite = TRUE) %>%
+#'   osf_open()
+#' }
+#'
+#' @seealso
+#' * [`osf_download()`] for downloading files and directories from OSF.
+#' * [`osf_ls_files()`] for listing files and directories on OSF.
+#'
 #' @export
 #' @importFrom crul upload
 #' @importFrom fs is_file is_dir path_dir
