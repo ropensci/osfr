@@ -33,7 +33,7 @@
 #' project or component). Because projects and components are functionally
 #' identical, osfr uses the same [`osf_tbl_node`] class to represent both.
 #'
-#' @section Acknowledgements:
+#' @section Acknowledgments:
 #'
 #' Our implementation of the `osf_tbl` class is based on `dribble` objects from
 #' the [googledrive](https://googledrive.tidyverse.org) package.

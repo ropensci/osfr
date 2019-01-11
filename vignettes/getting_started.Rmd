@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 This vignette provides a quick tour of the `osfr` package. 
 
 ```{r message=FALSE}
-library(osfr2)
+library(osfr)
 library(dplyr)
 
 # external file for our example project

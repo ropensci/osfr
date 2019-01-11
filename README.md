@@ -28,15 +28,12 @@ collaborators, or made publicly available with citable DOIs.*
 
 ## Installation
 
-This package is currently under development and is apt to undergo
-significant changes until a stable version has been submitted to CRAN.
-You’ve been warned.
-
-Also note this version of osfr has been temporarily renamed to *osfr2*.
+This package is currently under development and is not available on
+CRAN. You can install the current version with the *remotes* package:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("aaronwolen/osfr")
+# install.packages("remotes")
+remotes::install_github("centerforopenscience/osfr")
 ```
 
 ## Usage Examples
@@ -52,7 +49,7 @@ Here we’ll retrieve the main project for the Cancer Reproducibility
 Project (<https://osf.io/e81xl/>).
 
 ``` r
-library(osfr2)
+library(osfr)
 
 cr_project <- osf_retrieve_node("e81xl")
 cr_project

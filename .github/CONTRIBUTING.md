@@ -1,14 +1,14 @@
-# Contributing to osfr2
+# Contributing to osfr
 
-This outlines how to propose a change to osfr2.
+This outlines how to propose a change to osfr
 
 ### Development environment
 
-osfr2 development should take place on OSF's testing server. The following steps will get you setup:
+osfr development should take place on OSF's testing server. The following steps will get you setup:
 
 1. Create an account on <https://test.osf.io/>.
 2. Generate a PAT for the new account.
-3. Fork the osfr2 repository and clone a local copy.
+3. Fork the osfr repository and clone a local copy.
 4. Create a `.Renviron` file in the root of your project directory that defines the `OSF_PAT` and `OSF_SERVER` environment variables. It should look like this:
 
    ```

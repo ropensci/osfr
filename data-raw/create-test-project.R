@@ -1,7 +1,7 @@
 # Create OSF projects for unit tests
 # NOTE: these must be created on test.osf.io
 
-library(osfr2)
+library(osfr)
 
 proj_root <- osf_create_project(
   title = "osfr-testthat-project",

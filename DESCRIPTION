@@ -1,4 +1,4 @@
-Package: osfr2
+Package: osfr
 Title: R Interface to OSF
 Version: 0.1.1.9009
 Authors@R: c(

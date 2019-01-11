@@ -1,4 +1,4 @@
 library(testthat)
-library(osfr2)
+library(osfr)
 
-test_check("osfr2")
+test_check("osfr")
