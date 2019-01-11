@@ -21,7 +21,7 @@ are primarily focused on project management workflows.
 *OSF is a free and [open
 source](https://github.com/CenterForOpenScience/osf.io "OSF's GitHub Repository")
 project management repository designed to support researchers across
-their entire project lifecycle. The service includes unlimited cloud
+their entire project lifecycle. The service includes cloud
 storage and file version history, providing a centralized location for
 all your research materials that can be kept private, shared with select
 collaborators, or made publicly available with citable DOIs.*
