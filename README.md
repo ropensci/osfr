@@ -1,10 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# osfr <a href="https://github.com/aaronwolen/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
+# osfr <a href="https://github.com/centerforopenscience/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
 [![Build
-Status](https://travis-ci.org/aaronwolen/osfr.svg?branch=master)](https://travis-ci.org/aaronwolen/osfr)
+Status](https://travis-ci.org/centerforopenscience/osfr.svg?branch=master)](https://travis-ci.org/centerforopenscience/osfr)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/aaronwolen/osfr?branch=master&svg=true)](https://ci.appveyor.com/project/aaronwolen/osfr)
 [![Coverage
