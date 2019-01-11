@@ -14,24 +14,24 @@ osf_rm(x, recursive = FALSE, verbose = FALSE, check = TRUE)
 \item{verbose}{Logical, indicating whether to print informative messages
 about interactions with the OSF API (default \code{FALSE}).}
 
-\item{check}{If \code{FALSE} deletion will proceed without opening the project or
-component, and asking for your verification. This basically removes your
-safety net.}
+\item{check}{If \code{FALSE} deletion will proceed without opening the item or
+requesting verification---this effectively removes your safety net.}
 }
 \value{
 Invisibly returns \code{TRUE} if deletion was successful.
 }
 \description{
-Use \code{osf_rm()}  to \emph{permanently} delete a project or component from OSF,
+Use \code{osf_rm()} to \emph{permanently} delete a project or component from OSF,
 including any uploaded files, wiki content, or comments contained therein.
-This process does not request confirmation, so please \strong{handle with
-care}. This functionality is limited to contributors with admin-level
-permissions.
-}
-\details{
+Because this process is irreversible, osfr will first open the item in your
+web browser so you can verify the item before proceeding.
+
 If the project or component contains sub-components, those must be deleted
 first. Setting \code{recursive = TRUE} will attempt to remove the hierarchy
 of sub-components before deleting the top-level entity.
+
+\emph{Note: This functionality is limited to contributors with admin-level
+permissions.}
 }
 \examples{
 \dontrun{
