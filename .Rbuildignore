@@ -1,9 +1,22 @@
+^\.github$
+^Meta$
+^doc$
+^data-raw$
+^README\.Rmd$
+^_ignore$
+^man-roxygen$
+
+# rstudio
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^\.httr-oauth$
-^\.lintr
+
+# CI
 ^\.travis.yml
-^inst/\.lintr$
-^_ignore$
-^CONTRIBUTING\.md$
-^CODE_OF_CONDUCT\.md$
+^appveyor\.yml$
+^codecov\.yml$
+^\.lintr
+inst/.lintr$
+
+# pkgdown
+^docs$
+^inst/_pkgdown\.yml$

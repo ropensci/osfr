@@ -1,34 +1,33 @@
 Package: osfr
-Title: API to the Open Science Framework
-Version: 0.1.1
-Maintainer: Chris Hartgerink <chjh@protonmail.com>
-Authors@R: c(person( "Chris","Hartgerink", email = "chjh@protonmail.com", role =
-    c("aut", "cre")),
-    person("VP","Nagraj",  email = "vpnagraj@virginia.edu", role =
-    c("aut")),
-    person("Ryan","Hafen",  email = "rhafen@gmail.com", role =
-    c("aut")),
-    person("Julien", "Colomb",  email = "julien.colomb@fu-berlin.de", role =
-    c("aut")), 
-    person("Brian", "Richards", email = "brian.g.richards@gmail.com", role = 
-    c("aut"))
-    )
-Description: Providing ways to interface with the Open Science Framework inside
-    R. This includes searching through the OSF projects, posting files and comments
-    and more.
-Date: 20180101
+Title: R Interface to OSF
+Version: 0.2.0
+Authors@R: c(
+    person("Aaron", "Wolen",, "aaron@wolen.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-2542-2202")),
+    person("Chris","Hartgerink",, "chjh@protonmail.com", role = "aut"),
+    person("Timothy", "York",, "timothypyork@gmail.com", role = "ctb"),
+    person("Courtney", "Soderberg",, "courtney@cos.io", role = "ctb"))
+Description: Manage your projects and access open research materials and data on OSF.
 Depends: R (>= 3.1.0)
 Imports:
-    httr,
+    crul,
     jsonlite,
-    stringr,
-    plyr
+    stringi,
+    purrr,
+    tibble,
+    rlang,
+    fs
 License: MIT + file LICENSE
-BugReports: https://github.com/chartgerink/osfr/issues
+BugReports: https://github.com/centerforopenscience/osfr/issues
 LazyData: true
 Suggests:
+    dplyr,
     testthat,
     knitr,
-    rmarkdown
-RoxygenNote: 6.1.0
+    rmarkdown,
+    lintr,
+    covr
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr

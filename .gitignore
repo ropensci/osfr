@@ -1,3 +1,5 @@
+Meta
+doc
 # History files
 .Rhistory
 .Rapp.history
@@ -14,4 +16,6 @@ vignettes/*.pdf
 .httr-oauth
 .Rprofile
 _ignore
+*.DS_Store
 inst/doc
+docs/

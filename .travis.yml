@@ -1,9 +1,20 @@
 language: r
 sudo: false
 cache: packages
-r:
-  - oldrel
-  - release
-  - devel
-# after_success:
-# - Rscript -e 'covr::coveralls()'
+
+matrix:
+  include:
+  - r: oldrel
+  - r: devel
+  - r: release
+    r_packages:
+      - pkgdown
+    after_success:
+    - Rscript -e 'covr::codecov()'
+
+    deploy:
+      on:
+        branch: master
+      provider: script
+      script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
+      skip_cleanup: true
