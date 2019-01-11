@@ -6,9 +6,11 @@
 \alias{osf_create_component}
 \title{Create a new project or component on OSF}
 \usage{
-osf_create_project(title, description = NULL, public = FALSE)
+osf_create_project(title, description = NULL, public = FALSE,
+  category = "project")
 
-osf_create_component(x, title, description = NULL, public = FALSE)
+osf_create_component(x, title, description = NULL, public = FALSE,
+  category = NULL)
 }
 \arguments{
 \item{title, description}{Set a title (required) and, optionally, a
@@ -17,33 +19,50 @@ description.}
 \item{public}{Logical, should it be publicly available (\code{TRUE}) or private
 (\code{FALSE}, the default)?}
 
+\item{category}{Character string, specify a category to change the icon
+displayed on OSF. The defaults are \code{"project"} for projects and
+\code{"uncategorized"} for components. The specified category can be easily
+changed later on OSF. Valid category options include:
+\itemize{
+\item analysis
+\item communication
+\item data
+\item hypothesis
+\item instrumentation
+\item methods and measures
+\item procedure
+\item project
+\item software
+\item other
+}}
+
 \item{x}{An \code{\link{osf_tbl_node}} with a single OSF project or component that will
 serve as the new sub-component's parent node.}
 }
 \value{
-an \code{\link{osf_tbl_node}} containing the new OSF project or component
+An \code{\link{osf_tbl_node}} containing the new project or component.
 }
 \description{
 Use \code{osf_create_project()} to create a new top-level project on OSF. A nested
-component can be created by providing an \code{\link{osf_tbl_node}} referencing an
+component can be created by providing an \code{\link{osf_tbl_node}} containing an
 existing project or component to \code{osf_create_component()}'s \code{x} argument.
 }
-\section{}{
- OSF Nodes
-Both projects and components are implemented as \emph{nodes} within OSF, which
-explains why they are functionally identical. The only distinction between
-the two is projects exist at the top-level of an organizational hierarchy,
-and components are nested within a parent project or another component. As
-such, osfr uses the same S3 class to represent both projects and components:
-an \code{\link{osf_tbl_node}}.
+\section{OSF nodes}{
+
+
+Projects and components are both implemented as \emph{nodes} on OSF. The only
+distinction between the two is that a project is a top-level node, and a
+component must have a parent node (i.e., must be a sub-component of another
+project or component). Because projects and components are functionally
+identical, osfr uses the same \code{\link{osf_tbl_node}} class to represent both.
 }
 
 \examples{
 \dontrun{
-# create a new private project
-project <- osf_create_project(title = "Private OSF Project")
+# create a new public project
+project <- osf_create_project(title = "Private OSF Project", public = TRUE)
 
-# create a new component
+# add a private component to the new project
 component <- osf_create_component(project, title = "Project Data")
 }
 }
@@ -52,6 +71,6 @@ component <- osf_create_component(project, title = "Project Data")
 \item OSF Guides: Create a Project.
 \url{http://help.osf.io/m/projects/l/481539-create-a-project}.
 \item OSF Guides: Create a Component.
-\url{http://help.osf.io/m/projects/l/481998-create-components}
+\url{http://help.osf.io/m/projects/l/481998-create-components}.
 }
 }

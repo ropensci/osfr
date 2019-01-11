@@ -11,11 +11,11 @@ as_id(x)
 Waterbutler ID.}
 }
 \value{
-A character vector with class \code{osf_id}
+A character vector with class \code{osf_id}.
 }
 \description{
-Extract GUIDs and Waterbutler IDs from various types of inputs. Valid looking
-IDs are returned as \code{osf_id} objects.
+Extract OSF GUIDs and Waterbutler IDs from various types of inputs. Valid
+looking IDs are returned as \code{osf_id} objects.
 }
 \section{Identifier types}{
 
@@ -28,5 +28,13 @@ characters.
 }
 
 \examples{
-as_id("https://osf.io/egzt9/")
+\dontrun{
+# extract a GUID from an OSF URL
+proj_id <- as_id("https://osf.io/7zqxp/")
+
+# extract waterbutler IDs from an `osf_tbl_file`` with multiple files
+osf_retrieve_node(proj_id) \%>\%
+  osf_ls_files() \%>\%
+  as_id()
+}
 }

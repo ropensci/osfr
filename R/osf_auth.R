@@ -1,4 +1,4 @@
-#' OSF User Authentication
+#' Authenticate osfr with a personal access token
 #'
 #' Authorize osfr to interact with your OSF data and OSF account by passing a
 #' personal access token (PAT) to `osf_auth()`. If no `token` is provided,
@@ -14,15 +14,17 @@
 #' will walk you through the process of generating a PAT and using it to
 #' authenticate osfr.
 #'
-#' @param token OSF personal access token
+#' @param token OSF personal access token.
 #' @examples
 #' \dontrun{
-#' osf_auth("a22JKLgdAEx9wms...")
+#' # manually authenticate with a PAT
+#' osf_auth("bdEEFMCuBtaBoSK11YzyjOdjUjKtWIj2FWxHl6kTBRax7uaeyBghALumTO1kT8RA")
 #' }
 #'
-#' @return Invisibly returns your OSF PAT
+#' @return Invisibly returns your OSF PAT along with a message indicating it was
+#'   registered.
 #'
-#' @section Creating an OSF Personal Access Token:
+#' @section Creating an OSF personal access token:
 #'
 #' - Navigate to <https://osf.io/settings/tokens/>
 #' - Click the *New token* button and provide a descriptive name
@@ -49,16 +51,16 @@
 #' directory that defines the `OSF_PAT` variable. For example:
 #'
 #' ```
-#' OSF_PAT=a22JKLgdAEx9wms...
+#' OSF_PAT=bdEEFMCuBtaBoSK11YzyjOdjUjKtWIj2FWxHl6kTBRax7uaeyBghALumTO1kT8RA
 #' ```
 #'
 #' For new users we suggest adding the `.Renviron` to your home directory so it
 #' is automatically applied to all your projects. To verify this was done
-#' correctly restart R and run `Sys.getenv("OSF_PAT")`, which should return your
-#' PAT.
+#' correctly, restart R and run `Sys.getenv("OSF_PAT")`, which should return
+#' your PAT.
 #'
 #' @references
-#' Colin Gillespie and Robin Lovelace (2017). *Efficient R programming*.
+#' 1. Colin Gillespie and Robin Lovelace (2017). *Efficient R programming*.
 #' O'Reilly Press. <https://csgillespie.github.io/efficientR>.
 #'
 #' @export

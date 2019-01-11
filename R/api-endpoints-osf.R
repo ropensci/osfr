@@ -8,9 +8,18 @@
 #' @param description Optional, description for the new node
 #' @param public Logical, should the new node be publicly available (`TRUE`) or
 #'   private (`FALSE`)
+#' @param category One of the pre-defined node categories.
+#' @references https://developer.osf.io/#operation/nodes_create
 #' @noRd
-.osf_node_create <- function(id = NULL, title, description = NULL, public = FALSE) {
+.osf_node_create <-
+  function(id = NULL,
+           title,
+           description = NULL,
+           public = FALSE,
+           category = NULL) {
+
   if (missing(title)) abort("A title must be provided.")
+  if (!is.null(category)) category <- check_category(category)
 
   if (is.null(id)) {
     path <- .osf_api_path("nodes/")
@@ -23,7 +32,7 @@
       type = "nodes",
       attributes = list(
         title = title,
-        category = "project",
+        category = category %||% "",
         description = description %||% "",
         public = public
       )

@@ -2,12 +2,12 @@
 % Please edit documentation in R/osf_download.R
 \name{osf_download}
 \alias{osf_download}
-\title{Download a file or folder from OSF}
+\title{Download files and directories from OSF}
 \usage{
 osf_download(x, path = NULL, overwrite = FALSE, verbose = FALSE)
 }
 \arguments{
-\item{x}{an \code{\link{osf_tbl_file}} containing a single file or directory.}
+\item{x}{An \code{\link{osf_tbl_file}} containing a single file or directory.}
 
 \item{path}{Local path where the downloaded file will be saved. The default
 is to use the remote file's name.}
@@ -16,32 +16,37 @@ is to use the remote file's name.}
 replaced with the downloaded file?}
 
 \item{verbose}{Logical, indicating whether to print informative messages
-(default \code{FALSE})}
+about interactions with the OSF API (default \code{FALSE}).}
 }
 \value{
-an \code{\link{osf_tbl_file}} with a new column, \code{"local_path"}, containing the
-downloaded file's path
+The \code{\link{osf_tbl_file}} input with a new column, \code{"local_path"},
+containing the downloaded file's path.
 }
 \description{
 Files stored on OSF can be downloaded locally by providing an
 \code{\link{osf_tbl_file}} that contains the OSF file of interest. If the
-\code{\link{osf_tbl_file}} contains a directory, a zip file containing the OSF
+\code{\link{osf_tbl_file}} contains a directory, a zip file containing the
 directory's contents will be downloaded.
-}
-\details{
+
 By default files are downloaded to your current working directory with the
 same filename used on OSF. The \code{path} argument can be used to specify a
-different destination and a different filename for the downloaded file.
-However, the directory portion of \code{path} must reference an existing
-directory.
+different destination \emph{and}, optionally,  a different filename for the
+downloaded file. Note, the directory portion of \code{path} must reference an
+existing directory.
 }
 \examples{
 \dontrun{
-# Download a single file
-analysis_plan <- osf_retrieve_file("2ryha")
-analysis_plan <- osf_download(analysis_plan, path = "plan_wave1.docx")
+# download a single file
+analysis_plan <- osf_retrieve_file("2ryha") \%>\%
+  osf_download(analysis_plan, path = "plan_wave1.docx")
 
-# Verify the file was downloaded locally
+# verify the file was downloaded locally
 file.exists(analysis_plan$local_path)
+}
+}
+\seealso{
+\itemize{
+\item \code{\link[=osf_upload]{osf_upload()}} for uploading files to OSF.
+\item \code{\link[=osf_ls_files]{osf_ls_files()}} for listing files and directories on OSF.
 }
 }

@@ -2,15 +2,16 @@
 % Please edit documentation in R/osf_auth.R
 \name{osf_auth}
 \alias{osf_auth}
-\title{OSF User Authentication}
+\title{Authenticate osfr with a personal access token}
 \usage{
 osf_auth(token = NULL)
 }
 \arguments{
-\item{token}{OSF personal access token}
+\item{token}{OSF personal access token.}
 }
 \value{
-Invisibly returns your OSF PAT
+Invisibly returns your OSF PAT along with a message indicating it was
+registered.
 }
 \description{
 Authorize osfr to interact with your OSF data and OSF account by passing a
@@ -28,7 +29,7 @@ you must provide a Personal Access Token (PAT). The following instructions
 will walk you through the process of generating a PAT and using it to
 authenticate osfr.
 }
-\section{Creating an OSF Personal Access Token}{
+\section{Creating an OSF personal access token}{
 
 \itemize{
 \item Navigate to \url{https://osf.io/settings/tokens/}
@@ -56,22 +57,25 @@ A better approach is to store your PAT as an environment variable called
 \code{OSF_PAT}. Doing so will allow osfr to detect and utilize the token
 automatically without any need to manually call \code{osf_auth()}. One way to
 accomplish this is by creating an \code{.Renviron} file in your home or working
-directory that defines the \code{OSF_PAT} variable. For example:\preformatted{OSF_PAT=a22JKLgdAEx9wms...
+directory that defines the \code{OSF_PAT} variable. For example:\preformatted{OSF_PAT=bdEEFMCuBtaBoSK11YzyjOdjUjKtWIj2FWxHl6kTBRax7uaeyBghALumTO1kT8RA
 }
 
 For new users we suggest adding the \code{.Renviron} to your home directory so it
 is automatically applied to all your projects. To verify this was done
-correctly restart R and run \code{Sys.getenv("OSF_PAT")}, which should return your
-PAT.
+correctly, restart R and run \code{Sys.getenv("OSF_PAT")}, which should return
+your PAT.
 }
 
 \examples{
 \dontrun{
-osf_auth("a22JKLgdAEx9wms...")
+# manually authenticate with a PAT
+osf_auth("bdEEFMCuBtaBoSK11YzyjOdjUjKtWIj2FWxHl6kTBRax7uaeyBghALumTO1kT8RA")
 }
 
 }
 \references{
-Colin Gillespie and Robin Lovelace (2017). \emph{Efficient R programming}.
+\enumerate{
+\item Colin Gillespie and Robin Lovelace (2017). \emph{Efficient R programming}.
 O'Reilly Press. \url{https://csgillespie.github.io/efficientR}.
+}
 }

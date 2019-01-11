@@ -1,0 +1,37 @@
+destination: docs/
+title: "osfr: An R interface to OSF"
+
+template:
+  params:
+    noindex: true
+    bootswatch: yeti
+
+navbar:
+  structure:
+    left:  []
+    right: [home, reference, articles]
+
+reference:
+- title: Retrieving information from OSF
+  desc: ~
+  contents:
+  - '`osf_auth`'
+  - '`osf_retrieve`'
+  - '`osf_ls_files`'
+  - '`osf_ls_nodes`'
+  - '`osf_download`'
+
+- title: Managing OSF projects and files
+  desc: ~
+  contents:
+  - '`osf_create`'
+  - '`osf_mkdir`'
+  - '`osf_rm`'
+  - '`osf_upload`'
+
+- title: Helper functions
+  desc: ~
+  contents:
+  - '`as_id`'
+  - '`osf_open`'
+  - '`osf_refresh`'

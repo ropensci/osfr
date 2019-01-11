@@ -10,8 +10,8 @@ osf_upload(x, path, name = NULL, overwrite = FALSE, verbose = FALSE)
 \item{x}{an \code{\link{osf_tbl_node}} with a single project or
 component, or an \code{\link{osf_tbl_file}} with a single directory}
 
-\item{path}{Path to file on local machine to upload. Ensure file has proper
-extension named (i.e., extension sensitive, not like on Linux)}
+\item{path}{Path to a local file. Ensure the file has a proper
+file extension (e.g., \code{.docx}) to ensure it's rendered properly on OSF.}
 
 \item{name}{Name of the uploaded file (if \code{NULL}, \code{basename(path)}
 will be used).}
@@ -21,11 +21,34 @@ will be used).}
 record the previous version.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
-(default \code{FALSE})}
+about interactions with the OSF API (default \code{FALSE}).}
 }
 \value{
 an \code{\link{osf_tbl_file}} containing uploaded file
 }
 \description{
 Upload files to OSF
+}
+\examples{
+\dontrun{
+# Create an example file to upload to our example project
+write.csv(iris, file = "iris.csv")
+project <- osf_create_project("Flower Data")
+
+# Upload the first version
+osf_upload(project,"iris.csv")
+
+# Modify the data file, upload version 2, and view it on OSF
+write.csv(subset(iris, Species != "setosa"), file = "iris.csv")
+project \%>\%
+  osf_upload("iris.csv", overwrite = TRUE) \%>\%
+  osf_open()
+}
+
+}
+\seealso{
+\itemize{
+\item \code{\link[=osf_download]{osf_download()}} for downloading files and directories from OSF.
+\item \code{\link[=osf_ls_files]{osf_ls_files()}} for listing files and directories on OSF.
+}
 }

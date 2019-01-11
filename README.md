@@ -5,6 +5,8 @@
 
 [![Build
 Status](https://travis-ci.org/aaronwolen/osfr.svg?branch=master)](https://travis-ci.org/aaronwolen/osfr)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/aaronwolen/osfr?branch=master&svg=true)](https://ci.appveyor.com/project/aaronwolen/osfr)
 [![Coverage
 status](https://codecov.io/gh/aaronwolen/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/aaronwolen/osfr?branch=master)
 
@@ -177,14 +179,20 @@ OSF is developed by the [Center for Open
 Science](https://cos.io "Center for Open Science") in Charlottesville,
 VA.
 
-The original version of osfr was developed by @chartgerink and further
-developed by @bgrich. The current version was developed by @aaronwolen
-and is *heavily* inspired by @jennybc and @lucymcgowan’s excellent
+The original version of osfr was developed by
+\[@chartgerink\][chris](https://github.com/chartgerink) and further
+developed by \[@bgrich\][brian](https://github.com/bgrich) and
+\[@hafen\][ryan](https://github.com/hafen). The current version was
+developed by \[@aaronwolen\][aaron](https://github.com/aaronwolen) and
+is *heavily* inspired by \[@jennybc\][jenny](https://github.com/jennybc)
+and \[@lucymcgowan\][lucy](https://github.com/lucy)’s excellent
 [googledrive](https://googledrive.tidyverse.org) package. Seriously, we
 borrowed a lot of great ideas from them. Other important resources
 include [http testing](https://ropensci.github.io/http-testing-book/) by
 Scott Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley
 Wickham. Development was also greatly facilitated by OSF’s excellent
 [API documentation](https://developer.osf.io "OSF API Documentation").
+
+Big thanks to Rusty Speidel for designing our logo.
 
 <!-- links -->

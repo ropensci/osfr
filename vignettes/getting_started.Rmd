@@ -62,7 +62,7 @@ scripts_comp <- car_project %>%
 Because each operation in the sequence above applies to the previous object, we've accidentally created a project with the `analysis scripts` component nested within the `data` component, which is not what we wanted. We can delete the analysis scripts component and recreate it under the top-level project.
 
 ```{r}
-osf_rm(scripts_comp)
+osf_rm(scripts_comp, check = FALSE)
 
 car_project %>% 
   osf_create_component(title = "Analysis Scripts")
@@ -123,7 +123,7 @@ We can download files from any public or private node that we have access to and
     ```
 
 ```{r cleanup, include=FALSE}
-osf_rm(car_project, recursive = TRUE)
+osf_rm(car_project, recursive = TRUE, check = FALSE)
 unlink("mtcars.csv")
 ```
 

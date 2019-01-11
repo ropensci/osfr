@@ -15,11 +15,11 @@ for additional details.
 Each row of an \code{osf_tbl} represents a single OSF entity, which could be a
 user, project, component, directory, or file. An \code{osf_tbl} must include
 the following 3 variables:
-\itemize{
-\item \code{name}: the name or title of the entity
-\item \code{id}: the unique identifier assigned to the entity
-\item \code{meta}: a list-column that stores the processed response returned by
-OSF's API
+\enumerate{
+\item \code{name}: the name or title of the entity.
+\item \code{id}: the unique identifier assigned to the entity.
+\item \code{meta}: a list-column that stores the processed response returned by OSF's
+API.
 }
 
 The \code{meta} column is primarily intended for use by \code{osfr}'s functions and
@@ -28,10 +28,23 @@ should not be altered by users.
 \section{Subclasses}{
 
 
-An \code{osf_tbl} is the parent class of 3 subclasses that are used to represent
-each of OSF's main entities: \code{osf_tbl_user} for users, \code{osf_tbl_node} for
-nodes (i.e., projects and components) and \code{osf_tbl_file} for files and
-directories.
+\code{osf_tbl} is the parent class of 3 subclasses that are used to represent
+each of OSF's main entities:
+\enumerate{
+\item \code{osf_tbl_user} for users.
+\item \code{osf_tbl_file} for files and directories.
+\item \code{osf_tbl_node} for projects and components.
+}
+}
+
+\section{OSF nodes}{
+
+
+Projects and components are both implemented as \emph{nodes} on OSF. The only
+distinction between the two is that a project is a top-level node, and a
+component must have a parent node (i.e., must be a sub-component of another
+project or component). Because projects and components are functionally
+identical, osfr uses the same \code{\link{osf_tbl_node}} class to represent both.
 }
 
 \section{Acknowledgements}{

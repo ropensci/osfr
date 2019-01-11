@@ -99,4 +99,4 @@ test_that("a directory can be downloaded as a zip file", {
 
 
 # cleanup -----------------------------------------------------------------
-osf_rm(p1, recursive = TRUE)
+osf_rm(p1, recursive = TRUE, check = FALSE)

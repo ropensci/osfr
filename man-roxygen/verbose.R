@@ -1,2 +1,2 @@
 #' @param verbose Logical, indicating whether to print informative messages
-#'   (default `FALSE`)
+#'   about interactions with the OSF API (default `FALSE`).
