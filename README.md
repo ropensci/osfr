@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# osfr <a href="https://github.com/centerforopenscience/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
+# osfr <a href="http://centerforopenscience.github.io/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
 [![Build
 Status](https://travis-ci.org/CenterForOpenScience/osfr.svg?branch=master)](https://travis-ci.org/CenterForOpenScience/osfr)
