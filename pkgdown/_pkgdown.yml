@@ -9,7 +9,7 @@ template:
 navbar:
   structure:
     left:  []
-    right: [home, reference, articles]
+    right: [home, reference, articles, github]
 
 reference:
 - title: Retrieving information from OSF
