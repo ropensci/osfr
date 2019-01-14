@@ -117,7 +117,7 @@
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;   name                       id    meta      </span></a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt;   &lt;chr&gt;                      &lt;chr&gt; &lt;list&gt;    </span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; 1 Motor Trend Car Road Tests w5dr4 &lt;list [3]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; 1 Motor Trend Car Road Tests mrhnx &lt;list [3]&gt;</span></a></code></pre></div>
 <p>To view the project directly on OSF use <code><a href="../reference/osf_open.html">osf_open(car_project)</a></code>.</p>
 <p>After the project is created we’ll create two nested <em>components</em>, one for data and one for analysis scripts. We can take advantage of osfr’s <a href="https://magrittr.tidyverse.org">pipe</a>-compatibility to arrange multiple operations into a single sequence.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">scripts_comp &lt;-<span class="st"> </span>car_project <span class="op">%&gt;%</span></a>
@@ -131,15 +131,15 @@
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
 <a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt;   name             id    meta      </span></a>
 <a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt;   &lt;chr&gt;            &lt;chr&gt; &lt;list&gt;    </span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; 1 Analysis Scripts w7ctm &lt;list [3]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; 1 Analysis Scripts stchd &lt;list [3]&gt;</span></a></code></pre></div>
 <p>We can verify the project is now structured the way we wanted by listing the components we have under the main project.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">car_components &lt;-<span class="st"> </span><span class="kw"><a href="../reference/osf_ls_nodes.html">osf_ls_nodes</a></span>(car_project)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">car_components</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; # A tibble: 2 x 3</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;   name             id    meta      </span></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;   &lt;chr&gt;            &lt;chr&gt; &lt;list&gt;    </span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 1 Analysis Scripts w7ctm &lt;list [3]&gt;</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 2 Data             wq7md &lt;list [3]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 1 Analysis Scripts stchd &lt;list [3]&gt;</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 2 Data             cmkat &lt;list [3]&gt;</span></a></code></pre></div>
 </div>
 </div>
 <div id="working-with-files" class="section level2">
@@ -163,7 +163,7 @@
 <a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
 <a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt;   name       id                       meta      </span></a>
 <a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;                    &lt;list&gt;    </span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; 1 mtcars.csv 5c3cd1dc0fa57c0016c93572 &lt;list [3]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; 1 mtcars.csv 5c3cdba4fe56530015ed38e0 &lt;list [3]&gt;</span></a></code></pre></div>
 <p>The <code>mtcars_file</code> object now contains an <code>osf_tbl</code> with 1 row corresponding to the version of that file stored on OSF. Again, we could use <code><a href="../reference/osf_open.html">osf_open()</a></code> to view it directly on OSF.</p>
 <p>OSF also version controls files, which means that if we were to make a change to the <code>mtcars.csv</code> file (perhaps we collected more data) we could automatically create a 2nd version of the dataset by using the <code><a href="../reference/osf_upload.html">osf_upload()</a></code> function and setting <code>overwrite = TRUE</code>. As long as the file we’re uploading has the same file name as a file in that particular section of the project, a new version will be created.</p>
 </div>
@@ -180,7 +180,7 @@
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;   name       id                       local_path meta      </span></a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; * &lt;chr&gt;      &lt;chr&gt;                    &lt;chr&gt;      &lt;list&gt;    </span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 1 mtcars.csv 5c3cd1dc0fa57c0016c93572 mtcars.csv &lt;list [3]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 1 mtcars.csv 5c3cdba4fe56530015ed38e0 mtcars.csv &lt;list [3]&gt;</span></a></code></pre></div>
 </li>
 <li>
 <p>For a public file that we may have seen referenced in a published article, we may already have the GUID, and so can retrieve the file directly before downloading it. Here, we’ll download Daniel Laken’s helpful spreadsheet for calculating effect sizes (<a href="https://osf.io/vbdah/" class="uri">https://osf.io/vbdah/</a>).</p>
