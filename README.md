@@ -125,8 +125,9 @@ copies of project files using `osf_download()`.
 ### Managing Projects
 
 You can use osfr to create projects, add sub-components, create
-directories, and upload files. See the *Getting Started* vignette to
-learn more about building projects with osfr, but here is a quick
+directories, and upload files. See the [Getting Started
+vignette](http://centerforopenscience.github.io/osfr/articles/getting_started.html)
+to learn more about building projects with osfr, but here is a quick
 example in which we:
 
 1.  Create a new project called *Motor Trend Car Road Tests*

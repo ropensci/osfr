@@ -83,7 +83,7 @@ We could continue this pattern of exploration and even download local copies of 
 
 ### Managing Projects
 
-You can use osfr to create projects, add sub-components, create directories, and upload files. See the *Getting Started* vignette to learn more about building projects with osfr, but here is a quick example in which we:
+You can use osfr to create projects, add sub-components, create directories, and upload files. See the [Getting Started vignette][getting-started] to learn more about building projects with osfr, but here is a quick example in which we:
 
 1. Create a new project called *Motor Trend Car Road Tests*
 2. Create a sub-component called *Car Data*
@@ -142,4 +142,7 @@ Big thanks to Rusty Speidel for designing our logo and [Tim Errington][tim] for 
 [jenny]: https://github.com/jennybc
 [lucy]: https://github.com/lucymcgowan
 [tim]: https://github.com/timerrington
+
+[getting-started]: http://centerforopenscience.github.io/osfr/articles/getting_started.html
+[auth]: http://centerforopenscience.github.io/osfr/articles/auth.html
 
