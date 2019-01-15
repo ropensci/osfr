@@ -5,7 +5,7 @@
 \alias{osf_retrieve_user}
 \alias{osf_retrieve_node}
 \alias{osf_retrieve_file}
-\title{Retrieve an entity from OSF based on its identifier}
+\title{Retrieve an entity from OSF}
 \usage{
 osf_retrieve_user(id)
 
@@ -18,17 +18,42 @@ osf_retrieve_file(id)
 or file. Set \code{id = "me"} to retrieve your own OSF profile.}
 }
 \value{
-an \code{\link{osf_tbl_user}}, \code{\link{osf_tbl_node}}, or \code{\link{osf_tbl_file}} containing
-the corresponding OSF entity
+An \code{\link{osf_tbl_user}}, \code{\link{osf_tbl_node}}, or \code{\link{osf_tbl_file}} containing
+the corresponding OSF entity.
 }
 \description{
-Use \code{osf_retrieve()} to create an \code{osf_tbl} for an existing OSF entity based
-on its unique identifier. Usually this is a 5-character global unique
-identifier (GUID) but for files or directories could be a 24-character
-Waterbutler ID.
+Create an \code{\link{osf_tbl}} for an existing OSF project, component, file, or user
+based on the associated unique identifier. Usually this is a 5-character
+global unique identifier (GUID) but for files or directories, it could also
+be a 24-character Waterbutler ID.
 }
+\details{
+To begin using osfr to interact with resources on OSF you must use one of the
+following \emph{retrieve} functions to create an \code{\link{osf_tbl}} that contains
+the entity interest. Note the functions are entity-type specific, use:
+\itemize{
+\item \code{osf_retrieve_node()} to retrieve a project or component
+\item \code{osf_retrieve_file()} to retrieve a file or directory
+\item \code{osf_retrieve_user()} to retrieve a user
+}
+}
+\section{A note on 3rd-party storage providers}{
+
+While OSF supports integration with a variety of 3rd-party cloud storage
+providers, osfr can currently only access files stored on the default OSF
+storage service. Support for additional storage providers is planned for a
+future release.
+}
+
 \examples{
 \dontrun{
+ # retrieve your own OSF user profile (must be authenticated, ?osf_auth)
  osf_retrieve_user("me")
+
+# retrieve the Psychology Reproducibility Project (P:RP, osf.io/ezum7)
+osf_retrieve_node("ezum7")
+
+# get the first figure from the P:RP
+osf_retrieve_file("https://osf.io/7js8c")
 }
 }

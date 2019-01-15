@@ -13,6 +13,8 @@ workflows.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{http://centerforopenscience.github.io/osfr}
+  \item \url{https://github.com/centerforopenscience/osfr}
   \item Report bugs at \url{https://github.com/centerforopenscience/osfr/issues}
 }
 
@@ -28,6 +30,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Timothy York \email{timothypyork@gmail.com} [contributor]
+  \item Richards Brian \email{brian.g.richards@gmail.com} [contributor]
   \item Courtney Soderberg \email{courtney@cos.io} [contributor]
 }
 
