@@ -19,4 +19,4 @@ inst/.lintr$
 
 # pkgdown
 ^docs$
-^pkgdown/_pkgdown\.yml$
+^pkgdown$
