@@ -3,7 +3,6 @@ title: "osfr: An R interface to OSF"
 
 template:
   params:
-    noindex: true
     bootswatch: yeti
     ganalytics: UA-132425816-1
 
