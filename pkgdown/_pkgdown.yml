@@ -5,6 +5,7 @@ template:
   params:
     noindex: true
     bootswatch: yeti
+    ganalytics: UA-132425816-1
 
 navbar:
   structure:
