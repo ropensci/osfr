@@ -8,6 +8,13 @@
 
 <title>Open on OSF — osf_open • osfr: An R interface to OSF</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
@@ -37,7 +44,7 @@ web browser." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
-<meta name="robots" content="noindex" />
+
 
 
 <!-- mathjax -->
@@ -49,6 +56,16 @@ web browser." />
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132425816-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-132425816-1');
+</script>
 
   </head>
 
@@ -66,7 +83,7 @@ web browser." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">osfr: An R interface to OSF</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -102,6 +119,12 @@ web browser." />
     </li>
   </ul>
 </li>
+<li>
+  <a href="https://github.com/centerforopenscience/osfr">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -115,7 +138,7 @@ web browser." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Open on OSF</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/centerforopenscience/osfr/blob/master/R/osf_open.R'><code>R/osf_open.R</code></a></small>
     <div class="hidden name"><code>osf_open.Rd</code></div>
     </div>
 

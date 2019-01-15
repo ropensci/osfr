@@ -6,8 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve an entity from OSF based on its identifier — osf_retrieve • osfr: An R interface to OSF</title>
+<title>Retrieve an entity from OSF — osf_retrieve • osfr: An R interface to OSF</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
@@ -30,16 +37,16 @@
 
 
 
-<meta property="og:title" content="Retrieve an entity from OSF based on its identifier — osf_retrieve" />
+<meta property="og:title" content="Retrieve an entity from OSF — osf_retrieve" />
 
-<meta property="og:description" content="Use osf_retrieve() to create an osf_tbl for an existing OSF entity based
-on its unique identifier. Usually this is a 5-character global unique
-identifier (GUID) but for files or directories could be a 24-character
-Waterbutler ID." />
+<meta property="og:description" content="Create an osf_tbl for an existing OSF project, component, file, or user
+based on the associated unique identifier. Usually this is a 5-character
+global unique identifier (GUID) but for files or directories, it could also
+be a 24-character Waterbutler ID." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
-<meta name="robots" content="noindex" />
+
 
 
 <!-- mathjax -->
@@ -51,6 +58,16 @@ Waterbutler ID." />
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132425816-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-132425816-1');
+</script>
 
   </head>
 
@@ -68,7 +85,7 @@ Waterbutler ID." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">osfr: An R interface to OSF</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -104,6 +121,12 @@ Waterbutler ID." />
     </li>
   </ul>
 </li>
+<li>
+  <a href="https://github.com/centerforopenscience/osfr">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -116,17 +139,17 @@ Waterbutler ID." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve an entity from OSF based on its identifier</h1>
-    
+    <h1>Retrieve an entity from OSF</h1>
+    <small class="dont-index">Source: <a href='https://github.com/centerforopenscience/osfr/blob/master/R/osf_retrieve.R'><code>R/osf_retrieve.R</code></a></small>
     <div class="hidden name"><code>osf_retrieve.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Use <code>osf_retrieve()</code> to create an <code>osf_tbl</code> for an existing OSF entity based
-on its unique identifier. Usually this is a 5-character global unique
-identifier (GUID) but for files or directories could be a 24-character
-Waterbutler ID.</p>
+    <p>Create an <code><a href='osf_tbl.html'>osf_tbl</a></code> for an existing OSF project, component, file, or user
+based on the associated unique identifier. Usually this is a 5-character
+global unique identifier (GUID) but for files or directories, it could also
+be a 24-character Waterbutler ID.</p>
     
     </div>
 
@@ -148,13 +171,38 @@ or file. Set <code>id = "me"</code> to retrieve your own OSF profile.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an <code><a href='osf_tbl.html'>osf_tbl_user</a></code>, <code><a href='osf_tbl.html'>osf_tbl_node</a></code>, or <code><a href='osf_tbl.html'>osf_tbl_file</a></code> containing
-the corresponding OSF entity</p>
+    <p>An <code><a href='osf_tbl.html'>osf_tbl_user</a></code>, <code><a href='osf_tbl.html'>osf_tbl_node</a></code>, or <code><a href='osf_tbl.html'>osf_tbl_file</a></code> containing
+the corresponding OSF entity.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>To begin using osfr to interact with resources on OSF you must use one of the
+following <em>retrieve</em> functions to create an <code><a href='osf_tbl.html'>osf_tbl</a></code> that contains
+the entity interest. Note the functions are entity-type specific, use:</p><ul>
+<li><p><code>osf_retrieve_node()</code> to retrieve a project or component</p></li>
+<li><p><code>osf_retrieve_file()</code> to retrieve a file or directory</p></li>
+<li><p><code>osf_retrieve_user()</code> to retrieve a user</p></li>
+</ul>
+    
+    <h2 class="hasAnchor" id="a-note-on-rd-party-storage-providers"><a class="anchor" href="#a-note-on-rd-party-storage-providers"></a>A note on 3rd-party storage providers</h2>
+
+    
+    <p>While OSF supports integration with a variety of 3rd-party cloud storage
+providers, osfr can currently only access files stored on the default OSF
+storage service. Support for additional storage providers is planned for a
+future release.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
+ <span class='co'># retrieve your own OSF user profile (must be authenticated, ?osf_auth)</span>
  <span class='fu'>osf_retrieve_user</span>(<span class='st'>"me"</span>)
+
+<span class='co'># retrieve the Psychology Reproducibility Project (P:RP, osf.io/ezum7)</span>
+<span class='fu'>osf_retrieve_node</span>(<span class='st'>"ezum7"</span>)
+
+<span class='co'># get the first figure from the P:RP</span>
+<span class='fu'>osf_retrieve_file</span>(<span class='st'>"https://osf.io/7js8c"</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -163,6 +211,10 @@ the corresponding OSF entity</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#a-note-on-rd-party-storage-providers">A note on 3rd-party storage providers</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
