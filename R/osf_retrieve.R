@@ -1,9 +1,16 @@
-#' Retrieve an entity from OSF based on its identifier
+#' Retrieve an entity from OSF
 #'
-#' Use `osf_retrieve()` to create an `osf_tbl` for an existing OSF project,
-#' component, file, or user based on its unique identifier. Usually this is a
-#' 5-character global unique identifier (GUID) but for files or directories
-#' could be a 24-character Waterbutler ID.
+#' Create an [`osf_tbl`] for an existing OSF project, component, file, or user
+#' based on the associated unique identifier. Usually this is a 5-character
+#' global unique identifier (GUID) but for files or directories, it could also
+#' be a 24-character Waterbutler ID.
+#'
+#' To begin using osfr to interact with resources on OSF you must use one of the
+#' following *retrieve* functions to create an [`osf_tbl`] that contains
+#' the entity interest. Note the functions are entity-type specific, use:
+#' * `osf_retrieve_node()` to retrieve a project or component
+#' * `osf_retrieve_file()` to retrieve a file or directory
+#' * `osf_retrieve_user()` to retrieve a user
 #'
 #' @section A note on 3rd-party storage providers:
 #' While OSF supports integration with a variety of 3rd-party cloud storage
@@ -13,8 +20,8 @@
 #'
 #' @param id An OSF identifier corresponding to an OSF user, project, component,
 #'   or file. Set `id = "me"` to retrieve your own OSF profile.
-#' @return an [`osf_tbl_user`], [`osf_tbl_node`], or [`osf_tbl_file`] containing
-#'   the corresponding OSF entity
+#' @return An [`osf_tbl_user`], [`osf_tbl_node`], or [`osf_tbl_file`] containing
+#'   the corresponding OSF entity.
 #'
 #' @examples
 #' \dontrun{
