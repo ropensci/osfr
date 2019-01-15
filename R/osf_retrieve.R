@@ -1,14 +1,21 @@
 #' Retrieve an entity from OSF based on its identifier
 #'
-#' Use `osf_retrieve()` to create an `osf_tbl` for an existing OSF project, component, file, or user based on its unique identifier.
-#' Usually this is a 5-character global unique
-#' identifier (GUID) but for files or directories could be a 24-character
-#' Waterbutler ID.
+#' Use `osf_retrieve()` to create an `osf_tbl` for an existing OSF project,
+#' component, file, or user based on its unique identifier. Usually this is a
+#' 5-character global unique identifier (GUID) but for files or directories
+#' could be a 24-character Waterbutler ID.
+#'
+#' @section A note on 3rd-party storage providers:
+#' While OSF supports integration with a variety of 3rd-party cloud storage
+#' providers, osfr can currently only access files stored on the default OSF
+#' storage service. Support for additional storage providers is planned for a
+#' future release.
 #'
 #' @param id An OSF identifier corresponding to an OSF user, project, component,
 #'   or file. Set `id = "me"` to retrieve your own OSF profile.
 #' @return an [`osf_tbl_user`], [`osf_tbl_node`], or [`osf_tbl_file`] containing
 #'   the corresponding OSF entity
+#'
 #' @examples
 #' \dontrun{
 #'  osf_retrieve_user("me")
@@ -53,6 +60,14 @@ osf_retrieve_file <- function(id) {
 
   out <- .osf_file_retrieve(id)
   raise_error(out)
+
+  # prevent file retrieval from other providers until properly supported
+  if (out$data$attributes$provider != "osfstorage") {
+    abort(paste0(
+      "3rd party storage add-ons are not currently supported\n",
+      "* The requested file is stored on ", out$data$attributes$provider, "\n"
+    ))
+  }
 
   as_osf_tbl(out["data"], "osf_tbl_file")
 }
