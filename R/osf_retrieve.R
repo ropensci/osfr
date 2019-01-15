@@ -18,7 +18,14 @@
 #'
 #' @examples
 #' \dontrun{
+#'  # retrieve your own OSF user profile (must be authenticated, ?osf_auth)
 #'  osf_retrieve_user("me")
+#'
+#' # retrieve the Psychology Reproducibility Project (P:RP, osf.io/ezum7)
+#' osf_retrieve_node("ezum7")
+#'
+#' # get the first figure from the P:RP
+#' osf_retrieve_file("https://osf.io/7js8c")
 #' }
 #' @name osf_retrieve
 NULL
