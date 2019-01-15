@@ -6,6 +6,10 @@ template:
     bootswatch: yeti
     ganalytics: UA-132425816-1
 
+authors:
+  Aaron Wolen:
+    href: https://www.aaronwolen.com
+
 navbar:
   structure:
     left:  []
