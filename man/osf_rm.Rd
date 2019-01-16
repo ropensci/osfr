@@ -2,14 +2,19 @@
 % Please edit documentation in R/osf_rm.R
 \name{osf_rm}
 \alias{osf_rm}
-\title{Delete projects or components from OSF}
+\title{Delete an entity from OSF}
 \usage{
 osf_rm(x, recursive = FALSE, verbose = FALSE, check = TRUE)
 }
 \arguments{
-\item{x}{an \code{\link{osf_tbl_node}}}
+\item{x}{One of the following:
+\itemize{
+\item An \code{\link{osf_tbl_node}} with a single OSF project or component.
+\item An \code{\link{osf_tbl_file}} containing a single directory or file.
+}}
 
-\item{recursive}{Remove all sub-components before deleting the top-level entity.}
+\item{recursive}{Remove all sub-components before deleting the top-level
+entity. This only applies when deleting projects or components.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 about interactions with the OSF API (default \code{FALSE}).}
@@ -21,14 +26,15 @@ requesting verification---this effectively removes your safety net.}
 Invisibly returns \code{TRUE} if deletion was successful.
 }
 \description{
-Use \code{osf_rm()} to \emph{permanently} delete a project or component from OSF,
-including any uploaded files, wiki content, or comments contained therein.
-Because this process is irreversible, osfr will first open the item in your
-web browser so you can verify the item before proceeding.
+Use \code{osf_rm()} to \strong{permanently} delete a project, component, file or
+directory from OSF, including any uploaded files, wiki content, or comments
+contained therein. Because this process is \strong{irreversible}, osfr will first
+open the item in your web browser so you can verify what is about to be
+deleted before proceeding.
 
-If the project or component contains sub-components, those must be deleted
-first. Setting \code{recursive = TRUE} will attempt to remove the hierarchy
-of sub-components before deleting the top-level entity.
+If the project or component targeted for deletion contains sub-components,
+those must be deleted first. Setting \code{recursive = TRUE} will attempt to
+remove the hierarchy of sub-components before deleting the top-level entity.
 
 \emph{Note: This functionality is limited to contributors with admin-level
 permissions.}

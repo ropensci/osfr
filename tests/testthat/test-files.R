@@ -98,5 +98,21 @@ test_that("a directory can be downloaded as a zip file", {
 })
 
 
+context("Deleting files")
+
+test_that("a single file can be deleted", {
+  expect_true(osf_rm(f1, check = FALSE))
+})
+
+test_that("an empty directory can be deleted", {
+  d2 <- osf_mkdir(p1, "empty")
+  expect_true(osf_rm(d2, check = FALSE))
+})
+
+test_that("a non-empty directory can be deleted", {
+  expect_true(osf_rm(d1, check = FALSE))
+})
+
+
 # cleanup -----------------------------------------------------------------
-osf_rm(p1, recursive = TRUE, check = FALSE)
+osf_rm(p1, check = FALSE)
