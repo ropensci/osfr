@@ -46,10 +46,7 @@ osf_mkdir.osf_tbl_node <- function(x, path, verbose = FALSE) {
   dir_root <- items[which(items$name == path_root), ]
 
   if (nrow(dir_root) == 0) {
-    res <- .wb_create_folder(id = id, name = path_root)
-    raise_error(res)
-    dir_id <- gsub("/", "", res$data$attributes$path, fixed = TRUE)
-    dir_root <- osf_retrieve_file(dir_id)
+    dir_root <- .osf_mkdir(id, name = path_root)
     msg <- sprintf("Created directory '%s/' in node %s", path_root, id)
   } else {
     msg <- sprintf("Directory '%s/' already exists in node %s", path_root, id)
@@ -79,11 +76,7 @@ osf_mkdir.osf_tbl_file <- function(x, path, verbose = FALSE) {
   dir_root <- items[which(items$name == path_root), ]
 
   if (nrow(dir_root) == 0) {
-    res <- .wb_create_folder(id = get_parent_id(x), name = path_root, fid = id)
-    raise_error(res)
-
-    dir_id <- gsub("/", "", res$data$attributes$path, fixed = TRUE)
-    dir_root <- osf_retrieve_file(dir_id)
+    dir_root <- .osf_mkdir(id = get_parent_id(x), name = path_root, fid = id)
     msg <- sprintf("Created sub-directory '%s/' in directory '%s/'",
                    path_root, x$name)
   } else {
@@ -101,4 +94,24 @@ osf_mkdir.osf_tbl_file <- function(x, path, verbose = FALSE) {
     out <- osf_mkdir(dir_root, path_next, verbose)
   }
   out
+
+#' Create a single folder on OSF
+#'
+#' This wraps the create folder endpoint on Waterbutler but retrieves the newly
+#' created directory from OSF because Waterbutler returns only a subset of the
+#' information provided by OSF.
+#'
+#' @param id GUID for an OSF project or component
+#' @param name Name of the new directory
+#' @param fid Optional, provide a Waterbutler folder ID to create the new folder
+#'   within the specified existing folder.
+#' @noRd
+
+.osf_mkdir <- function(id, name, fid = NULL) {
+  res <- .wb_create_folder(id, name, fid)
+  raise_error(res)
+  dir_id <- gsub("/", "", res$data$attributes$path, fixed = TRUE)
+  osf_retrieve_file(dir_id)
+}
+
 }
