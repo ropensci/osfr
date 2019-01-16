@@ -1,3 +1,7 @@
+# osfr 0.2.1.9000
+
+* `osf_rm()` can now delete files and directories
+
 # osfr 0.2.1
 
 * Minor tweaks to the website
