@@ -14,7 +14,7 @@ test_that("empty project/folder returns a osf_tbl_file with 0 rows", {
 })
 
 test_that("listing a non-existent folder errors", {
-  expect_error(osf_ls_files(p1, path = "data"), "Can't find path")
+  expect_error(osf_ls_files(p1, path = "data"), "Can't find directory")
 })
 
 test_that("create a top-level directory", {
