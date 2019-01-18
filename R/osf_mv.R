@@ -36,6 +36,20 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
   action <- match.arg(action, c("move", "copy"))
   conflict <- ifelse(overwrite, "replace", "warn")
 
+  if (inherits(to, "osf_tbl_file")) {
+    if (is_osf_file(to)) {
+      abort("If `to` is an `osf_tbl_file` it  must contain a directory, not a file.")
+    }
+
+    # verify destination is not a child of x
+    is_child_dest <- fs::path_has_parent(
+      get_meta(to, "attributes", "materialized_path"),
+      get_meta(x, "attributes", "materialized_path")
+    )
+    if (is_child_dest) abort("Can't move a parent directory into its child.")
+  }
+
+
   api_url <- get_meta(x, "links", "move")
   api_path <- crul::url_parse(api_url)$path
 
@@ -58,9 +72,6 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
 build_move_request <- function(x) UseMethod("build_move_request")
 
 build_move_request.osf_tbl_file <- function(x) {
-  if (is_osf_file(x)) {
-    abort("If `to` is an `osf_tbl_file` it  must contain a directory, not a file.")
-  }
   list(
     path = get_meta(x, "attributes", "path")
   )
@@ -73,4 +84,3 @@ build_move_request.osf_tbl_node <- function(x) {
     provider = "osfstorage"
   )
 }
-
