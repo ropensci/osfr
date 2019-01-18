@@ -4,4 +4,7 @@ pkgdown_sha: ~
 articles:
   auth: auth.html
   getting_started: getting_started.html
+urls:
+  reference: https://centerforopenscience.github.io/osfr//reference
+  article: https://centerforopenscience.github.io/osfr//articles
 

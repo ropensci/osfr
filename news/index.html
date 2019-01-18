@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • osfr: An R interface to OSF</title>
+<title>Changelog • osfr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -39,7 +39,7 @@
 
 <meta property="og:title" content="Changelog" />
 
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://centerforopenscience.github.io/osfr/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -79,7 +79,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">osfr: An R interface to OSF</a>
+        <a class="navbar-link" href="../index.html">osfr</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
@@ -138,12 +138,30 @@
       <small>Source: <a href='https://github.com/centerforopenscience/osfr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="osfr-0-2-1" class="section level1">
+<h1 class="page-header">
+<a href="#osfr-0-2-1" class="anchor"></a>osfr 0.2.1</h1>
+<ul>
+<li>Minor tweaks to the website</li>
+<li>
+<code><a href="../reference/osf_retrieve.html">osf_retrieve_file()</a></code> will no longer retrieve files on 3rd-party storage providers, since other osfr functions currently only support OSF storage</li>
+</ul>
+</div>
+    <div id="osfr-0-2-0" class="section level1">
+<h1 class="page-header">
+<a href="#osfr-0-2-0" class="anchor"></a>osfr 0.2.0</h1>
+<p><strong>NOTE:</strong> This version of osfr is a rewrite of the original codebase. It is effectively an entirely different package and provides no backwards compatibility with functions in versions &lt; 0.2.0. The last version of the previous package can be installed with the <em>remotes</em> package:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"centerforopenscience/osfr@v0.1.1"</span>)</a></code></pre></div>
+<p>See <a href="https://centerforopenscience.github.io/osfr/" class="uri">https://centerforopenscience.github.io/osfr/</a> for details about the new package.</p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#osfr-0-2-1">0.2.1</a></li>
+        <li><a href="#osfr-0-2-0">0.2.0</a></li>
       </ul>
     </div>
   </div>
