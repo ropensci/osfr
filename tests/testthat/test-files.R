@@ -98,6 +98,39 @@ test_that("a directory can be downloaded as a zip file", {
 })
 
 
+context ("Moving/copying files")
+
+test_that("moving to a destination with an existing file throws an error", {
+  expect_error(osf_mv(f1, d1), "Cannot complete action: file or folder")
+})
+
+test_that("moving can overwrite an existing file", {
+  f1 <- osf_mv(f1, d1, overwrite = TRUE)
+  expect_s3_class(f1, "osf_tbl_file")
+
+  expect_match(
+    get_meta(f1, "attributes", "materialized_path"),
+    file.path(d1$name, f1$name)
+  )
+})
+
+test_that("moving destination can be the parent node", {
+  f1 <- osf_mv(f1, p1)
+  expect_s3_class(f1, "osf_tbl_file")
+
+  expect_match(
+    get_meta(f1, "attributes", "materialized_path"),
+    paste0("/", f1$name)
+  )
+})
+
+test_that("moving destination can be a different node", {
+  p2 <- osf_create_project("File Tests 2")
+  f1 <- osf_mv(f1, p2)
+  expect_match(get_parent_id(f1), as_id(p2))
+})
+
+
 context("Deleting files")
 
 test_that("a single file can be deleted", {
@@ -116,3 +149,4 @@ test_that("a non-empty directory can be deleted", {
 
 # cleanup -----------------------------------------------------------------
 osf_rm(p1, check = FALSE)
+osf_rm(p2, check = FALSE)
