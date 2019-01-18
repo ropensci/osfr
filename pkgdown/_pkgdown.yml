@@ -30,6 +30,7 @@ reference:
   contents:
   - '`osf_create`'
   - '`osf_mkdir`'
+  - '`osf_mv`'
   - '`osf_rm`'
   - '`osf_upload`'
 
