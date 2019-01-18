@@ -52,7 +52,7 @@
 # Waterbutler request functions -------------------------------------------
 
 .wb_request <- function(method, path, query = list(), body = NULL, verbose = FALSE, ...) {
-  method <- match.arg(method, c("get", "put", "patch", "delete"))
+  method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
   cli <- .wb_cli()
   method <- cli[[method]]
   method(path, query, body = body, ...)
