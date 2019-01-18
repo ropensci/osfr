@@ -23,7 +23,13 @@ osf_mv <- function(x, to, overwrite = FALSE, verbose = FALSE) {
 #' @export
 osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
   x <- make_single(x)
-  out <- .wb_file_move(x, to, action = "move", overwrite = overwrite)
+  out <- .wb_file_move(
+    x,
+    to = to,
+    action = "move",
+    overwrite = overwrite,
+    verbose = verbose
+  )
   as_osf_tbl(out["data"], subclass = "osf_tbl_file")
 }
 
@@ -32,7 +38,7 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
 #' @noRd
 #' @references
 #' https://waterbutler.readthedocs.io/en/latest/api.html#actions
-.wb_file_move <- function(x, to, action, overwrite) {
+.wb_file_move <- function(x, to, action, overwrite, verbose) {
   action <- match.arg(action, c("move", "copy"))
   conflict <- ifelse(overwrite, "replace", "warn")
 
@@ -49,7 +55,6 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
     if (is_child_dest) abort("Can't move a parent directory into its child.")
   }
 
-
   api_url <- get_meta(x, "links", "move")
   api_path <- crul::url_parse(api_url)$path
 
@@ -61,6 +66,8 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
   res <- .wb_request("post", api_path, body = req, encode = "json")
   out <- process_response(res)
   raise_error(out)
+
+  if (verbose) message(sprintf("Moved '%s' to '%s'.", x$name, to$name))
 
   # retrieve osf representation of file
   file_id <- strsplit(out$data$id, split = "/", fixed = TRUE)[[1]][2]
