@@ -1,5 +1,5 @@
 destination: docs/
-title: "osfr: An R interface to OSF"
+url: https://centerforopenscience.github.io/osfr/
 
 template:
   params:

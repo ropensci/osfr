@@ -1,10 +1,10 @@
-# osfr v0.2.1
+# osfr 0.2.1
 
 * Minor tweaks to the website
 * `osf_retrieve_file()` will no longer retrieve files on 3rd-party storage
 providers, since other osfr functions currently only support OSF storage
 
-# osfr v0.2.0
+# osfr 0.2.0
 
 **NOTE:** This version of osfr is a rewrite of the original codebase. It is
 effectively an entirely different package and provides no backwards
