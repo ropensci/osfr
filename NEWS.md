@@ -1,5 +1,12 @@
 # osfr 0.2.1.9000
 
+## New functions
+
+* `osf_mv()` to move files and directories to a new project, component, or
+subdirectory
+
+## New features
+
 * `osf_rm()` can now delete files and directories
 
 # osfr 0.2.1
