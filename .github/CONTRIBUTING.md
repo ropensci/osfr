@@ -4,7 +4,7 @@ This outlines how to propose a change to osfr
 
 ### Development environment
 
-osfr development should take place on OSF's testing server. The following steps will get you setup:
+To get started with osfr development you'll need to generate a personal access token (PAT) on OSF's testing server. The following steps will get you setup:
 
 1. Create an account on <https://test.osf.io/>.
 2. Generate a PAT for the new account.
@@ -16,7 +16,9 @@ osfr development should take place on OSF's testing server. The following steps 
    OSF_SERVER=test
    ```
 
-5. Load your local copy of osfr2 with `devtools::load_all()` and verify that `osf_open(osf_retrieve_user("me"))` opens your test server profile on the `test.osf.io` domain. 
+5. Load your local copy of osfr with `devtools::load_all()` and verify that `osf_open(osf_retrieve_user("me"))` opens your test server profile on the `test.osf.io` domain.
+
+Once this is setup correctly, you should be able to run osfr's tests without error (`devtools::test()`). 
 
 ### Fixing typos
 
