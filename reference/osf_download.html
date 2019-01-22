@@ -206,7 +206,7 @@ containing the downloaded file's path.</p>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='co'># download a single file</span>
 <span class='no'>analysis_plan</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='osf_retrieve.html'>osf_retrieve_file</a></span>(<span class='st'>"2ryha"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>osf_download</span>(<span class='no'>analysis_plan</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"plan_wave1.docx"</span>)
+  <span class='fu'>osf_download</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"plan_wave1.docx"</span>)
 
 <span class='co'># verify the file was downloaded locally</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/files'>file.exists</a></span>(<span class='no'>analysis_plan</span>$<span class='no'>local_path</span>)
