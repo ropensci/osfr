@@ -38,7 +38,7 @@ existing directory.
 \dontrun{
 # download a single file
 analysis_plan <- osf_retrieve_file("2ryha") \%>\%
-  osf_download(analysis_plan, path = "plan_wave1.docx")
+  osf_download(path = "plan_wave1.docx")
 
 # verify the file was downloaded locally
 file.exists(analysis_plan$local_path)
