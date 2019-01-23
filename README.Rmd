@@ -122,6 +122,10 @@ The original version of osfr was developed by [Chris Chartgerink][chris] and fur
 
 Big thanks to Rusty Speidel for designing our logo and [Tim Errington][tim] for his feedback during development.
 
+## Contributing
+
+Check out the [Contributing Guidelines](.github/CONTRIBUTING.md) to get started with osfr development and note that by contributing to this project, you agree to abide by the terms outlined in the [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
+
 <!-- links -->
 [osf]: https://osf.io "Open Science Framework"
 [cos]: https://cos.io "Center for Open Science"

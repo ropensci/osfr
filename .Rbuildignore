@@ -1,3 +1,4 @@
+^CODE_OF_CONDUCT\.md$
 ^\.github$
 ^Meta$
 ^doc$
@@ -9,14 +10,12 @@
 # rstudio
 ^.*\.Rproj$
 ^\.Rproj\.user$
-
 # CI
 ^\.travis.yml
 ^appveyor\.yml$
 ^codecov\.yml$
 ^\.lintr
 inst/.lintr$
-
 # pkgdown
 ^docs$
 ^pkgdown$
