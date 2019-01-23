@@ -40,6 +40,8 @@ remotes::install_github("centerforopenscience/osfr")
 
 ## Usage Examples
 
+*Note: You need to [setup an OSF personal access token (PAT)][auth] to use osfr to manage projects or upload files.*
+
 ### Accessing Open Research Materials
 
 Many researchers use OSF to archive and share their work. You can use osfr to explore publicly accessible projects and download the associated files---all you need to get started is the project's URL or GUID (global unique identifier).
@@ -83,7 +85,7 @@ We could continue this pattern of exploration and even download local copies of 
 
 ### Managing Projects
 
-You can use osfr to create projects, add sub-components, create directories, and upload files. See the [Getting Started vignette][getting-started] to learn more about building projects with osfr, but here is a quick example in which we:
+You can use osfr to create projects, add sub-components or directories, and upload files. See the [Getting Started vignette][getting-started] to learn more about building projects with osfr, but here is a quick example in which we:
 
 1. Create a new project called *Motor Trend Car Road Tests*
 2. Create a sub-component called *Car Data*
