@@ -1,13 +1,13 @@
 # Contributing to osfr
 
-This outlines how to propose a change to osfr
+This outlines how to propose a change to osfr.
 
 ### Development environment
 
 To get started with osfr development you'll need to generate a personal access token (PAT) on OSF's testing server. The following steps will get you setup:
 
 1. Create an account on <https://test.osf.io/>.
-2. Generate a PAT for the new account.
+2. Generate a PAT for the new account with all permission scopes enabled. This is necessary to run osfr's unit tests.
 3. Fork the osfr repository and clone a local copy.
 4. Create a `.Renviron` file in the root of your project directory that defines the `OSF_PAT` and `OSF_SERVER` environment variables. It should look like this:
 
