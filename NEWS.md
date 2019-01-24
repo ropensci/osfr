@@ -1,4 +1,4 @@
-# osfr 0.2.1.9000
+# osfr 0.2.2
 
 ## New functions
 
@@ -8,6 +8,10 @@ subdirectory
 ## New features
 
 * `osf_rm()` can now delete files and directories
+
+## Minor improvements and fixes
+
+* Restructured tests to better handle environments in which `OSF_PAT` and/or `OSF_SERVER` are not defined
 
 # osfr 0.2.1
 
