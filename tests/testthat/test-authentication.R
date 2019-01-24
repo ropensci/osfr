@@ -18,7 +18,7 @@ teardown({
 
   if (exists("test_pat")) {
     Sys.setenv(OSF_PAT = test_pat)
-    osf_auth()
+    suppressMessages(osf_auth())
   }
 })
 
