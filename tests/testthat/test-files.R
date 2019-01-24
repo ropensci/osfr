@@ -1,10 +1,24 @@
 context("Uploading")
 
-# setup -------------------------------------------------------------------
-txt.file <- file.path(tempdir(), "osfr-test-file.txt")
-writeLines("Lorem ipsum dolor sit amet, consectetur", txt.file)
 
-p1 <- osf_create_project("File Tests")
+# setup -------------------------------------------------------------------
+infile <- tempfile("osfr-local-file-", fileext = ".txt")
+outfile <- basename(infile)
+
+setup({
+  writeLines("Lorem ipsum dolor sit amet, consectetur", infile)
+  if (has_pat()) {
+    p1 <<- osf_create_project(title = "osfr-test-files")
+  }
+})
+
+teardown({
+  unlink(outfile)
+
+  if (has_pat()) {
+    osf_rm(p1, recursive = TRUE, check = FALSE)
+  }
+})
 
 
 # tests -------------------------------------------------------------------
@@ -12,54 +26,67 @@ test_that("non-existent file is detected", {
   expect_error(osf_upload(p1, "non-existent-file"), "Can't find file")
 })
 
-f1 <- osf_upload(p1, txt.file)
-
 test_that("file is uploaded to project root", {
+  skip_if_no_pat()
+
+  f1 <<- osf_upload(p1, infile)
   expect_s3_class(f1, "osf_tbl_file")
-  expect_match(f1$name, basename(txt.file))
+  expect_match(f1$name, outfile)
 })
 
 test_that("uploaded file can be retrieved", {
+  skip_if_no_pat()
+
   f2 <- osf_retrieve_file(as_id(f1))
   expect_identical(f1, f2)
 })
 
 test_that("upload fails if the file already exists", {
-  expect_error(osf_upload(p1, txt.file), "File already exists at destination")
+  skip_if_no_pat()
+  expect_error(osf_upload(p1, infile), "File already exists at destination")
 })
 
-writeLines("Lorem ipsum dolor sit amet, consectetur, ea duo posse", txt.file)
 
 test_that("upload can overwrite existing files", {
-  f1 <- osf_upload(p1, txt.file, overwrite = TRUE)
+  skip_if_no_pat()
+
+  writeLines("Lorem ipsum dolor sit amet, consectetur, ea duo posse", infile)
+  skip_if_no_pat()
+
+  f1 <- osf_upload(p1, infile, overwrite = TRUE)
   expect_equal(f1$meta[[1]]$attributes$current_version, 2)
   expect_s3_class(f1, "osf_tbl_file")
 })
 
 test_that("user is warned that path info is removed from upload name", {
+  skip_if_no_pat()
+
   expect_warning(
-    osf_upload(p1, txt.file, name = "path/file.txt"),
+    osf_upload(p1, infile, name = "path/file.txt"),
     "Removing path information"
   )
 })
 
-d1 <- osf_mkdir(p1, "d1")
-f2 <- osf_upload(d1, txt.file)
 
 test_that("file can be uploaded to a directory", {
+  skip_if_no_pat()
+
+  d1 <<- osf_mkdir(p1, "data")
+  f2 <<- osf_upload(d1, infile)
   expect_s3_class(f2, "osf_tbl_file")
 })
 
 test_that("attempting to list an osf_tbl_file with a file errors", {
+  skip_if_no_pat()
   expect_error(osf_ls_files(f1), "Listing an `osf_tbl_file` requires a dir")
 })
 
 
 context("Downloading")
-
-outfile <- tempfile(fileext = ".txt")
-
 test_that("a file can be downloaded from a project", {
+
+  skip_if_no_pat()
+
   out <- osf_download(f1, path = outfile)
   expect_s3_class(out, "osf_tbl_file")
   expect_identical(out$local_path, outfile)
@@ -67,17 +94,29 @@ test_that("a file can be downloaded from a project", {
 })
 
 test_that("an existing file won't be overwritten", {
-  expect_error(osf_download(f1, path = outfile), "A file exists at the specified")
-  expect_s3_class(osf_download(f1, path = outfile, overwrite = TRUE), "osf_tbl_file")
+  skip_if_no_pat()
+
+  expect_error(
+    osf_download(f1, path = outfile),
+    "A file exists at the specified"
+  )
+  expect_s3_class(
+    osf_download(f1, path = outfile, overwrite = TRUE),
+    "osf_tbl_file"
+  )
 })
 
 test_that("a non-existant path throws an error", {
+  skip_if_no_pat()
+
   expect_error(
     osf_download(f1, path = "ddd/test.txt"),
     "The directory specified in `path` does not exist.")
 })
 
 test_that("a file can be downloaded from a directory", {
+  skip_if_no_pat()
+
   outfile <- tempfile(fileext = ".txt")
   out <- osf_download(f2, path = outfile)
   expect_s3_class(out, "osf_tbl_file")
@@ -86,14 +125,18 @@ test_that("a file can be downloaded from a directory", {
 })
 
 test_that("a directory can be downloaded as a zip file", {
+  skip_if_no_pat()
+
+  d1_files <- osf_ls_files(d1, n_max = Inf)
   outfile <- tempfile(fileext = ".zip")
+
   out <- osf_download(d1, path = outfile)
   expect_s3_class(out, "osf_tbl_file")
   expect_true(file.exists(outfile))
 
-  expect_match(
-    unzip(outfile, list = TRUE)$Name[1],
-    basename(txt.file)
+  expect_equal(
+    sort(unzip(outfile, list = TRUE)$Name),
+    sort(d1_files$name)
   )
 })
 
@@ -168,8 +211,3 @@ test_that("a non-empty directory can be deleted", {
   d3 <- osf_mkdir(p1, "d1/d2/d3")
   expect_true(osf_rm(d3, check = FALSE))
 })
-
-
-# cleanup -----------------------------------------------------------------
-osf_rm(p1, check = FALSE)
-osf_rm(p2, check = FALSE)
