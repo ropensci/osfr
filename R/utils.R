@@ -109,9 +109,25 @@ osf_dev_off <- function() {
 #' @noRd
 
 yesno_menu <- function(question) {
-  yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah", "Absolutely", "Yes, 100%")
-  nos <- c("No way", "Not yet", "I don't think so", "No", "Nope", "Uhhhh... Maybe?",
-           "No. That's my final answer")
+  yeses <- c(
+    "Yes",
+    "Definitely",
+    "For sure",
+    "Yup",
+    "Yeah",
+    "Absolutely",
+    "Yes, 100%"
+  )
+
+  nos <- c(
+    "No way",
+    "Not yet",
+    "I don't think so",
+    "No",
+    "Nope",
+    "Uhhhh... Maybe?",
+    "No. That's my final answer"
+  )
 
   qs <- c(sample(yeses, 1), sample(nos, 2))
   rand <- sample(length(qs))

@@ -54,7 +54,8 @@ osf_rm.osf_tbl_node <-
     child_ids <- recurse_node(id, maxdepth = Inf)
     if (verbose) {
       message(
-        sprintf("Retrieved %i components under node: %s", length(child_ids), id))
+        sprintf("Retrieved %i components under node: %s", length(child_ids), id)
+      )
     }
 
     # reverse to begin with the most deeply nested node

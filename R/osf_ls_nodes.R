@@ -41,7 +41,14 @@ osf_ls_nodes.osf_tbl_node <-
            n_max = 10,
            verbose = FALSE) {
   x <- make_single(x)
-  out <- .osf_node_children(as_id(x), n_max, filter_nodes(pattern = pattern), verbose)
+
+  out <- .osf_node_children(
+    id = as_id(x),
+    n_max = n_max,
+    query = filter_nodes(pattern = pattern),
+    verbose = verbose
+  )
+
   raise_error(out)
   as_osf_tbl(out, "osf_tbl_node")
 }
@@ -53,7 +60,14 @@ osf_ls_nodes.osf_tbl_user <-
            n_max = 10,
            verbose = FALSE) {
   x <- make_single(x)
-  out <- .osf_user_nodes(as_id(x), n_max, filter_nodes(pattern = pattern), verbose)
+
+  out <- .osf_user_nodes(
+    id = as_id(x),
+    n_max = n_max,
+    query = filter_nodes(pattern = pattern),
+    verbose = verbose
+  )
+
   raise_error(out)
   as_osf_tbl(out, "osf_tbl_node")
 }

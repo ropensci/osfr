@@ -26,7 +26,9 @@ user_agent <- function(agent = "osfr") {
 
   headers <- list(
     `User-Agent` = user_agent(),
-    `Accept-Header` = sprintf("application/vnd.api+json;version=%s", .osf_api_version)
+    `Accept-Header` = sprintf(
+      "application/vnd.api+json;version=%s",
+      .osf_api_version)
   )
 
   if (!is.null(pat)) {
@@ -46,7 +48,14 @@ user_agent <- function(agent = "osfr") {
 
 # OSF API request functions -----------------------------------------------
 
-.osf_request <- function(method, path, query = list(), body = NULL, verbose = FALSE, ...) {
+.osf_request <-
+  function(method,
+           path,
+           query = list(),
+           body = NULL,
+           verbose = FALSE,
+           ...) {
+
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
   cli <- .osf_cli()
   method <- cli[[method]]
@@ -54,7 +63,13 @@ user_agent <- function(agent = "osfr") {
 }
 
 # TODO: .osf_request and .osf_paginated_request returns should be consistent
-.osf_paginated_request <- function(method, path, query = list(), n_max = 100, verbose = FALSE) {
+.osf_paginated_request <-
+  function(method,
+           path,
+           query = list(),
+           n_max = 100,
+           verbose = FALSE) {
+
   items <- list()
   i <- 1
   retrieved <- 0
@@ -72,7 +87,9 @@ user_agent <- function(agent = "osfr") {
     items <- c(items, out$data)
 
     if (verbose && n_max > 10) {
-      if (i == 1) message(sprintf("Retrieving %i of %i available items:", n_max, total))
+      if (i == 1) {
+        message(sprintf("Retrieving %i of %i available items:", n_max, total))
+      }
       message(sprintf("..retrieved %i items", retrieved), appendLF = TRUE)
     }
 

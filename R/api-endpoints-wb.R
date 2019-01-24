@@ -59,7 +59,8 @@
   type <- match.arg(type, c("file", "folder"))
   query <- list()
   if (zip) query$zip <- ""
-  res <- .wb_request("get", .wb_api_path(id, fid, type = type), query, disk = path)
+  api_path <- .wb_api_path(id, fid, type = type)
+  res <- .wb_request("get", api_path, query, disk = path)
   if (res$status_code == 200) return(TRUE)
   if (res$status_code == 404) {
     msg <- sprintf("The requested %s (%s) could not be found in node `%s`",

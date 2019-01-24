@@ -12,8 +12,13 @@ skip_on_production_server <- function() {
 
 
 # for tests that require authenticated access
-has_pat <- function() nzchar(Sys.getenv("OSF_PAT"))
+has_pat <- function() {
+  nzchar(Sys.getenv("OSF_PAT"))
+}
 
 skip_if_no_pat <- function() {
-  testthat::skip_if_not(has_pat(), "No PAT detected.")
+  testthat::skip_if_not(
+    has_pat(),
+    "No PAT detected."
+  )
 }

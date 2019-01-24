@@ -89,8 +89,8 @@ parse_datetime_attrs <- function(x) {
   stopifnot("attributes" %in% names(x))
 
   x$attributes <-  purrr::modify_at(x$attributes,
-      .at = c("date_registered", "date_created", "date_modified", "modified_utc"),
-      .f = parse_datetime
+    .at = c("date_registered", "date_created", "date_modified", "modified_utc"),
+    .f = parse_datetime
   )
 
   return(x)

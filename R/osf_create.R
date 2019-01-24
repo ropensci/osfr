@@ -76,7 +76,7 @@ osf_create_component <-
            category = NULL) {
 
   if (missing(x) || !inherits(x, "osf_tbl_node"))
-    abort("`x` must be an `osf_tbl_node` referencing an existing project/component. ")
+    abort("`x` must be an `osf_tbl_node` referencing an existing project/component.")
   if (missing(title)) abort("Must define a title for the new component.")
 
   out <- .osf_node_create(
