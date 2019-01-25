@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download files and directories from OSF — osf_download • osfr</title>
+<title>Move a file or directory — osf_mv • osfr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,17 +37,10 @@
 
 
 
-<meta property="og:title" content="Download files and directories from OSF — osf_download" />
+<meta property="og:title" content="Move a file or directory — osf_mv" />
 
-<meta property="og:description" content="Files stored on OSF can be downloaded locally by providing an
-osf_tbl_file that contains the OSF file of interest. If the
-osf_tbl_file contains a directory, a zip file containing the
-directory's contents will be downloaded.
-By default files are downloaded to your current working directory with the
-same filename used on OSF. The path argument can be used to specify a
-different destination and, optionally,  a different filename for the
-downloaded file. Note, the directory portion of path must reference an
-existing directory." />
+<meta property="og:description" content="Use osf_mv() to move a file or directory to a new project, component, or
+subdirectory." />
 
 <meta property="og:image" content="https://centerforopenscience.github.io/osfr/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -144,26 +137,19 @@ existing directory." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download files and directories from OSF</h1>
-    <small class="dont-index">Source: <a href='https://github.com/centerforopenscience/osfr/blob/master/R/osf_download.R'><code>R/osf_download.R</code></a></small>
-    <div class="hidden name"><code>osf_download.Rd</code></div>
+    <h1>Move a file or directory</h1>
+    <small class="dont-index">Source: <a href='https://github.com/centerforopenscience/osfr/blob/master/R/osf_mv.R'><code>R/osf_mv.R</code></a></small>
+    <div class="hidden name"><code>osf_mv.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Files stored on OSF can be downloaded locally by providing an
-<code><a href='osf_tbl.html'>osf_tbl_file</a></code> that contains the OSF file of interest. If the
-<code><a href='osf_tbl.html'>osf_tbl_file</a></code> contains a directory, a zip file containing the
-directory's contents will be downloaded.</p>
-<p>By default files are downloaded to your current working directory with the
-same filename used on OSF. The <code>path</code> argument can be used to specify a
-different destination <em>and</em>, optionally,  a different filename for the
-downloaded file. Note, the directory portion of <code>path</code> must reference an
-existing directory.</p>
+    <p>Use <code>osf_mv()</code> to move a file or directory to a new project, component, or
+subdirectory.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>osf_download</span>(<span class='no'>x</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>osf_mv</span>(<span class='no'>x</span>, <span class='no'>to</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,14 +159,17 @@ existing directory.</p>
       <td><p>An <code><a href='osf_tbl.html'>osf_tbl_file</a></code> containing a single file or directory.</p></td>
     </tr>
     <tr>
-      <th>path</th>
-      <td><p>Local path where the downloaded file will be saved. The default
-is to use the remote file's name.</p></td>
+      <th>to</th>
+      <td><p>The destination where the file or directory will be copied to. This
+can be one of the following:</p><ul>
+<li><p>An <code><a href='osf_tbl.html'>osf_tbl_node</a></code> with a single project or component.</p></li>
+<li><p>An <code><a href='osf_tbl.html'>osf_tbl_file</a></code> with a single directory.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>overwrite</th>
-      <td><p>Logical, if the local path already exists should it be
-replaced with the downloaded file?</p></td>
+      <td><p>Logical, if a file or directory with the same name already
+exists at the destination should it be replaced with <code>x</code>?</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -191,26 +180,30 @@ about interactions with the OSF API (default <code>FALSE</code>).</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The <code><a href='osf_tbl.html'>osf_tbl_file</a></code> input with a new column, <code>"local_path"</code>,
-containing the downloaded file's path.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><ul>
-<li><p><code><a href='osf_upload.html'>osf_upload()</a></code> for uploading files to OSF.</p></li>
-<li><p><code><a href='osf_ls_files.html'>osf_ls_files()</a></code> for listing files and directories on OSF.</p></li>
-</ul></div>
+    <p>An <code><a href='osf_tbl.html'>osf_tbl_file</a></code> containing the updated OSF file.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># download a single file</span>
-<span class='no'>analysis_plan</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='osf_retrieve.html'>osf_retrieve_file</a></span>(<span class='st'>"2ryha"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>osf_download</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"plan_wave1.docx"</span>)
+<span class='co'># Create an example file to upload to our example project</span>
+<span class='no'>project</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='osf_create.html'>osf_create_project</a></span>(<span class='st'>"Flower Data"</span>)
 
-<span class='co'># verify the file was downloaded locally</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/files'>file.exists</a></span>(<span class='no'>analysis_plan</span>$<span class='no'>local_path</span>)
-<span class='co'># }</span></pre>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/write.table'>write.csv</a></span>(<span class='no'>iris</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"iris.csv"</span>)
+<span class='no'>data_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='osf_upload.html'>osf_upload</a></span>(<span class='no'>project</span>,<span class='st'>"iris.csv"</span>)
+
+<span class='co'># Create a new directory to move our file to</span>
+<span class='no'>data_dir</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='osf_mkdir.html'>osf_mkdir</a></span>(<span class='no'>project</span>, <span class='st'>"data"</span>)
+
+<span class='co'># Move the file to our data directory</span>
+<span class='no'>data_file</span> <span class='kw'>&lt;-</span> <span class='fu'>osf_mv</span>(<span class='no'>data_file</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='no'>data_dir</span>)
+
+<span class='co'># Move our data directory to a new component</span>
+<span class='no'>data_comp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='osf_create.html'>osf_create_component</a></span>(<span class='no'>project</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"data"</span>, <span class='kw'>category</span> <span class='kw'>=</span> <span class='st'>"data"</span>)
+<span class='no'>data_file</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>osf_mv</span>(<span class='kw'>to</span> <span class='kw'>=</span> <span class='no'>data_comp</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='osf_open.html'>osf_open</a></span>()
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -218,8 +211,6 @@ containing the downloaded file's path.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
