@@ -45,7 +45,9 @@ osf_upload <-
            verbose = FALSE) {
 
   if (!file.exists(path)) abort(sprintf("Can't find file:\n %s", path))
-  if (is_dir(path)) abort("`path` must point to a file\n* Uploading directories is not supported")
+  if (is_dir(path)) {
+    abort("`path` must point to a file\n* Uploading directories is not supported")
+  }
   UseMethod("osf_upload")
 }
 

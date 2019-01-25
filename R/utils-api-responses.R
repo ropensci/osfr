@@ -23,7 +23,7 @@ process_response <- function(res) {
   if (res$status_code > 500) {
     abort(paste0(
       "Encountered an unexpected error with the OSF API\n",
-      "Please report this at https://github.com/aaronwolen/osfr/issues\n",
+      "Please report this at https://github.com/centerforopenscience/osfr/issues\n",
       "* Status code: ", res$status_code, "\n",
       "* Request: ", res$request$url$url
     ))
@@ -89,8 +89,8 @@ parse_datetime_attrs <- function(x) {
   stopifnot("attributes" %in% names(x))
 
   x$attributes <-  purrr::modify_at(x$attributes,
-      .at = c("date_registered", "date_created", "date_modified", "modified_utc"),
-      .f = parse_datetime
+    .at = c("date_registered", "date_created", "date_modified", "modified_utc"),
+    .f = parse_datetime
   )
 
   return(x)

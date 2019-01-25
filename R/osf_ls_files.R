@@ -53,7 +53,13 @@ osf_ls_files.osf_tbl_node <-
            verbose = FALSE) {
 
   x <- make_single(x)
- .osf_list_files(x, path, type, pattern, n_max, verbose)
+
+  if (!is.null(path) && path != ".") {
+    leaf_dir <- recurse_path(x, path, missing_action = "error", verbose)
+    return(osf_ls_files(leaf_dir, path = ".", type, pattern, n_max, verbose))
+  }
+
+ .osf_list_files(x, type, pattern, n_max, verbose)
 }
 
 #' @export
@@ -69,32 +75,30 @@ osf_ls_files.osf_tbl_file <-
   if (is_osf_file(x)) {
     abort("Listing an `osf_tbl_file` requires a directory\n* `x` contains a file")
   }
- .osf_list_files(x, path, type, pattern, n_max, verbose)
+
+  # walk down path tree and replace x with the leaf directory
+  if (!is.null(path) && path != ".") {
+    x <- recurse_path(x, path, missing_action = "error", verbose = verbose)
+  }
+
+ .osf_list_files(x, type, pattern, n_max, verbose)
 }
 
 
-.osf_list_files <- function(x, path, type, pattern, n_max, verbose) {
+#' Internal list files method
+#'
+#' This requires an API path to more easily support different storage providers
+#' in the future when listing from a node.
+#' @return An `osf_tbl_file`.
+#' @noRd
+.osf_list_files <- function(x, type, pattern, n_max, verbose) {
 
-  # manually construct path for nodes because the provided files endpoint is
-  # for listing storage providers
+  # manually construct the API path because the 'files' endpoint for nodes lists
+  # the enabled storage providers
   api_path <- switch(class(x)[1],
     osf_tbl_node = .osf_api_path(sprintf("nodes/%s/files/osfstorage/", as_id(x))),
     osf_tbl_file = crul::url_parse(get_relation(x, "files"))$path
   )
-
-  # recurse if path contains subdirectories
-  path <- path %||% "."
-  if (path != ".") {
-    path_root <- fs::path_split(path)[[1]][1]
-    root_dir <- find_exact_match(x, name = path_root, type = "folder")
-    if (nrow(root_dir) == 0) {
-      abort(sprintf("Can't find path `%s` within `%s`", path, x$name))
-    }
-
-    next_path <- fs::path_rel(path, path_root)
-    res <- .osf_list_files(root_dir, next_path, type, pattern, n_max, verbose)
-    return(as_osf_tbl(res, "osf_tbl_file"))
-  }
 
   res <- .osf_paginated_request(
     method = "get",

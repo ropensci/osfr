@@ -32,23 +32,6 @@ is_osf_file <- function(x) {
   kind == "file"
 }
 
-#' Return an OSF file or folder based on name matching
-#'
-#' Useful in situations where we need to know if a file or directory already
-#' exists on OSF and want to retrieve it without knowing its ID. This is just a
-#' wrapper around `osf_ls_files` that verifies a returned entity's name exactly
-#' matches the specified `name` argument. This isn't possible with
-#' `osf_ls_files` since OSF API uses substring matching.
-#'
-#' @param name string containing the exact name to be matched against
-#' @return an [`osf_tbl_file`] containing a single matching entity or zero rows
-#'   if no match was found
-#' @noRd
-find_exact_match <- function(x, name, type = "files") {
-  items <- osf_ls_files(x, pattern = name, type = type)
-  items[items$name == name, ]
-}
-
 
 # extract OSF and Waterbutler identifiers from known URL schemes
 extract_osf_id <- function(url) {
@@ -126,9 +109,25 @@ osf_dev_off <- function() {
 #' @noRd
 
 yesno_menu <- function(question) {
-  yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah", "Absolutely", "Yes, 100%")
-  nos <- c("No way", "Not yet", "I don't think so", "No", "Nope", "Uhhhh... Maybe?",
-           "No. That's my final answer")
+  yeses <- c(
+    "Yes",
+    "Definitely",
+    "For sure",
+    "Yup",
+    "Yeah",
+    "Absolutely",
+    "Yes, 100%"
+  )
+
+  nos <- c(
+    "No way",
+    "Not yet",
+    "I don't think so",
+    "No",
+    "Nope",
+    "Uhhhh... Maybe?",
+    "No. That's my final answer"
+  )
 
   qs <- c(sample(yeses, 1), sample(nos, 2))
   rand <- sample(length(qs))
