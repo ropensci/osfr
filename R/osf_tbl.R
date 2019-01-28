@@ -92,7 +92,7 @@ as_osf_tbl.list <- function(x, subclass = NULL) {
   new_osf_tbl(out, subclass)
 }
 
-#' Validate and rebuild osf_tbl
+#' Rebuild osf_tbl
 #'
 #' Return an osf_tbl with the proper subclass *if* the input meets all of the
 #' requirements for a valid osf_tbl. Otherwise, the object is returned as a
@@ -102,10 +102,7 @@ as_osf_tbl.list <- function(x, subclass = NULL) {
 #' @return an [`osf_tbl`] or [`tibble`]
 #' @noRd
 rebuild_osf_tbl <- function(x) {
-  if (is.data.frame(x) &&
-      has_osf_tbl_colnames(x) &&
-      has_osf_tbl_coltypes(x) &&
-      has_uniform_entity_type(x)) {
+  if (is_valid_osf_tbl(x)) {
     subclass <- sprintf("osf_tbl_%s", determine_entity_type(x$meta[[1]]))
     return(as_osf_tbl(x, subclass = subclass))
   } else {
@@ -160,4 +157,22 @@ determine_entity_type <- function(x) {
   } else {
     abort("Could not determine `x`'s entity type.")
   }
+}
+
+#' Validate OSF tibble
+#'
+#' Determine whether a data frame meets the requirements to be a valid
+#' [`osf_tbl`] based on the names and types of included variables. If the data
+#' frame is not empty, we also check the entity *type* represented by each row
+#' to ensure the collection of entities is homogeneous.
+#'
+#' @param x an [`osf_tbl`]
+#' @return Logical
+#' @noRd
+is_valid_osf_tbl <- function(x) {
+  valid <- is.data.frame(x) &&
+    has_osf_tbl_colnames(x) &&
+    has_osf_tbl_coltypes(x)
+  if (nrow(x) > 1) valid <- valid && has_uniform_entity_type(x)
+  return(valid)
 }
