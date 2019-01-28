@@ -48,7 +48,7 @@ osf_tbl <- function(x = NULL, subclass = NULL) {
   x <- x %||% tibble::tibble(
     name = character(),
     id = character(),
-    metadata = list()
+    meta = list()
   )
   new_osf_tbl(x, subclass)
 }

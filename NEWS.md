@@ -12,6 +12,7 @@ subdirectory
 ## Minor improvements and fixes
 
 * Restructured tests to better handle environments in which `OSF_PAT` and/or `OSF_SERVER` are not defined
+* Fix incorrect column name in empty `osf_tbl`s (#88, @machow)
 
 # osfr 0.2.1
 

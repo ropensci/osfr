@@ -4,12 +4,14 @@ test_that("NULL input returns empty osf_tbl", {
   out <- osf_tbl()
   expect_s3_class(out, "osf_tbl")
   expect_equal(nrow(out), 0)
+  expect_true(is_valid_osf_tbl(out))
 })
 
 test_that("empty list returns empty osf_tbl", {
   out <- osf_tbl(list())
   expect_s3_class(out, "osf_tbl")
   expect_equal(nrow(out), 0)
+  expect_true(is_valid_osf_tbl(out))
 })
 
 
