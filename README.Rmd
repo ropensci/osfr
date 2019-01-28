@@ -20,6 +20,7 @@ Sys.unsetenv(c("OSF_SERVER", "OSF_PAT"))
 [![Build Status](https://travis-ci.org/CenterForOpenScience/osfr.svg?branch=master)](https://travis-ci.org/CenterForOpenScience/osfr)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/c1hf7snq8s59waos?svg=true)](https://ci.appveyor.com/project/CenterForOpenScience24999/osfr)
 [![Coverage status](https://codecov.io/gh/CenterForOpenScience/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/CenterForOpenScience/osfr?branch=master)
+[![](https://badges.ropensci.org/279_status.svg)](https://github.com/ropensci/software-review/issues/279)
 
 ## Overview
 
