@@ -146,6 +146,7 @@ test_that("a directory can be downloaded as a zip file", {
 context("Moving/copying files")
 
 test_that("moving to a destination with an existing file throws an error", {
+  skip_if_no_pat()
   expect_error(osf_mv(f1, d1), "Cannot complete action: file or folder")
 })
 
@@ -181,6 +182,8 @@ test_that("moving destination can be a different node", {
 })
 
 test_that("directories can be moved to a sibling directory", {
+  skip_if_no_pat()
+
   d2 <- osf_mkdir(p1, "d2")
   d1 <- osf_mv(d1, d2)
   expect_s3_class(f1, "osf_tbl_file")
