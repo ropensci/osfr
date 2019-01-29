@@ -204,6 +204,6 @@ development.
 Check out the [Contributing Guidelines](.github/CONTRIBUTING.md) to get
 started with osfr development and note that by contributing to this
 project, you agree to abide by the terms outlined in the [Contributor
-Code of Conduct](CODE_OF_CONDUCT.md).
+Code of Conduct](.github/CODE_OF_CONDUCT.md).
 
 <!-- links -->

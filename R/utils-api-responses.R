@@ -83,16 +83,18 @@ raise_error <- function(x) {
 
 # Convert datetime attributes to POSIXct objects
 # param x an OSF response list that contains an attributes element
-#' @importFrom purrr modify_at
 parse_datetime_attrs <- function(x) {
   stopifnot(is.list(x))
   stopifnot("attributes" %in% names(x))
 
-  x$attributes <-  purrr::modify_at(x$attributes,
-    .at = c("date_registered", "date_created", "date_modified", "modified_utc"),
-    .f = parse_datetime
+  dt_keys <- intersect(
+    c("date_registered", "date_created", "date_modified", "modified_utc"),
+    names(x$attributes)
   )
 
+  dt_vals <- lapply(x$attributes[dt_keys], parse_datetime)
+
+  x$attributes <- modifyList(x$attributes, dt_vals)
   return(x)
 }
 

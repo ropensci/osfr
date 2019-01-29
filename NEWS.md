@@ -1,18 +1,27 @@
-# osfr 0.2.2
-
-## New functions
-
-* `osf_mv()` to move files and directories to a new project, component, or
-subdirectory
+# osfr 0.2.3
 
 ## New features
 
+* Failed OSF API requests are now re-attempted 3 times (requires crul v0.7.0)
+
+## Minor fixes
+
+* Fix incorrect column name in empty `osf_tbl`s (#88, @machow)
+* No longer importing `modify_at()`
+* Add rOpenSci badge (#89, @maelle)
+* Don't build vignettes on travis
+
+# osfr 0.2.2
+
+## New features
+
+* Added `osf_mv()` to move files and directories to a new project, component, or
+subdirectory
 * `osf_rm()` can now delete files and directories
 
 ## Minor improvements and fixes
 
 * Restructured tests to better handle environments in which `OSF_PAT` and/or `OSF_SERVER` are not defined
-* Fix incorrect column name in empty `osf_tbl`s (#88, @machow)
 
 # osfr 0.2.1
 
