@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">osfr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
       </span>
     </div>
 
@@ -138,21 +138,36 @@
       <small>Source: <a href='https://github.com/centerforopenscience/osfr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="osfr-0-2-2" class="section level1">
+    <div id="osfr-0-2-3" class="section level1">
 <h1 class="page-header">
-<a href="#osfr-0-2-2" class="anchor"></a>osfr 0.2.2</h1>
-<div id="new-functions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#new-functions" class="anchor"></a>New functions</h2>
-<ul>
-<li>
-<code><a href="../reference/osf_mv.html">osf_mv()</a></code> to move files and directories to a new project, component, or subdirectory</li>
-</ul>
-</div>
+<a href="#osfr-0-2-3" class="anchor"></a>osfr 0.2.3</h1>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New features</h2>
 <ul>
+<li>Failed OSF API requests are now re-attempted 3 times (requires crul v0.7.0)</li>
+</ul>
+</div>
+<div id="minor-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-fixes" class="anchor"></a>Minor fixes</h2>
+<ul>
+<li>Fix incorrect column name in empty <code>osf_tbl</code>s (<a href='https://github.com/centerforopenscience/osfr/issues/88'>#88</a>, <a href='https://github.com/machow'>@machow</a>)</li>
+<li>No longer importing <code>modify_at()</code>
+</li>
+<li>Add rOpenSci badge (<a href='https://github.com/centerforopenscience/osfr/issues/89'>#89</a>, <a href='https://github.com/maelle'>@maelle</a>)</li>
+<li>Don’t build vignettes on travis</li>
+</ul>
+</div>
+</div>
+    <div id="osfr-0-2-2" class="section level1">
+<h1 class="page-header">
+<a href="#osfr-0-2-2" class="anchor"></a>osfr 0.2.2</h1>
+<div id="new-features-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features-1" class="anchor"></a>New features</h2>
+<ul>
+<li>Added <code><a href="../reference/osf_mv.html">osf_mv()</a></code> to move files and directories to a new project, component, or subdirectory</li>
 <li>
 <code><a href="../reference/osf_rm.html">osf_rm()</a></code> can now delete files and directories</li>
 </ul>
@@ -187,6 +202,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#osfr-0-2-3">0.2.3</a></li>
         <li><a href="#osfr-0-2-2">0.2.2</a></li>
         <li><a href="#osfr-0-2-1">0.2.1</a></li>
         <li><a href="#osfr-0-2-0">0.2.0</a></li>
