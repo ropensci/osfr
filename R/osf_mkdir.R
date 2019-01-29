@@ -32,8 +32,6 @@ osf_mkdir <- function(x, path, verbose = FALSE) {
   UseMethod("osf_mkdir")
 }
 
-# TODO: DRY out the osf_tbl_node and osf_tbl_file methods
-
 #' @export
 osf_mkdir.osf_tbl_node <- function(x, path, verbose = FALSE) {
   x <- make_single(x)

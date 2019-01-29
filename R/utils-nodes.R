@@ -20,7 +20,7 @@ recurse_node <- function(id, maxdepth = 5) {
 # containing the ID of the most deeply nested node.
 recurse_tree <- function(id, maxdepth = 5) {
   if (maxdepth == 1) return(id)
-  # TODO: use consistent argument names for number of items to return
+
   children <- .osf_node_children(id, n_max = Inf)
   child_ids <- purrr::map_chr(children, "id")
 

@@ -18,6 +18,19 @@ http_error <- function(code, ...) {
   stop(args, msg, call. = FALSE)
 }
 
+#' Inform user the API request failed and will be retried
+#' @param res response object from the failed request
+#' @param time wait time in seconds
+#' @noRd
+retry_message <- function(res, time) {
+  message(
+    sprintf(
+      "Request failed (Status code: %s). Retrying in %ds...",
+      res$status_code, ceiling(time)
+    )
+  )
+}
+
 is_osf_url <- function(url) grepl("osf.io", tolower(url), fixed = TRUE)
 
 is_osf_dir <- function(x) {
