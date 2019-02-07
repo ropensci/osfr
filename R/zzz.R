@@ -24,4 +24,11 @@
   if (!is.null(getOption("osfr.pat"))) {
     packageStartupMessage("Automatically registered OSF personal access token")
   }
+
+  server <- Sys.getenv("OSF_SERVER")
+  if (!nzchar(server)) {
+    packageStartupMessage(
+      sprintf("<Testing server enabled: %s.osf.io>", tolower(server))
+    )
+  }
 }
