@@ -26,7 +26,7 @@
   }
 
   server <- Sys.getenv("OSF_SERVER")
-  if (!nzchar(server)) {
+  if (nzchar(server)) {
     packageStartupMessage(
       sprintf("<Testing server enabled: %s.osf.io>", tolower(server))
     )
