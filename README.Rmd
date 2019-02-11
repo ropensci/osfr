@@ -86,7 +86,7 @@ We could continue this pattern of exploration and even download local copies of 
 
 ### Managing Projects
 
-You can use osfr to create projects, add sub-components or directories, and upload files. See the [Getting Started vignette][getting-started] to learn more about building projects with osfr, but here is a quick example in which we:
+You can use osfr to [create projects][osf-create], [add sub-components][osf-create] or [directories][osf-mkdir], and [upload files][osf-upload]. See [Getting Started][getting-started] to learn more about building projects with osfr, but here is a quick example in which we:
 
 1. Create a new project called *Motor Trend Car Road Tests*
 2. Create a sub-component called *Car Data*
@@ -153,3 +153,6 @@ Check out the [Contributing Guidelines](.github/CONTRIBUTING.md) to get started 
 [getting-started]: http://centerforopenscience.github.io/osfr/articles/getting_started.html
 [auth]: http://centerforopenscience.github.io/osfr/articles/auth.html
 
+[osf-create]: https://centerforopenscience.github.io/osfr/reference/osf_create.html
+[osf-mkdir]: https://centerforopenscience.github.io/osfr/reference/osf_mkdir.html
+[osf-upload]: https://centerforopenscience.github.io/osfr/reference/osf_upload.html
