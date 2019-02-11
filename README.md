@@ -130,7 +130,19 @@ cr_project %>%
 ```
 
 We could continue this pattern of exploration and even download local
-copies of project files using `osf_download()`.
+copies of project files using `osf_download()`. Or, if you come across a
+publication that directly references a file’s OSF URL, you could quickly
+download it to your project directory by providing the URL or simply the
+GUID:
+
+``` r
+osf_retrieve_file("https://osf.io/btgx3/") %>% 
+  osf_download()
+#> # A tibble: 1 x 4
+#>   name                 id                     local_path          meta     
+#> * <chr>                <chr>                  <chr>               <list>   
+#> 1 Study_19_Figure_1.p… 5751d71d9ad5a10207937… Study_19_Figure_1.… <list [3…
+```
 
 ### Managing Projects
 

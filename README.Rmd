@@ -84,7 +84,13 @@ cr_project %>%
   osf_ls_files()
 ```
 
-We could continue this pattern of exploration and even download local copies of project files using `osf_download()`.
+We could continue this pattern of exploration and even download local copies of project files using `osf_download()`. Or, if you come across a publication that  directly references a file's OSF URL, you could quickly download it to your project directory by providing the URL or simply the GUID:
+
+```{r}
+osf_retrieve_file("https://osf.io/btgx3/") %>% 
+  osf_download()
+```
+
 
 ### Managing Projects
 
@@ -130,6 +136,10 @@ Big thanks to Rusty Speidel for designing our logo and [Tim Errington][tim] for 
 ## Contributing
 
 Check out the [Contributing Guidelines](.github/CONTRIBUTING.md) to get started with osfr development and note that by contributing to this project, you agree to abide by the terms outlined in the [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).
+
+```{r cleanup, include=FALSE}
+unlink("Study_19_Figure_1.pdf")
+```
 
 <!-- links -->
 [osf]: https://osf.io "Open Science Framework"
