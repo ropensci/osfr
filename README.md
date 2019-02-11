@@ -50,8 +50,13 @@ osfr to explore publicly accessible projects and download the associated
 files—all you need to get started is the project’s URL or GUID (global
 unique identifier).
 
-Here we’ll retrieve the main project for the Cancer Reproducibility
-Project (<https://osf.io/e81xl/>).
+Every user, project, component, and file on OSF is assigned a GUID that
+is embedded in the corresponding entity’s URL. For example, you can
+access the main OSF project for the *Cancer Reproducibility Project* at
+<https://osf.io/e81xl/>. The GUID for this project is `e81xl`.
+
+We can then use osfr to *retrieve* this project and load it into R by
+providing the GUID:
 
 ``` r
 library(osfr)
