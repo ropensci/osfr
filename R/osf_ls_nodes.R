@@ -10,7 +10,8 @@
 #' @template n_max
 #' @template verbose
 #'
-#' @return An [`osf_tbl_node`] with one row for each OSF project or component.
+#' @return An [`osf_tbl_node`] with one row for each OSF project or component,
+#'   ordered by modification time.
 #' @examples
 #' \dontrun{
 #' # List your recent projects and components
