@@ -1,3 +1,10 @@
+# osfr 0.2.3.9000
+
+## Minor fixes
+
+* Listing files within a specified `path` would fail if sibling directories
+shared a common substring in their names (#95)
+
 # osfr 0.2.3
 
 ## New features
