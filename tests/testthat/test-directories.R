@@ -77,3 +77,8 @@ test_that("create a subdirectory within a non-existent parent directory", {
   d2_attrs <- d21$meta[[1]]$attributes
   expect_equal(d2_attrs$materialized_path, "/dir2/dir21/")
 })
+
+test_that("'path' isn't confused by dir names with a shared substring (#95)", {
+  d3 <- osf_mkdir(p1, path = "dir")
+  expect_silent(osf_ls_files(p1, path = "dir"))
+})

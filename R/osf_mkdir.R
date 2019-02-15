@@ -84,6 +84,9 @@ recurse_path <- function(x, path, missing_action = "error", verbose = FALSE) {
   path_root <- fs::path_split(path)[[1]][1]
   root_dir <- osf_ls_files(x, type = "folder", pattern = path_root)
 
+  # ensure the retrieved directory and path_root have the same name
+  root_dir <- root_dir[root_dir$name == path_root, ]
+
   if (nrow(root_dir) == 0) {
     if (missing_action == "error") {
       abort(sprintf("Can't find directory '%s' in `%s`", path_root, x$name))
