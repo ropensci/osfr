@@ -83,6 +83,37 @@ test_that("attempting to list an osf_tbl_file with a file errors", {
   expect_error(osf_ls_files(f1), "Listing an `osf_tbl_file` requires a dir")
 })
 
+test_that("messages are printed with `verbose` enabled", {
+  skip_if_no_pat()
+
+  infile2 <- sub(".txt", "_2.txt", infile)
+  dev.null <- file.copy(infile, infile2)
+
+  # uploading to a node
+  expect_message(
+    osf_upload(p1, infile2, verbose = TRUE),
+    sprintf("Uploaded %s to OSF", basename(infile2))
+  )
+
+  # uploading to a directory
+  expect_message(
+    osf_upload(d1, infile2, verbose = TRUE),
+    sprintf("Uploaded %s to OSF", basename(infile2))
+  )
+
+  # updating node file
+  expect_message(
+    osf_upload(p1, infile2, overwrite = TRUE, verbose = TRUE),
+    sprintf("Uploaded new version of %s to OSF", basename(infile2))
+  )
+
+  # updating directory file
+  expect_message(
+    osf_upload(d1, infile2, overwrite = TRUE, verbose = TRUE),
+    sprintf("Uploaded new version of %s to OSF", basename(infile2))
+  )
+})
+
 
 context("Downloading")
 test_that("a file can be downloaded from a project", {

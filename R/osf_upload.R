@@ -68,9 +68,9 @@ osf_upload.osf_tbl_node <-
   osf_file <- items[items$name == name, ]
 
   if (nrow(osf_file) == 0) {
-    out <- upload_file(as_id(x), path, name)
+    out <- upload_file(as_id(x), path, name, verbose = verbose)
   } else {
-    out <- update_file(as_id(x), path, as_id(osf_file), overwrite)
+    out <- update_file(as_id(x), path, as_id(osf_file), overwrite, verbose)
   }
 
   as_osf_tbl(out["data"], "osf_tbl_file")
