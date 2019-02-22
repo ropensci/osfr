@@ -7,7 +7,7 @@ This outlines how to propose a change to osfr.
 To get started with osfr development you'll need to generate a personal access token (PAT) on OSF's *testing* server. The following steps will get you setup:
 
 1. Create an account on <https://test.osf.io/>.
-2. Generate a PAT for the new account with all permission scopes enabled (this is necessary to run osfr's unit tests).
+2. Generate a PAT for the new account with all permission scopes enabled (this is necessary to run osfr's unit tests). (Under "Settings"->Personal access token)
 3. Fork the osfr repository and clone a local copy.
 4. Create a `.Renviron` file in the root of your project directory that defines the `OSF_PAT` and `OSF_SERVER` environment variables. You can easily create or edit an existing `.Renviron` file by running `usethis::edit_r_environ(scope = "project")`. The end result should look like this:
 
@@ -16,7 +16,7 @@ To get started with osfr development you'll need to generate a personal access t
    OSF_SERVER=test
    ```
 
-5. Load your local copy of osfr with `devtools::load_all()` and verify that `osf_open(osf_retrieve_user("me"))` opens your user profile on the `test.osf.io` domain.
+5. Restart R to load your `.Renviron` file or use `readRneviron(".Renviron")`.  Then load your local copy of osfr with `devtools::load_all()` and verify that `osf_open(osf_retrieve_user("me"))` opens your user profile on the `test.osf.io` domain.
 
 Once this is setup correctly, you should be able to run osfr's tests without error (`devtools::test()`). 
 
