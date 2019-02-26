@@ -146,14 +146,14 @@
 <p>To get started with osfr development you’ll need to generate a personal access token (PAT) on OSF’s <em>testing</em> server. The following steps will get you setup:</p>
 <ol>
 <li>Create an account on <a href="https://test.osf.io/" class="uri">https://test.osf.io/</a>.</li>
-<li>Generate a PAT for the new account with all permission scopes enabled (this is necessary to run osfr’s unit tests).</li>
+<li>Generate a PAT for the new account with all permission scopes enabled (this is necessary to run osfr’s unit tests). (Under “Settings”-&gt;Personal access token)</li>
 <li>Fork the osfr repository and clone a local copy.</li>
 <li>
 <p>Create a <code>.Renviron</code> file in the root of your project directory that defines the <code>OSF_PAT</code> and <code>OSF_SERVER</code> environment variables. You can easily create or edit an existing <code>.Renviron</code> file by running <code><a href="https://www.rdocumentation.org/packages/usethis/topics/edit">usethis::edit_r_environ(scope = "project")</a></code>. The end result should look like this:</p>
 <pre><code>OSF_PAT=&lt;YOUR PAT GOES HERE&gt;
 OSF_SERVER=test</code></pre>
 </li>
-<li><p>Load your local copy of osfr with <code><a href="https://www.rdocumentation.org/packages/devtools/topics/load_all">devtools::load_all()</a></code> and verify that <code><a href="reference/osf_open.html">osf_open(osf_retrieve_user("me"))</a></code> opens your user profile on the <code>test.osf.io</code> domain.</p></li>
+<li><p>Restart R to load your <code>.Renviron</code> file or use <code>readRneviron(".Renviron")</code>. Then load your local copy of osfr with <code><a href="https://www.rdocumentation.org/packages/devtools/topics/load_all">devtools::load_all()</a></code> and verify that <code><a href="reference/osf_open.html">osf_open(osf_retrieve_user("me"))</a></code> opens your user profile on the <code>test.osf.io</code> domain.</p></li>
 </ol>
 <p>Once this is setup correctly, you should be able to run osfr’s tests without error (<code><a href="https://www.rdocumentation.org/packages/devtools/topics/test">devtools::test()</a></code>).</p>
 </div>
