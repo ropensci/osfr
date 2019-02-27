@@ -57,15 +57,15 @@ osf_download.osf_tbl_file <-
            verbose = FALSE) {
 
   if (is.null(path)) {
-    path <- getwd()
+    path <- x$name
   } else {
     if (!fs::dir_exists(path))
       abort("`path` must point to an existing local directory.")
+    path <- file.path(path, x$name)
   }
 
   type <- ifelse(is_osf_dir(x), "folder", "file")
 
-  path <- file.path(path, x$name)
   path <- ifelse(
     type == "folder",
     as.character(fs::path_ext_set(path, "zip")),
