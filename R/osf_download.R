@@ -52,33 +52,45 @@ osf_download.osf_tbl_file <-
            overwrite = FALSE,
            verbose = FALSE) {
 
-  x <- make_single(x)
-  if (is.null(path)) path <- x$name
+  # # x <- make_single(x)
+  # if (is.null(path)) {
+  #   dest_dir <- getwd()
+  #   dest_file <- x$name
+  # } else {
+  #   # does path include a filename?
+  #   dest_dir <- fs::path_dir(path)
+  #   dest_file <- fs::path_file(path)
+  # }
 
-  if (is_osf_dir(x)) {
-    type <- "folder"
-    path <- as.character(fs::path_ext_set(path, "zip"))
+  if (is.null(path)) {
+    path <- getwd()
   } else {
-    type <- "file"
+    if (!fs::dir_exists(path))
+      abort("`path` must point to an existing local directory.")
   }
 
-  if (!dir.exists(dirname(path))) {
-    abort("The directory specified in `path` does not exist.")
-  }
+  type <- ifelse(is_osf_dir(x), "folder", "file")
 
-  if (file.exists(path) && !overwrite) {
+  path <- file.path(path, x$name)
+  path <- ifelse(
+    type == "folder",
+    as.character(fs::path_ext_set(path, "zip")),
+    path
+  )
+
+  if (any(file.exists(path)) && !overwrite) {
     abort("A file exists at the specified path and `overwrite` is `FALSE`")
   }
 
-  out <- .wb_download(
+  out <- Map(
+    f = .wb_download,
     id = get_parent_id(x),
     fid = as_id(x),
     path = path,
     type = type,
-    zip = type == "folder"
+    zip = type == "folder",
+    verbose = verbose
   )
-
-  if (verbose) message(sprintf("Downloaded OSF %s to %s", type, path))
 
   if ("local_path" %in% names(x)) {
     x$local_path <- path
