@@ -117,10 +117,9 @@ test_that("messages are printed with `verbose` enabled", {
 
 context("Downloading")
 test_that("a file can be downloaded from a project", {
-
   skip_if_no_pat()
 
-  out <- osf_download(f1, path = outfile)
+  out <- osf_download(f1)
   expect_s3_class(out, "osf_tbl_file")
   expect_identical(out$local_path, outfile)
   expect_true(file.exists(outfile))
@@ -130,11 +129,11 @@ test_that("an existing file won't be overwritten", {
   skip_if_no_pat()
 
   expect_error(
-    osf_download(f1, path = outfile),
+    osf_download(f1),
     "A file exists at the specified"
   )
   expect_s3_class(
-    osf_download(f1, path = outfile, overwrite = TRUE),
+    osf_download(f1, overwrite = TRUE),
     "osf_tbl_file"
   )
 })
@@ -143,15 +142,15 @@ test_that("a non-existant path throws an error", {
   skip_if_no_pat()
 
   expect_error(
-    osf_download(f1, path = "ddd/test.txt"),
-    "The directory specified in `path` does not exist.")
+    osf_download(f1, path = "ddd"),
+    "`path` must point to an existing local directory.")
 })
 
 test_that("a file can be downloaded from a directory", {
   skip_if_no_pat()
 
-  outfile <- tempfile(fileext = ".txt")
-  out <- osf_download(f2, path = outfile)
+  unlink(outfile)
+  out <- osf_download(f2)
   expect_s3_class(out, "osf_tbl_file")
   expect_identical(out$local_path, outfile)
   expect_true(file.exists(outfile))
@@ -160,18 +159,26 @@ test_that("a file can be downloaded from a directory", {
 test_that("a directory can be downloaded as a zip file", {
   skip_if_no_pat()
 
-  d1_files <- osf_ls_files(d1, n_max = Inf)
-  outfile <- tempfile(fileext = ".zip")
-
-  out <- osf_download(d1, path = outfile)
+  zipfile <- file.path(tempdir(), paste0(d1$name, ".zip"))
+  out <- osf_download(d1, path = tempdir(), decompress = FALSE)
   expect_s3_class(out, "osf_tbl_file")
-  expect_true(file.exists(outfile))
-
-  expect_equal(
-    sort(unzip(outfile, list = TRUE)$Name),
-    sort(d1_files$name)
-  )
+  expect_true(file.exists(zipfile))
+  unlink(zipfile)
 })
+
+test_that("a downloaded directory is unzipped", {
+  skip_if_no_pat()
+
+  d1_files <- osf_ls_files(d1, n_max = Inf)
+  outdir <- file.path(tempdir(), d1$name)
+
+  out <- osf_download(d1, path = tempdir())
+  expect_s3_class(out, "osf_tbl_file")
+
+  expect_true(dir.exists(outdir))
+  expect_true(all(file.exists(file.path(outdir, d1_files$name))))
+})
+
 
 
 context("Moving/copying files")
