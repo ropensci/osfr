@@ -14,7 +14,7 @@ unzip_files <- function(zipfiles, overwrite = FALSE) {
   stopifnot(all(fs::path_ext(zipfiles) == "zip"))
   stopifnot(all(file.exists(zipfiles)))
 
-  zipped_files <- map(zipfiles, ~ unzip(.x, list = TRUE)$Name)
+  zipped_files <- map(zipfiles, ~ utils::unzip(.x, list = TRUE)$Name)
   extract_dirs <- map(zipfiles, fs::path_ext_remove)
 
   # unzip to pwd if the exdir is embedded in the zip file
@@ -26,7 +26,7 @@ unzip_files <- function(zipfiles, overwrite = FALSE) {
   extract_dirs <- ifelse(redundant, ".", extract_dirs)
 
   # remove existing files to prevent overwriting
-  if (isFALSE(overwrite)) {
+  if (!overwrite) {
     zipped_files <- Map(
       function(file, dir) {
         path <- file.path(dir, file)
@@ -37,7 +37,12 @@ unzip_files <- function(zipfiles, overwrite = FALSE) {
     )
   }
 
-  unzipped <- Map(unzip, zipfile = zipfiles, files = zipped_files, exdir = extract_dirs)
+  unzipped <- Map(
+    utils::unzip,
+    zipfile = zipfiles,
+    files = zipped_files,
+    exdir = extract_dirs
+  )
 
   unlink(zipfiles)
   invisible(unzipped)
