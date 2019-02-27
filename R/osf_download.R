@@ -13,10 +13,12 @@
 #' existing directory.
 #'
 #' @param x An [`osf_tbl_file`] containing a single file or directory.
-#' @param path Local path where the downloaded file will be saved. The default
-#'   is to use the remote file's name.
+#' @param path Path pointing to a local directory where the downloaded files
+#'   will be saved. Default is to use the current working directory.
 #' @param overwrite Logical, if the local path already exists should it be
 #'   replaced with the downloaded file?
+#' @param decompress Logical, should downloaded directories be automatically
+#'   unzipped? Default is `TRUE`.
 #' @template verbose
 #'
 #' @return The [`osf_tbl_file`] input with a new column, `"local_path"`,
@@ -25,7 +27,7 @@
 #' \dontrun{
 #' # download a single file
 #' analysis_plan <- osf_retrieve_file("2ryha") %>%
-#'   osf_download(path = "plan_wave1.docx")
+#'   osf_download()
 #'
 #' # verify the file was downloaded locally
 #' file.exists(analysis_plan$local_path)
@@ -35,7 +37,7 @@
 #' * [`osf_ls_files()`] for listing files and directories on OSF.
 #'
 #' @export
-#' @importFrom fs path_ext_set
+#' @importFrom fs path_ext_set path_ext_remove
 
 osf_download <-
   function(x,
@@ -50,17 +52,8 @@ osf_download.osf_tbl_file <-
   function(x,
            path = NULL,
            overwrite = FALSE,
+           decompress = TRUE,
            verbose = FALSE) {
-
-  # # x <- make_single(x)
-  # if (is.null(path)) {
-  #   dest_dir <- getwd()
-  #   dest_file <- x$name
-  # } else {
-  #   # does path include a filename?
-  #   dest_dir <- fs::path_dir(path)
-  #   dest_file <- fs::path_file(path)
-  # }
 
   if (is.null(path)) {
     path <- getwd()
@@ -91,6 +84,12 @@ osf_download.osf_tbl_file <-
     zip = type == "folder",
     verbose = verbose
   )
+
+  zipped <- type == "folder"
+  if (decompress && any(zipped)) {
+    unzipped <- unzip_files(path[zipped], overwrite = overwrite)
+    path <- ifelse(path %in% names(unzipped), fs::path_ext_remove(path), path)
+  }
 
   if ("local_path" %in% names(x)) {
     x$local_path <- path
