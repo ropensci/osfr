@@ -4,16 +4,20 @@
 \alias{osf_download}
 \title{Download files and directories from OSF}
 \usage{
-osf_download(x, path = NULL, overwrite = FALSE, verbose = FALSE)
+osf_download(x, path = NULL, overwrite = FALSE, decompress = FALSE,
+  verbose = FALSE)
 }
 \arguments{
 \item{x}{An \code{\link{osf_tbl_file}} containing a single file or directory.}
 
-\item{path}{Local path where the downloaded file will be saved. The default
-is to use the remote file's name.}
+\item{path}{Path pointing to a local directory where the downloaded files
+will be saved. Default is to use the current working directory.}
 
 \item{overwrite}{Logical, if the local path already exists should it be
 replaced with the downloaded file?}
+
+\item{decompress}{Logical, should downloaded directories be automatically
+unzipped? Default is \code{TRUE}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 about interactions with the OSF API (default \code{FALSE}).}
@@ -38,7 +42,7 @@ existing directory.
 \dontrun{
 # download a single file
 analysis_plan <- osf_retrieve_file("2ryha") \%>\%
-  osf_download(path = "plan_wave1.docx")
+  osf_download()
 
 # verify the file was downloaded locally
 file.exists(analysis_plan$local_path)
