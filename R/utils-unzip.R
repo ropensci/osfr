@@ -22,7 +22,14 @@ unzip_files <- function(zipfiles, overwrite = FALSE) {
     zipped_files <- map(zipped_files, purrr::discard, .p = file.exists)
   }
 
-  unzipped <- Map(unzip, zipfile = zipfiles, files = zipped_files)
+  # unzip to a directory named for the zipfile
+  exdirs <- map(zipfiles, fs::path_ext_remove)
+  # unzip to pwd if the exdir is embedded in the zip file
+  redundant <- purrr::map2_lgl(zipped_files, exdirs, ~ fs::path_has_parent(.x, .y))
+  exdirs <- ifelse(redundant, ".", exdirs)
+
+  unzipped <- Map(unzip, zipfile = zipfiles, files = zipped_files, exdir = exdirs)
+
   unlink(zipfiles)
   invisible(unzipped)
 }
