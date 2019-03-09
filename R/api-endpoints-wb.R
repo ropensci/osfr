@@ -60,13 +60,11 @@
   query <- list()
   if (zip) query$zip <- ""
   api_path <- .wb_api_path(id, fid, type = type)
+
+  if (verbose) message(sprintf("\nDownloading %s to %s...", type, path))
   res <- .wb_request("get", api_path, query, disk = path)
 
-  if (res$status_code == 200) {
-    if (verbose) message(sprintf("Downloaded OSF %s to %s", type, path))
-    return(TRUE)
-  }
-
+  if (res$status_code == 200) return(TRUE)
   if (res$status_code == 404) {
     msg <- sprintf("The requested %s (%s) could not be found in node `%s`",
                    type, fid, id)
