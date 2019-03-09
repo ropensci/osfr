@@ -35,7 +35,7 @@ test_that("an existing file won't be overwritten", {
     "A file exists at the specified"
   )
   expect_s3_class(
-    osf_download(f1, overwrite = TRUE),
+    osf_download(f1, path = outdir, overwrite = TRUE),
     "osf_tbl_file"
   )
 })
