@@ -26,6 +26,7 @@ BugReports: https://github.com/centerforopenscience/osfr/issues
 LazyData: true
 Suggests:
     dplyr,
+    logger,
     testthat,
     knitr,
     rmarkdown,

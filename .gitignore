@@ -19,3 +19,4 @@ _ignore
 *.DS_Store
 inst/doc
 docs/
+*.log

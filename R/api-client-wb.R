@@ -66,5 +66,6 @@
 
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
   cli <- .wb_cli()
-  cli$verb(method, path, query, body = body, ...)
+  res <- cli$verb(method, path, query, body = body, ...)
+  log_response(res)
 }

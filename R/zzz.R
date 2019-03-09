@@ -7,6 +7,10 @@
   env.pat <- Sys.getenv("OSF_PAT")
   if (nzchar(env.pat)) options(osfr.pat = env.pat)
 
+  # setup logger
+  env.log <- Sys.getenv("OSF_LOG")
+  if (nzchar(env.log)) options(osfr.log = env.log)
+
   # register dplyr methods
   if (requireNamespace("dplyr", quietly = TRUE)) {
     register_s3_method("dplyr", "arrange", "osf_tbl")
@@ -23,6 +27,17 @@
 .onAttach <- function(libname, pkgname) {
   if (!is.null(getOption("osfr.pat"))) {
     packageStartupMessage("Automatically registered OSF personal access token")
+  }
+
+  if (!is.null(getOption("osfr.log"))) {
+    if (!requireNamespace("logger", quietly = TRUE)) {
+      warn("The logger package must installed to enable logging")
+      options(osfr.log = NULL)
+    } else {
+      packageStartupMessage(
+        sprintf("<Logging enabled: %s>", getOption("osfr.log"))
+      )
+    }
   }
 
   server <- Sys.getenv("OSF_SERVER")

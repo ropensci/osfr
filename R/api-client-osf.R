@@ -59,7 +59,7 @@ user_agent <- function(agent = "osfr") {
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
   cli <- .osf_cli()
 
-  cli$retry(
+  res <- cli$retry(
     method,
     path,
     query,
@@ -69,6 +69,8 @@ user_agent <- function(agent = "osfr") {
     onwait = retry_message,
     ...
   )
+
+  log_response(res)
 }
 
 # TODO: .osf_request and .osf_paginated_request returns should be consistent
