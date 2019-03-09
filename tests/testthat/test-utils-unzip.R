@@ -2,35 +2,25 @@ context("Unzipping")
 
 
 # setup -------------------------------------------------------------------
-zipdir1 <- "text-files1"
-zipdir2 <- "text-files2"
 
-zipfile1 <- paste0(zipdir1, ".zip")
-file1a <- file.path(zipdir1, "file1a.txt")
-file1b <- file.path(zipdir1, "file1b.txt")
+# create temporary copies of zipfiles for testing
+copy_test_zipfiles <<- function(x) {
+  zipfile <- rprojroot::find_testthat_root_file(file.path("test-files", x))
+  fs::file_copy(zipfile, tempdir())
+}
 
-zipfile2 <- paste0(zipdir2, ".zip")
-file2a <- file.path(zipdir2, "file2a.txt")
-file2b <- file.path(zipdir2, "file2b.txt")
 
 setup({
-  dir.create(zipdir1)
-  writeLines("foo", file1a)
-  writeLines("bar", file1b)
-  zip(zipfile1, dir(zipdir1, full.names = TRUE))
-  unlink(zipdir1, recursive = TRUE)
+  zipfile1 <<- copy_test_zipfiles("test-dir1.zip")
+  zipfile2 <<- copy_test_zipfiles("test-dir2.zip")
 
-  dir.create(zipdir2)
-  writeLines("fizz", file2a)
-  writeLines("buzz", file2b)
-  zip(zipfile2, dir(zipdir2, full.names = TRUE))
-  unlink(zipdir2, recursive = TRUE)
+  zipdir1 <<- fs::path_ext_remove(zipfile1)
+  zipdir2 <<- fs::path_ext_remove(zipfile2)
 })
 
 
 teardown({
-  unlink(zipdir1, recursive = TRUE)
-  unlink(zipdir2, recursive = TRUE)
+  unlink(c(zipdir1, zipdir2), recursive = TRUE)
 })
 
 
@@ -42,39 +32,39 @@ test_that("can unzip a single zipfile", {
   out <- unzip_files(zipfile1)
   expect_true(dir.exists(zipdir1))
   expect_true(all(file.exists(out[[1]])))
+
+  unlink(zipdir1, recursive = TRUE)
+  copy_test_zipfiles("test-dir1.zip")
 })
 
 test_that("can unzip multiple files", {
-  zip(zipfile1, dir(zipdir1, full.names = TRUE))
-  out <- unzip_files(c(zipfile1, zipfile2), overwrite = TRUE)
+  out <- unzip_files(c(zipfile1, zipfile2))
 
-  # deleted the zip files
+  # the zip files were deleted
   expect_false(any(file.exists(names(out))))
 
-  # zip file contents exist
+  # the zip file content exist
   expect_true(all(file.exists(unlist(out))))
+
+  unlink(c(zipdir1, zipdir2), recursive = TRUE)
+  copy_test_zipfiles(c("test-dir1.zip", "test-dir2.zip"))
 })
 
 test_that("existing files are not overwritten", {
 
-  # recreate zipfiles
-  zip(zipfile1, dir(zipdir1, full.names = TRUE))
-  zip(zipfile2, dir(zipdir2, full.names = TRUE))
+  # delete first zip file and modify the second
+  out <- unzip_files(zipfile1)
+  unlink(out[[1]][1])
+  writeLines("foo", out[[1]][2])
 
-  # delete first file and modify the second
-  unlink(file1a)
-  writeLines("foo", file1b)
-
-  # delete second directory
-  unlink(zipdir2, recursive = TRUE)
-
+  # recreate the zipfile
+  copy_test_zipfiles("test-dir1.zip")
   out <- unzip_files(c(zipfile1, zipfile2))
 
-  expect_true(file.exists(file1a))
-  expect_true(file.exists(file1b))
-  expect_true(file.exists(file2a))
-  expect_true(file.exists(file2b))
+  # both files were unzipped
+  unzipped_files <- list.files(zipdir1, full.names = TRUE)
+  expect_equal(length(unzipped_files), 2)
 
   # file1b's modification persists
-  expect_match(readLines(file1b), "foo")
+  expect_match(readLines(unzipped_files[1]), "foo")
 })

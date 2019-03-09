@@ -27,6 +27,7 @@ LazyData: true
 Suggests:
     dplyr,
     logger,
+    rprojroot,
     testthat,
     knitr,
     rmarkdown,
