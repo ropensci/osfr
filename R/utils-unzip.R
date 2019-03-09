@@ -17,14 +17,6 @@ unzip_files <- function(zipfiles, overwrite = FALSE) {
   zipped_files <- map(zipfiles, ~ utils::unzip(.x, list = TRUE)$Name)
   extract_dirs <- map(zipfiles, fs::path_ext_remove)
 
-  # unzip to pwd if the exdir is embedded in the zip file
-  redundant <- purrr::map2_lgl(
-    .x = zipped_files,
-    .y = extract_dirs,
-    ~ fs::path_has_parent(.x, .y)
-  )
-  extract_dirs <- ifelse(redundant, ".", extract_dirs)
-
   # remove existing files to prevent overwriting
   if (!overwrite) {
     zipped_files <- Map(
