@@ -71,6 +71,9 @@ as_osf_tbl.list <- function(x, subclass = NULL) {
   # handle empty lists returned by e.g. .osf_node_children() for childless nodes
   if (rlang::is_empty(x)) return(osf_tbl(subclass = subclass))
 
+  # remove 'data' name that otherwise remains only w/ singleton entities
+  x <- unname(x)
+
   name_field <- switch(subclass,
     osf_tbl_node = "title",
     osf_tbl_file = "name",
