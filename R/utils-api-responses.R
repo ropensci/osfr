@@ -21,6 +21,10 @@ process_response <- function(res) {
   stopifnot(class(res)[1] == "HttpResponse")
 
   if (res$status_code > 500) {
+    if (!is.null(getOption("osfr.log"))) {
+      logger::log_error(fmt = "Status code: %s Content: %s",
+                        toupper(res$status_code), res$content)
+    }
     abort(paste0(
       "Encountered an unexpected error with the OSF API\n",
       "Please report this at https://github.com/centerforopenscience/osfr/issues\n",

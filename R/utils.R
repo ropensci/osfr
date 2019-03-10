@@ -23,12 +23,12 @@ http_error <- function(code, ...) {
 #' @param time wait time in seconds
 #' @noRd
 retry_message <- function(res, time) {
-  message(
-    sprintf(
-      "Request failed (Status code: %s). Retrying in %ds...",
-      res$status_code, ceiling(time)
-    )
+  msg <- sprintf(
+    "Request failed (Status code: %s). Retrying in %ds...",
+    res$status_code, ceiling(time)
   )
+  if (!is.null(getOption("osfr.log"))) logger::log_info(msg)
+  message(msg)
 }
 
 is_osf_url <- function(url) grepl("osf.io", tolower(url), fixed = TRUE)

@@ -70,7 +70,11 @@ user_agent <- function(agent = "osfr") {
     ...
   )
 
-  log_response(res)
+  if (!is.null(getOption("osfr.log"))) {
+    logger::log_info(fmt = "%s %s", toupper(res$method), res$request$url$url)
+  }
+
+  res
 }
 
 # TODO: .osf_request and .osf_paginated_request returns should be consistent

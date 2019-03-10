@@ -9,7 +9,15 @@
 
   # setup logger
   env.log <- Sys.getenv("OSF_LOG")
-  if (nzchar(env.log)) options(osfr.log = env.log)
+  if (nzchar(env.log)) {
+    if (requireNamespace("logger", quietly = TRUE)) {
+      options(osfr.log = env.log)
+      logger::log_appender(logger::appender_file(env.log), namespace = "osfr")
+      logger::log_formatter(logger::formatter_sprintf, namespace = "osfr")
+    } else {
+      warn("The logger package must installed to enable logging")
+    }
+  }
 
   # register dplyr methods
   if (requireNamespace("dplyr", quietly = TRUE)) {
@@ -30,14 +38,9 @@
   }
 
   if (!is.null(getOption("osfr.log"))) {
-    if (!requireNamespace("logger", quietly = TRUE)) {
-      warn("The logger package must installed to enable logging")
-      options(osfr.log = NULL)
-    } else {
       packageStartupMessage(
         sprintf("<Logging enabled: %s>", getOption("osfr.log"))
       )
-    }
   }
 
   server <- Sys.getenv("OSF_SERVER")
