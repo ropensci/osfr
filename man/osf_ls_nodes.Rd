@@ -17,13 +17,15 @@ osf_ls_nodes(x, pattern = NULL, n_max = 10, verbose = FALSE)
 substring \code{"pattern"} in their name. \emph{Note:} this is a fixed, case-insensitive
 search.}
 
-\item{n_max}{Number of results to return from OSF.}
+\item{n_max}{Maximum number of results to return from OSF (default is 10).
+Set to \code{Inf} to return \emph{all} results.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 about interactions with the OSF API (default \code{FALSE}).}
 }
 \value{
-An \code{\link{osf_tbl_node}} with one row for each OSF project or component.
+An \code{\link{osf_tbl_node}} with one row for each OSF project or component,
+ordered by modification time.
 }
 \description{
 List the projects or components associated with a user or contained in the

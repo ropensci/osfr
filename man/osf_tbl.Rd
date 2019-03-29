@@ -12,18 +12,15 @@ data frames based on the \link[tibble:tibble-package]{tibble} class. See below
 for additional details.
 }
 \details{
-Each row of an \code{osf_tbl} represents a single OSF entity, which could be a
+Each row of an \code{osf_tbl} represents a single OSF entity. This could be a
 user, project, component, directory, or file. An \code{osf_tbl} must include
-the following 3 variables:
+the following 3 columns:
 \enumerate{
-\item \code{name}: the name or title of the entity.
-\item \code{id}: the unique identifier assigned to the entity.
+\item \code{name}: indicates the name or title of the entity.
+\item \code{id}: the unique identifier assigned by OSF.
 \item \code{meta}: a list-column that stores the processed response returned by OSF's
-API.
+API. See the \emph{Meta column} section below for more information.
 }
-
-The \code{meta} column is primarily intended for use by \code{osfr}'s functions and
-should not be altered by users.
 }
 \section{Subclasses}{
 
@@ -45,6 +42,25 @@ distinction between the two is that a project is a top-level node, and a
 component must have a parent node (i.e., must be a sub-component of another
 project or component). Because projects and components are functionally
 identical, osfr uses the same \code{\link{osf_tbl_node}} class to represent both.
+}
+
+\section{Meta column}{
+
+
+The \code{meta} column contains all of the information returned from OSF's API for
+a single entity, structed as a named list with 3 elements:
+\enumerate{
+\item \code{attributes} contains metadata about the entity (e.g., names,
+descriptions, tags, etc).
+\item \code{links} contains urls to API endpoints with alternative representations of
+the entity or actions that may be performed on the entity.
+\item \code{relationships} contains URLs to other entities with relationships to the
+entity (e.g., collaborators attached to a project).
+}
+
+This information is critical for \code{osfr}'s internal functions and should not
+be altered by users. For even more information about these elements, see
+\href{https://developer.osf.io/#tag/Entities-and-Entity-Collections}{OSF's API documentation}.
 }
 
 \section{Acknowledgments}{

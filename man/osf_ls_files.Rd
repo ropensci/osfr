@@ -23,13 +23,15 @@ osf_ls_files(x, path = NULL, type = "any", pattern = NULL,
 substring \code{"pattern"} in their name. \emph{Note:} this is a fixed, case-insensitive
 search.}
 
-\item{n_max}{Number of results to return from OSF.}
+\item{n_max}{Maximum number of results to return from OSF (default is 10).
+Set to \code{Inf} to return \emph{all} results.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 about interactions with the OSF API (default \code{FALSE}).}
 }
 \value{
-An \code{\link{osf_tbl_file}} with one row for each file or directory.
+An \code{\link{osf_tbl_file}} with one row for each file or directory, ordered
+by modification time.
 }
 \description{
 List the files and directories in the top-level of an OSF project, component,
