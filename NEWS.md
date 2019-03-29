@@ -1,9 +1,12 @@
-# osfr 0.2.3.9000
+# osfr 0.2.4
 
 ## Minor fixes
 
 * Listing files within a specified `path` would fail if sibling directories
 shared a common substring in their names (#95)
+* Setting `verbose=TRUE` now works properly for `osf_upload()`
+* A startup message is printed when `OSF_SERVER` is defined
+* Improved documentation for `n_max`, GUIDs and the mysterious `meta` column
 
 # osfr 0.2.3
 
