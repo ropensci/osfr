@@ -1,13 +1,30 @@
 #' Retrieve an entity from OSF
 #'
-#' Create an [`osf_tbl`] for an existing OSF project, component, file, or user
-#' based on the associated unique identifier. Usually this is a 5-character
-#' global unique identifier (GUID) but for files or directories, it could also
-#' be a 24-character Waterbutler ID.
+#' Create an [`osf_tbl`] representation of an existing OSF project, component,
+#' file, or user based on the associated unique identifier. Usually this is a
+#' 5-character global unique identifier (GUID) but for files or directories, it
+#' could also be an 11-character Waterbutler ID. See below for details.
 #'
+#' @section OSF identifiers: A 5-character GUID is assigned to every user,
+#'   project, component, and file on OSF and forms the basis for the service's
+#'   URL scheme. For example the GUID for a project accessible at
+#'   <https://osf.io/ezum7> is simply `ezum7`. You can learn more about GUIDs
+#'   [here](http://help.osf.io/m/faqs/l/726460-faqs#what-s-a-globally-unique-identifier-guid-what-metadata-is-maintained-about-them).
+#'
+#' An important detail is that files and directories are handled internally on
+#' OSF by another serviced called [Waterbutler](http://www.waterbutler.io/),
+#' which uses 11-character identifiers. Although Waterbutler IDs are largely
+#' hidden from users on <https://osf.io>, they represent the primary method for
+#' identifying files/directories by the OSF API. In fact, files do not receive a
+#' GUID until it is viewed directly on <https://osf.io> and directories never
+#' receive a GUID. Therefore, osfr relies on Waterbutler IDs for files and
+#' directories, and always includes them (rather than GUIDs) in [`osf_tbl_file`]
+#' objects.
+#'
+#' @section Retrieving OSF objects:
 #' To begin using osfr to interact with resources on OSF you must use one of the
 #' following *retrieve* functions to create an [`osf_tbl`] that contains
-#' the entity interest. Note the functions are entity-type specific, use:
+#' the entity of interest. Note the functions are entity-type specific, use:
 #' * `osf_retrieve_node()` to retrieve a project or component
 #' * `osf_retrieve_file()` to retrieve a file or directory
 #' * `osf_retrieve_user()` to retrieve a user

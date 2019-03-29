@@ -47,7 +47,9 @@ remotes::install_github("centerforopenscience/osfr")
 
 Many researchers use OSF to archive and share their work. You can use osfr to explore publicly accessible projects and download the associated files---all you need to get started is the project's URL or GUID (global unique identifier).
 
-Here we'll retrieve the main project for the Cancer Reproducibility Project (<https://osf.io/e81xl/>).
+Every user, project, component, and file on OSF is assigned a GUID that is embedded in the corresponding entity's URL. For example, you can access the main OSF project for the *Cancer Reproducibility Project* at <https://osf.io/e81xl/>. The GUID for this project is `e81xl`.
+
+We can then use osfr to *retrieve* this project and load it into R by providing the GUID:
 
 ```{r message=FALSE}
 library(osfr)
@@ -82,11 +84,17 @@ cr_project %>%
   osf_ls_files()
 ```
 
-We could continue this pattern of exploration and even download local copies of project files using `osf_download()`.
+We could continue this pattern of exploration and even download local copies of project files using `osf_download()`. Or, if you come across a publication that  directly references a file's OSF URL, you could quickly download it to your project directory by providing the URL or simply the GUID:
+
+```{r}
+osf_retrieve_file("https://osf.io/btgx3/") %>% 
+  osf_download()
+```
+
 
 ### Managing Projects
 
-You can use osfr to create projects, add sub-components or directories, and upload files. See the [Getting Started vignette][getting-started] to learn more about building projects with osfr, but here is a quick example in which we:
+You can use osfr to [create projects][osf-create], [add sub-components][osf-create] or [directories][osf-mkdir], and [upload files][osf-upload]. See [Getting Started][getting-started] to learn more about building projects with osfr, but here is a quick example in which we:
 
 1. Create a new project called *Motor Trend Car Road Tests*
 2. Create a sub-component called *Car Data*
@@ -129,6 +137,10 @@ Big thanks to Rusty Speidel for designing our logo and [Tim Errington][tim] for 
 
 Check out the [Contributing Guidelines](.github/CONTRIBUTING.md) to get started with osfr development and note that by contributing to this project, you agree to abide by the terms outlined in the [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).
 
+```{r cleanup, include=FALSE}
+unlink("Study_19_Figure_1.pdf")
+```
+
 <!-- links -->
 [osf]: https://osf.io "Open Science Framework"
 [cos]: https://cos.io "Center for Open Science"
@@ -153,3 +165,6 @@ Check out the [Contributing Guidelines](.github/CONTRIBUTING.md) to get started 
 [getting-started]: http://centerforopenscience.github.io/osfr/articles/getting_started.html
 [auth]: http://centerforopenscience.github.io/osfr/articles/auth.html
 
+[osf-create]: https://centerforopenscience.github.io/osfr/reference/osf_create.html
+[osf-mkdir]: https://centerforopenscience.github.io/osfr/reference/osf_mkdir.html
+[osf-upload]: https://centerforopenscience.github.io/osfr/reference/osf_upload.html

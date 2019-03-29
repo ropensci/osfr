@@ -13,7 +13,8 @@
 #' @template n_max
 #' @template verbose
 #'
-#' @return An [`osf_tbl_file`] with one row for each file or directory.
+#' @return An [`osf_tbl_file`] with one row for each file or directory, ordered
+#'   by modification time.
 #' @examples
 #' \dontrun{
 #' # Retrieve the Psychology Reproducibility Project from OSF

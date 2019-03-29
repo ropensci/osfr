@@ -50,8 +50,13 @@ osfr to explore publicly accessible projects and download the associated
 files—all you need to get started is the project’s URL or GUID (global
 unique identifier).
 
-Here we’ll retrieve the main project for the Cancer Reproducibility
-Project (<https://osf.io/e81xl/>).
+Every user, project, component, and file on OSF is assigned a GUID that
+is embedded in the corresponding entity’s URL. For example, you can
+access the main OSF project for the *Cancer Reproducibility Project* at
+<https://osf.io/e81xl/>. The GUID for this project is `e81xl`.
+
+We can then use osfr to *retrieve* this project and load it into R by
+providing the GUID:
 
 ``` r
 library(osfr)
@@ -125,13 +130,32 @@ cr_project %>%
 ```
 
 We could continue this pattern of exploration and even download local
-copies of project files using `osf_download()`.
+copies of project files using `osf_download()`. Or, if you come across a
+publication that directly references a file’s OSF URL, you could quickly
+download it to your project directory by providing the URL or simply the
+GUID:
+
+``` r
+osf_retrieve_file("https://osf.io/btgx3/") %>% 
+  osf_download()
+#> # A tibble: 1 x 4
+#>   name                 id                     local_path          meta     
+#> * <chr>                <chr>                  <chr>               <list>   
+#> 1 Study_19_Figure_1.p… 5751d71d9ad5a10207937… Study_19_Figure_1.… <list [3…
+```
 
 ### Managing Projects
 
-You can use osfr to create projects, add sub-components or directories,
-and upload files. See the [Getting Started
-vignette](http://centerforopenscience.github.io/osfr/articles/getting_started.html)
+You can use osfr to [create
+projects](https://centerforopenscience.github.io/osfr/reference/osf_create.html),
+[add
+sub-components](https://centerforopenscience.github.io/osfr/reference/osf_create.html)
+or
+[directories](https://centerforopenscience.github.io/osfr/reference/osf_mkdir.html),
+and [upload
+files](https://centerforopenscience.github.io/osfr/reference/osf_upload.html).
+See [Getting
+Started](http://centerforopenscience.github.io/osfr/articles/getting_started.html)
 to learn more about building projects with osfr, but here is a quick
 example in which we:
 

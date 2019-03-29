@@ -16,6 +16,7 @@ navbar:
     right: [home, reference, articles, github]
 
 reference:
+
 - title: Retrieving information from OSF
   desc: ~
   contents:
@@ -34,9 +35,14 @@ reference:
   - '`osf_rm`'
   - '`osf_upload`'
 
+- title: OSF Tibbles
+  desc: ~
+  contents:
+  - '`osf_tbl`'
+  - '`as_id`'
+
 - title: Helper functions
   desc: ~
   contents:
-  - '`as_id`'
   - '`osf_open`'
   - '`osf_refresh`'
