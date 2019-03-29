@@ -83,7 +83,7 @@ top-level of another OSF project or component." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">osfr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.4</span>
       </span>
     </div>
 
@@ -169,7 +169,8 @@ search.</p></td>
     </tr>
     <tr>
       <th>n_max</th>
-      <td><p>Number of results to return from OSF.</p></td>
+      <td><p>Maximum number of results to return from OSF (default is 10).
+Set to <code>Inf</code> to return <em>all</em> results.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -180,7 +181,8 @@ about interactions with the OSF API (default <code>FALSE</code>).</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code><a href='osf_tbl.html'>osf_tbl_node</a></code> with one row for each OSF project or component.</p>
+    <p>An <code><a href='osf_tbl.html'>osf_tbl_node</a></code> with one row for each OSF project or component,
+ordered by modification time.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

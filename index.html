@@ -43,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">osfr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.4</span>
       </span>
     </div>
 
@@ -127,7 +127,8 @@
 <h3 class="hasAnchor">
 <a href="#accessing-open-research-materials" class="anchor"></a>Accessing Open Research Materials</h3>
 <p>Many researchers use OSF to archive and share their work. You can use osfr to explore publicly accessible projects and download the associated files—all you need to get started is the project’s URL or GUID (global unique identifier).</p>
-<p>Here we’ll retrieve the main project for the Cancer Reproducibility Project (<a href="https://osf.io/e81xl/" class="uri">https://osf.io/e81xl/</a>).</p>
+<p>Every user, project, component, and file on OSF is assigned a GUID that is embedded in the corresponding entity’s URL. For example, you can access the main OSF project for the <em>Cancer Reproducibility Project</em> at <a href="https://osf.io/e81xl/" class="uri">https://osf.io/e81xl/</a>. The GUID for this project is <code>e81xl</code>.</p>
+<p>We can then use osfr to <em>retrieve</em> this project and load it into R by providing the GUID:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(osfr)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">cr_project &lt;-<span class="st"> </span><span class="kw"><a href="reference/osf_retrieve.html">osf_retrieve_node</a></span>(<span class="st">"e81xl"</span>)</a>
@@ -170,12 +171,18 @@
 <a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 4 Replication_Study_19_track_changes_2.d… 58714d46594d9001f801f4… &lt;list [3…</span></a>
 <a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 5 Response_letter_Replication_Study_19.d… 58755747b83f6901ff066a… &lt;list [3…</span></a>
 <a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; 6 Study_19_Correction_Letter.docx         5a56569125719b000ff28b… &lt;list [3…</span></a></code></pre></div>
-<p>We could continue this pattern of exploration and even download local copies of project files using <code><a href="reference/osf_download.html">osf_download()</a></code>.</p>
+<p>We could continue this pattern of exploration and even download local copies of project files using <code><a href="reference/osf_download.html">osf_download()</a></code>. Or, if you come across a publication that directly references a file’s OSF URL, you could quickly download it to your project directory by providing the URL or simply the GUID:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/osf_retrieve.html">osf_retrieve_file</a></span>(<span class="st">"https://osf.io/btgx3/"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/osf_download.html">osf_download</a></span>()</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;   name                 id                     local_path          meta     </span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; * &lt;chr&gt;                &lt;chr&gt;                  &lt;chr&gt;               &lt;list&gt;   </span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; 1 Study_19_Figure_1.p… 5751d71d9ad5a10207937… Study_19_Figure_1.… &lt;list [3…</span></a></code></pre></div>
 </div>
 <div id="managing-projects" class="section level3">
 <h3 class="hasAnchor">
 <a href="#managing-projects" class="anchor"></a>Managing Projects</h3>
-<p>You can use osfr to create projects, add sub-components or directories, and upload files. See the <a href="http://centerforopenscience.github.io/osfr/articles/getting_started.html">Getting Started vignette</a> to learn more about building projects with osfr, but here is a quick example in which we:</p>
+<p>You can use osfr to <a href="https://centerforopenscience.github.io/osfr/reference/osf_create.html">create projects</a>, <a href="https://centerforopenscience.github.io/osfr/reference/osf_create.html">add sub-components</a> or <a href="https://centerforopenscience.github.io/osfr/reference/osf_mkdir.html">directories</a>, and <a href="https://centerforopenscience.github.io/osfr/reference/osf_upload.html">upload files</a>. See <a href="http://centerforopenscience.github.io/osfr/articles/getting_started.html">Getting Started</a> to learn more about building projects with osfr, but here is a quick example in which we:</p>
 <ol style="list-style-type: decimal">
 <li>Create a new project called <em>Motor Trend Car Road Tests</em>
 </li>
@@ -186,14 +193,14 @@
 <li>Upload a file (<code>mtcars.csv</code>) to the new directory</li>
 <li>Open the uploaded file on OSF</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># create an external data file</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/write.table">write.csv</a></span>(mtcars, <span class="st">"mtcars.csv"</span>)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw"><a href="reference/osf_create.html">osf_create_project</a></span>(<span class="dt">title =</span> <span class="st">"Motor Trend Car Road Tests"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="reference/osf_create.html">osf_create_component</a></span>(<span class="st">"Car Data"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="reference/osf_mkdir.html">osf_mkdir</a></span>(<span class="st">"rawdata"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/osf_upload.html">osf_upload</a></span>(<span class="st">"mtcars.csv"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="reference/osf_open.html">osf_open</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># create an external data file</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/write.table">write.csv</a></span>(mtcars, <span class="st">"mtcars.csv"</span>)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="reference/osf_create.html">osf_create_project</a></span>(<span class="dt">title =</span> <span class="st">"Motor Trend Car Road Tests"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="reference/osf_create.html">osf_create_component</a></span>(<span class="st">"Car Data"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="reference/osf_mkdir.html">osf_mkdir</a></span>(<span class="st">"rawdata"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="reference/osf_upload.html">osf_upload</a></span>(<span class="st">"mtcars.csv"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="reference/osf_open.html">osf_open</a></span>()</a></code></pre></div>
 <div class="figure">
 <img src="reference/figures/screen-shot.png" alt="Screenshot of the uploaded file on OSF"><p class="caption">Screenshot of the uploaded file on OSF</p>
 </div>

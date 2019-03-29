@@ -84,7 +84,7 @@ for additional details." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">osfr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.4</span>
       </span>
     </div>
 
@@ -154,16 +154,14 @@ for additional details.</p>
         
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Each row of an <code>osf_tbl</code> represents a single OSF entity, which could be a
+    <p>Each row of an <code>osf_tbl</code> represents a single OSF entity. This could be a
 user, project, component, directory, or file. An <code>osf_tbl</code> must include
-the following 3 variables:</p><ol>
-<li><p><code>name</code>: the name or title of the entity.</p></li>
-<li><p><code>id</code>: the unique identifier assigned to the entity.</p></li>
+the following 3 columns:</p><ol>
+<li><p><code>name</code>: indicates the name or title of the entity.</p></li>
+<li><p><code>id</code>: the unique identifier assigned by OSF.</p></li>
 <li><p><code>meta</code>: a list-column that stores the processed response returned by OSF's
-API.</p></li>
+API. See the <em>Meta column</em> section below for more information.</p></li>
 </ol>
-    <p>The <code>meta</code> column is primarily intended for use by <code>osfr</code>'s functions and
-should not be altered by users.</p>
     
     <h2 class="hasAnchor" id="subclasses"><a class="anchor" href="#subclasses"></a>Subclasses</h2>
 
@@ -184,6 +182,22 @@ component must have a parent node (i.e., must be a sub-component of another
 project or component). Because projects and components are functionally
 identical, osfr uses the same <code>osf_tbl_node</code> class to represent both.</p>
     
+    <h2 class="hasAnchor" id="meta-column"><a class="anchor" href="#meta-column"></a>Meta column</h2>
+
+    
+    <p>The <code>meta</code> column contains all of the information returned from OSF's API for
+a single entity, structed as a named list with 3 elements:</p><ol>
+<li><p><code>attributes</code> contains metadata about the entity (e.g., names,
+descriptions, tags, etc).</p></li>
+<li><p><code>links</code> contains urls to API endpoints with alternative representations of
+the entity or actions that may be performed on the entity.</p></li>
+<li><p><code>relationships</code> contains URLs to other entities with relationships to the
+entity (e.g., collaborators attached to a project).</p></li>
+</ol>
+    <p>This information is critical for <code>osfr</code>'s internal functions and should not
+be altered by users. For even more information about these elements, see
+<a href='https://developer.osf.io/#tag/Entities-and-Entity-Collections'>OSF's API documentation</a>.</p>
+    
     <h2 class="hasAnchor" id="acknowledgments"><a class="anchor" href="#acknowledgments"></a>Acknowledgments</h2>
 
     
@@ -201,6 +215,8 @@ the <a href='https://googledrive.tidyverse.org'>googledrive</a> package.</p>
       <li><a href="#subclasses">Subclasses</a></li>
 
       <li><a href="#osf-nodes">OSF nodes</a></li>
+
+      <li><a href="#meta-column">Meta column</a></li>
 
       <li><a href="#acknowledgments">Acknowledgments</a></li>
           </ul>
