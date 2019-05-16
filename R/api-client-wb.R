@@ -48,7 +48,11 @@
     opts = list(
       encode = "raw"
     ),
-    headers = headers
+    headers = headers,
+    hooks = list(
+      request = log_request,
+      response = log_response
+    )
   )
 }
 

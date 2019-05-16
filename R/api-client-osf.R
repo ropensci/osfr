@@ -40,7 +40,11 @@ user_agent <- function(agent = "osfr") {
     opts = list(
       encode = "json"
     ),
-    headers = headers
+    headers = headers,
+    hooks = list(
+      request = log_request,
+      response = log_response
+    )
   )
 }
 
@@ -59,7 +63,7 @@ user_agent <- function(agent = "osfr") {
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
   cli <- .osf_cli()
 
-  res <- cli$retry(
+  cli$retry(
     method,
     path,
     query,
@@ -69,12 +73,6 @@ user_agent <- function(agent = "osfr") {
     onwait = retry_message,
     ...
   )
-
-  if (!is.null(getOption("osfr.log"))) {
-    logger::log_info(fmt = "%s %s", toupper(res$method), res$request$url$url)
-  }
-
-  res
 }
 
 # TODO: .osf_request and .osf_paginated_request returns should be consistent

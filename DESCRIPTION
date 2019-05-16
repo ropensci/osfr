@@ -11,7 +11,7 @@ Authors@R: c(
 Description: Manage your projects and access open research materials and data on OSF.
 Depends: R (>= 3.1.0)
 Imports:
-    crul (>= 0.7.0),
+    crul (>= 0.7.4),
     jsonlite,
     stringi,
     purrr,
