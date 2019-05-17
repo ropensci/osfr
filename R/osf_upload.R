@@ -89,7 +89,11 @@ osf_upload.osf_tbl_file <-
   x <- make_single(x)
 
   if (is_osf_file(x)) {
-    abort("Uploading to an `osf_tbl_file` requires a directory\n* `x` contains a file")
+    abort(paste0(
+      "Can't upload directly to a file.\n",
+      "Are you trying to update an existing file on OSF? Try:\n",
+      "  * uploading to the file's parent directory or project/component"
+    ))
   }
 
   items <- osf_ls_files(x, type = "file", pattern = name)

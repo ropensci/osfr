@@ -1,3 +1,10 @@
+# osfr 0.2.4.9000
+
+## Minor fixes
+
+* Better error message when user attempts to upload directly to a file 
+(#102, @tiernanmartin)
+
 # osfr 0.2.4
 
 ## Minor fixes
