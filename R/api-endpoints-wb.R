@@ -25,6 +25,7 @@
 #'   the specified existing folder
 #'
 #' @noRd
+
 .wb_file_upload <- function(id, name, body, fid = NULL) {
   query <- list(kind = "file", name = name)
   res <- .wb_request("put", .wb_api_path(id, fid), query = query, body = body)

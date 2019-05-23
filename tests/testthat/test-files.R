@@ -25,7 +25,7 @@ teardown({
 
 # tests -------------------------------------------------------------------
 test_that("non-existent file is detected", {
-  expect_error(osf_upload(p1, "non-existent-file"), "Can't find file")
+  expect_error(osf_upload(p1, "non-existent-file"), "Can't find following")
 })
 
 test_that("file is uploaded to project root", {
@@ -43,15 +43,18 @@ test_that("uploaded file can be retrieved", {
   expect_identical(f1, f2)
 })
 
-test_that("upload fails if the file already exists", {
+test_that("user is warned if a file already exists", {
   skip_if_no_pat()
-  expect_error(osf_upload(p1, infile), "File already exists at destination")
+  expect_warning(
+    out <- osf_upload(p1, infile),
+    sprintf("Local file '%s' was NOT uploaded", basename(infile))
+  )
+  # existing OSF file is returned
+  expect_identical(out, f1)
 })
 
 
 test_that("upload can overwrite existing files", {
-  skip_if_no_pat()
-
   writeLines("Lorem ipsum dolor sit amet, consectetur, ea duo posse", infile)
   skip_if_no_pat()
 
@@ -60,21 +63,12 @@ test_that("upload can overwrite existing files", {
   expect_s3_class(f1, "osf_tbl_file")
 })
 
-test_that("user is warned that path info is removed from upload name", {
-  skip_if_no_pat()
-
-  expect_warning(
-    osf_upload(p1, infile, name = "path/file.txt"),
-    "Removing path information"
-  )
-})
-
 
 test_that("file can be uploaded to a directory", {
   skip_if_no_pat()
 
   d1 <<- osf_mkdir(p1, "data")
-  f2 <<- osf_upload(d1, infile)
+  expect_silent(f2 <<- osf_upload(d1, infile))
   expect_s3_class(f2, "osf_tbl_file")
 })
 
@@ -114,6 +108,17 @@ test_that("messages are printed with `verbose` enabled", {
   )
 })
 
+test_that("multiple files can be uploaded", {
+  skip_if_no_pat()
+
+  infiles <- replicate(10, tempfile())
+  dev.null <- sapply(infiles, writeLines, text = sample(letters))
+
+  out <- osf_upload(p1, infiles)
+  expect_s3_class(out, "osf_tbl_file")
+  expect_equal(out$name, basename(infiles))
+  expect_equal(nrow(out), length(infiles))
+})
 
 context("Moving/copying files")
 
