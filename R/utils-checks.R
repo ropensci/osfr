@@ -27,7 +27,7 @@ check_files <- function(files) {
   found <- fs::file_exists(files)
   if (any(!found)) {
     abort(paste0(
-      "Can't find find following files/folders included in `path`:\n",
+      "Can't find following files/folders included in `path`:\n",
       paste0(
         sprintf("  * %s", names(Filter(isFALSE, found))),
         collapse = "\n")
