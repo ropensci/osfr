@@ -1,9 +1,27 @@
 # osfr 0.2.4.9000
 
-## Minor fixes
+
+## Multi-file transfers!
+
+`osf_download()` and `osf_upload()` are now vectorized, making the process of adding files to or retriving files from OSF much more convenient. This functionality required significant refactoring and brings with it several notable breaking changes. 
+
+## Breaking changes
+
+* `osf_upload()`'s `name` argument has been removed, so it is no longer possible to upload a file *and* change it's OSF name.
+
+* `osf_download()`'s `path` argument must point to the directory where downloaded files should be saved. 
+
+* `osf_upload()`'s behavior has changed when `overwrite = FALSE` and a file with the same name already exists on OSF. Previously, an error was thrown and the operation would cease. Now a *warning* is thrown and an `osf_tbl_file` containing the current version of the OSF file is returned. This change was made to facilitate multifile uploading, particularly situations where only subset of files already exist on OSF and you don't want them overwritten when uploading the missing files. 
+
+## Minor changes
+
+* Devs can now enable logging API requests and responses by defining defining
+`OSF_LOG` (see Contributing for more information)
 
 * Better error message when user attempts to upload directly to a file 
 (#102, @tiernanmartin)
+
+* crul v0.7.4 is now the minimum required version
 
 # osfr 0.2.4
 
