@@ -191,7 +191,7 @@ upload_file <- function(dest, path, overwrite, verbose) {
   res <- do.call(".wb_file_upload", upload_args)
 
   if (is.null(res$errors)) {
-    if (verbose) message(sprintf("Uploaded %s to OSF", basename(path)))
+    if (verbose) message(sprintf("Uploaded new file %s to OSF", basename(path)))
   } else {
     # raise error as usual if error is anything other than 409 (file exists)
     if (res$status_code != 409) raise_error(res)
