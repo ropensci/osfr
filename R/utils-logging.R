@@ -2,7 +2,7 @@ log_response <- function(res) {
   if (!is.null(getOption("osfr.log"))) {
     times <- res$times[res$times > 0]
 
-    msg <- sprintf(fmt = "Status %s - %s - [%s]",
+    msg <- sprintf(fmt = "STATUS %s - %s - [%s]",
       res$status_code,
       res$url,
       paste0(sprintf("%s:%f", names(times), times), collapse = ", ")
