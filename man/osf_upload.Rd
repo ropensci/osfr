@@ -2,33 +2,55 @@
 % Please edit documentation in R/osf_upload.R
 \name{osf_upload}
 \alias{osf_upload}
-\title{Upload files to OSF}
+\title{Upload files and directories to OSF}
 \usage{
-osf_upload(x, path, name = NULL, overwrite = FALSE, verbose = FALSE)
+osf_upload(x, path, overwrite = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{x}{an \code{\link{osf_tbl_node}} with a single project or
-component, or an \code{\link{osf_tbl_file}} with a single directory}
+component, or an \code{\link{osf_tbl_file}} with a single directory. This is the OSF
+bucket to which your files will be uploaded.}
 
-\item{path}{Path to a local file. Ensure the file has a proper
-file extension (e.g., \code{.docx}) to ensure it's rendered properly on OSF.}
-
-\item{name}{Name of the uploaded file (if \code{NULL}, \code{basename(path)}
-will be used).}
+\item{path}{A character vector of filepaths to upload to \code{x} on OSF. Only
+paths pointing to existing files and/or directories are uploaded. Any other
+file types (e.g., symlinks) are silently ignored.}
 
 \item{overwrite}{Logical, overwrite an existing file with the same name
 (default \code{FALSE})? If \code{TRUE}, OSF will automatically update the file and
-record the previous version.}
+record the previous version. If \code{FALSE}, a warning will be issued that the
+local file was \emph{not} uploaded and the \emph{existing} version of the file on OSF
+is returned.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 about interactions with the OSF API (default \code{FALSE}).}
 }
 \value{
-an \code{\link{osf_tbl_file}} containing uploaded file
+an \code{\link{osf_tbl_file}} containing only the files/directories uploaded to
+the root-level of \code{x}. It will not include the files/directories that were
+uploaded to subdirectories within \code{x}.
 }
 \description{
-Upload files to OSF
+Local files and directories can be uploaded to a project, component or directory on OSF.
 }
+\section{A note about synchronization}{
+
+While \code{osf_download()} and \code{osf_upload()} can be used to conveniently shuttle
+files back and forth between OSF and your local machine, it's important to
+note that \strong{they are not file synchronization functions}. In contrast to
+something like \href{https://rsync.samba.org}{rsync},
+\code{osf_download()}/\code{osf_upload()} do not take into account file contents or
+file modification times. Whether you're uploading or downloading, if
+\code{overwrite=TRUE}, osfr will overwrite an existing file regradless of whether
+the existing file is the more recent copy. You have been warned.
+}
+
+\section{Uploading to subdirectories}{
+
+If you want to upload to an existing directory on OSF, you will first need to retrieve it. For example, if the project \code{proj} has a subdirectory, \code{rawdata/}, nested within a top-level directory, \code{data/}, \code{osf_ls_files()} could be used to retrieve \code{rawdata/} directly\preformatted{rawdata_dir <- osf_ls_files(proj, path = "data", pattern = "rawdata")
+osf_upload(rawdata_dir, path = "my-file.txt")
+}
+}
+
 \examples{
 \dontrun{
 # Create an example file to upload to our example project
