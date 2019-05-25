@@ -77,6 +77,7 @@ osf_mkdir.osf_tbl_file <- function(x, path, verbose = FALSE) {
 #' @param path A path of directories.
 #' @param missing_action Either `"error"` or `"create"` to create the missing
 #'   directory.
+#' @importFrom fs path_rel
 #' @noRd
 recurse_path <- function(x, path, missing_action = "error", verbose = FALSE) {
   missing_action <- match.arg(missing_action, c("error", "create"))

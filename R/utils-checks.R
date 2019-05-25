@@ -22,6 +22,7 @@ check_category <- function(x) {
 
 #' Verify local file paths exist
 #' @param files Character vector containing paths for one or more local files
+#' @importFrom fs file_exists
 #' @noRd
 check_files <- function(files) {
   found <- fs::file_exists(files)

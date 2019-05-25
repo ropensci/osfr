@@ -36,6 +36,8 @@
 #' }
 #'
 #' @export
+#' @importFrom fs path_has_parent
+
 osf_mv <- function(x, to, overwrite = FALSE, verbose = FALSE) {
   UseMethod("osf_mv")
 }

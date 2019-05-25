@@ -47,6 +47,7 @@ is_osf_file <- function(x) {
 
 
 # extract OSF and Waterbutler identifiers from known URL schemes
+#' @importFrom fs path_split
 extract_osf_id <- function(url) {
   stopifnot(is_osf_url(url))
   path <- crul::url_parse(url)$path

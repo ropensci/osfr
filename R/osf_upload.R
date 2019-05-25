@@ -59,7 +59,7 @@
 #'
 #' @export
 #' @importFrom crul upload
-#' @importFrom fs is_file is_dir path_dir
+#' @importFrom fs is_file is_dir path_dir file_info dir_walk
 
 osf_upload <-
   function(x,

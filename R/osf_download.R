@@ -37,7 +37,7 @@
 #' * [`osf_ls_files()`] for listing files and directories on OSF.
 #'
 #' @export
-#' @importFrom fs path_ext_set path_ext_remove
+#' @importFrom fs path_ext_set path_ext_remove dir_exists
 
 osf_download <-
   function(x,
