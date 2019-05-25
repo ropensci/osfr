@@ -60,6 +60,7 @@
 #' @export
 #' @importFrom crul upload
 #' @importFrom fs is_file is_dir path_dir file_info dir_walk
+#' @importFrom memoise memoise forget
 
 osf_upload <-
   function(x,

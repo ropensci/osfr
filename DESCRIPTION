@@ -17,7 +17,8 @@ Imports:
     purrr,
     tibble,
     rlang,
-    fs
+    fs,
+    memoise
 License: Apache License 2.0 | file LICENSE
 URL: 
     http://centerforopenscience.github.io/osfr, 
