@@ -86,13 +86,13 @@ test_that("messages are printed with `verbose` enabled", {
   # uploading to a node
   expect_message(
     osf_upload(p1, infile2, verbose = TRUE),
-    sprintf("Uploaded %s to OSF", basename(infile2))
+    sprintf("Uploaded new file %s to OSF", basename(infile2))
   )
 
   # uploading to a directory
   expect_message(
     osf_upload(d1, infile2, verbose = TRUE),
-    sprintf("Uploaded %s to OSF", basename(infile2))
+    sprintf("Uploaded new file %s to OSF", basename(infile2))
   )
 
   # updating node file
