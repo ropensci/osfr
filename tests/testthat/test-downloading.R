@@ -6,10 +6,22 @@ setup({
   # Retrieve public OSF project and components required for tests
   # (created using data-raw/create-test-project.R)
   if (on_test_server()) {
-    p1 <<- osf_retrieve_node("brfza")
-    c1 <<- osf_retrieve_node("rxwhk")
-    f1 <<- osf_retrieve_file("ew8tc")
-    d1 <<- osf_retrieve_file("5c34b68a44cd030016942349")
+
+    guid_file <- list.files(
+      path = rprojroot::find_testthat_root_file(),
+      pattern = "test-guids.dcf",
+      recursive = TRUE,
+      full.names = TRUE
+    )
+
+    guids <- read.dcf(guid_file)
+
+    dir(rprojroot::find_testthat_root_file(), "test-guids.dcf", recursive = TRUE)
+
+    p1 <<- osf_retrieve_node(guids[, "p1"])
+    c1 <<- osf_retrieve_node(guids[, "c1"])
+    f1 <<- osf_retrieve_file(guids[, "f1"])
+    d1 <<- osf_retrieve_file(guids[, "d1"])
   }
   outdir <<- tempdir()
 })

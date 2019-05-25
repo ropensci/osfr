@@ -1,5 +1,7 @@
 # Create OSF projects for unit tests
-# NOTE: these must be created on test.osf.io
+# NOTE: these must be created on test.osf.io and publicly accessible
+# GUIDs for OSF entities required by the tests are recorded in:
+guid_file <- "tests/testthat/test-files/test-guids.dcf"
 
 library(osfr)
 
@@ -63,6 +65,13 @@ pdf(file_pdf)
 plot(density(random_nums[[1]]))
 dev.off()
 
-osf_upload(proj_root, file_pdf)
+f_pdf <- osf_upload(proj_root, file_pdf)
 
 
+# export GUIDs
+guids <- list(p1 = proj_root, c1 = c_paged, f1 = f_pdf, d1 = d_files)
+
+write.dcf(
+  lapply(guids, function(x) x$id),
+  file = guid_file
+)
