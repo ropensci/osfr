@@ -32,5 +32,5 @@ get_guids <- function() {
     recursive = TRUE,
     full.names = TRUE
   )
-  guids <- read.dcf(guid_file)
+  read.dcf(guid_file)
 }
