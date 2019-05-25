@@ -59,7 +59,6 @@
 #'
 #' @export
 #' @importFrom crul upload
-#' @importFrom fs is_file is_dir path_dir file_info dir_walk
 #' @importFrom memoise memoise forget
 
 osf_upload <-
@@ -104,7 +103,13 @@ osf_upload.osf_tbl_file <-
 }
 
 
+#' Recursive file and directory upload function
+#'
+#' This function maps over all elements in `path` and recursively walks any
+#' subdirectories, calling `file_upload()` for each file it counters..
 #' @param dest OSF node or directory upload destination
+#' @importFrom fs is_dir file_info dir_walk
+#' @noRd
 
 recursive_upload <- function(dest, path, overwrite, verbose) {
 
@@ -137,21 +142,19 @@ recursive_upload <- function(dest, path, overwrite, verbose) {
   if (is.null(path_by$directory)) {
     out_dirs <- NULL
   } else {
-    out_dirs <- fs::dir_walk(path_by$directory, recursive = TRUE, fun = function(file) {
-        message(sprintf("Working on %s", file))
-
-        # if path is a directory, create or retrieve the corresponding osf folder
-        # and return it. if path is a file, retrieve its osf parent.
-        if (fs::is_dir(file)) {
-          get_path(dest, file)
+    out_dirs <- fs::dir_walk(path_by$directory, recursive = TRUE, function(p) {
+        # * if path is a dir, [create and] retrieve the corresponding osf dir
+        # * if path is a file, upload to its parent dir on osf
+        if (fs::is_dir(p)) {
+          get_path(dest, p)
         } else {
-          parent_path <- dirname(file)
+          parent_path <- dirname(p)
           if (parent_path == ".") {
             parent <- dest
           } else {
             parent <- get_path(dest, parent_path)
           }
-          upload_file(parent, file, overwrite = overwrite, verbose = verbose)
+          upload_file(parent, p, overwrite = overwrite, verbose = verbose)
         }
       }
     )
