@@ -14,10 +14,9 @@
 #'   is returned.
 #' @template verbose
 #'
-#' @return An [`osf_tbl_file`] containing the files and directories that were
-#'   uploaded to the root-level of `x`. It will not include the
-#'   files/directories that were uploaded to subdirectories within `x`.
-
+#' @return An [`osf_tbl_file`] containing the uploaded files and directories
+#'   that were directly specified in `path`.
+#'
 #' @section File and directory paths:
 #' The `x` argument indicates *where* on OSF the files will be uploaded (*i.e.*,
 #' the destination). The `path` argument indicates *what* will be uploaded,
@@ -179,7 +178,7 @@ recursive_upload <- function(dest, path, overwrite, verbose) {
   if (is.null(path_by$directory)) {
     out_dirs <- NULL
   } else {
-    out_dirs <- fs::dir_walk(path_by$directory, recursive = TRUE, function(p) {
+    out_dirs <- fs::dir_walk(path_by$directory, function(p) {
         # * if path is a dir, [create and] retrieve the corresponding osf dir
         # * if path is a file, upload to its parent dir on osf
         if (fs::is_dir(p)) {
@@ -195,7 +194,7 @@ recursive_upload <- function(dest, path, overwrite, verbose) {
         }
       }
     )
-    # dir_walk() only returns directory names, so we need to re-retrieve them
+    # dir_walk() only returns directory names so we need to re-retrieve them
     out_dirs <- map(out_dirs, get_path, x = dest)
   }
 
