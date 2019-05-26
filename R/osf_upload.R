@@ -2,75 +2,6 @@
 #'
 #' Upload local files to a project, component, or directory on OSF.
 #'
-#' @details
-#' The `x` argument indicates *where* on OSF the files will be uploaded (*i.e.*,
-#' the destination). The `path` argument indicates *what* will be uploaded,
-#' which can include a combination of files *and* directories.
-#'
-#' `osf_upload()` is intended to make it convenient to replicate your project
-#' directory on OSF and update files as needed. In that vein,
-#' `osf_upload(my_proj, path = ".")` will upload your entire current working
-#' directory to the specified OSF destination. To achieve this behavior
-#' `osf_upload()` adheres to the following rules:
-#'
-#' 1. When `path` points to a file it is uploaded to the *root* of the OSF
-#' destination, regardless of where it's located on your local machine (*i.e.*,
-#' the intermediate paths are not preserved).
-#' 2. When `path` points to a directory, a corresponding directory is created at
-#' the root of the OSF destination, and its contents are uploaded.
-#'
-#' Consider the following example working directory:
-#'
-#' ```
-#' ├── a.txt
-#' ├── subdir1/
-#' │  ├── b.txt
-#' │  └── subdir1_1/
-#' │     ├── c.txt
-#' └── subdir2/
-#'    └── d.txt
-#' ```
-#'
-#' Running `osf_upload(my_proj, c("a.txt", "subdir2/b.txt"))` would upload both
-#' `a.txt` and `b.txt` to the root of the specified OSF project, `my_proj`. We
-#' can maintain the same directory structure on OSF by passing `b.txt`'s
-#' directory to `path`, instead of the file itself.
-#'
-#' ```
-#' osf_upload(my_proj, c("a.txt", "subdir2"))
-#' ```
-#'
-#' @section Filepaths:
-#'
-#' If `path` is pointing directly to a file, it will be uploaded to the root of
-#' the OSF upload location.
-#'
-#' If `path` is pointing to a directory (e.g., `data/`), a corresponding
-#' directory on OSF will be created (or retrieved if it already exists) and any
-#' files within the local directory will be uploaded to the corresponding OSF
-#' directory.
-#'
-#' @section A note about synchronization:
-#' While `osf_download()` and `osf_upload()` can be used to conveniently shuttle
-#' files back and forth between OSF and your local machine, it's important to
-#' note that **they are not file synchronization functions**. In contrast to
-#' something like [`rsync`](https://rsync.samba.org),
-#' `osf_download()`/`osf_upload()` do not take into account file contents or
-#' file modification times. Whether you're uploading or downloading, if
-#' `overwrite=TRUE`, osfr will overwrite an existing file regradless of whether
-#' the existing file is the more recent copy. You have been warned.
-#'
-#' @section Uploading to subdirectories:
-#' If you want to upload to an existing directory on OSF, you will first need to
-#' retrieve it. For example, if the project `proj` has a subdirectory,
-#' `rawdata/`, nested within a top-level directory, `data/`, `osf_ls_files()`
-#' could be used to retrieve `rawdata/` directly
-#'
-#' ```
-#' rawdata_dir <- osf_ls_files(proj, path = "data", pattern = "rawdata")
-#' osf_upload(rawdata_dir, path = "my-file.txt")
-#' ```
-#'
 #' @param x The upload destintation on OSF. Can be one of the following:
 #'   * An [`osf_tbl_node`] with a single project or component.
 #'   * An [`osf_tbl_file`] with a single directory.
@@ -83,9 +14,64 @@
 #'   is returned.
 #' @template verbose
 #'
-#' @return an [`osf_tbl_file`] containing only the files/directories uploaded to
-#'   the root-level of `x`. It will not include the files/directories that were
-#'   uploaded to subdirectories within `x`.
+#' @return An [`osf_tbl_file`] containing the files and directories that were
+#'   uploaded to the root-level of `x`. It will not include the
+#'   files/directories that were uploaded to subdirectories within `x`.
+
+#' @section File and directory paths:
+#' The `x` argument indicates *where* on OSF the files will be uploaded (*i.e.*,
+#' the destination). The `path` argument indicates *what* will be uploaded,
+#' which can include a combination of files *and* directories.
+#'
+#' When `path` points to a local file, the file is uploaded to the *root* of the
+#' specified OSF destination, regardless of where it's on your local machine
+#' (*i.e.*, the intermediate paths are not preserved). For example, the
+#' following would would upload both `a.txt` and `b.txt` to the root of
+#' `my_proj`:
+#'
+#' ```
+#' osf_upload(my_proj, c("a.txt", "subdir/b.txt"))`
+#' ```
+#'
+#' When `path` points to a local directory, a corresponding directory will be
+#' created at the root of the OSF destination, `x`, and any files within the
+#' local directory are uploaded to the new OSF directory. Therefore, we could
+#' maintain the directory structure in the above example by passing `b.txt`'s
+#' directory to `path` instead of the file itself:
+#'
+#' ```
+#' osf_upload(my_proj, c("a.txt", "subdir2"))
+#' ```
+#'
+#' These behaviors are intended to to make it convenient to replicate your
+#' project directory on OSF and subsequently update the files as needed. In that
+#' vein, `osf_upload(my_proj, path = ".")` will upload your entire current
+#' working directory to the specified OSF destination.
+#'
+#' @section Uploading to subdirectories:
+#' In order to upload directly to an existing OSF directory you would first need
+#' to retrieve the directory as an [`osf_tbl_file`]. This can be accomplished by
+#' passing the directory's unique identifier to [`osf_retrieve_file()`], or, if
+#' you don't have the ID handy, you can use [`osf_ls_files()`] to retrieve the
+#' directory by name.
+#'
+#' ```
+#' # search for the 'rawdata' subdirectory within top-level 'data' directory
+#' target_dir <- osf_ls_files(my_proj, path = "data", pattern = "rawdata")
+#' # upload 'a.txt' to data/rawdata/ on OSF
+#' osf_upload(target_dir, path = "a.txt")
+#' ```
+#'
+#' @section A note about synchronization:
+#' While `osf_download()` and `osf_upload()` can be used to conveniently shuttle
+#' files back and forth between OSF and your local machine, it's important to
+#' note that **they are not file synchronization functions**. In contrast to
+#' something like [`rsync`](https://rsync.samba.org),
+#' `osf_download()`/`osf_upload()` do not take into account a file's contents or
+#' modification time. Whether you're uploading or downloading, if `overwrite =
+#' TRUE`, osfr will overwrite an existing file regradless of whether the
+#' existing file is the more recent copy. You have been warned.
+#'
 #'
 #' @examples
 #' \dontrun{
