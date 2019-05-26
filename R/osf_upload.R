@@ -1,6 +1,54 @@
-#' Upload files and directories to OSF
+#' Upload files to OSF
 #'
-#' Local files and directories can be uploaded to a project, component or directory on OSF.
+#' Upload local files to a project, component, or directory on OSF.
+#'
+#' @details
+#' The `x` argument indicates *where* on OSF the files will be uploaded (*i.e.*,
+#' the destination). The `path` argument indicates *what* will be uploaded,
+#' which can include a combination of files *and* directories.
+#'
+#' `osf_upload()` is intended to make it convenient to replicate your project
+#' directory on OSF and update files as needed. In that vein,
+#' `osf_upload(my_proj, path = ".")` will upload your entire current working
+#' directory to the specified OSF destination. To achieve this behavior
+#' `osf_upload()` adheres to the following rules:
+#'
+#' 1. When `path` points to a file it is uploaded to the *root* of the OSF
+#' destination, regardless of where it's located on your local machine (*i.e.*,
+#' the intermediate paths are not preserved).
+#' 2. When `path` points to a directory, a corresponding directory is created at
+#' the root of the OSF destination, and its contents are uploaded.
+#'
+#' Consider the following example working directory:
+#'
+#' ```
+#' ├── a.txt
+#' ├── subdir1/
+#' │  ├── b.txt
+#' │  └── subdir1_1/
+#' │     ├── c.txt
+#' └── subdir2/
+#'    └── d.txt
+#' ```
+#'
+#' Running `osf_upload(my_proj, c("a.txt", "subdir2/b.txt"))` would upload both
+#' `a.txt` and `b.txt` to the root of the specified OSF project, `my_proj`. We
+#' can maintain the same directory structure on OSF by passing `b.txt`'s
+#' directory to `path`, instead of the file itself.
+#'
+#' ```
+#' osf_upload(my_proj, c("a.txt", "subdir2"))
+#' ```
+#'
+#' @section Filepaths:
+#'
+#' If `path` is pointing directly to a file, it will be uploaded to the root of
+#' the OSF upload location.
+#'
+#' If `path` is pointing to a directory (e.g., `data/`), a corresponding
+#' directory on OSF will be created (or retrieved if it already exists) and any
+#' files within the local directory will be uploaded to the corresponding OSF
+#' directory.
 #'
 #' @section A note about synchronization:
 #' While `osf_download()` and `osf_upload()` can be used to conveniently shuttle
@@ -13,19 +61,21 @@
 #' the existing file is the more recent copy. You have been warned.
 #'
 #' @section Uploading to subdirectories:
-#' If you want to upload to an existing directory on OSF, you will first need to retrieve it. For example, if the project `proj` has a subdirectory, `rawdata/`, nested within a top-level directory, `data/`, `osf_ls_files()` could be used to retrieve `rawdata/` directly
+#' If you want to upload to an existing directory on OSF, you will first need to
+#' retrieve it. For example, if the project `proj` has a subdirectory,
+#' `rawdata/`, nested within a top-level directory, `data/`, `osf_ls_files()`
+#' could be used to retrieve `rawdata/` directly
 #'
 #' ```
 #' rawdata_dir <- osf_ls_files(proj, path = "data", pattern = "rawdata")
 #' osf_upload(rawdata_dir, path = "my-file.txt")
 #' ```
 #'
-#' @param x an [`osf_tbl_node`] with a single project or
-#'   component, or an [`osf_tbl_file`] with a single directory. This is the OSF
-#'   bucket to which your files will be uploaded.
-#' @param path A character vector of filepaths to upload to `x` on OSF. Only
-#'   paths pointing to existing files and/or directories are uploaded. Any other
-#'   file types (e.g., symlinks) are silently ignored.
+#' @param x The upload destintation on OSF. Can be one of the following:
+#'   * An [`osf_tbl_node`] with a single project or component.
+#'   * An [`osf_tbl_file`] with a single directory.
+#' @param path A character vector of paths pointing to existing
+#'   local files and/directories.
 #' @param overwrite Logical, overwrite an existing file with the same name
 #'   (default `FALSE`)? If `TRUE`, OSF will automatically update the file and
 #'   record the previous version. If `FALSE`, a warning will be issued that the
