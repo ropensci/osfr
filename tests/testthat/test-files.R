@@ -1,4 +1,4 @@
-context("Uploading")
+context("Uploading files")
 
 
 # setup -------------------------------------------------------------------
@@ -7,6 +7,13 @@ outfile <- basename(infile)
 
 setup({
   writeLines("Lorem ipsum dolor sit amet, consectetur", infile)
+
+  # copy directory for testing multifile uploads to pwd
+  multidir <- fs::dir_copy(
+    file.path(rprojroot::find_testthat_root_file(), "test-files", "uploads"),
+    "."
+  )
+
   if (has_pat()) {
     p1 <<- osf_create_project(title = "osfr-test-files-1")
     p2 <<- osf_create_project(title = "osfr-test-files-2")
@@ -15,6 +22,7 @@ setup({
 
 teardown({
   unlink(outfile)
+  unlink(multidir, recursive = TRUE)
 
   if (has_pat()) {
     osf_rm(p1, recursive = TRUE, check = FALSE)
@@ -31,7 +39,11 @@ test_that("non-existent file is detected", {
 test_that("file is uploaded to project root", {
   skip_if_no_pat()
 
-  f1 <<- osf_upload(p1, infile)
+  expect_message(
+    f1 <<- osf_upload(p1, infile, verbose = TRUE),
+    sprintf("Uploaded new file %s to OSF", basename(infile))
+  )
+
   expect_s3_class(f1, "osf_tbl_file")
   expect_match(f1$name, outfile)
 })
@@ -53,22 +65,27 @@ test_that("user is warned if a file already exists", {
   expect_identical(out, f1)
 })
 
-
 test_that("upload can overwrite existing files", {
   writeLines("Lorem ipsum dolor sit amet, consectetur, ea duo posse", infile)
   skip_if_no_pat()
 
-  f1 <- osf_upload(p1, infile, overwrite = TRUE)
+  expect_message(
+    f1 <<- osf_upload(p1, infile, overwrite = TRUE, verbose = TRUE),
+    sprintf("Uploaded new version of %s to OSF", basename(infile))
+  )
+
   expect_equal(f1$meta[[1]]$attributes$current_version, 2)
   expect_s3_class(f1, "osf_tbl_file")
 })
-
 
 test_that("file can be uploaded to a directory", {
   skip_if_no_pat()
 
   d1 <<- osf_mkdir(p1, "data")
-  expect_silent(f2 <<- osf_upload(d1, infile))
+  expect_message(
+    f2 <<- osf_upload(d1, infile, verbose = TRUE),
+    sprintf("Uploaded new file %s to OSF", basename(infile))
+  )
   expect_s3_class(f2, "osf_tbl_file")
 })
 
@@ -77,48 +94,31 @@ test_that("attempting to list an osf_tbl_file with a file errors", {
   expect_error(osf_ls_files(f1), "Listing an `osf_tbl_file` requires a dir")
 })
 
-test_that("messages are printed with `verbose` enabled", {
-  skip_if_no_pat()
 
-  infile2 <- sub(".txt", "_2.txt", infile)
-  dev.null <- file.copy(infile, infile2)
-
-  # uploading to a node
-  expect_message(
-    osf_upload(p1, infile2, verbose = TRUE),
-    sprintf("Uploaded new file %s to OSF", basename(infile2))
-  )
-
-  # uploading to a directory
-  expect_message(
-    osf_upload(d1, infile2, verbose = TRUE),
-    sprintf("Uploaded new file %s to OSF", basename(infile2))
-  )
-
-  # updating node file
-  expect_message(
-    osf_upload(p1, infile2, overwrite = TRUE, verbose = TRUE),
-    sprintf("Uploaded new version of %s to OSF", basename(infile2))
-  )
-
-  # updating directory file
-  expect_message(
-    osf_upload(d1, infile2, overwrite = TRUE, verbose = TRUE),
-    sprintf("Uploaded new version of %s to OSF", basename(infile2))
-  )
-})
+context("Uploading multiple files")
 
 test_that("multiple files can be uploaded", {
   skip_if_no_pat()
 
-  infiles <- replicate(10, tempfile())
-  dev.null <- sapply(infiles, writeLines, text = sample(letters))
-
-  out <- osf_upload(p1, infiles)
+  infiles <- fs::dir_ls(multidir, type = "file")
+  out <- osf_upload(p1, infiles, verbose = TRUE)
   expect_s3_class(out, "osf_tbl_file")
   expect_equal(out$name, basename(infiles))
-  expect_equal(nrow(out), length(infiles))
 })
+
+
+test_that("a directory can be uploaded", {
+  skip_if_no_pat()
+
+  indir <- file.path(multidir, "subdir1", "subdir1_1")
+  out <- osf_upload(p1, fs::path_rel(indir), verbose = TRUE)
+  expect_s3_class(out, "osf_tbl_file")
+  expect_equal(out$name, basename(indir))
+
+  # verify files within the directory were uploaded
+  expect_equal(osf_ls_files(out)$name, list.files(indir))
+})
+
 
 context("Moving/copying files")
 
