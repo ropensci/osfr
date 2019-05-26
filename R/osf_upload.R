@@ -157,6 +157,7 @@ recursive_upload <- function(dest, path, overwrite, verbose) {
       recurse_path(x, path, missing_action = "create", verbose = verbose)
     }
   )
+  on.exit(memoise::forget(get_path))
 
   # split into top-level files and folders
   path_by <- split(path, fs::file_info(path)$type, drop = TRUE)
@@ -198,7 +199,6 @@ recursive_upload <- function(dest, path, overwrite, verbose) {
     out_dirs <- map(out_dirs, get_path, x = dest)
   }
 
-  memoise::forget(get_path)
   do.call("rbind", c(out_files, out_dirs))
 }
 
