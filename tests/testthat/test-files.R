@@ -3,16 +3,9 @@ context("Uploading files")
 
 # setup -------------------------------------------------------------------
 infile <- tempfile("osfr-local-file-", fileext = ".txt")
-outfile <- basename(infile)
 
 setup({
   writeLines("Lorem ipsum dolor sit amet, consectetur", infile)
-
-  # copy directory for testing multifile uploads to pwd
-  multidir <- fs::dir_copy(
-    file.path(rprojroot::find_testthat_root_file(), "test-files", "uploads"),
-    "."
-  )
 
   if (has_pat()) {
     p1 <<- osf_create_project(title = "osfr-test-files-1")
@@ -21,9 +14,6 @@ setup({
 })
 
 teardown({
-  unlink(outfile)
-  unlink(multidir, recursive = TRUE)
-
   if (has_pat()) {
     osf_rm(p1, recursive = TRUE, check = FALSE)
     osf_rm(p2, recursive = TRUE, check = FALSE)
@@ -45,7 +35,7 @@ test_that("file is uploaded to project root", {
   )
 
   expect_s3_class(f1, "osf_tbl_file")
-  expect_match(f1$name, outfile)
+  expect_match(f1$name, basename(infile))
 })
 
 test_that("uploaded file can be retrieved", {
@@ -92,31 +82,6 @@ test_that("file can be uploaded to a directory", {
 test_that("attempting to list an osf_tbl_file with a file errors", {
   skip_if_no_pat()
   expect_error(osf_ls_files(f1), "Listing an `osf_tbl_file` requires a dir")
-})
-
-
-context("Uploading multiple files")
-
-test_that("multiple files can be uploaded", {
-  skip_if_no_pat()
-
-  infiles <- fs::dir_ls(multidir, type = "file")
-  out <- osf_upload(p1, infiles, verbose = TRUE)
-  expect_s3_class(out, "osf_tbl_file")
-  expect_equal(out$name, basename(infiles))
-})
-
-
-test_that("a directory can be uploaded", {
-  skip_if_no_pat()
-
-  indir <- file.path(multidir, "subdir1", "subdir1_1")
-  out <- osf_upload(p1, fs::path_rel(indir), verbose = TRUE)
-  expect_s3_class(out, "osf_tbl_file")
-  expect_equal(out$name, basename(indir))
-
-  # verify files within the directory were uploaded
-  expect_equal(osf_ls_files(out)$name, list.files(indir))
 })
 
 
