@@ -33,7 +33,7 @@
 #' @section Meta column:
 #'
 #' The `meta` column contains all of the information returned from OSF's API for
-#' a single entity, structed as a named list with 3 elements:
+#' a single entity, structured as a named list with 3 elements:
 #'
 #' 1. `attributes` contains metadata about the entity (e.g., names,
 #'    descriptions, tags, etc).
