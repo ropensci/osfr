@@ -82,10 +82,13 @@ osf_mkdir.osf_tbl_file <- function(x, path, verbose = FALSE) {
 recurse_path <- function(x, path, missing_action = "error", verbose = FALSE) {
   missing_action <- match.arg(missing_action, c("error", "create"))
 
-  path_root <- fs::path_split(path)[[1]][1]
-  root_dir <- osf_ls_files(x, type = "folder", pattern = path_root)
+  # skip leading slashes or dots so `path_root` is a valid folder name
+  path_dirs <- fs::path_split(path)[[1]]
+  valid_names <- grepl(sprintf("^[^\\%s\\.]", .Platform$file.sep), path_dirs)
+  path_root <- path_dirs[valid_names][1]
 
   # ensure the retrieved directory and path_root have the same name
+  root_dir <- osf_ls_files(x, type = "folder", pattern = path_root)
   root_dir <- root_dir[root_dir$name == path_root, ]
 
   if (nrow(root_dir) == 0) {
