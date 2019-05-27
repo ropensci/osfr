@@ -18,7 +18,6 @@ setup({
 
 
 # tests -------------------------------------------------------------------
-context("Downloading")
 
 test_that("a file can be downloaded from a project", {
   skip_if_no_pat()
