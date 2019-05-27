@@ -70,11 +70,15 @@
 
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
   cli <- .wb_cli()
-  res <- cli$verb(method, path, query, body = body, ...)
 
-  if (!is.null(getOption("osfr.log"))) {
-    logger::log_info(fmt = "%s %s", toupper(res$method), res$request$url$url)
-  }
-
-  res
+  cli$retry(
+    method,
+    path,
+    query,
+    body = body,
+    times = 3,
+    retry_only_on = "502",
+    onwait = retry_message,
+    ...
+  )
 }

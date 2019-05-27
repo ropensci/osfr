@@ -23,6 +23,8 @@
 
 * crul v0.7.4 is now the minimum required version
 
+* The waterbutler client will now re-attempt failed requests 3 times
+
 # osfr 0.2.4
 
 ## Minor fixes
