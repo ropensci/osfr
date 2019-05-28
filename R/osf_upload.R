@@ -7,6 +7,9 @@
 #'   * An [`osf_tbl_file`] with a single directory.
 #' @param path A character vector of paths pointing to existing
 #'   local files and/directories.
+#' @param recurse If `TRUE`, fully recurse directories included in `path`. You
+#'   can also control the number of levels to recurse by specifying a positive
+#'   number.
 #' @param overwrite Logical, overwrite an existing file with the same name
 #'   (default `FALSE`)? If `TRUE`, OSF will automatically update the file and
 #'   record the previous version. If `FALSE`, a warning will be issued that the
@@ -99,6 +102,7 @@
 osf_upload <-
   function(x,
            path,
+           recurse = FALSE,
            overwrite = FALSE,
            verbose = FALSE) {
   UseMethod("osf_upload")
@@ -108,18 +112,20 @@ osf_upload <-
 osf_upload.osf_tbl_node <-
   function(x,
            path,
+           recurse = FALSE,
            overwrite = FALSE,
            verbose = FALSE) {
 
   path <- check_files(path)
   x <- make_single(x)
-  recursive_upload(x, path, overwrite, verbose)
+  recursive_upload(x, path, recurse, overwrite, verbose)
 }
 
 #' @export
 osf_upload.osf_tbl_file <-
   function(x,
            path,
+           recurse = FALSE,
            overwrite = FALSE,
            verbose = FALSE) {
 
@@ -134,7 +140,7 @@ osf_upload.osf_tbl_file <-
     ))
   }
 
-  recursive_upload(x, path, overwrite, verbose)
+  recursive_upload(x, path, recurse, overwrite, verbose)
 }
 
 
@@ -146,13 +152,12 @@ osf_upload.osf_tbl_file <-
 #' @importFrom fs is_dir file_info dir_walk
 #' @noRd
 
-recursive_upload <- function(dest, path, overwrite, verbose) {
+recursive_upload <- function(dest, path, recurse, overwrite, verbose) {
 
   # memoise osf directory retrieval to avoid subsequent API calls for every
   # file or subdirectory contained therein
   get_path <- memoise::memoise(
     function(x, path) {
-      message(sprintf("Getting path `%s` from `%s`", path, as_id(x)))
       recurse_path(x, path, missing_action = "create", verbose = verbose)
     }
   )
@@ -178,7 +183,11 @@ recursive_upload <- function(dest, path, overwrite, verbose) {
   if (is.null(path_by$directory)) {
     out_dirs <- NULL
   } else {
-    out_dirs <- fs::dir_walk(path_by$directory, function(p) {
+    out_dirs <- fs::dir_walk(
+      path,
+      type = c("file", "directory"),
+      recurse = recurse,
+      function(p) {
         # * if path is a dir, [create and] retrieve the corresponding osf dir
         # * if path is a file, upload to its parent dir on osf
         if (fs::is_dir(p)) {
