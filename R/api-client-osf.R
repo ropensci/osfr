@@ -15,40 +15,6 @@ user_agent <- function(agent = "osfr") {
   sprintf("v%s/%s", floor(.osf_api_version), path)
 }
 
-# Construct the OSF API Client
-.osf_cli <- function(pat = getOption("osfr.pat")) {
-  server <- Sys.getenv("OSF_SERVER")
-  url <- if (nzchar(server)) {
-    sprintf("https://api.%s.osf.io", server)
-  } else {
-    "https://api.osf.io"
-  }
-
-  headers <- list(
-    `User-Agent` = user_agent(),
-    `Accept-Header` = sprintf(
-      "application/vnd.api+json;version=%s",
-      .osf_api_version)
-  )
-
-  if (!is.null(pat)) {
-    headers$Authorization <- sprintf("Bearer %s", pat)
-  }
-
-  crul::HttpClient$new(
-    url = url,
-    opts = list(
-      encode = "json"
-    ),
-    headers = headers,
-    hooks = list(
-      request = log_request,
-      response = log_response
-    )
-  )
-}
-
-
 
 # OSF API request functions -----------------------------------------------
 
@@ -61,7 +27,7 @@ user_agent <- function(agent = "osfr") {
            ...) {
 
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
-  cli <- .osf_cli()
+  cli <- .build_client(api = "osf", encode = "json", version = 2.8)
 
   cli$retry(
     method,

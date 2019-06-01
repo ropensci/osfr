@@ -6,56 +6,26 @@
 #' @param type indicate whether the provided `fid` refers to a `"folder"` (the
 #'   default) or `"file"`. This is significant because the path must always have
 #'   a trailing flash when referring to a folder
+#' @param version Specify the waterbutler API version
 #'
 #' @noRd
 .wb_api_path <-
   function(id,
            fid = NULL,
            provider = "osfstorage",
-           type = "folder") {
+           type = "folder",
+           version = 1) {
 
   type <- match.arg(type, c("folder", "file"))
-  api_v <- floor(.wb_api_version)
-  if (is.null(fid)) {
-    out <- sprintf("v%i/resources/%s/providers/%s/", api_v, id, provider)
-  } else {
-    out <- sprintf("v%i/resources/%s/providers/%s/%s/", api_v, id, provider, fid)
-  }
+
+  out <- sprintf("v%i/resources/%s/providers/%s/", version, id, provider)
+  if (!is.null(fid)) out <- paste(out, fid, sep = "/")
+
   switch(type,
     file = sub("\\/$", "", out),
     folder = out
   )
 }
-
-
-# Construct the WaterButler API Client
-.wb_cli <- function(pat = getOption("osfr.pat")) {
-
-  url <- ifelse(Sys.getenv("OSF_SERVER") == "test",
-                   "https://files.us.test.osf.io",
-                   "https://files.osf.io")
-
-  headers <- list(
-    `User-Agent` = user_agent()
-  )
-
-  if (!is.null(pat)) {
-    headers$Authorization <- sprintf("Bearer %s", pat)
-  }
-
-  crul::HttpClient$new(
-    url = url,
-    opts = list(
-      encode = "raw"
-    ),
-    headers = headers,
-    hooks = list(
-      request = log_request,
-      response = log_response
-    )
-  )
-}
-
 
 
 # Waterbutler request functions -------------------------------------------
@@ -69,7 +39,7 @@
            ...) {
 
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
-  cli <- .wb_cli()
+  cli <- .build_client(api = "wb", encode = "raw")
 
   cli$retry(
     method,
