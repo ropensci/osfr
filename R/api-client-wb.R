@@ -13,12 +13,11 @@
   function(id,
            fid = NULL,
            provider = "osfstorage",
-           type = "folder",
-           version = 1) {
+           type = "folder") {
 
   type <- match.arg(type, c("folder", "file"))
 
-  out <- sprintf("v%i/resources/%s/providers/%s/", version, id, provider)
+  out <- sprintf("/resources/%s/providers/%s/", id, provider)
   if (!is.null(fid)) out <- paste(out, fid, sep = "/")
 
   switch(type,
@@ -36,9 +35,11 @@
            query = list(),
            body = NULL,
            verbose = FALSE,
+           version = 1,
            ...) {
 
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
+  path <- url_path(paste0("v", floor(version)), path)
   cli <- .build_client(api = "wb", encode = "raw")
 
   cli$retry(

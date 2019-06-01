@@ -10,12 +10,6 @@ user_agent <- function(agent = "osfr") {
 }
 
 
-# Appends API version to a specificed path
-.osf_api_path <- function(path) {
-  sprintf("v%s/%s", floor(.osf_api_version), path)
-}
-
-
 # OSF API request functions -----------------------------------------------
 
 .osf_request <-
@@ -24,10 +18,12 @@ user_agent <- function(agent = "osfr") {
            query = list(),
            body = NULL,
            verbose = FALSE,
+           version = 2.8,
            ...) {
 
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
-  cli <- .build_client(api = "osf", encode = "json", version = 2.8)
+  path <- url_path(paste0("v", floor(version)), path)
+  cli <- .build_client(api = "osf", encode = "json", version = version)
 
   cli$retry(
     method,

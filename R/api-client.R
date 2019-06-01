@@ -3,16 +3,16 @@
 #' Create a crul HTTP client for either osf or waterbutler.
 #'
 #' @param api Either `"osf"` or `"wb"` for waterbutler
-#' @param version Optional, number that if provided is embedded within the
-#'   `Accept-Header` field to the client's request to a specific version of the
-#'   API.
+#' @param version Optional, specify the API version number. This only used when
+#'   `api = "osf"`. The version number is embedded within the `Accept-Header`
+#'   field to pin requests to a minor version of the API.
 #' @param encode one of `"form"`, `"multipart"`, `"json"`, or `"raw"`.
 #' @noRd
 .build_client <-
   function(api,
            encode,
-           pat = getOption("osfr.pat"),
-           version = NULL) {
+           version = NULL,
+           pat = getOption("osfr.pat")) {
 
   api <- match.arg(api, c("osf", "wb"))
   encode <- match.arg(encode, c("form", "multipart", "json", "raw"))
@@ -32,7 +32,7 @@
     headers$Authorization <- sprintf("Bearer %s", pat)
   }
 
-  if (!is.null(version)) {
+  if (api == "osf") {
     headers$`Accept-Header` <- sprintf(
       "application/vnd.api+json;version=%s",
       version)
