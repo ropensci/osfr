@@ -5,6 +5,7 @@
 #' workflows.
 #'
 #' @importFrom crul HttpClient url_parse
+#' @importFrom httr progress
 #' @importFrom stringi stri_split_fixed
 #' @importFrom purrr map map_chr imap_chr pluck set_names transpose %||%
 #' @importFrom tibble tibble

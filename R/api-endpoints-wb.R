@@ -26,9 +26,11 @@
 #'
 #' @noRd
 
-.wb_file_upload <- function(id, name, body, fid = NULL) {
+.wb_file_upload <- function(id, name, body, fid = NULL, progress = TRUE) {
   query <- list(kind = "file", name = name)
-  res <- .wb_request("put", .wb_api_path(id, fid), query = query, body = body)
+  path <- .wb_api_path(id, fid)
+  if (progress) cat(sprintf("Uploading %s", name))
+  res <- .wb_request("put", path, query = query, body = body, progress = progress)
   process_response(res)
 }
 
@@ -39,10 +41,10 @@
 #' @param fid Existing file's Waterbutler ID
 #'
 #' @noRd
-.wb_file_update <- function(id, fid, body) {
+.wb_file_update <- function(id, fid, body, progress = TRUE) {
   query <- list(kind = "file")
   path <- .wb_api_path(id, fid, type = "file")
-  res <- .wb_request("put", path, query = query, body = body)
+  res <- .wb_request("put", path, query = query, body = body, progress = progress)
   process_response(res)
 }
 
@@ -56,14 +58,22 @@
 #'   folders.
 #'
 #' @noRd
-.wb_download <- function(id, fid, path, type, zip = FALSE, verbose = FALSE) {
+.wb_download <-
+  function(id,
+           fid,
+           path,
+           type,
+           zip = FALSE,
+           verbose = FALSE,
+           progress = TRUE) {
   type <- match.arg(type, c("file", "folder"))
   query <- list()
   if (zip) query$zip <- ""
   api_path <- .wb_api_path(id, fid, type = type)
 
-  if (verbose) message(sprintf("\nDownloading %s to %s...", type, path))
-  res <- .wb_request("get", api_path, query, disk = path)
+  if (progress) cat(sprintf("Downloading %s\n", path))
+  res <- .wb_request("get", api_path, query, disk = path, progress = progress)
+  if (verbose) message(sprintf("\nDownloaded %s to %s", type, path))
 
   if (res$status_code == 200) return(TRUE)
   if (res$status_code == 404) {

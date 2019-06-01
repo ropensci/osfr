@@ -12,6 +12,7 @@
   function(api,
            encode,
            version = NULL,
+           progress = NULL,
            pat = getOption("osfr.pat")) {
 
   api <- match.arg(api, c("osf", "wb"))
@@ -47,6 +48,7 @@
     hooks = list(
       request = log_request,
       response = log_response
-    )
+    ),
+    progress = progress
   )
 }

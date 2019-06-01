@@ -34,13 +34,23 @@
            path,
            query = list(),
            body = NULL,
-           verbose = FALSE,
            version = 1,
+           verbose = FALSE,
+           progress = FALSE,
            ...) {
-
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
-  cli <- .build_client(api = "wb", encode = "raw")
 
+  if (progress) {
+    pb <- switch(method,
+      get = httr::progress(type = "down"),
+      put = httr::progress(type = "up"),
+      NULL
+    )
+  } else {
+    pb <- NULL
+  }
+
+  cli <- .build_client(api = "wb", encode = "raw", progress = pb)
   cli$retry(
     method,
     prepend_version(path, version),

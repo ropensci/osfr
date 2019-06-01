@@ -104,6 +104,7 @@ osf_upload <-
            path,
            recurse = FALSE,
            overwrite = FALSE,
+           progress = TRUE,
            verbose = FALSE) {
   UseMethod("osf_upload")
 }
@@ -114,11 +115,12 @@ osf_upload.osf_tbl_node <-
            path,
            recurse = FALSE,
            overwrite = FALSE,
+           progress = TRUE,
            verbose = FALSE) {
 
   path <- check_files(path)
   x <- make_single(x)
-  recursive_upload(x, path, recurse, overwrite, verbose)
+  recursive_upload(x, path, recurse, overwrite, progress, verbose)
 }
 
 #' @export
@@ -127,6 +129,7 @@ osf_upload.osf_tbl_file <-
            path,
            recurse = FALSE,
            overwrite = FALSE,
+           progress = TRUE,
            verbose = FALSE) {
 
   path <- check_files(path)
@@ -140,7 +143,7 @@ osf_upload.osf_tbl_file <-
     ))
   }
 
-  recursive_upload(x, path, recurse, overwrite, verbose)
+  recursive_upload(x, path, recurse, overwrite, progress, verbose)
 }
 
 
@@ -152,7 +155,7 @@ osf_upload.osf_tbl_file <-
 #' @importFrom fs is_dir file_info dir_walk
 #' @noRd
 
-recursive_upload <- function(dest, path, recurse, overwrite, verbose) {
+recursive_upload <- function(dest, path, recurse, overwrite, progress, verbose) {
 
   # memoise osf directory retrieval to avoid subsequent API calls for every
   # file or subdirectory contained therein
@@ -170,11 +173,11 @@ recursive_upload <- function(dest, path, recurse, overwrite, verbose) {
   if (is.null(path_by$file)) {
     out_files <- NULL
   } else {
-    out_files <- map(
-      .x  = path_by$file,
+    out_files <- map(path_by$file,
       .f = upload_file,
       dest = dest,
       overwrite = overwrite,
+      progress = progress,
       verbose = verbose
     )
   }
@@ -199,7 +202,7 @@ recursive_upload <- function(dest, path, recurse, overwrite, verbose) {
           } else {
             parent <- get_path(dest, parent_path)
           }
-          upload_file(parent, p, overwrite = overwrite, verbose = verbose)
+          upload_file(parent, path = p, overwrite, progress, verbose)
         }
       }
     )
@@ -221,13 +224,17 @@ recursive_upload <- function(dest, path, recurse, overwrite, verbose) {
 #' @return `osf_tbl_file` with a single row
 #' @noRd
 
-upload_file <- function(dest, path, overwrite, verbose) {
+upload_file <- function(dest, path, overwrite, progress, verbose) {
 
   # force the uploaded filename to match the local filename
   name <- basename(path)
 
   # set arguments depending on whether destination is a directory or node
-  upload_args <- list(name = name, body = crul::upload(path))
+  upload_args <- list(
+    name = name,
+    body = crul::upload(path),
+    progress = progress
+  )
 
   if (inherits(dest, "osf_tbl_node")) {
     upload_args$id <- as_id(dest)
