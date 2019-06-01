@@ -8,6 +8,14 @@
 #' @usage lhs \%>\% rhs
 NULL
 
+#' Shortcut for constructing a URL path from components
+#' Also removes double forward slashes.
+#' @param ... character vectors with path components
+#' @noRd
+url_path <- function(...) {
+  gsub("//", "/", file.path(..., fsep = "/"), fixed = TRUE)
+}
+
 #' Stop execution with HTTP status code
 #' @param code HTTP status code
 #' @inheritParams base::stop
