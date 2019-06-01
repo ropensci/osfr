@@ -18,7 +18,7 @@
   type <- match.arg(type, c("folder", "file"))
 
   out <- sprintf("/resources/%s/providers/%s/", id, provider)
-  if (!is.null(fid)) out <- paste(out, fid, sep = "/")
+  if (!is.null(fid)) out <- sprintf("%s/%s/", out, fid)
 
   switch(type,
     file = sub("\\/$", "", out),
