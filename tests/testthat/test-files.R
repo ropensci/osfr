@@ -1,4 +1,4 @@
-context("Uploading files")
+context("Moving/copying files")
 
 
 # setup -------------------------------------------------------------------
@@ -10,6 +10,8 @@ setup({
   if (has_pat()) {
     p1 <<- osf_create_project(title = "osfr-test-files-1")
     p2 <<- osf_create_project(title = "osfr-test-files-2")
+    d1 <<- osf_mkdir(p1, "d1")
+    f1 <<- osf_upload(p1, infile)
   }
 })
 
@@ -22,78 +24,25 @@ teardown({
 
 
 # tests -------------------------------------------------------------------
-test_that("non-existent file is detected", {
-  expect_error(osf_upload(p1, "non-existent-file"), "Can't find following")
-})
-
-test_that("file is uploaded to project root", {
+test_that("a file can be moved from node to subdirectory and back", {
   skip_if_no_pat()
-
-  expect_message(
-    f1 <<- osf_upload(p1, infile, verbose = TRUE),
-    sprintf("Uploaded new file %s to OSF", basename(infile))
+  f1 <- osf_mv(f1, d1)
+  expect_match(
+    get_meta(f1, "attributes", "materialized_path"),
+    file.path(d1$name, basename(infile))
   )
 
-  expect_s3_class(f1, "osf_tbl_file")
-  expect_match(f1$name, basename(infile))
-})
-
-test_that("uploaded file can be retrieved", {
-  skip_if_no_pat()
-
-  f2 <- osf_retrieve_file(as_id(f1))
-  expect_identical(f1, f2)
-})
-
-test_that("user is warned if a file already exists", {
-  skip_if_no_pat()
-  expect_warning(
-    out <- osf_upload(p1, infile),
-    sprintf("Local file '%s' was NOT uploaded", basename(infile))
+  f1 <- osf_mv(f1, p1)
+  expect_equal(
+    get_meta(f1, "attributes", "materialized_path"),
+    paste0("/", basename(infile))
   )
-  # existing OSF file is returned
-  expect_identical(out, f1)
 })
 
-test_that("upload can overwrite existing files", {
-  writeLines("Lorem ipsum dolor sit amet, consectetur, ea duo posse", infile)
+test_that("moving respects overwrite argument", {
   skip_if_no_pat()
-
-  expect_message(
-    f1 <<- osf_upload(p1, infile, overwrite = TRUE, verbose = TRUE),
-    sprintf("Uploaded new version of %s to OSF", basename(infile))
-  )
-
-  expect_equal(f1$meta[[1]]$attributes$current_version, 2)
-  expect_s3_class(f1, "osf_tbl_file")
-})
-
-test_that("file can be uploaded to a directory", {
-  skip_if_no_pat()
-
-  d1 <<- osf_mkdir(p1, "data")
-  expect_message(
-    f2 <<- osf_upload(d1, infile, verbose = TRUE),
-    sprintf("Uploaded new file %s to OSF", basename(infile))
-  )
-  expect_s3_class(f2, "osf_tbl_file")
-})
-
-test_that("attempting to list an osf_tbl_file with a file errors", {
-  skip_if_no_pat()
-  expect_error(osf_ls_files(f1), "Listing an `osf_tbl_file` requires a dir")
-})
-
-
-context("Moving/copying files")
-
-test_that("moving to a destination with an existing file throws an error", {
-  skip_if_no_pat()
+  f2 <- osf_upload(d1, infile)
   expect_error(osf_mv(f1, d1), "Cannot complete action: file or folder")
-})
-
-test_that("moving can overwrite an existing file", {
-  skip_if_no_pat()
 
   f1 <- osf_mv(f1, d1, overwrite = TRUE)
   expect_s3_class(f1, "osf_tbl_file")
@@ -101,18 +50,6 @@ test_that("moving can overwrite an existing file", {
   expect_match(
     get_meta(f1, "attributes", "materialized_path"),
     file.path(d1$name, f1$name)
-  )
-})
-
-test_that("moving destination can be the parent node", {
-  skip_if_no_pat()
-
-  f1 <- osf_mv(f1, p1)
-  expect_s3_class(f1, "osf_tbl_file")
-
-  expect_match(
-    get_meta(f1, "attributes", "materialized_path"),
-    paste0("/", f1$name)
   )
 })
 
@@ -140,7 +77,7 @@ test_that("moving a parent directory to a child directory errors", {
   skip_if_no_pat()
 
   parent <- osf_mkdir(p1, "parent")
-  child <- osf_mkdir(p1, "parent/child")
+  child <- osf_mkdir(parent, "child")
   expect_error(
     osf_mv(parent, child),
     "Can't move a parent directory into its child"
