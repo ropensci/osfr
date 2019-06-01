@@ -25,6 +25,8 @@
 
 * The waterbutler client will now re-attempt failed requests 3 times
 
+* Consolidated internal client constructors
+
 # osfr 0.2.4
 
 ## Minor fixes
