@@ -48,7 +48,7 @@ identical, osfr uses the same \code{\link{osf_tbl_node}} class to represent both
 
 
 The \code{meta} column contains all of the information returned from OSF's API for
-a single entity, structed as a named list with 3 elements:
+a single entity, structured as a named list with 3 elements:
 \enumerate{
 \item \code{attributes} contains metadata about the entity (e.g., names,
 descriptions, tags, etc).
