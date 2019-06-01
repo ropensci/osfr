@@ -39,12 +39,11 @@
            ...) {
 
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
-  path <- url_path(paste0("v", floor(version)), path)
   cli <- .build_client(api = "wb", encode = "raw")
 
   cli$retry(
     method,
-    path,
+    prepend_version(path, version),
     query,
     body = body,
     times = 3,

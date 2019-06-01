@@ -16,6 +16,20 @@ url_path <- function(...) {
   gsub("//", "/", file.path(..., fsep = "/"), fixed = TRUE)
 }
 
+#' Selectively prepends major API version to path when necessary A hacky fix but
+#' we need it to account for requests based on URLs extracted from API response
+#' links (rather than using the endpoint functions), which already include the
+#' API version.
+#' @param path A URL path
+#' @param version Positive number indicating the specific API version
+#' @noRd
+prepend_version <- function(path, version) {
+  stopifnot(is.character(path))
+  stopifnot(is.numeric(version))
+  path <- sub("^\\/?v\\d\\/", "", path)
+  url_path(paste0("v", floor(version)), path)
+}
+
 #' Stop execution with HTTP status code
 #' @param code HTTP status code
 #' @inheritParams base::stop
