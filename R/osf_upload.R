@@ -244,6 +244,7 @@ upload_file <- function(dest, path, overwrite, progress, verbose) {
     upload_args$fid <- as_id(dest)
   }
 
+  if (progress) cat(sprintf("Uploading %s\n", name))
   res <- do.call(".wb_file_upload", upload_args)
 
   if (is.null(res$errors)) {
@@ -259,6 +260,8 @@ upload_file <- function(dest, path, overwrite, progress, verbose) {
     if (overwrite) {
       upload_args$fid <- as_id(osf_file)
       upload_args$name <- NULL
+
+      if (progress) cat(sprintf("Uploading %s\n", name))
       res <- do.call(".wb_file_update", upload_args)
       if (verbose) message(sprintf("Uploaded new version of '%s' to OSF", name))
     } else {

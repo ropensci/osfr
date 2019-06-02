@@ -29,7 +29,6 @@
 .wb_file_upload <- function(id, name, body, fid = NULL, progress = FALSE) {
   query <- list(kind = "file", name = name)
   path <- .wb_api_path(id, fid)
-  if (progress) cat(sprintf("Uploading %s\n", name))
   res <- .wb_request("put", path, query = query, body = body, progress = progress)
   process_response(res)
 }
@@ -44,7 +43,6 @@
 .wb_file_update <- function(id, fid, body, progress = FALSE) {
   query <- list(kind = "file")
   path <- .wb_api_path(id, fid, type = "file")
-  if (progress) cat(sprintf("Uploading %s\n", name))
   res <- .wb_request("put", path, query = query, body = body, progress = progress)
   process_response(res)
 }
