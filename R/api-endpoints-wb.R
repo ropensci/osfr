@@ -29,7 +29,7 @@
 .wb_file_upload <- function(id, name, body, fid = NULL, progress = TRUE) {
   query <- list(kind = "file", name = name)
   path <- .wb_api_path(id, fid)
-  if (progress) cat(sprintf("Uploading %s", name))
+  if (progress) cat(sprintf("Uploading %s\n", name))
   res <- .wb_request("put", path, query = query, body = body, progress = progress)
   process_response(res)
 }
@@ -44,6 +44,7 @@
 .wb_file_update <- function(id, fid, body, progress = TRUE) {
   query <- list(kind = "file")
   path <- .wb_api_path(id, fid, type = "file")
+  if (progress) cat(sprintf("Uploading %s\n", name))
   res <- .wb_request("put", path, query = query, body = body, progress = progress)
   process_response(res)
 }
@@ -71,9 +72,9 @@
   if (zip) query$zip <- ""
   api_path <- .wb_api_path(id, fid, type = type)
 
-  if (progress) cat(sprintf("Downloading %s\n", path))
+  if (progress) cat(sprintf("Downloading %s\n", basename(path)))
   res <- .wb_request("get", api_path, query, disk = path, progress = progress)
-  if (verbose) message(sprintf("\nDownloaded %s to %s", type, path))
+  if (verbose) message(sprintf("Downloaded %s to %s", type, path))
 
   if (res$status_code == 200) return(TRUE)
   if (res$status_code == 404) {
