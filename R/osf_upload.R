@@ -15,6 +15,7 @@
 #'   record the previous version. If `FALSE`, a warning will be issued that the
 #'   local file was *not* uploaded and the *existing* version of the file on OSF
 #'   is returned.
+#' @template progress
 #' @template verbose
 #'
 #' @return An [`osf_tbl_file`] containing the uploaded files and directories

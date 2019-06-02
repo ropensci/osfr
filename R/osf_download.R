@@ -19,6 +19,7 @@
 #'   replaced with the downloaded file?
 #' @param decompress Logical, should downloaded directories be automatically
 #'   unzipped? Default is `TRUE`.
+#' @template progress
 #' @template verbose
 #'
 #' @return The [`osf_tbl_file`] input with a new column, `"local_path"`,
