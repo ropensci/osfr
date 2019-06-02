@@ -259,14 +259,17 @@ upload_file <- function(dest, path, overwrite, progress, verbose) {
       upload_args$fid <- as_id(osf_file)
       upload_args$name <- NULL
       res <- do.call(".wb_file_update", upload_args)
-      if (verbose) message(sprintf("Uploaded new version of %s to OSF", name))
+      if (verbose) message(sprintf("Uploaded new version of '%s' to OSF", name))
     } else {
-      warn(paste0(
-        sprintf("Local file '%s' was NOT uploaded to OSF.\n", name),
+      warning(paste0(
+        sprintf("\nLocal file '%s' was NOT uploaded to OSF.\n", name),
         "A file with the same name already exists in that location and 'ovewrite = FALSE'\n",
         "  * The current OSF version of this file will be returned instead\n",
-        "  * Set 'overwrite = TRUE' and re-upload to create a new version on OSF"
-      ))
+        "  * Set 'overwrite = TRUE' and re-upload to create a new version on OSF\n"
+        ),
+        immediate. = TRUE,
+        call. = FALSE
+      )
       return(osf_file)
     }
   }
