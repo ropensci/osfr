@@ -5,6 +5,10 @@
 
 `osf_download()` and `osf_upload()` are now vectorized, making the process of adding files to or retriving files from OSF much more convenient. This functionality required significant refactoring and brings with it several notable breaking changes. 
 
+## Other few features
+
+* `osf_download()` and `osf_upload()` can now display progress bars when transferring files by setting `progress = TRUE`.
+
 ## Breaking changes
 
 * `osf_upload()`'s `name` argument has been removed, so it is no longer possible to upload a file *and* change it's OSF name.

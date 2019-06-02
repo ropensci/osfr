@@ -5,7 +5,7 @@
 \title{Download files and directories from OSF}
 \usage{
 osf_download(x, path = NULL, overwrite = FALSE, decompress = FALSE,
-  verbose = FALSE)
+  verbose = FALSE, progress = FALSE)
 }
 \arguments{
 \item{x}{An \code{\link{osf_tbl_file}} containing a single file or directory.}
@@ -21,6 +21,10 @@ unzipped? Default is \code{TRUE}.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 about interactions with the OSF API (default \code{FALSE}).}
+
+\item{progress}{Logical, if \code{TRUE} progress bars are displayed for each file
+transfer. Mainly useful for transferring large files. For tracking lots of
+small files, setting \code{verbose = TRUE} is more informative.}
 }
 \value{
 The \code{\link{osf_tbl_file}} input with a new column, \code{"local_path"},

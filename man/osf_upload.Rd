@@ -5,7 +5,7 @@
 \title{Upload files to OSF}
 \usage{
 osf_upload(x, path, recurse = FALSE, overwrite = FALSE,
-  verbose = FALSE)
+  progress = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{x}{The upload destintation on OSF. Can be one of the following:
@@ -26,6 +26,10 @@ number.}
 record the previous version. If \code{FALSE}, a warning will be issued that the
 local file was \emph{not} uploaded and the \emph{existing} version of the file on OSF
 is returned.}
+
+\item{progress}{Logical, if \code{TRUE} progress bars are displayed for each file
+transfer. Mainly useful for transferring large files. For tracking lots of
+small files, setting \code{verbose = TRUE} is more informative.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 about interactions with the OSF API (default \code{FALSE}).}
