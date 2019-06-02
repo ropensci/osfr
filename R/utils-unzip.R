@@ -36,6 +36,6 @@ unzip_files <- function(zipfiles, overwrite = FALSE) {
     exdir = extract_dirs
   )
 
-  unlink(zipfiles)
+  fs::file_delete(zipfiles)
   invisible(unzipped)
 }

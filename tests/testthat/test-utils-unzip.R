@@ -20,7 +20,8 @@ setup({
 
 
 teardown({
-  unlink(c(zipdir1, zipdir2), recursive = TRUE)
+  fs::file_delete(c(zipfile1, zipfile2))
+  fs::dir_delete(c(zipdir1, zipdir2))
 })
 
 
@@ -33,7 +34,7 @@ test_that("can unzip a single zipfile", {
   expect_true(dir.exists(zipdir1))
   expect_true(all(file.exists(out[[1]])))
 
-  unlink(zipdir1, recursive = TRUE)
+  fs::dir_delete(zipdir1)
   copy_test_zipfiles("test-dir1.zip")
 })
 
@@ -46,7 +47,7 @@ test_that("can unzip multiple files", {
   # the zip file content exist
   expect_true(all(file.exists(unlist(out))))
 
-  unlink(c(zipdir1, zipdir2), recursive = TRUE)
+  fs::dir_delete(c(zipdir1, zipdir2))
   copy_test_zipfiles(c("test-dir1.zip", "test-dir2.zip"))
 })
 
@@ -54,7 +55,7 @@ test_that("existing files are not overwritten", {
 
   # delete first zip file and modify the second
   out <- unzip_files(zipfile1)
-  unlink(out[[1]][1])
+  fs::file_delete(out[[1]][1])
   writeLines("foo", out[[1]][2])
 
   # recreate the zipfile

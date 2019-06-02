@@ -23,4 +23,4 @@ writeLines("buzz", file2b)
 zipfile2 <- file.path(testdir, paste0(zipdir2, ".zip"))
 zip(zipfile2, files = c(file2a, file2b))
 
-unlink(c(file1a, file1b, file2a, file2b))
+fs::file_delete(c(file1a, file1b, file2a, file2b))

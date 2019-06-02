@@ -63,7 +63,7 @@ test_that("a directory can be downloaded as a zip file", {
   out <- osf_download(d1, path = outdir, decompress = FALSE)
   expect_s3_class(out, "osf_tbl_file")
   expect_true(file.exists(zipfile))
-  unlink(zipfile)
+  fs::file_delete(zipfile)
 })
 
 test_that("a downloaded directory is unzipped", {
@@ -75,7 +75,7 @@ test_that("a downloaded directory is unzipped", {
 
   expect_true(dir.exists(out$local_path))
   expect_true(all(file.exists(file.path(out$local_path, d1_files$name))))
-  unlink(out$local_path, recursive = TRUE)
+  fs::dir_delete(out$local_path)
 })
 
 test_that("only missing files are downloaded when ovewrite=FALSE", {
