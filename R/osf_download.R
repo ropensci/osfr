@@ -44,7 +44,7 @@ osf_download <-
   function(x,
            path = NULL,
            overwrite = FALSE,
-           decompress = FALSE,
+           decompress = TRUE,
            verbose = FALSE,
            progress = FALSE) {
   UseMethod("osf_download")
