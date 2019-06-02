@@ -45,7 +45,7 @@ osf_download <-
            overwrite = FALSE,
            decompress = FALSE,
            verbose = FALSE,
-           progress = TRUE) {
+           progress = FALSE) {
   UseMethod("osf_download")
 }
 
@@ -56,7 +56,7 @@ osf_download.osf_tbl_file <-
            overwrite = FALSE,
            decompress = TRUE,
            verbose = FALSE,
-           progress = TRUE) {
+           progress = FALSE) {
 
   if (is.null(path)) {
     path <- x$name

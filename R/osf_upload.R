@@ -104,7 +104,7 @@ osf_upload <-
            path,
            recurse = FALSE,
            overwrite = FALSE,
-           progress = TRUE,
+           progress = FALSE,
            verbose = FALSE) {
   UseMethod("osf_upload")
 }
@@ -115,7 +115,7 @@ osf_upload.osf_tbl_node <-
            path,
            recurse = FALSE,
            overwrite = FALSE,
-           progress = TRUE,
+           progress = FALSE,
            verbose = FALSE) {
 
   path <- check_files(path)
@@ -129,7 +129,7 @@ osf_upload.osf_tbl_file <-
            path,
            recurse = FALSE,
            overwrite = FALSE,
-           progress = TRUE,
+           progress = FALSE,
            verbose = FALSE) {
 
   path <- check_files(path)

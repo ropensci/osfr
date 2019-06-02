@@ -26,7 +26,7 @@
 #'
 #' @noRd
 
-.wb_file_upload <- function(id, name, body, fid = NULL, progress = TRUE) {
+.wb_file_upload <- function(id, name, body, fid = NULL, progress = FALSE) {
   query <- list(kind = "file", name = name)
   path <- .wb_api_path(id, fid)
   if (progress) cat(sprintf("Uploading %s\n", name))
@@ -41,7 +41,7 @@
 #' @param fid Existing file's Waterbutler ID
 #'
 #' @noRd
-.wb_file_update <- function(id, fid, body, progress = TRUE) {
+.wb_file_update <- function(id, fid, body, progress = FALSE) {
   query <- list(kind = "file")
   path <- .wb_api_path(id, fid, type = "file")
   if (progress) cat(sprintf("Uploading %s\n", name))
@@ -66,7 +66,7 @@
            type,
            zip = FALSE,
            verbose = FALSE,
-           progress = TRUE) {
+           progress = FALSE) {
   type <- match.arg(type, c("file", "folder"))
   query <- list()
   if (zip) query$zip <- ""
