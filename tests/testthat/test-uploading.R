@@ -61,7 +61,7 @@ test_that("upload can overwrite existing files", {
 
   expect_message(
     f1 <<- osf_upload(p1, infile, overwrite = TRUE, verbose = TRUE),
-    sprintf("Uploaded new version of %s to OSF", basename(infile))
+    sprintf("Uploaded new version of '%s' to OSF", basename(infile))
   )
 
   expect_equal(f1$meta[[1]]$attributes$current_version, 2)
