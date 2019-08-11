@@ -196,7 +196,7 @@ download_dir <- function(x, path, conflicts, recurse, progress, verbose) {
 
   # filter by recursion level
   files$levels <- purrr::map_int(fs::path_split(files$remote), length) - 1
-  files <- subset(files, levels <= recurse)
+  files <- files[files$levels <= recurse, ]
 
   # handle conflicted files
   files$conflicted <- fs::file_exists(files$destination)
@@ -216,7 +216,7 @@ download_dir <- function(x, path, conflicts, recurse, progress, verbose) {
           sum(files$conflicted)
         ))
       }
-      files <- subset(files, !conflicted)
+      files <- files[!files$conflicted, ]
     }
   }
 

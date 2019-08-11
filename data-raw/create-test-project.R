@@ -29,8 +29,7 @@ lapply(
 
 
 
-# Create directory with lots of files -------------------------------------
-
+# create a directory with lots of files for listing tests -----------------
 d_files <- osf_mkdir(proj_root, "many-files")
 
 # add text files
@@ -44,7 +43,7 @@ dev.null <- mapply(
   con = files_txt
 )
 
-lapply(files_txt, osf_upload, x = d_files, verbose = TRUE)
+osf_upload(d_files, path = files_txt, verbose = TRUE)
 
 # add png files
 files_pngs <- file.path(dir_tmp, sprintf("image-file-%02.0f.png", seq_along(files_txt)))
@@ -56,9 +55,10 @@ for (i in seq_along(files_pngs)) {
   dev.off()
 }
 
-lapply(files_pngs, osf_upload, x = d_files, verbose = TRUE)
+osf_upload(d_files, path = files_pngs, verbose = TRUE)
 
-# add a top-level file
+
+# add a top-level file ----------------------------------------------------
 file_pdf <- sub("png", "pdf", files_pngs[1])
 
 pdf(file_pdf)
@@ -68,8 +68,34 @@ dev.off()
 f_pdf <- osf_upload(proj_root, file_pdf)
 
 
-# export GUIDs
-guids <- list(p1 = proj_root, c1 = c_paged, f1 = f_pdf, d1 = d_files)
+
+# create a nested directory structure for recurse tests -------------------
+d_nested <- osf_mkdir(proj_root, "nested-dir")
+
+osf_upload(d_nested, files_txt[1:2])
+
+d_nested %>%
+  osf_mkdir(path = "d01") %>%
+  osf_upload(path = files_txt[3:4])
+
+d_nested %>%
+  osf_mkdir(path = "d01/d02") %>%
+  osf_upload(path = files_txt[3:4])
+
+d_nested %>%
+  osf_mkdir(path = "d01/d02/d03") %>%
+  osf_upload(path = files_txt[5:6])
+
+
+# export GUIDS ------------------------------------------------------------
+guids <-
+  list(
+    p1 = proj_root,
+    c1 = c_paged,
+    f1 = f_pdf,
+    d1 = d_files,
+    d2 = d_nested
+  )
 
 write.dcf(
   lapply(guids, function(x) x$id),
