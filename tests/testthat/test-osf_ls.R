@@ -53,10 +53,10 @@ test_that("both files and directories are listed", {
 
   out <- osf_ls_files(p1)
   expect_s3_class(out, "osf_tbl_file")
-  expect_equal(nrow(out), 2)
+  expect_equal(nrow(out), 3)
   expect_identical(
     get_meta(out, "attributes", "kind"),
-    c("folder", "file")
+    c("folder", "file", "folder")
   )
 })
 
@@ -72,7 +72,7 @@ test_that("`type` can filters for files", {
   skip_on_production_server()
 
   out <- osf_ls_files(p1, type = "folder")
-  expect_equal(nrow(out), 1)
+  expect_equal(nrow(out), 2)
   expect_match(get_meta(out, "attributes", "kind"), "folder")
 })
 

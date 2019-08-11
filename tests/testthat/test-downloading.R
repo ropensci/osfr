@@ -11,10 +11,15 @@ setup({
     c1 <<- osf_retrieve_node(guids[, "c1"])
     f1 <<- osf_retrieve_file(guids[, "f1"])
     d1 <<- osf_retrieve_file(guids[, "d1"])
+    d2 <<- osf_retrieve_file(guids[, "d2"])
   }
-  outdir <<- tempdir()
+  outdir <<- as.character(fs::dir_create(".osfr-tests"))
 })
 
+
+teardown({
+  fs::dir_delete(outdir)
+})
 
 
 # tests -------------------------------------------------------------------
@@ -25,30 +30,36 @@ test_that("a file can be downloaded from a project", {
   out <- osf_download(f1, path = outdir)
   expect_s3_class(out, "osf_tbl_file")
   expect_true(file.exists(out$local_path))
+
+  # verify the local_path wasn't returned as a relative path
+  expect_equal(dirname(out$local_path), outdir)
 })
 
-test_that("an existing file won't be overwritten", {
+test_that("by default an error is thrown if a conflicting file exists", {
   skip_if_no_pat()
-
   expect_error(
     osf_download(f1, path = outdir),
-    "A file exists at the specified"
+    paste0("Can't download file '", f1$name, "' from OSF.")
   )
-  expect_s3_class(
-    osf_download(f1, path = outdir, overwrite = TRUE),
-    "osf_tbl_file"
+})
+
+test_that("a file can be overwritten when conflicts='overwrite'", {
+  skip_if_no_pat()
+  expect_silent(
+    out <- osf_download(f1, path = outdir, conflict = "overwrite")
   )
+  expect_s3_class(out, "osf_tbl_file")
 })
 
 test_that("a non-existant path throws an error", {
   skip_if_no_pat()
-
   expect_error(
     osf_download(f1, path = "ddd"),
-    "`path` must point to an existing local directory.")
+    "`path` must point to an existing local directory."
+  )
 })
 
-test_that("a file can be downloaded from a directory", {
+test_that("a file can be downloaded from an OSF directory", {
   skip_if_no_pat()
   f2 <- osf_ls_files(d1, pattern = "image-file-01.png")
   out <- osf_download(f2, path = outdir)
@@ -56,34 +67,69 @@ test_that("a file can be downloaded from a directory", {
   expect_true(file.exists(out$local_path))
 })
 
-test_that("a directory can be downloaded as a zip file", {
+test_that("by default only top-level files are downloaded from an OSF directory", {
   skip_if_no_pat()
 
-  zipfile <- file.path(outdir, paste0(d1$name, ".zip"))
-  out <- osf_download(d1, path = outdir, decompress = FALSE)
+  out <- osf_download(d2, path = outdir)
   expect_s3_class(out, "osf_tbl_file")
-  expect_true(file.exists(zipfile))
-  fs::file_delete(zipfile)
+  expect_true(file.exists(out$local_path))
+
+  d2_files <- osf_ls_files(d2, type = "file")
+  expect_equal(
+    dir(file.path(outdir, d2$name), recursive = TRUE),
+    d2_files$name
+  )
+  fs::dir_delete(file.path(outdir, d2$name))
 })
 
-test_that("a downloaded directory is unzipped", {
+test_that("recurse argument respects specified levels", {
   skip_if_no_pat()
 
-  d1_files <- osf_ls_files(d1, n_max = Inf)
-  out <- osf_download(d1, path = outdir)
-  expect_s3_class(out, "osf_tbl_file")
+  out <- osf_download(d2, path = outdir, recurse = 2)
+  d01_files <- osf_ls_files(d2, path = "d01", type = "file")
 
-  expect_true(dir.exists(out$local_path))
-  expect_true(all(file.exists(file.path(out$local_path, d1_files$name))))
-  fs::dir_delete(out$local_path)
+  expect_equal(
+    d01_files$name,
+    dir(file.path(outdir, d2$name, "d01"))
+  )
+
+  expect_length(
+    dir(file.path(outdir, d2$name), recursive = TRUE),
+    4
+  )
+
+  fs::dir_delete(file.path(outdir, d2$name))
 })
 
-test_that("only missing files are downloaded when ovewrite=FALSE", {
-  # create a local version of the first text file in d1
-  dir.create(file.path(outdir, d1$name))
-  txt_f1 <- file.path(outdir, d1$name, "text-file-01.txt")
-  cat("Local file\n", file = txt_f1)
+test_that("recurse=TRUE downloads the entire OSF directory structure", {
+  skip_if_no_pat()
+  out <- osf_download(d2, path = outdir, recurse = TRUE)
+  d03_files <- osf_ls_files(d2, path = "d01/d02/d03", type = "file")
 
-  out <- osf_download(d1, path = outdir)
-  expect_match(readLines(txt_f1), "Local file")
+  expect_equal(
+    d03_files$name,
+    dir(file.path(outdir, d2$name, "d01/d02/d03"))
+  )
+  fs::dir_delete(file.path(outdir, d2$name))
+})
+
+test_that("only missing files are downloaded when conflicts='skip'", {
+  skip_if_no_pat()
+  out <- osf_download(d2, path = outdir)
+
+  # overwrite contents of first file and delete the second file
+  top_files <- dir(file.path(outdir, d2$name), full.names = TRUE)
+  writeLines("foo", con = top_files[1])
+  fs::file_delete(top_files[2])
+
+  expect_warning(
+    out <- osf_download(d2, path = outdir, conflicts = "skip"),
+    "Skipped 1 file(s) to avoid overwriting local copies.",
+    fixed = TRUE
+  )
+
+  # modified file was not overwritten
+  expect_match(readLines(top_files[1]), "foo")
+  # missing file was downloaded
+  expect_true(file.exists(top_files[2]))
 })
