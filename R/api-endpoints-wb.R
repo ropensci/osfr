@@ -55,6 +55,7 @@
 #' @param type indicate whether downloading a `"file"` or `"folder"`
 #' @param zip Logical, should the downloaded contents be zipped? Only applies to
 #'   folders.
+#' @return Invisibly returns `TRUE` when the download succeeds
 #'
 #' @noRd
 .wb_download <-
@@ -74,7 +75,7 @@
   res <- .wb_request("get", api_path, query, disk = path, progress = progress)
   if (verbose) message(sprintf("Downloaded %s to %s", type, path))
 
-  if (res$status_code == 200) return(TRUE)
+  if (res$status_code == 200) return(invisible(TRUE))
   if (res$status_code == 404) {
     msg <- sprintf("The requested %s (%s) could not be found in node `%s`",
                    type, fid, id)

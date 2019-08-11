@@ -36,3 +36,25 @@ check_files <- function(files) {
   }
   files
 }
+
+#' Verify a local directory exists
+#'
+#' @param path A scalar character vector pointing to an existing local directory
+#' @importFrom fs dir_exists
+#' @return A scalar character vector with the verified `path`. If `path` was
+#'   `NULL` a `"."` is returned to represent the cwd.
+#' @noRd
+check_local_dir <- function(path) {
+  if (is.null(path)) {
+    path <- "."
+  } else {
+    if (
+      !is_scalar_character(path) ||
+      !fs::is_dir(path) ||
+      !fs::dir_exists(path)
+    ) {
+      abort("`path` must point to an existing local directory.")
+    }
+  }
+  path
+}

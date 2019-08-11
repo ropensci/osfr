@@ -17,6 +17,8 @@
 
 * `osf_upload()`'s behavior has changed when `overwrite = FALSE` and a file with the same name already exists on OSF. Previously, an error was thrown and the operation would cease. Now a *warning* is thrown and an `osf_tbl_file` containing the current version of the OSF file is returned. This change was made to facilitate multifile uploading, particularly situations where only subset of files already exist on OSF and you don't want them overwritten when uploading the missing files. 
 
+* `osf_download()`'s `decompress` argument has been removed. The zip file downloaded from OSF is always decompressed in a temp directory where the enclosed files are selectively copied to the specified `path`
+
 ## Minor changes
 
 * Devs can now enable logging API requests and responses by defining defining
