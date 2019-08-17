@@ -122,7 +122,7 @@ test_that("only missing files are downloaded when conflicts='skip'", {
   writeLines("foo", con = top_files[1])
   fs::file_delete(top_files[2])
 
-  expect_warning(
+  expect_message(
     out <- osf_download(d2, path = outdir, conflicts = "skip"),
     "Skipped 1 file(s) to avoid overwriting local copies.",
     fixed = TRUE

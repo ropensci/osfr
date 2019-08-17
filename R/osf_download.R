@@ -106,13 +106,16 @@ osf_download.osf_tbl_file <-
 
 #' Internal download functions
 #'
-#' This is a non-vectorized function that downloads a single file. It
-#' implements the strategies for handling conflicting files.
+#' These are non-vectorized functions for downloading a file or directory that
+#' implement the logic for handling local conflicts.
 #'
 #' @param file OSF file or directory
 #' @param path scalar character vector with the complete path of the download
 #'  destination (i.e., directory path and file path)
-#' @return `osf_tbl_file` with a single row
+#' @return `osf_tbl_file` with a single row for each file.
+#'   * For `download_file()` the result always contains a single row
+#'   * For `download_dir()` the result will contain 1 row for every file
+#'     contained within the OSF directory.
 #' @noRd
 
 download_file <- function(x, path, conflicts, progress, verbose) {
@@ -128,8 +131,9 @@ download_file <- function(x, path, conflicts, progress, verbose) {
   if (fs::file_exists(local_path)) {
     if (conflicts == "error") stop_dl_conflict(x$name)
     if (conflicts == "skip") {
-      warn(sprintf(
-        "\nSkipping file '%s' to avoid overwriting local copy.\n", filename
+      message(sprintf(
+        "Skipping file '%s' to avoid overwriting local copy.\n",
+        x$name
       ))
       return(out)
     }
@@ -205,17 +209,7 @@ download_dir <- function(x, path, conflicts, recurse, progress, verbose) {
     if (conflicts == "error") {
       stop_dl_conflict(files$remote[files$conflicted][1])
     } else if (conflicts == "skip") {
-      if (verbose) {
-        message(
-          "Skipped the following file(s) to avoid overwriting local copies:\n",
-          sprintf("  * %s\n", files$remote[files$conflicted])
-        )
-      } else {
-        warn(sprintf(
-          "Skipped %i file(s) to avoid overwriting local copies.\n",
-          sum(files$conflicted)
-        ))
-      }
+      inform_dl_conflicts(files$remote[files$conflicted], verbose)
       files <- files[!files$conflicted, ]
     }
   }
@@ -224,21 +218,36 @@ download_dir <- function(x, path, conflicts, recurse, progress, verbose) {
   fs::dir_create(unique(dirname(files$destination)))
   files$copied <- fs::file_copy(files$downloaded, files$destination)
 
-  if (verbose) {
-    message(
-      "Downloaded the following file(s) from OSF:\n",
-      sprintf("  * %s\n", files$copied)
-    )
+  msg <- sprintf(
+    "Downloaded %s file(s) from OSF folder '%s'",
+    nrow(files),
+    x$name
+  )
+  if (verbose && nrow(files) > 0) {
+    msg <- bullet_msg(paste0(msg, ":"), files$destination)
   }
-
+  message(msg)
   return(out)
 }
 
 
+#' @importFrom fs path_common
+inform_dl_conflicts <- function(filenames, verbose) {
+  stopifnot(is.logical(verbose))
+  msg <- sprintf(
+    "Skipped %i file(s) from OSF folder '%s' to avoid overwriting local copies",
+    length(filenames),
+    fs::path_common(filenames)
+  )
+  if (verbose) msg <- bullet_msg(paste0(msg, ":"), filenames)
+  message(msg)
+}
+
+
 stop_dl_conflict <- function(filename) {
-  abort(paste0(
-    sprintf("Can't download file '%s' from OSF.\n", filename),
-    "A file with the same name already exists in the specified path.\n",
-    "  * Use the `conflicts` argument to avoid this error in the future.\n"
-  ))
+  msg <- bullet_msg(
+    sprintf("Can't download file '%s' from OSF.", filename),
+    "Use the `conflicts` argument to avoid this error in the future."
+  )
+  abort(msg)
 }
