@@ -6,18 +6,6 @@
 #' *where* the files should be downloaded, otherwise they are downloaded to
 #' your working directory by default.
 #'
-#'
-#' @section Implementation details:
-#' Directories are always downloaded from OSF as zip files that contain its
-#' entire contents. The logic for handling conflicts and recursion is
-#' implemented locally, acting on these files in a temporary location and
-#' copying them to `path` as needed. This creates a *gotcha* if you're
-#' downloading directories with large files and assuming that setting `conflicts
-#' = "skip"` and/or limiting recursion will reduce the number of files you're
-#' downloading. In such a case, a better strategy would be to use
-#' `osf_ls_files()` to list the contents of the directory and pass that output
-#' to `osf_download()`.
-#'
 #' @param x An [`osf_tbl_file`] containing a single file or directory.
 #' @param path Path pointing to a local directory where the downloaded files
 #'   will be saved. Default is to use the current working directory.
@@ -36,6 +24,19 @@
 #'
 #' @return The same [`osf_tbl_file`] passed to `x` with a new column,
 #'   `"local_path"`, containing paths to the local files.
+#'
+#' @section Implementation details:
+#' Directories are always downloaded from OSF as zip files that contain its
+#' entire contents. The logic for handling conflicts and recursion is
+#' implemented locally, acting on these files in a temporary location and
+#' copying them to `path` as needed. This creates a *gotcha* if you're
+#' downloading directories with large files and assuming that setting `conflicts
+#' = "skip"` and/or limiting recursion will reduce the number of files you're
+#' downloading. In such a case, a better strategy would be to use
+#' `osf_ls_files()` to list the contents of the directory and pass that output
+#' to `osf_download()`.
+#'
+#' @template synchronization
 #'
 #' @examples
 #' \dontrun{
