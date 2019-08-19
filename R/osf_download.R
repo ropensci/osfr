@@ -130,7 +130,7 @@ osf_download.osf_tbl_file <-
 
 download_file <- function(x, path, conflicts, progress, verbose) {
 
-  local_path <- file.path(clean_path(path), x$name)
+  local_path <- file.path(clean_local_path(path), x$name)
 
   out <- tibble::add_column(
     .data = x,
@@ -165,7 +165,7 @@ download_file <- function(x, path, conflicts, progress, verbose) {
 
 download_dir <- function(x, path, conflicts, recurse, progress, verbose) {
 
-  local_path <- file.path(clean_path(path), x$name)
+  local_path <- file.path(clean_local_path(path), x$name)
 
   out <- tibble::add_column(
     .data = x,

@@ -172,14 +172,14 @@ yesno_menu <- function(question) {
 }
 
 
-#' Clean directory path
+#' Clean local directory path
 #'
 #' Returns an absolute path when `x` is above the current working directory,
 #' or a relative path when `x` is nested within the current working directory.
 #' Path expansion is also performed.
 #' @param x A local directory path
-clean_path <- function(x) {
-  x <- path.expand(x)
+#' @noRd
+clean_local_path <- function(x) {
   if (fs::path_has_parent(x, getwd())) {
     return(fs::path_rel(x))
   } else {
