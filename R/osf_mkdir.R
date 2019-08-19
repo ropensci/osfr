@@ -84,7 +84,7 @@ recurse_path <- function(x, path, missing_action = "error", verbose = FALSE) {
 
   # skip leading slashes or dots so `path_root` is a valid folder name
   path_dirs <- fs::path_split(path)[[1]]
-  valid_names <- grepl(sprintf("^[^\\%s\\.]", .Platform$file.sep), path_dirs)
+  valid_names <- grepl(sprintf("^[^\\%s]", .Platform$file.sep), path_dirs)
   path_root <- path_dirs[valid_names][1]
 
   # ensure the retrieved directory and path_root have the same name
