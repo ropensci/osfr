@@ -46,7 +46,8 @@
 #' osf_upload(my_proj, c("a.txt", "subdir2"))
 #' ```
 #'
-#' These behaviors are intended to to make it convenient to replicate your
+#' These behaviors are intended to provide flexibility
+#'  make it convenient to replicate your
 #' project directory on OSF and subsequently update the files as needed. In that
 #' vein, `osf_upload(my_proj, path = ".")` will upload your entire current
 #' working directory to the specified OSF destination.
@@ -144,29 +145,19 @@ osf_upload.osf_tbl_file <-
 #' This function maps over all elements in `path` and recursively walks any
 #' subdirectories, calling `file_upload()` for each file it counters..
 #' @param dest OSF node or directory upload destination
-#' @importFrom fs is_dir file_info dir_walk
+#' @importFrom fs is_dir file_info
 #' @noRd
 
 recursive_upload <- function(dest, path, recurse, overwrite, progress, verbose) {
 
-  # memoise osf directory retrieval to avoid subsequent API calls for every
-  # file or subdirectory contained therein
-  get_path <- memoise::memoise(
-    function(x, path) {
-      recurse_path(x, path, missing_action = "create", verbose = verbose)
-    }
-  )
-  on.exit(memoise::forget(get_path))
-
   # split into top-level files and folders
   path_by <- split(path, fs::file_info(path)$type, drop = TRUE)
+  results <- vector(mode = "list")
 
   # upload files in pwd
-  if (is.null(path_by$file)) {
-    out_files <- NULL
-  } else {
-    out_files <- map(path_by$file,
-      .f = upload_file,
+  if (!is.null(path_by$file)) {
+    results$file <- purrr::map(path_by$file,
+      upload_file,
       dest = dest,
       overwrite = overwrite,
       progress = progress,
@@ -175,34 +166,18 @@ recursive_upload <- function(dest, path, recurse, overwrite, progress, verbose) 
   }
 
   # recurse directories in pwd
-  if (is.null(path_by$directory)) {
-    out_dirs <- NULL
-  } else {
-    out_dirs <- fs::dir_walk(
-      path,
-      type = c("file", "directory"),
+  if (!is.null(path_by$directory)) {
+    results$directory <- purrr::map(path_by$directory,
+      upload_dir,
+      dest = dest,
+      overwrite = overwrite,
       recurse = recurse,
-      function(p) {
-        # * if path is a dir, [create and] retrieve the corresponding osf dir
-        # * if path is a file, upload to its parent dir on osf
-        if (fs::is_dir(p)) {
-          get_path(dest, p)
-        } else {
-          parent_path <- dirname(p)
-          if (parent_path == ".") {
-            parent <- dest
-          } else {
-            parent <- get_path(dest, parent_path)
-          }
-          upload_file(parent, path = p, overwrite, progress, verbose)
-        }
-      }
+      progress = progress,
+      verbose = verbose
     )
-    # dir_walk() only returns directory names so we need to re-retrieve them
-    out_dirs <- map(out_dirs, get_path, x = dest)
   }
 
-  do.call("rbind", c(out_files, out_dirs))
+  do.call("rbind", c(results$file, results$directory))
 }
 
 
@@ -275,4 +250,59 @@ upload_file <- function(dest, path, overwrite, progress, verbose) {
   out <- .osf_file_retrieve(file_id)
 
   as_osf_tbl(out["data"], subclass = "osf_tbl_file")
+}
+
+
+upload_dir <- function(dest, path, overwrite, recurse, progress, verbose) {
+  stopifnot(rlang::is_scalar_character(path))
+
+  # memoise osf directory retrieval to avoid subsequent API calls for every
+  # file or subdirectory contained therein
+  get_path <- memoise::memoise(
+    function(x, path, verbose) {
+      recurse_path(x, path, missing_action = "create", verbose = verbose)
+    }
+  )
+  on.exit(memoise::forget(get_path))
+
+  # output will be the osf_tbl_file for `path`'s leaf directory
+  out <- get_path(dest, path = basename(path), verbose = verbose)
+
+  targets <- tibble::tibble(
+    local = fs::dir_ls(path, type = c("file", "directory"), recurse = recurse)
+  )
+
+  # upload target files/directories to the root of the osf destination
+  targets$remote <- fs::path_rel(targets$local, dirname(path))
+  targets$destination <- lapply(dirname(targets$remote),
+    get_path,
+    x = dest,
+    verbose = verbose
+  )
+
+  targets$type <- fs::file_info(targets$local)$type
+  targets <- split(targets, targets$type, drop = TRUE)
+  results <- vector(mode = "list")
+
+  if (!is.null(targets$file)) {
+    results$file <- Map(
+      f = upload_file,
+      dest = targets$file$destination,
+      path = targets$file$local,
+      overwrite = overwrite,
+      progress = progress,
+      verbose = verbose
+    )
+  }
+
+  if (!is.null(targets$directory)) {
+    results$directory <- Map(
+      f = get_path,
+      path = targets$directory$remote,
+      x = list(dest),
+      verbose = verbose
+    )
+  }
+
+  return(out)
 }

@@ -88,4 +88,3 @@ test_that("directory names can start with a dot", {
   expect_s3_class(dotdir, "osf_tbl_file")
   expect_equal(dotdir$name, ".dir")
 })
-
