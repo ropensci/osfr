@@ -186,3 +186,26 @@ clean_local_path <- function(x) {
     return(x)
   }
 }
+
+
+#' Clean OSF directory path
+#'
+#' This removes reserved filenames (ie, `..`, and platform-specific file
+#' separators) from the begining of file paths in order to create valid directory
+#' names for OSF.
+#'
+#' @param x A local directory path
+#' @importFrom fs path_join
+#' @noRd
+clean_osf_path <- function(x) {
+  stopifnot(rlang::is_scalar_character(x))
+
+  reserved <- c(".", "..", .Platform$file.sep)
+  parts <- fs::path_split(x)[[1]]
+
+  # recursively remove offending parts from the begining of a path
+  while (parts[1] %in% reserved) parts <- parts[-1]
+  if (rlang::is_empty(parts)) parts <- "."
+
+  fs::path_join(parts)
+}
