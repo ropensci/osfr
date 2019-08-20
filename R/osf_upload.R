@@ -40,7 +40,7 @@
 #' created at the root of the OSF destination, `x`, and any files within the
 #' local directory are uploaded to the new OSF directory. Therefore, we could
 #' maintain the directory structure in the above example by passing `b.txt`'s
-#' directory to `path` instead of the file itself:
+#' parent directory to `path` instead of the file itself:
 #'
 #' ```
 #' osf_upload(my_proj, c("a.txt", "subdir2"))

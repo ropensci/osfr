@@ -58,10 +58,11 @@ When \code{path} points to a local directory, a corresponding directory will be
 created at the root of the OSF destination, \code{x}, and any files within the
 local directory are uploaded to the new OSF directory. Therefore, we could
 maintain the directory structure in the above example by passing \code{b.txt}'s
-directory to \code{path} instead of the file itself:\preformatted{osf_upload(my_proj, c("a.txt", "subdir2"))
+parent directory to \code{path} instead of the file itself:\preformatted{osf_upload(my_proj, c("a.txt", "subdir2"))
 }
 
-These behaviors are intended to to make it convenient to replicate your
+This behavior is intended to make organizing your OSF projects as flexible as
+make it convenient to replicate your
 project directory on OSF and subsequently update the files as needed. In that
 vein, \code{osf_upload(my_proj, path = ".")} will upload your entire current
 working directory to the specified OSF destination.
