@@ -119,3 +119,21 @@ test_that("recurse=TRUE uploads the entire OSF directory structure", {
   )
 })
 
+test_that("files in parent directories can be uploaded", {
+  skip_if_no_pat()
+  cparent <- osf_create_component(p1, "parent-directories")
+
+  # set working directory a test subdirectory
+  cwd <- getwd()
+  setwd(fs::path(multidir, "subdir1/subdir1_1"))
+
+  upf1 <- osf_upload(cparent, path = "../d.txt")
+  upf2 <- osf_upload(cparent, path = "../../a.txt")
+  updir <- osf_upload(cparent, path = "../../subdir2")
+
+  expect_equal(
+    osf_ls_files(cparent)$name,
+    c("d.txt", "a.txt", "subdir2")
+  )
+})
+
