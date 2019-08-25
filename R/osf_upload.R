@@ -113,7 +113,7 @@ osf_upload.osf_tbl_node <-
 
   path <- check_files(path)
   x <- make_single(x)
-  recursive_upload(x, path, recurse, overwrite, progress, verbose)
+  .osf_upload(x, path, recurse, overwrite, progress, verbose)
 }
 
 #' @export
@@ -136,7 +136,7 @@ osf_upload.osf_tbl_file <-
     ))
   }
 
-  recursive_upload(x, path, recurse, overwrite, progress, verbose)
+  .osf_upload(x, path, recurse, overwrite, progress, verbose)
 }
 
 
@@ -148,7 +148,7 @@ osf_upload.osf_tbl_file <-
 #' @importFrom fs is_dir file_info
 #' @noRd
 
-recursive_upload <- function(dest, path, recurse, overwrite, progress, verbose) {
+.osf_upload <- function(dest, path, recurse, overwrite, progress, verbose) {
 
   # split into top-level files and folders
   path_by <- split(path, fs::file_info(path)$type, drop = TRUE)
@@ -157,7 +157,7 @@ recursive_upload <- function(dest, path, recurse, overwrite, progress, verbose) 
   # upload files in pwd
   if (!is.null(path_by$file)) {
     results$file <- purrr::map(path_by$file,
-      upload_file,
+      .upload_file,
       dest = dest,
       overwrite = overwrite,
       progress = progress,
@@ -168,7 +168,7 @@ recursive_upload <- function(dest, path, recurse, overwrite, progress, verbose) 
   # recurse directories in pwd
   if (!is.null(path_by$directory)) {
     results$directory <- purrr::map(path_by$directory,
-      upload_dir,
+      .upload_dir,
       dest = dest,
       overwrite = overwrite,
       recurse = recurse,
@@ -181,6 +181,64 @@ recursive_upload <- function(dest, path, recurse, overwrite, progress, verbose) 
 }
 
 
+#' Upload a directory
+#' @param path a scalar character vector containing a single directory path
+#' @return An `osf_tbl_file` containing a single row for `path`'s leaf directory
+#' @noRd
+.upload_dir <- function(dest, path, overwrite, recurse, progress, verbose) {
+  stopifnot(rlang::is_scalar_character(path))
+
+  # memoise osf directory retrieval to avoid subsequent API calls for every
+  # file or subdirectory contained therein
+  get_path <- memoise::memoise(
+    function(x, path, verbose) {
+      recurse_path(x, path, missing_action = "create", verbose = verbose)
+    }
+  )
+  on.exit(memoise::forget(get_path))
+
+  out <- get_path(dest, path = basename(path), verbose = verbose)
+
+  targets <- tibble::tibble(
+    local = fs::dir_ls(path, type = c("file", "directory"), recurse = recurse)
+  )
+
+  # upload target files/directories to the root of the osf destination
+  targets$remote <- fs::path_rel(targets$local, dirname(path))
+  targets$destination <- lapply(dirname(targets$remote),
+    get_path,
+    x = dest,
+    verbose = verbose
+  )
+
+  targets$type <- fs::file_info(targets$local)$type
+  targets <- split(targets, targets$type, drop = TRUE)
+  results <- vector(mode = "list")
+
+  if (!is.null(targets$file)) {
+    results$file <- Map(
+      f = .upload_file,
+      dest = targets$file$destination,
+      path = targets$file$local,
+      overwrite = overwrite,
+      progress = progress,
+      verbose = verbose
+    )
+  }
+
+  if (!is.null(targets$directory)) {
+    results$directory <- Map(
+      f = get_path,
+      path = targets$directory$remote,
+      x = list(dest),
+      verbose = verbose
+    )
+  }
+
+  return(out)
+}
+
+
 #' Internal file upload function
 #'
 #' This is a non-vectorized function that uploads a single file at a time. It
@@ -188,10 +246,10 @@ recursive_upload <- function(dest, path, recurse, overwrite, progress, verbose) 
 #'
 #' @param dest OSF node or directory upload destination
 #' @param path scalar character vector with the path of the file to be uploaded
-#' @return `osf_tbl_file` with a single row
+#' @return `osf_tbl_file` with a single row for the uploaded file
 #' @noRd
 
-upload_file <- function(dest, path, overwrite, progress, verbose) {
+.upload_file <- function(dest, path, overwrite, progress, verbose) {
 
   # force the uploaded filename to match the local filename
   name <- basename(path)
@@ -250,59 +308,4 @@ upload_file <- function(dest, path, overwrite, progress, verbose) {
   out <- .osf_file_retrieve(file_id)
 
   as_osf_tbl(out["data"], subclass = "osf_tbl_file")
-}
-
-
-upload_dir <- function(dest, path, overwrite, recurse, progress, verbose) {
-  stopifnot(rlang::is_scalar_character(path))
-
-  # memoise osf directory retrieval to avoid subsequent API calls for every
-  # file or subdirectory contained therein
-  get_path <- memoise::memoise(
-    function(x, path, verbose) {
-      recurse_path(x, path, missing_action = "create", verbose = verbose)
-    }
-  )
-  on.exit(memoise::forget(get_path))
-
-  # output will be the osf_tbl_file for `path`'s leaf directory
-  out <- get_path(dest, path = basename(path), verbose = verbose)
-
-  targets <- tibble::tibble(
-    local = fs::dir_ls(path, type = c("file", "directory"), recurse = recurse)
-  )
-
-  # upload target files/directories to the root of the osf destination
-  targets$remote <- fs::path_rel(targets$local, dirname(path))
-  targets$destination <- lapply(dirname(targets$remote),
-    get_path,
-    x = dest,
-    verbose = verbose
-  )
-
-  targets$type <- fs::file_info(targets$local)$type
-  targets <- split(targets, targets$type, drop = TRUE)
-  results <- vector(mode = "list")
-
-  if (!is.null(targets$file)) {
-    results$file <- Map(
-      f = upload_file,
-      dest = targets$file$destination,
-      path = targets$file$local,
-      overwrite = overwrite,
-      progress = progress,
-      verbose = verbose
-    )
-  }
-
-  if (!is.null(targets$directory)) {
-    results$directory <- Map(
-      f = get_path,
-      path = targets$directory$remote,
-      x = list(dest),
-      verbose = verbose
-    )
-  }
-
-  return(out)
 }
