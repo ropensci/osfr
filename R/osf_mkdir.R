@@ -91,8 +91,7 @@ recurse_path <- function(x, path, missing_action = "error", verbose = FALSE) {
   if (path_root == ".") return(x)
 
   # ensure the retrieved directory and path_root have the same name
-  root_dir <- osf_ls_files(x, type = "folder", pattern = path_root)
-  root_dir <- root_dir[root_dir$name == path_root, ]
+  root_dir <- osf_find_file(x, type = "folder", pattern = path_root)
 
   if (nrow(root_dir) == 0) {
     if (missing_action == "error") {
