@@ -9,12 +9,7 @@
 #' @param x An [`osf_tbl_file`] containing a single file or directory.
 #' @param path Path pointing to a local directory where the downloaded files
 #'   will be saved. Default is to use the current working directory.
-#' @param conflicts This determines what happens when a file with the same name
-#'   exists at the specified destination. Can be one of the following:
-#'   * `"error"` (the default): throw an error and abort the file transfer operation.
-#'   * `"skip"`: skip the conflicting file(s) and continue transferring the
-#'     remaining files.
-#'   * `"overwrite"`: replace the existing file with the transferred copy.
+#' @template conflicts
 #' @param recurse Applies only to OSF directories. If `TRUE`, a directory is
 #'   fully recursed and all nested files and subdirectories are downloaded.
 #'   Alternatively, a positive number will determine the number of levels
