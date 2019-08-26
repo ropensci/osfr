@@ -10,11 +10,7 @@
 #' @param recurse If `TRUE`, fully recurse directories included in `path`. You
 #'   can also control the number of levels to recurse by specifying a positive
 #'   number.
-#' @param overwrite Logical, overwrite an existing file with the same name
-#'   (default `FALSE`)? If `TRUE`, OSF will automatically update the file and
-#'   record the previous version. If `FALSE`, a warning will be issued that the
-#'   local file was *not* uploaded and the *existing* version of the file on OSF
-#'   is returned.
+#' @template conflicts
 #' @template progress
 #' @template verbose
 #'
@@ -96,7 +92,7 @@ osf_upload <-
   function(x,
            path,
            recurse = FALSE,
-           overwrite = FALSE,
+           conflicts = "error",
            progress = FALSE,
            verbose = FALSE) {
   UseMethod("osf_upload")
@@ -107,13 +103,13 @@ osf_upload.osf_tbl_node <-
   function(x,
            path,
            recurse = FALSE,
-           overwrite = FALSE,
+           conflicts = "error",
            progress = FALSE,
            verbose = FALSE) {
 
   path <- check_files(path)
   x <- make_single(x)
-  .osf_upload(x, path, recurse, overwrite, progress, verbose)
+  .osf_upload(x, path, recurse, conflicts, progress, verbose)
 }
 
 #' @export
@@ -121,7 +117,7 @@ osf_upload.osf_tbl_file <-
   function(x,
            path,
            recurse = FALSE,
-           overwrite = FALSE,
+           conflicts = "error",
            progress = FALSE,
            verbose = FALSE) {
 
@@ -136,7 +132,7 @@ osf_upload.osf_tbl_file <-
     ))
   }
 
-  .osf_upload(x, path, recurse, overwrite, progress, verbose)
+  .osf_upload(x, path, recurse, conflicts, progress, verbose)
 }
 
 
@@ -148,7 +144,7 @@ osf_upload.osf_tbl_file <-
 #' @importFrom fs is_dir file_info
 #' @noRd
 
-.osf_upload <- function(dest, path, recurse, overwrite, progress, verbose) {
+.osf_upload <- function(dest, path, recurse, conflicts, progress, verbose) {
 
   # split into top-level files and folders
   path_by <- split(path, fs::file_info(path)$type, drop = TRUE)
@@ -159,7 +155,7 @@ osf_upload.osf_tbl_file <-
     results$file <- purrr::map(path_by$file,
       .upload_file,
       dest = dest,
-      overwrite = overwrite,
+      conflicts = conflicts,
       progress = progress,
       verbose = verbose
     )
@@ -170,7 +166,7 @@ osf_upload.osf_tbl_file <-
     results$directory <- purrr::map(path_by$directory,
       .upload_dir,
       dest = dest,
-      overwrite = overwrite,
+      conflicts = conflicts,
       recurse = recurse,
       progress = progress,
       verbose = verbose
@@ -185,7 +181,7 @@ osf_upload.osf_tbl_file <-
 #' @param path a scalar character vector containing a single directory path
 #' @return An `osf_tbl_file` containing a single row for `path`'s leaf directory
 #' @noRd
-.upload_dir <- function(dest, path, overwrite, recurse, progress, verbose) {
+.upload_dir <- function(dest, path, conflicts, recurse, progress, verbose) {
   stopifnot(rlang::is_scalar_character(path))
 
   # memoise osf directory retrieval to avoid subsequent API calls for every
@@ -220,7 +216,7 @@ osf_upload.osf_tbl_file <-
       f = .upload_file,
       dest = targets$file$destination,
       path = targets$file$local,
-      overwrite = overwrite,
+      conflicts = conflicts,
       progress = progress,
       verbose = verbose
     )
@@ -249,14 +245,14 @@ osf_upload.osf_tbl_file <-
 #' @return `osf_tbl_file` with a single row for the uploaded file
 #' @noRd
 
-.upload_file <- function(dest, path, overwrite, progress, verbose) {
+.upload_file <- function(dest, path, conflicts, progress, verbose) {
 
   # force the uploaded filename to match the local filename
-  name <- basename(path)
+  filename <- basename(path)
 
   # set arguments depending on whether destination is a directory or node
   upload_args <- list(
-    name = name,
+    name = filename,
     body = crul::upload(path),
     progress = progress
   )
@@ -268,44 +264,72 @@ osf_upload.osf_tbl_file <-
     upload_args$fid <- as_id(dest)
   }
 
-  if (progress) cat(sprintf("Uploading %s\n", name))
+  if (progress) cat(sprintf("Uploading %s\n", filename))
   res <- do.call(".wb_file_upload", upload_args)
 
   if (is.null(res$errors)) {
-    if (verbose) message(sprintf("Uploaded new file %s to OSF", basename(path)))
+    if (verbose) message(sprintf("Uploaded new file '%s' to OSF", filename))
   } else {
+
     # raise error as usual if error is anything other than 409 (file exists)
     if (res$status_code != 409) raise_error(res)
+    if (conflicts == "error") stop_conflict(path, "upload")
 
-    # retrieve existing file from osf
-    osf_items <- osf_ls_files(dest, type = "file", pattern = name)
-    osf_file <- osf_items[osf_items$name == name, ]
+    conflicting_file <- osf_find_file(dest, pattern = filename, type = "file")
 
-    if (overwrite) {
-      upload_args$fid <- as_id(osf_file)
-      upload_args$name <- NULL
-
-      if (progress) cat(sprintf("Uploading %s\n", name))
-      res <- do.call(".wb_file_update", upload_args)
-      if (verbose) message(sprintf("Uploaded new version of '%s' to OSF", name))
-    } else {
-      warning(paste0(
-        sprintf("\nLocal file '%s' was NOT uploaded to OSF.\n", name),
-        "A file with the same name already exists in that location and 'ovewrite = FALSE'\n",
-        "  * The current OSF version of this file will be returned instead\n",
-        "  * Set 'overwrite = TRUE' and re-upload to create a new version on OSF\n"
-        ),
-        immediate. = TRUE,
-        call. = FALSE
+    if (conflicts == "skip") {
+      msg <- sprintf(
+        "Skipping file '%s' to avoid overwriting the existing copy on OSF",
+        filename
       )
-      return(osf_file)
+      if (verbose) message(msg)
+      return(conflicting_file)
     }
+
+    # overwrite existing file
+    upload_args$fid <- as_id(conflicting_file)
+    upload_args$name <- NULL
+
+    if (progress) cat(sprintf("Uploading file '%s'\n", filename))
+    res <- do.call(".wb_file_update", upload_args)
+    if (verbose) message(sprintf("Uploaded new version of '%s' to OSF", filename))
   }
 
   # the metadata returned by waterbutler is a subset of what osf provides
   # so this extra API call allows us to return a consistent osf_tbl_file
-  file_id <- strsplit(res$data$id, split = "/", fixed = TRUE)[[1]][2]
+  file_id <- extract_osf_id(res$data$links$upload)
   out <- .osf_file_retrieve(file_id)
 
   as_osf_tbl(out["data"], subclass = "osf_tbl_file")
 }
+
+
+#' File transfer messages
+#'
+#' Generate messages about file conflicts while uploading or downloading.
+#' @param filename Name of the file to be transferred
+#' @param direction Label indicating whether the transfer was `"uploading"` or
+#'   `"downloading`
+#' @noRd
+
+stop_conflict <- function(filename, direction) {
+  msg <- bullet_msg(
+    sprintf("Can't %s file '%s'.", direction, basename(filename)),
+    c(
+      "A file with the same name already exists at the destination.",
+      "Use the `conflicts` argument to avoid this error in the future."
+    )
+  )
+  abort(msg)
+}
+
+warn_ul_conflict <- function(filename) {
+  msg <- bullet_msg(
+    sprintf("Local file '%s' was NOT uploaded to OSF.", filename),
+    c(
+      "A file with the same name already exists at the destination.",
+      "Use the `conflicts` argument to avoid this error in the future."
+    )
+  )
+}
+

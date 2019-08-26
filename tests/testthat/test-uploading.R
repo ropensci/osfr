@@ -31,7 +31,7 @@ test_that("file is uploaded to project root", {
 
   expect_message(
     f1 <<- osf_upload(p1, infile, verbose = TRUE),
-    sprintf("Uploaded new file %s to OSF", basename(infile))
+    sprintf("Uploaded new file '%s' to OSF", basename(infile))
   )
 
   expect_s3_class(f1, "osf_tbl_file")
@@ -45,37 +45,33 @@ test_that("uploaded file can be retrieved", {
   expect_identical(f1, f2)
 })
 
-test_that("user is warned if a file already exists", {
+test_that("by default an error is thrown if a conflicting file exists", {
   skip_if_no_pat()
-  expect_warning(
+  expect_error(
     out <- osf_upload(p1, infile),
-    sprintf("Local file '%s' was NOT uploaded", basename(infile))
+    sprintf("Can't upload file '%s'", basename(infile))
   )
-  # existing OSF file is returned
-  expect_identical(out, f1)
 })
 
-test_that("upload can overwrite existing files", {
+test_that("a file can be overwritten when conflicts='overwrite'", {
   writeLines("Lorem ipsum dolor sit amet, consectetur, ea duo posse", infile)
   skip_if_no_pat()
 
   expect_message(
-    f1 <<- osf_upload(p1, infile, overwrite = TRUE, verbose = TRUE),
+    f1 <<- osf_upload(p1, infile, conflicts = "overwrite", verbose = TRUE),
     sprintf("Uploaded new version of '%s' to OSF", basename(infile))
   )
 
-  expect_equal(f1$meta[[1]]$attributes$current_version, 2)
-  expect_s3_class(f1, "osf_tbl_file")
+  version <- get_meta(f1, "attributes", "current_version")
+  expect_equal(version, 2)
 })
+
 
 test_that("file can be uploaded to a directory", {
   skip_if_no_pat()
 
-  d1 <<- osf_mkdir(p1, "data")
-  expect_message(
-    f2 <<- osf_upload(d1, infile, verbose = TRUE),
-    sprintf("Uploaded new file %s to OSF", basename(infile))
-  )
+  d1 <- osf_mkdir(p1, "data")
+  f2 <- osf_upload(d1, infile, verbose = TRUE)
   expect_s3_class(f2, "osf_tbl_file")
 })
 

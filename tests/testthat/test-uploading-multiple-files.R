@@ -37,10 +37,10 @@ test_that("multiple files can be uploaded", {
 test_that("a directory can be uploaded", {
   skip_if_no_pat()
 
-  c1_dir <- osf_create_component(p1, "dir-upload")
-  out <- osf_upload(c1_dir, multidir)
+  c1 <- osf_create_component(p1, "dir-upload")
+  out <- osf_upload(c1, multidir)
   expect_s3_class(out, "osf_tbl_file")
-  expect_match(out$name, multidir)
+  expect_match(out$name, basename(multidir))
 
   # files within the directory were uploaded
   expect_equal(
@@ -64,17 +64,17 @@ test_that("a subdirectory can be uploaded", {
   skip_if_no_pat()
 
   # upload the subdirectory with no children
-  c2_subdir <- osf_create_component(p1, "subdir-upload")
+  c2 <- osf_create_component(p1, "subdir-upload")
 
   indir <- file.path(multidir, "subdir1", "subdir1_1")
-  out <- osf_upload(c2_subdir, indir)
+  out <- osf_upload(c2, indir, verbose = TRUE)
 
   expect_s3_class(out, "osf_tbl_file")
   expect_match(out$name, basename(indir))
 
   # verify leaf directory was created in the project root
   expect_match(
-    osf_ls_files(c2_subdir, type = "folder")$name,
+    osf_ls_files(c2, type = "folder")$name,
     basename(indir)
   )
 
@@ -86,8 +86,8 @@ test_that("a subdirectory can be uploaded", {
 test_that("recurse argument respects specified levels", {
   skip_if_no_pat()
 
-  c3_recurse <- osf_create_component(p1, "recurse=1")
-  out <- osf_upload(c3_recurse, path = multidir, recurse = 1, verbose = TRUE)
+  c3 <- osf_create_component(p1, "recurse=1")
+  out <- osf_upload(c3, path = multidir, recurse = 1)
 
   sd1_files <- osf_ls_files(out, path = "subdir1")
   expect_equal(
@@ -109,8 +109,8 @@ test_that("recurse argument respects specified levels", {
 test_that("recurse=TRUE uploads the entire OSF directory structure", {
   skip_if_no_pat()
 
-  c4_recurse <- osf_create_component(p1, "recurse=TRUE")
-  out <- osf_upload(c4_recurse, path = multidir, recurse = TRUE)
+  c4 <- osf_create_component(p1, "recurse=TRUE")
+  out <- osf_upload(c4, path = multidir, recurse = TRUE)
 
   sd1_1_files <- osf_ls_files(out, path = "subdir1/subdir1_1")
   expect_equal(
@@ -120,20 +120,41 @@ test_that("recurse=TRUE uploads the entire OSF directory structure", {
 })
 
 test_that("files in parent directories can be uploaded", {
-  skip_if_no_pat()
-  cparent <- osf_create_component(p1, "parent-directories")
-
   # set working directory a test subdirectory
   cwd <- getwd()
+  on.exist(setwd(cwd))
   setwd(fs::path(multidir, "subdir1/subdir1_1"))
 
-  upf1 <- osf_upload(cparent, path = "../d.txt")
-  upf2 <- osf_upload(cparent, path = "../../a.txt")
-  updir <- osf_upload(cparent, path = "../../subdir2")
+  skip_if_no_pat()
+  c5 <- osf_create_component(p1, "parent-directories")
+
+  upf1 <- osf_upload(c5, path = "../d.txt")
+  upf2 <- osf_upload(c5, path = "../../a.txt")
+  updir <- osf_upload(c5, path = "../../subdir2")
 
   expect_equal(
-    osf_ls_files(cparent)$name,
+    osf_ls_files(c5)$name,
     c("d.txt", "a.txt", "subdir2")
   )
+})
+
+test_that("conflicting files are skipped or overwritten", {
+  skip_if_no_pat()
+
+  c6 <- osf_create_component(p1, "conflicts")
+  infiles <- fs::dir_ls(multidir, type = "file")
+  out1 <- osf_upload(c6, path = infiles[1])
+
+  # overwrite contents of first file
+  writeLines("foo", infiles[1])
+  out2 <- osf_upload(c6, path = infiles, conflicts = "skip")
+
+  # all files are still on version 1
+  versions <- get_meta(out2, "attributes", "current_version")
+  expect_true(all(versions) == 1)
+
+  # overwriting with new file increments version
+  out3 <- osf_upload(c6, path = infiles[1], conflicts = "overwrite")
+  expect_equal(get_meta(out3, "attributes", "current_version"), 2)
 })
 
