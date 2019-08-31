@@ -4,7 +4,7 @@
 \alias{osf_upload}
 \title{Upload files to OSF}
 \usage{
-osf_upload(x, path, recurse = FALSE, overwrite = FALSE,
+osf_upload(x, path, recurse = FALSE, conflicts = "error",
   progress = FALSE, verbose = FALSE)
 }
 \arguments{
@@ -21,11 +21,14 @@ local files and/directories.}
 can also control the number of levels to recurse by specifying a positive
 number.}
 
-\item{overwrite}{Logical, overwrite an existing file with the same name
-(default \code{FALSE})? If \code{TRUE}, OSF will automatically update the file and
-record the previous version. If \code{FALSE}, a warning will be issued that the
-local file was \emph{not} uploaded and the \emph{existing} version of the file on OSF
-is returned.}
+\item{conflicts}{This determines what happens when a file with the same name
+exists at the specified destination. Can be one of the following:
+\itemize{
+\item \code{"error"} (the default): throw an error and abort the file transfer operation.
+\item \code{"skip"}: skip the conflicting file(s) and continue transferring the
+remaining files.
+\item \code{"overwrite"}: replace the existing file with the transferred copy.
+}}
 
 \item{progress}{Logical, if \code{TRUE} progress bars are displayed for each file
 transfer. Mainly useful for transferring large files. For tracking lots of
@@ -61,10 +64,7 @@ maintain the directory structure in the above example by passing \code{b.txt}'s
 parent directory to \code{path} instead of the file itself:\preformatted{osf_upload(my_proj, c("a.txt", "subdir2"))
 }
 
-This behavior is intended to make organizing your OSF projects as flexible as
-make it convenient to replicate your
-project directory on OSF and subsequently update the files as needed. In that
-vein, \code{osf_upload(my_proj, path = ".")} will upload your entire current
+Likewise, \code{osf_upload(my_proj, path = ".")} will upload your entire current
 working directory to the specified OSF destination.
 }
 
