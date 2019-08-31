@@ -90,13 +90,13 @@ test_that("recurse argument respects specified levels", {
   out <- osf_upload(c3, path = multidir, recurse = 1)
 
   sd1_files <- osf_ls_files(out, path = "subdir1")
-  expect_equal(
+  expect_setequal(
     sd1_files$name,
     dir(file.path(multidir, "subdir1"))
   )
 
   sd2_files <- osf_ls_files(out, path = "subdir2")
-  expect_equal(
+  expect_setequal(
     sd2_files$name,
     dir(file.path(multidir, "subdir2"))
   )

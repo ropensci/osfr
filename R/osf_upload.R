@@ -143,92 +143,41 @@ osf_upload.osf_tbl_file <-
 
 .osf_upload <- function(dest, path, recurse, conflicts, progress, verbose) {
 
-  # split into top-level files and folders
-  path_by <- split(path, fs::file_info(path)$type, drop = TRUE)
-  results <- vector(mode = "list")
+  # inventory of files to upload and/or remote directories to create
+  targets <- map_rbind(.upload_inventory, filepath = path, recurse = recurse)
 
-  # upload files in pwd
-  if (!is.null(path_by$file)) {
-    results$file <- purrr::map(path_by$file,
-      .upload_file,
-      dest = dest,
-      conflicts = conflicts,
-      progress = progress,
-      verbose = verbose
-    )
-  }
-
-  # recurse directories in pwd
-  if (!is.null(path_by$directory)) {
-    results$directory <- purrr::map(path_by$directory,
-      .upload_dir,
-      dest = dest,
-      conflicts = conflicts,
-      recurse = recurse,
-      progress = progress,
-      verbose = verbose
-    )
-  }
-
-  do.call("rbind", c(results$file, results$directory))
-}
-
-
-#' Upload a directory
-#' @param path a scalar character vector containing a single directory path
-#' @return An `osf_tbl_file` containing a single row for `path`'s leaf directory
-#' @noRd
-.upload_dir <- function(dest, path, conflicts, recurse, progress, verbose) {
-  stopifnot(rlang::is_scalar_character(path))
-
-  # memoise osf directory retrieval to avoid subsequent API calls for every
-  # file or subdirectory contained therein
-  get_path <- memoise::memoise(
-    function(x, path, verbose) {
-      recurse_path(x, path, missing_action = "create", verbose = verbose)
-    }
-  )
-  on.exit(memoise::forget(get_path))
-
-  out <- get_path(dest, path = basename(path), verbose = verbose)
-
-  targets <- tibble::tibble(
-    local = fs::dir_ls(path, type = c("file", "directory"), recurse = recurse)
-  )
-
-  # upload target files/directories to the root of the osf destination
-  targets$remote <- fs::path_rel(targets$local, dirname(path))
-  targets$destination <- lapply(dirname(targets$remote),
-    get_path,
-    x = dest,
+  # retrive/create each unique remote destination
+  destinations <- Map(recurse_path,
+    path = unique(targets$remote_dir),
+    x = list(dest),
+    missing_action = "create",
     verbose = verbose
   )
 
-  targets$type <- fs::file_info(targets$local)$type
-  targets <- split(targets, targets$type, drop = TRUE)
-  results <- vector(mode = "list")
+  # return only files/directories passed directly to `path`
+  path_by <- split(path, fs::file_info(path)$type, drop = TRUE)
+  out <- vector(mode = "list")
 
-  if (!is.null(targets$file)) {
-    results$file <- Map(
-      f = .upload_file,
-      dest = targets$file$destination,
-      path = targets$file$local,
+  if (any(targets$type == "file")) {
+    target_files <- targets[targets$type == "file", ]
+    uploaded <- map_rbind(.upload_file,
+      path = target_files$path,
+      dest = destinations[target_files$remote_dir],
       conflicts = conflicts,
       progress = progress,
       verbose = verbose
     )
+
+    if (!is.null(path_by$file)) {
+      out$file <- uploaded[uploaded$name %in% basename(path_by$file), ]
+    }
   }
 
-  if (!is.null(targets$directory)) {
-    results$directory <- Map(
-      f = get_path,
-      path = targets$directory$remote,
-      x = list(dest),
-      verbose = verbose
-    )
+  if (!is.null(path_by$directory)) {
+    out$directory <- do.call("rbind", destinations[basename(path_by$directory)])
   }
 
-  return(out)
+  do.call("rbind", out)
 }
 
 
