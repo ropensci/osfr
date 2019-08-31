@@ -98,6 +98,14 @@ make_single <- function(x) {
   x
 }
 
+#' Wrapper around base::Map that rbinds the results
+#'
+#' I like base::Map because it returns a named list when mapping over a
+#' character vector.
+#' @noRd
+map_rbind <- function(f, ...) {
+  do.call("rbind", base::Map(f, ...))
+}
 
 #' Include an interactive menu to confirm action
 #'
