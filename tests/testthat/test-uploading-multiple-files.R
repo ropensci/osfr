@@ -122,7 +122,7 @@ test_that("recurse=TRUE uploads the entire OSF directory structure", {
 test_that("files in parent directories can be uploaded", {
   # set working directory a test subdirectory
   cwd <- getwd()
-  on.exist(setwd(cwd))
+  on.exit(setwd(cwd))
   setwd(fs::path(multidir, "subdir1/subdir1_1"))
 
   skip_if_no_pat()
@@ -157,4 +157,3 @@ test_that("conflicting files are skipped or overwritten", {
   out3 <- osf_upload(c6, path = infiles[1], conflicts = "overwrite")
   expect_equal(get_meta(out3, "attributes", "current_version"), 2)
 })
-
