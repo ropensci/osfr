@@ -42,10 +42,7 @@
 #' osf_upload(my_proj, c("a.txt", "subdir2"))
 #' ```
 #'
-#' These behaviors are intended to provide flexibility
-#'  make it convenient to replicate your
-#' project directory on OSF and subsequently update the files as needed. In that
-#' vein, `osf_upload(my_proj, path = ".")` will upload your entire current
+#' Likewise, `osf_upload(my_proj, path = ".")` will upload your entire current
 #' working directory to the specified OSF destination.
 #'
 #' @section Uploading to subdirectories:
