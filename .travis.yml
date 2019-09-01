@@ -2,19 +2,15 @@ language: r
 sudo: false
 cache: packages
 
+r_build_args: --no-build-vignettes
+r_check_args: --ignore-vignettes
+
 matrix:
   include:
 
   - r: oldrel
-    r_build_args: --no-build-vignettes
-    r_check_args: --ignore-vignettes
   - r: devel
-    r_build_args: --no-build-vignettes
-    r_check_args: --ignore-vignettes
-
   - r: release
-    r_build_args: --no-build-vignettes
-    r_check_args: --ignore-vignettes
     r_packages:
       - pkgdown
     after_success:
