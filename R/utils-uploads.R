@@ -26,3 +26,47 @@
 
   inventory
 }
+
+#' File transfer messages
+#'
+#' Generate messages about file conflicts while uploading or downloading.
+#' @param filename Name of the file to be transferred
+#' @param direction Label indicating whether the transfer was `"uploading"` or
+#'   `"downloading`
+#' @noRd
+
+stop_conflict <- function(filename, direction) {
+  msg <- bullet_msg(
+    sprintf("Can't %s file '%s'.", direction, basename(filename)),
+    c(
+      "A file with the same name already exists at the destination.",
+      "Use the `conflicts` argument to avoid this error in the future."
+    )
+  )
+  abort(msg)
+}
+
+warn_ul_conflict <- function(filename) {
+  msg <- bullet_msg(
+    sprintf("Local file '%s' was NOT uploaded to OSF.", filename),
+    c(
+      "A file with the same name already exists at the destination.",
+      "Use the `conflicts` argument to avoid this error in the future."
+    )
+  )
+}
+
+
+#' Succinct message indicating number of files uploaded or skipped
+#' @param x an `osf_tbl_file` with the additional `.uploaded` column
+#' @noRd
+report_ul_activity <- function(x) {
+  if (any(x$.uploaded))
+    message(sprintf("Uploaded %i file(s) to OSF", sum(x$.uploaded)))
+  if (any(!x$.uploaded))
+    message(sprintf(
+      "Skipped %i files to avoid overwriting OSF copies",
+      sum(!x$.uploaded)
+    ))
+}
+

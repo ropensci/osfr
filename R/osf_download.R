@@ -81,7 +81,7 @@ osf_download.osf_tbl_file <-
   if (!is.null(requests$folder)) {
     n <- nrow(requests$folder)
     results$folder <- Map(
-      f =  download_dir,
+      f =  .download_dir,
       x = split(requests$folder, seq_len(n)),
       path = path,
       conflicts = conflicts,
@@ -94,7 +94,7 @@ osf_download.osf_tbl_file <-
   if (!is.null(requests$file)) {
     n <- nrow(requests$file)
     results$file <- Map(
-      f =  download_file,
+      f =  .download_file,
       x = split(requests$file, seq_len(n)),
       path = path,
       conflicts = conflicts,
@@ -118,12 +118,12 @@ osf_download.osf_tbl_file <-
 #' @param path scalar character vector with the complete path of the download
 #'  destination (i.e., directory path and file path)
 #' @return `osf_tbl_file` with a single row for each file.
-#'   * For `download_file()` the result always contains a single row
-#'   * For `download_dir()` the result will contain 1 row for every file
+#'   * For `.download_file()` the result always contains a single row
+#'   * For `.download_dir()` the result will contain 1 row for every file
 #'     contained within the OSF directory.
 #' @noRd
 
-download_file <- function(x, path, conflicts, progress, verbose) {
+.download_file <- function(x, path, conflicts, progress, verbose) {
 
   local_path <- file.path(clean_local_path(path), x$name)
 
@@ -159,7 +159,7 @@ download_file <- function(x, path, conflicts, progress, verbose) {
 }
 
 
-download_dir <- function(x, path, conflicts, recurse, progress, verbose) {
+.download_dir <- function(x, path, conflicts, recurse, progress, verbose) {
 
   local_path <- file.path(clean_local_path(path), x$name)
 
@@ -193,71 +193,49 @@ download_dir <- function(x, path, conflicts, recurse, progress, verbose) {
   )
 
   # each file has 3 location attributes:
-  files <- data.frame(
-    # 1. remote OSF path
+  # 1. remote: OSF path
+  # 2. downloaded: path to downloaded files temp location
+  # 3. destination: path to local destination
+
+  targets <- tibble::tibble(
     remote = fs::path_rel(unzipped, dirname(zip_file)),
-    # 2. path to downloaded files temp location
-    downloaded = unzipped,
-    stringsAsFactors = FALSE
+    downloaded = unzipped
   )
 
-  # 3. path to local destination
-  files$destination <- fs::path(path, files$remote)
+  targets$destination <- fs::path(path, targets$remote)
 
   # filter by recursion level
-  files$levels <- purrr::map_int(fs::path_split(files$remote), length) - 1
-  files <- files[files$levels <= recurse, ]
+  targets$levels <- purrr::map_int(fs::path_split(targets$remote), length) - 1
+  targets <- targets[targets$levels <= recurse, ]
 
   # handle conflicted files
-  files$conflicted <- fs::file_exists(files$destination)
+  targets$conflicted <- fs::file_exists(targets$destination)
 
-  if (any(files$conflicted)) {
+  if (any(targets$conflicted)) {
     if (conflicts == "error") {
-      stop_dl_conflict(files$remote[files$conflicted][1])
+      stop_dl_conflict(targets$remote[targets$conflicted][1])
     } else if (conflicts == "skip") {
-      inform_dl_conflicts(files$remote[files$conflicted], verbose)
-      files <- files[!files$conflicted, ]
+      inform_dl_conflicts(targets$remote[targets$conflicted], verbose)
+      targets <- targets[!targets$conflicted, ]
     }
   }
 
   # create destination directories and copy remaining unzipped files
-  fs::dir_create(unique(dirname(files$destination)))
-  files$copied <- fs::file_copy(
-    files$downloaded,
-    files$destination,
+  fs::dir_create(unique(dirname(targets$destination)))
+  targets$copied <- fs::file_copy(
+    targets$downloaded,
+    targets$destination,
     overwrite = TRUE
   )
 
   msg <- sprintf(
     "Downloaded %s file(s) from OSF folder '%s'",
-    nrow(files),
+    nrow(targets),
     x$name
   )
-  if (verbose && nrow(files) > 0) {
-    msg <- bullet_msg(paste0(msg, ":"), files$destination)
+  if (verbose && nrow(targets) > 0) {
+    msg <- bullet_msg(paste0(msg, ":"), targets$destination)
   }
   message(msg)
   return(out)
-}
-
-
-#' @importFrom fs path_common
-inform_dl_conflicts <- function(filenames, verbose) {
-  stopifnot(is.logical(verbose))
-  msg <- sprintf(
-    "Skipped %i file(s) from OSF folder '%s' to avoid overwriting local copies",
-    length(filenames),
-    fs::path_common(filenames)
-  )
-  if (verbose) msg <- bullet_msg(paste0(msg, ":"), filenames)
-  message(msg)
-}
-
-
-stop_dl_conflict <- function(filename) {
-  msg <- bullet_msg(
-    sprintf("Can't download file '%s' from OSF.", filename),
-    "Use the `conflicts` argument to avoid this error in the future."
-  )
-  abort(msg)
 }
