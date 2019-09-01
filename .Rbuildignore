@@ -18,3 +18,5 @@ inst/.lintr$
 # pkgdown
 ^docs$
 ^pkgdown$
+# misc
+^\.httr-oauth
