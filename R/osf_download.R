@@ -136,10 +136,11 @@ download_file <- function(x, path, conflicts, progress, verbose) {
   if (fs::file_exists(local_path)) {
     if (conflicts == "error") stop_dl_conflict(x$name)
     if (conflicts == "skip") {
-      message(sprintf(
-        "Skipping file '%s' to avoid overwriting local copy.\n",
+      msg <- sprintf(
+        "Skipping file '%s' to avoid overwriting local copy",
         x$name
-      ))
+      )
+      if (verbose) message(msg)
       return(out)
     }
   }
