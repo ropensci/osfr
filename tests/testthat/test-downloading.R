@@ -113,12 +113,13 @@ test_that("recurse=TRUE downloads the entire OSF directory structure", {
   fs::dir_delete(file.path(outdir, d2$name))
 })
 
-test_that("only missing files are downloaded when conflicts='skip'", {
+test_that("conflicting files are skipped or overwritten", {
   skip_if_no_pat()
   out <- osf_download(d2, path = outdir)
 
-  # overwrite contents of first file and delete the second file
+# overwrite contents of first file and delete the second file
   top_files <- dir(file.path(outdir, d2$name), full.names = TRUE)
+  f1_text <- readLines(top_files[1])
   writeLines("foo", con = top_files[1])
   fs::file_delete(top_files[2])
 
@@ -128,4 +129,8 @@ test_that("only missing files are downloaded when conflicts='skip'", {
   expect_match(readLines(top_files[1]), "foo")
   # missing file was downloaded
   expect_true(file.exists(top_files[2]))
+
+  # overwriting restore f1's original content
+  out <- osf_download(d2, path = outdir, conflicts = "overwrite")
+  expect_match(readLines(top_files[1])[1], f1_text[1])
 })
