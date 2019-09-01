@@ -222,7 +222,11 @@ download_dir <- function(x, path, conflicts, recurse, progress, verbose) {
 
   # create destination directories and copy remaining unzipped files
   fs::dir_create(unique(dirname(files$destination)))
-  files$copied <- fs::file_copy(files$downloaded, files$destination)
+  files$copied <- fs::file_copy(
+    files$downloaded,
+    files$destination,
+    overwrite = TRUE
+  )
 
   msg <- sprintf(
     "Downloaded %s file(s) from OSF folder '%s'",
