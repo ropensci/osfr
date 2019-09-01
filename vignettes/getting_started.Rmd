@@ -101,7 +101,7 @@ mtcars_file
 
 The `mtcars_file` object now contains an `osf_tbl` with 1 row corresponding to the version of that file stored on OSF. Again, we could use `osf_open()` to view it directly on OSF.
 
-OSF also version controls files, which means that if we were to make a change to the `mtcars.csv` file (perhaps we collected more data) we could automatically create a 2nd version of the dataset by using the `osf_upload()` function and setting `overwrite = TRUE`. As long as the file we're uploading has the same file name as a file in that particular section of the project, a new version will be created.
+OSF also version controls files, which means that if we were to make a change to the `mtcars.csv` file (perhaps we collected more data) we could automatically create a 2nd version of the dataset by using the `osf_upload()` function and setting `conflicts = "overwrite"`. As long as the file we're uploading has the same file name as a file in that particular section of the project, a new version will be created.
 
 ### Downloading files
 
@@ -112,7 +112,7 @@ We can download files from any public or private node that we have access to and
     ```{r message=FALSE}
     data_component %>% 
       osf_ls_files() %>%
-      osf_download(overwrite = TRUE)
+      osf_download(conflicts = "overwrite")
     ```
 
 2. For a public file that we may have seen referenced in a published article, we may already have the GUID, and so can retrieve the file directly before downloading it. Here, we'll download Daniel Laken's helpful spreadsheet for calculating effect sizes (<https://osf.io/vbdah/>).
