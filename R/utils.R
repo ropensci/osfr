@@ -104,7 +104,8 @@ make_single <- function(x) {
 #' character vector.
 #' @noRd
 map_rbind <- function(f, ...) {
-  do.call("rbind", base::Map(f, ...))
+  out <- base::Map(f, ...)
+  do.call("rbind", out)
 }
 
 #' Include an interactive menu to confirm action

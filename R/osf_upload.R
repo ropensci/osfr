@@ -144,9 +144,9 @@ osf_upload.osf_tbl_file <-
 .osf_upload <- function(dest, path, recurse, conflicts, progress, verbose) {
 
   # inventory of files to upload and/or remote directories to create
-  targets <- map_rbind(.upload_inventory, filepath = path, recurse = recurse)
+  targets <- map_rbind(.upload_manifest, path = path, recurse = recurse)
 
-  # retrive/create each unique remote destination
+  # retrieve/create each unique remote destination
   destinations <- Map(recurse_path,
     path = unique(targets$remote_dir),
     x = list(dest),
@@ -160,6 +160,11 @@ osf_upload.osf_tbl_file <-
 
   if (any(targets$type == "file")) {
     target_files <- targets[targets$type == "file", ]
+    message(sprintf(
+      "Attempting to upload %i file(s) to OSF",
+      nrow(target_files)
+    ))
+
     uploaded <- map_rbind(.upload_file,
       path = target_files$path,
       dest = destinations[target_files$remote_dir],
@@ -168,15 +173,19 @@ osf_upload.osf_tbl_file <-
       verbose = verbose
     )
 
+    if (!verbose) report_ul_activity(uploaded)
+
     if (!is.null(path_by$file)) {
-      out$file <- uploaded[uploaded$name %in% basename(path_by$file), ]
+      out$file <- uploaded[
+        uploaded$name %in% basename(path_by$file),
+        c("name", "id", "meta")
+      ]
     }
   }
 
   if (!is.null(path_by$directory)) {
     out$directory <- do.call("rbind", destinations[basename(path_by$directory)])
   }
-
   do.call("rbind", out)
 }
 
@@ -188,10 +197,12 @@ osf_upload.osf_tbl_file <-
 #'
 #' @param dest OSF node or directory upload destination
 #' @param path scalar character vector with the path of the file to be uploaded
-#' @return `osf_tbl_file` with a single row for the uploaded file
+#' @return `osf_tbl_file` with a single row for the uploaded file and a logical
+#'    column, `.uploaded` that indicates whether the file was actually uploaded.
 #' @noRd
 
 .upload_file <- function(dest, path, conflicts, progress, verbose) {
+  stopifnot(rlang::is_scalar_character(path))
 
   # force the uploaded filename to match the local filename
   filename <- basename(path)
@@ -222,6 +233,7 @@ osf_upload.osf_tbl_file <-
     if (conflicts == "error") stop_conflict(path, "upload")
 
     conflicting_file <- osf_find_file(dest, pattern = filename, type = "file")
+    conflicting_file$.uploaded <- FALSE
 
     if (conflicts == "skip") {
       msg <- sprintf(
@@ -244,9 +256,9 @@ osf_upload.osf_tbl_file <-
   # the metadata returned by waterbutler is a subset of what osf provides
   # so this extra API call allows us to return a consistent osf_tbl_file
   file_id <- extract_osf_id(res$data$links$upload)
-  out <- .osf_file_retrieve(file_id)
-
-  as_osf_tbl(out["data"], subclass = "osf_tbl_file")
+  out <- osf_retrieve_file(file_id)
+  out$.uploaded <- TRUE
+  out
 }
 
 
@@ -279,3 +291,16 @@ warn_ul_conflict <- function(filename) {
   )
 }
 
+
+#' Succinct message indicating number of files uploaded or skipped
+#' @param x an `osf_tbl_file` with the additional `.uploaded` column
+#' @noRd
+report_ul_activity <- function(x) {
+  if (any(x$.uploaded))
+    message(sprintf("Uploaded %i file(s) to OSF", sum(x$.uploaded)))
+  if (any(!x$.uploaded))
+    message(sprintf(
+      "Skipped %i files to avoid overwriting OSF copies",
+      sum(!x$.uploaded)
+    ))
+}
