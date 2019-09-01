@@ -69,4 +69,3 @@ report_ul_activity <- function(x) {
       sum(!x$.uploaded)
     ))
 }
-

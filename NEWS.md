@@ -1,37 +1,36 @@
-# osfr 0.2.4.9000
-
+# osfr 0.2.4.9004
 
 ## Multi-file transfers!
 
 `osf_download()` and `osf_upload()` are now vectorized, making the process of adding files to or retriving files from OSF much more convenient. This functionality required significant refactoring and brings with it several notable breaking changes. 
 
-## Other few features
+## Other new features
 
 * `osf_download()` and `osf_upload()` can now display progress bars when transferring files by setting `progress = TRUE`.
 
 ## Breaking changes
 
+* `osf_download()` and `osf_upload()`'s `overwrite` argument has been replaced with `conflicts`, which can be set to `"error"` (the default), `"skip"`, or `"overwrite"`. 
+
 * `osf_upload()`'s `name` argument has been removed, so it is no longer possible to upload a file *and* change it's OSF name.
 
-* `osf_download()`'s `path` argument must point to the directory where downloaded files should be saved. 
+* `osf_download()`'s `path` argument must point to an existing directory where all downloaded files will be saved.
 
-* `osf_upload()`'s behavior has changed when `overwrite = FALSE` and a file with the same name already exists on OSF. Previously, an error was thrown and the operation would cease. Now a *warning* is thrown and an `osf_tbl_file` containing the current version of the OSF file is returned. This change was made to facilitate multifile uploading, particularly situations where only subset of files already exist on OSF and you don't want them overwritten when uploading the missing files. 
-
-* `osf_download()`'s `decompress` argument has been removed. The zip file downloaded from OSF is always decompressed in a temp directory where the enclosed files are selectively copied to the specified `path`
+* `osf_download()`'s `decompress` argument has been removed. The zip file downloaded from OSF is always decompressed in a temp directory where the enclosed files are selectively copied to the specified `path`.
 
 ## Minor changes
 
-* Devs can now enable logging API requests and responses by defining defining
-`OSF_LOG` (see Contributing for more information)
+* Devs can now enable logging API requests and responses by defining
+`OSF_LOG` (see Contributing for more information).
 
 * Better error message when user attempts to upload directly to a file 
-(#102, @tiernanmartin)
+(#102, @tiernanmartin).
 
-* crul v0.7.4 is now the minimum required version
+* crul v0.7.4 is now the minimum required version.
 
-* The waterbutler client will now re-attempt failed requests 3 times
+* The waterbutler client will now re-attempt failed requests 3 times.
 
-* Consolidated internal client constructors
+* Consolidated internal client constructors.
 
 # osfr 0.2.4
 
