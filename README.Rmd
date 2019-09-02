@@ -147,8 +147,8 @@ unlink("Study_19_Figure_1.pdf")
 [osf-gh]: https://github.com/CenterForOpenScience/osf.io "OSF's GitHub Repository"
 [osf-api]: https://developer.osf.io "OSF API Documentation"
 [help]: http://help.osf.io "OSF Support"
-[help-proj]: http://help.osf.io/m/projects/l/481539-create-a-project "OSF: Create a Project"
-[help-comp]: http://help.osf.io/m/projects/l/481998-create-components "OSF: Create a Component"
+[help-proj]: https://help.osf.io/hc/en-us/articles/360019737594-Create-a-Project "OSF: Create a Project"
+[help-comp]: https://help.osf.io/hc/en-us/articles/360019737614-Create-Components "OSF: Create a Component"
 [magrittr]: https://magrittr.tidyverse.org
 [dplyr]: https://dplyr.tidyverse.org
 [googledrive]: https://googledrive.tidyverse.org
