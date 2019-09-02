@@ -7,6 +7,7 @@
 ## Other new features
 
 * `osf_download()` and `osf_upload()` can now display progress bars when transferring files by setting `progress = TRUE`.
+* New function `osf_refresh()` to update an existing `osf_tbl`
 
 ## Breaking changes
 
