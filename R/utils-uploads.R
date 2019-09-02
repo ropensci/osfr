@@ -65,7 +65,7 @@ report_ul_activity <- function(x) {
     message(sprintf("Uploaded %i file(s) to OSF", sum(x$.uploaded)))
   if (any(!x$.uploaded))
     message(sprintf(
-      "Skipped %i files to avoid overwriting OSF copies",
+      "Skipped %i file(s) to avoid overwriting OSF copies",
       sum(!x$.uploaded)
     ))
 }
