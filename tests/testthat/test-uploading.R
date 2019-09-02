@@ -79,3 +79,12 @@ test_that("attempting to list an osf_tbl_file with a file errors", {
   skip_if_no_pat()
   expect_error(osf_ls_files(f1), "Listing an `osf_tbl_file` requires a dir")
 })
+
+test_that("an empty directory can be uploaded", {
+  skip_if_no_pat()
+  d <- fs::dir_create("empty")
+  on.exit(fs::dir_delete(d))
+
+  out <- osf_upload(p1, path = d)
+  expect_s3_class(out, "osf_tbl_file")
+})

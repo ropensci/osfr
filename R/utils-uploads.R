@@ -10,7 +10,9 @@
 
   if (fs::is_dir(path)) {
     targets <- fs::dir_ls(path, type = c("file", "directory"), recurse = recurse)
-  } else {
+  }
+
+  if (fs::is_file(path) || rlang::is_empty(targets)) {
     targets <- path
   }
 
