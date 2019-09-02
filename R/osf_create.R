@@ -9,9 +9,9 @@
 #'
 #' @references
 #' 1. OSF Guides: Create a Project.
-#' <http://help.osf.io/m/projects/l/481539-create-a-project>.
+#' <https://help.osf.io/hc/en-us/articles/360019737594-Create-a-Project>.
 #' 2. OSF Guides: Create a Component.
-#' <http://help.osf.io/m/projects/l/481998-create-components>.
+#' <https://help.osf.io/hc/en-us/articles/360019737614-Create-Components>.
 #'
 #' @param x An [`osf_tbl_node`] with a single OSF project or component that will
 #'   serve as the new sub-component's parent node.
