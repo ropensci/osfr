@@ -1,6 +1,6 @@
 Package: osfr
 Title: R Interface to OSF
-Version: 0.2.4
+Version: 0.2.4.9004
 Authors@R: c(
     person("Aaron", "Wolen",, "aaron@wolen.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-2542-2202")),
@@ -11,13 +11,15 @@ Authors@R: c(
 Description: Manage your projects and access open research materials and data on OSF.
 Depends: R (>= 3.1.0)
 Imports:
-    crul (>= 0.7.0),
+    crul (>= 0.7.4),
     jsonlite,
     stringi,
     purrr,
     tibble,
     rlang,
-    fs
+    fs (>= 1.3.0),
+    memoise,
+    httr
 License: Apache License 2.0 | file LICENSE
 URL: 
     http://centerforopenscience.github.io/osfr, 
@@ -26,6 +28,8 @@ BugReports: https://github.com/centerforopenscience/osfr/issues
 LazyData: true
 Suggests:
     dplyr,
+    logger,
+    rprojroot,
     testthat,
     knitr,
     rmarkdown,

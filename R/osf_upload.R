@@ -1,17 +1,65 @@
 #' Upload files to OSF
 #'
-#' @param x an [`osf_tbl_node`] with a single project or
-#'   component, or an [`osf_tbl_file`] with a single directory
-#' @param path Path to a local file. Ensure the file has a proper
-#'   file extension (e.g., `.docx`) to ensure it's rendered properly on OSF.
-#' @param name Name of the uploaded file (if `NULL`, `basename(path)`
-#'   will be used).
-#' @param overwrite Logical, overwrite an existing file with the same name
-#'   (default `FALSE`)? If `TRUE`, OSF will automatically update the file and
-#'   record the previous version.
+#' Upload local files to a project, component, or directory on OSF.
+#'
+#' @param x The upload destintation on OSF. Can be one of the following:
+#'   * An [`osf_tbl_node`] with a single project or component.
+#'   * An [`osf_tbl_file`] with a single directory.
+#' @param path A character vector of paths pointing to existing
+#'   local files and/directories.
+#' @param recurse If `TRUE`, fully recurse directories included in `path`. You
+#'   can also control the number of levels to recurse by specifying a positive
+#'   number.
+#' @template conflicts
+#' @template progress
 #' @template verbose
 #'
-#' @return an [`osf_tbl_file`] containing uploaded file
+#' @return An [`osf_tbl_file`] containing the uploaded files and directories
+#'   that were directly specified in `path`.
+#'
+#' @section File and directory paths:
+#' The `x` argument indicates *where* on OSF the files will be uploaded (*i.e.*,
+#' the destination). The `path` argument indicates *what* will be uploaded,
+#' which can include a combination of files *and* directories.
+#'
+#' When `path` points to a local file, the file is uploaded to the *root* of the
+#' specified OSF destination, regardless of where it's on your local machine
+#' (*i.e.*, the intermediate paths are not preserved). For example, the
+#' following would would upload both `a.txt` and `b.txt` to the root of
+#' `my_proj`:
+#'
+#' ```
+#' osf_upload(my_proj, c("a.txt", "subdir/b.txt"))`
+#' ```
+#'
+#' When `path` points to a local directory, a corresponding directory will be
+#' created at the root of the OSF destination, `x`, and any files within the
+#' local directory are uploaded to the new OSF directory. Therefore, we could
+#' maintain the directory structure in the above example by passing `b.txt`'s
+#' parent directory to `path` instead of the file itself:
+#'
+#' ```
+#' osf_upload(my_proj, c("a.txt", "subdir2"))
+#' ```
+#'
+#' Likewise, `osf_upload(my_proj, path = ".")` will upload your entire current
+#' working directory to the specified OSF destination.
+#'
+#' @section Uploading to subdirectories:
+#' In order to upload directly to an existing OSF directory you would first need
+#' to retrieve the directory as an [`osf_tbl_file`]. This can be accomplished by
+#' passing the directory's unique identifier to [`osf_retrieve_file()`], or, if
+#' you don't have the ID handy, you can use [`osf_ls_files()`] to retrieve the
+#' directory by name.
+#'
+#' ```
+#' # search for the 'rawdata' subdirectory within top-level 'data' directory
+#' target_dir <- osf_ls_files(my_proj, path = "data", pattern = "rawdata")
+#' # upload 'a.txt' to data/rawdata/ on OSF
+#' osf_upload(target_dir, path = "a.txt")
+#' ```
+#'
+#' @template synchronization
 #'
 #' @examples
 #' \dontrun{
@@ -35,19 +83,15 @@
 #'
 #' @export
 #' @importFrom crul upload
-#' @importFrom fs is_file is_dir path_dir
+#' @importFrom memoise memoise forget
 
 osf_upload <-
   function(x,
            path,
-           name = NULL,
-           overwrite = FALSE,
+           recurse = FALSE,
+           conflicts = "error",
+           progress = FALSE,
            verbose = FALSE) {
-
-  if (!file.exists(path)) abort(sprintf("Can't find file:\n %s", path))
-  if (is_dir(path)) {
-    abort("`path` must point to a file\n* Uploading directories is not supported")
-  }
   UseMethod("osf_upload")
 }
 
@@ -55,86 +99,164 @@ osf_upload <-
 osf_upload.osf_tbl_node <-
   function(x,
            path,
-           name = NULL,
-           overwrite = FALSE,
+           recurse = FALSE,
+           conflicts = "error",
+           progress = FALSE,
            verbose = FALSE) {
 
-  if (is.null(name)) name <- basename(path)
-  name <- check_upload_name(name)
+  path <- check_files(path)
   x <- make_single(x)
-
-  # check if filename already exists at destination
-  items <- osf_ls_files(x, type = "file", pattern = name)
-  osf_file <- items[items$name == name, ]
-
-  if (nrow(osf_file) == 0) {
-    out <- upload_file(as_id(x), path, name, verbose = verbose)
-  } else {
-    out <- update_file(as_id(x), path, as_id(osf_file), overwrite, verbose)
-  }
-
-  as_osf_tbl(out["data"], "osf_tbl_file")
+  .osf_upload(x, path, recurse, conflicts, progress, verbose)
 }
 
 #' @export
 osf_upload.osf_tbl_file <-
   function(x,
            path,
-           name = NULL,
-           overwrite = FALSE,
+           recurse = FALSE,
+           conflicts = "error",
+           progress = FALSE,
            verbose = FALSE) {
 
-  if (is.null(name)) name <- basename(path)
-  name <- check_upload_name(name)
+  path <- check_files(path)
   x <- make_single(x)
 
   if (is_osf_file(x)) {
-    abort("Uploading to an `osf_tbl_file` requires a directory\n* `x` contains a file")
+    abort(paste0(
+      "Can't upload directly to a file.\n",
+      "Are you trying to update an existing file on OSF? Try:\n",
+      "  * uploading to the file's parent directory or project/component"
+    ))
   }
 
-  items <- osf_ls_files(x, type = "file", pattern = name)
-  osf_file <- items[items$name == name, ]
+  .osf_upload(x, path, recurse, conflicts, progress, verbose)
+}
 
-  if (nrow(osf_file) == 0) {
-    out <- upload_file(get_parent_id(x), path, name, as_id(x), verbose)
+
+#' Recursive file and directory upload function
+#'
+#' This function maps over all elements in `path` and recursively walks any
+#' subdirectories, calling `file_upload()` for each file it counters..
+#' @param dest OSF node or directory upload destination
+#' @importFrom fs is_dir file_info
+#' @noRd
+
+.osf_upload <- function(dest, path, recurse, conflicts, progress, verbose) {
+
+  # inventory of files to upload and/or remote directories to create
+  targets <- map_rbind(.upload_manifest, path = path, recurse = recurse)
+
+  # retrieve/create each unique remote destination
+  destinations <- Map(recurse_path,
+    path = unique(targets$remote_dir),
+    x = list(dest),
+    missing_action = "create",
+    verbose = verbose
+  )
+
+  # return only files/directories passed directly to `path`
+  path_by <- split(path, fs::file_info(path)$type, drop = TRUE)
+  out <- vector(mode = "list")
+
+  if (any(targets$type == "file")) {
+    target_files <- targets[targets$type == "file", ]
+    message(sprintf(
+      "Attempting to upload %i file(s) to OSF",
+      nrow(target_files)
+    ))
+
+    uploaded <- map_rbind(.upload_file,
+      path = target_files$path,
+      dest = destinations[target_files$remote_dir],
+      conflicts = conflicts,
+      progress = progress,
+      verbose = verbose
+    )
+
+    if (!verbose) report_ul_activity(uploaded)
+
+    if (!is.null(path_by$file)) {
+      out$file <- uploaded[
+        uploaded$name %in% basename(path_by$file),
+        c("name", "id", "meta")
+      ]
+    }
+  }
+
+  if (!is.null(path_by$directory)) {
+    out$directory <- do.call("rbind", destinations[basename(path_by$directory)])
+  }
+  do.call("rbind", out)
+}
+
+
+#' Internal file upload function
+#'
+#' This is a non-vectorized function that uploads a single file at a time. It
+#' handles the logic for uploading new files or updating existing ones.
+#'
+#' @param dest OSF node or directory upload destination
+#' @param path scalar character vector with the path of the file to be uploaded
+#' @return `osf_tbl_file` with a single row for the uploaded file and a logical
+#'    column, `.uploaded` that indicates whether the file was actually uploaded.
+#' @noRd
+
+.upload_file <- function(dest, path, conflicts, progress, verbose) {
+  stopifnot(rlang::is_scalar_character(path))
+
+  # force the uploaded filename to match the local filename
+  filename <- basename(path)
+
+  # set arguments depending on whether destination is a directory or node
+  upload_args <- list(
+    name = filename,
+    body = crul::upload(path),
+    progress = progress
+  )
+
+  if (inherits(dest, "osf_tbl_node")) {
+    upload_args$id <- as_id(dest)
   } else {
-    out <- update_file(get_parent_id(x), path, as_id(osf_file), overwrite, verbose)
+    upload_args$id <- get_parent_id(dest)
+    upload_args$fid <- as_id(dest)
   }
 
-  as_osf_tbl(out["data"], "osf_tbl_file")
-}
+  if (progress) cat(sprintf("Uploading %s\n", filename))
+  res <- do.call(".wb_file_upload", upload_args)
 
-check_upload_name <- function(x) {
-  path <- fs::path_dir(x)
-  if (path != ".") {
-    x <- basename(x)
-    warn(sprintf("Removing path information (%s) from uploaded file name", path))
+  if (is.null(res$errors)) {
+    if (verbose) message(sprintf("Uploaded new file '%s' to OSF", filename))
+  } else {
+
+    # raise error as usual if error is anything other than 409 (file exists)
+    if (res$status_code != 409) raise_error(res)
+    if (conflicts == "error") stop_conflict(path, "upload")
+
+    conflicting_file <- osf_find_file(dest, pattern = filename, type = "file")
+    conflicting_file$.uploaded <- FALSE
+
+    if (conflicts == "skip") {
+      msg <- sprintf(
+        "Skipping file '%s' to avoid overwriting the existing copy on OSF",
+        filename
+      )
+      if (verbose) message(msg)
+      return(conflicting_file)
+    }
+
+    # overwrite existing file
+    upload_args$fid <- as_id(conflicting_file)
+    upload_args$name <- NULL
+
+    if (progress) cat(sprintf("Uploading file '%s'\n", filename))
+    res <- do.call(".wb_file_update", upload_args)
+    if (verbose) message(sprintf("Uploaded new version of '%s' to OSF", filename))
   }
-  x
-}
 
-upload_file <- function(id, path, name, dir_id = NULL, verbose = FALSE) {
-  res <- .wb_file_upload(id, name, crul::upload(path), dir_id)
-  raise_error(res)
-
-  if (verbose) message(sprintf("Uploaded %s to OSF", basename(path)))
-
-  # the metadata returned by waterbutler is a subset of what's returned by osf
+  # the metadata returned by waterbutler is a subset of what osf provides
   # so this extra API call allows us to return a consistent osf_tbl_file
-  file_id <- strsplit(res$data$id, split = "/", fixed = TRUE)[[1]][2]
-  .osf_file_retrieve(file_id)
-}
-
-update_file <- function(id, path, file_id, overwrite = TRUE, verbose = FALSE) {
-  if (!overwrite) {
-    abort("File already exists at destination\n* Set `overwrite=TRUE` to upload a new version")
-  }
-
-  res <- .wb_file_update(id, file_id, body = crul::upload(path))
-  raise_error(res)
-
-  if (verbose) message(sprintf("Uploaded new version of %s to OSF", basename(path)))
-
-  file_id <- strsplit(res$data$id, split = "/", fixed = TRUE)[[1]][2]
-  .osf_file_retrieve(file_id)
+  file_id <- extract_osf_id(res$data$links$upload)
+  out <- osf_retrieve_file(file_id)
+  out$.uploaded <- TRUE
+  out
 }

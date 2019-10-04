@@ -18,19 +18,19 @@
 #' @examples
 #' \dontrun{
 #' # Retrieve the Psychology Reproducibility Project from OSF
-#' pysch_rp <- osf_retrieve_node("ezum7")
+#' psych_rp <- osf_retrieve_node("ezum7")
 #'
 #' # List all files and directories
-#' osf_ls_files(pysch_rp)
+#' osf_ls_files(psych_rp)
 #'
 #' # ...only the directories
-#' osf_ls_files(pysch_rp, type = "folder")
+#' osf_ls_files(psych_rp, type = "folder")
 #'
 #' # ...only PDF files
-#' osf_ls_files(pysch_rp, type = "file", pattern = "pdf")
+#' osf_ls_files(psych_rp, type = "file", pattern = "pdf")
 #'
 #' # List the contents of the first directory
-#' osf_ls_files(pysch_rp, path = "RPP_SI_Figures")
+#' osf_ls_files(psych_rp, path = "RPP_SI_Figures")
 #' }
 #' @seealso [`osf_ls_nodes()`] to generate a list of projects and components.
 #' @export
@@ -97,7 +97,7 @@ osf_ls_files.osf_tbl_file <-
   # manually construct the API path because the 'files' endpoint for nodes lists
   # the enabled storage providers
   api_path <- switch(class(x)[1],
-    osf_tbl_node = .osf_api_path(sprintf("nodes/%s/files/osfstorage/", as_id(x))),
+    osf_tbl_node = sprintf("nodes/%s/files/osfstorage/", as_id(x)),
     osf_tbl_file = crul::url_parse(get_relation(x, "files"))$path
   )
 

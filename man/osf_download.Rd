@@ -4,41 +4,74 @@
 \alias{osf_download}
 \title{Download files and directories from OSF}
 \usage{
-osf_download(x, path = NULL, overwrite = FALSE, verbose = FALSE)
+osf_download(x, path = NULL, recurse = FALSE, conflicts = "error",
+  verbose = FALSE, progress = FALSE)
 }
 \arguments{
 \item{x}{An \code{\link{osf_tbl_file}} containing a single file or directory.}
 
-\item{path}{Local path where the downloaded file will be saved. The default
-is to use the remote file's name.}
+\item{path}{Path pointing to a local directory where the downloaded files
+will be saved. Default is to use the current working directory.}
 
-\item{overwrite}{Logical, if the local path already exists should it be
-replaced with the downloaded file?}
+\item{recurse}{Applies only to OSF directories. If \code{TRUE}, a directory is
+fully recursed and all nested files and subdirectories are downloaded.
+Alternatively, a positive number will determine the number of levels
+to recurse.}
+
+\item{conflicts}{This determines what happens when a file with the same name
+exists at the specified destination. Can be one of the following:
+\itemize{
+\item \code{"error"} (the default): throw an error and abort the file transfer operation.
+\item \code{"skip"}: skip the conflicting file(s) and continue transferring the
+remaining files.
+\item \code{"overwrite"}: replace the existing file with the transferred copy.
+}}
 
 \item{verbose}{Logical, indicating whether to print informative messages
 about interactions with the OSF API (default \code{FALSE}).}
+
+\item{progress}{Logical, if \code{TRUE} progress bars are displayed for each file
+transfer. Mainly useful for transferring large files. For tracking lots of
+small files, setting \code{verbose = TRUE} is more informative.}
 }
 \value{
-The \code{\link{osf_tbl_file}} input with a new column, \code{"local_path"},
-containing the downloaded file's path.
+The same \code{\link{osf_tbl_file}} passed to \code{x} with a new column,
+\code{"local_path"}, containing paths to the local files.
 }
 \description{
-Files stored on OSF can be downloaded locally by providing an
-\code{\link{osf_tbl_file}} that contains the OSF file of interest. If the
-\code{\link{osf_tbl_file}} contains a directory, a zip file containing the
-directory's contents will be downloaded.
-
-By default files are downloaded to your current working directory with the
-same filename used on OSF. The \code{path} argument can be used to specify a
-different destination \emph{and}, optionally,  a different filename for the
-downloaded file. Note, the directory portion of \code{path} must reference an
-existing directory.
+Files stored on OSF can be downloaded locally by passing an \code{\link{osf_tbl_file}}
+that contains the files and folders of interest. Use \code{path} to specify
+\emph{where} the files should be downloaded, otherwise they are downloaded to
+your working directory by default.
 }
+\section{Implementation details}{
+
+Directories are always downloaded from OSF as zip files that contain its
+entire contents. The logic for handling conflicts and recursion is
+implemented locally, acting on these files in a temporary location and
+copying them to \code{path} as needed. This creates a \emph{gotcha} if you're
+downloading directories with large files and assuming that setting \code{conflicts = "skip"} and/or limiting recursion will reduce the number of files you're
+downloading. In such a case, a better strategy would be to use
+\code{osf_ls_files()} to list the contents of the directory and pass that output
+to \code{osf_download()}.
+}
+
+\section{A note about synchronization}{
+
+While \code{osf_download()} and \code{osf_upload()} can be used to conveniently shuttle
+files back and forth between OSF and your local machine, it's important to
+note that \strong{they are not file synchronization functions}. In contrast to
+something like \href{https://rsync.samba.org}{rsync},
+\code{osf_download()}/\code{osf_upload()} do not take into account a file's contents or
+modification time. Whether you're uploading or downloading, if \code{overwrite = TRUE}, osfr will overwrite an existing file regradless of whether the
+existing file is the more recent copy. You have been warned.
+}
+
 \examples{
 \dontrun{
 # download a single file
 analysis_plan <- osf_retrieve_file("2ryha") \%>\%
-  osf_download(path = "plan_wave1.docx")
+  osf_download()
 
 # verify the file was downloaded locally
 file.exists(analysis_plan$local_path)

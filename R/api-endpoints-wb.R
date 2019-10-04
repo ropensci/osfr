@@ -25,9 +25,11 @@
 #'   the specified existing folder
 #'
 #' @noRd
-.wb_file_upload <- function(id, name, body, fid = NULL) {
+
+.wb_file_upload <- function(id, name, body, fid = NULL, progress = FALSE) {
   query <- list(kind = "file", name = name)
-  res <- .wb_request("put", .wb_api_path(id, fid), query = query, body = body)
+  path <- .wb_api_path(id, fid)
+  res <- .wb_request("put", path, query = query, body = body, progress = progress)
   process_response(res)
 }
 
@@ -38,10 +40,10 @@
 #' @param fid Existing file's Waterbutler ID
 #'
 #' @noRd
-.wb_file_update <- function(id, fid, body) {
+.wb_file_update <- function(id, fid, body, progress = FALSE) {
   query <- list(kind = "file")
   path <- .wb_api_path(id, fid, type = "file")
-  res <- .wb_request("put", path, query = query, body = body)
+  res <- .wb_request("put", path, query = query, body = body, progress = progress)
   process_response(res)
 }
 
@@ -53,15 +55,27 @@
 #' @param type indicate whether downloading a `"file"` or `"folder"`
 #' @param zip Logical, should the downloaded contents be zipped? Only applies to
 #'   folders.
+#' @return Invisibly returns `TRUE` when the download succeeds
 #'
 #' @noRd
-.wb_download <- function(id, fid, path, type, zip = FALSE) {
+.wb_download <-
+  function(id,
+           fid,
+           path,
+           type,
+           zip = FALSE,
+           verbose = FALSE,
+           progress = FALSE) {
   type <- match.arg(type, c("file", "folder"))
   query <- list()
   if (zip) query$zip <- ""
   api_path <- .wb_api_path(id, fid, type = type)
-  res <- .wb_request("get", api_path, query, disk = path)
-  if (res$status_code == 200) return(TRUE)
+
+  if (progress) cat(sprintf("Downloading %s\n", basename(path)))
+  res <- .wb_request("get", api_path, query, disk = path, progress = progress)
+  if (verbose) message(sprintf("Downloaded %s to %s", type, path))
+
+  if (res$status_code == 200) return(invisible(TRUE))
   if (res$status_code == 404) {
     msg <- sprintf("The requested %s (%s) could not be found in node `%s`",
                    type, fid, id)

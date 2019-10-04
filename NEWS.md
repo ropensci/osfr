@@ -1,3 +1,37 @@
+# osfr 0.2.4.9004
+
+## Multi-file transfers!
+
+`osf_download()` and `osf_upload()` are now vectorized, making the process of adding files to or retriving files from OSF much more convenient. This functionality required significant refactoring and brings with it several notable breaking changes. 
+
+## Other new features
+
+* `osf_download()` and `osf_upload()` can now display progress bars when transferring files by setting `progress = TRUE`.
+
+## Breaking changes
+
+* `osf_download()` and `osf_upload()`'s `overwrite` argument has been replaced with `conflicts`, which can be set to `"error"` (the default), `"skip"`, or `"overwrite"`. 
+
+* `osf_upload()`'s `name` argument has been removed, so it is no longer possible to upload a file *and* change it's OSF name.
+
+* `osf_download()`'s `path` argument must point to an existing directory where all downloaded files will be saved.
+
+* `osf_download()`'s `decompress` argument has been removed. The zip file downloaded from OSF is always decompressed in a temp directory where the enclosed files are selectively copied to the specified `path`.
+
+## Minor changes
+
+* Devs can now enable logging API requests and responses by defining
+`OSF_LOG` (see Contributing for more information).
+
+* Better error message when user attempts to upload directly to a file 
+(#102, @tiernanmartin).
+
+* crul v0.7.4 is now the minimum required version.
+
+* The waterbutler client will now re-attempt failed requests 3 times.
+
+* Consolidated internal client constructors.
+
 # osfr 0.2.4
 
 ## Minor fixes

@@ -5,9 +5,10 @@
 #' workflows.
 #'
 #' @importFrom crul HttpClient url_parse
+#' @importFrom httr progress
 #' @importFrom stringi stri_split_fixed
 #' @importFrom purrr map map_chr imap_chr pluck set_names transpose %||%
 #' @importFrom tibble tibble
 #' @importFrom rlang abort warn is_empty is_scalar_character
-#' @importFrom utils head tail modifyList browseURL
+#' @importFrom utils head tail modifyList browseURL unzip
 "_PACKAGE"
