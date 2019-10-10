@@ -7,7 +7,7 @@
 osf_refresh(x)
 }
 \arguments{
-\item{x}{an \code{\link{osf_tbl}}}
+\item{x}{an \code{\link{osf_tbl}}.}
 }
 \description{
 Use \code{osf_refresh()} to update one or more entities in an \code{\link[=osf_tbl]{osf_tbl()}} with
