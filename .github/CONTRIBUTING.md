@@ -26,7 +26,7 @@ You can also enable logging by defining `OSF_LOG` to point to a logfile. For exa
 OSF_PAT=osfr.log
 ```
 
-Doing so will log all API requests to `osfr.log` for inspection.
+This will log all API requests to `osfr.log` for inspection.
 
 ### Fixing typos
 
