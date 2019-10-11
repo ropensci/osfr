@@ -98,18 +98,17 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
 
 
 # Construct the move/copy request's body
-build_move_request <- function(x) UseMethod("build_move_request")
+build_move_request <- function(x) {
+  switch(class(x)[1],
 
-build_move_request.osf_tbl_file <- function(x) {
-  list(
-    path = get_meta(x, "attributes", "path")
-  )
-}
+    osf_tbl_node =   list(
+      path = "/",
+      resource = unclass(as_id(x)),
+      provider = "osfstorage"
+    ),
 
-build_move_request.osf_tbl_node <- function(x) {
-  list(
-    path = "/",
-    resource = unclass(as_id(x)),
-    provider = "osfstorage"
+    osf_tbl_file = list(
+      path = get_meta(x, "attributes", "path")
+    )
   )
 }
