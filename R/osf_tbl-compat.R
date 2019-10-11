@@ -44,9 +44,11 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
   )
 }
 
+# nolint start
 arrange.osf_tbl <- function(.data, ...) rebuild_osf_tbl(NextMethod())
 filter.osf_tbl <- function(.data, ...)  rebuild_osf_tbl(NextMethod())
 mutate.osf_tbl <- function(.data, ...)  rebuild_osf_tbl(NextMethod())
 rename.osf_tbl <- function(.data, ...)  rebuild_osf_tbl(NextMethod())
 select.osf_tbl <- function(.data, ...)  rebuild_osf_tbl(NextMethod())
 slice.osf_tbl <- function(.data, ...)   rebuild_osf_tbl(NextMethod())
+# nolint end

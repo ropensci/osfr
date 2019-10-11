@@ -20,3 +20,4 @@ inst/.lintr$
 ^pkgdown$
 # misc
 ^\.httr-oauth
+^\.lintr$

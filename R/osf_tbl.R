@@ -77,7 +77,9 @@ as_osf_tbl <- function(x, subclass = NULL) UseMethod("as_osf_tbl")
 as_osf_tbl.default <- function(x, subclass = NULL)
   abort("No methods available to coerce this object into an osf_tbl")
 
+# nolint start
 as_osf_tbl.data.frame <- function(x, subclass = NULL) new_osf_tbl(x, subclass)
+# nolint end
 
 as_osf_tbl.list <- function(x, subclass = NULL) {
 

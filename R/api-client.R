@@ -30,11 +30,11 @@
   headers <- list(`User-Agent` = user_agent())
 
   if (!is.null(pat)) {
-    headers$Authorization <- sprintf("Bearer %s", pat)
+    headers$Authorization <- sprintf("Bearer %s", pat) # nolint
   }
 
   if (api == "osf") {
-    headers$`Accept-Header` <- sprintf(
+    headers$`Accept-Header` <- sprintf( # nolint
       "application/vnd.api+json;version=%s",
       version)
   }
