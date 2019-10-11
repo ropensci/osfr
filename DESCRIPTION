@@ -33,7 +33,7 @@ Suggests:
     testthat,
     knitr,
     rmarkdown,
-    lintr,
+    lintr (>= 2.0),
     covr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
