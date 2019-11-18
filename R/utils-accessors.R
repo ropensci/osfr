@@ -1,7 +1,7 @@
 #' Extract metadata values from OSF entity lists
 #'
 #' @param x an [`osf_tbl`] object
-#' @param ... list of accessors passed to [`purrr::pluck()`]
+#' @param ... list of accessors passed to [`purrr::chuck()`]
 #'
 #' @examples
 #' me <- osf_retrieve_user("me")
@@ -11,7 +11,7 @@
 get_meta <- function(x, ...) {
   stopifnot(inherits(x, "osf_tbl"))
   stopifnot(is.list(x$meta))
-  out <- lapply(x$meta, purrr::pluck, ...)
+  out <- lapply(x$meta, purrr::chuck, ...)
   unlist(out, use.names = FALSE, recursive = FALSE)
 }
 
@@ -23,7 +23,7 @@ get_relation <- function(x, field) {
     root = function(x) x$relationships$node$data$id
   )
   stopifnot(field %in% names(fields))
-  purrr::pluck(x$meta[[1]], fields[[field]])
+  purrr::chuck(x$meta[[1]], fields[[field]])
 }
 
 # Retrieve the parent node's GUID for a component, file or directory
@@ -35,5 +35,5 @@ get_parent_id <- function(x) {
     osf_tbl_file = function(x) x$meta[[1]]$relationships$node$data$id,
     osf_tbl_node = function(x) x$meta[[1]]$relationships$parent$data$id
   )
-  purrr::pluck(x, parent_id)
+  purrr::chuck(x, parent_id)
 }
