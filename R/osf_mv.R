@@ -90,10 +90,7 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
   raise_error(out)
 
   if (verbose) message(sprintf("Moved '%s' to '%s'.", x$name, to$name))
-
-  # retrieve osf representation of file
-  file_id <- strsplit(out$data$id, split = "/", fixed = TRUE)[[1]][2]
-  .osf_file_retrieve(file_id)
+  wb2osf(out)
 }
 
 
