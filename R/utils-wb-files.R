@@ -8,7 +8,7 @@
 #' @return An `osf_tbl_file`
 #' @noRd
 
-wb2osf <- function (x) {
+wb2osf <- function(x) {
   wb_path <- purrr::chuck(x, "data", "id")
   id <- strsplit(wb_path, split = "/", fixed = TRUE)[[1]][2]
   osf_retrieve_file(id)

@@ -37,3 +37,21 @@ get_parent_id <- function(x) {
   )
   purrr::chuck(x, parent_id)
 }
+
+#' Remote path for node, file, or directory
+#'
+#' Details:
+#'  - leading slash is always removed to facilitate comparisons with local files
+#'  - directories always end with a trailing slash
+#'  - '.' is returned for nodes since they represent the project root
+#' @noRd
+get_remote_path <- function(x) {
+  stopifnot(inherits(x, c("osf_tbl_file", "osf_tbl_node")))
+
+  get_path <- switch(class(x)[1],
+    osf_tbl_file = function(x) get_meta(x, "attributes", "materialized_path"),
+    osf_tbl_node = function(x) rep(".", nrow(x))
+  )
+  sub("^\\/", "", get_path(x))
+}
+

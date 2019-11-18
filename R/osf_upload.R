@@ -139,124 +139,98 @@ osf_upload.osf_tbl_file <-
 #' subdirectories, calling `file_upload()` for each file it counters..
 #' @param dest OSF node or directory upload destination
 #' @importFrom fs is_dir file_info
+#' @importFrom purrr map_lgl
 #' @noRd
 
 .osf_upload <- function(dest, path, recurse, conflicts, progress, verbose) {
 
   # inventory of files to upload and/or remote directories to create
-  targets <- map_rbind(.upload_manifest, path = path, recurse = recurse)
+  manifest <- map_rbind(.upload_manifest, path = path, recurse = recurse)
 
-  # retrieve/create each unique remote destination
-  destinations <- Map(recurse_path,
-    path = unique(targets$remote_dir),
-    x = list(dest),
-    missing_action = "create",
-    verbose = verbose
+  # retrieve remote destinations
+  manifest <- .ulm_add_remote_dests(manifest, dest, verbose)
+
+  # identify conflicting files at remote destinations
+  manifest <- .ulm_add_conflicting_files(manifest, verbose)
+  manifest$conflicted <-  purrr::map_lgl(manifest$remote_file, Negate(is.null))
+
+  # list of osf_tbls to be returned
+  out <- list(
+    dirs = NULL,
+    skipped = NULL,
+    updated = NULL,
+    uploaded = NULL
   )
 
-  # return only files/directories passed directly to `path`
-  path_by <- split(path, fs::file_info(path)$type, drop = TRUE)
-  out <- vector(mode = "list")
+  # assemble directories specified in `path` for output
+  path_dirs <- setdiff(intersect(manifest$remote_dir, path), ".")
+  if (!is_empty(path_dirs)) {
+    out$dirs <- do.call(
+      "rbind",
+      manifest$remote_dest[match(path_dirs, manifest$remote_dir)]
+    )
+  }
 
-  if (any(targets$type == "file")) {
-    target_files <- targets[targets$type == "file", ]
+  # process target files in upload manifest
+  manifest <- manifest[manifest$type == "file", ]
+
+  if (any(manifest$conflicted)) {
+
+    if (conflicts == "error") {
+      stop_conflict(manifest$path[manifest$conflicted][1], "upload")
+    }
+
+    if (conflicts == "skip") {
+      message(sprintf(
+        "Skipped %i file(s) to avoid overwriting OSF copies",
+        sum(manifest$conflicted)
+      ))
+
+      # drop skipped files from manifest and add them to output
+      out$skipped <- do.call("rbind", manifest$remote_file[manifest$conflicted])
+      manifest <- manifest[!manifest$conflicted, ]
+    }
+  }
+
+  # split file inventory based on whether they will be uploaded or updated
+  manifest <- split(
+    manifest,
+    ifelse(manifest$conflicted, "update", "upload")
+  )
+
+  if (!is.null(manifest$update)) {
     message(sprintf(
-      "Attempting to upload %i file(s) to OSF",
-      nrow(target_files)
+      "Attempting to update %i existing file(s) on OSF...",
+        nrow(manifest$update)
     ))
-
-    uploaded <- map_rbind(.upload_file,
-      path = target_files$path,
-      dest = destinations[target_files$remote_dir],
-      conflicts = conflicts,
+    out$updated <- Map(.update_existing_file,
+      dest = manifest$update$remote_file,
+      path = manifest$update$path,
       progress = progress,
       verbose = verbose
     )
-
-    if (!verbose) report_ul_activity(uploaded)
-
-    if (!is.null(path_by$file)) {
-      out$file <- uploaded[
-        uploaded$name %in% basename(path_by$file),
-        c("name", "id", "meta")
-      ]
-    }
   }
 
-  if (!is.null(path_by$directory)) {
-    out$directory <- do.call("rbind", destinations[basename(path_by$directory)])
+  if (!is.null(manifest$upload)) {
+    message(sprintf(
+      "Attempting to upload %i new file(s) to OSF...",
+        nrow(manifest$upload)
+    ))
+    out$uploaded <- Map(.upload_new_file,
+      path = manifest$upload$path,
+      dest = manifest$upload$remote_dest,
+      progress = progress,
+      verbose = verbose
+    )
   }
+
+  # return osf_tbls only for files passed directly to `path`
+  out$updated  <- out$updated[names(out$updated) %in% path]
+  out$uploaded <- out$uploaded[names(out$uploaded) %in% path]
+
+  out$updated  <- map_rbind(wb2osf, out$updated)
+  out$uploaded <- map_rbind(wb2osf, out$uploaded)
+
   do.call("rbind", out)
 }
 
-
-#' Internal file upload function
-#'
-#' This is a non-vectorized function that uploads a single file at a time. It
-#' handles the logic for uploading new files or updating existing ones.
-#'
-#' @param dest OSF node or directory upload destination
-#' @param path scalar character vector with the path of the file to be uploaded
-#' @return `osf_tbl_file` with a single row for the uploaded file and a logical
-#'    column, `.uploaded` that indicates whether the file was actually uploaded.
-#' @noRd
-
-.upload_file <- function(dest, path, conflicts, progress, verbose) {
-  stopifnot(rlang::is_scalar_character(path))
-
-  # force the uploaded filename to match the local filename
-  filename <- basename(path)
-
-  # set arguments depending on whether destination is a directory or node
-  upload_args <- list(
-    name = filename,
-    body = crul::upload(path),
-    progress = progress
-  )
-
-  if (inherits(dest, "osf_tbl_node")) {
-    upload_args$id <- as_id(dest)
-  } else {
-    upload_args$id <- get_parent_id(dest)
-    upload_args$fid <- as_id(dest)
-  }
-
-  if (progress) cat(sprintf("Uploading %s\n", filename))
-  res <- do.call(".wb_file_upload", upload_args)
-
-  if (is.null(res$errors)) {
-    if (verbose) message(sprintf("Uploaded new file '%s' to OSF", filename))
-  } else {
-
-    # raise error as usual if error is anything other than 409 (file exists)
-    if (res$status_code != 409) raise_error(res)
-    if (conflicts == "error") stop_conflict(path, "upload")
-
-    conflicting_file <- osf_find_file(dest, pattern = filename, type = "file")
-    conflicting_file$.uploaded <- FALSE
-
-    if (conflicts == "skip") {
-      msg <- sprintf(
-        "Skipping file '%s' to avoid overwriting the existing copy on OSF",
-        filename
-      )
-      if (verbose) message(msg)
-      return(conflicting_file)
-    }
-
-    # overwrite existing file
-    upload_args$fid <- as_id(conflicting_file)
-    upload_args$name <- NULL
-
-    if (progress) cat(sprintf("Uploading file '%s'\n", filename))
-    res <- do.call(".wb_file_update", upload_args)
-    if (verbose) message(sprintf("Uploaded new version of '%s' to OSF", filename))
-  }
-
-  # the metadata returned by waterbutler is a subset of what osf provides
-  # so this extra API call allows us to return a consistent osf_tbl_file
-  file_id <- extract_osf_id(res$data$links$upload)
-  out <- osf_retrieve_file(file_id)
-  out$.uploaded <- TRUE
-  out
-}
