@@ -28,7 +28,9 @@ get_relation <- function(x, field) {
 
 # Retrieve the parent node's GUID for a component, file or directory
 get_parent_id <- function(x) {
-  stopifnot(inherits(x, "osf_tbl"))
+  stopifnot(inherits(x, c("osf_tbl_file", "osf_tbl_node")))
+  stopifnot(nrow(x) == 1)
+
   parent_id <- switch(class(x)[1],
     osf_tbl_file = function(x) x$meta[[1]]$relationships$node$data$id,
     osf_tbl_node = function(x) x$meta[[1]]$relationships$parent$data$id
