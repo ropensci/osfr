@@ -75,10 +75,11 @@ car_components <- osf_ls_nodes(car_project)
 car_components
 ```
 
+Remember, new projects are always private by default. You can change this by opening the project on OSF and [making it public][osf-privacy], and [even generate a DOI][osf-doi] so others can cite your work. 
 
 ## Working With Files
 
-In general, files can exist in projects, components, and/or directories on the OSF. Files can be stored on *OSF's Storage* or in another service that is connected to an OSF project (e.g. GitHub, Dropbox, or Google Drive). However, `osfr` currently only supports interacting with files on OSF Storage.
+In general, files can exist in projects, components, and/or directories on OSF. Files can be stored on *OSF's Storage* or in another service that is connected to an OSF project (e.g. GitHub, Dropbox, or Google Drive). However, `osfr` currently only supports interacting with files on OSF Storage.
 
 ### Uploading/Updating files
 
@@ -86,7 +87,7 @@ To add our data file to the *Data* component within our project, we'll need to p
 
 *__Note:__ If an `osf_tbl` with multiple entities is passed to an osfr function, the default behavior is to use the entity in the first row and warn that all other entities are ignored.*
 
-osfr is compatible with the dplyr package, so we can use `filter()` to select the component we 
+osfr is compatible with the dplyr package, so we can `filter()` for the specific component we want.
 
 ```{r}
 library(dplyr)
@@ -99,7 +100,7 @@ mtcars_file <- osf_upload(data_component, path = "mtcars.csv")
 mtcars_file
 ```
 
-The `mtcars_file` object now contains an `osf_tbl` with 1 row corresponding to the version of that file stored on OSF. Again, we could use `osf_open()` to view it directly on OSF.
+The `mtcars_file` object now contains an `osf_tbl` with 1 row corresponding to the version of that file stored on OSF. We can also use `osf_open()` to examine the file directly on OSF, which provides rendered views for a wide variety of file formats.
 
 OSF also version controls files, which means that if we were to make a change to the `mtcars.csv` file (perhaps we collected more data) we could automatically create a 2nd version of the dataset by using the `osf_upload()` function and setting `conflicts = "overwrite"`. As long as the file we're uploading has the same file name as a file in that particular section of the project, a new version will be created.
 
@@ -143,3 +144,5 @@ For more information on OSF and `osfr` check out:
 [osf-api]: https://developer.osf.io
 [magrittr]: https://magrittr.tidyverse.org
 [tibble]: https://tibble.tidyverse.org
+[osf-privacy]: https://help.osf.io/hc/en-us/articles/360018981414-control-your-privacy-settings
+[osf-doi]: https://help.osf.io/hc/en-us/articles/360019931013-Create-DOIs
