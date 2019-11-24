@@ -45,14 +45,13 @@ osf_mv <- function(x, to, overwrite = FALSE, verbose = FALSE) {
 #' @export
 osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
   x <- make_single(x)
-  out <- .wb_file_move(
+  .wb_file_move(
     x,
     to = to,
     action = "move",
     overwrite = overwrite,
     verbose = verbose
   )
-  as_osf_tbl(out["data"], subclass = "osf_tbl_file")
 }
 
 
