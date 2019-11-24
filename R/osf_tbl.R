@@ -121,6 +121,7 @@ as_osf_tbl.list <- function(x, subclass = NULL) {
 #' @noRd
 rebuild_osf_tbl <- function(x) {
   if (is_valid_osf_tbl(x)) {
+    if (nrow(x) == 0) return(x)
     subclass <- sprintf("osf_tbl_%s", determine_entity_type(x$meta[[1]]))
     return(as_osf_tbl(x, subclass = subclass))
   } else {
