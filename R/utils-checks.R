@@ -22,7 +22,7 @@ check_category <- function(x) {
 
 #' Verify local file paths exist
 #' @param files Character vector containing paths for one or more local files
-#' @importFrom fs file_exists
+#' @importFrom fs file_exists path_tidy
 #' @noRd
 check_files <- function(files) {
   found <- fs::file_exists(files)
@@ -34,7 +34,7 @@ check_files <- function(files) {
         collapse = "\n")
     ))
   }
-  files
+  fs::path_tidy(files)
 }
 
 #' Verify a local directory exists
@@ -56,5 +56,5 @@ check_local_dir <- function(path) {
       abort("`path` must point to an existing local directory.")
     }
   }
-  path
+  fs::path_tidy(path)
 }

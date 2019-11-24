@@ -163,7 +163,7 @@ osf_upload.osf_tbl_file <-
   )
 
   # assemble directories specified in `path` for output
-  path_dirs <- setdiff(intersect(manifest$remote_dir, path), ".")
+  path_dirs <- setdiff(intersect(manifest$remote_dir, basename(path)), ".")
   if (!is_empty(path_dirs)) {
     out$dirs <- do.call(
       "rbind",
@@ -204,8 +204,8 @@ osf_upload.osf_tbl_file <-
         nrow(manifest$update)
     ))
     out$updated <- Map(.update_existing_file,
-      dest = manifest$update$remote_file,
       path = manifest$update$path,
+      dest = manifest$update$remote_file,
       progress = progress,
       verbose = verbose
     )
@@ -225,6 +225,8 @@ osf_upload.osf_tbl_file <-
   }
 
   # return osf_tbls only for files passed directly to `path`
+  out$skipped  <- out$skipped[out$skipped$name %in% basename(path), ]
+
   out$updated  <- out$updated[names(out$updated) %in% path]
   out$uploaded <- out$uploaded[names(out$uploaded) %in% path]
 
