@@ -24,6 +24,8 @@ matrix:
       - pkgdown
     after_success:
     - Rscript -e 'covr::codecov()'
+    after_failure:
+    - cat osfr.log
 
     deploy:
       on:
