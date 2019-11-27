@@ -6,7 +6,7 @@ Authors@R: c(
            comment = c(ORCID = "0000-0003-2542-2202")),
     person("Chris","Hartgerink",, "chjh@protonmail.com", role = "aut"),
     person("Timothy", "York",, "timothypyork@gmail.com", role = "ctb"),
-    person("Richards", "Brian",, "brian.g.richards@gmail.com", role = "ctb"),
+    person("Brian", "Richards",, "brian.g.richards@gmail.com", role = "ctb"),
     person("Courtney", "Soderberg",, "courtney@cos.io", role = "ctb"))
 Description: Manage your projects and access open research materials and data on OSF.
 Depends: R (>= 3.1.0)
