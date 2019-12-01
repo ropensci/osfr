@@ -30,7 +30,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Timothy York \email{timothypyork@gmail.com} [contributor]
-  \item Richards Brian \email{brian.g.richards@gmail.com} [contributor]
+  \item Brian Richards \email{brian.g.richards@gmail.com} [contributor]
   \item Courtney Soderberg \email{courtney@cos.io} [contributor]
 }
 
