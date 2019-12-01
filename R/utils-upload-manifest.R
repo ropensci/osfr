@@ -42,7 +42,7 @@
   # retrieve (or create) each unique remote directory
   remote_dirs <- unique(manifest$remote_dir)
   if (any(remote_dirs != ".")) {
-    message("Retrieving upload destinations from OSF...")
+    if (verbose) message("Retrieving upload destinations from OSF")
   }
 
   remote_dests <- Map(recurse_path,
@@ -66,7 +66,7 @@
 #' @noRd
 .ulm_add_conflicting_files <- function(manifest, verbose) {
 
-  message("Searching for conflicting files on OSF...")
+  if (verbose) message("Searching for conflicting files on OSF")
 
   # list existing files within each remote destination
   remote_dests <- manifest$remote_dest[!duplicated(manifest$remote_dir)]

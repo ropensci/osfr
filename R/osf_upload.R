@@ -144,6 +144,9 @@ osf_upload.osf_tbl_file <-
 
 .osf_upload <- function(dest, path, recurse, conflicts, progress, verbose) {
 
+  # be more verbose when uploading directories
+  any_dirs <- any(fs::is_dir(path))
+
   # inventory of files to upload and/or remote directories to create
   manifest <- map_rbind(.upload_manifest, path = path, recurse = recurse)
 
@@ -151,7 +154,7 @@ osf_upload.osf_tbl_file <-
   manifest <- .ulm_add_remote_dests(manifest, dest, verbose)
 
   # identify conflicting files at remote destinations
-  manifest <- .ulm_add_conflicting_files(manifest, verbose)
+  manifest <- .ulm_add_conflicting_files(manifest, verbose || any_dirs)
   manifest$conflicted <-  purrr::map_lgl(manifest$remote_file, Negate(is.null))
 
   # list of osf_tbls to be returned
@@ -199,10 +202,10 @@ osf_upload.osf_tbl_file <-
   )
 
   if (!is.null(manifest$update)) {
-    message(sprintf(
-      "Attempting to update %i existing file(s) on OSF...",
-        nrow(manifest$update)
-    ))
+    n <- nrow(manifest$update)
+    msg <- sprintf("Updating %i existing file(s) on OSF", n)
+    if (verbose || any_dirs) message(msg)
+
     out$updated <- Map(.update_existing_file,
       path = manifest$update$path,
       dest = manifest$update$remote_file,
@@ -212,10 +215,10 @@ osf_upload.osf_tbl_file <-
   }
 
   if (!is.null(manifest$upload)) {
-    message(sprintf(
-      "Attempting to upload %i new file(s) to OSF...",
-        nrow(manifest$upload)
-    ))
+    n <- nrow(manifest$upload)
+    msg <- sprintf("Uploading %i new file(s) to OSF", n)
+    if (verbose || any_dirs) message(msg)
+
     out$uploaded <- Map(.upload_new_file,
       path = manifest$upload$path,
       dest = manifest$upload$remote_dest,

@@ -173,7 +173,7 @@ osf_download.osf_tbl_file <-
   zip_file <- fs::path(tempdir(), x$name, ext = "zip")
 
   # print a message because this can take a while on OSF's end
-  message(sprintf("Requesting folder '%s' from OSF...", x$name))
+  message(sprintf("Requesting folder '%s' from OSF", x$name))
 
   .wb_download(
     id = get_parent_id(x),
