@@ -78,12 +78,11 @@ warn_ul_conflict <- function(filename) {
   filename <- basename(path)
 
   if (progress) cat(sprintf("Uploading file '%s'\n", filename))
-
   res <- .wb_file_update(
     id = get_parent_id(dest),
     fid = as_id(dest),
     body = crul::upload(path),
-    progress = TRUE
+    progress = progress
   )
 
   raise_error(res)
