@@ -14,16 +14,15 @@ script:
 - R CMD build . --no-build-vignettes
 - travis_wait 20 R CMD check *tar.gz --ignore-vignettes
 
-matrix:
+jobs:
   include:
-
   - r: oldrel
   - r: devel
   - r: release
-    r_packages:
-      - pkgdown
     after_success:
     - Rscript -e 'covr::codecov()'
+    before_cache:
+    - Rscript -e 'remotes::install_cran("pkgdown")'
     after_failure:
     - cat osfr.log
 
