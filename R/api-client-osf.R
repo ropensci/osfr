@@ -10,42 +10,6 @@ user_agent <- function(agent = "osfr") {
 }
 
 
-# Appends API version to a specificed path
-.osf_api_path <- function(path) {
-  sprintf("v%s/%s", floor(.osf_api_version), path)
-}
-
-# Construct the OSF API Client
-.osf_cli <- function(pat = getOption("osfr.pat")) {
-  server <- Sys.getenv("OSF_SERVER")
-  url <- if (nzchar(server)) {
-    sprintf("https://api.%s.osf.io", server)
-  } else {
-    "https://api.osf.io"
-  }
-
-  headers <- list(
-    `User-Agent` = user_agent(),
-    `Accept-Header` = sprintf(
-      "application/vnd.api+json;version=%s",
-      .osf_api_version)
-  )
-
-  if (!is.null(pat)) {
-    headers$Authorization <- sprintf("Bearer %s", pat)
-  }
-
-  crul::HttpClient$new(
-    url = url,
-    opts = list(
-      encode = "json"
-    ),
-    headers = headers
-  )
-}
-
-
-
 # OSF API request functions -----------------------------------------------
 
 .osf_request <-
@@ -54,14 +18,15 @@ user_agent <- function(agent = "osfr") {
            query = list(),
            body = NULL,
            verbose = FALSE,
+           version = 2.8,
            ...) {
 
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
-  cli <- .osf_cli()
+  cli <- .build_client(api = "osf", encode = "json", version = version)
 
   cli$retry(
     method,
-    path,
+    prepend_version(path, version),
     query,
     body = body,
     times = 3,

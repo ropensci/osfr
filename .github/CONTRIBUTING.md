@@ -18,7 +18,15 @@ To get started with osfr development you'll need to generate a personal access t
 
 5. Restart R to load your `.Renviron` file or use `readRneviron(".Renviron")`.  Then load your local copy of osfr with `devtools::load_all()` and verify that `osf_open(osf_retrieve_user("me"))` opens your user profile on the `test.osf.io` domain.
 
-Once this is setup correctly, you should be able to run osfr's tests without error (`devtools::test()`). 
+Once this is setup correctly, you should be able to run osfr's tests without error (`devtools::test()`).
+
+You can also enable logging by defining `OSF_LOG` to point to a logfile. For example:
+
+```
+OSF_PAT=osfr.log
+```
+
+This will log all API requests to `osfr.log` for inspection.
 
 ### Fixing typos
 

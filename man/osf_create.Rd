@@ -6,11 +6,20 @@
 \alias{osf_create_component}
 \title{Create a new project or component on OSF}
 \usage{
-osf_create_project(title, description = NULL, public = FALSE,
-  category = "project")
+osf_create_project(
+  title,
+  description = NULL,
+  public = FALSE,
+  category = "project"
+)
 
-osf_create_component(x, title, description = NULL, public = FALSE,
-  category = NULL)
+osf_create_component(
+  x,
+  title,
+  description = NULL,
+  public = FALSE,
+  category = NULL
+)
 }
 \arguments{
 \item{title, description}{Set a title (required) and, optionally, a
@@ -69,8 +78,8 @@ component <- osf_create_component(project, title = "Project Data")
 \references{
 \enumerate{
 \item OSF Guides: Create a Project.
-\url{http://help.osf.io/m/projects/l/481539-create-a-project}.
+\url{https://help.osf.io/hc/en-us/articles/360019737594-Create-a-Project}.
 \item OSF Guides: Create a Component.
-\url{http://help.osf.io/m/projects/l/481998-create-components}.
+\url{https://help.osf.io/hc/en-us/articles/360019737614-Create-Components}.
 }
 }

@@ -25,7 +25,8 @@ process_response <- function(res) {
       "Encountered an unexpected error with the OSF API\n",
       "Please report this at https://github.com/centerforopenscience/osfr/issues\n",
       "* Status code: ", res$status_code, "\n",
-      "* Request: ", res$request$url$url
+      "* Request: ", res$request$url$url, "\n",
+      "* Resonse: \n", res$parse("UTF-8")
     ))
   }
 

@@ -6,6 +6,7 @@
 #' @param type indicate whether the provided `fid` refers to a `"folder"` (the
 #'   default) or `"file"`. This is significant because the path must always have
 #'   a trailing flash when referring to a folder
+#' @param version Specify the waterbutler API version
 #'
 #' @noRd
 .wb_api_path <-
@@ -15,43 +16,15 @@
            type = "folder") {
 
   type <- match.arg(type, c("folder", "file"))
-  api_v <- floor(.wb_api_version)
-  if (is.null(fid)) {
-    out <- sprintf("v%i/resources/%s/providers/%s/", api_v, id, provider)
-  } else {
-    out <- sprintf("v%i/resources/%s/providers/%s/%s/", api_v, id, provider, fid)
-  }
+
+  out <- sprintf("/resources/%s/providers/%s/", id, provider)
+  if (!is.null(fid)) out <- sprintf("%s/%s/", out, fid)
+
   switch(type,
     file = sub("\\/$", "", out),
     folder = out
   )
 }
-
-
-# Construct the WaterButler API Client
-.wb_cli <- function(pat = getOption("osfr.pat")) {
-
-  url <- ifelse(Sys.getenv("OSF_SERVER") == "test",
-                   "https://files.us.test.osf.io",
-                   "https://files.osf.io")
-
-  headers <- list(
-    `User-Agent` = user_agent()
-  )
-
-  if (!is.null(pat)) {
-    headers$Authorization <- sprintf("Bearer %s", pat)
-  }
-
-  crul::HttpClient$new(
-    url = url,
-    opts = list(
-      encode = "raw"
-    ),
-    headers = headers
-  )
-}
-
 
 
 # Waterbutler request functions -------------------------------------------
@@ -61,10 +34,31 @@
            path,
            query = list(),
            body = NULL,
+           version = 1,
            verbose = FALSE,
+           progress = FALSE,
            ...) {
-
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
-  cli <- .wb_cli()
-  cli$verb(method, path, query, body = body, ...)
+
+  if (progress) {
+    pb <- switch(method,
+      get = httr::progress(type = "down"),
+      put = httr::progress(type = "up"),
+      NULL
+    )
+  } else {
+    pb <- NULL
+  }
+
+  cli <- .build_client(api = "wb", encode = "raw", progress = pb)
+  cli$retry(
+    method,
+    prepend_version(path, version),
+    query,
+    body = body,
+    times = 3,
+    retry_only_on = "502",
+    onwait = retry_message,
+    ...
+  )
 }

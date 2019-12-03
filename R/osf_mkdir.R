@@ -74,18 +74,24 @@ osf_mkdir.osf_tbl_file <- function(x, path, verbose = FALSE) {
 #' determines what happens if an intermediate directory does not exist.
 #'
 #' @param x An `osf_tbl_node` or an `osf_tbl_file` with a directory.
-#' @param path A path of directories.
+#' @param path A scalar vector containing a path of directories.
 #' @param missing_action Either `"error"` or `"create"` to create the missing
 #'   directory.
+#' @importFrom fs path_rel
 #' @noRd
 recurse_path <- function(x, path, missing_action = "error", verbose = FALSE) {
   missing_action <- match.arg(missing_action, c("error", "create"))
 
-  path_root <- fs::path_split(path)[[1]][1]
-  root_dir <- osf_ls_files(x, type = "folder", pattern = path_root)
+  stopifnot(rlang::is_scalar_character(path))
+
+  path_dirs <- fs::path_split(clean_osf_path(path))[[1]]
+  path_root <- path_dirs[1]
+
+  # return the original destination
+  if (path_root == ".") return(x)
 
   # ensure the retrieved directory and path_root have the same name
-  root_dir <- root_dir[root_dir$name == path_root, ]
+  root_dir <- osf_find_file(x, type = "folder", pattern = path_root)
 
   if (nrow(root_dir) == 0) {
     if (missing_action == "error") {

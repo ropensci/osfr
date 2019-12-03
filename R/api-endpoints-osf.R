@@ -21,10 +21,9 @@
   if (missing(title)) abort("A title must be provided.")
   if (!is.null(category)) category <- check_category(category)
 
-  if (is.null(id)) {
-    path <- .osf_api_path("nodes/")
-  } else {
-    path <- .osf_api_path(sprintf("nodes/%s/children/", id))
+  path <- "nodes/"
+  if (!is.null(id)) {
+    path <- url_path(path, sprintf("%s/children/", id))
   }
 
   body <- list(
@@ -51,7 +50,7 @@
 #' https://developer.osf.io/#operation/nodes_read
 #' @noRd
 .osf_node_retrieve <- function(id) {
-  path <- .osf_api_path(sprintf("nodes/%s/", id))
+  path <- sprintf("nodes/%s/", id)
   res <- .osf_request("get", path)
   process_response(res)
 }
@@ -62,7 +61,7 @@
 #' https://developer.osf.io/#operation/users_read
 #' @noRd
 .osf_user_retrieve <- function(id) {
-  path <- .osf_api_path(sprintf("/users/%s/", id))
+  path <- sprintf("/users/%s/", id)
   res <- .osf_request("get", path)
   process_response(res)
 }
@@ -73,7 +72,7 @@
 #' https://developer.osf.io/#operation/files_detail
 #' @noRd
 .osf_file_retrieve <- function(id) {
-  path <- .osf_api_path(sprintf("files/%s/", id))
+  path <- sprintf("files/%s/", id)
   res <- .osf_request("get", path)
   process_response(res)
 }
@@ -86,7 +85,7 @@
 #' https://developer.osf.io/#operation/nodes_delete
 #' @noRd
 .osf_node_delete <- function(id) {
-  path <- .osf_api_path(sprintf("nodes/%s/", id))
+  path <- sprintf("nodes/%s/", id)
   res <- .osf_request("delete", path)
   if (res$status_code == 204) return(TRUE)
   raise_error(process_response(res))
@@ -107,7 +106,7 @@
 #' https://developer.osf.io/#operation/nodes_list
 #' @noRd
 .osf_node_children <- function(id, n_max, query = list(), verbose = FALSE) {
-  path <- .osf_api_path(sprintf("nodes/%s/children/", id))
+  path <- sprintf("nodes/%s/children/", id)
   .osf_paginated_request("get", path, query, n_max = n_max, verbose = verbose)
 }
 
@@ -119,6 +118,6 @@
 #' https://developer.osf.io/#operation/users_nodes_list
 #' @noRd
 .osf_user_nodes <- function(id, n_max, query = list(), verbose = FALSE) {
-  path <- .osf_api_path(sprintf("users/%s/nodes/", id))
+  path <- sprintf("users/%s/nodes/", id)
   .osf_paginated_request("get", path, query, n_max = n_max, verbose = verbose)
 }

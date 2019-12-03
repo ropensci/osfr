@@ -22,3 +22,15 @@ skip_if_no_pat <- function() {
     "No PAT detected."
   )
 }
+
+
+# for tests that require existing projects on osf created w/ data-raw/ scripts
+get_guids <- function() {
+  guid_file <- list.files(
+    path = rprojroot::find_testthat_root_file(),
+    pattern = "test-guids.dcf",
+    recursive = TRUE,
+    full.names = TRUE
+  )
+  read.dcf(guid_file)
+}

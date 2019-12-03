@@ -8,6 +8,28 @@
 #' @usage lhs \%>\% rhs
 NULL
 
+#' Shortcut for constructing a URL path from components
+#' Also removes double forward slashes.
+#' @param ... character vectors with path components
+#' @noRd
+url_path <- function(...) {
+  gsub("//", "/", file.path(..., fsep = "/"), fixed = TRUE)
+}
+
+#' Selectively prepends major API version to path when necessary A hacky fix but
+#' we need it to account for requests based on URLs extracted from API response
+#' links (rather than using the endpoint functions), which already include the
+#' API version.
+#' @param path A URL path
+#' @param version Positive number indicating the specific API version
+#' @noRd
+prepend_version <- function(path, version) {
+  stopifnot(is.character(path))
+  stopifnot(is.numeric(version))
+  path <- sub("^\\/?v\\d\\/", "", path)
+  url_path(paste0("v", floor(version)), path)
+}
+
 #' Stop execution with HTTP status code
 #' @param code HTTP status code
 #' @inheritParams base::stop
@@ -23,12 +45,12 @@ http_error <- function(code, ...) {
 #' @param time wait time in seconds
 #' @noRd
 retry_message <- function(res, time) {
-  message(
-    sprintf(
-      "Request failed (Status code: %s). Retrying in %ds...",
-      res$status_code, ceiling(time)
-    )
+  msg <- sprintf(
+    "Request failed (Status code: %s). Retrying in %ds...",
+    res$status_code, ceiling(time)
   )
+  if (!is.null(getOption("osfr.log"))) logger::log_info(msg)
+  message(msg)
 }
 
 is_osf_url <- function(url) grepl("osf.io", tolower(url), fixed = TRUE)
@@ -47,6 +69,7 @@ is_osf_file <- function(x) {
 
 
 # extract OSF and Waterbutler identifiers from known URL schemes
+#' @importFrom fs path_split
 extract_osf_id <- function(url) {
   stopifnot(is_osf_url(url))
   path <- crul::url_parse(url)$path
@@ -75,37 +98,15 @@ make_single <- function(x) {
   x
 }
 
-
-#' Convenience functions for developers to switch between accounts
+#' Wrapper around base::Map that rbinds the results
 #'
-#' Use these functions to:
-#' * switch between OSF's test and production servers
-#' * switch between your development and standard PAT
-#'
-#' Assumes your home directory contains a `.Renviron` file that defines
-#' `OSF_PAT` with your standard PAT, and your current working directory contains
-#' another `.Renviron` file with the PAT you use for `test.osf.io`.
+#' I like base::Map because it returns a named list when mapping over a
+#' character vector.
 #' @noRd
-NULL
-
-osf_dev_on <- function() {
-  renviron <- normalizePath(".Renviron")
-  stopifnot(file.exists(renviron))
-  stopifnot(readRenviron(renviron))
-  Sys.setenv(OSF_SERVER = "test")
-  message("osfr development mode enabled.")
-  osf_auth()
+map_rbind <- function(f, ...) {
+  out <- base::Map(f, ...)
+  do.call("rbind", out)
 }
-
-osf_dev_off <- function() {
-  renviron <- normalizePath("~/.Renviron")
-  stopifnot(file.exists(renviron))
-  stopifnot(readRenviron(renviron))
-  Sys.unsetenv("OSF_SERVER")
-  message("osfr development mode disabled.")
-  osf_auth()
-}
-
 
 #' Include an interactive menu to confirm action
 #'
@@ -146,4 +147,43 @@ yesno_menu <- function(question) {
   rand <- sample(length(qs))
 
   menu(qs[rand], title = question) == which(rand == 1)
+}
+
+
+#' Clean local directory path
+#'
+#' Returns an absolute path when `x` is above the current working directory,
+#' or a relative path when `x` is nested within the current working directory.
+#' Path expansion is also performed.
+#' @param x A local directory path
+#' @noRd
+clean_local_path <- function(x) {
+  if (fs::path_has_parent(x, getwd())) {
+    return(fs::path_rel(x))
+  } else {
+    return(x)
+  }
+}
+
+
+#' Clean OSF directory path
+#'
+#' This removes reserved filenames (ie, `..`, and platform-specific file
+#' separators) from the begining of file paths in order to create valid directory
+#' names for OSF.
+#'
+#' @param x A local directory path
+#' @importFrom fs path_join
+#' @noRd
+clean_osf_path <- function(x) {
+  stopifnot(rlang::is_scalar_character(x))
+
+  reserved <- c(".", "..", .Platform$file.sep)
+  parts <- fs::path_split(x)[[1]]
+
+  # recursively remove offending parts from the begining of a path
+  while (parts[1] %in% reserved) parts <- parts[-1]
+  if (rlang::is_empty(parts)) parts <- "."
+
+  fs::path_join(parts)
 }

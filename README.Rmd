@@ -18,7 +18,7 @@ Sys.unsetenv(c("OSF_SERVER", "OSF_PAT"))
 # osfr <a href="http://centerforopenscience.github.io/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
 [![Build Status](https://travis-ci.org/CenterForOpenScience/osfr.svg?branch=master)](https://travis-ci.org/CenterForOpenScience/osfr)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/c1hf7snq8s59waos?svg=true)](https://ci.appveyor.com/project/CenterForOpenScience24999/osfr)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/CenterForOpenScience/osfr?branch=master&svg=true)](https://ci.appveyor.com/project/CenterForOpenScience24999/osfr)
 [![Coverage status](https://codecov.io/gh/CenterForOpenScience/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/CenterForOpenScience/osfr?branch=master)
 [![](https://badges.ropensci.org/279_status.svg)](https://github.com/ropensci/software-review/issues/279)
 
@@ -147,8 +147,8 @@ unlink("Study_19_Figure_1.pdf")
 [osf-gh]: https://github.com/CenterForOpenScience/osf.io "OSF's GitHub Repository"
 [osf-api]: https://developer.osf.io "OSF API Documentation"
 [help]: http://help.osf.io "OSF Support"
-[help-proj]: http://help.osf.io/m/projects/l/481539-create-a-project "OSF: Create a Project"
-[help-comp]: http://help.osf.io/m/projects/l/481998-create-components "OSF: Create a Component"
+[help-proj]: https://help.osf.io/hc/en-us/articles/360019737594-Create-a-Project "OSF: Create a Project"
+[help-comp]: https://help.osf.io/hc/en-us/articles/360019737614-Create-Components "OSF: Create a Component"
 [magrittr]: https://magrittr.tidyverse.org
 [dplyr]: https://dplyr.tidyverse.org
 [googledrive]: https://googledrive.tidyverse.org

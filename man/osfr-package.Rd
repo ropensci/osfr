@@ -20,7 +20,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Aaron Wolen \email{aaron@wolen.com} (0000-0003-2542-2202)
+\strong{Maintainer}: Aaron Wolen \email{aaron@wolen.com} (\href{https://orcid.org/0000-0003-2542-2202}{ORCID})
 
 Authors:
 \itemize{
@@ -30,7 +30,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Timothy York \email{timothypyork@gmail.com} [contributor]
-  \item Richards Brian \email{brian.g.richards@gmail.com} [contributor]
+  \item Brian Richards \email{brian.g.richards@gmail.com} [contributor]
   \item Courtney Soderberg \email{courtney@cos.io} [contributor]
 }
 

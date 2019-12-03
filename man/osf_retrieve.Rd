@@ -32,7 +32,7 @@ could also be an 11-character Waterbutler ID. See below for details.
 project, component, and file on OSF and forms the basis for the service's
 URL scheme. For example the GUID for a project accessible at
 \url{https://osf.io/ezum7} is simply \code{ezum7}. You can learn more about GUIDs
-\href{http://help.osf.io/m/faqs/l/726460-faqs#what-s-a-globally-unique-identifier-guid-what-metadata-is-maintained-about-them}{here}.
+\href{https://help.osf.io/hc/en-us/articles/360019737894-FAQs}{here}.
 
 An important detail is that files and directories are handled internally on
 OSF by another serviced called \href{http://www.waterbutler.io/}{Waterbutler},
