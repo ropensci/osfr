@@ -22,5 +22,4 @@ jobs:
         branch: fix-pkgdown
       provider: script
       script: Rscript -e 'dir(recursive = TRUE)' && Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
-      cleanup: false
-
+      skip_cleanup: true
