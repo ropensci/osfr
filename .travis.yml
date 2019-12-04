@@ -1,5 +1,5 @@
 language: r
-sudo: false
+os: linux
 cache: packages
 
 install:
@@ -10,7 +10,7 @@ script:
 - R CMD build . --no-build-vignettes
 - travis_wait 20 R CMD check *tar.gz --ignore-vignettes
 
-matrix:
+jobs:
   include:
   - r: oldrel
   - r: devel
@@ -26,4 +26,4 @@ matrix:
         branch: fix-pkgdown
       provider: script
       script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
-      skip_cleanup: true
+      cleanup: false
