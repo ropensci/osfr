@@ -8,7 +8,7 @@ install:
 
 script:
 - R CMD build . --no-build-vignettes
-- travis_wait 20 R CMD check *tar.gz --ignore-vignettes
+- travis_wait 20 R CMD check *tar.gz --ignore-vignettes --no-tests
 
 jobs:
   include:
