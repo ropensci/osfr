@@ -2,10 +2,6 @@ language: r
 os: linux
 cache: packages
 
-install:
-- R -e 'install.packages("remotes")'
-- R -e 'remotes::install_deps(dep = T)'
-
 script:
 - R CMD build . --no-build-vignettes
 - travis_wait 20 R CMD check *tar.gz --ignore-vignettes --no-tests
