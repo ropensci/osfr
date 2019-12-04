@@ -15,7 +15,7 @@ jobs:
     # - Rscript -e 'covr::codecov()'
     after_failure:
     - cat osfr.log
-    before_cache:
+    before_deploy:
     - Rscript -e 'dir(recursive = TRUE)' && Rscript -e 'remotes::install_cran("pkgdown")'
     deploy:
       on:
