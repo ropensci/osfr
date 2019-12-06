@@ -1,15 +1,13 @@
-#' Move a file or directory
+#' Copy a file or directory
 #'
-#' Use `osf_mv()` to move a file or directory to a new project, component, or
-#' subdirectory.
+#' Use `osf_cp()` to make a copy of a file or directory within the same or new location.
 #'
 #' @param x An [`osf_tbl_file`] containing a single file or directory.
-#' @param to The destination where the file or directory will be copied to. This
-#'   can be one of the following:
+#' @param to Optional destination where the file or directory will be copied. Defaults
+#'   to original location of file if not specified.
+#'   This can be one of the following:
 #'   * An [`osf_tbl_node`] with a single project or component.
 #'   * An [`osf_tbl_file`] with a single directory.
-#' @param overwrite Logical, if a file or directory with the same name already
-#'   exists at the destination should it be replaced with `x`?
 #' @template verbose
 #'
 #' @return An [`osf_tbl_file`] containing the updated OSF file.
@@ -18,40 +16,41 @@
 #' \dontrun{
 #' # Create an example file to upload to our example project
 #' project <- osf_create_project("Flower Data")
-#'
 #' write.csv(iris, file = "iris.csv")
 #' data_file <- osf_upload(project,"iris.csv")
 #'
-#' # Create a new directory to move our file to
+#' # Make a copy of the file in the same location. A suffix is added to avoid name conflicts
+#' data_file <- osf_cp(data_file)
+#'
+#' # Create a new directory to copy our file to
 #' data_dir <- osf_mkdir(project, "data")
 #'
-#' # Move the file to our data directory
-#' data_file <- osf_mv(data_file, to = data_dir)
+#' # Copy the file to our data directory
+#' data_file <- osf_cp(data_file, to = data_dir)
 #'
-#' # Move our data directory to a new component
+#' # Copy directory to new component
 #' data_comp <- osf_create_component(project, title = "data", category = "data")
 #' data_dir %>%
-#'   osf_mv(to = data_comp) %>%
+#'   osf_cp(to = data_comp) %>%
 #'   osf_open()
 #' }
 #'
 #' @export
-#' @importFrom fs path_has_parent
-
-osf_mv <- function(x, to, overwrite = FALSE, verbose = FALSE) {
-  UseMethod("osf_mv")
+osf_cp <- function(x, to = NULL, verbose = FALSE) {
+  UseMethod("osf_cp")
 }
 
 #' @export
-osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
+osf_cp.osf_tbl_file <- function(x, to = NULL, verbose = FALSE) {
   x <- make_single(x)
-  .wb_file_move(
+  if (is.null(to)) to <- osf_retrieve_node(get_parent_id(x))
+  out <- .wb_file_copy(
     x,
     to = to,
-    action = "move",
-    overwrite = overwrite,
+    action = "copy",
     verbose = verbose
   )
+  as_osf_tbl(out["data"], subclass = "osf_tbl_file")
 }
 
 
@@ -59,9 +58,9 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
 #' @noRd
 #' @references
 #' https://waterbutler.readthedocs.io/en/latest/api.html#actions
-.wb_file_move <- function(x, to, action, overwrite, verbose) {
+.wb_file_copy <- function(x, to, action, verbose) {
   action <- match.arg(action, c("move", "copy"))
-  conflict <- ifelse(overwrite, "replace", "warn")
+  conflict <- "keep"
 
   if (inherits(to, "osf_tbl_file")) {
     if (is_osf_file(to)) {
@@ -88,23 +87,27 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
   out <- process_response(res)
   raise_error(out)
 
-  if (verbose) message(sprintf("Moved '%s' to '%s'.", x$name, to$name))
-  wb2osf(out)
+  if (verbose) message(sprintf("Copied '%s' to '%s'.", x$name, to$name))
+
+  # retrieve osf representation of file
+  file_id <- strsplit(out$data$id, split = "/", fixed = TRUE)[[1]][2]
+  .osf_file_retrieve(file_id)
 }
 
 
 # Construct the move/copy request's body
-build_move_request <- function(x) {
-  switch(class(x)[1],
+build_move_request <- function(x) UseMethod("build_move_request")
 
-    osf_tbl_node =   list(
-      path = "/",
-      resource = unclass(as_id(x)),
-      provider = "osfstorage"
-    ),
+build_move_request.osf_tbl_file <- function(x) {
+  list(
+    path = get_meta(x, "attributes", "path")
+  )
+}
 
-    osf_tbl_file = list(
-      path = get_meta(x, "attributes", "path")
-    )
+build_move_request.osf_tbl_node <- function(x) {
+  list(
+    path = "/",
+    resource = unclass(as_id(x)),
+    provider = "osfstorage"
   )
 }

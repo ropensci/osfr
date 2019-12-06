@@ -4,14 +4,8 @@
 \alias{osf_ls_files}
 \title{List files and directories on OSF}
 \usage{
-osf_ls_files(
-  x,
-  path = NULL,
-  type = "any",
-  pattern = NULL,
-  n_max = 10,
-  verbose = FALSE
-)
+osf_ls_files(x, path = NULL, type = "any", pattern = NULL,
+  n_max = 10, verbose = FALSE)
 }
 \arguments{
 \item{x}{One of the following:

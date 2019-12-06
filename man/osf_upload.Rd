@@ -4,14 +4,8 @@
 \alias{osf_upload}
 \title{Upload files to OSF}
 \usage{
-osf_upload(
-  x,
-  path,
-  recurse = FALSE,
-  conflicts = "error",
-  progress = FALSE,
-  verbose = FALSE
-)
+osf_upload(x, path, recurse = FALSE, conflicts = "error",
+  progress = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{x}{The upload destintation on OSF. Can be one of the following:
@@ -92,7 +86,7 @@ osf_upload(target_dir, path = "a.txt")
 While \code{osf_download()} and \code{osf_upload()} can be used to conveniently shuttle
 files back and forth between OSF and your local machine, it's important to
 note that \strong{they are not file synchronization functions}. In contrast to
-something like \href{https://rsync.samba.org}{\code{rsync}},
+something like \href{https://rsync.samba.org}{rsync},
 \code{osf_download()}/\code{osf_upload()} do not take into account a file's contents or
 modification time. Whether you're uploading or downloading, if \code{overwrite = TRUE}, osfr will overwrite an existing file regradless of whether the
 existing file is the more recent copy. You have been warned.
