@@ -13,7 +13,7 @@ NULL
 #' @param ... character vectors with path components
 #' @noRd
 url_path <- function(...) {
-  gsub("//", "/", file.path(..., fsep = "/"), fixed = TRUE)
+  gsub("\\/{2,}", "/", paste0(list(...), collapse = "/"))
 }
 
 #' Selectively prepends major API version to path when necessary A hacky fix but
