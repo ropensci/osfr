@@ -1,14 +1,6 @@
 language: r
-sudo: false
+os: linux
 cache: packages
-
-
-r_packages:
-  - devtools
-
-install:
-- R -e 'install.packages("remotes")'
-- R -e 'remotes::install_deps(dep = T)'
 
 script:
 - R CMD build . --no-build-vignettes
@@ -25,7 +17,8 @@ jobs:
     - Rscript -e 'remotes::install_cran("pkgdown")'
     after_failure:
     - cat osfr.log
-
+    before_deploy:
+    - Rscript -e 'remotes::install_cran("pkgdown")'
     deploy:
       on:
         branch: master
