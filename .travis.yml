@@ -1,14 +1,6 @@
 language: r
-sudo: false
+os: linux
 cache: packages
-
-
-r_packages:
-  - devtools
-
-install:
-- R -e 'install.packages("remotes")'
-- R -e 'remotes::install_deps(dep = T)'
 
 script:
 - R CMD build . --no-build-vignettes
@@ -19,16 +11,12 @@ jobs:
   - r: oldrel
   - r: devel
   - r: release
-    after_success:
-    - Rscript -e 'covr::codecov()'
-    before_cache:
-    - Rscript -e 'remotes::install_cran("pkgdown")'
-    after_failure:
-    - cat osfr.log
-
+    after_success: Rscript -e 'covr::codecov()'
+    after_failure: cat osfr.log
+    before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
     deploy:
       on:
         branch: master
       provider: script
-      script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
+      script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE, tarball = dir(pattern = "tar.gz$"))'
       skip_cleanup: true
