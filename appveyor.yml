@@ -46,6 +46,9 @@ artifacts:
   - path: '*.Rcheck\**\*.Rout'
     name: Logs
 
+  - path: 'osfr.log'
+    name: Logs
+
   - path: '\*_*.tar.gz'
     name: Bits
 
