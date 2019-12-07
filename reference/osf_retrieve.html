@@ -15,21 +15,25 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,15 +41,15 @@
 
 
 
-<meta property="og:title" content="Retrieve an entity from OSF — osf_retrieve" />
 
+<meta property="og:title" content="Retrieve an entity from OSF — osf_retrieve" />
 <meta property="og:description" content="Create an osf_tbl representation of an existing OSF project, component,
 file, or user based on the associated unique identifier. Usually this is a
 5-character global unique identifier (GUID) but for files or directories, it
 could also be an 11-character Waterbutler ID. See below for details." />
-
 <meta property="og:image" content="https://centerforopenscience.github.io/osfr/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -69,6 +73,7 @@ could also be an 11-character Waterbutler ID. See below for details." />
   gtag('config', 'UA-132425816-1');
 </script>
 
+
   </head>
 
   <body>
@@ -85,7 +90,7 @@ could also be an 11-character Waterbutler ID. See below for details." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">osfr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.6</span>
       </span>
     </div>
 
@@ -95,11 +100,10 @@ could also be an 11-character Waterbutler ID. See below for details." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -123,7 +127,7 @@ could also be an 11-character Waterbutler ID. See below for details." />
 </li>
 <li>
   <a href="https://github.com/centerforopenscience/osfr">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -134,6 +138,7 @@ could also be an 11-character Waterbutler ID. See below for details." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -145,12 +150,10 @@ could also be an 11-character Waterbutler ID. See below for details." />
     </div>
 
     <div class="ref-description">
-    
     <p>Create an <code><a href='osf_tbl.html'>osf_tbl</a></code> representation of an existing OSF project, component,
 file, or user based on the associated unique identifier. Usually this is a
 5-character global unique identifier (GUID) but for files or directories, it
 could also be an 11-character Waterbutler ID. See below for details.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>osf_retrieve_user</span>(<span class='no'>id</span>)
@@ -158,7 +161,7 @@ could also be an 11-character Waterbutler ID. See below for details.</p>
 <span class='fu'>osf_retrieve_node</span>(<span class='no'>id</span>)
 
 <span class='fu'>osf_retrieve_file</span>(<span class='no'>id</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -168,19 +171,18 @@ could also be an 11-character Waterbutler ID. See below for details.</p>
 or file. Set <code>id = "me"</code> to retrieve your own OSF profile.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An <code><a href='osf_tbl.html'>osf_tbl_user</a></code>, <code><a href='osf_tbl.html'>osf_tbl_node</a></code>, or <code><a href='osf_tbl.html'>osf_tbl_file</a></code> containing
 the corresponding OSF entity.</p>
-    
     <h2 class="hasAnchor" id="osf-identifiers"><a class="anchor" href="#osf-identifiers"></a>OSF identifiers</h2>
 
     <p>A 5-character GUID is assigned to every user,
 project, component, and file on OSF and forms the basis for the service's
 URL scheme. For example the GUID for a project accessible at
 <a href='https://osf.io/ezum7'>https://osf.io/ezum7</a> is simply <code>ezum7</code>. You can learn more about GUIDs
-<a href='http://help.osf.io/m/faqs/l/726460-faqs#what-s-a-globally-unique-identifier-guid-what-metadata-is-maintained-about-them'>here</a>.</p>
+<a href='https://help.osf.io/hc/en-us/articles/360019737894-FAQs'>here</a>.</p>
 <p>An important detail is that files and directories are handled internally on
 OSF by another serviced called <a href='http://www.waterbutler.io/'>Waterbutler</a>,
 which uses 11-character identifiers. Although Waterbutler IDs are largely
@@ -190,29 +192,29 @@ GUID until it is viewed directly on <a href='https://osf.io'>https://osf.io</a> 
 receive a GUID. Therefore, osfr relies on Waterbutler IDs for files and
 directories, and always includes them (rather than GUIDs) in <code><a href='osf_tbl.html'>osf_tbl_file</a></code>
 objects.</p>
-    
     <h2 class="hasAnchor" id="retrieving-osf-objects"><a class="anchor" href="#retrieving-osf-objects"></a>Retrieving OSF objects</h2>
 
     
-    <p>To begin using osfr to interact with resources on OSF you must use one of the
+
+<p>To begin using osfr to interact with resources on OSF you must use one of the
 following <em>retrieve</em> functions to create an <code><a href='osf_tbl.html'>osf_tbl</a></code> that contains
 the entity of interest. Note the functions are entity-type specific, use:</p><ul>
 <li><p><code>osf_retrieve_node()</code> to retrieve a project or component</p></li>
 <li><p><code>osf_retrieve_file()</code> to retrieve a file or directory</p></li>
 <li><p><code>osf_retrieve_user()</code> to retrieve a user</p></li>
 </ul>
-    
+
     <h2 class="hasAnchor" id="a-note-on-rd-party-storage-providers"><a class="anchor" href="#a-note-on-rd-party-storage-providers"></a>A note on 3rd-party storage providers</h2>
 
     
-    <p>While OSF supports integration with a variety of 3rd-party cloud storage
+
+<p>While OSF supports integration with a variety of 3rd-party cloud storage
 providers, osfr can currently only access files stored on the default OSF
 storage service. Support for additional storage providers is planned for a
 future release.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
  <span class='co'># retrieve your own OSF user profile (must be authenticated, ?osf_auth)</span>
  <span class='fu'>osf_retrieve_user</span>(<span class='st'>"me"</span>)
 
@@ -221,26 +223,22 @@ future release.</p>
 
 <span class='co'># get the first figure from the P:RP</span>
 <span class='fu'>osf_retrieve_file</span>(<span class='st'>"https://osf.io/7js8c"</span>)
-<span class='co'># }</span></pre>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#osf-identifiers">OSF identifiers</a></li>
-
       <li><a href="#retrieving-osf-objects">Retrieving OSF objects</a></li>
-
       <li><a href="#a-note-on-rd-party-storage-providers">A note on 3rd-party storage providers</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -248,13 +246,16 @@ future release.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
