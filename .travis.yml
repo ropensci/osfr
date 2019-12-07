@@ -11,14 +11,9 @@ jobs:
   - r: oldrel
   - r: devel
   - r: release
-    after_success:
-    - Rscript -e 'covr::codecov()'
-    before_cache:
-    - Rscript -e 'remotes::install_cran("pkgdown")'
-    after_failure:
-    - cat osfr.log
-    before_deploy:
-    - Rscript -e 'remotes::install_cran("pkgdown")'
+    after_success: Rscript -e 'covr::codecov()'
+    after_failure: cat osfr.log
+    before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
     deploy:
       on:
         branch: master
