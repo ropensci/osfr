@@ -5,6 +5,9 @@
 * New approach uses a file manifest to compare local and remote files
 * We now search for conflicting remote files within each directory queued for upload, this avoids the issue reported in (#108, thanks @tpyork)
 
+## osfr 0.2.6.1
+
+* Fix pkgdown deployment
 
 # osfr 0.2.5
 
