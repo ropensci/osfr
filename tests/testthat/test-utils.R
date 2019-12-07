@@ -40,3 +40,16 @@ test_that("Reserved filenames are removed from osf-bound file paths", {
   expect_match(clean_osf_path("../../data"), "data")
   expect_match(clean_osf_path("./data"),     "data")
 })
+
+
+context("URL Utilities")
+
+test_that("url_path() doesn't drop trailing slashes", {
+  expect_equal(url_path("a/"), "a/")
+})
+
+test_that("url_path() removes multiple slashes", {
+  expect_equal(url_path("a", "b"), "a/b")
+  expect_equal(url_path("a/", "/b"), "a/b")
+  expect_equal(url_path("a/", "/", "/b"), "a/b")
+})
