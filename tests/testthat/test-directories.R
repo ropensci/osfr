@@ -79,11 +79,15 @@ test_that("create a subdirectory within a non-existent parent directory", {
 })
 
 test_that("'path' isn't confused by dir names with a shared substring (#95)", {
+  skip_if_no_pat()
+
   d3 <- osf_mkdir(p1, path = "dir")
   expect_silent(osf_ls_files(p1, path = "dir"))
 })
 
 test_that("directory names can start with a dot", {
+  skip_if_no_pat()
+
   dotdir <- osf_mkdir(p1, path = ".dir")
   expect_s3_class(dotdir, "osf_tbl_file")
   expect_equal(dotdir$name, ".dir")
