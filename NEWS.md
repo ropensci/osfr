@@ -9,6 +9,11 @@
 
 * Fix pkgdown deployment
 
+## osfr 0.2.6.2
+
+* Fix project creation on windows (#110)
+* Fix tests when PAT is undefined
+
 # osfr 0.2.5
 
 ## Multi-file transfers!
