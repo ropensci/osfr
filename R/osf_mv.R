@@ -80,7 +80,7 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
   api_path <- crul::url_parse(api_url)$path
 
   req <- modifyList(
-    build_move_request(to),
+    .wb_file_action(to),
     list(action = action, conflict = conflict)
   )
 
@@ -94,7 +94,7 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
 
 
 # Construct the move/copy request's body
-build_move_request <- function(x) {
+.wb_file_action <- function(x) {
   switch(class(x)[1],
 
     osf_tbl_node =   list(

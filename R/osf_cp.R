@@ -79,7 +79,7 @@ osf_cp.osf_tbl_file <- function(x, to = NULL, verbose = FALSE) {
   api_path <- crul::url_parse(api_url)$path
 
   req <- modifyList(
-    build_move_request(to),
+    .wb_file_action(to),
     list(action = action, conflict = conflict)
   )
 
@@ -95,19 +95,3 @@ osf_cp.osf_tbl_file <- function(x, to = NULL, verbose = FALSE) {
 }
 
 
-# Construct the move/copy request's body
-build_move_request <- function(x) UseMethod("build_move_request")
-
-build_move_request.osf_tbl_file <- function(x) {
-  list(
-    path = get_meta(x, "attributes", "path")
-  )
-}
-
-build_move_request.osf_tbl_node <- function(x) {
-  list(
-    path = "/",
-    resource = unclass(as_id(x)),
-    provider = "osfstorage"
-  )
-}
