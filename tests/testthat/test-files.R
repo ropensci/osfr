@@ -1,4 +1,4 @@
-context("Moving/copying files")
+context("Moving files")
 
 
 # setup -------------------------------------------------------------------
@@ -11,6 +11,7 @@ setup({
     p1 <<- osf_create_project(title = "osfr-test-files-1")
     p2 <<- osf_create_project(title = "osfr-test-files-2")
     d1 <<- osf_mkdir(p1, "d1")
+    d3 <<- osf_mkdir(p2, "d3")
     f1 <<- osf_upload(p1, infile)
   }
 })
@@ -82,6 +83,37 @@ test_that("moving a parent directory to a child directory errors", {
     osf_mv(parent, child),
     "Can't move a parent directory into its child"
   )
+})
+
+
+context("Copying files")
+
+test_that("a single file can be copied with appropriate suffix", {
+  skip_if_no_pat()
+
+  f1 <- osf_refresh(f1)
+  f_copy <- osf_cp(f1)
+  expect_identical(get_parent_id(f_copy), get_parent_id(f1))
+  expect_identical(f_copy$name, paste0(fs::path_ext_remove(f1$name),  " (1).", fs::path_ext(f1$name)))
+})
+
+
+test_that("a directory can be copied with appropriate suffix", {
+  skip_if_no_pat()
+
+  #d3 <- osf_mkdir(p2, "d3")
+  d3_copy <- osf_cp(d3)
+  expect_identical(get_parent_id(d3_copy), get_parent_id(d3))
+  expect_identical(d3_copy$name, paste0(d3$name,  " (1)"))
+})
+
+
+test_that("a directory can be copied to a new node", {
+  skip_if_no_pat()
+
+  d3_copy2 <- osf_cp(d3, p1)
+  expect_identical(get_parent_id(d3), (p2$id))
+  expect_identical(get_parent_id(d3_copy2), (p1$id))
 })
 
 
