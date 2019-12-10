@@ -45,7 +45,7 @@ data_file <- osf_mv(data_file, to = data_dir)
 
 # Move our data directory to a new component
 data_comp <- osf_create_component(project, title = "data", category = "data")
-data_file \%>\%
+data_dir \%>\%
   osf_mv(to = data_comp) \%>\%
   osf_open()
 }

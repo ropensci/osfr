@@ -34,7 +34,7 @@ write.csv(iris, file = "iris.csv")
 data_file <- osf_upload(project,"iris.csv")
 
 # Make a copy of the file in the same location. A suffix is added to avoid name conflicts
-data_file_1 <- osf_cp(data_file)
+data_file <- osf_cp(data_file)
 
 # Create a new directory to copy our file to
 data_dir <- osf_mkdir(project, "data")
@@ -42,9 +42,9 @@ data_dir <- osf_mkdir(project, "data")
 # Copy the file to our data directory
 data_file <- osf_cp(data_file, to = data_dir)
 
-# Copy file to a separate component
+# Copy directory to new component
 data_comp <- osf_create_component(project, title = "data", category = "data")
-data_file \%>\%
+data_dir \%>\%
   osf_cp(to = data_comp) \%>\%
   osf_open()
 }
