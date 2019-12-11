@@ -45,7 +45,7 @@ osf_mv <- function(x, to, overwrite = FALSE, verbose = FALSE) {
 #' @export
 osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
   x <- make_single(x)
-  .wb_file_move(
+  .wb_file_action(
     x,
     to = to,
     action = "move",
@@ -59,9 +59,10 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
 #' @noRd
 #' @references
 #' https://waterbutler.readthedocs.io/en/latest/api.html#actions
-.wb_file_move <- function(x, to, action, overwrite, verbose) {
+.wb_file_action <- function(x, to, action, overwrite, verbose) {
   action <- match.arg(action, c("move", "copy"))
-  conflict <- ifelse(overwrite, "replace", "warn")
+  if (action == "move") conflict <- ifelse(overwrite, "replace", "warn")   #move
+  if (action == "copy") conflict <- "keep"                                 #copy
 
   if (inherits(to, "osf_tbl_file")) {
     if (is_osf_file(to)) {
@@ -80,7 +81,7 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
   api_path <- crul::url_parse(api_url)$path
 
   req <- modifyList(
-    .wb_file_action(to),
+    build_move_request(to),
     list(action = action, conflict = conflict)
   )
 
@@ -94,7 +95,7 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
 
 
 # Construct the move/copy request's body
-.wb_file_action <- function(x) {
+build_move_request <- function(x) {
   switch(class(x)[1],
 
     osf_tbl_node =   list(
