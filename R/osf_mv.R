@@ -61,8 +61,7 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
 #' https://waterbutler.readthedocs.io/en/latest/api.html#actions
 .wb_file_action <- function(x, to, action, overwrite, verbose) {
   action <- match.arg(action, c("move", "copy"))
-  if (action == "move") conflict <- ifelse(overwrite, "replace", "warn")   #move
-  if (action == "copy") conflict <- "keep"                                 #copy
+  conflict <- ifelse(overwrite, "replace", "warn")   #move and copy
 
   if (inherits(to, "osf_tbl_file")) {
     if (is_osf_file(to)) {
@@ -89,7 +88,9 @@ osf_mv.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
   out <- process_response(res)
   raise_error(out)
 
-  if (verbose) message(sprintf("Moved '%s' to '%s'.", x$name, to$name))
+  if (verbose & action == "move") message(sprintf("Moved '%s' to '%s'.", x$name, to$name))
+  if (verbose & action == "copy") message(sprintf("Copied '%s' to '%s'.", x$name, to$name))
+
   wb2osf(out)
 }
 
