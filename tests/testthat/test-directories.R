@@ -1,8 +1,8 @@
 context("Directories")
 
-
 # setup -------------------------------------------------------------------
 setup({
+  vcr::insert_cassette("test-directories", record = "new_episodes")
   if (has_pat()) {
     p1 <<- osf_create_project(title = "osfr-test-directories")
   }
@@ -12,6 +12,7 @@ teardown({
   if (has_pat()) {
     osf_rm(p1, recurse = TRUE, check = FALSE)
   }
+  vcr::eject_cassette("test-directories")
 })
 
 
@@ -25,8 +26,10 @@ test_that("empty project/folder returns a osf_tbl_file with 0 rows", {
 })
 
 test_that("listing a non-existent folder errors", {
+  vcr::insert_cassette("test-directories-nonexistent"), record = "new_episodes")
   skip_if_no_pat()
-  expect_error(osf_ls_files(p1, path = "data"), "Can't find directory")
+  expect_error(osf_ls_files(p1, path = "nonexistent"), "Can't find directory")
+  vcr::eject_cassette()
 })
 
 test_that("create a top-level directory", {
@@ -40,7 +43,8 @@ test_that("create a top-level directory", {
 test_that("list a top-level directory", {
   skip_if_no_pat()
 
-  out <- osf_ls_files(p1)
+  p1_nonempty <- p1
+  out <- osf_ls_files(p1_nonempty)
   expect_s3_class(out, "osf_tbl_file")
   expect_equal(nrow(out), 1)
   expect_equal(out$name, "dir1")
@@ -58,11 +62,12 @@ test_that("create a subdirectory within an existing directory", {
 test_that("list a subdirectory", {
   skip_if_no_pat()
 
-  out <- osf_ls_files(p1)
+  p1_withsubdir <- p1
+  out <- osf_ls_files(p1_withsubdir)
   expect_equal(nrow(out), 1)
   expect_equal(out$name, "dir1")
 
-  out <- osf_ls_files(p1, path = "dir1")
+  out <- osf_ls_files(p1_withsubdir, path = "dir1")
   expect_equal(nrow(out), 1)
   expect_equal(out$name, "dir11")
 })
