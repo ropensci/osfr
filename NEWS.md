@@ -1,3 +1,9 @@
+# osfr 0.2.7
+
+## New features
+
+* New `osf_cp()` function for copying files to new locations (@tpyork, #114)
+
 # osfr 0.2.6
 
 ## Improved uploading
