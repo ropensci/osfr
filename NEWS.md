@@ -4,6 +4,10 @@
 
 * New `osf_cp()` function for copying files to new locations (@tpyork, #114)
 
+## Minor changes
+
+* Encoded HTML symbols in node titles are now handled properly (#117)
+
 # osfr 0.2.6
 
 ## Improved uploading
