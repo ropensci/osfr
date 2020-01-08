@@ -46,7 +46,7 @@ osf_ls_nodes.osf_tbl_node <-
   out <- .osf_node_children(
     id = as_id(x),
     n_max = n_max,
-    query = filter_nodes(pattern = pattern),
+    query = filter_nodes(pattern = html_encode(pattern)),
     verbose = verbose
   )
 

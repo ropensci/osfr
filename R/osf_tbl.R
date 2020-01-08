@@ -105,8 +105,11 @@ as_osf_tbl.list <- function(x, subclass = NULL) {
   ))
 
   out <- tibble::new_tibble(purrr::transpose(vars), nrow = length(vars))
-  out$name <- as.character(out$name)
   out$id   <- as.character(out$id)
+  out$name <- as.character(out$name)
+
+  if (subclass == "osf_tbl_node") out$name <- html_decode(out$name)
+
   new_osf_tbl(out, subclass)
 }
 
