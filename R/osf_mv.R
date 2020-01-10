@@ -4,7 +4,7 @@
 #' subdirectory.
 #'
 #' @param x An [`osf_tbl_file`] containing a single file or directory.
-#' @param to The destination where the file or directory will be copied to. This
+#' @param to Destination where the file or directory will be moved. This
 #'   can be one of the following:
 #'   * An [`osf_tbl_node`] with a single project or component.
 #'   * An [`osf_tbl_file`] with a single directory.
