@@ -1,16 +1,13 @@
 #' Copy a file or directory
 #'
-#' Use `osf_cp()` to make a copy of a file or directory within the same or new location.
+#' Use `osf_cp()` to make a copy of a file or directory in a new location.
 #'
-#' @param x An [`osf_tbl_file`] containing a single file or directory.
+#' @inherit osf_mv params return
 #' @param to Destination where the file or directory will be copied. Files can not be
 #'   copied in original location regardless of 'overwrite' value.
 #'   This can be one of the following:
 #'   * An [`osf_tbl_node`] with a single project or component.
 #'   * An [`osf_tbl_file`] with a single directory.
-#' @param overwrite Logical, if a file or directory with the same name already
-#'   exists at the destination should it be replaced with `x`?
-#' @template verbose
 #'
 #' @return An [`osf_tbl_file`] containing the updated OSF file.
 #'
