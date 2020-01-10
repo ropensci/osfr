@@ -4,7 +4,7 @@
 \alias{osf_rm}
 \title{Delete an entity from OSF}
 \usage{
-osf_rm(x, recursive = FALSE, verbose = FALSE, check = TRUE)
+osf_rm(x, recurse = FALSE, verbose = FALSE, check = TRUE)
 }
 \arguments{
 \item{x}{One of the following:
@@ -13,7 +13,7 @@ osf_rm(x, recursive = FALSE, verbose = FALSE, check = TRUE)
 \item An \code{\link{osf_tbl_file}} containing a single directory or file.
 }}
 
-\item{recursive}{Remove all sub-components before deleting the top-level
+\item{recurse}{Remove all sub-components before deleting the top-level
 entity. This only applies when deleting projects or components.}
 
 \item{verbose}{Logical, indicating whether to print informative messages
@@ -33,7 +33,7 @@ open the item in your web browser so you can verify what is about to be
 deleted before proceeding.
 
 If the project or component targeted for deletion contains sub-components,
-those must be deleted first. Setting \code{recursive = TRUE} will attempt to
+those must be deleted first. Setting \code{recurse = TRUE} will attempt to
 remove the hierarchy of sub-components before deleting the top-level entity.
 
 \emph{Note: This functionality is limited to contributors with admin-level
