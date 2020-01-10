@@ -2,9 +2,8 @@
 #'
 #' Use `osf_cp()` to make a copy of a file or directory in a new location.
 #'
-#' @inherit osf_mv params return
-#' @param to Destination where the file or directory will be copied. Files can not be
-#'   copied in original location regardless of 'overwrite' value.
+#' @inherit osf_mv params return details
+#' @param to Destination where the file or directory will be copied.
 #'   This can be one of the following:
 #'   * An [`osf_tbl_node`] with a single project or component.
 #'   * An [`osf_tbl_file`] with a single directory.
@@ -38,10 +37,8 @@ osf_cp <- function(x, to, overwrite = FALSE, verbose = FALSE) {
 
 #' @export
 osf_cp.osf_tbl_file <- function(x, to, overwrite = FALSE, verbose = FALSE) {
-  x <- make_single(x)
-  #if (is.null(to)) to <- osf_retrieve_node(get_parent_id(x))
   .wb_file_action(
-    x,
+    make_single(x),
     to = to,
     action = "copy",
     overwrite = overwrite,
