@@ -7,6 +7,7 @@
 ## Minor changes
 
 * Encoded HTML symbols in node titles are now handled properly (#117)
+* `osf_rm()` argument `recursive` been renamed to `recurse` in order to be consistent with other functions
 
 # osfr 0.2.6
 
