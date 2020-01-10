@@ -14,6 +14,10 @@
 * Fix project creation on windows (#110)
 * Fix tests when PAT is undefined
 
+## osfr 0.2.6.3
+
+* Add JOSS paper
+
 # osfr 0.2.5
 
 ## Multi-file transfers!

@@ -23,10 +23,11 @@ An \code{\link{osf_tbl_file}} with one row containing the leaf directory
 specified in \code{path}.
 }
 \description{
-Use \code{osf_mkdir()} to create a new directory on OSF. Directories can be added
-to projects, components, or nested within existing directories on OSF. If
-\code{path} contains multiple directories (e.g., \code{"data/rawdata"}) the
-intermediate-level directories will be created if needed.
+Use \code{osf_mkdir()} to add new directories to projects, components, or nested
+within existing OSF directories. If \code{path} contains multiple directory
+levels (e.g., \code{"data/rawdata"}) the intermediate-level directories are
+created automatically. If the directory you're attempting to create already
+exists on OSF it will be silently ignored and included in the output.
 }
 \examples{
 \dontrun{

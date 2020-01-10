@@ -24,14 +24,15 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Chris Hartgerink \email{chjh@protonmail.com}
+  \item Chris Hartgerink \email{chjh@protonmail.com} (\href{https://orcid.org/0000-0003-1050-6809}{ORCID})
 }
 
 Other contributors:
 \itemize{
-  \item Timothy York \email{timothypyork@gmail.com} [contributor]
+  \item Timothy York \email{timothypyork@gmail.com} (\href{https://orcid.org/0000-0003-4068-4286}{ORCID}) [contributor]
+  \item Ryan Hafen \email{rhafen@purdue.edu} [contributor]
   \item Brian Richards \email{brian.g.richards@gmail.com} [contributor]
-  \item Courtney Soderberg \email{courtney@cos.io} [contributor]
+  \item Courtney Soderberg \email{courtney@cos.io} (\href{https://orcid.org/0000-0003-1227-7042}{ORCID}) [contributor]
 }
 
 }
