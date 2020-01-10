@@ -15,6 +15,7 @@
 ^codecov\.yml$
 ^\.lintr
 inst/.lintr$
+inst/paper.md
 # pkgdown
 ^docs$
 ^pkgdown$
