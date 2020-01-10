@@ -43,10 +43,11 @@
 
 
 <meta property="og:title" content="Create directories on OSF — osf_mkdir" />
-<meta property="og:description" content="Use osf_mkdir() to create a new directory on OSF. Directories can be added
-to projects, components, or nested within existing directories on OSF. If
-path contains multiple directories (e.g., &quot;data/rawdata&quot;) the
-intermediate-level directories will be created if needed." />
+<meta property="og:description" content="Use osf_mkdir() to add new directories to projects, components, or nested
+within existing OSF directories. If path contains multiple directory
+levels (e.g., &quot;data/rawdata&quot;) the intermediate-level directories are
+created automatically. If the directory you're attempting to create already
+exists on OSF it will be silently ignored and included in the output." />
 <meta property="og:image" content="https://centerforopenscience.github.io/osfr/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -90,7 +91,7 @@ intermediate-level directories will be created if needed." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">osfr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.6.3</span>
       </span>
     </div>
 
@@ -150,10 +151,11 @@ intermediate-level directories will be created if needed." />
     </div>
 
     <div class="ref-description">
-    <p>Use <code>osf_mkdir()</code> to create a new directory on OSF. Directories can be added
-to projects, components, or nested within existing directories on OSF. If
-<code>path</code> contains multiple directories (e.g., <code>"data/rawdata"</code>) the
-intermediate-level directories will be created if needed.</p>
+    <p>Use <code>osf_mkdir()</code> to add new directories to projects, components, or nested
+within existing OSF directories. If <code>path</code> contains multiple directory
+levels (e.g., <code>"data/rawdata"</code>) the intermediate-level directories are
+created automatically. If the directory you're attempting to create already
+exists on OSF it will be silently ignored and included in the output.</p>
     </div>
 
     <pre class="usage"><span class='fu'>osf_mkdir</span>(<span class='no'>x</span>, <span class='no'>path</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
