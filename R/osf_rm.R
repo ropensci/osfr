@@ -25,6 +25,7 @@
 #'
 #' @return Invisibly returns `TRUE` if deletion was successful.
 #'
+#' @family OSF file operations
 #' @examples
 #' \dontrun{
 #' project <- osf_create_project("My Short-Lived Project")

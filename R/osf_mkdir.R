@@ -14,7 +14,8 @@
 #'
 #' @return An [`osf_tbl_file`] with one row containing the leaf directory
 #'   specified in `path`.
-#' @export
+#'
+#' @family OSF file operations
 #' @examples
 #' \dontrun{
 #' proj <- osf_create_project("Directory Example")
@@ -28,6 +29,7 @@
 #' # recursively create multiple directory levels within data/
 #' osf_mkdir(data_dir, path = "samples/pcr/qc")
 #' }
+#' @export
 
 osf_mkdir <- function(x, path, verbose = FALSE) {
   UseMethod("osf_mkdir")

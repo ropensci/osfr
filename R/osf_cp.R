@@ -9,8 +9,7 @@
 #'   * An [`osf_tbl_node`] with a single project or component.
 #'   * An [`osf_tbl_file`] with a single directory.
 #'
-#' @return An [`osf_tbl_file`] containing the updated OSF file.
-#'
+#' @family OSF file operations
 #' @examples
 #' \dontrun{
 # Create an example file to upload to our example project
