@@ -14,6 +14,7 @@
 #'
 #' @return An [`osf_tbl_file`] containing the updated OSF file.
 #'
+#' @family OSF file operations
 #' @examples
 #' \dontrun{
 #' # Create an example file to upload to our example project
