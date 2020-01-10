@@ -80,7 +80,7 @@
 #' Permanently delete a node
 #' @param id a node's GUID
 #' @return Since this endpoint doesn't return any useful information we return
-#'   `TRUE` is deletion was successful or the JSON error message if not
+#'   `TRUE` if deletion was successful and the JSON error message otherwise
 #' @references
 #' https://developer.osf.io/#operation/nodes_delete
 #' @noRd
