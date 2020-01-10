@@ -9,7 +9,7 @@ osf_mv(x, to, overwrite = FALSE, verbose = FALSE)
 \arguments{
 \item{x}{An \code{\link{osf_tbl_file}} containing a single file or directory.}
 
-\item{to}{The destination where the file or directory will be copied to. This
+\item{to}{Destination where the file or directory will be moved. This
 can be one of the following:
 \itemize{
 \item An \code{\link{osf_tbl_node}} with a single project or component.
@@ -28,6 +28,10 @@ An \code{\link{osf_tbl_file}} containing the updated OSF file.
 \description{
 Use \code{osf_mv()} to move a file or directory to a new project, component, or
 subdirectory.
+}
+\details{
+Note that a file (or directory) cannot be moved or copied onto itself, even
+if \code{overwrite = TRUE}.
 }
 \examples{
 \dontrun{
@@ -51,3 +55,10 @@ data_dir \%>\%
 }
 
 }
+\seealso{
+Other OSF file operations: 
+\code{\link{osf_cp}()},
+\code{\link{osf_mkdir}()},
+\code{\link{osf_rm}()}
+}
+\concept{OSF file operations}

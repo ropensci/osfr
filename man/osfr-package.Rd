@@ -20,7 +20,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Aaron Wolen \email{aaron@wolen.com} (0000-0003-2542-2202)
+\strong{Maintainer}: Aaron Wolen \email{aaron@wolen.com} (\href{https://orcid.org/0000-0003-2542-2202}{ORCID})
 
 Authors:
 \itemize{

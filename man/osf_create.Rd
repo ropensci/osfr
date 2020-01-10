@@ -6,11 +6,20 @@
 \alias{osf_create_component}
 \title{Create a new project or component on OSF}
 \usage{
-osf_create_project(title, description = NULL, public = FALSE,
-  category = "project")
+osf_create_project(
+  title,
+  description = NULL,
+  public = FALSE,
+  category = "project"
+)
 
-osf_create_component(x, title, description = NULL, public = FALSE,
-  category = NULL)
+osf_create_component(
+  x,
+  title,
+  description = NULL,
+  public = FALSE,
+  category = NULL
+)
 }
 \arguments{
 \item{title, description}{Set a title (required) and, optionally, a

@@ -46,3 +46,10 @@ osf_rm(project)
 }
 
 }
+\seealso{
+Other OSF file operations: 
+\code{\link{osf_cp}()},
+\code{\link{osf_mkdir}()},
+\code{\link{osf_mv}()}
+}
+\concept{OSF file operations}

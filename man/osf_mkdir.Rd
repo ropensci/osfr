@@ -43,3 +43,10 @@ osf_mkdir(data_dir, path = "rawdata")
 osf_mkdir(data_dir, path = "samples/pcr/qc")
 }
 }
+\seealso{
+Other OSF file operations: 
+\code{\link{osf_cp}()},
+\code{\link{osf_mv}()},
+\code{\link{osf_rm}()}
+}
+\concept{OSF file operations}
