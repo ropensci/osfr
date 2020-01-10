@@ -8,7 +8,7 @@
 #' deleted before proceeding.
 #'
 #' If the project or component targeted for deletion contains sub-components,
-#' those must be deleted first. Setting `recursive = TRUE` will attempt to
+#' those must be deleted first. Setting `recurse = TRUE` will attempt to
 #' remove the hierarchy of sub-components before deleting the top-level entity.
 #'
 #' *Note: This functionality is limited to contributors with admin-level
@@ -17,7 +17,7 @@
 #' @param x One of the following:
 #'   * An [`osf_tbl_node`] with a single OSF project or component.
 #'   * An [`osf_tbl_file`] containing a single directory or file.
-#' @param recursive Remove all sub-components before deleting the top-level
+#' @param recurse Remove all sub-components before deleting the top-level
 #'   entity. This only applies when deleting projects or components.
 #' @param check If `FALSE` deletion will proceed without opening the item or
 #'   requesting verification---this effectively removes your safety net.
@@ -35,7 +35,7 @@
 #' @export
 osf_rm <-
   function(x,
-           recursive = FALSE,
+           recurse = FALSE,
            verbose = FALSE,
            check = TRUE) {
   UseMethod("osf_rm")
@@ -44,14 +44,14 @@ osf_rm <-
 #' @export
 osf_rm.osf_tbl_node <-
   function(x,
-           recursive = FALSE,
+           recurse = FALSE,
            verbose = FALSE,
            check = TRUE) {
 
   x <- make_single(x)
   id <- as_id(x)
 
-  if (recursive) {
+  if (recurse && isTRUE(check)) {
     child_ids <- recurse_node(id, maxdepth = Inf)
     if (verbose) {
       message(
@@ -77,7 +77,9 @@ osf_rm.osf_tbl_node <-
   if (check) {
     if (!rm_check(id, "node")) return(invisible())
   }
+
   out <- .osf_node_delete(id)
+
   if (isTRUE(out)) {
     if (verbose) message(sprintf("Deleted node %s", id))
     invisible(TRUE)
@@ -87,7 +89,7 @@ osf_rm.osf_tbl_node <-
 #' @export
 osf_rm.osf_tbl_file <-
   function(x,
-           recursive = FALSE,
+           recurse = FALSE,
            verbose = FALSE,
            check = TRUE) {
 
