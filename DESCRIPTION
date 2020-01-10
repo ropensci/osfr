@@ -4,11 +4,15 @@ Version: 0.2.6.2
 Authors@R: c(
     person("Aaron", "Wolen",, "aaron@wolen.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-2542-2202")),
-    person("Chris","Hartgerink",, "chjh@protonmail.com", role = "aut"),
-    person("Timothy", "York",, "timothypyork@gmail.com", role = "ctb"),
+    person("Chris","Hartgerink",, "chjh@protonmail.com", role = "aut",
+           comment = c(ORCID = "0000-0003-1050-6809")),
+    person("Timothy", "York",, "timothypyork@gmail.com", role = "ctb",
+           comment = c(ORCID = "0000-0003-4068-4286")),
     person("Ryan", "Hafen",, "rhafen@purdue.edu", role = "ctb"),
     person("Brian", "Richards",, "brian.g.richards@gmail.com", role = "ctb"),
-    person("Courtney", "Soderberg",, "courtney@cos.io", role = "ctb"))
+    person("Courtney", "Soderberg",, "courtney@cos.io", role = "ctb",
+           comment = c(ORCID = "0000-0003-1227-7042"))
+    )
 Description: Manage your projects and access open research materials and data on OSF.
 Depends: R (>= 3.1.0)
 Imports:
@@ -38,5 +42,5 @@ Suggests:
     covr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.1
+RoxygenNote: 7.0.2
 VignetteBuilder: knitr
