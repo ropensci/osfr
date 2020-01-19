@@ -1,7 +1,9 @@
 ---
 title: "Getting Started with osfr"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    toc: TRUE
 vignette: >
   %\VignetteIndexEntry{Getting Started with osfr}
   %\VignetteEngine{knitr::rmarkdown}
@@ -13,121 +15,214 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+Sys.unsetenv("OSF_SERVER")
 ```
 
-This vignette provides a quick tour of the `osfr` package. 
+This vignette provides a quick tour of the *osfr* package. 
 
 ```{r message=FALSE}
 library(osfr)
-library(dplyr)
-
-# external file for our example project
-write.csv(mtcars, "mtcars.csv")
 ```
 
+## What is OSF? 
 
-## Background 
+[OSF][osf] is a free and open source web application that provides a space for researchers to collaboratively store, manage, and share their research materials (e.g. data, code, protocols). 
 
-[OSF][osf], developed by the [Center for Open Science (COS)][cos], is a free, open source, web application that provides a space for researchers to collaboratively store, manage, and share their research materials (e.g. data, code, protocols). Files can be kept private, shared with a specific group of researchers, or made publicly available with citable DOIs so researchers can get credit for their work.
+Most work on OSF is organized around ***projects***, which include a cloud-based storage bucket where files can be stored and organized into directories. Note there is no storage limit on the size of projects but individual files must be < 5Gb. Projects can be kept private, shared with a specific group of collaborators, or made publicly available with citable DOIs so you can get credit for their work.
 
-`osfr` allows researchers to create and modify projects, components, and files through OSF's API.
+If you'd like to learn more about OSF the Center for Open Science has published an excellent series of [guides](http://help.osf.io/) to help get you started. We'll provide links to specific guides throughout this vignette.
+Here are a few relevant topics:
 
-## Working with projects/components
+* [Creating and Managing Projects][osf-projects]
+* [Adding sub-projects (i.e., components) to a project][osf-components]
+* [Understanding project permissions][osf-permissions]
 
-Most work on OSF is organized around ***projects***. Projects can contain *files*, groups of files in *directories*, and/or files in subsections of a project called ***components***. Collectively projects and components are called ***nodes***.
+## Accessing OSF projects
 
-### Creating a new project/component
+Let's check out an example project containing materials for an analysis of the 2012 American National Election Survey (ANES). You can access the OSF project in your browser by navigating to its URL: <https://osf.io/jgyxm/>. 
 
-At the start of a new research project or study we'll want to set up a new private project on OSF to store all the files related to the project. We can add multiple nested components or directories to create whatever structure will suite our workflow. Different components can have different DOIs and different privacy settings, so we may want to put similar files in their own components to organize the project.
-
-We'll first create a new *project* and store osfr's response in the `car_project` object. This object contains a specialized data frame based on the [tibble][] class that provides the new project's global unique identifier (GUID), title, and other metadata returned by the API. 
-
-*Note: You'll need to be authenticated to create `nodes`. See the `osf_auth()` function documentation or the `auth` vignette for more information.*
+Let's load this project into R with `osfr::osf_retrieve_node()`:
 
 ```{r}
-car_project <- osf_create_project("Motor Trend Car Road Tests")
-car_project
+anes_project <- osf_retrieve_node("https://osf.io/jgyxm")
+anes_project
 ```
 
-To view the project directly on OSF use `osf_open(car_project)`.
+This returns an `osf_tbl` object, which is the `data.frame`-like class *osfr* uses to represent items retrieved from OSF. You can now use `anes_project` to perform a variety of project related tasks by passing it to different osfr functions. 
 
-After the project is created we'll create two nested *components*, one for data and one for analysis scripts. We can take advantage of osfr's [pipe][magrittr]-compatibility to arrange multiple operations into a single sequence.
+### Downloading files
+
+Let's list all of the files that have been uploaded to the project:
 
 ```{r}
-scripts_comp <- car_project %>%
-  osf_create_component("Data") %>%
-  osf_create_component("Analysis Scripts")
+anes_files <- osf_ls_files(anes_project)
+anes_files
 ```
 
-Because each operation in the sequence above applies to the previous object, we've accidentally created a project with the `analysis scripts` component nested within the `data` component, which is not what we wanted. We can delete the analysis scripts component and recreate it under the top-level project.
+This returns another `osf_tbl` but this one contains 5 rows;  one for each of the project *files* stored on OSF. A nice feature of OSF is it provides rendered views for a wide variety of file formats, so it's not necessary to actually download and open a file if you just want to quickly examine it. Let's open the Word Document containing the project's data dictionary by extracting the relevant row from `anes_tbl` and passing it to `osf_open()`:
+
+```{r, eval=FALSE}
+osf_open(anes_files[4, ])
+```
+
+Because `osf_tbl`s are just specialized `data.frame`s, we could also `subset()` or `dplyr::filter()` to achieve the same result.
+
+*__Note:__ If an `osf_tbl` with multiple entities is passed to an non-vectorized osfr function like `osf_open()`, the default behavior is to use the entity in the first row and warn that all other entities are ignored.*
+
+We can also download local copies of these files by passing `anes_files` to `osf_download()`. 
 
 ```{r}
-osf_rm(scripts_comp, check = FALSE)
+osf_download(anes_files)
+```
 
-car_project %>% 
-  osf_create_component(title = "Analysis Scripts")
+We'll use these files in the next section for creating a new project.
+
+### Pipes
+
+As you've likely noticed, `osf_tbl` objects are central to osfr's functionality. Indeed, nearly all of its functions both expect an `osf_tbl` as input and return an `osf_tbl` as output. As such, osfr functions can be chained together using the [pipe operator][magrittr] (`%>%`), allowing for the creation of pipelines to automate OSF-based tasks.
+
+Here is a short example that consolidates all of the steps we've performed so far:
+
+```{r, eval=FALSE}
+osf_retrieve_node("jgyxm") %>% 
+  osf_ls_files() %>% 
+  osf_download()
+```
+
+## Project management
+
+Now let's see how to use osfr to create and manage your own projects. The goal for this section is to create your own version of the *Political Identification and Gender* project but with a better organizational structure. To follow along with this section you'll need to authenticate osfr using a personal access token (PAT). See the `?osf_auth()` function documentation or the `auth` vignette for more information.
+
+### Creating a project
+
+First you will need to create a new private project on OSF to store all the files related to the project. Here, we're giving the new project a title (required) and description (optional).
+
+```{r}
+my_project <- osf_create_project(
+  title = "Political Identification and Gender: Re-examined",
+  description = "A re-analysis of the original study's results."
+)
+my_project
+```
+
+The GUID for this new project is `r my_project$id`, so you could check it out on OSF by opening its URL (`r paste0("https://www.osf.io/", my_project$id)`) in your browser, or, more conveniently: `osf_open(my_project)`.
+
+### Adding structure with components
+
+A key organizational feature of OSF is the ability to augment a project's structure with sub-projects, which are referred to as *components* on OSF. Like top-level projects, every component is assigned a unique URL and contains its own cloud-based storage bucket. They can also have different privacy settings from the parent project. 
+
+We are going to create two nested *components*, one for the raw data and one for the analysis scripts. 
+
+```{r}
+data_comp <- osf_create_component(my_project, title = "Raw Data")
+script_comp <- osf_create_component(my_project, title = "Analysis Scripts")
+
+# verify the components were created
+# osf_open(my_project)
+```
+
+If you refresh the OSF project in your browser the *Components* widget should now contain two entries for each of our newly created components.
+
+### Uploading files
+
+Now that our project components are in place we can start to populate them with files. Let's start with the csv file containing our raw data.
+
+```{r}
+data_file  <- osf_upload(my_project, path = "raw_data.csv")
+data_file
+```
+
+Oh no! Instead of uploading `raw_data.csv` to the *Raw Data* component, we uploaded it to the parent project instead. 
+
+Fear not. We can easily fix this contrived mistake by simply moving the file to its intended location.
+
+```{r}
+data_file <- osf_mv(data_file, to = data_comp)
+```
+
+Crisis averted. Now if you open *Raw Data* on OSF (`osf_open(data_comp)`), it should contain the csv file. 
+
+Our next step is to upload the R scripts into the *Analysis Scripts* component. Rather than upload each file individually, we'll take advantage of `osf_upload()`'s ability to handle multiple files/directories and use `list.files()` to identify all `.R` files in the working directory:
+
+```{r}
+r_files <- osf_upload(script_comp, path = list.files(pattern = ".R$"))
+r_files
+```
+
+### Putting it all together
+
+Finally, let's repeat the process for the 2 `.docx` file containing the survey and accompanying data dictionary. This time we'll use a more succinct approach that leverages pipes to create and populate the component in one block:
+
+```{r}
+my_project %>%
+  osf_create_component("Research Materials") %>%
+  osf_upload(path = list.files(pattern = "\\.docx$"))
 ```
 
 We can verify the project is now structured the way we wanted by listing the components we have under the main project.
 
 ```{r}
-car_components <- osf_ls_nodes(car_project)
-car_components
+osf_ls_nodes(my_project)
 ```
 
-Remember, new projects are always private by default. You can change this by opening the project on OSF and [making it public][osf-privacy], and [even generate a DOI][osf-doi] so others can cite your work. 
+which gives us an `osf_tbl` with one row for each of the project's components.
 
-## Working With Files
+### Updating files
 
-In general, files can exist in projects, components, and/or directories on OSF. Files can be stored on *OSF's Storage* or in another service that is connected to an OSF project (e.g. GitHub, Dropbox, or Google Drive). However, `osfr` currently only supports interacting with files on OSF Storage.
+OSF provides automatic and unlimited file versioning. Let's see how this works with osfr. Make a small edit to your local copy of `cleaning.R` and save. Now, if we attempt to upload this new version to the *Analysis Scripts* component, osfr will throw a conflict error:
 
-### Uploading/Updating files
-
-To add our data file to the *Data* component within our project, we'll need to pass an `osf_tbl` containing only that component to the `osf_upload()` function, so the file is uploaded to the correct part of the project.
-
-*__Note:__ If an `osf_tbl` with multiple entities is passed to an osfr function, the default behavior is to use the entity in the first row and warn that all other entities are ignored.*
-
-osfr is compatible with the dplyr package, so we can `filter()` for the specific component we want.
-
-```{r}
-library(dplyr)
-
-# select the data component
-data_component <- filter(car_components, name == "Data")
-
-# upload our file
-mtcars_file <- osf_upload(data_component, path = "mtcars.csv")
-mtcars_file
+```{r, eval=FALSE}
+osf_upload(script_comp, path = "cleaning.R")
 ```
 
-The `mtcars_file` object now contains an `osf_tbl` with 1 row corresponding to the version of that file stored on OSF. We can also use `osf_open()` to examine the file directly on OSF, which provides rendered views for a wide variety of file formats.
+```
+Error: Can't upload file 'cleaning.R'.
+  * A file with the same name already exists at the destination.
+  * Use the `conflicts` argument to avoid this error in the future.
+```
+ 
+ As the error indicates, we need to use the `conflicts` argument to instruct `osf_upload()` how to handle the conflict. In this case, we want to overwrite the original copy with our new version:
 
-OSF also version controls files, which means that if we were to make a change to the `mtcars.csv` file (perhaps we collected more data) we could automatically create a 2nd version of the dataset by using the `osf_upload()` function and setting `conflicts = "overwrite"`. As long as the file we're uploading has the same file name as a file in that particular section of the project, a new version will be created.
+ ```{r, eval=FALSE}
+osf_upload(script_comp, path = "cleaning.R", conflicts = "overwrite")
+ ```
 
-### Downloading files
+Learn more about file versioning on OSF [here][osf-versioning].
 
-We can download files from any public or private node that we have access to and can identify files to download in two different ways.
+### Sharing
 
-1. If we know where the file is located, but don't remember it's GUID, we can use the `osf_ls_files` function to list all the files within a specified node and then pipe the results to `osf_download()`.
+Remember, new OFS projects are *always* private by default. You can change this by opening the project's settings page on OSF and making it public. See the following guides more information about OSF permissions and how to optionally generate a DOI so other can cite your project.
 
-    ```{r message=FALSE}
-    data_component %>% 
-      osf_ls_files() %>%
+* [Privacy Settings][osf-privacy]
+* [Sharing Projects][osf-sharing]
+* [Generate DOIs][osf-doi]
+
+## A more details about files on OSF
+
+On OSF, files can exist in projects, components, and/or directories. Files can be stored on *OSF's Storage* or in another service that is connected to an OSF project (e.g. GitHub, Dropbox, or Google Drive). However, `osfr` currently only supports interacting with files on OSF Storage.
+
+We can download files from any public or private node that we have access to and can identify files to download in two different ways:
+
+1. If we know where the file is located, but don't remember its GUID, you can use the `osf_ls_files` function to filter by filename within a specified node and then pipe the results to `osf_download()`.
+
+    ```{r message=FALSE, eval=FALSE}
+    anes_project %>% 
+      osf_ls_files(pattern = ) %>%
       osf_download(conflicts = "overwrite")
     ```
 
-2. For a public file that we may have seen referenced in a published article, we may already have the GUID, and so can retrieve the file directly before downloading it. Here, we'll download Daniel Laken's helpful spreadsheet for calculating effect sizes (<https://osf.io/vbdah/>).
+2. For a public file that was referenced in a published article, you may already have the GUID, and so can retrieve the file directly before downloading it. For example, let's download Daniel Laken's helpful spreadsheet for calculating effect sizes (available from <https://osf.io/vbdah/>).
 
     ```{r eval=FALSE}
-    excel_file <- osf_retrieve_file("vbdah")
-    osf_download(excel_file)
-    ```
-
-```{r cleanup, include=FALSE}
-osf_rm(car_project, recursive = TRUE, check = FALSE)
-unlink("mtcars.csv")
+osf_retrieve_file("vbdah") %>%
+  osf_download(excel_file)
 ```
 
+```{r cleanup, include=FALSE}
+unlink(anes_files$name)
+osf_rm(my_project, recurse = TRUE, check = FALSE)
+```
 
 ## More Information
 
@@ -144,5 +239,11 @@ For more information on OSF and `osfr` check out:
 [osf-api]: https://developer.osf.io
 [magrittr]: https://magrittr.tidyverse.org
 [tibble]: https://tibble.tidyverse.org
-[osf-privacy]: https://help.osf.io/hc/en-us/articles/360018981414-control-your-privacy-settings
+
+[osf-projects]: https://help.osf.io/hc/en-us/categories/360001495973-Creating-and-Managing-Projects
+[osf-components]: https://help.osf.io/hc/en-us/articles/360019737614-Create-Components
+[osf-privacy]: https://help.osf.io/hc/en-us/articles/360018981414-Control-Your-Privacy-Settings
+[osf-permissions]: https://help.osf.io/hc/en-us/articles/360019737774-Edit-Contributor-Permissions
 [osf-doi]: https://help.osf.io/hc/en-us/articles/360019931013-Create-DOIs
+[osf-versioning]: https://help.osf.io/hc/en-us/articles/360019738694-File-Revisions-and-Version-Control
+[osf-sharing]: https://help.osf.io/hc/en-us/categories/360001530614-Sharing-Projects
