@@ -15,14 +15,18 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-
-Sys.unsetenv("OSF_SERVER")
 ```
 
 This vignette provides a quick tour of the *osfr* package. 
 
 ```{r message=FALSE}
 library(osfr)
+```
+
+```{r diable-dev-mode, include = FALSE}
+# Need to be able to access the example project on OSF's production server
+# This expects OSF_PAT is defined in ~/.Renviron
+osfr:::osf_dev_off()
 ```
 
 ## What is OSF? 
