@@ -18,7 +18,7 @@ setup({
 teardown({
   fs::dir_delete(multidir)
   if (has_pat()) {
-    osf_rm(p1, recursive = TRUE, check = FALSE)
+    osf_rm(p1, recurse = TRUE, check = FALSE)
   }
 })
 
