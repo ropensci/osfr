@@ -15,8 +15,8 @@ setup({
 
 teardown({
   if (has_pat()) {
-    osf_rm(p1, recursive = TRUE, check = FALSE)
-    osf_rm(p2, recursive = TRUE, check = FALSE)
+    osf_rm(p1, recurse = TRUE, check = FALSE)
+    osf_rm(p2, recurse = TRUE, check = FALSE)
   }
 })
 
