@@ -4,8 +4,9 @@
 
 * New `osf_cp()` function for copying files to new locations (@tpyork, #114)
 
-## Minor changes
+## Other changes
 
+* Overhauled the *getting started* vignette
 * Encoded HTML symbols in node titles are now handled properly (#117)
 * `osf_rm()` argument `recursive` been renamed to `recurse` in order to be consistent with other functions
 
