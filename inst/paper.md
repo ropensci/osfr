@@ -51,9 +51,9 @@ A key organizational feature of OSF is the ability to augment a project's struct
 
 ## Implementation and Design
 
-osfr is built on the OSF public REST API, available at https://developer.osf.io, using rOpenSci's HTTP client, crul [@crul], for API Communication . In order to provide an interface that feels natural to R users, the JSON responses from the OSF API are encapsulated as R objects using the custom`osf_tbl` class. These specialized `data.frame`-like structures are deeply nested and store information using a list-column approach based on [googledrive][]'s `dribble` class [@googledrive]. The vast majority of osfr functions return `osf_tbl`s as output and expect them as input, so that method chaining is possible using [magrittr][]'s pipe operator [@magrittr]. End users can safely ignore these implementation details while making use of the provided osfr functions.
+osfr is built on the OSF public REST API, available at https://developer.osf.io, and uses rOpenSci's HTTP client, crul [@crul], for API Communication. In order to provide an interface that feels natural to R users, items retrieved from the OSF are represented as `data.frame`-like objects called `osf_tbl`s. The `osf_tbl` class is built on top of the [tibble package][tibble] [@tibble] and, like [googledrive][]'s dribble class [@googledrive], uses a list-column to encapsulate JSON responses from the API. These deeply nested structures are rarely of interest to the end user but are essential for the package's internal methods. The vast majority of osfr functions return `osf_tbl`s as output and expect them as input, so that method chaining is possible using [magrittr][]'s pipe operator [@magrittr]. 
 
-Exported osfr functions all start with the prefix, `osf_`, following the `<prefix>_<verb>` convention used in packages like [stringr][] [@stringr], which facilitates auto-completion in supported IDEs (like RStudio) and avoids namespace clashes with other packages that perform similar file-based operations. Where possible, we adopt the names of common Unix utilities that perform analogous tasks (e.g., `osf_cp()`, `osf_mkdir()`).
+Exported osfr functions all start with the prefix, `osf_`, following the `<prefix>_<verb>` naming convention used in packages like [stringr][] [@stringr], which facilitates auto-completion in supported IDEs (like RStudio) and avoids namespace clashes with other packages that perform similar file-based operations. Where possible, we adopt the names of common Unix utilities that perform analogous tasks (e.g., `osf_cp()`, `osf_mkdir()`).
 
 # Summary
 
@@ -66,3 +66,4 @@ Exported osfr functions all start with the prefix, `osf_`, following the `<prefi
 [googledrive]: https://googledrive.tidyverse.org
 [magrittr]: https://magrittr.tidyverse.org
 [stringr]: https://stringr.tidyverse.org
+[tibble]: https://tibble.tidyverse.org
