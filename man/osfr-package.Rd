@@ -6,10 +6,35 @@
 \alias{osfr-package}
 \title{osfr: R interface to OSF}
 \description{
-osfr provides a suite of functions for interacting with
-\href{https://www.osf.io}{OSF} that are primarily focused on project management
-workflows.
+osfr provides a suite of functions for interacting with the Open Science
+Framework (OSF; \url{https://www.osf.io}).
 }
+\section{What is OSF?}{
+
+
+OSF is a free and open source project management repository designed to
+support researchers across their entire project lifecycle. The service
+includes free cloud storage and file version history, providing a
+centralized location for all your research materials that can be kept
+private, shared with select collaborators, or made publicly available with
+citable DOIs.
+
+Most work on OSF is organized around \emph{\strong{projects}}. Projects can contain
+\emph{files}, groups of files in \emph{directories}, and/or files in sub-projects
+called \emph{\strong{components}}. Note there is no storage limit on the size of
+projects but individual files must be < 5Gb.
+}
+
+\section{Resources}{
+
+\itemize{
+\item To learn more about OSF check out the helpful series of guides published by
+the Center for Open Science: \url{https://help.osf.io}
+\item See the vignette for an overview of osfr's features:
+\code{vignette("getting_started", package = "osfr")}
+}
+}
+
 \seealso{
 Useful links:
 \itemize{
