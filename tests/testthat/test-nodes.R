@@ -97,8 +97,8 @@ test_that("deleting non-empty project/component fails", {
 test_that("non-empty project can be recursively deleted", {
   skip_if_no_pat()
 
-  out <- osf_rm(p1, recursive = TRUE, check = FALSE)
+  out <- osf_rm(p1, recurse = TRUE, check = FALSE)
   expect_true(out)
-  out <- osf_rm(p2, recursive = TRUE, check = FALSE)
+  out <- osf_rm(p2, recurse = TRUE, check = FALSE)
   expect_true(out)
 })

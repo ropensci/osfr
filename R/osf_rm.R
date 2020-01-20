@@ -51,7 +51,7 @@ osf_rm.osf_tbl_node <-
   x <- make_single(x)
   id <- as_id(x)
 
-  if (recurse && isTRUE(check)) {
+  if (recurse) {
     child_ids <- recurse_node(id, maxdepth = Inf)
     if (verbose) {
       message(
@@ -70,14 +70,12 @@ osf_rm.osf_tbl_node <-
       if (verbose) {
         message(sprintf("Deleted component %s", names(child)))
       }
-
     }
   }
 
   if (check) {
     if (!rm_check(id, "node")) return(invisible())
   }
-
   out <- .osf_node_delete(id)
 
   if (isTRUE(out)) {
