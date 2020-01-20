@@ -198,7 +198,7 @@ Remember, new OFS projects are *always* private by default. You can change this 
 * [Sharing Projects][osf-sharing]
 * [Generate DOIs][osf-doi]
 
-## A more details about files on OSF
+## A few details about files on OSF
 
 On OSF, files can exist in projects, components, and/or directories. Files can be stored on *OSF's Storage* or in another service that is connected to an OSF project (e.g. GitHub, Dropbox, or Google Drive). However, `osfr` currently only supports interacting with files on OSF Storage.
 
@@ -224,7 +224,7 @@ unlink(anes_files$name)
 osf_rm(my_project, recurse = TRUE, check = FALSE)
 ```
 
-## More Information
+## Additional resources
 
 For more information on OSF and `osfr` check out:
 
