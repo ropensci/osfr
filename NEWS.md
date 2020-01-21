@@ -1,14 +1,19 @@
 # osfr 0.2.7
 
+## Important changes
+
+osfr is now part of rOpenSci and the documentation website has moved to a new URL:  <https://docs.ropensci.org/osfr>.
+
 ## New features
 
 * New `osf_cp()` function for copying files to new locations (@tpyork, #114)
 
 ## Other changes
 
-* Overhauled the *getting started* vignette
+* The *getting started* vignette was overhauled to better leverage multi-file transfers
 * Encoded HTML symbols in node titles are now handled properly (#117)
 * `osf_rm()` argument `recursive` been renamed to `recurse` in order to be consistent with other functions
+* Internal links now point to the ropensci repository and new documentation URL
 
 # osfr 0.2.6
 
