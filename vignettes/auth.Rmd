@@ -27,9 +27,17 @@ To create an OSF PAT, log into OSF through your browser, navigate to the [OSF se
 
 You can authenticate in two different ways:
 
-1. Call the `osf_auth()` function in the console at the start of each new session and paste in your PAT. Your PAT functions like a password, so it should **not** be hard coded into any scripts.
+1. Call the `osf_auth()` function in the console at the start of each new session and paste in your PAT. 
 
-2. To automatically authenticate, store you the PAT as an environment variable named `OSF_PAT`. One way to do this is to create a `.Renviron` file in your home or project working directory, and include a definition of the `OSF_PAT` variable.
+   ```r
+   osf_auth("ThIsIsNoTaReAlPaTbUtYoUgEtIt")
+   ```
+
+   Your PAT functions like a password, so it should **not** be hard coded into any scripts, ever.
+
+2. To authenticate automatically, store the PAT as an environment variable named `OSF_PAT`, which osfr will detect upon being loaded. One way to do this is to create a `.Renviron` file in your home or project working directory that defines `OSF_PAT`. 
+
+    If you'd like to learn more about `.Renviron` files, the [R Startup chapter](https://rstats.wtf/r-startup.html) of *What They Forgot to Teach You About R* is highly recommended.
 
 ## Removing a PAT
 
