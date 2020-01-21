@@ -10,7 +10,7 @@ osfr is now part of rOpenSci and the documentation website has moved to a new UR
 
 ## Other changes
 
-* The *getting started* vignette was overhauled to better leverage multi-file transfers
+* The *getting started* vignette was overhauled to better leverage multi-file transfers and is now precomputed
 * Encoded HTML symbols in node titles are now handled properly (#117)
 * `osf_rm()` argument `recursive` been renamed to `recurse` in order to be consistent with other functions
 * Internal links now point to the ropensci repository and new documentation URL
