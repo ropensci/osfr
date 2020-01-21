@@ -235,7 +235,7 @@ For more information on OSF and `osfr` check out:
 * [OSF][osf]
 * [OSF API Documentation][osf-api]
 * [OSF Support](https://osf.io/support/)
-* [osfr GitHub Repository](https://github.com/CenterForOpenScience/osfr)
+* [osfr GitHub Repository](https://github.com/ropensci/osfr)
 
 <!-- links -->
 [osf]: https://osf.io

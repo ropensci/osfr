@@ -27,9 +27,9 @@ Imports:
     httr
 License: Apache License 2.0 | file LICENSE
 URL: 
-    http://centerforopenscience.github.io/osfr, 
-    https://github.com/centerforopenscience/osfr
-BugReports: https://github.com/centerforopenscience/osfr/issues
+    https://docs.ropensci.org/osfr, 
+    https://github.com/ropensci/osfr
+BugReports: https://github.com/ropensci/osfr/issues
 LazyData: true
 Suggests:
     dplyr,
