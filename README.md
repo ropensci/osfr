@@ -1,21 +1,20 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# osfr <a href="http://centerforopenscience.github.io/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
+# osfr <a href="http://ropensci/osfr.io/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
 [![Build
-Status](https://travis-ci.org/CenterForOpenScience/osfr.svg?branch=master)](https://travis-ci.org/CenterForOpenScience/osfr)
+Status](https://travis-ci.org/ropensci/osfr.svg?branch=master)](https://travis-ci.org/ropensci/osfr)
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/CenterForOpenScience/osfr?branch=master&svg=true)](https://ci.appveyor.com/project/CenterForOpenScience24999/osfr)
+status](https://ci.appveyor.com/api/projects/status/github/ropensci/osfr?branch=master&svg=true)](https://ci.appveyor.com/project/aaronwolen/osfr)
 [![Coverage
-status](https://codecov.io/gh/CenterForOpenScience/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/CenterForOpenScience/osfr?branch=master)
+status](https://codecov.io/gh/ropensci/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/osfr?branch=master)
 [![](https://badges.ropensci.org/279_status.svg)](https://github.com/ropensci/software-review/issues/279)
 
 ## Overview
 
-osfr provides a suite of functions for interacting with
-[OSF](https://osf.io "Open Science Framework") (<https://osf.io>) that
-are primarily focused on project management workflows.
+osfr provides a suite of functions for interacting with the Open Science
+Framework ([OSF](https://osf.io "Open Science Framework")).
 
 **What is OSF?**
 
@@ -34,14 +33,14 @@ CRAN. You can install the current version with the *remotes* package:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("centerforopenscience/osfr")
+remotes::install_github("ropensci/osfr")
 ```
 
 ## Usage Examples
 
 *Note: You need to [setup an OSF personal access token
-(PAT)](http://centerforopenscience.github.io/osfr/articles/auth.html) to
-use osfr to manage projects or upload files.*
+(PAT)](http://ropensci/osfr.io/osfr/articles/auth.html) to use osfr to
+manage projects or upload files.*
 
 ### Accessing Open Research Materials
 
@@ -64,9 +63,9 @@ library(osfr)
 cr_project <- osf_retrieve_node("e81xl")
 cr_project
 #> # A tibble: 1 x 3
-#>   name                                    id    meta      
-#>   <chr>                                   <chr> <list>    
-#> 1 Reproducibility Project: Cancer Biology e81xl <list [3]>
+#>   name                                    id    meta            
+#>   <chr>                                   <chr> <list>          
+#> 1 Reproducibility Project: Cancer Biology e81xl <named list [3]>
 ```
 
 This returns an `osf_tbl` object with a single row representing the
@@ -76,12 +75,12 @@ project.
 ``` r
 osf_ls_files(cr_project)
 #> # A tibble: 4 x 3
-#>   name                                     id                     meta     
-#>   <chr>                                    <chr>                  <list>   
-#> 1 Adjustment of 50 studies to 37 studies.… 565602398c5e4a3877d72… <list [3…
-#> 2 papers_and_keywords.xlsx                 553e671b8c5e4a219919e… <list [3…
-#> 3 Full_dataset_of_papers_formatted.xls     553e671b8c5e4a219919e… <list [3…
-#> 4 METHOD_to_select_papers.txt              553e671b8c5e4a219919e… <list [3…
+#>   name                                     id                     meta          
+#>   <chr>                                    <chr>                  <list>        
+#> 1 Adjustment of 50 studies to 37 studies.… 565602398c5e4a3877d72… <named list […
+#> 2 papers_and_keywords.xlsx                 553e671b8c5e4a219919e… <named list […
+#> 3 Full_dataset_of_papers_formatted.xls     553e671b8c5e4a219919e… <named list […
+#> 4 METHOD_to_select_papers.txt              553e671b8c5e4a219919e… <named list […
 ```
 
 This returns another `osf_tbl` with 1 row for each of the files and
@@ -96,10 +95,10 @@ components with osfr using `osf_ls_nodes()`.
 ``` r
 osf_ls_nodes(cr_project)
 #> # A tibble: 2 x 3
-#>   name                                      id    meta      
-#>   <chr>                                     <chr> <list>    
-#> 1 Replication Studies                       p7ayb <list [3]>
-#> 2 Data collection and publishing guidelines a5imq <list [3]>
+#>   name                                      id    meta            
+#>   <chr>                                     <chr> <list>          
+#> 1 Replication Studies                       p7ayb <named list [3]>
+#> 2 Data collection and publishing guidelines a5imq <named list [3]>
 ```
 
 osfr is compatible with the [pipe
@@ -119,14 +118,14 @@ cr_project %>%
   osf_ls_nodes(pattern = "Study 19") %>%
   osf_ls_files()
 #> # A tibble: 6 x 3
-#>   name                                    id                      meta     
-#>   <chr>                                   <chr>                   <list>   
-#> 1 Replication_Study_19.docx               57c9e8ed594d9001e7a240… <list [3…
-#> 2 Replication_Study_19.Rmd                578e2b23594d9001f48164… <list [3…
-#> 3 Replication_Study_19_track_changes.docx 581a27b76c613b02233228… <list [3…
-#> 4 Replication_Study_19_track_changes_2.d… 58714d46594d9001f801f4… <list [3…
-#> 5 Response_letter_Replication_Study_19.d… 58755747b83f6901ff066a… <list [3…
-#> 6 Study_19_Correction_Letter.docx         5a56569125719b000ff28b… <list [3…
+#>   name                                    id                     meta           
+#>   <chr>                                   <chr>                  <list>         
+#> 1 Replication_Study_19.docx               57c9e8ed594d9001e7a24… <named list [3…
+#> 2 Replication_Study_19.Rmd                578e2b23594d9001f4816… <named list [3…
+#> 3 Replication_Study_19_track_changes.docx 581a27b76c613b0223322… <named list [3…
+#> 4 Replication_Study_19_track_changes_2.d… 58714d46594d9001f801f… <named list [3…
+#> 5 Response_letter_Replication_Study_19.d… 58755747b83f6901ff066… <named list [3…
+#> 6 Study_19_Correction_Letter.docx         5a56569125719b000ff28… <named list [3…
 ```
 
 We could continue this pattern of exploration and even download local
@@ -139,24 +138,23 @@ GUID:
 osf_retrieve_file("https://osf.io/btgx3/") %>% 
   osf_download()
 #> # A tibble: 1 x 4
-#>   name                 id                     local_path          meta     
-#> * <chr>                <chr>                  <chr>               <list>   
-#> 1 Study_19_Figure_1.p… 5751d71d9ad5a10207937… Study_19_Figure_1.… <list [3…
+#>   name                id                    local_path            meta          
+#>   <chr>               <chr>                 <chr>                 <list>        
+#> 1 Study_19_Figure_1.… 5751d71d9ad5a1020793… ./Study_19_Figure_1.… <named list […
 ```
 
 ### Managing Projects
 
 You can use osfr to [create
-projects](https://centerforopenscience.github.io/osfr/reference/osf_create.html),
-[add
-sub-components](https://centerforopenscience.github.io/osfr/reference/osf_create.html)
+projects](https://ropensci/osfr.io/osfr/reference/osf_create.html), [add
+sub-components](https://ropensci/osfr.io/osfr/reference/osf_create.html)
 or
-[directories](https://centerforopenscience.github.io/osfr/reference/osf_mkdir.html),
+[directories](https://ropensci/osfr.io/osfr/reference/osf_mkdir.html),
 and [upload
-files](https://centerforopenscience.github.io/osfr/reference/osf_upload.html).
-See [Getting
-Started](http://centerforopenscience.github.io/osfr/articles/getting_started.html)
-to learn more about building projects with osfr, but here is a quick
+files](https://ropensci/osfr.io/osfr/reference/osf_upload.html). See
+[Getting
+Started](http://ropensci/osfr.io/osfr/articles/getting_started.html) to
+learn more about building projects with osfr, but here is a quick
 example in which we:
 
 1.  Create a new project called *Motor Trend Car Road Tests*
@@ -185,9 +183,9 @@ osf_create_project(title = "Motor Trend Car Road Tests") %>%
 There are 3 main types of OSF entities that osfr can work with:
 
 1.  **nodes:** both
-    [projects](http://help.osf.io/m/projects/l/481539-create-a-project "OSF: Create a Project")
+    [projects](https://help.osf.io/hc/en-us/articles/360019737594-Create-a-Project "OSF: Create a Project")
     and
-    [components](http://help.osf.io/m/projects/l/481998-create-components "OSF: Create a Component")
+    [components](https://help.osf.io/hc/en-us/articles/360019737614-Create-Components "OSF: Create a Component")
     (i.e., sub-projects) are referred to as nodes
 2.  **files:** this includes both files *and* folders stored on OSF
 3.  **users:** individuals with OSF accounts
@@ -229,5 +227,7 @@ Check out the [Contributing Guidelines](.github/CONTRIBUTING.md) to get
 started with osfr development and note that by contributing to this
 project, you agree to abide by the terms outlined in the [Contributor
 Code of Conduct](.github/CODE_OF_CONDUCT.md).
+
+[![ropensci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
 
 <!-- links -->
