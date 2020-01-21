@@ -9,16 +9,22 @@
 # rstudio
 ^.*\.Rproj$
 ^\.Rproj\.user$
+
 # CI
 ^\.travis.yml
 ^appveyor\.yml$
 ^codecov\.yml$
-^\.lintr
+
+# paper
 inst/.lintr$
-inst/paper.md
+inst/paper.md$
+inst/paper.bib$
+
 # pkgdown
 ^docs$
 ^pkgdown$
+
 # misc
 ^\.httr-oauth
 ^\.lintr$
+vignettes/precompile.R$
