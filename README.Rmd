@@ -141,6 +141,8 @@ Check out the [Contributing Guidelines](.github/CONTRIBUTING.md) to get started 
 unlink("Study_19_Figure_1.pdf")
 ```
 
+[![ropensci_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
+
 <!-- links -->
 [osf]: https://osf.io "Open Science Framework"
 [cos]: https://cos.io "Center for Open Science"
