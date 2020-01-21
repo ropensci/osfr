@@ -1,5 +1,5 @@
 destination: docs/
-url: https://centerforopenscience.github.io/osfr/
+url: https://docs.ropensci.org/osfr
 
 template:
   params:

@@ -107,8 +107,8 @@ compatibility with functions in versions < 0.2.0. The last version of the
 previous package can be installed with the *remotes* package:
 
 ```r
-remotes::install_github("centerforopenscience/osfr@v0.1.1")
+remotes::install_github("ropensci/osfr@v0.1.1")
 ```
 
-See <https://centerforopenscience.github.io/osfr/> for details about the new
+See <https://docs.ropensci.org/osfr/> for details about the new
 package.

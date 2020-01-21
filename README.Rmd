@@ -15,16 +15,16 @@ knitr::opts_chunk$set(
 Sys.unsetenv(c("OSF_SERVER", "OSF_PAT"))
 ```
 
-# osfr <a href="http://centerforopenscience.github.io/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
+# osfr <a href="http://ropensci/osfr.io/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
-[![Build Status](https://travis-ci.org/CenterForOpenScience/osfr.svg?branch=master)](https://travis-ci.org/CenterForOpenScience/osfr)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/CenterForOpenScience/osfr?branch=master&svg=true)](https://ci.appveyor.com/project/CenterForOpenScience24999/osfr)
-[![Coverage status](https://codecov.io/gh/CenterForOpenScience/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/CenterForOpenScience/osfr?branch=master)
+[![Build Status](https://travis-ci.org/ropensci/osfr.svg?branch=master)](https://travis-ci.org/ropensci/osfr)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/osfr?branch=master&svg=true)](https://ci.appveyor.com/project/aaronwolen/osfr)
+[![Coverage status](https://codecov.io/gh/ropensci/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/osfr?branch=master)
 [![](https://badges.ropensci.org/279_status.svg)](https://github.com/ropensci/software-review/issues/279)
 
 ## Overview
 
-osfr provides a suite of functions for interacting with [OSF][osf] (<https://osf.io>) that are primarily focused on project management workflows.
+osfr provides a suite of functions for interacting with the Open Science Framework ([OSF][osf]).
 
 **What is OSF?**
 
@@ -36,7 +36,7 @@ This package is currently under development and is not available on CRAN. You ca
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("centerforopenscience/osfr")
+remotes::install_github("ropensci/osfr")
 ```
 
 ## Usage Examples
@@ -164,9 +164,9 @@ unlink("Study_19_Figure_1.pdf")
 [lucy]: https://github.com/lucymcgowan
 [tim]: https://github.com/timerrington
 
-[getting-started]: http://centerforopenscience.github.io/osfr/articles/getting_started.html
-[auth]: http://centerforopenscience.github.io/osfr/articles/auth.html
+[getting-started]: http://ropensci/osfr.io/osfr/articles/getting_started.html
+[auth]: http://ropensci/osfr.io/osfr/articles/auth.html
 
-[osf-create]: https://centerforopenscience.github.io/osfr/reference/osf_create.html
-[osf-mkdir]: https://centerforopenscience.github.io/osfr/reference/osf_mkdir.html
-[osf-upload]: https://centerforopenscience.github.io/osfr/reference/osf_upload.html
+[osf-create]: https://ropensci/osfr.io/osfr/reference/osf_create.html
+[osf-mkdir]: https://ropensci/osfr.io/osfr/reference/osf_mkdir.html
+[osf-upload]: https://ropensci/osfr.io/osfr/reference/osf_upload.html
