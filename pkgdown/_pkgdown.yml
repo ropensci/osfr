@@ -3,7 +3,6 @@ url: https://docs.ropensci.org/osfr
 
 template:
   params:
-    bootswatch: yeti
     ganalytics: UA-132425816-1
 
 authors:
