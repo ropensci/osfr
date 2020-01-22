@@ -4,7 +4,7 @@ cache: packages
 
 script:
 - R CMD build . --no-build-vignettes
-- travis_wait 20 R CMD check *tar.gz --ignore-vignettes
+- travis_wait 30 R CMD check *tar.gz --ignore-vignettes
 
 jobs:
   include:
