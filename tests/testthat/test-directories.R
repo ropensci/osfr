@@ -8,8 +8,8 @@ record <- "once"
 
 setup({
   if (has_pat()) {
-    vcr::use_cassette("create-p5", record = record, {
-      p1 <<- osf_create_project(title = "osfr-test-directories3")
+    vcr::use_cassette("create-p1", record = record, {
+      p1 <<- osf_create_project(title = "osfr-test-directories")
     })
   }
 })
@@ -97,11 +97,10 @@ test_that("'path' isn't confused by dir names with a shared substring (#95)", {
     d3 <- osf_mkdir(p1, path = "dir")
   })
 
-  expect_silent(
-    vcr::use_cassette("list-dir", record = record, {
-      osf_ls_files(p1, path = "dir")
-    })
-  )
+  vcr::use_cassette("list-dir", record = record, {
+    out <- osf_ls_files(p1, path = "dir")
+  })
+  expect_equal(nrow(out), 0)
 })
 
 test_that("directory names can start with a dot", {
