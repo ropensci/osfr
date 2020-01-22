@@ -13,10 +13,3 @@ jobs:
   - r: release
     after_success: Rscript -e 'covr::codecov()'
     after_failure: cat osfr.log
-    before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
-    deploy:
-      on:
-        branch: master
-      provider: script
-      script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE, tarball = dir(pattern = "tar.gz$"))'
-      skip_cleanup: true
