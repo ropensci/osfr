@@ -23,6 +23,7 @@ teardown({
 
 # tests -------------------------------------------------------------------
 test_that("non-existent file is detected", {
+  skip_if_no_pat()
   expect_error(osf_upload(p1, "non-existent-file"), "Can't find following")
 })
 
