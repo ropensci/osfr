@@ -17,7 +17,7 @@ Sys.unsetenv(c("OSF_SERVER", "OSF_PAT"))
 
 # osfr <a href="http://ropensci/osfr.io/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
-[![Build Status](https://travis-ci.org/ropensci/osfr.svg?branch=master)](https://travis-ci.org/ropensci/osfr)
+[![Build Status](https://travis-ci.com/ropensci/osfr.svg)](https://travis-ci.com/ropensci/osfr)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/osfr?branch=master&svg=true)](https://ci.appveyor.com/project/aaronwolen/osfr)
 [![Coverage status](https://codecov.io/gh/ropensci/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/osfr?branch=master)
 [![](https://badges.ropensci.org/279_status.svg)](https://github.com/ropensci/software-review/issues/279)
