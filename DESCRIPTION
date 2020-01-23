@@ -1,6 +1,6 @@
 Package: osfr
-Title: R Interface to OSF
-Version: 0.2.7
+Title: Interface to the Open Science Framework (OSF)
+Version: 0.2.7.9000
 Authors@R: c(
     person("Aaron", "Wolen",, "aaron@wolen.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-2542-2202")),
@@ -13,7 +13,9 @@ Authors@R: c(
     person("Courtney", "Soderberg",, "courtney@cos.io", role = "ctb",
            comment = c(ORCID = "0000-0003-1227-7042"))
     )
-Description: Manage your projects and access open research materials and data on OSF.
+Description: An interface for interacting with OSF (<https://osf.io>). osfr 
+    enables you to access open research materials and data, or create and
+    manage your own private or public projects.
 Depends: R (>= 3.1.0)
 Imports:
     crul (>= 0.7.4),
