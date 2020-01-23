@@ -1,15 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# osfr <a href="http://ropensci/osfr.io/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
+# osfr <a href="https://ropensci.github.io/osfr/"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
 [![Build
-Status](https://travis-ci.org/ropensci/osfr.svg?branch=master)](https://travis-ci.org/ropensci/osfr)
+Status](https://travis-ci.com/ropensci/osfr.svg)](https://travis-ci.com/ropensci/osfr)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/ropensci/osfr?branch=master&svg=true)](https://ci.appveyor.com/project/aaronwolen/osfr)
 [![Coverage
 status](https://codecov.io/gh/ropensci/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/osfr?branch=master)
 [![](https://badges.ropensci.org/279_status.svg)](https://github.com/ropensci/software-review/issues/279)
+[![DOI](https://zenodo.org/badge/42329785.svg)](https://zenodo.org/badge/latestdoi/42329785)
 
 ## Overview
 
@@ -39,7 +40,7 @@ remotes::install_github("ropensci/osfr")
 ## Usage Examples
 
 *Note: You need to [setup an OSF personal access token
-(PAT)](http://ropensci/osfr.io/osfr/articles/auth.html) to use osfr to
+(PAT)](https://ropensci.github.io/osfr/articles/auth) to use osfr to
 manage projects or upload files.*
 
 ### Accessing Open Research Materials
@@ -146,14 +147,12 @@ osf_retrieve_file("https://osf.io/btgx3/") %>%
 ### Managing Projects
 
 You can use osfr to [create
-projects](https://ropensci/osfr.io/osfr/reference/osf_create.html), [add
-sub-components](https://ropensci/osfr.io/osfr/reference/osf_create.html)
-or
-[directories](https://ropensci/osfr.io/osfr/reference/osf_mkdir.html),
-and [upload
-files](https://ropensci/osfr.io/osfr/reference/osf_upload.html). See
-[Getting
-Started](http://ropensci/osfr.io/osfr/articles/getting_started.html) to
+projects](https://ropensci.github.io/osfr/reference/osf_create), [add
+sub-components](https://ropensci.github.io/osfr/reference/osf_create) or
+[directories](https://ropensci.github.io/osfr/reference/osf_mkdir), and
+[upload files](https://ropensci.github.io/osfr/reference/osf_upload).
+See [Getting
+Started](https://ropensci.github.io/osfr/articles/getting_started) to
 learn more about building projects with osfr, but here is a quick
 example in which we:
 
@@ -212,7 +211,7 @@ by [Jennifer Bryan](https://github.com/jennybc) and [Lucy D’Agostino
 McGowan](https://github.com/lucymcgowan)’s excellent
 [googledrive](https://googledrive.tidyverse.org) package. Seriously, we
 borrowed a lot of great ideas from them. Other important resources
-include [http testing](https://ropensci.github.io/http-testing-book/) by
+include [http testing](https://books.ropensci.org/http-testing/) by
 Scott Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley
 Wickham. Development was also greatly facilitated by OSF’s excellent
 [API documentation](https://developer.osf.io "OSF API Documentation").

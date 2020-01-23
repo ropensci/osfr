@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 Sys.unsetenv(c("OSF_SERVER", "OSF_PAT"))
 ```
 
-# osfr <a href="http://ropensci/osfr.io/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
+# osfr <a href="https://ropensci.github.io/osfr/"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
 [![Build Status](https://travis-ci.com/ropensci/osfr.svg)](https://travis-ci.com/ropensci/osfr)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/osfr?branch=master&svg=true)](https://ci.appveyor.com/project/aaronwolen/osfr)
@@ -130,7 +130,7 @@ osfr represents these entities within `osf_tbl`s---specialized data frames built
 
 OSF is developed by the [Center for Open Science][cos] in Charlottesville, VA.
 
-The original version of osfr was developed by [Chris Chartgerink][chris] and further developed by [Brian Richards][brian] and [Ryan Hafen][ryan]. The current version was developed by [Aaron Wolen][aaron] and is *heavily* inspired by [Jennifer Bryan][jenny] and [Lucy D'Agostino McGowan][lucy]'s excellent [googledrive][] package. Seriously, we borrowed a lot of great ideas from them. Other important resources include [http testing](https://ropensci.github.io/http-testing-book/) by Scott Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley Wickham. Development was also greatly facilitated by OSF's excellent [API documentation][osf-api].
+The original version of osfr was developed by [Chris Chartgerink][chris] and further developed by [Brian Richards][brian] and [Ryan Hafen][ryan]. The current version was developed by [Aaron Wolen][aaron] and is *heavily* inspired by [Jennifer Bryan][jenny] and [Lucy D'Agostino McGowan][lucy]'s excellent [googledrive][] package. Seriously, we borrowed a lot of great ideas from them. Other important resources include [http testing](https://books.ropensci.org/http-testing/) by Scott Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley Wickham. Development was also greatly facilitated by OSF's excellent [API documentation][osf-api].
 
 Big thanks to Rusty Speidel for designing our logo and [Tim Errington][tim] for his feedback during development.
 
@@ -165,9 +165,9 @@ unlink("Study_19_Figure_1.pdf")
 [lucy]: https://github.com/lucymcgowan
 [tim]: https://github.com/timerrington
 
-[getting-started]: http://ropensci/osfr.io/osfr/articles/getting_started.html
-[auth]: http://ropensci/osfr.io/osfr/articles/auth.html
+[getting-started]: https://ropensci.github.io/osfr/articles/getting_started
+[auth]: https://ropensci.github.io/osfr/articles/auth
 
-[osf-create]: https://ropensci/osfr.io/osfr/reference/osf_create.html
-[osf-mkdir]: https://ropensci/osfr.io/osfr/reference/osf_mkdir.html
-[osf-upload]: https://ropensci/osfr.io/osfr/reference/osf_upload.html
+[osf-create]: https://ropensci.github.io/osfr/reference/osf_create
+[osf-mkdir]: https://ropensci.github.io/osfr/reference/osf_mkdir
+[osf-upload]: https://ropensci.github.io/osfr/reference/osf_upload

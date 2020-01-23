@@ -28,8 +28,7 @@ Imports:
     memoise,
     httr
 License: Apache License 2.0 | file LICENSE
-URL: 
-    https://docs.ropensci.org/osfr, 
+URL:
     https://github.com/ropensci/osfr
 BugReports: https://github.com/ropensci/osfr/issues
 LazyData: true
