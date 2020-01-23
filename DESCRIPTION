@@ -43,8 +43,10 @@ Suggests:
     knitr,
     rmarkdown,
     lintr (>= 2.0),
-    covr
+    covr,
+    spelling
 Encoding: UTF-8
+Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2
 VignetteBuilder: knitr
