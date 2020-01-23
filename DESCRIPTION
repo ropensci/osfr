@@ -11,7 +11,10 @@ Authors@R: c(
     person("Ryan", "Hafen",, "rhafen@purdue.edu", role = "ctb"),
     person("Brian", "Richards",, "brian.g.richards@gmail.com", role = "ctb"),
     person("Courtney", "Soderberg",, "courtney@cos.io", role = "ctb",
-           comment = c(ORCID = "0000-0003-1227-7042"))
+           comment = c(ORCID = "0000-0003-1227-7042")),
+    person("Carl", "Boettiger",, "cboettig@gmail.com", role = "rev",
+           comment = c(ORCID = "0000-0002-1642-628X")),
+    person("Heidi", "Seibold",, "heidi.seibold@stat.uni-muenchen.de", role = "rev")
     )
 Description: An interface for interacting with OSF (<https://osf.io>). osfr 
     enables you to access open research materials and data, or create and
