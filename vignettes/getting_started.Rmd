@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with osfr"
-date: "2020-01-21"
+date: "2020-01-23"
 output: 
   rmarkdown::html_vignette:
     toc: TRUE
@@ -87,13 +87,13 @@ We can also download local copies of these files by passing `anes_files` to `osf
 ```r
 osf_download(anes_files)
 #> # A tibble: 5 x 4
-#>   name                id                     local_path           meta          
-#>   <chr>               <chr>                  <chr>                <list>        
-#> 1 cleaning.R          5e20d22bedceab002d82e… ./cleaning.R         <named list […
-#> 2 Questionnaire.docx  5e20d22bedceab002b82d… ./Questionnaire.docx <named list […
-#> 3 raw_data.csv        5e20d22c675e0e00096b4… ./raw_data.csv       <named list […
-#> 4 Data Dictionary.do… 5e20d22c675e0e000e6b4… ./Data Dictionary.d… <named list […
-#> 5 analyses.R          5e20d22c675e0e000a6b4… ./analyses.R         <named list […
+#>   name                 id                       local_path             meta           
+#>   <chr>                <chr>                    <chr>                  <list>         
+#> 1 cleaning.R           5e20d22bedceab002d82e0f1 ./cleaning.R           <named list [3…
+#> 2 Questionnaire.docx   5e20d22bedceab002b82dc3f ./Questionnaire.docx   <named list [3…
+#> 3 raw_data.csv         5e20d22c675e0e00096b4de8 ./raw_data.csv         <named list [3…
+#> 4 Data Dictionary.docx 5e20d22c675e0e000e6b4b18 ./Data Dictionary.docx <named list [3…
+#> 5 analyses.R           5e20d22c675e0e000a6b4bd3 ./analyses.R           <named list [3…
 ```
 
 We'll use these files in the next section for creating a new project.
@@ -129,10 +129,10 @@ my_project
 #> # A tibble: 1 x 3
 #>   name                                             id    meta            
 #>   <chr>                                            <chr> <list>          
-#> 1 Political Identification and Gender: Re-examined dg486 <named list [3]>
+#> 1 Political Identification and Gender: Re-examined tr5x2 <named list [3]>
 ```
 
-The GUID for this new project is dg486, so you could check it out on OSF by opening its URL (https://www.osf.io/dg486) in your browser, or, more conveniently: `osf_open(my_project)`.
+The GUID for this new project is tr5x2, but yours will be something different. You can check out the project on OSF by opening it's URL (`https://www.osf.io/<GUID>`), or, more conveniently: `osf_open(my_project)`.
 
 ### Adding structure with components
 
@@ -162,7 +162,7 @@ data_file
 #> # A tibble: 1 x 3
 #>   name         id                       meta            
 #>   <chr>        <chr>                    <list>          
-#> 1 raw_data.csv 5e2764be675e0e02346b53a7 <named list [3]>
+#> 1 raw_data.csv 5e29d03bc19c5d006dedf2d0 <named list [3]>
 ```
 
 Oh no! Instead of uploading `raw_data.csv` to the *Raw Data* component, we uploaded it to the parent project instead. 
@@ -182,11 +182,12 @@ Our next step is to upload the R scripts into the *Analysis Scripts* component. 
 ```r
 r_files <- osf_upload(script_comp, path = list.files(pattern = ".R$"))
 r_files
-#> # A tibble: 2 x 3
-#>   name       id                       meta            
-#>   <chr>      <chr>                    <list>          
-#> 1 analyses.R 5e2764c1edceab023b82e3ec <named list [3]>
-#> 2 cleaning.R 5e2764c2edceab023b82e3f0 <named list [3]>
+#> # A tibble: 3 x 3
+#>   name         id                       meta            
+#>   <chr>        <chr>                    <list>          
+#> 1 analyses.R   5e29d04087a1d9005f1cdf7d <named list [3]>
+#> 2 cleaning.R   5e29d04387a1d9005f1cdf84 <named list [3]>
+#> 3 precompile.R 5e29d046c19c5d006dedf2e1 <named list [3]>
 ```
 
 ### Putting it all together
@@ -201,8 +202,8 @@ my_project %>%
 #> # A tibble: 2 x 3
 #>   name                 id                       meta            
 #>   <chr>                <chr>                    <list>          
-#> 1 Data Dictionary.docx 5e2764c6675e0e022b6b5f01 <named list [3]>
-#> 2 Questionnaire.docx   5e2764c9edceab023d82db15 <named list [3]>
+#> 1 Data Dictionary.docx 5e29d04bc19c5d006dedf2ed <named list [3]>
+#> 2 Questionnaire.docx   5e29d04d87a1d900511cfd18 <named list [3]>
 ```
 
 We can verify the project is now structured the way we wanted by listing the components we have under the main project.
@@ -213,9 +214,9 @@ osf_ls_nodes(my_project)
 #> # A tibble: 3 x 3
 #>   name               id    meta            
 #>   <chr>              <chr> <list>          
-#> 1 Research Materials t2pca <named list [3]>
-#> 2 Analysis Scripts   jsrc3 <named list [3]>
-#> 3 Raw Data           dt8up <named list [3]>
+#> 1 Research Materials 6w2sd <named list [3]>
+#> 2 Analysis Scripts   6egc3 <named list [3]>
+#> 3 Raw Data           uxjwh <named list [3]>
 ```
 
 which gives us an `osf_tbl` with one row for each of the project's components.
