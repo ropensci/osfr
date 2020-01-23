@@ -1,3 +1,13 @@
+# osfr 0.2.8
+
+Initial CRAN release.
+
+## Minor changes
+
+* Add rOpenSci reviewers to DESCRIPTION
+* Remove deleted URLs from vignette
+* Add zenodo badge
+
 # osfr 0.2.7
 
 ## Important changes
