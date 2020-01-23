@@ -28,3 +28,4 @@ inst/paper.bib$
 ^\.httr-oauth
 ^\.lintr$
 vignettes/precompile.R$
+^cran-comments\.md$
