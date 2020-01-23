@@ -11,8 +11,6 @@
       options(osfr.log = env_log)
       logger::log_appender(logger::appender_file(env_log), namespace = "osfr")
       logger::log_formatter(logger::formatter_sprintf, namespace = "osfr")
-    } else {
-      warn("The logger package must installed to enable logging")
     }
   }
 
@@ -34,10 +32,16 @@
     packageStartupMessage("Automatically registered OSF personal access token")
   }
 
+  if (is.null(getOption("osfr.log")) && nzchar(Sys.getenv("OSF_LOG"))) {
+    packageStartupMessage(
+      "<Logging NOT enabled: please install the logger package>"
+    )
+  }
+
   if (!is.null(getOption("osfr.log"))) {
-      packageStartupMessage(
-        sprintf("<Logging enabled: %s>", getOption("osfr.log"))
-      )
+    packageStartupMessage(
+      sprintf("<Logging enabled: %s>", getOption("osfr.log"))
+    )
   }
 
   server <- Sys.getenv("OSF_SERVER")
