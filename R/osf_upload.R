@@ -2,7 +2,7 @@
 #'
 #' Upload local files to a project, component, or directory on OSF.
 #'
-#' @param x The upload destintation on OSF. Can be one of the following:
+#' @param x The upload destination on OSF. Can be one of the following:
 #'   * An [`osf_tbl_node`] with a single project or component.
 #'   * An [`osf_tbl_file`] with a single directory.
 #' @param path A character vector of paths pointing to existing

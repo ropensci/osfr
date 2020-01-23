@@ -14,7 +14,7 @@ osf_upload(
 )
 }
 \arguments{
-\item{x}{The upload destintation on OSF. Can be one of the following:
+\item{x}{The upload destination on OSF. Can be one of the following:
 \itemize{
 \item An \code{\link{osf_tbl_node}} with a single project or component.
 \item An \code{\link{osf_tbl_file}} with a single directory.
@@ -94,7 +94,7 @@ files back and forth between OSF and your local machine, it's important to
 note that \strong{they are not file synchronization functions}. In contrast to
 something like \href{https://rsync.samba.org}{\code{rsync}},
 \code{osf_download()}/\code{osf_upload()} do not take into account a file's contents or
-modification time. Whether you're uploading or downloading, if \code{overwrite = TRUE}, osfr will overwrite an existing file regradless of whether the
+modification time. Whether you're uploading or downloading, if \code{overwrite = TRUE}, osfr will overwrite an existing file regardless of whether the
 existing file is the more recent copy. You have been warned.
 }
 

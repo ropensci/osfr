@@ -69,7 +69,7 @@ files back and forth between OSF and your local machine, it's important to
 note that \strong{they are not file synchronization functions}. In contrast to
 something like \href{https://rsync.samba.org}{\code{rsync}},
 \code{osf_download()}/\code{osf_upload()} do not take into account a file's contents or
-modification time. Whether you're uploading or downloading, if \code{overwrite = TRUE}, osfr will overwrite an existing file regradless of whether the
+modification time. Whether you're uploading or downloading, if \code{overwrite = TRUE}, osfr will overwrite an existing file regardless of whether the
 existing file is the more recent copy. You have been warned.
 }
 
