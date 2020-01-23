@@ -57,6 +57,8 @@ Other contributors:
   \item Ryan Hafen \email{rhafen@purdue.edu} [contributor]
   \item Brian Richards \email{brian.g.richards@gmail.com} [contributor]
   \item Courtney Soderberg \email{courtney@cos.io} (\href{https://orcid.org/0000-0003-1227-7042}{ORCID}) [contributor]
+  \item Carl Boettiger \email{cboettig@gmail.com} (\href{https://orcid.org/0000-0002-1642-628X}{ORCID}) [reviewer]
+  \item Heidi Seibold \email{heidi.seibold@stat.uni-muenchen.de} [reviewer]
 }
 
 }
