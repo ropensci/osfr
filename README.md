@@ -222,10 +222,12 @@ development.
 
 ## Contributing
 
-Check out the [Contributing Guidelines](.github/CONTRIBUTING.md) to get
-started with osfr development and note that by contributing to this
-project, you agree to abide by the terms outlined in the [Contributor
-Code of Conduct](.github/CODE_OF_CONDUCT.md).
+Check out the [Contributing
+Guidelines](https://github.com/ropensci/osfr/blob/master/.github/CONTRIBUTING.md)
+to get started with osfr development and note that by contributing to
+this project, you agree to abide by the terms outlined in the
+[Contributor Code of
+Conduct](https://github.com/ropensci/osfr/blob/master/.github/CODE_OF_CONDUCT.md).
 
 [![ropensci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
 

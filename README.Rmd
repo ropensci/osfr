@@ -136,7 +136,7 @@ Big thanks to Rusty Speidel for designing our logo and [Tim Errington][tim] for 
 
 ## Contributing
 
-Check out the [Contributing Guidelines](.github/CONTRIBUTING.md) to get started with osfr development and note that by contributing to this project, you agree to abide by the terms outlined in the [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).
+Check out the [Contributing Guidelines][contrib] to get started with osfr development and note that by contributing to this project, you agree to abide by the terms outlined in the [Contributor Code of Conduct][coc].
 
 ```{r cleanup, include=FALSE}
 unlink("Study_19_Figure_1.pdf")
@@ -171,3 +171,6 @@ unlink("Study_19_Figure_1.pdf")
 [osf-create]: https://ropensci.github.io/osfr/reference/osf_create
 [osf-mkdir]: https://ropensci.github.io/osfr/reference/osf_mkdir
 [osf-upload]: https://ropensci.github.io/osfr/reference/osf_upload
+
+[contrib]: https://github.com/ropensci/osfr/blob/master/.github/CONTRIBUTING.md
+[coc]: https://github.com/ropensci/osfr/blob/master/.github/CODE_OF_CONDUCT.md
