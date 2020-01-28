@@ -38,6 +38,7 @@ the Center for Open Science: \url{https://help.osf.io}
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://docs.ropensci.org/osfr}
   \item \url{https://github.com/ropensci/osfr}
   \item Report bugs at \url{https://github.com/ropensci/osfr/issues}
 }

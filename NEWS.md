@@ -12,7 +12,7 @@ Initial CRAN release.
 
 ## Important changes
 
-osfr is now part of rOpenSci and the documentation website has moved to a new URL:  <https://ropensci.github.io/osfr>.
+osfr is now part of rOpenSci and the documentation website has moved to a new URL:  <https://docs.ropensci.org/osfr>.
 
 ## New features
 
@@ -125,5 +125,5 @@ previous package can be installed with the *remotes* package:
 remotes::install_github("ropensci/osfr@v0.1.1")
 ```
 
-See <https://ropensci.github.io/osfr> for details about the new
+See <https://docs.ropensci.org/osfr> for details about the new
 package.
