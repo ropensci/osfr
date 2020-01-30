@@ -11,9 +11,17 @@ setup({
   }
 })
 
+teardown({
+  if (has_pat()) {
+    vcr::use_cassette("delete-p1", record = record, {
+      osf_rm(p1, recurse = TRUE, check = FALSE)
+    })
+  }
+})
+
 
 # tests -------------------------------------------------------------------
-test_that("empty project/folder returns a osf_tbl_file with 0 rows", {
+test_that("empty project/folder returns an empty osf_tbl_file", {
   skip_if_no_pat()
   vcr::use_cassette("list-empty-p1", record = record, {
     out <- osf_ls_files(p1)
@@ -108,13 +116,4 @@ test_that("directory names can start with a dot", {
 
   expect_s3_class(dotdir, "osf_tbl_file")
   expect_equal(dotdir$name, ".dir")
-})
-
-
-teardown({
-  if (has_pat()) {
-    vcr::use_cassette("delete-p1", record = record, {
-      osf_rm(p1, recurse = TRUE, check = FALSE)
-    })
-  }
 })
