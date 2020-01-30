@@ -2,9 +2,6 @@ context("Directories")
 
 # setup -------------------------------------------------------------------
 vcr_config("cassettes/directories")
-# record <- "new_episodes"
-# record <- "none"
-record <- "once"
 
 setup({
   if (has_pat()) {
