@@ -1,5 +1,8 @@
 library(vcr)
 
+# set to 'once' when recording new requests
+record <- "once"
+
 # redefine same global settings until the following issue is resolved
 # https://github.com/ropensci/vcr/issues/136
 vcr_config <- function(dir, record = "new_episodes") {
