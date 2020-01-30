@@ -1,0 +1,39 @@
+http_interactions:
+- request:
+    method: post
+    uri: https://api.test.osf.io/v2/nodes/
+    body:
+      encoding: ''
+      string: '{"data":{"type":"nodes","attributes":{"title":"osfr-multifile-upload-test","category":"project","description":"","public":false}}}'
+    headers:
+      Content-Type: application/json
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '201'
+      message: Created
+      explanation: Document created, URL follows
+    headers:
+      status: HTTP/1.1 201 Created
+      server: nginx
+      date: Thu, 30 Jan 2020 21:04:57 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      content-length: '3936'
+      vary: Accept
+      allow: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS
+      x-frame-options: SAMEORIGIN
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: clear
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":{"id":"mzavs","type":"nodes","attributes":{"title":"osfr-multifile-upload-test","description":"","category":"project","custom_citation":null,"date_created":"2020-01-30T21:04:56.656699","date_modified":"2020-01-30T21:04:56.656699","registration":false,"preprint":false,"fork":false,"collection":false,"tags":[],"access_requests_enabled":true,"node_license":null,"current_user_can_comment":true,"current_user_permissions":["admin","write","read"],"current_user_is_contributor":true,"current_user_is_contributor_or_group_member":true,"wiki_enabled":true,"public":false,"subjects":[]},"relationships":{"children":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/children/","meta":{}}}},"comments":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/comments/?filter%5Btarget%5D=mzavs","meta":{}}}},"contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/contributors/","meta":{}}}},"bibliographic_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/bibliographic_contributors/","meta":{}}}},"implicit_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/implicit_contributors/","meta":{}}}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/files/","meta":{}}}},"settings":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/settings/","meta":{}}},"data":{"id":"mzavs","type":"nodes"}},"wikis":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/wikis/","meta":{}}}},"forks":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/forks/","meta":{}}}},"groups":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/groups/","meta":{}}}},"node_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/node_links/","meta":{}}}},"linked_by_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/linked_by_nodes/","meta":{}}}},"linked_by_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/linked_by_registrations/","meta":{}}}},"identifiers":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/identifiers/","meta":{}}}},"draft_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/draft_registrations/","meta":{}}}},"registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/registrations/","meta":{}}}},"region":{"links":{"related":{"href":"https://api.test.osf.io/v2/regions/us/","meta":{}}},"data":{"id":"us","type":"regions"}},"affiliated_institutions":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/institutions/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/mzavs/relationships/institutions/","meta":{}}}},"root":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/","meta":{}}},"data":{"id":"mzavs","type":"nodes"}},"logs":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/logs/","meta":{}}}},"linked_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/linked_nodes/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/mzavs/relationships/linked_nodes/","meta":{}}}},"linked_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/linked_registrations/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/mzavs/relationships/linked_registrations/","meta":{}}}},"view_only_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/view_only_links/","meta":{}}}},"citation":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/citation/","meta":{}}},"data":{"id":"mzavs","type":"nodes"}},"preprints":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/preprints/","meta":{}}}}},"links":{"html":"https://test.osf.io/mzavs/","self":"https://api.test.osf.io/v2/nodes/mzavs/"}},"meta":{"version":"2.0"}}'
+  recorded_at: 2020-01-30 21:04:57 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96

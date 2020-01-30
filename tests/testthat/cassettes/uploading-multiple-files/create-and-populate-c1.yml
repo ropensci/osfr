@@ -1,0 +1,740 @@
+http_interactions:
+- request:
+    method: post
+    uri: https://api.test.osf.io/v2/nodes/mzavs/children/
+    body:
+      encoding: ''
+      string: '{"data":{"type":"nodes","attributes":{"title":"dir-upload","category":"","description":"","public":false}}}'
+    headers:
+      Content-Type: application/json
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '201'
+      message: Created
+      explanation: Document created, URL follows
+    headers:
+      status: HTTP/1.1 201 Created
+      server: nginx
+      date: Thu, 30 Jan 2020 21:06:31 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      content-length: '4042'
+      vary: Accept
+      allow: GET, POST, HEAD, OPTIONS
+      x-frame-options: SAMEORIGIN
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: clear
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":{"id":"y26eu","type":"nodes","attributes":{"title":"dir-upload","description":"","category":"","custom_citation":null,"date_created":"2020-01-30T21:06:30.713864","date_modified":"2020-01-30T21:06:30.713864","registration":false,"preprint":false,"fork":false,"collection":false,"tags":[],"access_requests_enabled":true,"node_license":null,"current_user_can_comment":true,"current_user_permissions":["admin","write","read"],"current_user_is_contributor":true,"current_user_is_contributor_or_group_member":true,"wiki_enabled":true,"public":false,"subjects":[]},"relationships":{"children":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/children/","meta":{}}}},"comments":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/comments/?filter%5Btarget%5D=y26eu","meta":{}}}},"contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/contributors/","meta":{}}}},"bibliographic_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/bibliographic_contributors/","meta":{}}}},"implicit_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/implicit_contributors/","meta":{}}}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/files/","meta":{}}}},"settings":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/settings/","meta":{}}},"data":{"id":"y26eu","type":"nodes"}},"wikis":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/wikis/","meta":{}}}},"forks":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/forks/","meta":{}}}},"groups":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/groups/","meta":{}}}},"node_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/node_links/","meta":{}}}},"linked_by_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/linked_by_nodes/","meta":{}}}},"linked_by_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/linked_by_registrations/","meta":{}}}},"parent":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/","meta":{}}},"data":{"id":"mzavs","type":"nodes"}},"identifiers":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/identifiers/","meta":{}}}},"draft_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/draft_registrations/","meta":{}}}},"registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/registrations/","meta":{}}}},"region":{"links":{"related":{"href":"https://api.test.osf.io/v2/regions/us/","meta":{}}},"data":{"id":"us","type":"regions"}},"affiliated_institutions":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/institutions/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/y26eu/relationships/institutions/","meta":{}}}},"root":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/mzavs/","meta":{}}},"data":{"id":"mzavs","type":"nodes"}},"logs":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/logs/","meta":{}}}},"linked_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/linked_nodes/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/y26eu/relationships/linked_nodes/","meta":{}}}},"linked_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/linked_registrations/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/y26eu/relationships/linked_registrations/","meta":{}}}},"view_only_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/view_only_links/","meta":{}}}},"citation":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/citation/","meta":{}}},"data":{"id":"y26eu","type":"nodes"}},"preprints":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/preprints/","meta":{}}}}},"links":{"html":"https://test.osf.io/y26eu/","self":"https://api.test.osf.io/v2/nodes/y26eu/"}},"meta":{"version":"2.0"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: get
+    uri: https://api.test.osf.io/v2/nodes/y26eu/files/osfstorage/?filter%5Bkind%5D=folder&filter%5Bname%5D=.osfr-tests&page=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: clear
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-length: '128'
+      content-type: application/vnd.api+json; charset=utf-8
+      date: Thu, 30 Jan 2020 21:06:31 GMT
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      server: nginx
+      status: HTTP/1.1 200 OK
+      vary:
+      - Accept-Encoding
+      - Accept
+      via: 1.1 google
+      x-frame-options: SAMEORIGIN
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":[],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":0,"per_page":10}},"meta":{"version":"2.0"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: put
+    uri: https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/?kind=folder&name=.osfr-tests
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+  response:
+    status:
+      status_code: '201'
+      message: Created
+      explanation: Document created, URL follows
+    headers:
+      status: HTTP/1.1 201 Created
+      server: nginx
+      date: Thu, 30 Jan 2020 21:06:33 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '835'
+      x-waterbutler-request-id: df7b9bae-3387-4779-bdc1-392fecad4703
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: clear
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data": {"links": {"upload": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/?kind=file",
+        "delete": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/",
+        "new_folder": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/?kind=folder",
+        "move": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/"},
+        "attributes": {"provider": "osfstorage", "name": ".osfr-tests", "kind": "folder",
+        "path": "/5e33455904172e0009b16178/", "sizeInt": null, "size": null, "etag":
+        "5caf8ab73c068565297e455ebce37fd64b6897a2284ec9d7ecba8b6093082bcd", "extra":
+        {}, "materialized": "/.osfr-tests/", "resource": "y26eu"}, "id": "osfstorage/5e33455904172e0009b16178/",
+        "type": "files"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: get
+    uri: https://api.test.osf.io/v2/files/5e33455904172e0009b16178/
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      allow: GET, PUT, PATCH, HEAD, OPTIONS
+      alt-svc: clear
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      date: Thu, 30 Jan 2020 21:06:33 GMT
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      server: nginx
+      status: HTTP/1.1 200 OK
+      transfer-encoding: chunked
+      vary:
+      - Accept-Encoding
+      - Accept
+      via: 1.1 google
+      x-frame-options: SAMEORIGIN
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":{"id":"5e33455904172e0009b16178","type":"files","attributes":{"guid":null,"checkout":null,"name":".osfr-tests","kind":"folder","path":"/5e33455904172e0009b16178/","size":null,"provider":"osfstorage","materialized_path":"/.osfr-tests/","last_touched":null,"date_modified":null,"date_created":null,"extra":{"hashes":{"md5":null,"sha256":null}},"tags":[],"current_user_can_comment":true,"current_version":1},"relationships":{"parent_folder":{"links":{"related":{"href":"https://api.test.osf.io/v2/files/5e33455658cd6b00097d24f0/","meta":{}}},"data":{"id":"5e33455658cd6b00097d24f0","type":"files"}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/files/osfstorage/5e33455904172e0009b16178/","meta":{}}}},"node":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/","meta":{}}},"data":{"id":"y26eu","type":"nodes"}},"target":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/","meta":{"type":"node"}}},"data":{"type":"node","id":"y26eu"}}},"links":{"info":"https://api.test.osf.io/v2/files/5e33455904172e0009b16178/","move":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/","upload":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/","delete":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/","new_folder":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/?kind=folder","self":"https://api.test.osf.io/v2/files/5e33455904172e0009b16178/"}},"meta":{"version":"2.0"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: get
+    uri: https://api.test.osf.io/v2/nodes/y26eu/files/osfstorage/?filter%5Bkind%5D=folder&filter%5Bname%5D=.osfr-tests&page=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: clear
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      date: Thu, 30 Jan 2020 21:06:34 GMT
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      server: nginx
+      status: HTTP/1.1 200 OK
+      transfer-encoding: chunked
+      vary:
+      - Accept-Encoding
+      - Accept
+      via: 1.1 google
+      x-frame-options: SAMEORIGIN
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":[{"id":"5e33455904172e0009b16178","type":"files","attributes":{"guid":null,"checkout":null,"name":".osfr-tests","kind":"folder","path":"/5e33455904172e0009b16178/","size":null,"provider":"osfstorage","materialized_path":"/.osfr-tests/","last_touched":null,"date_modified":null,"date_created":null,"extra":{"hashes":{"md5":null,"sha256":null}},"tags":[],"current_user_can_comment":true,"current_version":1},"relationships":{"parent_folder":{"links":{"related":{"href":"https://api.test.osf.io/v2/files/5e33455658cd6b00097d24f0/","meta":{}}},"data":{"id":"5e33455658cd6b00097d24f0","type":"files"}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/files/osfstorage/5e33455904172e0009b16178/","meta":{}}}},"node":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/","meta":{}}},"data":{"id":"y26eu","type":"nodes"}},"target":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/","meta":{"type":"node"}}},"data":{"type":"node","id":"y26eu"}}},"links":{"info":"https://api.test.osf.io/v2/files/5e33455904172e0009b16178/","move":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/","upload":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/","delete":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/","new_folder":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/?kind=folder","self":"https://api.test.osf.io/v2/files/5e33455904172e0009b16178/"}}],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":1,"per_page":10}},"meta":{"version":"2.0"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: get
+    uri: https://api.test.osf.io/v2/nodes/y26eu/files/osfstorage/5e33455904172e0009b16178/?filter%5Bkind%5D=folder&filter%5Bname%5D=subdir1&page=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: clear
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-length: '128'
+      content-type: application/vnd.api+json; charset=utf-8
+      date: Thu, 30 Jan 2020 21:06:34 GMT
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      server: nginx
+      status: HTTP/1.1 200 OK
+      vary:
+      - Accept-Encoding
+      - Accept
+      via: 1.1 google
+      x-frame-options: SAMEORIGIN
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":[],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":0,"per_page":10}},"meta":{"version":"2.0"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: put
+    uri: https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/?kind=folder&name=subdir1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+  response:
+    status:
+      status_code: '201'
+      message: Created
+      explanation: Document created, URL follows
+    headers:
+      status: HTTP/1.1 201 Created
+      server: nginx
+      date: Thu, 30 Jan 2020 21:06:35 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '839'
+      x-waterbutler-request-id: f62acc4f-a775-4afd-ae4e-020fef88beae
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: clear
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data": {"links": {"upload": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455b342fc90009b70cd9/?kind=file",
+        "delete": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455b342fc90009b70cd9/",
+        "new_folder": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455b342fc90009b70cd9/?kind=folder",
+        "move": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455b342fc90009b70cd9/"},
+        "attributes": {"provider": "osfstorage", "name": "subdir1", "kind": "folder",
+        "path": "/5e33455b342fc90009b70cd9/", "sizeInt": null, "size": null, "etag":
+        "5caf8ab73c068565297e455ebce37fd64b6897a2284ec9d7ecba8b6093082bcd", "extra":
+        {}, "materialized": "/.osfr-tests/subdir1/", "resource": "y26eu"}, "id": "osfstorage/5e33455b342fc90009b70cd9/",
+        "type": "files"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: get
+    uri: https://api.test.osf.io/v2/files/5e33455b342fc90009b70cd9/
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      allow: GET, PUT, PATCH, HEAD, OPTIONS
+      alt-svc: clear
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      date: Thu, 30 Jan 2020 21:06:35 GMT
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      server: nginx
+      status: HTTP/1.1 200 OK
+      transfer-encoding: chunked
+      vary:
+      - Accept-Encoding
+      - Accept
+      via: 1.1 google
+      x-frame-options: SAMEORIGIN
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":{"id":"5e33455b342fc90009b70cd9","type":"files","attributes":{"guid":null,"checkout":null,"name":"subdir1","kind":"folder","path":"/5e33455b342fc90009b70cd9/","size":null,"provider":"osfstorage","materialized_path":"/.osfr-tests/subdir1/","last_touched":null,"date_modified":null,"date_created":null,"extra":{"hashes":{"md5":null,"sha256":null}},"tags":[],"current_user_can_comment":true,"current_version":1},"relationships":{"parent_folder":{"links":{"related":{"href":"https://api.test.osf.io/v2/files/5e33455904172e0009b16178/","meta":{}}},"data":{"id":"5e33455904172e0009b16178","type":"files"}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/files/osfstorage/5e33455b342fc90009b70cd9/","meta":{}}}},"node":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/","meta":{}}},"data":{"id":"y26eu","type":"nodes"}},"target":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/","meta":{"type":"node"}}},"data":{"type":"node","id":"y26eu"}}},"links":{"info":"https://api.test.osf.io/v2/files/5e33455b342fc90009b70cd9/","move":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455b342fc90009b70cd9/","upload":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455b342fc90009b70cd9/","delete":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455b342fc90009b70cd9/","new_folder":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455b342fc90009b70cd9/?kind=folder","self":"https://api.test.osf.io/v2/files/5e33455b342fc90009b70cd9/"}},"meta":{"version":"2.0"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: get
+    uri: https://api.test.osf.io/v2/nodes/y26eu/files/osfstorage/?filter%5Bkind%5D=folder&filter%5Bname%5D=.osfr-tests&page=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: clear
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      date: Thu, 30 Jan 2020 21:06:36 GMT
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      server: nginx
+      status: HTTP/1.1 200 OK
+      transfer-encoding: chunked
+      vary:
+      - Accept-Encoding
+      - Accept
+      via: 1.1 google
+      x-frame-options: SAMEORIGIN
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":[{"id":"5e33455904172e0009b16178","type":"files","attributes":{"guid":null,"checkout":null,"name":".osfr-tests","kind":"folder","path":"/5e33455904172e0009b16178/","size":null,"provider":"osfstorage","materialized_path":"/.osfr-tests/","last_touched":null,"date_modified":null,"date_created":null,"extra":{"hashes":{"md5":null,"sha256":null}},"tags":[],"current_user_can_comment":true,"current_version":1},"relationships":{"parent_folder":{"links":{"related":{"href":"https://api.test.osf.io/v2/files/5e33455658cd6b00097d24f0/","meta":{}}},"data":{"id":"5e33455658cd6b00097d24f0","type":"files"}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/files/osfstorage/5e33455904172e0009b16178/","meta":{}}}},"node":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/","meta":{}}},"data":{"id":"y26eu","type":"nodes"}},"target":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/","meta":{"type":"node"}}},"data":{"type":"node","id":"y26eu"}}},"links":{"info":"https://api.test.osf.io/v2/files/5e33455904172e0009b16178/","move":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/","upload":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/","delete":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/","new_folder":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/?kind=folder","self":"https://api.test.osf.io/v2/files/5e33455904172e0009b16178/"}}],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":1,"per_page":10}},"meta":{"version":"2.0"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: get
+    uri: https://api.test.osf.io/v2/nodes/y26eu/files/osfstorage/5e33455904172e0009b16178/?filter%5Bkind%5D=folder&filter%5Bname%5D=subdir2&page=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: clear
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-length: '128'
+      content-type: application/vnd.api+json; charset=utf-8
+      date: Thu, 30 Jan 2020 21:06:36 GMT
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      server: nginx
+      status: HTTP/1.1 200 OK
+      vary:
+      - Accept-Encoding
+      - Accept
+      via: 1.1 google
+      x-frame-options: SAMEORIGIN
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":[],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":0,"per_page":10}},"meta":{"version":"2.0"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: put
+    uri: https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/?kind=folder&name=subdir2
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+  response:
+    status:
+      status_code: '201'
+      message: Created
+      explanation: Document created, URL follows
+    headers:
+      status: HTTP/1.1 201 Created
+      server: nginx
+      date: Thu, 30 Jan 2020 21:06:38 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '839'
+      x-waterbutler-request-id: 22ad3b4d-b4c9-4d19-ad30-a8ef8413f24c
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: clear
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data": {"links": {"upload": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455e04172e0009b1617d/?kind=file",
+        "delete": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455e04172e0009b1617d/",
+        "new_folder": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455e04172e0009b1617d/?kind=folder",
+        "move": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455e04172e0009b1617d/"},
+        "attributes": {"provider": "osfstorage", "name": "subdir2", "kind": "folder",
+        "path": "/5e33455e04172e0009b1617d/", "sizeInt": null, "size": null, "etag":
+        "5caf8ab73c068565297e455ebce37fd64b6897a2284ec9d7ecba8b6093082bcd", "extra":
+        {}, "materialized": "/.osfr-tests/subdir2/", "resource": "y26eu"}, "id": "osfstorage/5e33455e04172e0009b1617d/",
+        "type": "files"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: get
+    uri: https://api.test.osf.io/v2/files/5e33455e04172e0009b1617d/
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      allow: GET, PUT, PATCH, HEAD, OPTIONS
+      alt-svc: clear
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      date: Thu, 30 Jan 2020 21:06:38 GMT
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      server: nginx
+      status: HTTP/1.1 200 OK
+      transfer-encoding: chunked
+      vary:
+      - Accept-Encoding
+      - Accept
+      via: 1.1 google
+      x-frame-options: SAMEORIGIN
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":{"id":"5e33455e04172e0009b1617d","type":"files","attributes":{"guid":null,"checkout":null,"name":"subdir2","kind":"folder","path":"/5e33455e04172e0009b1617d/","size":null,"provider":"osfstorage","materialized_path":"/.osfr-tests/subdir2/","last_touched":null,"date_modified":null,"date_created":null,"extra":{"hashes":{"md5":null,"sha256":null}},"tags":[],"current_user_can_comment":true,"current_version":1},"relationships":{"parent_folder":{"links":{"related":{"href":"https://api.test.osf.io/v2/files/5e33455904172e0009b16178/","meta":{}}},"data":{"id":"5e33455904172e0009b16178","type":"files"}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/files/osfstorage/5e33455e04172e0009b1617d/","meta":{}}}},"node":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/","meta":{}}},"data":{"id":"y26eu","type":"nodes"}},"target":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/y26eu/","meta":{"type":"node"}}},"data":{"type":"node","id":"y26eu"}}},"links":{"info":"https://api.test.osf.io/v2/files/5e33455e04172e0009b1617d/","move":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455e04172e0009b1617d/","upload":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455e04172e0009b1617d/","delete":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455e04172e0009b1617d/","new_folder":"https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455e04172e0009b1617d/?kind=folder","self":"https://api.test.osf.io/v2/files/5e33455e04172e0009b1617d/"}},"meta":{"version":"2.0"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: get
+    uri: https://api.test.osf.io/v2/nodes/y26eu/files/osfstorage/5e33455904172e0009b16178/?filter%5Bkind%5D=file&page=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: clear
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-length: '128'
+      content-type: application/vnd.api+json; charset=utf-8
+      date: Thu, 30 Jan 2020 21:06:38 GMT
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      server: nginx
+      status: HTTP/1.1 200 OK
+      vary:
+      - Accept-Encoding
+      - Accept
+      via: 1.1 google
+      x-frame-options: SAMEORIGIN
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":[],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":0,"per_page":10}},"meta":{"version":"2.0"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: get
+    uri: https://api.test.osf.io/v2/nodes/y26eu/files/osfstorage/5e33455b342fc90009b70cd9/?filter%5Bkind%5D=file&page=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: clear
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-length: '128'
+      content-type: application/vnd.api+json; charset=utf-8
+      date: Thu, 30 Jan 2020 21:06:39 GMT
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      server: nginx
+      status: HTTP/1.1 200 OK
+      vary:
+      - Accept-Encoding
+      - Accept
+      via: 1.1 google
+      x-frame-options: SAMEORIGIN
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":[],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":0,"per_page":10}},"meta":{"version":"2.0"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: get
+    uri: https://api.test.osf.io/v2/nodes/y26eu/files/osfstorage/5e33455e04172e0009b1617d/?filter%5Bkind%5D=file&page=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: clear
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-length: '128'
+      content-type: application/vnd.api+json; charset=utf-8
+      date: Thu, 30 Jan 2020 21:06:39 GMT
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      server: nginx
+      status: HTTP/1.1 200 OK
+      vary:
+      - Accept-Encoding
+      - Accept
+      via: 1.1 google
+      x-frame-options: SAMEORIGIN
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":[],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":0,"per_page":10}},"meta":{"version":"2.0"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: put
+    uri: https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/?kind=file&name=a.txt
+    body:
+      encoding: ''
+      string: 'upload, file size: 2'
+    headers:
+      Content-Type: text/plain
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+  response:
+    status:
+      status_code: '201'
+      message: Created
+      explanation: Document created, URL follows
+    headers:
+      status: HTTP/1.1 201 Created
+      server: nginx
+      date: Thu, 30 Jan 2020 21:06:42 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '1183'
+      x-waterbutler-request-id: 98ce87d8-569d-41a4-b4f7-7e754e680e33
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: clear
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data": {"links": {"upload": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e334562342fc90009b70ce1?kind=file",
+        "delete": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e334562342fc90009b70ce1",
+        "download": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e334562342fc90009b70ce1",
+        "move": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e334562342fc90009b70ce1"},
+        "attributes": {"modified": "2020-01-30T21:06:42.261668+00:00", "provider":
+        "osfstorage", "created_utc": null, "path": "/5e334562342fc90009b70ce1", "size":
+        2, "etag": "2bb0223330a4038df62801a967b290aad8c6db86808aa5b0c02f7e5d7be0c9d7",
+        "resource": "y26eu", "materialized": "/.osfr-tests/a.txt", "sizeInt": 2, "name":
+        "a.txt", "kind": "file", "contentType": "application/octet-stream", "modified_utc":
+        "2020-01-30T21:06:42+00:00", "extra": {"guid": null, "version": 1, "checkout":
+        null, "hashes": {"md5": "b026324c6904b2a9cb4b88d6d61c81d1", "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"},
+        "downloads": 0, "latestVersionSeen": null}}, "id": "osfstorage/5e334562342fc90009b70ce1",
+        "type": "files"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: put
+    uri: https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/?kind=file&name=b.txt
+    body:
+      encoding: ''
+      string: 'upload, file size: 2'
+    headers:
+      Content-Type: text/plain
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+  response:
+    status:
+      status_code: '201'
+      message: Created
+      explanation: Document created, URL follows
+    headers:
+      status: HTTP/1.1 201 Created
+      server: nginx
+      date: Thu, 30 Jan 2020 21:06:45 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '1183'
+      x-waterbutler-request-id: d7ea9685-93e9-4224-9106-8bd9bc957d01
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: clear
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data": {"links": {"upload": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33456504172e0009b16184?kind=file",
+        "delete": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33456504172e0009b16184",
+        "download": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33456504172e0009b16184",
+        "move": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33456504172e0009b16184"},
+        "attributes": {"modified": "2020-01-30T21:06:45.495615+00:00", "provider":
+        "osfstorage", "created_utc": null, "path": "/5e33456504172e0009b16184", "size":
+        2, "etag": "01190142aee0a3594a47a212ff7b909833cab4a5a838412ddc5e3f1998957324",
+        "resource": "y26eu", "materialized": "/.osfr-tests/b.txt", "sizeInt": 2, "name":
+        "b.txt", "kind": "file", "contentType": "application/octet-stream", "modified_utc":
+        "2020-01-30T21:06:45+00:00", "extra": {"guid": null, "version": 1, "checkout":
+        null, "hashes": {"md5": "26ab0db90d72e28ad0ba1e22ee510510", "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"},
+        "downloads": 0, "latestVersionSeen": null}}, "id": "osfstorage/5e33456504172e0009b16184",
+        "type": "files"}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
+- request:
+    method: put
+    uri: https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33455904172e0009b16178/?kind=file&name=c.txt
+    body:
+      encoding: ''
+      string: 'upload, file size: 2'
+    headers:
+      Content-Type: text/plain
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+  response:
+    status:
+      status_code: '201'
+      message: Created
+      explanation: Document created, URL follows
+    headers:
+      status: HTTP/1.1 201 Created
+      server: nginx
+      date: Thu, 30 Jan 2020 21:06:48 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '1183'
+      x-waterbutler-request-id: 55a5555d-817c-4f47-a175-f0d235209178
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: clear
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data": {"type": "files", "links": {"upload": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33456804172e0009b1618a?kind=file",
+        "download": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33456804172e0009b1618a",
+        "delete": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33456804172e0009b1618a",
+        "move": "https://files.us.test.osf.io/v1/resources/y26eu/providers/osfstorage/5e33456804172e0009b1618a"},
+        "id": "osfstorage/5e33456804172e0009b1618a", "attributes": {"path": "/5e33456804172e0009b1618a",
+        "resource": "y26eu", "etag": "b513c146b8ca9f75f3f43b6e9e8bd5b42a114153ca5116df572f52bd18d43da5",
+        "name": "c.txt", "provider": "osfstorage", "materialized": "/.osfr-tests/c.txt",
+        "size": 2, "created_utc": null, "contentType": "application/octet-stream",
+        "kind": "file", "modified": "2020-01-30T21:06:48.479275+00:00", "extra": {"hashes":
+        {"sha256": "1121cfccd5913f0a63fec40a6ffd44ea64f9dc135c66634ba001d10bcf4302a2",
+        "md5": "6d7fce9fee471194aa8b5b6e47267f03"}, "checkout": null, "downloads":
+        0, "latestVersionSeen": null, "guid": null, "version": 1}, "modified_utc":
+        "2020-01-30T21:06:48+00:00", "sizeInt": 2}}}'
+  recorded_at: 2020-01-30 21:06:48 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
