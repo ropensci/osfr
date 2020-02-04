@@ -1,0 +1,47 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://files.us.test.osf.io/v1/resources/y8t6r/providers/osfstorage/5d4ef38e4e90e100146f7f41
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8
+      Authorization: Bearer <totallyrealpat>
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      accept-ranges: bytes
+      alt-svc: quic=":443"; ma=2592000; v="46,43",h3-Q050=":443"; ma=2592000,h3-Q049=":443";
+        ma=2592000,h3-Q048=":443"; ma=2592000,h3-Q046=":443"; ma=2592000,h3-Q043=":443";
+        ma=2592000
+      cache-control: private, max-age=0
+      content-disposition: attachment; filename="image-file-01.pdf"; filename*=UTF-8''image-file-01.pdf
+      content-length: '7709'
+      content-type: application/octet-stream
+      date: Fri, 31 Jan 2020 19:30:28 GMT
+      etag: '"b2b8554427811f3d67cd91e1b4e6631b"'
+      expires: Fri, 31 Jan 2020 19:30:28 GMT
+      last-modified: Sat, 10 Aug 2019 16:40:45 GMT
+      server: UploadServer
+      status: HTTP/1.1 200 OK
+      x-goog-generation: '1565455245924293'
+      x-goog-hash:
+      - crc32c=gkedLA==
+      - md5=srhVRCeBHz1nzZHhtOZjGw==
+      x-goog-metageneration: '1'
+      x-goog-storage-class: MULTI_REGIONAL
+      x-goog-stored-content-encoding: identity
+      x-goog-stored-content-length: '7709'
+      x-guploader-uploadid: AEnB2UpAQgSAcORFsXNanyCm9Ha4YhzR20hlsnnziNjgp0wscmEimwHvV-nqr5TSmq_6metCQDZ9_UfmS7LnQOGHl12-3dYwQEn5wA5z9mqCrs-WPECpgCY
+    body:
+      encoding: UTF-8
+      file: yes
+      string: /Users/aaronwolen/Dropbox/work/projects/r-packages/osfr/tests/testthat/cassettes/downloading/files/image-file-01.pdf
+  recorded_at: 2020-01-31 19:30:28 GMT
+  recorded_with: vcr/0.4.1.93, webmockr/0.5.1.96
