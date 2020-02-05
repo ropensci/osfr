@@ -30,3 +30,4 @@ inst/paper.bib$
 vignettes/precompile.R$
 ^cran-comments\.md$
 ^LICENSE\.md$
+^codemeta\.json$

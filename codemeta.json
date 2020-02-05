@@ -1,9 +1,12 @@
 {
-  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "osfr",
-  "description": "An interface for interacting with OSF (<https://osf.io>). osfr enables you to access open research materials and data, or create and manage your own private or public projects.",
-  "name": "osfr: Interface to the Open Science Framework (OSF)",
+  "description": "An interface for interacting with 'OSF' (<https://osf.io>). 'osfr' enables you to access open research materials and data, or create and manage your own private or public projects.",
+  "name": "osfr: Interface to the 'Open Science Framework' ('OSF')",
   "codeRepository": "https://github.com/ropensci/osfr",
   "issueTracker": "https://github.com/ropensci/osfr/issues",
   "license": "https://spdx.org/licenses/Apache-2.0",
@@ -299,30 +302,13 @@
       "sameAs": "https://CRAN.R-project.org/package=httr"
     }
   ],
-  "keywords": ["osf", "open-science", "reproducible-research"],
-  "citation": [
-    {
-      "@type": "SoftwareSourceCode",
-      "datePublished": "2020",
-      "author": [
-        {
-          "@type": "Person",
-          "givenName": "Aaron",
-          "familyName": "Wolen",
-          "email": "aaron@wolen.com",
-          "@id": "https://orcid.org/0000-0003-2542-2202"
-        },
-        {
-          "@type": "Person",
-          "givenName": "Chris",
-          "familyName": "Hartgerink",
-          "email": "chjh@protonmail.com",
-          "@id": "https://orcid.org/0000-0003-1050-6809"
-        }
-      ],
-      "name": "osfr: Interface to the Open Science Framework (OSF)",
-      "url": "https://github.com/ropensci/osfr",
-      "description": "R package version 0.2.8"
-    }
-  ]
+  "keywords": [
+    "osf",
+    "open-science",
+    "reproducible-research"
+  ],
+  "relatedLink": "https://docs.ropensci.org/osfr",
+  "releaseNotes": "https://github.com/ropensci/osfr/blob/master/NEWS.md",
+  "readme": "https://github.com/ropensci/osfr/blob/master/README.md",
+  "contIntegration": ["https://travis-ci.com/ropensci/osfr", "https://ci.appveyor.com/project/aaronwolen/osfr", "https://codecov.io/github/ropensci/osfr?branch=master"]
 }
