@@ -15,6 +15,8 @@
 This is a resubmission. In this version I have:
 
 - replaced links in README.md with fully specified URLs
+- updated the TITLE and DESCRIPTION to place 'osfr', 'OSF', and 'Open Science Framework' in quotes
+- removed the full license builds
 
 ## Reverse dependencies
 
