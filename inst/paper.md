@@ -23,7 +23,7 @@ authors:
     orcid: 0000-0003-4068-4286
     affiliation: 6
 affiliations:
-  - name: James D. Eason Transplant Research Institute, Department of Surgery, University of Tennessee Health Science Center
+  - name: Transplant Research Institute, Department of Surgery, University of Tennessee Health Science Center
     index: 1
   - name: Liberate Science GmbH
     index: 2
