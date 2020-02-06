@@ -20,7 +20,8 @@ doc: README.md vignettes
 	Rscript -e "devtools::document()"
 
 README.md: README.Rmd
-	Rscript -e "knitr::knit('$<', '$@', quiet = TRUE)"
+	Rscript -e "devtools::build_readme()"
+	rm README.html
 
 doc/%.html: vignettes/%.Rmd
 	Rscript -e "devtools::build_vignettes()"
