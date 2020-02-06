@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 Sys.unsetenv(c("OSF_SERVER", "OSF_PAT"))
 ```
 
-# osfr <a href="https://ropensci.github.io/osfr/"><img src="man/figures/logo.png" align="right" height="139" /></a>
+# osfr <a href="https://docs.ropensci.org/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
 [![Build Status](https://travis-ci.com/ropensci/osfr.svg)](https://travis-ci.com/ropensci/osfr)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ropensci/osfr?branch=master&svg=true)](https://ci.appveyor.com/project/aaronwolen/osfr)
@@ -165,12 +165,12 @@ unlink("Study_19_Figure_1.pdf")
 [lucy]: https://github.com/lucymcgowan
 [tim]: https://github.com/timerrington
 
-[getting-started]: https://ropensci.github.io/osfr/articles/getting_started
-[auth]: https://ropensci.github.io/osfr/articles/auth
+[getting-started]: https://docs.ropensci.org/osfr/articles/getting_started
+[auth]: https://docs.ropensci.org/osfr/articles/auth
 
-[osf-create]: https://ropensci.github.io/osfr/reference/osf_create
-[osf-mkdir]: https://ropensci.github.io/osfr/reference/osf_mkdir
-[osf-upload]: https://ropensci.github.io/osfr/reference/osf_upload
+[osf-create]: https://docs.ropensci.org/osfr/reference/osf_create
+[osf-mkdir]: https://docs.ropensci.org/osfr/reference/osf_mkdir
+[osf-upload]: https://docs.ropensci.org/osfr/reference/osf_upload
 
 [contrib]: https://github.com/ropensci/osfr/blob/master/.github/CONTRIBUTING.md
 [coc]: https://github.com/ropensci/osfr/blob/master/.github/CODE_OF_CONDUCT.md

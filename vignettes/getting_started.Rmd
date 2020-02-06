@@ -1,7 +1,7 @@
 ---
 title: "Getting Started with osfr"
-date: "2020-01-23"
-output: 
+date: "2020-02-06"
+output:
   rmarkdown::html_vignette:
     toc: TRUE
 vignette: >
@@ -12,7 +12,7 @@ vignette: >
 
 
 
-This vignette provides a quick tour of the *osfr* package. 
+This vignette provides a quick tour of the *osfr* package.
 
 
 ```r
@@ -21,9 +21,9 @@ library(osfr)
 
 
 
-## What is OSF? 
+## What is OSF?
 
-[OSF][osf] is a free and open source web application that provides a space for researchers to collaboratively store, manage, and share their research materials (e.g. data, code, protocols). 
+[OSF][osf] is a free and open source web application that provides a space for researchers to collaboratively store, manage, and share their research materials (e.g. data, code, protocols).
 
 Most work on OSF is organized around ***projects***, which include a cloud-based storage bucket where files can be stored and organized into directories. Note there is no storage limit on the size of projects but individual files must be < 5Gb. Projects can be kept private, shared with a specific group of collaborators, or made publicly available with citable DOIs so you can get credit for their work.
 
@@ -36,7 +36,7 @@ Here are a few relevant topics:
 
 ## Accessing OSF projects
 
-Let's check out an example project containing materials for an analysis of the 2012 American National Election Survey (ANES). You can access the OSF project in your browser by navigating to its URL: <https://osf.io/jgyxm/>. 
+Let's check out an example project containing materials for an analysis of the 2012 American National Election Survey (ANES). You can access the OSF project in your browser by navigating to its URL: <https://osf.io/jgyxm/>.
 
 Let's load this project into R with `osfr::osf_retrieve_node()`:
 
@@ -50,7 +50,7 @@ anes_project
 #> 1 Political identification and gender jgyxm <named list [3]>
 ```
 
-This returns an `osf_tbl` object, which is the `data.frame`-like class *osfr* uses to represent items retrieved from OSF. You can now use `anes_project` to perform a variety of project related tasks by passing it to different osfr functions. 
+This returns an `osf_tbl` object, which is the `data.frame`-like class *osfr* uses to represent items retrieved from OSF. You can now use `anes_project` to perform a variety of project related tasks by passing it to different osfr functions.
 
 ### Downloading files
 
@@ -81,19 +81,19 @@ Because `osf_tbl`s are just specialized `data.frame`s, we could also `subset()` 
 
 *__Note:__ If an `osf_tbl` with multiple entities is passed to an non-vectorized osfr function like `osf_open()`, the default behavior is to use the entity in the first row and warn that all other entities are ignored.*
 
-We can also download local copies of these files by passing `anes_files` to `osf_download()`. 
+We can also download local copies of these files by passing `anes_files` to `osf_download()`.
 
 
 ```r
 osf_download(anes_files)
 #> # A tibble: 5 x 4
-#>   name                 id                       local_path             meta            
-#>   <chr>                <chr>                    <chr>                  <list>          
-#> 1 cleaning.R           5e20d22bedceab002d82e0f1 ./cleaning.R           <named list [3]>
-#> 2 Questionnaire.docx   5e20d22bedceab002b82dc3f ./Questionnaire.docx   <named list [3]>
-#> 3 raw_data.csv         5e20d22c675e0e00096b4de8 ./raw_data.csv         <named list [3]>
-#> 4 Data Dictionary.docx 5e20d22c675e0e000e6b4b18 ./Data Dictionary.docx <named list [3]>
-#> 5 analyses.R           5e20d22c675e0e000a6b4bd3 ./analyses.R           <named list [3]>
+#>   name                id                     local_path           meta          
+#>   <chr>               <chr>                  <chr>                <list>        
+#> 1 cleaning.R          5e20d22bedceab002d82e… ./cleaning.R         <named list […
+#> 2 Questionnaire.docx  5e20d22bedceab002b82d… ./Questionnaire.docx <named list […
+#> 3 raw_data.csv        5e20d22c675e0e00096b4… ./raw_data.csv       <named list […
+#> 4 Data Dictionary.do… 5e20d22c675e0e000e6b4… ./Data Dictionary.d… <named list […
+#> 5 analyses.R          5e20d22c675e0e000a6b4… ./analyses.R         <named list […
 ```
 
 We'll use these files in the next section for creating a new project.
@@ -106,8 +106,8 @@ Here is a short example that consolidates all of the steps we've performed so fa
 
 
 ```r
-osf_retrieve_node("jgyxm") %>% 
-  osf_ls_files() %>% 
+osf_retrieve_node("jgyxm") %>%
+  osf_ls_files() %>%
   osf_download()
 ```
 
@@ -129,16 +129,16 @@ my_project
 #> # A tibble: 1 x 3
 #>   name                                             id    meta            
 #>   <chr>                                            <chr> <list>          
-#> 1 Political Identification and Gender: Re-examined 9e6kv <named list [3]>
+#> 1 Political Identification and Gender: Re-examined zrvnt <named list [3]>
 ```
 
-The GUID for this new project is 9e6kv, but yours will be something different. You can check out the project on OSF by opening it's URL (`https://www.osf.io/<GUID>`), or, more conveniently: `osf_open(my_project)`.
+The GUID for this new project is zrvnt, but yours will be something different. You can check out the project on OSF by opening it's URL (`https://www.osf.io/<GUID>`), or, more conveniently: `osf_open(my_project)`.
 
 ### Adding structure with components
 
-A key organizational feature of OSF is the ability to augment a project's structure with sub-projects, which are referred to as *components* on OSF. Like top-level projects, every component is assigned a unique URL and contains its own cloud-based storage bucket. They can also have different privacy settings from the parent project. 
+A key organizational feature of OSF is the ability to augment a project's structure with sub-projects, which are referred to as *components* on OSF. Like top-level projects, every component is assigned a unique URL and contains its own cloud-based storage bucket. They can also have different privacy settings from the parent project.
 
-We are going to create two nested *components*, one for the raw data and one for the analysis scripts. 
+We are going to create two nested *components*, one for the raw data and one for the analysis scripts.
 
 
 ```r
@@ -162,10 +162,10 @@ data_file
 #> # A tibble: 1 x 3
 #>   name         id                       meta            
 #>   <chr>        <chr>                    <list>          
-#> 1 raw_data.csv 5e29f7af87a1d9007a1cdcb6 <named list [3]>
+#> 1 raw_data.csv 5e3c2798032a4d00dee6e6f8 <named list [3]>
 ```
 
-Oh no! Instead of uploading `raw_data.csv` to the *Raw Data* component, we uploaded it to the parent project instead. 
+Oh no! Instead of uploading `raw_data.csv` to the *Raw Data* component, we uploaded it to the parent project instead.
 
 Fear not. We can easily fix this contrived mistake by simply moving the file to its intended location.
 
@@ -174,7 +174,7 @@ Fear not. We can easily fix this contrived mistake by simply moving the file to 
 data_file <- osf_mv(data_file, to = data_comp)
 ```
 
-Crisis averted. Now if you open *Raw Data* on OSF (`osf_open(data_comp)`), it should contain the csv file. 
+Crisis averted. Now if you open *Raw Data* on OSF (`osf_open(data_comp)`), it should contain the csv file.
 
 Our next step is to upload the R scripts into the *Analysis Scripts* component. Rather than upload each file individually, we'll take advantage of `osf_upload()`'s ability to handle multiple files/directories and use `list.files()` to identify all `.R` files in the working directory:
 
@@ -185,9 +185,9 @@ r_files
 #> # A tibble: 3 x 3
 #>   name         id                       meta            
 #>   <chr>        <chr>                    <list>          
-#> 1 analyses.R   5e29f7b487a1d900761ce601 <named list [3]>
-#> 2 cleaning.R   5e29f7b6c19c5d0080ee0246 <named list [3]>
-#> 3 precompile.R 5e29f7b9c19c5d0082edff21 <named list [3]>
+#> 1 analyses.R   5e3c279df1369e01058ab088 <named list [3]>
+#> 2 cleaning.R   5e3c27a0f1369e01058ab098 <named list [3]>
+#> 3 precompile.R 5e3c27a3032a4d00dce6eece <named list [3]>
 ```
 
 ### Putting it all together
@@ -202,8 +202,8 @@ my_project %>%
 #> # A tibble: 2 x 3
 #>   name                 id                       meta            
 #>   <chr>                <chr>                    <list>          
-#> 1 Data Dictionary.docx 5e29f7bdc19c5d007eedfe04 <named list [3]>
-#> 2 Questionnaire.docx   5e29f7bfc19c5d007eedfe08 <named list [3]>
+#> 1 Data Dictionary.docx 5e3c27a8f1369e01058ab0ad <named list [3]>
+#> 2 Questionnaire.docx   5e3c27aaf1369e01018ac3a9 <named list [3]>
 ```
 
 We can verify the project is now structured the way we wanted by listing the components we have under the main project.
@@ -214,9 +214,9 @@ osf_ls_nodes(my_project)
 #> # A tibble: 3 x 3
 #>   name               id    meta            
 #>   <chr>              <chr> <list>          
-#> 1 Research Materials 6k2j4 <named list [3]>
-#> 2 Analysis Scripts   324a7 <named list [3]>
-#> 3 Raw Data           q2ms4 <named list [3]>
+#> 1 Research Materials 4j6ta <named list [3]>
+#> 2 Analysis Scripts   evgkz <named list [3]>
+#> 3 Raw Data           sd6gt <named list [3]>
 ```
 
 which gives us an `osf_tbl` with one row for each of the project's components.
@@ -235,7 +235,7 @@ Error: Can't upload file 'cleaning.R'.
   * A file with the same name already exists at the destination.
   * Use the `conflicts` argument to avoid this error in the future.
 ```
- 
+
  As the error indicates, we need to use the `conflicts` argument to instruct `osf_upload()` how to handle the conflict. In this case, we want to overwrite the original copy with our new version:
 
  
@@ -263,7 +263,7 @@ We can download files from any public or private node that we have access to and
 
     
     ```r
-    anes_project %>% 
+    anes_project %>%
       osf_ls_files(pattern = ) %>%
       osf_download(conflicts = "overwrite")
     ```
