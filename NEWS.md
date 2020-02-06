@@ -1,6 +1,7 @@
 # osfr 0.2.8
 
-Initial CRAN release.
+* Initial CRAN release
+* Publication of accompanying paper in the [Journal of Open Source Software](http://joss.theoj.org/) that can be cited in papers using osfr, see `citation("osfr")` for details
 
 ## Minor changes
 

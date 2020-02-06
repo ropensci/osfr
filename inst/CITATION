@@ -1,0 +1,22 @@
+citHeader("To cite osfr in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "{osfr}: An {R} Interface to the Open Science Framework",
+  author   = c(
+    person("Aaron R.", "Wolen"),
+    person("Chris H.J.","Hartgerink"),
+    person("Ryan", "Hafen"),
+    person("Brian G.", "Richards"),
+    person("Courtney K.", "Soderberg"),
+    person("Timothy P.", "York")
+    ),
+  journal  = "Journal of Open Source Software",
+  year     = 2020,
+  volume   = 5,
+  number   = 46,
+  pages    = 2071,
+  url      = "https://doi.org/10.21105/joss.02071",
+  doi      = "10.21105/joss.02071",
+  textVersion = "Wolen et al., (2020). osfr: An R Interface to the Open Science Framework. Journal of Open Source Software, 5(46), 2071, https://doi.org/10.21105/joss.02071"
+)

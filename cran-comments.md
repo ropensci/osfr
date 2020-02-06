@@ -18,6 +18,7 @@ This is a resubmission. In this version I have:
 - updated the TITLE and DESCRIPTION to place 'osfr', 'OSF', and 'Open Science Framework' in quotes
 - removed the full license from builds
 - fixed invalid README URLs, which resulted from migrating to rOpenSci's docs server
+- added a CITATION for the recently published JOSS paper
 
 ## Reverse dependencies
 
