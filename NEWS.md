@@ -6,7 +6,8 @@ Initial CRAN release.
 
 * Add rOpenSci reviewers to DESCRIPTION
 * Remove deleted URLs from vignette
-* Add zenodo badge
+* Add badges for zenodo and joss
+* Add `Makefile` for common dev tasks
 
 # osfr 0.2.7
 
@@ -59,14 +60,14 @@ osfr is now part of rOpenSci and the documentation website has moved to a new UR
 
 ## Breaking changes
 
-* `osf_download()` and `osf_upload()`'s `overwrite` argument has been replaced with `conflicts`, which can be set to `"error"` (the default), `"skip"`, or `"overwrite"`. 
+* `osf_download()` and `osf_upload()`'s `overwrite` argument has been replaced with `conflicts`, which can be set to `"error"` (the default), `"skip"`, or `"overwrite"`.
 * `osf_upload()`'s `name` argument has been removed, so it is no longer possible to upload a file *and* change it's OSF name.
 * `osf_download()`'s `path` argument must point to an existing directory where all downloaded files will be saved.
 * `osf_download()`'s `decompress` argument has been removed. The zip file downloaded from OSF is always decompressed in a temp directory where the enclosed files are selectively copied to the specified `path`.
 
 ## Minor changes
 
-* Better error message when user attempts to upload directly to a file 
+* Better error message when user attempts to upload directly to a file
 (#102, @tiernanmartin).
 * crul v0.7.4 is now the minimum required version.
 * The waterbutler client will now re-attempt failed requests 3 times.
