@@ -38,5 +38,9 @@ install_deps:
 install: install_deps build
 	R CMD INSTALL $(PKGNAME)_$(PKGVERS).tar.gz
 
+tag:
+	@echo "Tagging last commit as v$(PKGVERS)"
+	@git tag -a v$(PKGVERS) -m "v$(PKGVERS)"
+
 clean:
 	@rm -rf $(PKGNAME)_$(PKGVERS).tar.gz $(PKGNAME).Rcheck

@@ -75,5 +75,9 @@ Run `make` to
 * build the package
 * check the package as CRAN but without running tests (this is temporary until mock tests are implemented)
 
-Run `make test` to:
-* run unit tests
+**Helpers:**
+
+* `make clean` to remove build/check files
+* `make test` to run unit tests
+* `make tag` to tag the last git commit with the current version
+
