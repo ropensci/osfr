@@ -129,10 +129,10 @@ my_project
 #> # A tibble: 1 x 3
 #>   name                                             id    meta            
 #>   <chr>                                            <chr> <list>          
-#> 1 Political Identification and Gender: Re-examined zrvnt <named list [3]>
+#> 1 Political Identification and Gender: Re-examined kqy2p <named list [3]>
 ```
 
-The GUID for this new project is zrvnt, but yours will be something different. You can check out the project on OSF by opening it's URL (`https://www.osf.io/<GUID>`), or, more conveniently: `osf_open(my_project)`.
+The GUID for this new project is `kqy2p`, but yours will be something different. You can check out the project on OSF by opening it's URL (`https://www.osf.io/<GUID>`), or, more conveniently: `osf_open(my_project)`.
 
 ### Adding structure with components
 
@@ -162,7 +162,7 @@ data_file
 #> # A tibble: 1 x 3
 #>   name         id                       meta            
 #>   <chr>        <chr>                    <list>          
-#> 1 raw_data.csv 5e3c2798032a4d00dee6e6f8 <named list [3]>
+#> 1 raw_data.csv 5e3c4af3032a4d00dee71f02 <named list [3]>
 ```
 
 Oh no! Instead of uploading `raw_data.csv` to the *Raw Data* component, we uploaded it to the parent project instead.
@@ -185,9 +185,9 @@ r_files
 #> # A tibble: 3 x 3
 #>   name         id                       meta            
 #>   <chr>        <chr>                    <list>          
-#> 1 analyses.R   5e3c279df1369e01058ab088 <named list [3]>
-#> 2 cleaning.R   5e3c27a0f1369e01058ab098 <named list [3]>
-#> 3 precompile.R 5e3c27a3032a4d00dce6eece <named list [3]>
+#> 1 analyses.R   5e3c4af6f1369e01158aaf3b <named list [3]>
+#> 2 cleaning.R   5e3c4af9032a4d00e8e70915 <named list [3]>
+#> 3 precompile.R 5e3c4afaf1369e010e8acaf7 <named list [3]>
 ```
 
 ### Putting it all together
@@ -202,8 +202,8 @@ my_project %>%
 #> # A tibble: 2 x 3
 #>   name                 id                       meta            
 #>   <chr>                <chr>                    <list>          
-#> 1 Data Dictionary.docx 5e3c27a8f1369e01058ab0ad <named list [3]>
-#> 2 Questionnaire.docx   5e3c27aaf1369e01018ac3a9 <named list [3]>
+#> 1 Data Dictionary.docx 5e3c4afef1369e01108ad708 <named list [3]>
+#> 2 Questionnaire.docx   5e3c4b00032a4d00ece6faab <named list [3]>
 ```
 
 We can verify the project is now structured the way we wanted by listing the components we have under the main project.
@@ -214,9 +214,9 @@ osf_ls_nodes(my_project)
 #> # A tibble: 3 x 3
 #>   name               id    meta            
 #>   <chr>              <chr> <list>          
-#> 1 Research Materials 4j6ta <named list [3]>
-#> 2 Analysis Scripts   evgkz <named list [3]>
-#> 3 Raw Data           sd6gt <named list [3]>
+#> 1 Research Materials hvmpr <named list [3]>
+#> 2 Analysis Scripts   85tck <named list [3]>
+#> 3 Raw Data           mzq49 <named list [3]>
 ```
 
 which gives us an `osf_tbl` with one row for each of the project's components.

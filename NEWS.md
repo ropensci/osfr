@@ -7,8 +7,8 @@
 
 * Add rOpenSci reviewers to DESCRIPTION
 * Remove deleted URLs from vignette
-* Add badges for zenodo and joss
-* Add `Makefile` for common dev tasks
+* Add badges for zenodo and JOSS
+* Add `Makefile` for common developer tasks
 
 # osfr 0.2.7
 

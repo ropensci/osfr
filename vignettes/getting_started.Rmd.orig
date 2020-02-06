@@ -110,7 +110,7 @@ my_project <- osf_create_project(
 my_project
 ```
 
-The GUID for this new project is `r my_project$id`, but yours will be something different. You can check out the project on OSF by opening it's URL (`https://www.osf.io/<GUID>`), or, more conveniently: `osf_open(my_project)`.
+The GUID for this new project is ``r my_project$id``, but yours will be something different. You can check out the project on OSF by opening it's URL (`https://www.osf.io/<GUID>`), or, more conveniently: `osf_open(my_project)`.
 
 ### Adding structure with components
 
