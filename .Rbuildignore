@@ -31,3 +31,4 @@ vignettes/precompile.R$
 ^cran-comments\.md$
 ^LICENSE\.md$
 ^codemeta\.json$
+^Makefile$
