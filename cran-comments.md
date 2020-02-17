@@ -19,6 +19,7 @@ This is a resubmission. In this version I have:
 - removed the full license from builds
 - fixed invalid README URLs, which resulted from migrating to rOpenSci's docs server
 - added a CITATION for the recently published JOSS paper
+- switched to the MIT license
 
 ## Reverse dependencies
 
