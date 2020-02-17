@@ -2,13 +2,13 @@ context("Uploading files")
 
 
 # setup -------------------------------------------------------------------
-infile <- tempfile("osfr-local-file-", fileext = ".txt")
-
 setup({
+  infile <<- tempfile("osfr-local-file-", fileext = ".txt")
   writeLines("Lorem ipsum dolor sit amet, consectetur", infile)
 
   if (has_pat()) {
     p1 <<- osf_create_project(title = "osfr-test-files-1")
+    d1 <<- osf_mkdir(p1, "data")
     p2 <<- osf_create_project(title = "osfr-test-files-2")
   }
 })
@@ -22,9 +22,9 @@ teardown({
 
 
 # tests -------------------------------------------------------------------
-test_that("non-existent file is detected", {
+test_that("nonexistent file is detected", {
   skip_if_no_pat()
-  expect_error(osf_upload(p1, "non-existent-file"), "Can't find following")
+  expect_error(osf_upload(p1, "nonexistent-file"), "Can't find following")
 })
 
 test_that("file is uploaded to project root", {
@@ -70,10 +70,28 @@ test_that("a file can be overwritten when conflicts='overwrite'", {
 
 test_that("file can be uploaded to a directory", {
   skip_if_no_pat()
-
-  d1 <- osf_mkdir(p1, "data")
-  f2 <- osf_upload(d1, infile, verbose = TRUE)
+  f2 <- osf_upload(d1, infile)
   expect_s3_class(f2, "osf_tbl_file")
+})
+
+test_that("conflicting files can be skipped when uploading to a dir", {
+  skip_if_no_pat()
+  expect_message(
+    f2 <- osf_upload(d1, infile, conflicts = "skip"),
+    "Skipped 1 file\\(s\\) to avoid overwriting OSF copies"
+  )
+  expect_s3_class(f2, "osf_tbl_file")
+})
+
+test_that("conflicting files can be skipped when uploading to a dir", {
+  skip_if_no_pat()
+  writeLines("Lorem ipsum dolor sit amet, consectetur, ea trio posse", infile)
+  expect_silent(
+    f2 <- osf_upload(d1, infile, conflicts = "overwrite")
+  )
+
+  # file is now on version 2
+  expect_equal(get_meta(f2, "attributes", "current_version"), 2)
 })
 
 test_that("attempting to list an osf_tbl_file with a file errors", {

@@ -150,6 +150,15 @@ osf_upload.osf_tbl_file <-
   # inventory of files to upload and/or remote directories to create
   manifest <- map_rbind(.upload_manifest, path = path, recurse = recurse)
 
+  # if uploading to a directory we need to update the remote paths for files
+  if (inherits(dest, "osf_tbl_file")) {
+    manifest$remote_path <- ifelse(
+      manifest$type == "file",
+      file.path(dest$name, manifest$remote_path),
+      manifest$remote_path
+    )
+  }
+
   # retrieve remote destinations
   manifest <- .ulm_add_remote_dests(manifest, dest, verbose)
 
