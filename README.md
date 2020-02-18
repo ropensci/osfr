@@ -3,6 +3,8 @@
 
 # osfr <a href="https://docs.ropensci.org/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/osfr)](https://CRAN.R-project.org/package=osfr)
 [![Build
 Status](https://travis-ci.com/ropensci/osfr.svg)](https://travis-ci.com/ropensci/osfr)
 [![AppVeyor build
@@ -30,8 +32,13 @@ collaborators, or made publicly available with citable DOIs.*
 
 ## Installation
 
-This package is currently under development and is not available on
-CRAN. You can install the current version with the *remotes* package:
+You can install the current release of osfr from CRAN (*recommended*):
+
+``` r
+install.packages("osfr")
+```
+
+Or the development version from GitHub with the *remotes* package:
 
 ``` r
 # install.packages("remotes")
