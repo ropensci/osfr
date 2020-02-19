@@ -80,7 +80,7 @@ test_that("a subdirectory can be uploaded", {
     subdirs <- osf_ls_files(c2, type = "folder")
   )
   expect_equal(
-    subdirs$name, 
+    subdirs$name,
     basename(indir)
   )
 
@@ -89,7 +89,7 @@ test_that("a subdirectory can be uploaded", {
     subdir_files <- osf_ls_files(out)
   )
   expect_equal(
-    subdir_files$name, 
+    subdir_files$name,
     basename(fs::dir_ls(indir))
   )
 })
@@ -153,7 +153,7 @@ test_that("files in parent directories can be uploaded", {
   vcr::use_cassette("create-c5", record = record, {
     c5 <- osf_create_component(p1, "parent-directories")
   })
-  
+
   vcr::use_cassette("c5-upload-f1", record = record, {
     upf1 <- osf_upload(c5, path = "../d.txt")
   })
