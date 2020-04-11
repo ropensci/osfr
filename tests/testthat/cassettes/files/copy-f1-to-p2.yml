@@ -1,0 +1,106 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.test.osf.io/v2/files/5f395a22492a36000968bbcf/
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8.9000
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      allow: GET, PUT, PATCH, HEAD, OPTIONS
+      alt-svc: clear
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      date: Sun, 16 Aug 2020 16:09:24 GMT
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      server: nginx
+      set-cookie: sloan_id=ea4186bb-806b-4eea-bbdd-dcfb1b41c7d4; Domain=.osf.io; Path=/;
+        samesite=None; Secure
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept
+      via: 1.1 google
+      x-frame-options: SAMEORIGIN
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":{"id":"5f395a22492a36000968bbcf","type":"files","attributes":{"guid":null,"checkout":null,"name":"a.txt","kind":"file","path":"/5f395a22492a36000968bbcf","size":2,"provider":"osfstorage","materialized_path":"/a.txt","last_touched":null,"date_modified":"2020-08-16T16:09:06.808616Z","date_created":"2020-08-16T16:09:06.808616Z","extra":{"hashes":{"md5":"b026324c6904b2a9cb4b88d6d61c81d1","sha256":"4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"},"downloads":0},"tags":[],"current_user_can_comment":true,"current_version":1},"relationships":{"parent_folder":{"links":{"related":{"href":"https://api.test.osf.io/v2/files/5f395a1d60b93200095e224f/","meta":{}}},"data":{"id":"5f395a1d60b93200095e224f","type":"files"}},"versions":{"links":{"related":{"href":"https://api.test.osf.io/v2/files/5f395a22492a36000968bbcf/versions/","meta":{}}}},"metadata_records":{"links":{"related":{"href":"https://api.test.osf.io/v2/files/5f395a22492a36000968bbcf/metadata_records/","meta":{}}}},"node":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/qv9as/","meta":{}}},"data":{"id":"qv9as","type":"nodes"}},"target":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/qv9as/","meta":{"type":"node"}}},"data":{"type":"node","id":"qv9as"}}},"links":{"info":"https://api.test.osf.io/v2/files/5f395a22492a36000968bbcf/","move":"https://files.us.test.osf.io/v1/resources/qv9as/providers/osfstorage/5f395a22492a36000968bbcf","upload":"https://files.us.test.osf.io/v1/resources/qv9as/providers/osfstorage/5f395a22492a36000968bbcf","delete":"https://files.us.test.osf.io/v1/resources/qv9as/providers/osfstorage/5f395a22492a36000968bbcf","download":"https://test.osf.io/download/5f395a22492a36000968bbcf/","render":"https://mfr.us.test.osf.io/render?url=https://test.osf.io/download/5f395a22492a36000968bbcf/?direct%26mode=render","html":"https://test.osf.io/qv9as/files/osfstorage/5f395a22492a36000968bbcf","self":"https://api.test.osf.io/v2/files/5f395a22492a36000968bbcf/"}},"meta":{"version":"2.0"}}'
+  recorded_at: 2020-08-16 16:09:26 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: post
+    uri: https://files.us.test.osf.io/v1/resources/qv9as/providers/osfstorage/5f395a22492a36000968bbcf
+    body:
+      encoding: ''
+      string: '{"path":"/","resource":"qv9as","provider":"osfstorage","action":"copy","conflict":"warn"}'
+    headers:
+      Content-Type: application/json
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8.9000
+      Authorization: Bearer <totallyrealpat>
+  response:
+    status:
+      status_code: '409'
+      message: Conflict
+      explanation: Request conflict.
+    headers:
+      status: 'HTTP/2 409 '
+      server: nginx
+      date: Sun, 16 Aug 2020 16:09:25 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '108'
+      via: 1.1 google
+      alt-svc: clear
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"code": 409, "message": "Cannot complete action: file or folder \"a.txt\"
+        already exists in this location"}'
+  recorded_at: 2020-08-16 16:09:26 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
+- request:
+    method: post
+    uri: https://files.us.test.osf.io/v1/resources/qv9as/providers/osfstorage/5f395a22492a36000968bbcf
+    body:
+      encoding: ''
+      string: '{"path":"/","resource":"qv9as","provider":"osfstorage","action":"copy","conflict":"replace"}'
+    headers:
+      Content-Type: application/json
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8.9000
+      Authorization: Bearer <totallyrealpat>
+  response:
+    status:
+      status_code: '400'
+      message: Bad Request
+      explanation: Bad request syntax or unsupported method
+    headers:
+      status: 'HTTP/2 400 '
+      server: nginx
+      date: Sun, 16 Aug 2020 16:09:26 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '125'
+      via: 1.1 google
+      alt-svc: clear
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"code": 400, "message": "Unable to move or copy ''/a.txt''. Moving
+        or copying a file or folder onto itself is not supported."}'
+  recorded_at: 2020-08-16 16:09:26 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2

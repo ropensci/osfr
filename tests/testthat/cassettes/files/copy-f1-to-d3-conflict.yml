@@ -1,0 +1,33 @@
+http_interactions:
+- request:
+    method: post
+    uri: https://files.us.test.osf.io/v1/resources/qv9as/providers/osfstorage/5f395a53213a150009a1ca4b
+    body:
+      encoding: ''
+      string: '{"path":"/5f395a20213a150009a1ca01/","action":"copy","conflict":"warn"}'
+    headers:
+      Content-Type: application/json
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8.9000
+      Authorization: Bearer <totallyrealpat>
+  response:
+    status:
+      status_code: '409'
+      message: Conflict
+      explanation: Request conflict.
+    headers:
+      status: 'HTTP/2 409 '
+      server: nginx
+      date: Sun, 16 Aug 2020 16:10:05 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '108'
+      via: 1.1 google
+      alt-svc: clear
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"code": 409, "message": "Cannot complete action: file or folder \"a.txt\"
+        already exists in this location"}'
+  recorded_at: 2020-08-16 16:10:05 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
