@@ -2,7 +2,9 @@ context("Uploading multiple files")
 
 
 # setup -------------------------------------------------------------------
-vcr_config("cassettes/uploading-multiple-files")
+vcr::vcr_configure(
+  dir = cassette_path("uploading-multiple-files")
+)
 
 setup({
   # copy directory for testing multifile uploads to pwd
@@ -12,7 +14,7 @@ setup({
   )
 
   if (has_pat()) {
-    vcr::use_cassette("create-p1", record = record, {
+    vcr::use_cassette("create-p1", {
       p1 <<- osf_create_project(title = "osfr-multifile-upload-test")
     })
   }
@@ -21,7 +23,7 @@ setup({
 teardown({
   fs::dir_delete(multidir)
   if (has_pat()) {
-    vcr::use_cassette("delete-p1", record = record, {
+    vcr::use_cassette("delete-p1", {
       osf_rm(p1, recurse = TRUE, check = FALSE)
     })
   }
@@ -35,7 +37,7 @@ test_that("multiple files can be uploaded", {
 
   infiles <- fs::dir_ls(multidir, type = "file")
 
-  vcr::use_cassette("upload-infiles", record = record, {
+  vcr::use_cassette("upload-infiles", {
     out <- osf_upload(p1, infiles)
   })
 
@@ -46,7 +48,7 @@ test_that("multiple files can be uploaded", {
 test_that("a directory can be uploaded", {
   skip_if_no_pat()
 
-  vcr::use_cassette("create-and-populate-c1", record = record, {
+  vcr::use_cassette("create-and-populate-c1", {
     c1 <- osf_create_component(p1, "dir-upload")
     out <- osf_upload(c1, multidir)
   })
@@ -67,7 +69,7 @@ test_that("a subdirectory can be uploaded", {
 
   # upload the subdirectory with no children
   indir <- file.path(multidir, "subdir1", "subdir1_1")
-  vcr::use_cassette("create-and-populate-c2", record = record, {
+  vcr::use_cassette("create-and-populate-c2", {
     c2 <- osf_create_component(p1, "subdir-upload")
     out <- osf_upload(c2, indir, verbose = TRUE)
   })
@@ -98,7 +100,7 @@ test_that("a subdirectory can be uploaded", {
 test_that("recurse argument respects specified levels", {
   skip_if_no_pat()
 
-  vcr::use_cassette("create-and-populate-c3", record = record, {
+  vcr::use_cassette("create-and-populate-c3", {
     c3 <- osf_create_component(p1, "recurse=1")
     out <- osf_upload(c3, path = multidir, recurse = 1)
   })
@@ -129,7 +131,7 @@ test_that("recurse argument respects specified levels", {
 test_that("recurse=TRUE uploads the entire OSF directory structure", {
   skip_if_no_pat()
 
-  vcr::use_cassette("create-and-populate-c4", record = record, {
+  vcr::use_cassette("create-and-populate-c4", {
     c4 <- osf_create_component(p1, "recurse=TRUE")
     out <- osf_upload(c4, path = multidir, recurse = TRUE)
   })
@@ -150,17 +152,17 @@ test_that("files in parent directories can be uploaded", {
   setwd(fs::path(multidir, "subdir1/subdir1_1"))
   skip_if_no_pat()
 
-  vcr::use_cassette("create-c5", record = record, {
+  vcr::use_cassette("create-c5", {
     c5 <- osf_create_component(p1, "parent-directories")
   })
 
-  vcr::use_cassette("c5-upload-f1", record = record, {
+  vcr::use_cassette("c5-upload-f1", {
     upf1 <- osf_upload(c5, path = "../d.txt")
   })
-  vcr::use_cassette("c5-upload-f2", record = record, {
+  vcr::use_cassette("c5-upload-f2", {
     upf2 <- osf_upload(c5, path = "../../a.txt")
   })
-  vcr::use_cassette("c5-upload-updir", record = record, {
+  vcr::use_cassette("c5-upload-updir", {
     updir <- osf_upload(c5, path = "../../subdir2")
   })
 
@@ -177,14 +179,14 @@ test_that("conflicting files are skipped or overwritten", {
   skip_if_no_pat()
 
   infiles <- fs::dir_ls(multidir, type = "file")
-  vcr::use_cassette("create-and-populate-c6", record = record, {
+  vcr::use_cassette("create-and-populate-c6", {
     c6 <- osf_create_component(p1, "conflicts")
     out1 <- osf_upload(c6, path = infiles[1])
   })
 
   # overwrite contents of first file
   writeLines("foo", infiles[1])
-  vcr::use_cassette("c6-conflict-skip", record = record, {
+  vcr::use_cassette("c6-conflict-skip", {
     out2 <- osf_upload(c6, path = infiles[1], conflicts = "skip")
   })
 
@@ -193,7 +195,7 @@ test_that("conflicting files are skipped or overwritten", {
   expect_true(all(versions) == 1)
 
   # overwriting with new file increments version
-  vcr::use_cassette("c6-conflict-overwrite", record = record, {
+  vcr::use_cassette("c6-conflict-overwrite", {
     out3 <- osf_upload(c6, path = infiles[1], conflicts = "overwrite")
   })
   expect_equal(get_meta(out3, "attributes", "current_version"), 2)
