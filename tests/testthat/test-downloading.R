@@ -2,13 +2,16 @@ context("Downloading files")
 
 
 # setup -------------------------------------------------------------------
-vcr_config("cassettes/downloading", write_disk_path = "cassettes/downloading/files")
+vcr::vcr_configure(
+  dir = cassette_path("downloading"),
+  write_disk_path = cassette_path("downloading/files")
+)
 
 setup({
   # Retrieve public OSF project and components required for tests
   # (created using data-raw/create-test-project.R)
   if (on_test_server()) {
-    vcr::use_cassette("load-guids", record = record, {
+    vcr::use_cassette("load-guids", {
       guids <- get_guids()
       p1 <<- osf_retrieve_node(guids[, "p1"])
       c1 <<- osf_retrieve_node(guids[, "c1"])
@@ -30,7 +33,7 @@ teardown({
 
 test_that("a file can be downloaded from a project", {
   skip_if_no_pat()
-  vcr::use_cassette("f1-from-project", record = record, {
+  vcr::use_cassette("f1-from-project", {
     out <- osf_download(f1, path = outdir)
   })
 
@@ -44,7 +47,7 @@ test_that("a file can be downloaded from a project", {
 test_that("by default an error is thrown if a conflicting file exists", {
   skip_if_no_pat()
 
-  vcr::insert_cassette("f1-from-project-conflict", record = record)
+  vcr::insert_cassette("f1-from-project-conflict")
   expect_error(
     out <- osf_download(f1, path = outdir),
     paste0("Can't download file '", f1$name, "' from OSF.")
@@ -54,7 +57,7 @@ test_that("by default an error is thrown if a conflicting file exists", {
 
 test_that("a file can be overwritten when conflicts='overwrite'", {
   skip_if_no_pat()
-  vcr::insert_cassette("f1-from-project-overwrite", record = record)
+  vcr::insert_cassette("f1-from-project-overwrite")
   expect_silent(
     out <- osf_download(f1, path = outdir, conflict = "overwrite")
   )
