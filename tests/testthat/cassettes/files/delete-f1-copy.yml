@@ -1,0 +1,33 @@
+http_interactions:
+- request:
+    method: delete
+    uri: https://files.us.test.osf.io/v1/resources/qv9as/providers/osfstorage/5f395a33213a150009a1ca3a
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8.9000
+      Authorization: Bearer <totallyrealpat>
+  response:
+    status:
+      status_code: '204'
+      message: No Content
+      explanation: Request fulfilled, nothing follows
+    headers:
+      status: 'HTTP/2 204 '
+      server: nginx
+      date: Sun, 16 Aug 2020 16:09:24 GMT
+      x-waterbutler-request-id: 07436263-8715-415b-a6c2-8c6a0cdd5ff4
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: clear
+    body:
+      encoding: UTF-8
+      file: no
+      string: ''
+  recorded_at: 2020-08-16 16:09:24 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2
