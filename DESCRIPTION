@@ -45,9 +45,10 @@ Suggests:
     rmarkdown,
     lintr (>= 2.0),
     covr,
-    spelling
+    spelling,
+    vcr (>= 0.5)
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 VignetteBuilder: knitr
