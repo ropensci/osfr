@@ -68,7 +68,7 @@ osf_tbl <- function(x = NULL, subclass = NULL) {
 
 new_osf_tbl <- function(x, subclass = NULL) {
   stopifnot(inherits(x, "data.frame"))
-  tibble::new_tibble(x, nrow = nrow(x), subclass = c(subclass, "osf_tbl"))
+  tibble::new_tibble(x, nrow = nrow(x), class = c(subclass, "osf_tbl"))
 }
 
 # expects a list, where each item is OSF entity represented as a list

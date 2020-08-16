@@ -1,5 +1,9 @@
 # osfr (development version)
 
+## Minor changes
+
+* tibble v3.0.0 is now the minimum required version
+
 # osfr 0.2.8
 
 * Initial CRAN release
