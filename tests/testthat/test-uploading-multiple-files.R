@@ -56,7 +56,7 @@ test_that("a directory can be uploaded", {
   expect_match(out$name, basename(multidir))
 
   # files within the directory were uploaded
-  vcr::use_cassette("list-c1-files", record = record,
+  vcr::use_cassette("list-c1-files",
     c1_files <- osf_ls_files(out)
   )
   expect_true(
@@ -78,7 +78,7 @@ test_that("a subdirectory can be uploaded", {
   expect_match(out$name, basename(indir))
 
   # verify leaf directory was created in the project root
-  vcr::use_cassette("list-c2-subdirs", record = record,
+  vcr::use_cassette("list-c2-subdirs",
     subdirs <- osf_ls_files(c2, type = "folder")
   )
   expect_equal(
@@ -87,7 +87,7 @@ test_that("a subdirectory can be uploaded", {
   )
 
   # verify files within the directory were uploaded
-  vcr::use_cassette("list-c2-subdir-files", record = record,
+  vcr::use_cassette("list-c2-subdir-files",
     subdir_files <- osf_ls_files(out)
   )
   expect_equal(
@@ -105,7 +105,7 @@ test_that("recurse argument respects specified levels", {
     out <- osf_upload(c3, path = multidir, recurse = 1)
   })
 
-  vcr::use_cassette("list-c3-subdir1", record = record,
+  vcr::use_cassette("list-c3-subdir1",
     sd1_files <- osf_ls_files(out, path = "subdir1")
   )
   expect_setequal(
@@ -113,7 +113,7 @@ test_that("recurse argument respects specified levels", {
     dir(file.path(multidir, "subdir1"))
   )
 
-  vcr::use_cassette("list-c3-subdir2", record = record,
+  vcr::use_cassette("list-c3-subdir2",
     sd2_files <- osf_ls_files(out, path = "subdir2")
   )
   expect_setequal(
@@ -121,7 +121,7 @@ test_that("recurse argument respects specified levels", {
     dir(file.path(multidir, "subdir2"))
   )
 
-  vcr::use_cassette("list-c3-subdir1_1", record = record,
+  vcr::use_cassette("list-c3-subdir1_1",
     sd1_1_files <- osf_ls_files(out, path = "subdir1/subdir1_1")
   )
   expect_equal(nrow(sd1_1_files), 0)
@@ -136,7 +136,7 @@ test_that("recurse=TRUE uploads the entire OSF directory structure", {
     out <- osf_upload(c4, path = multidir, recurse = TRUE)
   })
 
-  vcr::use_cassette("list-c4-subdir1_1-files", record = record,
+  vcr::use_cassette("list-c4-subdir1_1-files",
     sd1_1_files <- osf_ls_files(out, path = "subdir1/subdir1_1")
   )
   expect_equal(
@@ -166,7 +166,7 @@ test_that("files in parent directories can be uploaded", {
     updir <- osf_upload(c5, path = "../../subdir2")
   })
 
-  vcr::use_cassette("list-c5-files", record = record,
+  vcr::use_cassette("list-c5-files",
     c5_files <- osf_ls_files(c5)
   )
   expect_equal(
