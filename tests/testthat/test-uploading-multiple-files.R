@@ -3,7 +3,7 @@ context("Uploading multiple files")
 
 # setup -------------------------------------------------------------------
 vcr::vcr_configure(
-  dir = cassette_path("uploading-multiple-files")
+  dir = cassette_dir("uploading-multiple-files")
 )
 
 setup({
