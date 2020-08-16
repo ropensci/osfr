@@ -3,8 +3,8 @@ context("Downloading files")
 
 # setup -------------------------------------------------------------------
 vcr::vcr_configure(
-  dir = cassette_path("downloading"),
-  write_disk_path = cassette_path("downloading/files")
+  dir = cassette_dir("downloading"),
+  write_disk_path = cassette_dir("downloading/files")
 )
 
 setup({

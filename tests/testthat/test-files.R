@@ -3,7 +3,7 @@ context("Moving files")
 
 # setup -------------------------------------------------------------------
 vcr::vcr_configure(
-  dir = cassette_path("files")
+  dir = cassette_dir("files")
 )
 
 setup({

@@ -2,7 +2,7 @@ context("Directories")
 
 # setup -------------------------------------------------------------------
 vcr::vcr_configure(
-  dir = cassette_path("directories"),
+  dir = cassette_dir("directories")
 )
 
 setup({

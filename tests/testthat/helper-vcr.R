@@ -1,7 +1,7 @@
 library(vcr)
 
 # make path relative to test directory
-cassette_path <- function(x) {
+cassette_dir <- function(x) {
   file.path(rprojroot::find_testthat_root_file(), "cassettes", x)
 }
 
