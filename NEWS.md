@@ -4,6 +4,10 @@
 
 * tibble v3.0.0 is now the minimum required version
 
+## Fixes
+
+* Fixed bug preventing uploads directly to OSF directories that contained conflicting files (#121, #129)
+
 # osfr 0.2.8
 
 * Initial CRAN release
