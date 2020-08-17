@@ -83,7 +83,7 @@ test_that("conflicting files can be skipped when uploading to a dir", {
   expect_s3_class(f2, "osf_tbl_file")
 })
 
-test_that("conflicting files can be skipped when uploading to a dir", {
+test_that("conflicting files can be overwritten when uploading to a dir", {
   skip_if_no_pat()
   writeLines("Lorem ipsum dolor sit amet, consectetur, ea trio posse", infile)
   expect_silent(
