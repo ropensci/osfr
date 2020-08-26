@@ -73,7 +73,7 @@
 #' # Modify the data file, upload version 2, and view it on OSF
 #' write.csv(subset(iris, Species != "setosa"), file = "iris.csv")
 #' project %>%
-#'   osf_upload("iris.csv", overwrite = TRUE) %>%
+#'   osf_upload("iris.csv", conflicts = "overwrite") %>%
 #'   osf_open()
 #' }
 #'
