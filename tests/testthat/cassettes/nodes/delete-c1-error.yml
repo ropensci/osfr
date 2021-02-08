@@ -1,0 +1,38 @@
+http_interactions:
+- request:
+    method: delete
+    uri: https://api.test.osf.io/v2/nodes/n7yfu/
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8.9001
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '400'
+      message: Bad Request
+      explanation: Bad request syntax or unsupported method
+    headers:
+      status: 'HTTP/2 400 '
+      server: nginx
+      date: Mon, 08 Feb 2021 16:12:34 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      content-length: '119'
+      vary: Accept
+      allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+      x-frame-options: SAMEORIGIN
+      set-cookie: sloan_id=7932ba57-7e9e-48a2-b823-24b7995642a0; Domain=.osf.io; Path=/;
+        samesite=None; Secure
+      via: 1.1 google
+      alt-svc: clear
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"errors":[{"detail":"Any child components must be deleted prior to
+        deleting this project."}],"meta":{"version":"2.0"}}'
+  recorded_at: 2021-02-08 16:12:34 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
