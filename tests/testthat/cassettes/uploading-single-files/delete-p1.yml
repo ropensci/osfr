@@ -1,0 +1,80 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.test.osf.io/v2/nodes/jsvzm/children/?page=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8.9001
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      allow: GET, POST, HEAD, OPTIONS
+      alt-svc: clear
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-length: '128'
+      content-type: application/vnd.api+json; charset=utf-8
+      date: Mon, 08 Feb 2021 15:16:59 GMT
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      server: nginx
+      set-cookie: sloan_id=005c884d-1e9d-4e37-acb8-a3ed7374d775; Domain=.osf.io; Path=/;
+        samesite=None; Secure
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept
+      via: 1.1 google
+      x-frame-options: SAMEORIGIN
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":[],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":0,"per_page":10}},"meta":{"version":"2.0"}}'
+  recorded_at: 2021-02-08 15:17:00 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
+- request:
+    method: delete
+    uri: https://api.test.osf.io/v2/nodes/jsvzm/
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8.9001
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '204'
+      message: No Content
+      explanation: Request fulfilled, nothing follows
+    headers:
+      status: 'HTTP/2 204 '
+      server: nginx
+      date: Mon, 08 Feb 2021 15:17:00 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      vary: Accept
+      allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+      x-frame-options: SAMEORIGIN
+      set-cookie: sloan_id=d378a91f-521b-4973-8f2c-dbb0522b725a; Domain=.osf.io; Path=/;
+        samesite=None; Secure
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: clear
+    body:
+      encoding: UTF-8
+      file: no
+      string: ''
+  recorded_at: 2021-02-08 15:17:00 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4

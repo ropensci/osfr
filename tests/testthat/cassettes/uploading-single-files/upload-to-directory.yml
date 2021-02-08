@@ -1,0 +1,130 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.test.osf.io/v2/nodes/jsvzm/files/osfstorage/602155ddaec3160009222907/?filter%5Bkind%5D=file&page=1
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8.9001
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: clear
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-length: '128'
+      content-type: application/vnd.api+json; charset=utf-8
+      date: Mon, 08 Feb 2021 15:16:52 GMT
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      server: nginx
+      set-cookie: sloan_id=b0b37a00-1ae7-40f8-bf65-c81a4846316c; Domain=.osf.io; Path=/;
+        samesite=None; Secure
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept
+      via: 1.1 google
+      x-frame-options: SAMEORIGIN
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":[],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":0,"per_page":10}},"meta":{"version":"2.0"}}'
+  recorded_at: 2021-02-08 15:16:54 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
+- request:
+    method: put
+    uri: https://files.us.test.osf.io/v1/resources/jsvzm/providers/osfstorage/602155ddaec3160009222907/?kind=file&name=osfr-local-file.txt
+    body:
+      encoding: ''
+      string: 'upload, file size: 54'
+    headers:
+      Content-Type: text/plain
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8.9001
+      Authorization: Bearer <totallyrealpat>
+  response:
+    status:
+      status_code: '201'
+      message: Created
+      explanation: Document created, URL follows
+    headers:
+      status: 'HTTP/2 201 '
+      server: nginx
+      date: Mon, 08 Feb 2021 15:16:54 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '1206'
+      x-waterbutler-request-id: 88360b9a-3f54-41ed-9d2b-6886fad208c3
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: clear
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data": {"id": "osfstorage/602155e6bb74460009831c6d", "type": "files",
+        "attributes": {"extra": {"guid": null, "version": 1, "downloads": 0, "checkout":
+        null, "latestVersionSeen": null, "hashes": {"md5": "f6b63b0c44f5b9d196a745e65879be1c",
+        "sha256": "85e691bfaa7d5c46c044e685b79e1d862fc6bba173e58fe505d89ca73c30b51f"}},
+        "kind": "file", "name": "osfr-local-file.txt", "path": "/602155e6bb74460009831c6d",
+        "provider": "osfstorage", "materialized": "/data/osfr-local-file.txt", "etag":
+        "8ff43544a0cab05e68efe366e8d819cc3d42812baa6da73f2923956377d7e11b", "contentType":
+        "application/octet-stream", "modified": "2021-02-08T15:16:54.182454+00:00",
+        "modified_utc": "2021-02-08T15:16:54+00:00", "created_utc": null, "size":
+        54, "sizeInt": 54, "resource": "jsvzm"}, "links": {"move": "https://files.us.test.osf.io/v1/resources/jsvzm/providers/osfstorage/602155e6bb74460009831c6d",
+        "upload": "https://files.us.test.osf.io/v1/resources/jsvzm/providers/osfstorage/602155e6bb74460009831c6d?kind=file",
+        "delete": "https://files.us.test.osf.io/v1/resources/jsvzm/providers/osfstorage/602155e6bb74460009831c6d",
+        "download": "https://files.us.test.osf.io/v1/resources/jsvzm/providers/osfstorage/602155e6bb74460009831c6d"}}}'
+  recorded_at: 2021-02-08 15:16:54 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
+- request:
+    method: get
+    uri: https://api.test.osf.io/v2/files/602155e6bb74460009831c6d/
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: osfr v0.2.8.9001
+      Authorization: Bearer <totallyrealpat>
+      Accept-Header: application/vnd.api+json;version=2.8
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      allow: GET, PUT, PATCH, HEAD, OPTIONS
+      alt-svc: clear
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      date: Mon, 08 Feb 2021 15:16:54 GMT
+      expires: Mon, 01 Jan 1990 00:00:00 GMT
+      pragma: no-cache
+      server: nginx
+      set-cookie: sloan_id=d82ae84d-5349-418f-a82d-41422acd769c; Domain=.osf.io; Path=/;
+        samesite=None; Secure
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept
+      via: 1.1 google
+      x-frame-options: SAMEORIGIN
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"data":{"id":"602155e6bb74460009831c6d","type":"files","attributes":{"guid":null,"checkout":null,"name":"osfr-local-file.txt","kind":"file","path":"/602155e6bb74460009831c6d","size":54,"provider":"osfstorage","materialized_path":"/data/osfr-local-file.txt","last_touched":null,"date_modified":"2021-02-08T15:16:54.182454Z","date_created":"2021-02-08T15:16:54.182454Z","extra":{"hashes":{"md5":"f6b63b0c44f5b9d196a745e65879be1c","sha256":"85e691bfaa7d5c46c044e685b79e1d862fc6bba173e58fe505d89ca73c30b51f"},"downloads":0},"tags":[],"current_user_can_comment":true,"current_version":1},"relationships":{"parent_folder":{"links":{"related":{"href":"https://api.test.osf.io/v2/files/602155ddaec3160009222907/","meta":{}}},"data":{"id":"602155ddaec3160009222907","type":"files"}},"versions":{"links":{"related":{"href":"https://api.test.osf.io/v2/files/602155e6bb74460009831c6d/versions/","meta":{}}}},"metadata_records":{"links":{"related":{"href":"https://api.test.osf.io/v2/files/602155e6bb74460009831c6d/metadata_records/","meta":{}}}},"node":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/jsvzm/","meta":{}}},"data":{"id":"jsvzm","type":"nodes"}},"target":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/jsvzm/","meta":{"type":"node"}}},"data":{"type":"node","id":"jsvzm"}}},"links":{"info":"https://api.test.osf.io/v2/files/602155e6bb74460009831c6d/","move":"https://files.us.test.osf.io/v1/resources/jsvzm/providers/osfstorage/602155e6bb74460009831c6d","upload":"https://files.us.test.osf.io/v1/resources/jsvzm/providers/osfstorage/602155e6bb74460009831c6d","delete":"https://files.us.test.osf.io/v1/resources/jsvzm/providers/osfstorage/602155e6bb74460009831c6d","download":"https://test.osf.io/download/602155e6bb74460009831c6d/","render":"https://mfr.us.test.osf.io/render?url=https://test.osf.io/download/602155e6bb74460009831c6d/?direct%26mode=render","html":"https://test.osf.io/jsvzm/files/osfstorage/602155e6bb74460009831c6d","self":"https://api.test.osf.io/v2/files/602155e6bb74460009831c6d/"}},"meta":{"version":"2.0"}}'
+  recorded_at: 2021-02-08 15:16:54 GMT
+  recorded_with: vcr/0.6.0, webmockr/0.7.4
