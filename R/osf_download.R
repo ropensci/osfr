@@ -56,8 +56,8 @@ osf_download <-
            conflicts = "error",
            verbose = FALSE,
            progress = FALSE) {
-  UseMethod("osf_download")
-}
+    UseMethod("osf_download")
+  }
 
 #' @export
 osf_download.osf_tbl_file <-
@@ -67,46 +67,45 @@ osf_download.osf_tbl_file <-
            conflicts = "error",
            verbose = FALSE,
            progress = FALSE) {
+    path <- check_local_dir(path)
 
-  path <- check_local_dir(path)
+    # convert recurse to number of recursion levels
+    if (is.logical(recurse)) {
+      recurse <- ifelse(isTRUE(recurse), Inf, 1)
+    }
 
-  # convert recurse to number of recursion levels
-  if (is.logical(recurse)) {
-    recurse <- ifelse(isTRUE(recurse), Inf, 1)
+    requests <- split(x, ifelse(is_osf_dir(x), "folder", "file"))
+    results <- vector(mode = "list")
+
+    if (!is.null(requests$folder)) {
+      n <- nrow(requests$folder)
+      results$folder <- Map(
+        f = .download_dir,
+        x = split(requests$folder, seq_len(n)),
+        path = path,
+        conflicts = conflicts,
+        recurse = recurse,
+        progress = progress,
+        verbose = verbose
+      )
+    }
+
+    if (!is.null(requests$file)) {
+      n <- nrow(requests$file)
+      results$file <- Map(
+        f = .download_file,
+        x = split(requests$file, seq_len(n)),
+        path = path,
+        conflicts = conflicts,
+        progress = progress,
+        verbose = verbose
+      )
+    }
+
+    # bind results within each type before returning merged file/folder slots
+    results <- lapply(results, do.call, what = "rbind")
+    do.call("rbind", results)
   }
-
-  requests <- split(x, ifelse(is_osf_dir(x), "folder", "file"))
-  results <- vector(mode = "list")
-
-  if (!is.null(requests$folder)) {
-    n <- nrow(requests$folder)
-    results$folder <- Map(
-      f =  .download_dir,
-      x = split(requests$folder, seq_len(n)),
-      path = path,
-      conflicts = conflicts,
-      recurse = recurse,
-      progress = progress,
-      verbose = verbose
-    )
-  }
-
-  if (!is.null(requests$file)) {
-    n <- nrow(requests$file)
-    results$file <- Map(
-      f =  .download_file,
-      x = split(requests$file, seq_len(n)),
-      path = path,
-      conflicts = conflicts,
-      progress = progress,
-      verbose = verbose
-    )
-  }
-
-  # bind results within each type before returning merged file/folder slots
-  results <- lapply(results, do.call, what = "rbind")
-  do.call("rbind", results)
-}
 
 
 #' Internal download functions
@@ -124,7 +123,6 @@ osf_download.osf_tbl_file <-
 #' @noRd
 
 .download_file <- function(x, path, conflicts, progress, verbose) {
-
   local_path <- file.path(clean_local_path(path), x$name)
 
   out <- tibble::add_column(
@@ -147,7 +145,7 @@ osf_download.osf_tbl_file <-
 
   .wb_download(
     id = get_parent_id(x),
-    fid = as_id(x),
+    fid = as_wb_id(x),
     path = local_path,
     type = "file",
     zip = FALSE,
@@ -160,7 +158,6 @@ osf_download.osf_tbl_file <-
 
 
 .download_dir <- function(x, path, conflicts, recurse, progress, verbose) {
-
   local_path <- file.path(clean_local_path(path), x$name)
 
   out <- tibble::add_column(
