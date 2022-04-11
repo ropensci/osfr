@@ -6,7 +6,6 @@
 #' @examples
 #' me <- osf_retrieve_user("me")
 #' get_meta(me, "attributes", "full_name")
-#'
 #' @noRd
 get_meta <- function(x, ...) {
   stopifnot(inherits(x, "osf_tbl"))
@@ -55,3 +54,16 @@ get_remote_path <- function(x) {
   sub("^\\/", "", get_path(x))
 }
 
+#' Path for waterbutler API calls
+#'
+#' @noRd
+get_waterbutler_path_id <- function(x) {
+  stopifnot(inherits(x, c("osf_tbl_file", "osf_tbl_node")))
+
+  get_wb_path <- switch(class(x)[1],
+    osf_tbl_file = function(x) get_meta(x, "attributes", "path"),
+    osf_tbl_node = function(x) rep(".", nrow(x))
+  )
+
+  sub("^\\/", "", get_wb_path(x))
+}
