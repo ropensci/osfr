@@ -11,7 +11,7 @@ authors:
 
 navbar:
   structure:
-    left:  []
+    left:  
     right: [home, reference, articles, github]
 
 reference:
