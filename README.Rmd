@@ -17,8 +17,9 @@ Sys.unsetenv(c("OSF_SERVER", "OSF_PAT"))
 
 # osfr <a href="https://docs.ropensci.org/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
+<!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/osfr)](https://CRAN.R-project.org/package=osfr)
-[![R-CMD-check](https://github.com/ropensci/osfr/workflows/R-CMD-check/badge.svg)](https://github.com/ropensci/osfr/actions)
+[![R-CMD-check](https://github.com/ropensci/osfr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/osfr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 [![Coverage status](https://codecov.io/gh/ropensci/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/osfr?branch=master)
 [![](https://badges.ropensci.org/279_status.svg)](https://github.com/ropensci/software-review/issues/279)
