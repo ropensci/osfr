@@ -27,6 +27,8 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
+      OSF_SERVER: test
+      OSF_PAT: ${{ secrets.OSF_PAT }}
 
     steps:
       - uses: actions/checkout@v2
