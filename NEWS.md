@@ -8,6 +8,10 @@
 
 * Fixed bug preventing uploads directly to OSF directories that contained conflicting files (#121, #129)
 
+## Build and test infrastructure
+
+* Unit tests for single file uploads, html encoding, and basic node mechanics are now mocked with `vcr` (#145)
+
 # osfr 0.2.8
 
 * Initial CRAN release
