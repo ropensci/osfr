@@ -3,14 +3,11 @@
 
 # osfr <a href="https://docs.ropensci.org/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/osfr)](https://CRAN.R-project.org/package=osfr)
-[![Build
-Status](https://travis-ci.com/ropensci/osfr.svg)](https://travis-ci.com/ropensci/osfr)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/ropensci/osfr?branch=master&svg=true)](https://ci.appveyor.com/project/aaronwolen/osfr)
-[![Coverage
-status](https://codecov.io/gh/ropensci/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/osfr?branch=master)
+<!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/osfr)](https://CRAN.R-project.org/package=osfr)
+[![R-CMD-check](https://github.com/ropensci/osfr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/osfr/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+[![Coverage status](https://codecov.io/gh/ropensci/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/osfr?branch=master)
 [![](https://badges.ropensci.org/279_status.svg)](https://github.com/ropensci/software-review/issues/279)
 [![](https://joss.theoj.org/papers/d5398fc36ea92794a20914143d3fcdc4/status.svg)](https://joss.theoj.org/papers/d5398fc36ea92794a20914143d3fcdc4)
 [![DOI](https://zenodo.org/badge/42329785.svg)](https://zenodo.org/badge/latestdoi/42329785)
@@ -72,8 +69,8 @@ library(osfr)
 cr_project <- osf_retrieve_node("e81xl")
 cr_project
 #> # A tibble: 1 x 3
-#>   name                                    id    meta            
-#>   <chr>                                   <chr> <list>          
+#>   name                                    id    meta
+#>   <chr>                                   <chr> <list>
 #> 1 Reproducibility Project: Cancer Biology e81xl <named list [3]>
 ```
 
@@ -84,8 +81,8 @@ project.
 ``` r
 osf_ls_files(cr_project)
 #> # A tibble: 4 x 3
-#>   name                                     id                     meta          
-#>   <chr>                                    <chr>                  <list>        
+#>   name                                     id                     meta
+#>   <chr>                                    <chr>                  <list>
 #> 1 Adjustment of 50 studies to 37 studies.… 565602398c5e4a3877d72… <named list […
 #> 2 papers_and_keywords.xlsx                 553e671b8c5e4a219919e… <named list […
 #> 3 Full_dataset_of_papers_formatted.xls     553e671b8c5e4a219919e… <named list […
@@ -104,8 +101,8 @@ components with osfr using `osf_ls_nodes()`.
 ``` r
 osf_ls_nodes(cr_project)
 #> # A tibble: 2 x 3
-#>   name                                      id    meta            
-#>   <chr>                                     <chr> <list>          
+#>   name                                      id    meta
+#>   <chr>                                     <chr> <list>
 #> 1 Replication Studies                       p7ayb <named list [3]>
 #> 2 Data collection and publishing guidelines a5imq <named list [3]>
 ```
@@ -127,8 +124,8 @@ cr_project %>%
   osf_ls_nodes(pattern = "Study 19") %>%
   osf_ls_files()
 #> # A tibble: 6 x 3
-#>   name                                    id                     meta           
-#>   <chr>                                   <chr>                  <list>         
+#>   name                                    id                     meta
+#>   <chr>                                   <chr>                  <list>
 #> 1 Replication_Study_19.docx               57c9e8ed594d9001e7a24… <named list [3…
 #> 2 Replication_Study_19.Rmd                578e2b23594d9001f4816… <named list [3…
 #> 3 Replication_Study_19_track_changes.docx 581a27b76c613b0223322… <named list [3…
@@ -147,8 +144,8 @@ GUID:
 osf_retrieve_file("https://osf.io/btgx3/") %>%
   osf_download()
 #> # A tibble: 1 x 4
-#>   name                id                    local_path            meta          
-#>   <chr>               <chr>                 <chr>                 <list>        
+#>   name                id                    local_path            meta
+#>   <chr>               <chr>                 <chr>                 <list>
 #> 1 Study_19_Figure_1.… 5751d71d9ad5a1020793… ./Study_19_Figure_1.… <named list […
 ```
 
