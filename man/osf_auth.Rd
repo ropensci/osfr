@@ -57,8 +57,10 @@ A better approach is to store your PAT as an environment variable called
 \code{OSF_PAT}. Doing so will allow osfr to detect and utilize the token
 automatically without any need to manually call \code{osf_auth()}. One way to
 accomplish this is by creating an \code{.Renviron} file in your home or working
-directory that defines the \code{OSF_PAT} variable. For example:\preformatted{OSF_PAT=bdEEFMCuBtaBoSK11YzyjOdjUjKtWIj2FWxHl6kTBRax7uaeyBghALumTO1kT8RA
-}
+directory that defines the \code{OSF_PAT} variable. For example:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{OSF_PAT=bdEEFMCuBtaBoSK11YzyjOdjUjKtWIj2FWxHl6kTBRax7uaeyBghALumTO1kT8RA
+}\if{html}{\out{</div>}}
 
 For new users we suggest adding the \code{.Renviron} to your home directory so it
 is automatically applied to all your projects. To verify this was done
