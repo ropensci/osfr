@@ -1,14 +1,14 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.test.osf.io/v2/nodes/ntecg/children/?page=1
+    uri: https://api.test.osf.io/v2/nodes/5dtxf/children/?page=1
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: osfr v0.2.8.9001
+      User-Agent: osfr v0.2.8.9002
       Authorization: Bearer <totallyrealpat>
       Accept-Header: application/vnd.api+json;version=2.8
   response:
@@ -18,18 +18,15 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       allow: GET, POST, HEAD, OPTIONS
-      alt-svc: clear
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       content-encoding: gzip
       content-type: application/vnd.api+json; charset=utf-8
-      date: Mon, 08 Feb 2021 20:36:26 GMT
+      date: Sun, 18 Sep 2022 15:49:10 GMT
       expires: Mon, 01 Jan 1990 00:00:00 GMT
       pragma: no-cache
       server: nginx
-      set-cookie: sloan_id=97c28dd3-c18e-4d4d-ba12-5bbf1502064d; Domain=.osf.io; Path=/;
-        samesite=None; Secure
-      status: HTTP/1.1 200 OK
-      transfer-encoding: chunked
+      status: 'HTTP/2 200 '
       vary:
       - Accept-Encoding
       - Accept
@@ -38,19 +35,19 @@ http_interactions:
     body:
       encoding: UTF-8
       file: no
-      string: '{"data":[{"id":"59k7c","type":"nodes","attributes":{"title":"conflicts","description":"","category":"","custom_citation":null,"date_created":"2021-02-08T20:36:02.654739","date_modified":"2021-02-08T20:36:10.643724","registration":false,"preprint":false,"fork":false,"collection":false,"tags":[],"access_requests_enabled":true,"node_license":null,"current_user_can_comment":true,"current_user_permissions":["admin","write","read"],"current_user_is_contributor":true,"current_user_is_contributor_or_group_member":true,"wiki_enabled":true,"public":false,"subjects":[]},"relationships":{"children":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/children/","meta":{}}}},"comments":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/comments/?filter%5Btarget%5D=59k7c","meta":{}}}},"contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/contributors/","meta":{}}}},"bibliographic_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/bibliographic_contributors/","meta":{}}}},"implicit_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/implicit_contributors/","meta":{}}}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/files/","meta":{}}}},"settings":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/settings/","meta":{}}},"data":{"id":"59k7c","type":"nodes"}},"wikis":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/wikis/","meta":{}}}},"forks":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/forks/","meta":{}}}},"groups":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/groups/","meta":{}}}},"node_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/node_links/","meta":{}}}},"linked_by_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/linked_by_nodes/","meta":{}}}},"linked_by_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/linked_by_registrations/","meta":{}}}},"parent":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ntecg/","meta":{}}},"data":{"id":"ntecg","type":"nodes"}},"identifiers":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/identifiers/","meta":{}}}},"affiliated_institutions":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/institutions/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/59k7c/relationships/institutions/","meta":{}}}},"draft_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/draft_registrations/","meta":{}}}},"registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/registrations/","meta":{}}}},"region":{"links":{"related":{"href":"https://api.test.osf.io/v2/regions/us/","meta":{}}},"data":{"id":"us","type":"regions"}},"root":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ntecg/","meta":{}}},"data":{"id":"ntecg","type":"nodes"}},"logs":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/logs/","meta":{}}}},"linked_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/linked_nodes/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/59k7c/relationships/linked_nodes/","meta":{}}}},"linked_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/linked_registrations/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/59k7c/relationships/linked_registrations/","meta":{}}}},"view_only_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/view_only_links/","meta":{}}}},"citation":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/citation/","meta":{}}},"data":{"id":"59k7c","type":"nodes"}},"preprints":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/preprints/","meta":{}}}},"storage":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/59k7c/storage/","meta":{}}},"data":{"id":"59k7c","type":"nodes"}}},"links":{"html":"https://test.osf.io/59k7c/","self":"https://api.test.osf.io/v2/nodes/59k7c/"}},{"id":"casw4","type":"nodes","attributes":{"title":"parent-directories","description":"","category":"","custom_citation":null,"date_created":"2021-02-08T20:35:50.439900","date_modified":"2021-02-08T20:36:02.220530","registration":false,"preprint":false,"fork":false,"collection":false,"tags":[],"access_requests_enabled":true,"node_license":null,"current_user_can_comment":true,"current_user_permissions":["admin","write","read"],"current_user_is_contributor":true,"current_user_is_contributor_or_group_member":true,"wiki_enabled":true,"public":false,"subjects":[]},"relationships":{"children":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/children/","meta":{}}}},"comments":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/comments/?filter%5Btarget%5D=casw4","meta":{}}}},"contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/contributors/","meta":{}}}},"bibliographic_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/bibliographic_contributors/","meta":{}}}},"implicit_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/implicit_contributors/","meta":{}}}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/files/","meta":{}}}},"settings":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/settings/","meta":{}}},"data":{"id":"casw4","type":"nodes"}},"wikis":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/wikis/","meta":{}}}},"forks":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/forks/","meta":{}}}},"groups":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/groups/","meta":{}}}},"node_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/node_links/","meta":{}}}},"linked_by_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/linked_by_nodes/","meta":{}}}},"linked_by_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/linked_by_registrations/","meta":{}}}},"parent":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ntecg/","meta":{}}},"data":{"id":"ntecg","type":"nodes"}},"identifiers":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/identifiers/","meta":{}}}},"affiliated_institutions":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/institutions/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/casw4/relationships/institutions/","meta":{}}}},"draft_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/draft_registrations/","meta":{}}}},"registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/registrations/","meta":{}}}},"region":{"links":{"related":{"href":"https://api.test.osf.io/v2/regions/us/","meta":{}}},"data":{"id":"us","type":"regions"}},"root":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ntecg/","meta":{}}},"data":{"id":"ntecg","type":"nodes"}},"logs":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/logs/","meta":{}}}},"linked_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/linked_nodes/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/casw4/relationships/linked_nodes/","meta":{}}}},"linked_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/linked_registrations/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/casw4/relationships/linked_registrations/","meta":{}}}},"view_only_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/view_only_links/","meta":{}}}},"citation":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/citation/","meta":{}}},"data":{"id":"casw4","type":"nodes"}},"preprints":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/preprints/","meta":{}}}},"storage":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/casw4/storage/","meta":{}}},"data":{"id":"casw4","type":"nodes"}}},"links":{"html":"https://test.osf.io/casw4/","self":"https://api.test.osf.io/v2/nodes/casw4/"}},{"id":"ebhkv","type":"nodes","attributes":{"title":"recurse=TRUE","description":"","category":"","custom_citation":null,"date_created":"2021-02-08T20:35:24.313338","date_modified":"2021-02-08T20:35:49.137298","registration":false,"preprint":false,"fork":false,"collection":false,"tags":[],"access_requests_enabled":true,"node_license":null,"current_user_can_comment":true,"current_user_permissions":["admin","write","read"],"current_user_is_contributor":true,"current_user_is_contributor_or_group_member":true,"wiki_enabled":true,"public":false,"subjects":[]},"relationships":{"children":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/children/","meta":{}}}},"comments":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/comments/?filter%5Btarget%5D=ebhkv","meta":{}}}},"contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/contributors/","meta":{}}}},"bibliographic_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/bibliographic_contributors/","meta":{}}}},"implicit_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/implicit_contributors/","meta":{}}}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/files/","meta":{}}}},"settings":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/settings/","meta":{}}},"data":{"id":"ebhkv","type":"nodes"}},"wikis":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/wikis/","meta":{}}}},"forks":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/forks/","meta":{}}}},"groups":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/groups/","meta":{}}}},"node_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/node_links/","meta":{}}}},"linked_by_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/linked_by_nodes/","meta":{}}}},"linked_by_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/linked_by_registrations/","meta":{}}}},"parent":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ntecg/","meta":{}}},"data":{"id":"ntecg","type":"nodes"}},"identifiers":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/identifiers/","meta":{}}}},"affiliated_institutions":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/institutions/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/relationships/institutions/","meta":{}}}},"draft_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/draft_registrations/","meta":{}}}},"registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/registrations/","meta":{}}}},"region":{"links":{"related":{"href":"https://api.test.osf.io/v2/regions/us/","meta":{}}},"data":{"id":"us","type":"regions"}},"root":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ntecg/","meta":{}}},"data":{"id":"ntecg","type":"nodes"}},"logs":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/logs/","meta":{}}}},"linked_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/linked_nodes/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/relationships/linked_nodes/","meta":{}}}},"linked_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/linked_registrations/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/relationships/linked_registrations/","meta":{}}}},"view_only_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/view_only_links/","meta":{}}}},"citation":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/citation/","meta":{}}},"data":{"id":"ebhkv","type":"nodes"}},"preprints":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/preprints/","meta":{}}}},"storage":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ebhkv/storage/","meta":{}}},"data":{"id":"ebhkv","type":"nodes"}}},"links":{"html":"https://test.osf.io/ebhkv/","self":"https://api.test.osf.io/v2/nodes/ebhkv/"}},{"id":"u426y","type":"nodes","attributes":{"title":"recurse=1","description":"","category":"","custom_citation":null,"date_created":"2021-02-08T20:35:03.440501","date_modified":"2021-02-08T20:35:22.222370","registration":false,"preprint":false,"fork":false,"collection":false,"tags":[],"access_requests_enabled":true,"node_license":null,"current_user_can_comment":true,"current_user_permissions":["admin","write","read"],"current_user_is_contributor":true,"current_user_is_contributor_or_group_member":true,"wiki_enabled":true,"public":false,"subjects":[]},"relationships":{"children":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/children/","meta":{}}}},"comments":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/comments/?filter%5Btarget%5D=u426y","meta":{}}}},"contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/contributors/","meta":{}}}},"bibliographic_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/bibliographic_contributors/","meta":{}}}},"implicit_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/implicit_contributors/","meta":{}}}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/files/","meta":{}}}},"settings":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/settings/","meta":{}}},"data":{"id":"u426y","type":"nodes"}},"wikis":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/wikis/","meta":{}}}},"forks":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/forks/","meta":{}}}},"groups":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/groups/","meta":{}}}},"node_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/node_links/","meta":{}}}},"linked_by_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/linked_by_nodes/","meta":{}}}},"linked_by_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/linked_by_registrations/","meta":{}}}},"parent":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ntecg/","meta":{}}},"data":{"id":"ntecg","type":"nodes"}},"identifiers":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/identifiers/","meta":{}}}},"affiliated_institutions":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/institutions/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/u426y/relationships/institutions/","meta":{}}}},"draft_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/draft_registrations/","meta":{}}}},"registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/registrations/","meta":{}}}},"region":{"links":{"related":{"href":"https://api.test.osf.io/v2/regions/us/","meta":{}}},"data":{"id":"us","type":"regions"}},"root":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ntecg/","meta":{}}},"data":{"id":"ntecg","type":"nodes"}},"logs":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/logs/","meta":{}}}},"linked_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/linked_nodes/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/u426y/relationships/linked_nodes/","meta":{}}}},"linked_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/linked_registrations/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/u426y/relationships/linked_registrations/","meta":{}}}},"view_only_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/view_only_links/","meta":{}}}},"citation":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/citation/","meta":{}}},"data":{"id":"u426y","type":"nodes"}},"preprints":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/preprints/","meta":{}}}},"storage":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/u426y/storage/","meta":{}}},"data":{"id":"u426y","type":"nodes"}}},"links":{"html":"https://test.osf.io/u426y/","self":"https://api.test.osf.io/v2/nodes/u426y/"}},{"id":"54rxg","type":"nodes","attributes":{"title":"subdir-upload","description":"","category":"","custom_citation":null,"date_created":"2021-02-08T20:34:55.274082","date_modified":"2021-02-08T20:35:02.826528","registration":false,"preprint":false,"fork":false,"collection":false,"tags":[],"access_requests_enabled":true,"node_license":null,"current_user_can_comment":true,"current_user_permissions":["admin","write","read"],"current_user_is_contributor":true,"current_user_is_contributor_or_group_member":true,"wiki_enabled":true,"public":false,"subjects":[]},"relationships":{"children":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/children/","meta":{}}}},"comments":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/comments/?filter%5Btarget%5D=54rxg","meta":{}}}},"contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/contributors/","meta":{}}}},"bibliographic_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/bibliographic_contributors/","meta":{}}}},"implicit_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/implicit_contributors/","meta":{}}}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/files/","meta":{}}}},"settings":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/settings/","meta":{}}},"data":{"id":"54rxg","type":"nodes"}},"wikis":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/wikis/","meta":{}}}},"forks":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/forks/","meta":{}}}},"groups":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/groups/","meta":{}}}},"node_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/node_links/","meta":{}}}},"linked_by_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/linked_by_nodes/","meta":{}}}},"linked_by_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/linked_by_registrations/","meta":{}}}},"parent":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ntecg/","meta":{}}},"data":{"id":"ntecg","type":"nodes"}},"identifiers":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/identifiers/","meta":{}}}},"affiliated_institutions":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/institutions/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/54rxg/relationships/institutions/","meta":{}}}},"draft_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/draft_registrations/","meta":{}}}},"registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/registrations/","meta":{}}}},"region":{"links":{"related":{"href":"https://api.test.osf.io/v2/regions/us/","meta":{}}},"data":{"id":"us","type":"regions"}},"root":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ntecg/","meta":{}}},"data":{"id":"ntecg","type":"nodes"}},"logs":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/logs/","meta":{}}}},"linked_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/linked_nodes/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/54rxg/relationships/linked_nodes/","meta":{}}}},"linked_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/linked_registrations/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/54rxg/relationships/linked_registrations/","meta":{}}}},"view_only_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/view_only_links/","meta":{}}}},"citation":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/citation/","meta":{}}},"data":{"id":"54rxg","type":"nodes"}},"preprints":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/preprints/","meta":{}}}},"storage":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/54rxg/storage/","meta":{}}},"data":{"id":"54rxg","type":"nodes"}}},"links":{"html":"https://test.osf.io/54rxg/","self":"https://api.test.osf.io/v2/nodes/54rxg/"}},{"id":"scbmp","type":"nodes","attributes":{"title":"dir-upload","description":"","category":"","custom_citation":null,"date_created":"2021-02-08T20:34:44.212508","date_modified":"2021-02-08T20:34:54.517126","registration":false,"preprint":false,"fork":false,"collection":false,"tags":[],"access_requests_enabled":true,"node_license":null,"current_user_can_comment":true,"current_user_permissions":["admin","write","read"],"current_user_is_contributor":true,"current_user_is_contributor_or_group_member":true,"wiki_enabled":true,"public":false,"subjects":[]},"relationships":{"children":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/children/","meta":{}}}},"comments":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/comments/?filter%5Btarget%5D=scbmp","meta":{}}}},"contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/contributors/","meta":{}}}},"bibliographic_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/bibliographic_contributors/","meta":{}}}},"implicit_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/implicit_contributors/","meta":{}}}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/files/","meta":{}}}},"settings":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/settings/","meta":{}}},"data":{"id":"scbmp","type":"nodes"}},"wikis":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/wikis/","meta":{}}}},"forks":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/forks/","meta":{}}}},"groups":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/groups/","meta":{}}}},"node_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/node_links/","meta":{}}}},"linked_by_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/linked_by_nodes/","meta":{}}}},"linked_by_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/linked_by_registrations/","meta":{}}}},"parent":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ntecg/","meta":{}}},"data":{"id":"ntecg","type":"nodes"}},"identifiers":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/identifiers/","meta":{}}}},"affiliated_institutions":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/institutions/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/scbmp/relationships/institutions/","meta":{}}}},"draft_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/draft_registrations/","meta":{}}}},"registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/registrations/","meta":{}}}},"region":{"links":{"related":{"href":"https://api.test.osf.io/v2/regions/us/","meta":{}}},"data":{"id":"us","type":"regions"}},"root":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/ntecg/","meta":{}}},"data":{"id":"ntecg","type":"nodes"}},"logs":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/logs/","meta":{}}}},"linked_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/linked_nodes/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/scbmp/relationships/linked_nodes/","meta":{}}}},"linked_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/linked_registrations/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/scbmp/relationships/linked_registrations/","meta":{}}}},"view_only_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/view_only_links/","meta":{}}}},"citation":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/citation/","meta":{}}},"data":{"id":"scbmp","type":"nodes"}},"preprints":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/preprints/","meta":{}}}},"storage":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/scbmp/storage/","meta":{}}},"data":{"id":"scbmp","type":"nodes"}}},"links":{"html":"https://test.osf.io/scbmp/","self":"https://api.test.osf.io/v2/nodes/scbmp/"}}],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":6,"per_page":10}},"meta":{"version":"2.0"}}'
-  recorded_at: 2021-02-08 20:36:31 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+      string: '{"data":[{"id":"3qmst","type":"nodes","attributes":{"title":"conflicts","description":"","category":"","custom_citation":null,"date_created":"2022-09-18T15:48:32.152007","date_modified":"2022-09-18T15:48:40.635817","registration":false,"preprint":false,"fork":false,"collection":false,"tags":[],"access_requests_enabled":true,"node_license":null,"current_user_can_comment":true,"current_user_permissions":["admin","write","read"],"current_user_is_contributor":true,"current_user_is_contributor_or_group_member":true,"wiki_enabled":true,"public":false,"subjects":[]},"relationships":{"children":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/children/","meta":{}}}},"comments":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/comments/?filter%5Btarget%5D=3qmst","meta":{}}}},"contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/contributors/","meta":{}}}},"bibliographic_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/bibliographic_contributors/","meta":{}}}},"implicit_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/implicit_contributors/","meta":{}}}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/files/","meta":{}}}},"settings":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/settings/","meta":{}}},"data":{"id":"3qmst","type":"node-setting"}},"wikis":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/wikis/","meta":{}}}},"forks":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/forks/","meta":{}}}},"groups":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/groups/","meta":{}}}},"node_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/node_links/","meta":{}}}},"linked_by_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/linked_by_nodes/","meta":{}}}},"linked_by_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/linked_by_registrations/","meta":{}}}},"parent":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/5dtxf/","meta":{}}},"data":{"id":"5dtxf","type":"nodes"}},"identifiers":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/identifiers/","meta":{}}}},"affiliated_institutions":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/institutions/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/3qmst/relationships/institutions/","meta":{}}}},"draft_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/draft_registrations/","meta":{}}}},"registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/registrations/","meta":{}}}},"region":{"links":{"related":{"href":"https://api.test.osf.io/v2/regions/us/","meta":{}}},"data":{"id":"us","type":"regions"}},"root":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/5dtxf/","meta":{}}},"data":{"id":"5dtxf","type":"nodes"}},"logs":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/logs/","meta":{}}}},"linked_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/linked_nodes/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/3qmst/relationships/linked_nodes/","meta":{}}}},"linked_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/linked_registrations/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/3qmst/relationships/linked_registrations/","meta":{}}}},"view_only_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/view_only_links/","meta":{}}}},"citation":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/citation/","meta":{}}},"data":{"id":"3qmst","type":"nodes"}},"preprints":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/preprints/","meta":{}}}},"storage":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/3qmst/storage/","meta":{}}},"data":{"id":"3qmst","type":"node-storage"}}},"links":{"html":"https://test.osf.io/3qmst/","self":"https://api.test.osf.io/v2/nodes/3qmst/"}},{"id":"kxzmn","type":"nodes","attributes":{"title":"parent-directories","description":"","category":"","custom_citation":null,"date_created":"2022-09-18T15:48:19.269422","date_modified":"2022-09-18T15:48:31.494934","registration":false,"preprint":false,"fork":false,"collection":false,"tags":[],"access_requests_enabled":true,"node_license":null,"current_user_can_comment":true,"current_user_permissions":["admin","write","read"],"current_user_is_contributor":true,"current_user_is_contributor_or_group_member":true,"wiki_enabled":true,"public":false,"subjects":[]},"relationships":{"children":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/children/","meta":{}}}},"comments":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/comments/?filter%5Btarget%5D=kxzmn","meta":{}}}},"contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/contributors/","meta":{}}}},"bibliographic_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/bibliographic_contributors/","meta":{}}}},"implicit_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/implicit_contributors/","meta":{}}}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/files/","meta":{}}}},"settings":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/settings/","meta":{}}},"data":{"id":"kxzmn","type":"node-setting"}},"wikis":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/wikis/","meta":{}}}},"forks":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/forks/","meta":{}}}},"groups":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/groups/","meta":{}}}},"node_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/node_links/","meta":{}}}},"linked_by_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/linked_by_nodes/","meta":{}}}},"linked_by_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/linked_by_registrations/","meta":{}}}},"parent":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/5dtxf/","meta":{}}},"data":{"id":"5dtxf","type":"nodes"}},"identifiers":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/identifiers/","meta":{}}}},"affiliated_institutions":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/institutions/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/relationships/institutions/","meta":{}}}},"draft_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/draft_registrations/","meta":{}}}},"registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/registrations/","meta":{}}}},"region":{"links":{"related":{"href":"https://api.test.osf.io/v2/regions/us/","meta":{}}},"data":{"id":"us","type":"regions"}},"root":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/5dtxf/","meta":{}}},"data":{"id":"5dtxf","type":"nodes"}},"logs":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/logs/","meta":{}}}},"linked_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/linked_nodes/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/relationships/linked_nodes/","meta":{}}}},"linked_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/linked_registrations/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/relationships/linked_registrations/","meta":{}}}},"view_only_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/view_only_links/","meta":{}}}},"citation":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/citation/","meta":{}}},"data":{"id":"kxzmn","type":"nodes"}},"preprints":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/preprints/","meta":{}}}},"storage":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/kxzmn/storage/","meta":{}}},"data":{"id":"kxzmn","type":"node-storage"}}},"links":{"html":"https://test.osf.io/kxzmn/","self":"https://api.test.osf.io/v2/nodes/kxzmn/"}},{"id":"tsz7d","type":"nodes","attributes":{"title":"recurse=TRUE","description":"","category":"","custom_citation":null,"date_created":"2022-09-18T15:47:47.088957","date_modified":"2022-09-18T15:48:17.542966","registration":false,"preprint":false,"fork":false,"collection":false,"tags":[],"access_requests_enabled":true,"node_license":null,"current_user_can_comment":true,"current_user_permissions":["admin","write","read"],"current_user_is_contributor":true,"current_user_is_contributor_or_group_member":true,"wiki_enabled":true,"public":false,"subjects":[]},"relationships":{"children":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/children/","meta":{}}}},"comments":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/comments/?filter%5Btarget%5D=tsz7d","meta":{}}}},"contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/contributors/","meta":{}}}},"bibliographic_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/bibliographic_contributors/","meta":{}}}},"implicit_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/implicit_contributors/","meta":{}}}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/files/","meta":{}}}},"settings":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/settings/","meta":{}}},"data":{"id":"tsz7d","type":"node-setting"}},"wikis":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/wikis/","meta":{}}}},"forks":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/forks/","meta":{}}}},"groups":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/groups/","meta":{}}}},"node_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/node_links/","meta":{}}}},"linked_by_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/linked_by_nodes/","meta":{}}}},"linked_by_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/linked_by_registrations/","meta":{}}}},"parent":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/5dtxf/","meta":{}}},"data":{"id":"5dtxf","type":"nodes"}},"identifiers":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/identifiers/","meta":{}}}},"affiliated_institutions":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/institutions/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/relationships/institutions/","meta":{}}}},"draft_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/draft_registrations/","meta":{}}}},"registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/registrations/","meta":{}}}},"region":{"links":{"related":{"href":"https://api.test.osf.io/v2/regions/us/","meta":{}}},"data":{"id":"us","type":"regions"}},"root":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/5dtxf/","meta":{}}},"data":{"id":"5dtxf","type":"nodes"}},"logs":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/logs/","meta":{}}}},"linked_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/linked_nodes/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/relationships/linked_nodes/","meta":{}}}},"linked_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/linked_registrations/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/relationships/linked_registrations/","meta":{}}}},"view_only_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/view_only_links/","meta":{}}}},"citation":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/citation/","meta":{}}},"data":{"id":"tsz7d","type":"nodes"}},"preprints":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/preprints/","meta":{}}}},"storage":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/tsz7d/storage/","meta":{}}},"data":{"id":"tsz7d","type":"node-storage"}}},"links":{"html":"https://test.osf.io/tsz7d/","self":"https://api.test.osf.io/v2/nodes/tsz7d/"}},{"id":"7wvjg","type":"nodes","attributes":{"title":"recurse=1","description":"","category":"","custom_citation":null,"date_created":"2022-09-18T15:47:19.576539","date_modified":"2022-09-18T15:47:43.336504","registration":false,"preprint":false,"fork":false,"collection":false,"tags":[],"access_requests_enabled":true,"node_license":null,"current_user_can_comment":true,"current_user_permissions":["admin","write","read"],"current_user_is_contributor":true,"current_user_is_contributor_or_group_member":true,"wiki_enabled":true,"public":false,"subjects":[]},"relationships":{"children":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/children/","meta":{}}}},"comments":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/comments/?filter%5Btarget%5D=7wvjg","meta":{}}}},"contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/contributors/","meta":{}}}},"bibliographic_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/bibliographic_contributors/","meta":{}}}},"implicit_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/implicit_contributors/","meta":{}}}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/files/","meta":{}}}},"settings":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/settings/","meta":{}}},"data":{"id":"7wvjg","type":"node-setting"}},"wikis":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/wikis/","meta":{}}}},"forks":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/forks/","meta":{}}}},"groups":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/groups/","meta":{}}}},"node_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/node_links/","meta":{}}}},"linked_by_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/linked_by_nodes/","meta":{}}}},"linked_by_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/linked_by_registrations/","meta":{}}}},"parent":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/5dtxf/","meta":{}}},"data":{"id":"5dtxf","type":"nodes"}},"identifiers":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/identifiers/","meta":{}}}},"affiliated_institutions":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/institutions/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/relationships/institutions/","meta":{}}}},"draft_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/draft_registrations/","meta":{}}}},"registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/registrations/","meta":{}}}},"region":{"links":{"related":{"href":"https://api.test.osf.io/v2/regions/us/","meta":{}}},"data":{"id":"us","type":"regions"}},"root":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/5dtxf/","meta":{}}},"data":{"id":"5dtxf","type":"nodes"}},"logs":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/logs/","meta":{}}}},"linked_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/linked_nodes/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/relationships/linked_nodes/","meta":{}}}},"linked_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/linked_registrations/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/relationships/linked_registrations/","meta":{}}}},"view_only_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/view_only_links/","meta":{}}}},"citation":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/citation/","meta":{}}},"data":{"id":"7wvjg","type":"nodes"}},"preprints":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/preprints/","meta":{}}}},"storage":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/7wvjg/storage/","meta":{}}},"data":{"id":"7wvjg","type":"node-storage"}}},"links":{"html":"https://test.osf.io/7wvjg/","self":"https://api.test.osf.io/v2/nodes/7wvjg/"}},{"id":"pvw5x","type":"nodes","attributes":{"title":"subdir-upload","description":"","category":"","custom_citation":null,"date_created":"2022-09-18T15:47:10.885273","date_modified":"2022-09-18T15:47:18.407270","registration":false,"preprint":false,"fork":false,"collection":false,"tags":[],"access_requests_enabled":true,"node_license":null,"current_user_can_comment":true,"current_user_permissions":["admin","write","read"],"current_user_is_contributor":true,"current_user_is_contributor_or_group_member":true,"wiki_enabled":true,"public":false,"subjects":[]},"relationships":{"children":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/children/","meta":{}}}},"comments":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/comments/?filter%5Btarget%5D=pvw5x","meta":{}}}},"contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/contributors/","meta":{}}}},"bibliographic_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/bibliographic_contributors/","meta":{}}}},"implicit_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/implicit_contributors/","meta":{}}}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/files/","meta":{}}}},"settings":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/settings/","meta":{}}},"data":{"id":"pvw5x","type":"node-setting"}},"wikis":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/wikis/","meta":{}}}},"forks":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/forks/","meta":{}}}},"groups":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/groups/","meta":{}}}},"node_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/node_links/","meta":{}}}},"linked_by_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/linked_by_nodes/","meta":{}}}},"linked_by_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/linked_by_registrations/","meta":{}}}},"parent":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/5dtxf/","meta":{}}},"data":{"id":"5dtxf","type":"nodes"}},"identifiers":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/identifiers/","meta":{}}}},"affiliated_institutions":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/institutions/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/relationships/institutions/","meta":{}}}},"draft_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/draft_registrations/","meta":{}}}},"registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/registrations/","meta":{}}}},"region":{"links":{"related":{"href":"https://api.test.osf.io/v2/regions/us/","meta":{}}},"data":{"id":"us","type":"regions"}},"root":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/5dtxf/","meta":{}}},"data":{"id":"5dtxf","type":"nodes"}},"logs":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/logs/","meta":{}}}},"linked_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/linked_nodes/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/relationships/linked_nodes/","meta":{}}}},"linked_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/linked_registrations/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/relationships/linked_registrations/","meta":{}}}},"view_only_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/view_only_links/","meta":{}}}},"citation":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/citation/","meta":{}}},"data":{"id":"pvw5x","type":"nodes"}},"preprints":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/preprints/","meta":{}}}},"storage":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/pvw5x/storage/","meta":{}}},"data":{"id":"pvw5x","type":"node-storage"}}},"links":{"html":"https://test.osf.io/pvw5x/","self":"https://api.test.osf.io/v2/nodes/pvw5x/"}},{"id":"538fg","type":"nodes","attributes":{"title":"dir-upload","description":"","category":"","custom_citation":null,"date_created":"2022-09-18T15:46:53.069826","date_modified":"2022-09-18T15:47:09.890038","registration":false,"preprint":false,"fork":false,"collection":false,"tags":[],"access_requests_enabled":true,"node_license":null,"current_user_can_comment":true,"current_user_permissions":["admin","write","read"],"current_user_is_contributor":true,"current_user_is_contributor_or_group_member":true,"wiki_enabled":true,"public":false,"subjects":[]},"relationships":{"children":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/children/","meta":{}}}},"comments":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/comments/?filter%5Btarget%5D=538fg","meta":{}}}},"contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/contributors/","meta":{}}}},"bibliographic_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/bibliographic_contributors/","meta":{}}}},"implicit_contributors":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/implicit_contributors/","meta":{}}}},"files":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/files/","meta":{}}}},"settings":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/settings/","meta":{}}},"data":{"id":"538fg","type":"node-setting"}},"wikis":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/wikis/","meta":{}}}},"forks":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/forks/","meta":{}}}},"groups":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/groups/","meta":{}}}},"node_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/node_links/","meta":{}}}},"linked_by_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/linked_by_nodes/","meta":{}}}},"linked_by_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/linked_by_registrations/","meta":{}}}},"parent":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/5dtxf/","meta":{}}},"data":{"id":"5dtxf","type":"nodes"}},"identifiers":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/identifiers/","meta":{}}}},"affiliated_institutions":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/institutions/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/538fg/relationships/institutions/","meta":{}}}},"draft_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/draft_registrations/","meta":{}}}},"registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/registrations/","meta":{}}}},"region":{"links":{"related":{"href":"https://api.test.osf.io/v2/regions/us/","meta":{}}},"data":{"id":"us","type":"regions"}},"root":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/5dtxf/","meta":{}}},"data":{"id":"5dtxf","type":"nodes"}},"logs":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/logs/","meta":{}}}},"linked_nodes":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/linked_nodes/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/538fg/relationships/linked_nodes/","meta":{}}}},"linked_registrations":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/linked_registrations/","meta":{}},"self":{"href":"https://api.test.osf.io/v2/nodes/538fg/relationships/linked_registrations/","meta":{}}}},"view_only_links":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/view_only_links/","meta":{}}}},"citation":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/citation/","meta":{}}},"data":{"id":"538fg","type":"nodes"}},"preprints":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/preprints/","meta":{}}}},"storage":{"links":{"related":{"href":"https://api.test.osf.io/v2/nodes/538fg/storage/","meta":{}}},"data":{"id":"538fg","type":"node-storage"}}},"links":{"html":"https://test.osf.io/538fg/","self":"https://api.test.osf.io/v2/nodes/538fg/"}}],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":6,"per_page":10}},"meta":{"version":"2.0"}}'
+  recorded_at: 2022-09-18 15:49:16 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
 - request:
     method: get
-    uri: https://api.test.osf.io/v2/nodes/59k7c/children/?page=1
+    uri: https://api.test.osf.io/v2/nodes/3qmst/children/?page=1
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: osfr v0.2.8.9001
+      User-Agent: osfr v0.2.8.9002
       Authorization: Bearer <totallyrealpat>
       Accept-Header: application/vnd.api+json;version=2.8
   response:
@@ -60,17 +57,15 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       allow: GET, POST, HEAD, OPTIONS
-      alt-svc: clear
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       content-length: '128'
       content-type: application/vnd.api+json; charset=utf-8
-      date: Mon, 08 Feb 2021 20:36:26 GMT
+      date: Sun, 18 Sep 2022 15:49:10 GMT
       expires: Mon, 01 Jan 1990 00:00:00 GMT
       pragma: no-cache
       server: nginx
-      set-cookie: sloan_id=666c5024-2cb8-4975-8b7e-5d758a2d87bf; Domain=.osf.io; Path=/;
-        samesite=None; Secure
-      status: HTTP/1.1 200 OK
+      status: 'HTTP/2 200 '
       vary:
       - Accept-Encoding
       - Accept
@@ -80,18 +75,18 @@ http_interactions:
       encoding: UTF-8
       file: no
       string: '{"data":[],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":0,"per_page":10}},"meta":{"version":"2.0"}}'
-  recorded_at: 2021-02-08 20:36:31 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2022-09-18 15:49:16 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
 - request:
     method: get
-    uri: https://api.test.osf.io/v2/nodes/casw4/children/?page=1
+    uri: https://api.test.osf.io/v2/nodes/kxzmn/children/?page=1
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: osfr v0.2.8.9001
+      User-Agent: osfr v0.2.8.9002
       Authorization: Bearer <totallyrealpat>
       Accept-Header: application/vnd.api+json;version=2.8
   response:
@@ -101,17 +96,15 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       allow: GET, POST, HEAD, OPTIONS
-      alt-svc: clear
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       content-length: '128'
       content-type: application/vnd.api+json; charset=utf-8
-      date: Mon, 08 Feb 2021 20:36:26 GMT
+      date: Sun, 18 Sep 2022 15:49:11 GMT
       expires: Mon, 01 Jan 1990 00:00:00 GMT
       pragma: no-cache
       server: nginx
-      set-cookie: sloan_id=d0cc230b-4a14-4b50-a483-26fdaf6a4495; Domain=.osf.io; Path=/;
-        samesite=None; Secure
-      status: HTTP/1.1 200 OK
+      status: 'HTTP/2 200 '
       vary:
       - Accept-Encoding
       - Accept
@@ -121,18 +114,18 @@ http_interactions:
       encoding: UTF-8
       file: no
       string: '{"data":[],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":0,"per_page":10}},"meta":{"version":"2.0"}}'
-  recorded_at: 2021-02-08 20:36:31 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2022-09-18 15:49:16 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
 - request:
     method: get
-    uri: https://api.test.osf.io/v2/nodes/ebhkv/children/?page=1
+    uri: https://api.test.osf.io/v2/nodes/tsz7d/children/?page=1
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: osfr v0.2.8.9001
+      User-Agent: osfr v0.2.8.9002
       Authorization: Bearer <totallyrealpat>
       Accept-Header: application/vnd.api+json;version=2.8
   response:
@@ -142,17 +135,15 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       allow: GET, POST, HEAD, OPTIONS
-      alt-svc: clear
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       content-length: '128'
       content-type: application/vnd.api+json; charset=utf-8
-      date: Mon, 08 Feb 2021 20:36:27 GMT
+      date: Sun, 18 Sep 2022 15:49:11 GMT
       expires: Mon, 01 Jan 1990 00:00:00 GMT
       pragma: no-cache
       server: nginx
-      set-cookie: sloan_id=5f08f0f8-2c8c-4f04-ab5f-f75997b984d8; Domain=.osf.io; Path=/;
-        samesite=None; Secure
-      status: HTTP/1.1 200 OK
+      status: 'HTTP/2 200 '
       vary:
       - Accept-Encoding
       - Accept
@@ -162,18 +153,18 @@ http_interactions:
       encoding: UTF-8
       file: no
       string: '{"data":[],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":0,"per_page":10}},"meta":{"version":"2.0"}}'
-  recorded_at: 2021-02-08 20:36:31 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2022-09-18 15:49:16 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
 - request:
     method: get
-    uri: https://api.test.osf.io/v2/nodes/u426y/children/?page=1
+    uri: https://api.test.osf.io/v2/nodes/7wvjg/children/?page=1
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: osfr v0.2.8.9001
+      User-Agent: osfr v0.2.8.9002
       Authorization: Bearer <totallyrealpat>
       Accept-Header: application/vnd.api+json;version=2.8
   response:
@@ -183,17 +174,15 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       allow: GET, POST, HEAD, OPTIONS
-      alt-svc: clear
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       content-length: '128'
       content-type: application/vnd.api+json; charset=utf-8
-      date: Mon, 08 Feb 2021 20:36:27 GMT
+      date: Sun, 18 Sep 2022 15:49:11 GMT
       expires: Mon, 01 Jan 1990 00:00:00 GMT
       pragma: no-cache
       server: nginx
-      set-cookie: sloan_id=79613863-7cfa-4fd2-9ac2-b7625c4f7a3a; Domain=.osf.io; Path=/;
-        samesite=None; Secure
-      status: HTTP/1.1 200 OK
+      status: 'HTTP/2 200 '
       vary:
       - Accept-Encoding
       - Accept
@@ -203,18 +192,18 @@ http_interactions:
       encoding: UTF-8
       file: no
       string: '{"data":[],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":0,"per_page":10}},"meta":{"version":"2.0"}}'
-  recorded_at: 2021-02-08 20:36:31 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2022-09-18 15:49:16 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
 - request:
     method: get
-    uri: https://api.test.osf.io/v2/nodes/54rxg/children/?page=1
+    uri: https://api.test.osf.io/v2/nodes/pvw5x/children/?page=1
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: osfr v0.2.8.9001
+      User-Agent: osfr v0.2.8.9002
       Authorization: Bearer <totallyrealpat>
       Accept-Header: application/vnd.api+json;version=2.8
   response:
@@ -224,17 +213,15 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       allow: GET, POST, HEAD, OPTIONS
-      alt-svc: clear
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       content-length: '128'
       content-type: application/vnd.api+json; charset=utf-8
-      date: Mon, 08 Feb 2021 20:36:27 GMT
+      date: Sun, 18 Sep 2022 15:49:12 GMT
       expires: Mon, 01 Jan 1990 00:00:00 GMT
       pragma: no-cache
       server: nginx
-      set-cookie: sloan_id=99abc001-d5c6-4945-bc26-5796d17eb7bf; Domain=.osf.io; Path=/;
-        samesite=None; Secure
-      status: HTTP/1.1 200 OK
+      status: 'HTTP/2 200 '
       vary:
       - Accept-Encoding
       - Accept
@@ -244,18 +231,18 @@ http_interactions:
       encoding: UTF-8
       file: no
       string: '{"data":[],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":0,"per_page":10}},"meta":{"version":"2.0"}}'
-  recorded_at: 2021-02-08 20:36:31 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2022-09-18 15:49:16 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
 - request:
     method: get
-    uri: https://api.test.osf.io/v2/nodes/scbmp/children/?page=1
+    uri: https://api.test.osf.io/v2/nodes/538fg/children/?page=1
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: osfr v0.2.8.9001
+      User-Agent: osfr v0.2.8.9002
       Authorization: Bearer <totallyrealpat>
       Accept-Header: application/vnd.api+json;version=2.8
   response:
@@ -265,17 +252,15 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       allow: GET, POST, HEAD, OPTIONS
-      alt-svc: clear
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       content-length: '128'
       content-type: application/vnd.api+json; charset=utf-8
-      date: Mon, 08 Feb 2021 20:36:27 GMT
+      date: Sun, 18 Sep 2022 15:49:12 GMT
       expires: Mon, 01 Jan 1990 00:00:00 GMT
       pragma: no-cache
       server: nginx
-      set-cookie: sloan_id=1ccf2149-ac56-45a9-b3b0-c92f3c4135e8; Domain=.osf.io; Path=/;
-        samesite=None; Secure
-      status: HTTP/1.1 200 OK
+      status: 'HTTP/2 200 '
       vary:
       - Accept-Encoding
       - Accept
@@ -285,18 +270,18 @@ http_interactions:
       encoding: UTF-8
       file: no
       string: '{"data":[],"links":{"first":null,"last":null,"prev":null,"next":null,"meta":{"total":0,"per_page":10}},"meta":{"version":"2.0"}}'
-  recorded_at: 2021-02-08 20:36:31 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2022-09-18 15:49:16 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
 - request:
     method: delete
-    uri: https://api.test.osf.io/v2/nodes/scbmp/
+    uri: https://api.test.osf.io/v2/nodes/538fg/
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: osfr v0.2.8.9001
+      User-Agent: osfr v0.2.8.9002
       Authorization: Bearer <totallyrealpat>
       Accept-Header: application/vnd.api+json;version=2.8
   response:
@@ -305,37 +290,34 @@ http_interactions:
       message: No Content
       explanation: Request fulfilled, nothing follows
     headers:
-      status: HTTP/1.1 204 No Content
+      status: 'HTTP/2 204 '
       server: nginx
-      date: Mon, 08 Feb 2021 20:36:29 GMT
+      date: Sun, 18 Sep 2022 15:49:13 GMT
       content-type: application/vnd.api+json; charset=utf-8
-      content-length: '0'
       vary: Accept
       allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
       x-frame-options: SAMEORIGIN
-      set-cookie: sloan_id=cd687fa2-0a6d-4c01-8ac7-beb4ba1ac247; Domain=.osf.io; Path=/;
-        samesite=None; Secure
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       expires: Mon, 01 Jan 1990 00:00:00 GMT
       pragma: no-cache
       via: 1.1 google
-      alt-svc: clear
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
       file: no
       string: ''
-  recorded_at: 2021-02-08 20:36:31 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2022-09-18 15:49:16 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
 - request:
     method: delete
-    uri: https://api.test.osf.io/v2/nodes/54rxg/
+    uri: https://api.test.osf.io/v2/nodes/pvw5x/
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: osfr v0.2.8.9001
+      User-Agent: osfr v0.2.8.9002
       Authorization: Bearer <totallyrealpat>
       Accept-Header: application/vnd.api+json;version=2.8
   response:
@@ -344,37 +326,34 @@ http_interactions:
       message: No Content
       explanation: Request fulfilled, nothing follows
     headers:
-      status: HTTP/1.1 204 No Content
+      status: 'HTTP/2 204 '
       server: nginx
-      date: Mon, 08 Feb 2021 20:36:29 GMT
+      date: Sun, 18 Sep 2022 15:49:13 GMT
       content-type: application/vnd.api+json; charset=utf-8
-      content-length: '0'
       vary: Accept
       allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
       x-frame-options: SAMEORIGIN
-      set-cookie: sloan_id=00ef67b0-10ce-449e-a99c-720fb88535b5; Domain=.osf.io; Path=/;
-        samesite=None; Secure
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       expires: Mon, 01 Jan 1990 00:00:00 GMT
       pragma: no-cache
       via: 1.1 google
-      alt-svc: clear
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
       file: no
       string: ''
-  recorded_at: 2021-02-08 20:36:31 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2022-09-18 15:49:16 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
 - request:
     method: delete
-    uri: https://api.test.osf.io/v2/nodes/u426y/
+    uri: https://api.test.osf.io/v2/nodes/7wvjg/
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: osfr v0.2.8.9001
+      User-Agent: osfr v0.2.8.9002
       Authorization: Bearer <totallyrealpat>
       Accept-Header: application/vnd.api+json;version=2.8
   response:
@@ -383,37 +362,34 @@ http_interactions:
       message: No Content
       explanation: Request fulfilled, nothing follows
     headers:
-      status: HTTP/1.1 204 No Content
+      status: 'HTTP/2 204 '
       server: nginx
-      date: Mon, 08 Feb 2021 20:36:30 GMT
+      date: Sun, 18 Sep 2022 15:49:14 GMT
       content-type: application/vnd.api+json; charset=utf-8
-      content-length: '0'
       vary: Accept
       allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
       x-frame-options: SAMEORIGIN
-      set-cookie: sloan_id=52e40647-258d-4413-ac4c-310c63f1cfd6; Domain=.osf.io; Path=/;
-        samesite=None; Secure
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       expires: Mon, 01 Jan 1990 00:00:00 GMT
       pragma: no-cache
       via: 1.1 google
-      alt-svc: clear
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
       file: no
       string: ''
-  recorded_at: 2021-02-08 20:36:32 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2022-09-18 15:49:16 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
 - request:
     method: delete
-    uri: https://api.test.osf.io/v2/nodes/ebhkv/
+    uri: https://api.test.osf.io/v2/nodes/tsz7d/
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: osfr v0.2.8.9001
+      User-Agent: osfr v0.2.8.9002
       Authorization: Bearer <totallyrealpat>
       Accept-Header: application/vnd.api+json;version=2.8
   response:
@@ -422,37 +398,34 @@ http_interactions:
       message: No Content
       explanation: Request fulfilled, nothing follows
     headers:
-      status: HTTP/1.1 204 No Content
+      status: 'HTTP/2 204 '
       server: nginx
-      date: Mon, 08 Feb 2021 20:36:30 GMT
+      date: Sun, 18 Sep 2022 15:49:14 GMT
       content-type: application/vnd.api+json; charset=utf-8
-      content-length: '0'
       vary: Accept
       allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
       x-frame-options: SAMEORIGIN
-      set-cookie: sloan_id=c682584f-52b7-4998-9e3b-98214b4031d8; Domain=.osf.io; Path=/;
-        samesite=None; Secure
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       expires: Mon, 01 Jan 1990 00:00:00 GMT
       pragma: no-cache
       via: 1.1 google
-      alt-svc: clear
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
       file: no
       string: ''
-  recorded_at: 2021-02-08 20:36:32 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2022-09-18 15:49:16 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
 - request:
     method: delete
-    uri: https://api.test.osf.io/v2/nodes/casw4/
+    uri: https://api.test.osf.io/v2/nodes/kxzmn/
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: osfr v0.2.8.9001
+      User-Agent: osfr v0.2.8.9002
       Authorization: Bearer <totallyrealpat>
       Accept-Header: application/vnd.api+json;version=2.8
   response:
@@ -461,37 +434,34 @@ http_interactions:
       message: No Content
       explanation: Request fulfilled, nothing follows
     headers:
-      status: HTTP/1.1 204 No Content
+      status: 'HTTP/2 204 '
       server: nginx
-      date: Mon, 08 Feb 2021 20:36:31 GMT
+      date: Sun, 18 Sep 2022 15:49:15 GMT
       content-type: application/vnd.api+json; charset=utf-8
-      content-length: '0'
       vary: Accept
       allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
       x-frame-options: SAMEORIGIN
-      set-cookie: sloan_id=d0e4d6a2-ecbf-4d69-b060-78bd2941e790; Domain=.osf.io; Path=/;
-        samesite=None; Secure
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       expires: Mon, 01 Jan 1990 00:00:00 GMT
       pragma: no-cache
       via: 1.1 google
-      alt-svc: clear
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
       file: no
       string: ''
-  recorded_at: 2021-02-08 20:36:32 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2022-09-18 15:49:16 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
 - request:
     method: delete
-    uri: https://api.test.osf.io/v2/nodes/59k7c/
+    uri: https://api.test.osf.io/v2/nodes/3qmst/
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: osfr v0.2.8.9001
+      User-Agent: osfr v0.2.8.9002
       Authorization: Bearer <totallyrealpat>
       Accept-Header: application/vnd.api+json;version=2.8
   response:
@@ -500,37 +470,34 @@ http_interactions:
       message: No Content
       explanation: Request fulfilled, nothing follows
     headers:
-      status: HTTP/1.1 204 No Content
+      status: 'HTTP/2 204 '
       server: nginx
-      date: Mon, 08 Feb 2021 20:36:31 GMT
+      date: Sun, 18 Sep 2022 15:49:15 GMT
       content-type: application/vnd.api+json; charset=utf-8
-      content-length: '0'
       vary: Accept
       allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
       x-frame-options: SAMEORIGIN
-      set-cookie: sloan_id=ac38a15c-a111-421b-9f4e-94017aa890e2; Domain=.osf.io; Path=/;
-        samesite=None; Secure
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       expires: Mon, 01 Jan 1990 00:00:00 GMT
       pragma: no-cache
       via: 1.1 google
-      alt-svc: clear
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
       file: no
       string: ''
-  recorded_at: 2021-02-08 20:36:32 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2022-09-18 15:49:16 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
 - request:
     method: delete
-    uri: https://api.test.osf.io/v2/nodes/ntecg/
+    uri: https://api.test.osf.io/v2/nodes/5dtxf/
     body:
       encoding: ''
       string: ''
     headers:
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
-      User-Agent: osfr v0.2.8.9001
+      User-Agent: osfr v0.2.8.9002
       Authorization: Bearer <totallyrealpat>
       Accept-Header: application/vnd.api+json;version=2.8
   response:
@@ -539,24 +506,21 @@ http_interactions:
       message: No Content
       explanation: Request fulfilled, nothing follows
     headers:
-      status: HTTP/1.1 204 No Content
+      status: 'HTTP/2 204 '
       server: nginx
-      date: Mon, 08 Feb 2021 20:36:31 GMT
+      date: Sun, 18 Sep 2022 15:49:16 GMT
       content-type: application/vnd.api+json; charset=utf-8
-      content-length: '0'
       vary: Accept
       allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
       x-frame-options: SAMEORIGIN
-      set-cookie: sloan_id=1177d4be-aee6-452c-9953-900b43e39c02; Domain=.osf.io; Path=/;
-        samesite=None; Secure
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       expires: Mon, 01 Jan 1990 00:00:00 GMT
       pragma: no-cache
       via: 1.1 google
-      alt-svc: clear
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
       file: no
       string: ''
-  recorded_at: 2021-02-08 20:36:32 GMT
-  recorded_with: vcr/0.6.0, webmockr/0.7.4
+  recorded_at: 2022-09-18 15:49:16 GMT
+  recorded_with: vcr/1.0.2, webmockr/0.8.2
