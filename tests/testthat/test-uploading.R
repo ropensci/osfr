@@ -10,7 +10,7 @@ vcr::vcr_configure(
 setup({
   testdir <<- fs::dir_create(".osfr-tests")
   infile <<- fs::path(testdir, "osfr-local-file.txt")
-  writeLines("Lorem ipsum dolor sit amet, consectetur", infile)
+  brio::writeLines("Lorem ipsum dolor sit amet, consectetur", infile)
 
   if (has_pat()) {
     vcr::use_cassette("create-p1", {
@@ -70,7 +70,10 @@ test_that("by default an error is thrown if a conflicting file exists", {
 })
 
 test_that("a file can be overwritten when conflicts='overwrite'", {
-  writeLines("Lorem ipsum dolor sit amet, consectetur, ea duo posse", infile)
+  brio::writeLines(
+    text = "Lorem ipsum dolor sit amet, consectetur, ea duo posse",
+    con = infile
+  )
   skip_if_no_pat()
 
   expect_message(
@@ -107,7 +110,10 @@ test_that("conflicting files can be skipped when uploading to a dir", {
 test_that("conflicting files can be overwritten when uploading to a dir", {
   skip_if_no_pat()
   on.exit(vcr::eject_cassette())
-  writeLines("Lorem ipsum dolor sit amet, consectetur, ea trio posse", infile)
+  brio::writeLines(
+    text = "Lorem ipsum dolor sit amet, consectetur, ea trio posse",
+    con = infile
+  )
 
   vcr::insert_cassette("upload-conflict-overwrite-within-directory")
   expect_silent(
