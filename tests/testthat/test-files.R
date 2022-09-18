@@ -7,7 +7,8 @@ vcr::vcr_configure(
 )
 
 setup({
-  infile <<- fs::path(rprojroot::find_testthat_root_file(), "test-files/uploads/a.txt")
+  infile <<- file.path(tempdir(), "a.txt")
+  brio::writeLines("1", con = infile)
 
   if (has_pat()) {
     vcr::use_cassette("setup-test-project", {
