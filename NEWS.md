@@ -11,6 +11,8 @@
 ## Build and test infrastructure
 
 * Unit tests for single file uploads, html encoding, and basic node mechanics are now mocked with `vcr` (#145)
+* GitHub Actions is now used for continuous integration (#146)
+* brio is now used in tests for writing text to files so `\n` is used for line endings on Windows. This produces files with identical sizes on all platforms allowing vcr to match requests that include file sizes in the body (#146).
 
 # osfr 0.2.8
 
