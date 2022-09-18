@@ -7,11 +7,8 @@ vcr::vcr_configure(
 )
 
 setup({
-  # copy directory for testing multifile uploads to pwd
-  multidir <<- fs::dir_copy(
-    file.path(rprojroot::find_testthat_root_file(), "test-files", "uploads"),
-    ".osfr-tests"
-  )
+  # create directory for testing multifile uploads
+  multidir <<- create_upload_test_files(".osfr-tests")
 
   if (has_pat()) {
     vcr::use_cassette("create-p1", {
