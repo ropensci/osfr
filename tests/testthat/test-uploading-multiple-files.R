@@ -185,7 +185,7 @@ test_that("conflicting files are skipped or overwritten", {
   })
 
   # overwrite contents of first file
-  writeLines("foo", infiles[1])
+  brio::writeLines("foo", infiles[1])
   vcr::use_cassette("c6-conflict-skip", {
     out2 <- osf_upload(c6, path = infiles[1], conflicts = "skip")
   })
