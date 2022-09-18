@@ -64,13 +64,13 @@ to \code{osf_download()}.
 
 \section{A note about synchronization}{
 
-While \code{osf_download()} and \code{osf_upload()} can be used to conveniently shuttle
+While \code{osf_download()} and \code{osf_upload()} allow you to conveniently shuttle
 files back and forth between OSF and your local machine, it's important to
 note that \strong{they are not file synchronization functions}. In contrast to
 something like \href{https://rsync.samba.org}{\code{rsync}},
 \code{osf_download()}/\code{osf_upload()} do not take into account a file's contents or
-modification time. Whether you're uploading or downloading, if \code{overwrite = TRUE}, osfr will overwrite an existing file regardless of whether the
-existing file is the more recent copy. You have been warned.
+modification time. Whether you're uploading or downloading, if \code{conflicts = "overwrite"}, osfr will overwrite the existing file regardless of whether it
+is the more recent copy. You have been warned.
 }
 
 \examples{
