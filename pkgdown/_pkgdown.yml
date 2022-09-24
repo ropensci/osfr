@@ -11,10 +11,14 @@ authors:
 
 navbar:
   structure:
-    left:  
+    left:
     right: [home, reference, articles, github]
 
 reference:
+
+- title: Help
+  contents:
+  - '`osfr-package`'
 
 - title: Retrieving information from OSF
   desc: ~
@@ -31,6 +35,7 @@ reference:
   - '`osf_create`'
   - '`osf_mkdir`'
   - '`osf_mv`'
+  - '`osf_cp`'
   - '`osf_rm`'
   - '`osf_upload`'
 
