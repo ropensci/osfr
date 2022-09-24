@@ -7,6 +7,7 @@
 ## Fixes
 
 * Fixed bug preventing uploads directly to OSF directories that contained conflicting files (#121, #129)
+* Fixed pkgdown site build (#147)
 
 ## Build and test infrastructure
 
