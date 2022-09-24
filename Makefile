@@ -19,6 +19,9 @@ test:
 doc: README.md vignettes
 	Rscript -e "devtools::document()"
 
+build-pkgdown:
+	R -e "pkgdown::build_site()"
+
 README.md: README.Rmd
 	Rscript -e "devtools::build_readme()"
 	rm README.html
