@@ -25,7 +25,7 @@ inst/paper.bib$
 
 # dev
 ^_ignore$
-^dev&
+^dev
 ^.vscode$
 
 # misc
