@@ -247,4 +247,3 @@ osf_upload.osf_tbl_file <-
 
   do.call("rbind", out)
 }
-
