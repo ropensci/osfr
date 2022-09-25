@@ -61,7 +61,7 @@
 #'
 #' @references
 #' 1. Colin Gillespie and Robin Lovelace (2017). *Efficient R programming*.
-#' O'Reilly Press. <https://csgillespie.github.io/efficientR>.
+#' O'Reilly Press. <https://csgillespie.github.io/efficientR/>.
 #'
 #' @export
 osf_auth <- function(token = NULL) {

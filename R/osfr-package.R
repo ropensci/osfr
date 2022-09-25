@@ -1,7 +1,7 @@
 #' osfr: R interface to OSF
 #'
 #' osfr provides a suite of functions for interacting with the Open Science
-#' Framework (OSF; <https://www.osf.io>).
+#' Framework (OSF; <https://osf.io/>).
 #'
 #' @section What is OSF?:
 #'

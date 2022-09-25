@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 Sys.unsetenv(c("OSF_SERVER", "OSF_PAT"))
 ```
 
-# osfr <a href="https://docs.ropensci.org/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
+# osfr <a href="https://docs.ropensci.org/osfr/"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/osfr)](https://CRAN.R-project.org/package=osfr)
@@ -23,7 +23,7 @@ Sys.unsetenv(c("OSF_SERVER", "OSF_PAT"))
 <!-- badges: end -->
 [![Coverage status](https://codecov.io/gh/ropensci/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/osfr?branch=master)
 [![](https://badges.ropensci.org/279_status.svg)](https://github.com/ropensci/software-review/issues/279)
-[![](https://joss.theoj.org/papers/d5398fc36ea92794a20914143d3fcdc4/status.svg)](https://joss.theoj.org/papers/d5398fc36ea92794a20914143d3fcdc4)
+[![JOSS](https://joss.theoj.org/papers/10.21105/joss.02071/status.svg)](https://doi.org/10.21105/joss.02071)
 [![DOI](https://zenodo.org/badge/42329785.svg)](https://zenodo.org/badge/latestdoi/42329785)
 
 ## Overview
@@ -139,7 +139,7 @@ osfr represents these entities within `osf_tbl`s---specialized data frames built
 
 OSF is developed by the [Center for Open Science][cos] in Charlottesville, VA.
 
-The original version of osfr was developed by [Chris Chartgerink][chris] and further developed by [Brian Richards][brian] and [Ryan Hafen][ryan]. The current version was developed by [Aaron Wolen][aaron] and is *heavily* inspired by [Jennifer Bryan][jenny] and [Lucy D'Agostino McGowan][lucy]'s excellent [googledrive][] package. Seriously, we borrowed a lot of great ideas from them. Other important resources include [http testing](https://books.ropensci.org/http-testing/) by Scott Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley Wickham. Development was also greatly facilitated by OSF's excellent [API documentation][osf-api].
+The original version of osfr was developed by [Chris Chartgerink][chris] and further developed by [Brian Richards][brian] and [Ryan Hafen][ryan]. The current version was developed by [Aaron Wolen][aaron] and is *heavily* inspired by [Jennifer Bryan][jenny] and [Lucy D'Agostino McGowan][lucy]'s excellent [googledrive][] package. Seriously, we borrowed a lot of great ideas from them. Other important resources include [http testing](https://books.ropensci.org/http-testing/) by Scott Chamberlain and [R Packages](https://r-pkgs.org) by Hadley Wickham. Development was also greatly facilitated by OSF's excellent [API documentation][osf-api].
 
 Big thanks to Rusty Speidel for designing our logo and [Tim Errington][tim] for his feedback during development.
 
@@ -155,12 +155,12 @@ unlink("Study_19_Figure_1.pdf")
 
 <!-- links -->
 [osf]: https://osf.io "Open Science Framework"
-[cos]: https://cos.io "Center for Open Science"
+[cos]: https://www.cos.io "Center for Open Science"
 [osf-gh]: https://github.com/CenterForOpenScience/osf.io "OSF's GitHub Repository"
 [osf-api]: https://developer.osf.io "OSF API Documentation"
-[help]: http://help.osf.io "OSF Support"
-[help-proj]: https://help.osf.io/hc/en-us/articles/360019737594-Create-a-Project "OSF: Create a Project"
-[help-comp]: https://help.osf.io/hc/en-us/articles/360019737614-Create-Components "OSF: Create a Component"
+[help]: https://help.osf.io "OSF Support"
+[help-proj]: https://help.osf.io/article/383-creating-a-project "OSF: Create a Project"
+[help-comp]: https://help.osf.io/article/253-create-components "OSF: Create a Component"
 [magrittr]: https://magrittr.tidyverse.org
 [dplyr]: https://dplyr.tidyverse.org
 [googledrive]: https://googledrive.tidyverse.org
