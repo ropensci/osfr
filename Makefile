@@ -25,7 +25,6 @@ build-pkgdown:
 
 README.md: README.Rmd
 	Rscript -e "devtools::build_readme()"
-	rm README.html
 
 doc/%.html: vignettes/%.Rmd
 	Rscript -e "devtools::build_vignettes()"
