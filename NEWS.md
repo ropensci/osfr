@@ -1,4 +1,4 @@
-# osfr (development version)
+# osfr 0.2.9
 
 ## Minor changes
 
