@@ -9,7 +9,7 @@
 #'   project, component, and file on OSF and forms the basis for the service's
 #'   URL scheme. For example the GUID for a project accessible at
 #'   <https://osf.io/ezum7> is simply `ezum7`. You can learn more about GUIDs
-#'   [here](https://help.osf.io/hc/en-us/articles/360019737894-FAQs).
+#'   in the [OSF FAQ](https://help.osf.io/article/203-faqs).
 #'
 #' An important detail is that files and directories are handled internally on
 #' OSF by another serviced called [Waterbutler](http://www.waterbutler.io/),

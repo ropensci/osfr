@@ -19,7 +19,7 @@
 # osfr 0.2.8
 
 * Initial CRAN release
-* Publication of accompanying paper in the [Journal of Open Source Software](http://joss.theoj.org/) that can be cited in papers using osfr, see `citation("osfr")` for details
+* Publication of accompanying paper in the [Journal of Open Source Software](https://joss.theoj.org/) that can be cited in papers using osfr, see `citation("osfr")` for details
 
 ## Minor changes
 
@@ -32,7 +32,7 @@
 
 ## Important changes
 
-osfr is now part of rOpenSci and the documentation website has moved to a new URL:  <https://docs.ropensci.org/osfr>.
+osfr is now part of rOpenSci and the documentation website has moved to a new URL:  <https://docs.ropensci.org/osfr/>.
 
 ## New features
 
@@ -145,5 +145,5 @@ previous package can be installed with the *remotes* package:
 remotes::install_github("ropensci/osfr@v0.1.1")
 ```
 
-See <https://docs.ropensci.org/osfr> for details about the new
+See <https://docs.ropensci.org/osfr/> for details about the new
 package.

@@ -35,12 +35,12 @@ osfr:::osf_dev_off()
 
 Most work on OSF is organized around ***projects***, which include a cloud-based storage bucket where files can be stored and organized into directories. Note there is no storage limit on the size of projects but individual files must be < 5Gb. Projects can be kept private, shared with a specific group of collaborators, or made publicly available with citable DOIs so you can get credit for their work.
 
-If you'd like to learn more about OSF the Center for Open Science has published an excellent series of [guides](http://help.osf.io/) to help get you started. We'll provide links to specific guides throughout this vignette.
+If you'd like to learn more about OSF the Center for Open Science has published an excellent series of [guides](https://help.osf.io/) to help get you started. We'll provide links to specific guides throughout this vignette.
 Here are a few relevant topics:
 
-* [Creating and Managing Projects][osf-projects]
-* [Adding sub-projects (i.e., components) to a project][osf-components]
-* [Understanding project permissions][osf-permissions]
+* [Creating projects and components][osf-create-projects]
+* [Managing projects][osf-manage-projects]
+* [Collaborating on projects][osf-collaborating]
 
 ## Accessing OSF projects
 
@@ -198,8 +198,8 @@ Learn more about file versioning on OSF [here][osf-versioning].
 
 Remember, new OSF projects are *always* private by default. You can change this by opening the project's settings page on OSF and making it public. See the following guides more information about OSF permissions and how to optionally generate a DOI so other can cite your project.
 
-* [Privacy Settings][osf-privacy]
-* [Sharing Projects][osf-sharing]
+* [Control your privacy settings][osf-privacy]
+* [Sharing, linking, and forking projects][osf-sharing]
 * [Generate DOIs][osf-doi]
 
 ## A few details about files on OSF
@@ -239,15 +239,15 @@ For more information on OSF and `osfr` check out:
 
 <!-- links -->
 [osf]: https://osf.io
-[cos]: https://cos.io
+[cos]: https://www.cos.io
 [osf-api]: https://developer.osf.io
 [magrittr]: https://magrittr.tidyverse.org
 [tibble]: https://tibble.tidyverse.org
 
-[osf-projects]: https://help.osf.io/hc/en-us/categories/360001495973-Creating-and-Managing-Projects
-[osf-components]: https://help.osf.io/hc/en-us/articles/360019737614-Create-Components
-[osf-privacy]: https://help.osf.io/hc/en-us/articles/360018981414-Control-Your-Privacy-Settings
-[osf-permissions]: https://help.osf.io/hc/en-us/articles/360019737774-Edit-Contributor-Permissions
-[osf-doi]: https://help.osf.io/hc/en-us/articles/360019931013-Create-DOIs
-[osf-versioning]: https://help.osf.io/hc/en-us/articles/360019738694-File-Revisions-and-Version-Control
-[osf-sharing]: https://help.osf.io/hc/en-us/categories/360001530614-Sharing-Projects
+[osf-create-projects]: https://help.osf.io/article/383-creating-a-project
+[osf-manage-projects]: https://help.osf.io/article/384-managing-projects
+[osf-privacy]: https://help.osf.io/article/285-control-your-privacy-settings
+[osf-collaborating]: https://help.osf.io/article/385-collaborating-on-projects
+[osf-doi]: https://help.osf.io/article/220-create-dois
+[osf-versioning]: https://help.osf.io/article/282-file-revisions-and-version-control
+[osf-sharing]: https://help.osf.io/article/388-sharing-linking-and-forking-projects
