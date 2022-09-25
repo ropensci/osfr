@@ -35,7 +35,6 @@ URL:
     https://docs.ropensci.org/osfr/,
     https://github.com/ropensci/osfr
 BugReports: https://github.com/ropensci/osfr/issues
-LazyData: true
 Suggests:
     dplyr,
     logger,
