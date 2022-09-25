@@ -79,5 +79,6 @@ Run `make` to
 
 * `make clean` to remove build/check files
 * `make test` to run unit tests
+* `make check` to run `R CMD check` on the package
+* `make revdep` to run reverse dependency checks
 * `make tag` to tag the last git commit with the current version
-
