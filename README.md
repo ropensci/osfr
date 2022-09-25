@@ -1,15 +1,17 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# osfr <a href="https://docs.ropensci.org/osfr"><img src="man/figures/logo.png" align="right" height="139" /></a>
+# osfr <a href="https://docs.ropensci.org/osfr/"><img src="man/figures/logo.png" align="right" height="139" /></a>
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/osfr)](https://CRAN.R-project.org/package=osfr)
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/osfr)](https://CRAN.R-project.org/package=osfr)
 [![R-CMD-check](https://github.com/ropensci/osfr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/osfr/actions/workflows/R-CMD-check.yaml)
-<!-- badges: end -->
-[![Coverage status](https://codecov.io/gh/ropensci/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/osfr?branch=master)
+<!-- badges: end --> [![Coverage
+status](https://codecov.io/gh/ropensci/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/osfr?branch=master)
 [![](https://badges.ropensci.org/279_status.svg)](https://github.com/ropensci/software-review/issues/279)
-[![](https://joss.theoj.org/papers/d5398fc36ea92794a20914143d3fcdc4/status.svg)](https://joss.theoj.org/papers/d5398fc36ea92794a20914143d3fcdc4)
+[![JOSS](https://joss.theoj.org/papers/10.21105/joss.02071/status.svg)](https://doi.org/10.21105/joss.02071)
 [![DOI](https://zenodo.org/badge/42329785.svg)](https://zenodo.org/badge/latestdoi/42329785)
 
 ## Overview
@@ -68,9 +70,9 @@ library(osfr)
 
 cr_project <- osf_retrieve_node("e81xl")
 cr_project
-#> # A tibble: 1 x 3
-#>   name                                    id    meta
-#>   <chr>                                   <chr> <list>
+#> # A tibble: 1 × 3
+#>   name                                    id    meta            
+#>   <chr>                                   <chr> <list>          
 #> 1 Reproducibility Project: Cancer Biology e81xl <named list [3]>
 ```
 
@@ -80,13 +82,13 @@ project.
 
 ``` r
 osf_ls_files(cr_project)
-#> # A tibble: 4 x 3
-#>   name                                     id                     meta
-#>   <chr>                                    <chr>                  <list>
-#> 1 Adjustment of 50 studies to 37 studies.… 565602398c5e4a3877d72… <named list […
-#> 2 papers_and_keywords.xlsx                 553e671b8c5e4a219919e… <named list […
-#> 3 Full_dataset_of_papers_formatted.xls     553e671b8c5e4a219919e… <named list […
-#> 4 METHOD_to_select_papers.txt              553e671b8c5e4a219919e… <named list […
+#> # A tibble: 4 × 3
+#>   name                                        id                    meta        
+#>   <chr>                                       <chr>                 <list>      
+#> 1 papers_and_keywords.xlsx                    553e671b8c5e4a219919… <named list>
+#> 2 Full_dataset_of_papers_formatted.xls        553e671b8c5e4a219919… <named list>
+#> 3 METHOD_to_select_papers.txt                 553e671b8c5e4a219919… <named list>
+#> 4 Adjustment of 50 studies to 37 studies.docx 565602398c5e4a3877d7… <named list>
 ```
 
 This returns another `osf_tbl` with 1 row for each of the files and
@@ -100,11 +102,14 @@ components with osfr using `osf_ls_nodes()`.
 
 ``` r
 osf_ls_nodes(cr_project)
-#> # A tibble: 2 x 3
-#>   name                                      id    meta
-#>   <chr>                                     <chr> <list>
-#> 1 Replication Studies                       p7ayb <named list [3]>
-#> 2 Data collection and publishing guidelines a5imq <named list [3]>
+#> # A tibble: 5 × 3
+#>   name                                                        id    meta        
+#>   <chr>                                                       <chr> <list>      
+#> 1 Meta-analysis paper figures and tables                      squy7 <named list>
+#> 2 Replication Data from the Reproducibility Project: Cancer … e5nvr <named list>
+#> 3 Process paper figures and reported statistics               35ut8 <named list>
+#> 4 Replication Studies                                         p7ayb <named list>
+#> 5 Data collection and publishing guidelines                   a5imq <named list>
 ```
 
 osfr is compatible with the [pipe
@@ -123,15 +128,15 @@ cr_project %>%
   filter(name == "Replication Studies") %>%
   osf_ls_nodes(pattern = "Study 19") %>%
   osf_ls_files()
-#> # A tibble: 6 x 3
-#>   name                                    id                     meta
-#>   <chr>                                   <chr>                  <list>
-#> 1 Replication_Study_19.docx               57c9e8ed594d9001e7a24… <named list [3…
-#> 2 Replication_Study_19.Rmd                578e2b23594d9001f4816… <named list [3…
-#> 3 Replication_Study_19_track_changes.docx 581a27b76c613b0223322… <named list [3…
-#> 4 Replication_Study_19_track_changes_2.d… 58714d46594d9001f801f… <named list [3…
-#> 5 Response_letter_Replication_Study_19.d… 58755747b83f6901ff066… <named list [3…
-#> 6 Study_19_Correction_Letter.docx         5a56569125719b000ff28… <named list [3…
+#> # A tibble: 6 × 3
+#>   name                                      id                      meta        
+#>   <chr>                                     <chr>                   <list>      
+#> 1 Replication_Study_19.Rmd                  578e2b23594d9001f48164… <named list>
+#> 2 Study_19_Correction_Letter.docx           5a56569125719b000ff28b… <named list>
+#> 3 Replication_Study_19.docx                 57c9e8ed594d9001e7a240… <named list>
+#> 4 Response_letter_Replication_Study_19.docx 58755747b83f6901ff066a… <named list>
+#> 5 Replication_Study_19_track_changes.docx   581a27b76c613b02233228… <named list>
+#> 6 Replication_Study_19_track_changes_2.docx 58714d46594d9001f801f4… <named list>
 ```
 
 We could continue this pattern of exploration and even download local
@@ -143,10 +148,10 @@ GUID:
 ``` r
 osf_retrieve_file("https://osf.io/btgx3/") %>%
   osf_download()
-#> # A tibble: 1 x 4
-#>   name                id                    local_path            meta
-#>   <chr>               <chr>                 <chr>                 <list>
-#> 1 Study_19_Figure_1.… 5751d71d9ad5a1020793… ./Study_19_Figure_1.… <named list […
+#> # A tibble: 1 × 4
+#>   name                  id    local_path              meta            
+#>   <chr>                 <chr> <chr>                   <list>          
+#> 1 Study_19_Figure_1.pdf btgx3 ./Study_19_Figure_1.pdf <named list [3]>
 ```
 
 ### Managing Projects
@@ -167,8 +172,6 @@ example in which we:
 4.  Upload a file (`mtcars.csv`) to the new directory
 5.  Open the uploaded file on OSF
 
-<!-- end list -->
-
 ``` r
 # create an external data file
 write.csv(mtcars, "mtcars.csv")
@@ -187,9 +190,9 @@ osf_create_project(title = "Motor Trend Car Road Tests") %>%
 There are 3 main types of OSF entities that osfr can work with:
 
 1.  **nodes:** both
-    [projects](https://help.osf.io/hc/en-us/articles/360019737594-Create-a-Project "OSF: Create a Project")
+    [projects](https://help.osf.io/article/383-creating-a-project "OSF: Create a Project")
     and
-    [components](https://help.osf.io/hc/en-us/articles/360019737614-Create-Components "OSF: Create a Component")
+    [components](https://help.osf.io/article/253-create-components "OSF: Create a Component")
     (i.e., sub-projects) are referred to as nodes
 2.  **files:** this includes both files *and* folders stored on OSF
 3.  **users:** individuals with OSF accounts
@@ -204,8 +207,8 @@ standard functions from base R or dplyr.
 ## Acknowledgments
 
 OSF is developed by the [Center for Open
-Science](https://cos.io "Center for Open Science") in Charlottesville,
-VA.
+Science](https://www.cos.io "Center for Open Science") in
+Charlottesville, VA.
 
 The original version of osfr was developed by [Chris
 Chartgerink](https://github.com/chartgerink) and further developed by
@@ -217,7 +220,7 @@ McGowan](https://github.com/lucymcgowan)’s excellent
 [googledrive](https://googledrive.tidyverse.org) package. Seriously, we
 borrowed a lot of great ideas from them. Other important resources
 include [http testing](https://books.ropensci.org/http-testing/) by
-Scott Chamberlain and [R Packages](http://r-pkgs.had.co.nz) by Hadley
+Scott Chamberlain and [R Packages](https://r-pkgs.org) by Hadley
 Wickham. Development was also greatly facilitated by OSF’s excellent
 [API documentation](https://developer.osf.io "OSF API Documentation").
 
@@ -234,6 +237,6 @@ this project, you agree to abide by the terms outlined in the
 [Contributor Code of
 Conduct](https://github.com/ropensci/osfr/blob/master/.github/CODE_OF_CONDUCT.md).
 
-[![ropensci\_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
+[![ropensci_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)
 
 <!-- links -->

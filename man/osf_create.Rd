@@ -78,8 +78,8 @@ component <- osf_create_component(project, title = "Project Data")
 \references{
 \enumerate{
 \item OSF Guides: Create a Project.
-\url{https://help.osf.io/hc/en-us/articles/360019737594-Create-a-Project}.
+\url{https://help.osf.io/article/383-creating-a-project}.
 \item OSF Guides: Create a Component.
-\url{https://help.osf.io/hc/en-us/articles/360019737614-Create-Components}.
+\url{https://help.osf.io/article/253-create-components}.
 }
 }

@@ -196,7 +196,7 @@ Learn more about file versioning on OSF [here][osf-versioning].
 
 ### Sharing
 
-Remember, new OSF projects are *always* private by default. You can change this by opening the project's settings page on OSF and making it public. See the following guides more information about OSF permissions and how to optionally generate a DOI so other can cite your project.
+Remember, new OSF projects are *always* private by default. You can change this by opening the project's settings page on OSF and making it public. See the following guides for more information about OSF permissions and how to optionally generate a DOI so other can cite your project.
 
 * [Control your privacy settings][osf-privacy]
 * [Sharing, linking, and forking projects][osf-sharing]

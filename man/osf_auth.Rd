@@ -78,6 +78,6 @@ osf_auth("bdEEFMCuBtaBoSK11YzyjOdjUjKtWIj2FWxHl6kTBRax7uaeyBghALumTO1kT8RA")
 \references{
 \enumerate{
 \item Colin Gillespie and Robin Lovelace (2017). \emph{Efficient R programming}.
-O'Reilly Press. \url{https://csgillespie.github.io/efficientR}.
+O'Reilly Press. \url{https://csgillespie.github.io/efficientR/}.
 }
 }
