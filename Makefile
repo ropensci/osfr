@@ -12,6 +12,7 @@ build: docs
 
 check: build
 	R CMD check --as-cran --no-tests $(PKGNAME)_$(PKGVERS).tar.gz
+	rm -rf $(PKGNAME).Rcheck/
 
 test:
 	Rscript -e "devtools::test()"
