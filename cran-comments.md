@@ -1,26 +1,26 @@
+
+This update includes fixes for uploading/downloading files to/from 'OSF'.
+This version includes a new feature and two minor improvement of the function `ncbi_snp_query`,
+and a change in the vignette (we now pre-compile the vignette to avoid long runtimes).
+
 ## Test environments
-* local OS X install, R 3.6
-* ubuntu 14.04 (on travis-ci),  R 3.5.1, devel and release
+* local macOS install, R 4.2.1
 * win-builder (devel and release)
-* Windows Server 2008 R2 SP1 (on R-hub), R-devel
-* Ubuntu Linux 16.04 LTS + GCD (on R-hub), R-release
-* Fedora Linux + clang + gfortran (on R-hub), R-devel
+* Windows Server 2022, 64 bit (on R-hub), R-devel
+* Ubuntu Linux 20.04.1 LTS, GCC (on R-hub), R-release
+* Fedora Linux, clang, gfortran (on R-hub), R-devel
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+There were no ERRORs or WARNINGs.
 
-## Resubmission
+There was one NOTE that on Windows Server 2022 (Rhub), R-devel:
 
-This is a resubmission. In this version I have:
-
-- replaced github links in README.md with fully specified URLs
-- updated the TITLE and DESCRIPTION to place 'osfr', 'OSF', and 'Open Science Framework' in quotes
-- removed the full license from builds
-- fixed invalid README URLs, which resulted from migrating to rOpenSci's docs server
-- added a CITATION for the recently published JOSS paper
-- switched to the MIT license
+```
+❯ checking for detritus in the temp directory ... NOTE
+  Found the following files/directories:
+    'lastMiKTeXException'
+```
+As noted in [R-hub issue #503](https://github.com/r-hub/rhub/issues/503), this could be due to a bug/crash in MiKTeX and can likely be ignored.
 
 ## Reverse dependencies
-
-There are no reverse dependencies.

@@ -22,3 +22,7 @@ docs/
 *.log
 /doc/
 /Meta/
+revdep/checks.noindex
+revdep/library.noindex
+revdep/cloud.noindex
+revdep/data.sqlite

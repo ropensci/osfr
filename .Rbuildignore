@@ -27,6 +27,7 @@ inst/paper.bib$
 ^_ignore$
 ^dev
 ^.vscode$
+^revdep$
 
 # misc
 ^\.httr-oauth

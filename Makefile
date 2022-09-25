@@ -17,6 +17,9 @@ check: build
 test:
 	Rscript -e "devtools::test()"
 
+revdep:
+	Rscript -e "revdepcheck::revdep_check()"
+
 doc: README.md vignettes
 	Rscript -e "devtools::document()"
 
