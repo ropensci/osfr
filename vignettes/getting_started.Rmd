@@ -129,10 +129,10 @@ my_project
 #> # A tibble: 1 × 3
 #>   name                                             id    meta            
 #>   <chr>                                            <chr> <list>          
-#> 1 Political Identification and Gender: Re-examined 27z6d <named list [3]>
+#> 1 Political Identification and Gender: Re-examined f7bgz <named list [3]>
 ```
 
-The GUID for this new project is `27z6d`, but yours will be something different. You can check out the project on OSF by opening it's URL (`https://www.osf.io/<GUID>`), or, more conveniently: `osf_open(my_project)`.
+The GUID for this new project is `f7bgz`, but yours will be something different. You can check out the project on OSF by opening it's URL (`https://www.osf.io/<GUID>`), or, more conveniently: `osf_open(my_project)`.
 
 ### Adding structure with components
 
@@ -162,7 +162,7 @@ data_file
 #> # A tibble: 1 × 3
 #>   name         id                       meta            
 #>   <chr>        <chr>                    <list>          
-#> 1 raw_data.csv 63306e9c6c2401124550961c <named list [3]>
+#> 1 raw_data.csv 63309f3e18f4581162429679 <named list [3]>
 ```
 
 Oh no! Instead of uploading `raw_data.csv` to the *Raw Data* component, we uploaded it to the parent project instead.
@@ -185,9 +185,9 @@ r_files
 #> # A tibble: 3 × 3
 #>   name         id                       meta            
 #>   <chr>        <chr>                    <list>          
-#> 1 analyses.R   63306ea20b727211612af6f2 <named list [3]>
-#> 2 cleaning.R   63306ea46c2401125650a29c <named list [3]>
-#> 3 precompile.R 63306ea6408a271241763b13 <named list [3]>
+#> 1 analyses.R   63309f47408a27127e7637de <named list [3]>
+#> 2 cleaning.R   63309f4a555fe211977a9017 <named list [3]>
+#> 3 precompile.R 63309f4c18f4581167428d70 <named list [3]>
 ```
 
 ### Putting it all together
@@ -202,8 +202,8 @@ my_project %>%
 #> # A tibble: 2 × 3
 #>   name                 id                       meta            
 #>   <chr>                <chr>                    <list>          
-#> 1 Data Dictionary.docx 63306ead0b727211542b0446 <named list [3]>
-#> 2 Questionnaire.docx   63306eaf0b727211542b044c <named list [3]>
+#> 1 Data Dictionary.docx 63309f526c2401128550a2bc <named list [3]>
+#> 2 Questionnaire.docx   63309f5418f4581150428ef4 <named list [3]>
 ```
 
 We can verify the project is now structured the way we wanted by listing the components we have under the main project.
@@ -214,9 +214,9 @@ osf_ls_nodes(my_project)
 #> # A tibble: 3 × 3
 #>   name               id    meta            
 #>   <chr>              <chr> <list>          
-#> 1 Research Materials sjdcz <named list [3]>
-#> 2 Analysis Scripts   t3xup <named list [3]>
-#> 3 Raw Data           ef58g <named list [3]>
+#> 1 Research Materials dg79a <named list [3]>
+#> 2 Analysis Scripts   fquzh <named list [3]>
+#> 3 Raw Data           6urqv <named list [3]>
 ```
 
 which gives us an `osf_tbl` with one row for each of the project's components.
@@ -236,21 +236,21 @@ Error: Can't upload file 'cleaning.R'.
   * Use the `conflicts` argument to avoid this error in the future.
 ```
 
- As the error indicates, we need to use the `conflicts` argument to instruct `osf_upload()` how to handle the conflict. In this case, we want to overwrite the original copy with our new version:
+As the error indicates, we need to use the `conflicts` argument to instruct `osf_upload()` how to handle the conflict. In this case, we want to overwrite the original copy with our new version:
 
- 
- ```r
- osf_upload(script_comp, path = "cleaning.R", conflicts = "overwrite")
- ```
+
+```r
+osf_upload(script_comp, path = "cleaning.R", conflicts = "overwrite")
+```
 
 Learn more about file versioning on OSF [here][osf-versioning].
 
 ### Sharing
 
-Remember, new OSF projects are *always* private by default. You can change this by opening the project's settings page on OSF and making it public. See the following guides more information about OSF permissions and how to optionally generate a DOI so other can cite your project.
+Remember, new OSF projects are *always* private by default. You can change this by opening the project's settings page on OSF and making it public. See the following guides for more information about OSF permissions and how to optionally generate a DOI so other can cite your project.
 
-* [Privacy Settings][osf-privacy]
-* [Sharing Projects][osf-sharing]
+* [Control your privacy settings][osf-privacy]
+* [Sharing, linking, and forking projects][osf-sharing]
 * [Generate DOIs][osf-doi]
 
 ## A few details about files on OSF
@@ -298,6 +298,6 @@ For more information on OSF and `osfr` check out:
 [osf-manage-projects]: https://help.osf.io/article/384-managing-projects
 [osf-privacy]: https://help.osf.io/article/285-control-your-privacy-settings
 [osf-collaborating]: https://help.osf.io/article/385-collaborating-on-projects
-[osf-doi]: https://help.osf.io/hc/en-us/articles/360019931013-Create-DOIs
-[osf-versioning]: https://help.osf.io/hc/en-us/articles/360019738694-File-Revisions-and-Version-Control
-[osf-sharing]: https://help.osf.io/hc/en-us/categories/360001530614-Sharing-Projects
+[osf-doi]: https://help.osf.io/article/220-create-dois
+[osf-versioning]: https://help.osf.io/article/282-file-revisions-and-version-control
+[osf-sharing]: https://help.osf.io/article/388-sharing-linking-and-forking-projects

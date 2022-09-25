@@ -7,7 +7,7 @@
 \title{osfr: R interface to OSF}
 \description{
 osfr provides a suite of functions for interacting with the Open Science
-Framework (OSF; \url{https://www.osf.io}).
+Framework (OSF; \url{https://osf.io/}).
 }
 \section{What is OSF?}{
 
@@ -38,7 +38,7 @@ the Center for Open Science: \url{https://help.osf.io}
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://docs.ropensci.org/osfr}
+  \item \url{https://docs.ropensci.org/osfr/}
   \item \url{https://github.com/ropensci/osfr}
   \item Report bugs at \url{https://github.com/ropensci/osfr/issues}
 }
