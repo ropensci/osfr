@@ -186,11 +186,11 @@ Error: Can't upload file 'cleaning.R'.
   * Use the `conflicts` argument to avoid this error in the future.
 ```
 
- As the error indicates, we need to use the `conflicts` argument to instruct `osf_upload()` how to handle the conflict. In this case, we want to overwrite the original copy with our new version:
+As the error indicates, we need to use the `conflicts` argument to instruct `osf_upload()` how to handle the conflict. In this case, we want to overwrite the original copy with our new version:
 
- ```{r, eval=FALSE}
+```{r, eval=FALSE}
 osf_upload(script_comp, path = "cleaning.R", conflicts = "overwrite")
- ```
+```
 
 Learn more about file versioning on OSF [here][osf-versioning].
 
@@ -218,7 +218,7 @@ We can download files from any public or private node that we have access to and
 
 2. For a public file that was referenced in a published article, you may already have the GUID, and so can retrieve the file directly before downloading it. For example, let's download Daniel Laken's helpful spreadsheet for calculating effect sizes (available from <https://osf.io/vbdah/>).
 
-    ```{r eval=FALSE}
+```{r eval=FALSE}
 osf_retrieve_file("vbdah") %>%
   osf_download(excel_file)
 ```
