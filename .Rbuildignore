@@ -3,7 +3,6 @@
 ^doc$
 ^data-raw$
 ^README\.Rmd$
-^_ignore$
 ^man-roxygen$
 
 # rstudio
@@ -23,6 +22,11 @@ inst/paper.bib$
 # pkgdown
 ^docs$
 ^pkgdown$
+
+# dev
+^_ignore$
+^dev&
+^.vscode$
 
 # misc
 ^\.httr-oauth
