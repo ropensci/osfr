@@ -1,9 +1,11 @@
 ’s
 ANES
 AppVeyor
+brio
 Charlottesville
 Chartgerink
 citable
+cmd
 codebase
 crul
 csv
@@ -54,6 +56,7 @@ tibble
 Tibbles
 travis
 vbdah
+vcr
 vectorized
 waterbutler
 Waterbutler
