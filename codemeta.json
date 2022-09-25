@@ -1,23 +1,20 @@
 {
-  "@context": [
-    "https://doi.org/10.5063/schema/codemeta-2.0",
-    "http://schema.org"
-  ],
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "osfr",
   "description": "An interface for interacting with 'OSF' (<https://osf.io>). 'osfr' enables you to access open research materials and data, or create and manage your own private or public projects.",
   "name": "osfr: Interface to the 'Open Science Framework' ('OSF')",
+  "relatedLink": ["https://docs.ropensci.org/osfr/", "https://CRAN.R-project.org/package=osfr"],
   "codeRepository": "https://github.com/ropensci/osfr",
   "issueTracker": "https://github.com/ropensci/osfr/issues",
-  "license": "https://spdx.org/licenses/Apache-2.0",
-  "version": "0.2.8",
+  "license": "https://spdx.org/licenses/MIT",
+  "version": "0.2.9",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.2",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.2 (2019-12-12)",
+  "runtimePlatform": "R version 4.2.0 (2022-04-22)",
   "author": [
     {
       "@type": "Person",
@@ -62,8 +59,6 @@
       "@id": "https://orcid.org/0000-0003-1227-7042"
     }
   ],
-  "copyrightHolder": {},
-  "funder": {},
   "maintainer": [
     {
       "@type": "Person",
@@ -77,238 +72,180 @@
     {
       "@type": "SoftwareApplication",
       "identifier": "dplyr",
-      "name": "dplyr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=dplyr"
+      "name": "dplyr"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "logger",
-      "name": "logger",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=logger"
+      "name": "logger"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "rprojroot",
-      "name": "rprojroot",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=rprojroot"
+      "name": "rprojroot"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "brio",
+      "name": "brio"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "testthat",
-      "name": "testthat",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=testthat"
+      "name": "testthat"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "knitr",
-      "name": "knitr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=knitr"
+      "name": "knitr"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "rmarkdown",
-      "name": "rmarkdown",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+      "name": "rmarkdown"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "lintr",
       "name": "lintr",
-      "version": ">= 2.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=lintr"
+      "version": ">= 2.0"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "covr",
-      "name": "covr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=covr"
+      "name": "covr"
     },
     {
       "@type": "SoftwareApplication",
       "identifier": "spelling",
-      "name": "spelling",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=spelling"
+      "name": "spelling"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "vcr",
+      "name": "vcr",
+      "version": ">= 0.5"
     }
   ],
-  "softwareRequirements": [
-    {
+  "softwareRequirements": {
+    "1": {
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
       "version": ">= 3.1.0"
     },
-    {
+    "2": {
       "@type": "SoftwareApplication",
       "identifier": "crul",
       "name": "crul",
-      "version": ">= 0.7.4",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=crul"
+      "version": ">= 0.7.4"
     },
-    {
+    "3": {
       "@type": "SoftwareApplication",
       "identifier": "jsonlite",
-      "name": "jsonlite",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=jsonlite"
+      "name": "jsonlite"
     },
-    {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "stringi",
-      "name": "stringi",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=stringi"
+      "name": "stringi"
     },
-    {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "purrr",
-      "name": "purrr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=purrr"
+      "name": "purrr"
     },
-    {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=tibble"
+      "version": ">= 3.0.0"
     },
-    {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "rlang",
-      "name": "rlang",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=rlang"
+      "name": "rlang"
     },
-    {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "fs",
       "name": "fs",
-      "version": ">= 1.3.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=fs"
+      "version": ">= 1.3.0"
     },
-    {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "memoise",
-      "name": "memoise",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=memoise"
+      "name": "memoise"
     },
-    {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "httr",
-      "name": "httr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=httr"
+      "name": "httr"
+    },
+    "SystemRequirements": null
+  },
+  "fileSize": "0KB",
+  "citation": [
+    {
+      "@type": "ScholarlyArticle",
+      "datePublished": "2020",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "Aaron R.",
+          "familyName": "Wolen"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Chris H.J.",
+          "familyName": "Hartgerink"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Ryan",
+          "familyName": "Hafen"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Brian G.",
+          "familyName": "Richards"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Courtney K.",
+          "familyName": "Soderberg"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Timothy P.",
+          "familyName": "York"
+        }
+      ],
+      "name": "{osfr}: An {R} Interface to the Open Science Framework",
+      "identifier": "10.21105/joss.02071",
+      "url": "https://doi.org/10.21105/joss.02071",
+      "pagination": "2071",
+      "@id": "https://doi.org/10.21105/joss.02071",
+      "sameAs": "https://doi.org/10.21105/joss.02071",
+      "isPartOf": {
+        "@type": "PublicationIssue",
+        "issueNumber": "46",
+        "datePublished": "2020",
+        "isPartOf": {
+          "@type": ["PublicationVolume", "Periodical"],
+          "volumeNumber": "5",
+          "name": "Journal of Open Source Software"
+        }
+      }
     }
   ],
-  "keywords": [
-    "osf",
-    "open-science",
-    "reproducible-research"
-  ],
-  "relatedLink": "https://docs.ropensci.org/osfr",
   "releaseNotes": "https://github.com/ropensci/osfr/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/osfr/blob/master/README.md",
-  "contIntegration": ["https://travis-ci.com/ropensci/osfr", "https://ci.appveyor.com/project/aaronwolen/osfr", "https://codecov.io/github/ropensci/osfr?branch=master"]
+  "contIntegration": ["https://github.com/ropensci/osfr/actions/workflows/R-CMD-check.yaml", "https://codecov.io/github/ropensci/osfr?branch=master"],
+  "review": {
+    "@type": "Review",
+    "url": "https://github.com/ropensci/software-review/issues/279",
+    "provider": "https://ropensci.org"
+  },
+  "keywords": ["osf", "open-science", "reproducible-research"]
 }
