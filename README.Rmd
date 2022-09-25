@@ -20,11 +20,11 @@ Sys.unsetenv(c("OSF_SERVER", "OSF_PAT"))
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/osfr)](https://CRAN.R-project.org/package=osfr)
 [![R-CMD-check](https://github.com/ropensci/osfr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/osfr/actions/workflows/R-CMD-check.yaml)
-<!-- badges: end -->
 [![Coverage status](https://codecov.io/gh/ropensci/osfr/branch/master/graph/badge.svg)](https://codecov.io/github/ropensci/osfr?branch=master)
 [![](https://badges.ropensci.org/279_status.svg)](https://github.com/ropensci/software-review/issues/279)
 [![JOSS](https://joss.theoj.org/papers/10.21105/joss.02071/status.svg)](https://doi.org/10.21105/joss.02071)
 [![DOI](https://zenodo.org/badge/42329785.svg)](https://zenodo.org/badge/latestdoi/42329785)
+<!-- badges: end -->
 
 ## Overview
 
