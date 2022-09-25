@@ -1,7 +1,5 @@
 
-This update includes fixes for uploading/downloading files to/from 'OSF'.
-This version includes a new feature and two minor improvement of the function `ncbi_snp_query`,
-and a change in the vignette (we now pre-compile the vignette to avoid long runtimes).
+This update includes 2 fixes for uploading/downloading files to/from 'OSF'.
 
 ## Test environments
 * local macOS install, R 4.2.1
@@ -24,3 +22,8 @@ There was one NOTE that on Windows Server 2022 (Rhub), R-devel:
 As noted in [R-hub issue #503](https://github.com/r-hub/rhub/issues/503), this could be due to a bug/crash in MiKTeX and can likely be ignored.
 
 ## Reverse dependencies
+
+We checked 3 reverse dependencies (2 from CRAN + 1 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+
+ * We saw 0 new problems
+ * We failed to check 0 packages
