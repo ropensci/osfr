@@ -34,6 +34,9 @@
 #' # ...only PDF files
 #' osf_ls_files(psych_rp, type = "file", pattern = "pdf")
 #'
+#' # ...sorted by most recently modified
+#' osf_ls_files(psych_rp, pattern = "pdf", sort = "-date_modified")
+#'
 #' # List the contents of the first directory
 #' osf_ls_files(psych_rp, path = "RPP_SI_Figures")
 #' }
