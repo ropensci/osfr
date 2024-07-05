@@ -8,6 +8,11 @@
 #'   * An [`osf_tbl_node`] with a single project or component.
 #'   * An [`osf_tbl_file`] with a single directory.
 #' @param path List files within the specified subdirectory path.
+#' @param sort Sort results by `"date_created"` (default), `"date_modified"`,
+#' `"id"`, or `"name"`. Sorting is performed server-side so in combination with
+#' `n_max` can be used to efficiently retrieve a subset of the results (e.g.,
+#' the five oldest files). The sort order is ascending by default but can be
+#' reversed by prefixing with a minus (e.g., `"-date_modified"`).
 #' @template filter-type
 #' @template filter-pattern
 #' @template n_max
@@ -29,6 +34,9 @@
 #' # ...only PDF files
 #' osf_ls_files(psych_rp, type = "file", pattern = "pdf")
 #'
+#' # ...sorted by most recently modified
+#' osf_ls_files(psych_rp, pattern = "pdf", sort = "-date_modified")
+#'
 #' # List the contents of the first directory
 #' osf_ls_files(psych_rp, path = "RPP_SI_Figures")
 #' }
@@ -40,6 +48,7 @@ osf_ls_files <-
            type = "any",
            pattern = NULL,
            n_max = 10,
+           sort = NULL,
            verbose = FALSE) {
     UseMethod("osf_ls_files")
 }
@@ -51,16 +60,19 @@ osf_ls_files.osf_tbl_node <-
            type = "any",
            pattern = NULL,
            n_max = 10,
+           sort = NULL,
            verbose = FALSE) {
 
   x <- make_single(x)
 
   if (!is.null(path) && path != ".") {
     leaf_dir <- recurse_path(x, path, missing_action = "error", verbose)
-    return(osf_ls_files(leaf_dir, path = ".", type, pattern, n_max, verbose))
+    return(
+      osf_ls_files(leaf_dir, path = ".", type, pattern, n_max, sort, verbose)
+    )
   }
 
- .osf_list_files(x, type, pattern, n_max, verbose)
+ .osf_list_files(x, type, pattern, n_max, sort, verbose)
 }
 
 #' @export
@@ -70,6 +82,7 @@ osf_ls_files.osf_tbl_file <-
            type = "any",
            pattern = NULL,
            n_max = 10,
+           sort = NULL,
            verbose = FALSE) {
 
   x <- make_single(x)
@@ -82,7 +95,7 @@ osf_ls_files.osf_tbl_file <-
     x <- recurse_path(x, path, missing_action = "error", verbose = verbose)
   }
 
- .osf_list_files(x, type, pattern, n_max, verbose)
+ .osf_list_files(x, type, pattern, n_max, sort, verbose)
 }
 
 
@@ -92,7 +105,13 @@ osf_ls_files.osf_tbl_file <-
 #' in the future when listing from a node.
 #' @return An `osf_tbl_file`.
 #' @noRd
-.osf_list_files <- function(x, type, pattern, n_max, verbose) {
+.osf_list_files <- function(x, type, pattern, n_max, sort, verbose) {
+
+  stopifnot(is.null(sort) || rlang::is_scalar_character(sort))
+  sort <- match.arg(
+    arg = sort,
+    choices = c(.osf_file_attributes, paste0("-", .osf_file_attributes))
+  )
 
   # manually construct the API path because the 'files' endpoint for nodes lists
   # the enabled storage providers
@@ -101,13 +120,31 @@ osf_ls_files.osf_tbl_file <-
     osf_tbl_file = crul::url_parse(get_relation(x, "files"))$path
   )
 
+  query <- modifyList(
+    filter_files(pattern, type),
+    val = list(sort = sort)
+  )
+
   res <- .osf_paginated_request(
     method = "get",
     path = api_path,
-    query = filter_files(pattern, type),
+    query = query,
     n_max = n_max,
     verbose = verbose
   )
 
   as_osf_tbl(res, subclass = "osf_tbl_file")
 }
+
+# The documentation only includes attributes that I validated are actually
+# sorted by the server. However, I'm including all potentially sortable
+# attributes here in case the OSF database allows for sorting on them in the
+# future.
+.osf_file_attributes <- c(
+  "date_created",
+  "date_modified",
+  "guid",
+  "id",
+  "name",
+  "path"
+)
