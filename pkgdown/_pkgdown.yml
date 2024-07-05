@@ -12,7 +12,7 @@ authors:
 navbar:
   structure:
     left:
-    right: [home, reference, articles, github]
+    right: [home, reference, articles, news, search, github]
 
 reference:
 
