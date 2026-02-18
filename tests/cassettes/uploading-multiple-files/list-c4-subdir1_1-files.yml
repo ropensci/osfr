@@ -1,0 +1,155 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/nk7tv/files/osfstorage/6995ef0ddf975a4b61c55410/?filter%5Bkind%5D=folder&filter%5Bname%5D=subdir1&page=1
+  response:
+    status: 200
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:56:07 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJy9VdFu2zAM/Bc+e3FSxMkiYNiHFIXBWFQsRJYMiXK7Bv73QU5tp+lWDGvaN0viHU/UmTyB
+        REYQ9yf
+        QEgRsdruC1FLJXbFV6+262C8r/L7ZQQb8qyUQoLShABkgs9f7yBRAnOAQE9xGYzKo
+        aqqOLvK4ttgkYI
+        h7qf0KMjhqm3IpZyR5yKBFrkFA/rfkOWQQ9DONhK13nU5QAS6owM7jgSCD
+        Bpm8RqOfSZYj6cIF5b8xB
+        Q75i4TEZzBwyS5WNU3CJTKVjZNa6avNyhPyvEdP7DFdu8ZQnwvQ
+        yGI8DTXeFZvzqu8zYDwEEPcPGVTR
+        e7JcxkC+rNCWlWsasgyCfaT5vCMftLMgVonNPZYYymg7
+        TY9Jg0ITqM/Ak0HWzoZat4OGFgf0S13FCYy
+        2x+FkCE3YE9SeFAiomdsg8hxbvUjFSWVaaJd3
+        d/nwwuNjSKl22wLX+82qKor1apmK11DyzKlPtzv757
+        V93oCu7ZOA56//VmmdpJDb45a7F8Wz
+        F9510iy+zyCx3EbDe2UZIuYaDDA4W8MfiG8t4DrPhZxXJ9mlu
+        hRVkURfJpYUX3qqnJfhRk56
+        +xh/Tnf1Rn02J9dWuQ9lTNSuowuOAbCI4TXRKvcUXPTVVN2x5/yzzWJr
+        HMqvyCTJEH/JnSw9
+        Tt3lk7P9TEPixzQiApmPeQ36/uHCSUr7MA2oNAvm2ULdNLjoadqffi3HaIbG3JI
+        v2zR4xGqZ
+        XDpGTM0b7hZL6PvfKdV5gg==
+  recorded_at: 2026-02-18 16:56:07
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/nk7tv/files/osfstorage/6995ef0fd957f4745b0ca869/?filter%5Bkind%5D=folder&filter%5Bname%5D=subdir1_1&page=1
+  response:
+    status: 200
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:56:07 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJy9Ve1u2zAMfBf+9uI4jZNFwLAHKQpBsahYiCwZEuV2Dfzug5zYTrOuGNaPX7Yl8ng6nckT
+        SEEC2P0
+        JtAQGm92uRFWstsv13V6tC4Hru3JbbiAD+tUiMFDaYIAMBJHX+0gYgJ3gEFO6jcZk
+        UNVYHV2k8duKJi
+        WGuJfaF7yADI7apmrKGYkeMmgF1cAg/1v5HDII+hlHyNa7TqdUBi6oQM6L
+        A0IGjSD0Whj9jJKPoAsXl
+        P9GGCjkFxLjkxcJ2YhAnFysapwOIQUhb5zUSt8sVh4FzWv4RF4k
+        CWoR6rMYjSzH3VCLVbk5f/V9BiQO
+        Adj9QwZV9B4t8RjQ80pYXrmmQUvAyEec9zv0QTsLrEho
+        7pGLwKPtND4mDkqYgH0GHo0g7WyodTtwaMW
+        QfVGYncBoexx2htCUe4LaowIGNVEbWJ6LVi+S
+        TEmwhXZ5t8qH275cy1LJXblV6+263C8r8X2zS+I1mP
+        xz6tPpzl56YaU/k26tlBLPb//N0jqJ
+        IbfHLXUXxrMr3vTUTL7PIKF8DIe3ZBkiZg2GNDhbwx+QPprAb
+        Z0rOi92smt2KapCKTxPKCme
+        e6ycl+FjnPTKZbxe7uaO+mwurq1y76qYoF2HVxhDwiKGl0BF7jG46KtJ
+        3bH7/LPNYmuckF9R
+        SaJB+pIzWXycussnV/uZxsWPaVgENO/zGvT9w5WTlPZhGlZpFsxTBrtpiOHTtD7
+        9Wo6EGRpz
+        i563aQSxYplcOkZMzRtWiyX0/W/I5Xkp
+  recorded_at: 2026-02-18 16:56:07
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/nk7tv/files/osfstorage/6995ef127043bf41ae435756/?page=1
+  response:
+    status: 200
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:56:08 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJztVttu4zYQ/ZcB/Ka1SOouoCgKFPmCPnWxEChyGBORRYOknHQN/XtB2XLs2Jtmm3jbh33y
+        hTNzZs4
+        MOWcHknsO9ecdaAk15FWVoWK0IGnSqpRyTJOsyBRE4P/aINSgdIcOIuDeW90OHh3U
+        O7gfgns/dF0EYo
+        XiwQx+/t3zdXDEpX/yEMGD7uUhDkSw4X4FNcSvADv9FaFmEWys2WqJFmow
+        TjlvLL8PMdbco9W8019RN
+        nPApXHKfvLovIvd0Ept6fzZ0HhOpuPON94MYoXH/CX32KyN1EqH
+        P4ERln8i7BMt/6B5neU1ocs0YYxU
+        cDAWFrn/B9s/IQJ88pYHulbcrfbErWUGNVApBGdJkmWs
+        YCTLFUkVlq1iBKUSSAILK86yPBBH2kwwwRi
+        lopR5gZJmWGSYZ7koypxJUuZYsTRLGSkrxguJ
+        OROyQpGVjJMcxgikeew7w6WDmowReH7voP78JQIxWI
+        u9bwaHthG8b4RZr7H3UHs74PP5Fq3T
+        poeahszMY8NdM/RbjY+BBsU7h2MEFjvutendSm+majd88lamm
+        9q4g073D9PJZBp8d7CyqKCG
+        lfcbV8cx3+hlaGNo6FKbeMviaQYPI0PZi5HJ4zASGKZ6N45jdJjwswG/
+        dHo54MHxUKT7mEQv
+        ZzueAc4zHiPojcR/jxq8Xdw/FH77KheTxXPhk9tUuOf2Hv1HJ/AS5ySds5PoNLt
+        gJVBy24Qo
+        wb6xKIyVt+vKdbgXPRqjZ3DdK/MuxBDabPEkxuSwHNx5IBpbdGaw4sju/CS6+PlFfO0tHT
+        bh
+        2v8AIIkd+h9R0fyUnUCdIszHr5Jvsd+vlTnCWtmXqe5tfh1s98tktUh+W7C7Bbs7MVqwuxlv
+        we6+
+        hRjckjupLQq/YPnaSFwkvx9yiGDl1903itkztB+mt7HjsHvfZQgX8FwbJOc2Of0AbaDe
+        og2uAd9CG6h
+        3aYNkWWWMZcVbtMFs+6o2qDgS5BUmohI50rZqc5YxUSaBFCnoqTYgOVYyY4IW
+        jCjBU8pKkmDSkkKkLW
+        OlUpQmmJBEpaLgbZXmeZbQSpYJa1vVFj+1wX+kDS5m+6c2+B9og8uu
+        3FobXCLeRhtce0tvog2uAd1EG
+        1wF+j5tcJX8m2qDC8RbaYOru/P7tMEVdsbxy8moK23dcbGH
+        5Tl/31jcHhc+Ph3/P95943m33+Jom01Y
+        3DUl4RrNFseVAmxJYBz/BophZq0=
+  recorded_at: 2026-02-18 16:56:08
+recorded_with: VCR-vcr/2.1.0

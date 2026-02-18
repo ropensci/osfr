@@ -1,0 +1,55 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/gkj32/files/osfstorage/?filter%5Bkind%5D=file&page=1
+  response:
+    status: 200
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:53:46 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJy9VduOmzAQ/ZeR8sYGMJcAUlVVqvIFfWpVIWOPg7sGI9tkt43498okZLPXVt3tvoE9c86Z
+        8bHnAJw
+        6CtW3A0gOFeRlmSGWBS+zjUg3adZEjBZpCQG4nwNCBUIqtBAAdc7IZnRooTrAbvTp
+        /ahUAKxFdq1Ht/
+        z3tPOJ2gpzpTSj6spjrN2tgwCuZc9PqBDAQF0LFYQvyLDyF0KVRgEMRu8l
+        R3PEtk4buvMgHXVoJFXyF
+        /J6QXyaXVHraqdH1uJZPqcO605zKaRfBBKR/CoiV3HxJc6rLKnS
+        dB1nRVnkcApmBqn7Q+xXCABvnaG+
+        Wy217bFvHc9814ucJ+mmKTe8aQQtClFkhDYJbghmZTmX
+        3VKS5VBBxpo0jzMWlXxDi6aJ6CbLiwLjImm
+        aWPAkEiQjZUzjNI95RARjQpA4jllOCY8FTAFw
+        fdMrTbmFKpoCcHRnofr2PQA2GoO9q0eLpma0r5nuOu
+        wdVM6MeLe/R2Ol7qGKvTJ9U1Nbj/1e
+        4o1vg6DK4hSAQUWd1L1t5TBXO9A5W2g1H9sBlOyv55051Oceo
+        DUooILWucFWYUgHuXZo3Vpb
+        sZY63JNwtuDiEYIpzwvONyIr8qbJm9BbAL2pD9M0BSeD3/f3o6SH/vaJ
+        pyLtGwl9ZOZwIbiv
+        eAqg1xz/ndVn23B3/SMhL/ZijrgrfE6bC3fU7NC9tYCHPBdy7u0El+p8FENOTe1
+        RfHxtkGnD
+        /9+pPE334Iym4I5c9kK/itFD6z1eYMwJ69HeB4pDg1aPhp27uzyBNrx7AV96PMfBX/t3IO
+        Ko
+        0L1HRctTdkF1ybBsv9h8g/1xjCwInTAPpR5jPo5GfZijVsmnFdmuyPYiaEW2C9+KbJ9j9GnJ
+        lkuD
+        zK1I3mmOq+TzSUMArevUM8UcO3Q00991x6J63WWAafp+YXUhjT3PdT88l+/B4P487/H2
+        vH6++9pRNY+
+        LAU09+EFdxZG/RkvEeaQAWUcwTb8BolrKKQ==
+  recorded_at: 2026-02-18 16:53:46
+recorded_with: VCR-vcr/2.1.0

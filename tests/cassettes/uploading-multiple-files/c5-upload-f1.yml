@@ -1,0 +1,116 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/h4m7z/files/osfstorage/?filter%5Bkind%5D=file&page=1
+  response:
+    status: 200
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-length: '128'
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:56:09 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJxFjEEKgCAUBe/y1hHW8l8lIj70C8ks1CQQ754tyt0wDJMwc2DQMDYw2m4elLBo5wPIXsYU
+        y5VPJ/F
+        jK/fvd3kfCeEIbECqlOKmk1cBdSrnWkRxXh8WhL5VyPkB01MqVg==
+  recorded_at: 2026-02-18 16:56:09
+- request:
+    method: PUT
+    uri: https://files.us.test.osf.io/v1/resources/h4m7z/providers/osfstorage/?kind=file&name=d.txt
+    body:
+      string: 'upload, file size: 2'
+  response:
+    status: 201
+    headers:
+      status: 'HTTP/2 201 '
+      server: nginx
+      date: Wed, 18 Feb 2026 16:56:13 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '1171'
+      x-waterbutler-request-id: 9b5931a4-c2f0-4122-ae7f-40fddb6e8cb7
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      string: '{"data": {"id": "osfstorage/6995ef2d7043bf41ae435764", "type": "files",
+        "attributes": {"extra": {"guid": null, "version": 1, "downloads": 0, "checkout":
+        null, "latestVersionSeen": null, "hashes": {"md5": "48a24b70a0b376535542b996af517398",
+        "sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d"}},
+        "kind": "file", "name": "d.txt", "path": "/6995ef2d7043bf41ae435764", "provider":
+        "osfstorage", "materialized": "/d.txt", "etag": "924b8659a9dd2de155fe3f88a96cca2b808179bafb6ae878cfc3db84161ac204",
+        "contentType": "application/octet-stream", "modified": "2026-02-18T16:56:13.122214+00:00",
+        "modified_utc": "2026-02-18T16:56:13+00:00", "created_utc": null, "size":
+        2, "sizeInt": 2, "resource": "h4m7z"}, "links": {"move": "https://files.us.test.osf.io/v1/resources/h4m7z/providers/osfstorage/6995ef2d7043bf41ae435764",
+        "upload": "https://files.us.test.osf.io/v1/resources/h4m7z/providers/osfstorage/6995ef2d7043bf41ae435764?kind=file",
+        "delete": "https://files.us.test.osf.io/v1/resources/h4m7z/providers/osfstorage/6995ef2d7043bf41ae435764",
+        "download": "https://files.us.test.osf.io/v1/resources/h4m7z/providers/osfstorage/6995ef2d7043bf41ae435764"}}}'
+  recorded_at: 2026-02-18 16:56:13
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/files/6995ef2d7043bf41ae435764/
+  response:
+    status: 200
+    headers:
+      allow: GET, PUT, PATCH, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:56:13 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJy9Vdtu2zAM/RcCeXNjW77FAoZhwJAv2NOGwZAlqhZqW4Ykp10D//sgp27StM2GtetjwnN4
+        DimS3oN
+        gjgHdgxJAIS/LDCURRZQmtUxjhmmSFXkKAbhfAwIFqVq0EABzzqh6dGg9+Xr09H5s
+        2wB4g/xGj2753b
+        POE8Xa3TkI4Eb14iEPBDAw1wCF8IKwVfcIlAQwGL1TAg1Q0FZapw279jk6
+        5tAo1qp7FNWScJFrmXWV0
+        yNv8NGhYA6rTgsllf8TSETyq4hcxZtvcU6znMbJOiaExF5+BnOD
+        zP0B+x0CwDtn5m42zDaH1nQiAwrp
+        hpG0LiIW1UmRZ0mWpaQuy5zJLC6ScuPrbBjJcqBQCIyz
+        LBMy4qSIooSUuImzukzqhPCsiHmCLEsFL/O
+        i3vgYq4ukLsuC1AURsYApAKFv+1YzYYFGUwCO
+        XVugP34GwEdjsHfVaNFUnPUV112HvQPqzIjH+A6NVb
+        oHGntn+rZithr7ncJb3wbJWotTAAZb
+        5pTubaOGudqBzWyp2/mh9tCq/maOzFDP3UNjUAKFxrnB0jBkg
+        1o7tG6trVwrHe5IOE/ZMhSb
+        IpFlXsosjoQsNjwK/aPjPLbTNAUvjvAz0vkIe+JDkfadjD6b3nAReOp4
+        CqDXAv9d1bNt2KRd
+        cX+xFzPiWPhMmwt3zFyje28D5zondp5EglN3HsVRMFP5LB5fGeTaiP/3Ki/Lnb3
+        RFBzFVS/1
+        mxR9ar3DkxwzYT3ap4ni0KDVo+GP3V2Ong2PN+/StRwHv/YfICSwRfcRFS2n7ETqVGEJX2
+        y+
+        wf7w4VgydNKcWz1gPo+m/TSjVsmXFdmuyPYEtCLbRW9Ftq8pelqyFcogdyuSd1rgKvn64CGA
+        xnXt
+        K8UcOnQYpr/rjsX2bcswL+CywI9XH8g6gmn6DVnEnGc=
+  recorded_at: 2026-02-18 16:56:13
+recorded_with: VCR-vcr/2.1.0

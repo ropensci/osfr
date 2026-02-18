@@ -1,0 +1,57 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://api.test.osf.io/v2/nodes/xe3yd/children/
+    body:
+      string: '{"data":{"type":"nodes","attributes":{"title":"component-1-1","category":"","description":"","public":false}}}'
+  response:
+    status: 201
+    headers:
+      status: 'HTTP/2 201 '
+      server: nginx
+      date: Wed, 18 Feb 2026 16:52:06 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      content-length: '4478'
+      vary: Accept, Cookie, origin
+      allow: GET, POST, HEAD, OPTIONS
+      x-content-type-options: nosniff
+      referrer-policy: same-origin
+      cross-origin-opener-policy: same-origin
+      x-frame-options: DENY
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: |-
+        eJy1mOFu2jAQx9/lpH4LhNLRbZGmSdMeYd+myjLOBW517My+tEMV7z7ZCSkQStfVfCPJ3e9/
+        d7bPNk9
+        QSpZQPAGVUMDtxtSfIQPeNAgFGFuihwwks6Nly+iDJRPr8FXZurEGDU+uJ9eQQYle
+        OWqYrIECIAMlGV
+        fWbfqn1rOthSKWnYlptc6CPgrlUDKGCOaz+e1kNp9cf/pxfVss5sVsMV0s
+        bhezD9Db1rakil43drgiz
+        64Xq6T2mEHjsHFkeHhRWXc/PCirNaoDB5YrD8XPuwykUui9cPi7
+        Rc9eoJFLHcJg12IWayU0KTQed7mp
+        1jk0LFqPTihphLJ1jUG98zn43qCryXuyJgiCLGsykMGj
+        I8aYjizh7siHvFDWdINj3UnsoYmwTqycbRt
+        RY73EweWR7uk4o6ZdalJDJXy7/IWKYzW2IR4d
+        S+vX1MRpodakS4cm/NZk7uPLaBWQT7B2WEEBa+bGF3
+        kuG5oyep5aX03J5g/zPE63PM7BfEfL
+        IYMa4xTdbrfbYYywFJRKahh1f0ItDphPpdTR8q8VaUZ3tfjG0
+        q2Qrxbfv+zW3pH+MHTJYngm
+        jtJd0lKTXTnZrEmJ9OIv80ehUN1oUsQXiOIkehRARRoTCUbUSMAjM5lV
+        Io0d7VAme7W/T3pH
+        CMahDSSKJ6LGRbXuPpFARI0E+jZsUqk880ZS4S2WYrkR3T6ZRO8IekZ0f39LLn4
+        AHwXRSBd3
+        sfdp/sGbTXl2ukaL4+NIbA4lGg6ngGQt4Rk4ylZWFWmS3ZbjmbhNWPJ94oFy6A+6ejvwYF
+        9+
+        GR9r7WTFl5hHJ8Aj8QvIvi5o33Fk6Px93p5vsa1/nrC9C0R5a9+9YhYPH2/4rHq0OLVitE21
+        0QTS
+        S20pfSMcd8E0C+NF/F42F5iip8iXy+78gnggfBTW6E3K/fIIOj5QD9e/FGo72lsOPUME
+        cSfr74OJsh9
+        w48MeWydXmEamh739qNcHEQcCS+lEcA9uwqGyrkxUhtPscU36G6UIV+uGw+Xz
+        //V3sCOVfjVH3pprvQ
+        fZB3Rxw271/WuikAE5OseMte7jgQd0vvt3ZD6dwXb7FzdXHAY=
+  recorded_at: 2026-02-18 16:52:06
+recorded_with: VCR-vcr/2.1.0

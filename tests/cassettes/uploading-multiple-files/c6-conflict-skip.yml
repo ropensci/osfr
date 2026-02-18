@@ -1,0 +1,55 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/xakfr/files/osfstorage/?filter%5Bkind%5D=file&page=1
+  response:
+    status: 200
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:56:27 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJy9VdFunDAQ/JeV7o0eYMAHlqqqUnVf0KdWFTL2OlgBjGxzSXvi3ytzx+WStmnVpnkDe2Zn
+        dz32HkF
+        yz4F9PoKWwIBWVYEq47Iqdirf5UWTCF7uUojAfx0RGCjdoYMIuPdWN5NHB+wIN1Og
+        D1PXRSBaFLdm8u
+        v/wPtA5Ft/7yGCWz3IcxyIYOS+BQbxM8JOf0NgJILRmoOWaIGBccp5Y/lN
+        iNFzj1bzTn9DWa8BV7mOO
+        197M4kWLxlK7rHujdRKh0UgCaFvEvImLT+mlBWUEbotKpqSEs5g
+        YZH732A/QQR47y0PDWm5a0+t6WUB
+        DJqE0IzkglZJ3hBeiSZvylJSSVNRpnKps+WkoMAgz4qC
+        57RJK5nlpRREFTuR5FSVqGgm8yIrsWmqjCZ
+        JojJRIVZFzskup4mUJS1gjkCau6EzXDpgyRyB
+        5zcO2OcvEYjJWhx8PTm0teBDLUzf4+CBeTvhw/4Brd
+        NmAJaGzMxdzV09DQeNd6ENincO5wgs
+        dtxrM7hWj0u1I1/YynTLQR2h08PtsrNAA/cIrUUFDFrvR8fim
+        I9669H5rXFqq018IPHistUU
+        dJepilaqSBOpdqUo4nDoGHx7nOc5Onv4sYV/ID21cCCei3QvlOgP7o1X
+        gccZzxEMRuLfqwa2
+        i+/5rbLP9mJBPBS+0JbCPbc36F86gac6V+k82omuswsogZLbOkQJ+NqiMFb+v1P
+        5udyTM5qj
+        B3E9KPNPiiG0OeBVjIWwndzjQGls0ZnJikt310fPxQ9v3nOv5TSGa/8KQhI79K9R0fqUXU
+        ld
+        K6zbzzbf4nAaHGuEXtmnqZ4w7ybbvV1Qm+z9huw3ZH8F2pD9qrch+18pBlq2l9qi8BtCeyNx
+        k304
+        5xBB6/vuF8WcOnQy0591x2H3b5cB5vnLldWVtu4yusPwXL9Hi4fLSMf7y/rl7hvPu2Vc
+        jGjrMYxmlib
+        hGq2Iy0gBsk1gnr8D9rzCgg==
+  recorded_at: 2026-02-18 16:56:27
+recorded_with: VCR-vcr/2.1.0

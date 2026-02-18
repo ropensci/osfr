@@ -1,0 +1,61 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/p8u9r/files/osfstorage/6995eee9d957f4745b0ca85d/?page=1
+  response:
+    status: 200
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:55:12 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJztVttu4zYQ/ZcB/Ka1SErUDSiKAkW+oE9dLASKHMZCZFEgKSddQ/9eUI4cJ/am2Sbe9mHf
+        bPHMnJn
+        hcObsQQkvoPq8h1ZBBVlZckSUOUmTRqdUYJrwPC0gAv/XgFCBbjt0EIHw3rbN6NFB
+        tYfbMZj3Y9dFID
+        co78zol/+92AZDXPsHDxHctb169AMRDMJvoIL4FWLXfkWoWASDNbtWoYUK
+        jNPOGytug4+t8Ghb0bVfU
+        dWLQzc2qrW0pvFC3Anna29GucFjrEp4rLdGtboNH4ERln0i7BMt
+        /qBZxXlFinWWZpSU8AiWFoX/B+yf
+        EAE+eCtCaTbCbQ5F2ioOFVAlpWBJwjnLGeGZJqnGotGM
+        oNISSch4IxjPQpFIwyWTjFEqC5XlqCjHnGP
+        GM5kXGVOkyLBkKU8ZKUomcoUZk6pEyQsmSAZT
+        BMrc950RykFFpgi8uHVQff4SgRytxd7Xo0NbS9HX0m
+        y32HuovB3x6XyH1rWmh4qGyMx9LVw9
+        9rsW70MZtOgcThFY7IRvTe827TBnO4jZWptuvrI9dG1/N5/M0
+        GC7h41FDRVsvB9cFcdiaNce
+        nV8bp9etiXcsnvttaY9SlTzXaZ7yhkhRcBWH68fQwftpmqLHbn7ezGdG
+        L5s5GD4m6T4o0LM+
+        jheC5xFPEfRG4b9nDdYuHoqxtK/WYkY8JT6bzYl7YW/Rf3QAL3lOwnl2Ep1GF1A
+        SlbB18BLw
+        tUVprLrerVyme3FHU/RE3vbavIsxuDY7PPExG6xH99wRjS06M1p5rO4y/lz8NP1em5vjEJ
+        79
+        DyBS2KH/ERkto+yE6pRhOX61+Bb7wwpZPGy1fRnqAfPraLtfZtQq+W3Fblbs5gS0YjcL34rd
+        fIsx
+        mCU3qrUo/YplW6Nwlfz+GEMEG7/tvpHMoUKHZnpbdRx273sM4QE+H536Bab5AB2g36ID
+        LhG/Vwfo9+g
+        AStcppzzL36ADjthXdUApkKAoMZGlzJA2ZZMxzmSRlBy1kvRUB5AMS8WZpDkj
+        WoqUsoIkmDQkl2nDWK
+        E1pQkmJNGpzEVTplnGE1qqImFNo5v8pw74j3TAWR//1AH/Ax1wfivX
+        1gHnjNfRAZfm5lV0wCWiq+iAi
+        0TfpwMuFv+qOuCM8Vo64OKe/D4dcKE60/TlpNV1a91xiYfl
+        ufweLO6Oyx0fjt+Pb9940R02Ntp6CEu6
+        oiQ8owVxXCnA1gSm6W8bUWDd
+  recorded_at: 2026-02-18 16:55:12
+recorded_with: VCR-vcr/2.1.0

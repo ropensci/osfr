@@ -1,0 +1,112 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://api.test.osf.io/v2/nodes/
+    body:
+      string: '{"data":{"type":"nodes","attributes":{"title":"osfr-test-html-entities","category":"project","description":"","public":false}}}'
+  response:
+    status: 201
+    headers:
+      status: 'HTTP/2 201 '
+      server: nginx
+      date: Wed, 18 Feb 2026 17:00:31 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      content-length: '4366'
+      vary: Accept, Cookie, origin
+      allow: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS
+      x-content-type-options: nosniff
+      referrer-policy: same-origin
+      cross-origin-opener-policy: same-origin
+      x-frame-options: DENY
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: |-
+        eJy1mOFu4zYMx9+FwH1z4lyGdncGhgHDHmHfhoOgyHTCVZY8im4RFHn3QbLjJnHaIjvlWyKT
+        vz8piZT
+        lV6i1aKhegWqo4OXR8B4KkH2HUIHzNQYoQIswbXrBEC2FxManPjS8EAyy2ElrF+iE
+        hJJ9jcEwdULeQQ
+        VQgNGCW897qKBj/w8aiYN9EN8qQ6IHS9dbW8SAUBlGLRhDWq/Wj4vVevH1
+        219ff61Wq+qX1fLb98eH1
+        XcYbVtfU0OfGzNuKQiPYo22AQvoGDsmJ9NA4/lp+mO8tWjOHERv
+        A1R//yhAG4MhKMZ/ewwSFDq9sTEM
+        4R6LNHnKkkEX8Jib6ZnRieoDsjLaKePbFqP64HP2vENu
+        KQTyLgqCrltyUMALk2BKR9fw48KHgjLeDav
+        l+Sr23ER5Vlv2fadabDc4ubzQE11m1PUbS2aa
+        idBv4kqm2TjEeGya2rCjLu0TsyNbM7r425J7SoPJKi
+        JfYcfYQAU7kS5UZak7WsbdtPShWZIv
+        n9dl2n9l2pTlkVZCAS2mPXs4HA7TGmGtKJfUtOrhilpasJBLa
+        aCVvzdkBfnLwx+ieYvy5eHP
+        347FeKE/LV22GN6Is3Q3tLHkt6y7HRmVX/x9/iwUajtLhuQOUVxFzwJo
+        yGImwYSaCQQUIbfN
+        pHGkncsUnzb8xegI0Ti2gUzxJNR8Uj0/ZRJIqJnA2IZdLpU33kwqjmKtNns1HJx
+        Z9C6gH4ie
+        nm/Zxc/g89qs4+nfEGaryDfgTEw3DVnSQ8cPQtJnzPiUeKYcy9M2twPPjsX38akyWTdyj2
+        W8
+        Ap6J30H2c0H/Eyf24B/K/uMO14e39ja6QJL3XvKkeWN/HeStz9XnI+m9rpC/D82bUJ7CeBd/
+        ks0d
+        tug18v2y+7ggnglflHd2n/O4uoDO32en21cOtSPtlpqYIoiGx+tYpuwn3PxdSzzrLeaR
+        GWG3v2mNQaS
+        FwFqziu7RTTEaz3WmabjOns/JeKFT8WbbSbz7/X/9I+xCZazmxIufDU4gp4Cp
+        sw7Vd0MrJqaPmGmux3
+        jgGTkM3yjWyxUcDv8BNPABMQ==
+  recorded_at: 2026-02-18 17:00:31
+- request:
+    method: POST
+    uri: https://api.test.osf.io/v2/nodes/w6cry/children/
+    body:
+      string: '{"data":{"type":"nodes","attributes":{"title":"> data & < files","category":"","description":"","public":false}}}'
+  response:
+    status: 201
+    headers:
+      status: 'HTTP/2 201 '
+      server: nginx
+      date: Wed, 18 Feb 2026 17:00:32 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      content-length: '4491'
+      vary: Accept, Cookie, origin
+      allow: GET, POST, HEAD, OPTIONS
+      x-content-type-options: nosniff
+      referrer-policy: same-origin
+      cross-origin-opener-policy: same-origin
+      x-frame-options: DENY
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: |-
+        eJzFmOFu2zgMx1+lELB+cuM0u3YHF4cDDvcI+zYMgiLTDhdZ8ii6RVDk3QfJjpvEabpuCvYt
+        tsXfn6Q
+        kUsqzKBUrUTwLLEUh/lrTNy8ywZsWRCGsKyE8KmbCZcfgw0hGNuHrdc0PV8H86lo1
+        7cPVteGHqwpNNC
+        nBa8KW0VlRCJEJrRhqR5vhqfPsGqmRVT/EdsZkwRmQmkAxBHcW88X9zXxx
+        c/v359tPxXxefLyd3d99u
+        v24EMPYxpVY4duDCWr0TINYpYyHTLQELaHl8UXlaD0+aGcM6AMD
+        VrUXxZevmVBag/eS4HsHnr0Eq5Ym
+        uMHUQRYTJw1qsB52semOCCzLzgNJrazUrmkgqPc2B99b
+        oAa9R2eDoFBlg1Zk4omQIYajSvH1yAa91M7
+        2M+XoJPZwiHQka3JdKxtoljCaPOEajyNqu6VB
+        PWbCd8tvoDlmYxv8MTG1foVtXCN6haYksOG3QbuOL+
+        OogHwWK4JKFGLF3Poiz1WLMwbPM+er
+        Gbr8cZHHtZfHBZnvaLnIRANxvW632+04R1BKTCU1zro/oRYnz
+        KdS6mn5vxUaBvpw9x8rqoE/
+        3P3/z24jHumPU5fMhxfiJNwlLg26mlS7Qi3Ti7/On7iCTWtQI1/Ai5Po
+        iQN9WUsiGFETAQ/M
+        aOtEGjvaoUz2ZrG/GQxFGBzKQCJ/ImqaVEfrRAIRNREYyrBNpfLCm0iFt1DK5Ub
+        2TTOJ3hH0
+        jOh+f0sufgCfONEqil3s9zSf7jVtzi7XOOL4bBKLQwmWwykgWUl4AU6iVVWFBlXfcjwjdw
+        lT
+        vk88UA71wVTvBx705dfxMdekKr7EOjoBnohfQPZtQfcbR4be3ufd+RLb7dXXwUREeef+5I4x
+        LlWj
+        CaTXylL6Qjitgmk2xqv4vWgusERPkS8X3fkN8YjwJJ01m5T98gg6PVCP178Uajvaew49
+        owexkw33wUT
+        Rj7jpYY8dqRrSyAyw9x/1BifiRECpSAbzYCYJtKMyURpOs6c5GW6UMlytWw6X
+        z1/X38GOVIbdHHkrbs
+        weZB/Q+y12u+9nAxWZQMJzzJjrwR/xCOT7f0cWs7nYbn8ASbwmvA==
+  recorded_at: 2026-02-18 17:00:32
+recorded_with: VCR-vcr/2.1.0

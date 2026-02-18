@@ -1,0 +1,103 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/enust/files/osfstorage/?filter%5Bkind%5D=folder&filter%5Bname%5D=.dir&page=1
+  response:
+    status: 200
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-length: '128'
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:53:24 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJxFjEEKgCAUBe/y1hHW8l8lIj70C8ks1CQQ754tyt0wDJMwc2DQMDYw2m4elLBo5wPIXsYU
+        y5VPJ/F
+        jK/fvd3kfCeEIbECqlOKmk1cBdSrnWkRxXh8WhL5VyPkB01MqVg==
+  recorded_at: 2026-02-18 16:53:24
+- request:
+    method: PUT
+    uri: https://files.us.test.osf.io/v1/resources/enust/providers/osfstorage/?kind=folder&name=.dir
+  response:
+    status: 201
+    headers:
+      status: 'HTTP/2 201 '
+      server: nginx
+      date: Wed, 18 Feb 2026 16:53:25 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '821'
+      x-waterbutler-request-id: 32ffceac-8d5b-46e8-be5f-37dda8e28d85
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      string: '{"data": {"id": "osfstorage/6995ee85d957f4745b0ca845/", "type": "files",
+        "attributes": {"extra": {}, "kind": "folder", "name": ".dir", "path": "/6995ee85d957f4745b0ca845/",
+        "provider": "osfstorage", "materialized": "/.dir/", "etag": "5caf8ab73c068565297e455ebce37fd64b6897a2284ec9d7ecba8b6093082bcd",
+        "resource": "enust", "size": null, "sizeInt": null}, "links": {"move": "https://files.us.test.osf.io/v1/resources/enust/providers/osfstorage/6995ee85d957f4745b0ca845/",
+        "upload": "https://files.us.test.osf.io/v1/resources/enust/providers/osfstorage/6995ee85d957f4745b0ca845/?kind=file",
+        "delete": "https://files.us.test.osf.io/v1/resources/enust/providers/osfstorage/6995ee85d957f4745b0ca845/",
+        "new_folder": "https://files.us.test.osf.io/v1/resources/enust/providers/osfstorage/6995ee85d957f4745b0ca845/?kind=folder"}}}'
+  recorded_at: 2026-02-18 16:53:25
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/files/6995ee85d957f4745b0ca845/
+  response:
+    status: 200
+    headers:
+      allow: GET, PUT, PATCH, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:53:25 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJy9VduO2jAQ/Zd5tpLdFQkQqeqHVFVk4gmxcOzIM4Z2Uf69siGEpXRVdem+xZdz8cyJfQQl
+        WUJ1BK2
+        ggnK9LhBXhVoXy3axXBSbp0auFgUI4J8DQgWtNkggQDJ7vQmMFMHbEOE2GCOg6bDZ
+        ucDT2Mo+AjOlPQ
+        jYaRuFWmcUxvEguYMK8j8p5yCA9CtObIN3ex2hFThqiZ2XWwQBvWT0Whr9
+        iqqeSKNmJDCSuGYXmg4vN
+        pVkrHundKtvJhuPkuc5/ME+VaiT1J2O26tiWqVOvhTlaTSOAlhu
+        Capv3wU0wXu0XAdCXzfS1o3re7QM
+        FfuA8/oePWlnoXqObO5QS6qD3Ws8RA+tNISjAI9GsnaW
+        Oj0kD4NM6HMhqyMYbXdpJW2N2CN0HluooGM
+        eqMpzOeiMkThz1Gba5fuXPPXzXP1liQtVrpRa
+        tsWq3GzKZSxejykgYzzdnbD8DroNSwSevv7ZpXUKKU
+        cbiM+O5+a/G53Z/CggsjzGw3tlSTvm
+        GiQYnKLht8iPNnCrc2XnzYq4dhd3NaikryNL3F97bJxX9Jgk3
+        WnGfbmbHo1iFte2dR9SjNRu
+        j1ccCZAFekv0nHskF3xzqe50yfx1zMJgnFSfoaTQIH/KmSweLrfLf1b7
+        Gl+FL5c3gdB8LGsp
+        39P/cblf4SV7gnH8BRK/U2M=
+  recorded_at: 2026-02-18 16:53:25
+recorded_with: VCR-vcr/2.1.0

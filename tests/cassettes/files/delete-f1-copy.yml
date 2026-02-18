@@ -1,0 +1,20 @@
+http_interactions:
+- request:
+    method: DELETE
+    uri: https://files.us.test.osf.io/v1/resources/gc35q/providers/osfstorage/6995ef75d957f4745b0ca879
+  response:
+    status: 204
+    headers:
+      status: 'HTTP/2 204 '
+      server: nginx
+      date: Wed, 18 Feb 2026 16:57:26 GMT
+      x-waterbutler-request-id: eec9235a-d47a-4602-8693-131c96a885e6
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: eJwBAAD//wAAAAE=
+  recorded_at: 2026-02-18 16:57:26
+recorded_with: VCR-vcr/2.1.0

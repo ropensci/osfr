@@ -1,0 +1,57 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://api.test.osf.io/v2/nodes/5v73t/children/
+    body:
+      string: '{"data":{"type":"nodes","attributes":{"title":"component-1","category":"","description":"","public":false}}}'
+  response:
+    status: 201
+    headers:
+      status: 'HTTP/2 201 '
+      server: nginx
+      date: Wed, 18 Feb 2026 16:52:05 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      content-length: '4476'
+      vary: Accept, Cookie, origin
+      allow: GET, POST, HEAD, OPTIONS
+      x-content-type-options: nosniff
+      referrer-policy: same-origin
+      cross-origin-opener-policy: same-origin
+      x-frame-options: DENY
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: |-
+        eJzFmNtu2zAMht+FQO/cOE1Pg4FhwLBH2N1QCIpMJ1xlyZPodkGRdx8kO24SJ+m6KthdbIvf
+        T1ISKeU
+        FSskSihegEgr4jderEjLgVYNQgLEleshAMjuat4w+jGRiHb4qWzfWoOHLK8igRK8c
+        NUzWQAGQgZKMC+
+        tW/VPr2dZCEctuiGm1zoI6CuVQMgb92XR2dzmdXV59+n51V9zOiunN5GZ6
+        fzO7h35sbUuq6O3BDhfk2
+        fVildQeM2gcNo4MDy8q6x6HB2W1RrVjwHLhofjxkIFUCr0XDn+1
+        6NkLNHKugxvsWsxipoQmhcbjJjbV
+        OoeGRevRCSWNULauMah3NjvfG3Q1eU/WBEGQZU0GMnh2
+        xBjDkSU87NmQF8qabmqsO4jdHSKsEwtn20b
+        UWM9xMHmmR9qPqGnnmtSQCd/Of6LimI118EfH
+        1PolNXFRqCXp0qEJvzWZx/gyjgrIF1g6rKCAJXPjiz
+        yXDU0YPU+sryZk86dZHhdbHldgvqHl
+        kEGNcYGu1+v1MEdYCkolNcy6P6AWJ8ynUupo+ZeKNKO7uP3K0
+        i2QL26/fd7svD39YeqS+fBK
+        HIU7p7kmu3CyWZIS6cWP80euUN1oUsRn8OIgeuRARRoTCUbUSMAjM5lF
+        Io0NbVcme7O6X/aG
+        EAaHMpDIn4gaJ9W6x0QCETUS6MuwSaXyyhtJhbdYivlKdF0yid4e9ITodn9LLr4
+        DHznRSBe7
+        2Mc0b5/ur/nkco0j9g8jsTiUaDicApKVhFfgKFpZVaRJdi3HM3GbMOXbxB3lUB909X7gTl
+        8+
+        jo+5drLic6yjA+CR+Blk3xa0HzgydPY+b0+X2Na/LtjeBKK8tf9zx2ibqtEE0rGylL4Qjqtg
+        mo1x
+        FL8VzRmW6CHy+aI7vSGeCJ+FNXqVsl/uQccH6uH6l0JtQ3vPoWfwIHay/j6YKPoBNz7s
+        sXVygWlketj
+        7j3q9E3EisJROBPNgJhwq68pEaTjMHuekv1GKcLVuOFw+/11/A9tT6Xdz5C25
+        1luQbUDnN2x2398GCh
+        mQo1PMmOveH3hC57t/R2aTKazXfwAVSiDE
+  recorded_at: 2026-02-18 16:52:05
+recorded_with: VCR-vcr/2.1.0

@@ -1,0 +1,53 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/files/6995ee98d957f4745b0ca849/
+  response:
+    status: 200
+    headers:
+      allow: GET, PUT, PATCH, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:53:45 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJy9VduOmzAQ/ZeR8kYCmEsAqaoqVfmCPrWqkLHHwQ1gZJtsuxH/XpmETTa7m1bd7T4mnnOZ
+        4/FwAE4
+        theIAkkMBaZ4niHnG82Qt4nWcVAGjWZyDB/ZXj1CAkA0a8IBaq2U1WDQOvB0cvBua
+        xgNWI9upwc6/O9
+        o6oDJCLxvFaLN0HCv704IHO9nxEyt40FNbQwH+DRtG3iMUceBBr9VectRH
+        bmOVpltH0lKLWtJG3iMvZ
+        8bn1RtqbGnVwGp8sM+pxbJVXArp/gQSkHQZkGWYfQnTIomKOF6F
+        SZZnKZyKmUZq/1D7FTzAn1ZPUdfU
+        1MfcWp641LOUR/G6yte8qgTNMpElhFYRrgkmeT61XVOS
+        pFBAwqo4DRMW5HxNs6oK6DpJswzDLKqqUPA
+        oECQheUjDOA15QARjQpAwDFlKCQ8FjB5wddc1
+        inIDRTB6YOnWQPHtuwds0Bo7Ww4GdcloVzLVtthZKK
+        we8Hy+R22k6qAInTN1V1JTDt1e4p2L
+        QdDG4OiBxoZaqTpTy37qtqcTWqhmurYDNLLbTSdTqcMeoNYoo
+        IDa2t4Uvk97ubJo7EoZsZLK
+        3xN/GsF5RgjGPM04X4skS6sqrXw3AjjN9DiO3rPz/QR0Pd8OeGrSvJHR
+        J8PszwKPHY8edIrj
+        v6s6tPG3ux8RuZnFVHFufIJNjVuqt2jf2sC1zoWdRyfepTtXxZBTXToWV19qZEr
+        z/3crz8td
+        3dHoncVlJ9SrFB212uMFxwRYDeYxUehrNGrQ7CHdeQUa/7wBby3PoXfP/h2EODZo36OjeZ
+        Vd
+        SF0qzMc3w9fYHT8jM0Mr9LXVY83HQTcfpqpF9GlBNguyuShakM2styCblxQdLNpwqZHZBUlb
+        xXER
+        fT558KC2bfNCM8eEjsP0d+kYbF73GKYHOD/gh60PZBXAOP4GmR+qhA==
+  recorded_at: 2026-02-18 16:53:45
+recorded_with: VCR-vcr/2.1.0

@@ -1,0 +1,280 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/5v73t/children/?page=1
+  response:
+    status: 200
+    headers:
+      allow: GET, POST, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:52:10 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJzFmNuO2zgMht+FQO88OXWmszCwWGCxj7B3xUBQZDphR5Zcic40CPLuheRDDk7STqugd44j
+        fj9JUZT
+        kHRSSJeSfd0AF5PANP24LyIC3NUIOxhboIQPJ7GjZMHrId8DEOvyrbFVbg4Yf5pBB
+        gV45qpmsgRwgAy
+        UZV9Ztu1+NZ1sJRSzbIabROgvyKJRDyRj0F7PFp4fZ4mH+1//zT/nTIp89
+        Th5nz4+LZ+jGVragkn482
+        OGKPLtOrJTaYwa1w9qR4eFFad3r8ENZrVGdGLBcecg/v2QglULv
+        hcOvDXr2Ao1c6uAGuwazmCmhSaHx
+        2MemGufQsGg8OqGkEcpWFQb11ubk/xpdRd6TNUEQZFGR
+        gQzeHDHGcGQBL2c25IWypp0a6y5iT4cI68T
+        K2aYWFVZLHEze6JXOI6qbpSY1ZMI3yy+oOGZj
+        H/zRMbV+TXUsCrUmXTg04VmTeY0v46iA3MHaYQk5rJ
+        lrn0+nsqYJo+eJ9eWE7HSzmMZim8YK
+        nPa0KWRQYajQ3X6/3w9zhIWgVFLDrPsLanHCfCqlljb9pyTN6
+        D48/cvSrZA/PP33d7/yzvSH
+        qUvmw4E4CndJS0125WS9JiXSi1/nj1yhqtakiO/gxUX0yIGSNCYSjKiR
+        gEdmMqtEGj3tVCbr
+        2vv17v7QGUIYHNpAIn8iapxU614TCUTUSKBrwyaVyoE3kgpvsRDLrWh3ySR6Z9A
+        bosf7W3Lx
+        E/jIiVq6uIv9nubT5vkj3yzXOOL8MBKbQ4GGwykgWUs4AEfRyrIkTbLdcjwTNwlTfkw8UQ
+        79
+        QZfvB57sy9fxMddOlnyPOroAHonfQfbHgvY3jgytvZ82t1ts4w8F25lAlLf2T64YbVNtNIF0
+        rS2l
+        b4TjLphmYVzFH0VzhxK9RL5fdLcXxIbwTVijtyn3yzPo+EA9XP9SqPW09xx6Bg/iTtbd
+        BxNFP+DGhz2
+        2Tq4wjUwHe/9Rr3MiTgQW0olgHsyEQ2VdkSgNl9njnHQ3ShGu1jWHy+ev6/ew
+        M5VuNUfemit9BDkGtH
+        5Dv/p+NlDIgBzdYsJ+/3LkQknOc/95QMvDc+1w0z8b/Da870IBtiw1
+        5PMM6vCtIJbSfBbC60ds0Pn20
+        8tiMoP9/jtaxEBp
+  recorded_at: 2026-02-18 16:52:10
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/xe3yd/children/?page=1
+  response:
+    status: 200
+    headers:
+      allow: GET, POST, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:52:11 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJztWNtu2zgQ/RcCfVNsx62droDFAov9hH0rAoGWRvZsKFJLjpIahv+94EXyRbbrNJSDon2T
+        ZfKcM0N
+        yODobVnDiLP2yYViwlM3XsvqDJYzWNbCUSVWAYQnjRBoXDYFh6YYRkrD/5qqqlQRJ
+        d/d39yxhBZhcY0
+        2oJEsZS1jOCZZKr8OvxpCqshyJ+yGyESKxAiDLNXACq2A6mc7vJtO7+8//
+        3s/T2TSdzEaz2Xw2+cTC2
+        EoVWOL3B2tYoiEdyEouDCSs1lBrlNS9KJV+6n7kSgjIDyYQXxqW
+        fnlMGM9zMCbT8H8DhkwGki+ElUG6
+        gcTlKhOYgzTQxpY3WoOkrDGgs5zLLFdVBZbdzzn4vwZd
+        oTGopCVkvKhQsoS9aCRw4fCCPR7NQZPlSvr
+        FUfok7OGQTOlsqVVTZxVUC+imvOATHkdUNwuB
+        eZcJ0yz+g5xcNrZWj3CpNSus3bbIVygKDdI+C5RP7q
+        UbZSE3bKWhZClbEdUmHY95jSMCQyNl
+        yhGq8fN07Lbb2O3BcYs2ZgmrwO7RzXa73XZrBEWGsai6VTcn2
+        NyCmVhMHm38V4mCQH+Y/U1c
+        L4E+zP75sz17R/zd0kXTsEPshbvAhUC11LxeYZ7FJz+P35OCVS0wRxpA
+        xUnonoASBUQidFA9
+        AgNEKJeROFq0Q5okFPjz9f0uTGR2sC0DkfQ4qH5SlX6KROCgegShDMtYLDu8HpV
+        9C0W2WGf+
+        nozCdwR6gXT/fotOfgDeE1Fz7W6xt3F+hY/r4uJ2dSOO2xFXHAqQZLuAaCVhB9iLlpclCu
+        T+
+        yjGE1ERM+T7iAbOtD6J8PeDBvXwe3uVa85KG2EcngHvkA9B+n1C9oWXw8824uVxiG7PbsGEK
+        c/RK
+        vfnEzJ4fPtJFdjfi1IkRKtZFY5HOlaX4hbBfBeMcjLPwe9EMsEVPIQ8X3eUD8Yzwkikp
+        1jHvyyPQfkP
+        dff7FYGvRXtP0dArcTRa+ByNF38H1mz1Smi8hDk0Ae32rF0S4hYCC68xOt9My
+        DbnSRaQ0nMbu5yR8UW
+        b207om+/H54/wt2BFLOM0Ob0WV2APZB/C6WXv6rg2UJQw1XsK0uQ4r
+        8vDE5cuPmCvT4cyV+Wg+/zz/9
+        HCVubI3+Le58nOaK24P3sZcCVQ3MFdapgvmSnv2BjNXWg3v
+        Yq548vc2V7yKG5ornnBYc8VzXGWunKjv
+        8c0Vr2dAcyUkdWBzxbPIm5krnk+8j7lyTP7rmCuh
+        JNzeXAnE8cwVD/i+5orXcHNzpQ39t7kypLkSisT
+        Q5spBLepXwTgHQ9zaXDmIKqa5ciG6m5or
+        XsetzJXQzF5jrhw1PcOYK17P4OZK6PWuMFdOtnqDmythWX
+        46c8XrfoW50k04b674FdhuH/ck
+        lKgNtfaA4LvnWsNz+yzha/c+hMJIERcsnSastl6B20r3ExteO+IZt
+        PHWy3Q0YdvtN4gaUns=
+  recorded_at: 2026-02-18 16:52:11
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/6ynm9/children/?page=1
+  response:
+    status: 200
+    headers:
+      allow: GET, POST, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-length: '128'
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:52:12 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJxFjEEKgCAUBe/y1hHW8l8lIj70C8ks1CQQ754tyt0wDJMwc2DQMDYw2m4elLBo5wPIXsYU
+        y5VPJ/F
+        jK/fvd3kfCeEIbECqlOKmk1cBdSrnWkRxXh8WhL5VyPkB01MqVg==
+  recorded_at: 2026-02-18 16:52:12
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/7kanw/children/?page=1
+  response:
+    status: 200
+    headers:
+      allow: GET, POST, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-length: '128'
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:52:12 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJxFjEEKgCAUBe/y1hHW8l8lIj70C8ks1CQQ754tyt0wDJMwc2DQMDYw2m4elLBo5wPIXsYU
+        y5VPJ/F
+        jK/fvd3kfCeEIbECqlOKmk1cBdSrnWkRxXh8WhL5VyPkB01MqVg==
+  recorded_at: 2026-02-18 16:52:12
+- request:
+    method: DELETE
+    uri: https://api.test.osf.io/v2/nodes/7kanw/
+  response:
+    status: 204
+    headers:
+      status: 'HTTP/2 204 '
+      server: nginx
+      date: Wed, 18 Feb 2026 16:52:13 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      vary: Accept, Cookie, origin
+      allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+      x-content-type-options: nosniff
+      referrer-policy: same-origin
+      cross-origin-opener-policy: same-origin
+      x-frame-options: DENY
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: eJwBAAD//wAAAAE=
+  recorded_at: 2026-02-18 16:52:13
+- request:
+    method: DELETE
+    uri: https://api.test.osf.io/v2/nodes/6ynm9/
+  response:
+    status: 204
+    headers:
+      status: 'HTTP/2 204 '
+      server: nginx
+      date: Wed, 18 Feb 2026 16:52:13 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      vary: Accept, Cookie, origin
+      allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+      x-content-type-options: nosniff
+      referrer-policy: same-origin
+      cross-origin-opener-policy: same-origin
+      x-frame-options: DENY
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: eJwBAAD//wAAAAE=
+  recorded_at: 2026-02-18 16:52:13
+- request:
+    method: DELETE
+    uri: https://api.test.osf.io/v2/nodes/xe3yd/
+  response:
+    status: 204
+    headers:
+      status: 'HTTP/2 204 '
+      server: nginx
+      date: Wed, 18 Feb 2026 16:52:14 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      vary: Accept, Cookie, origin
+      allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+      x-content-type-options: nosniff
+      referrer-policy: same-origin
+      cross-origin-opener-policy: same-origin
+      x-frame-options: DENY
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: eJwBAAD//wAAAAE=
+  recorded_at: 2026-02-18 16:52:14
+- request:
+    method: DELETE
+    uri: https://api.test.osf.io/v2/nodes/5v73t/
+  response:
+    status: 204
+    headers:
+      status: 'HTTP/2 204 '
+      server: nginx
+      date: Wed, 18 Feb 2026 16:52:15 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      vary: Accept, Cookie, origin
+      allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+      x-content-type-options: nosniff
+      referrer-policy: same-origin
+      cross-origin-opener-policy: same-origin
+      x-frame-options: DENY
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: eJwBAAD//wAAAAE=
+  recorded_at: 2026-02-18 16:52:15
+recorded_with: VCR-vcr/2.1.0

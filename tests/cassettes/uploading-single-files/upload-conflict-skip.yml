@@ -1,0 +1,55 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/gkj32/files/osfstorage/6995ee94d957f4745b0ca847/?filter%5Bkind%5D=file&page=1
+  response:
+    status: 200
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Wed, 18 Feb 2026 16:53:53 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJy9VduOozgQ/ZeS8kaHqyEgrVYrrfIF+7SjESrsInjbYGSbdO9E/PvIJKTTmZme0dzewD5V
+        51T52HU
+        CgQ6hencCKaCCvCwZEUaiZEWbFRlrIo67jCAA9/9IUEErFVkIAJ0zspkcWahOcJh8
+        +DApFQDviD/qya
+        3/A/Y+UNvWPCjNUT34HFv37CCARzmIS1YIYETXQQXhGzKs/EBQsSyA0eij
+        FGTOua3TBg8e0aMjI1HJD
+        yTqNaMvM/y8BIXW1U5PvKNrDQId1b0WspV+EZIoyR+i5CHe/RPn
+        FUsrlmzTtGBRCRcwN4TuK9h/IQB6
+        dgZ9yzq03bl5vWC+BXmTp03Es6xlTSniMsciY5SzXVE2
+        FHNfe4cJy6GCHaO8jJsWsRCMZzmPsozyHWu
+        KkmKxy5OW502DcZES27XEIiZ2Jcci5WnUsLiF
+        OQChnwalUVioojkAhwcL1bv3AfDJGBpcPVkyNceh5r
+        rvaXBQOTPRy/6RjJV6gCr2yvRTjbae
+        hqOkJ9+GFpWlOQBDCp3Ug+3kuFQ74hLdarWc3QmUHB6XnQXqY
+        0/QGWqhgs650VZhiKPcOrJu
+        q227lTo8JuHiw4tRyuzOKEXofUDe2ad5noOLy1+Z/NOge5P7wEuR9ucI
+        /dTR4UrwWvEcwKAF
+        fT+rj7bh4fG/NHmzFwvipfAlbCncoTmQ+9kC7nlu5LzaCW7VeRQngab2WTy+NsS
+        1Eb/uVD5P
+        d3dGc/BCLodW/xCjT62PdJNjCdhO9nWiODRk9WT4tbvrO2jDl2fwrRd0Gv21/w1EghS531
+        HR
+        +pTdUN0yrNtvNt/QcJ4la4a+NfdSz5g/J6P+WFCb9K9Nst8k+xvQJtmvfJtk/yVGH5buhTTE
+        3SbJ
+        ey1ok/590RBA53r1hWLOHTqb6du6Y0n92GWAeX5/Y/VWGnsd7n54rt+joeN16NPzdf16
+        97VDtYyLkUw
+        9+mldxZG/RiviOlIg2UYwzx8BpNTOnQ==
+  recorded_at: 2026-02-18 16:53:53
+recorded_with: VCR-vcr/2.1.0

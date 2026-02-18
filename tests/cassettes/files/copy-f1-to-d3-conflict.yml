@@ -1,0 +1,28 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://files.us.test.osf.io/v1/resources/gc35q/providers/osfstorage/6995ef7dd957f4745b0ca87d
+    body:
+      string: '{"path":"/6995ef57d957f4745b0ca874/","action":"copy","conflict":"warn"}'
+  response:
+    status: 409
+    headers:
+      status: 'HTTP/2 409 '
+      server: nginx
+      date: Wed, 18 Feb 2026 16:57:36 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '758'
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      string: '{"message": "Cannot complete action: file or folder \"a.txt\" already
+        exists in this location", "data": {"extra": {"guid": null, "version": 1, "downloads":
+        0, "checkout": null, "latestVersionSeen": null, "hashes": {"md5": "b026324c6904b2a9cb4b88d6d61c81d1",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"}},
+        "kind": "file", "name": "a.txt", "path": "/6995ef7dd957f4745b0ca87d", "provider":
+        "osfstorage", "materialized": "/d3/a.txt", "etag": "df0680622c322a677301a4c34aebf6a96a7d3bc339cb0c64c87efddf05f6eb6d",
+        "contentType": "application/octet-stream", "modified": "2026-02-18T16:56:57.058721+00:00",
+        "modified_utc": "2026-02-18T16:56:57.058721+00:00", "created_utc": "2026-02-18T16:56:57.058721+00:00",
+        "size": 2, "sizeInt": 2}}'
+  recorded_at: 2026-02-18 16:57:36
+recorded_with: VCR-vcr/2.1.0

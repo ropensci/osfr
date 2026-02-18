@@ -1,0 +1,27 @@
+http_interactions:
+- request:
+    method: DELETE
+    uri: https://api.test.osf.io/v2/nodes/5v73t/
+  response:
+    status: 400
+    headers:
+      status: 'HTTP/2 400 '
+      server: nginx
+      date: Wed, 18 Feb 2026 16:52:09 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      content-length: '119'
+      vary: Accept, Cookie, origin
+      allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+      x-content-type-options: nosniff
+      referrer-policy: same-origin
+      cross-origin-opener-policy: same-origin
+      x-frame-options: DENY
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: |
+        eJwlzLEKAjEMANBfCZnlEMdufoc4aBu8SJscSRSO0n+/wq1veB3JTM0xPToWihdXTHiXHfLK
+        tUDWtqm
+        QhEP7ecCboFCloAKbsRqEnsDygVjZJ+uXciw4nhdsc8TU8U/mrDLr23LFMQ4DhCnr
+  recorded_at: 2026-02-18 16:52:09
+recorded_with: VCR-vcr/2.1.0

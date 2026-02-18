@@ -1,0 +1,57 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://api.test.osf.io/v2/nodes/
+    body:
+      string: '{"data":{"type":"nodes","attributes":{"title":"osfr-test-directories","category":"project","description":"","public":false}}}'
+  response:
+    status: 201
+    headers:
+      status: 'HTTP/2 201 '
+      server: nginx
+      date: Wed, 18 Feb 2026 16:53:10 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      content-length: '4364'
+      vary: Accept, Cookie, origin
+      allow: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS
+      x-content-type-options: nosniff
+      referrer-policy: same-origin
+      cross-origin-opener-policy: same-origin
+      x-frame-options: DENY
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: |-
+        eJy1mOFu2zgMx9+FwL45cZqhu5uBwwGHe4T7dhgERaYTrrLkUXSLosi7D5IdN4nTFtmUb4lD
+        /v6kKFJ
+        WXqDWoqF6AaqhAnR9EChAnjuECpyvMUABWoRp0wuGaCkkNv7qQ8MLwSCLmhiNeKZk
+        XWMwTJ2Qd1ABFG
+        C04NbzM1TQsf+OJkqYPohvlSHRg6XrrS1iOKgMoxaMAa1X6y+L1Xpx9+d/
+        d1+q+8/V6uvy693q8+oPG
+        G1bX1NDHxszbikIj2KNtgEL6Bg7JifTg8bzw/TFeGvRnDiI3gao
+        /v9WgDYGQ1CMP3oMEhQ6vbExDOEe
+        i7R0ypJBF/CQm+mZ0YnqA7Iy2inj2xaj+uBz8nuH3FII
+        5F0UBF235KCAJybBlI6u4duZDwVlvBtq5fk
+        i9tREeVZb9n2nWmw3OLk80QOdZ9T1G0tmWonQ
+        b2Il02rsYzw2LW3YUZd2idmRrRld/GzJPaSHySoiX2
+        DH2EAFO5EuVGWpO1rGvbT0oVmSLx/X
+        Zdp9ZdqS5YFWQgEtph273+/3U42wVpRLaqp6uKCWChZyKQ208
+        u+GrCB/uv9HNG9RPt3/+9eh
+        Fc/0p9Jli+GVOEt3QxtLfsu625FR+cXf5s9CobazZEhuEMVF9CyAhixm
+        EkyomUBAEXLbTBoH
+        2qlM8eG4X4yOEI3jGMgUT0LNF9XzQyaBhJoJjGPY5VJ55c2k4lOs1eZZDcdmFr0
+        z6Duix+db
+        dvET+Lw3a3QSD+FsHfkKnInppiFLepj4QUj6jBkfE0+UY3va5nrgybH4Nj51JutGblHGC+
+        CZ
+        +A1kPxb0v3FiD/6h7N+fcH14HW+jCyR57yVPmlfO10He+lxzPpLemgr559B8COVpjDfxR9nc
+        YIte
+        It8uu/cb4pHwSXlnn3MeV2fQ+fvsdPvKoXagXdMTUwTR8HAdy5T9hJu/a4lnvcU8MiPs
+        +jetMYhUCKw
+        1q+ge3RSj8VxnWobL7PmajBc6FW+2ncS736/rH2BnKmM3J95OWnsEOQZMk3Xo
+        vitGMTG9x0xrPcYDj8
+        hh+I9ivVzBfv8TkKQINw==
+  recorded_at: 2026-02-18 16:53:10
+recorded_with: VCR-vcr/2.1.0

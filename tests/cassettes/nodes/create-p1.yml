@@ -1,0 +1,57 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://api.test.osf.io/v2/nodes/
+    body:
+      string: '{"data":{"type":"nodes","attributes":{"title":"osfr-test-nodes","category":"project","description":"","public":false}}}'
+  response:
+    status: 201
+    headers:
+      status: 'HTTP/2 201 '
+      server: nginx
+      date: Wed, 18 Feb 2026 16:52:04 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      content-length: '4358'
+      vary: Accept, Cookie, origin
+      allow: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS
+      x-content-type-options: nosniff
+      referrer-policy: same-origin
+      cross-origin-opener-policy: same-origin
+      x-frame-options: DENY
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: |-
+        eJy1mOFu2zgMx9+FwL45cZciu8HA4YDDPcJ9GwZBkemEqyx5FN2iKPLug2THTeK0RTblW+KQ
+        vz8pipS
+        VF6i1aKhegGqoYP34171AAfLcIVTgfI0BCtAiTJteMERLIbHxVx8aXggGWRzsagyG
+        qRPyDiqAAowW3H
+        p+hgo69j/QRLjpg/hWGRI9WLre2iIGgsowasEYyupu9WVxt1p8/vr/5y/V
+        elXd3S/vV/dfV2sYbVtfU
+        0MfGzNuKQiPYo22AQvoGDsmJ9ODxvPD9MV4a9GcOIjeBqi+fS9A
+        G4MhKMafPQYJCp3e2BiGcI9FWjRl
+        yaALeMjN9MzoRPUBWRntlPFti1F98Dn5vUNuKQTyLgqC
+        rltyUMATk2BKR9fw/cyHgjLeDVXyfBF7aqI
+        8qy37vlMtthucXJ7ogc4z6vqNJTOtROg3sZJp
+        NfYxHpuWNuyoS/vD7MjWjC5+tuQe0sNkFZEvsGNsoI
+        KdSBeqstQdLeMuWvrQLMmXj6sy7acy
+        bcbyQCuhgBbTXt3v9/upRlgryiU1VT1cUEsFC7mUBlr5T0NWk
+        D+t/xXNW5RP6//+PjThmf5U
+        umwxvBJn6W5oY8lvWXc7Miq/+Nv8WSjUdpYMyQ2iuIieBdCQxUyCCTUT
+        CChCbptJ40A7lSk+
+        HPSL0RGicRwDmeJJqPmien7IJJBQM4FxDLtcKq+8mVR8irXaPKvhIMyidwZ9R/T
+        4fMsufgKf
+        92aNTuIhnK0jX4EzMd00ZEkPEz8ISZ8x42PiiXJsT9tcDzw5Ft/Gp85k3cgtyngBPBO/ge
+        zH
+        gv4PTuzBP5T9+xOuD6/jbXSBJO+95Enzyvk6yFufa85H0ltTIf8cmg+hPI3xJv4omxts0Uvk
+        22X3
+        fkM8Ej4p7+xzzuPqDDp/n51uXznUDrRremKKIBoermOZsp9w83ct8ay3mEdmhF3/pjUG
+        kQqBtWYV3aO
+        bYjSe60zLcJk9X5PxQqfizbaTePf7ff0D7Exl7ObE20lrjyDHgGmyDt13xSgm
+        pveYaa3HeOAROQz/Ua
+        yWd7Df/wLLnez4
+  recorded_at: 2026-02-18 16:52:04
+recorded_with: VCR-vcr/2.1.0
