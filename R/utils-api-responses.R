@@ -58,19 +58,18 @@ process_response <- function(res) {
 
 .process_wb_response <- function(x) {
 
-  # waterbutler errors contain a key code with the http status code and a key
-  # message with the error message
-  if (is.null(x$code)) {
-    # waterbutler returns modified and modified_utc, to be consistent with osf
-    # responses we store the `modified_utc` value in the `modified`
-    x$data$attributes$modified <- parse_datetime(x$data$attributes$modified_utc)
-    x$data$attributes$modified_utc <- NULL
-
-  } else {
+  # Waterbutler errors contain a `message` key. Older versions also included a
+  # `code` key with the HTTP status code, but current versions omit it.
+  if (!is.null(x$code) || !is.null(x$message)) {
     # reformat waterbutler's error response to be consistent with OSF's
     x <- list(
       errors = list(list(detail = x$message))
     )
+  } else {
+    # waterbutler returns modified and modified_utc, to be consistent with osf
+    # responses we store the `modified_utc` value in the `modified`
+    x$data$attributes$modified <- parse_datetime(x$data$attributes$modified_utc)
+    x$data$attributes$modified_utc <- NULL
   }
   x
 }
