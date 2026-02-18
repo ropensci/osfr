@@ -46,7 +46,7 @@ Suggests:
     lintr (>= 2.0),
     covr,
     spelling,
-    vcr (>= 0.5)
+    vcr (>= 1.2.0)
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
