@@ -1,5 +1,14 @@
 # osfr (development version)
 
+## Fixes
+
+* Fixed `osf_mv()` and `osf_cp()` failing with an uninformative error when a conflict is encountered. Waterbutler dropped the `code` field from conflict (409) responses, which prevented the error message from being extracted and surfaced correctly.
+
+## Build and test infrastructure
+
+* Updated vcr dependency to 2.0 and leverage new helpers: `vcr::vcr_test_path()` and `vcr::vcr_configure_log()`.
+* Removed `filter_sensitive_data` since vcr 2.x auto-strips `Authorization` headers from cassettes.
+
 # osfr 0.2.9
 
 ## Minor changes
