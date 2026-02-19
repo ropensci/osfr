@@ -10,7 +10,8 @@ if (on_test_server()) {
 }
 
 outdir <- normalizePath(
-  withr::local_tempdir(.local_envir = testthat::teardown_env())
+  withr::local_tempdir(.local_envir = testthat::teardown_env()),
+  winslash = "/"
 )
 
 
