@@ -1,0 +1,55 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/vpnmr/files/osfstorage/?filter%5Bkind%5D=file&page=1
+  response:
+    status: 200
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Thu, 19 Feb 2026 02:59:29 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJy9Ve2OmzoQfZeR8o8N4AABpKurK13lCe6vW1VosMeLtQYj22S3jXj3yiRks9t2W/XrH9gz
+        55wZH3t
+        OINAj1O9OoATUUFRVsedVIqp8L7N9lrcJx5aVEIH/MBLUIJUmBxGg91a1kycH9Qnu
+        p5A+TFpHwDviD2
+        by6/+AfUg0Tto7bTjqu4Cx9U8eInhQg7igQgQj+g5qiN+Q4dRHgjpLIhit
+        OSpB9oztvLF4H0B69GQVa
+        vWRRLMifpldo/ONNxPv6CpfoKemN0JJFRaBJay4S9hdWv2XsDqv
+        alZu06yokgwuwdwS+m/E/g8R0JO3
+        GLrVoevOfetFHrpeFmKX7dtqL9pWYlnKMmfY7mjPKK+q
+        KpTdIcsLqCHnbVakOU8qsceybRPc50VZUlr
+        u2jaVYpdIlrMqxTQrUpEwybmULE1TXiATqYQ5
+        AmEeB21QOKiTOQKP9w7qd+8j4JO1NPhmcmQbjkPDTd
+        /T4KH2dqLn/SNZp8wAdRqUmccGXTMN
+        R0WPoQ0StaM5AksavTKD69S4VDviki2NXo7tBFoND8vOEhpyT
+        9BZklBD5/3o6jjGUW09Ob81
+        Tm6ViY8sXix48UjZcsFJVJRxyjMSLI2DBSiY+jTPc3Qx+At/f5702t8h
+        8VKk+zVCPzdzvBK8
+        VDxHMBhBP84asl18HIfevtmLJeK58CVtKdyjvSf/qwW85rmR82InulUXojgJtE1
+        ACfGNJW6s
+        +H2n8mW6V2c0R8/kapDmpxgDtDnSDcaSsJ3cS6A0tuTMZPm1u+sT6OLnF/Ctx3Maw7X/A0
+        SC
+        NPk/UdH6lN1Q3TKs228239JwHiMrQi/ta6nnmL8nq/9aoja7fzbssGGHm6ANO6x8G3b4GmNI
+        2x2E
+        ssT9hhW9EbTZ/XvREEHne/2VYs4dOpvp+7rjSP/cZYB5fn9jdamsu871MDzX79HS8Trv
+        6em6fr37xqN
+        exsVIthnDoK7TJFyjNeI6UoBtE5jnT/y0zo0=
+  recorded_at: 2026-02-19 02:59:29
+recorded_with: VCR-vcr/2.1.0

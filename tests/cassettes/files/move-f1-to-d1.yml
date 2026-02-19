@@ -1,0 +1,86 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://files.us.test.osf.io/v1/resources/vjeuh/providers/osfstorage/69967bb9d957f4745b0caad9
+    body:
+      string: '{"path":"/69967bb4d957f4745b0caad6/","action":"move","conflict":"warn"}'
+  response:
+    status: 201
+    headers:
+      status: 'HTTP/2 201 '
+      server: nginx
+      date: Thu, 19 Feb 2026 02:55:55 GMT
+      content-type: application/json; charset=UTF-8
+      content-length: '1211'
+      x-waterbutler-request-id: de9c6938-833f-4de8-bb97-c670adc23652
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      string: '{"data": {"id": "osfstorage/69967bb9d957f4745b0caad9", "type": "files",
+        "attributes": {"extra": {"guid": null, "version": 1, "downloads": 0, "checkout":
+        null, "latestVersionSeen": null, "hashes": {"md5": "b026324c6904b2a9cb4b88d6d61c81d1",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"}},
+        "kind": "file", "name": "a.txt", "path": "/69967bb9d957f4745b0caad9", "provider":
+        "osfstorage", "materialized": "/d1/a.txt", "etag": "c8913faa05837ccb8e34e8d3158d1c605501ba48ca668fcb87f1cc4f762c921f",
+        "contentType": "application/octet-stream", "modified": "2026-02-19T02:55:53.420189+00:00",
+        "modified_utc": "2026-02-19T02:55:53.420189+00:00", "created_utc": "2026-02-19T02:55:53.420189+00:00",
+        "size": 2, "sizeInt": 2, "resource": "vjeuh"}, "links": {"move": "https://files.us.test.osf.io/v1/resources/vjeuh/providers/osfstorage/69967bb9d957f4745b0caad9",
+        "upload": "https://files.us.test.osf.io/v1/resources/vjeuh/providers/osfstorage/69967bb9d957f4745b0caad9?kind=file",
+        "delete": "https://files.us.test.osf.io/v1/resources/vjeuh/providers/osfstorage/69967bb9d957f4745b0caad9",
+        "download": "https://files.us.test.osf.io/v1/resources/vjeuh/providers/osfstorage/69967bb9d957f4745b0caad9"}}}'
+  recorded_at: 2026-02-19 02:55:56
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/files/69967bb9d957f4745b0caad9/
+  response:
+    status: 200
+    headers:
+      allow: GET, PUT, PATCH, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Thu, 19 Feb 2026 02:55:56 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJy9Ve1umzAUfZcr5R8LYMABS9M0acoT7NemCRn7UrwCRrZJu0a8+2RSmjRts2nt+jPxOfec
+        +8keJHc
+        c2B6UBAa0KOimqgpZZJs63aRZFQnOZQEBuF8DAoNatWghAO6cUdXo0Hry1ejp/di2
+        AYgGxbUe3fK755
+        0n8rW7dRDAterlfRwIYOCuAQbhBWGr7hAYCWAweqckGmCgbW2dNvzKx+i4
+        Q6N4q+5QlktAGYeLYsutK
+        50eRYMPJiV3WHZaqlr5P4FEhH6IyIe4+BoRlmUsS9YpieLcO5jB
+        wiB3f8B+gwDw1pm5oA23zaE6ncyA
+        QRURmpBU0CJKK8ILUaVVnksqaSzyWMY+1YaTjAKDNMky
+        ntIqLmSS5lKQOtuIKKV1jjVNZJolOVZVkdA
+        oiupEFIhFlnKySWkkZU4zmAKQ+qZvNZcWWDQF
+        4PiVBfb9RwBiNAZ7V44WTSl4Xwrdddg7YM6MeHzfob
+        FK98Bi70zflNyWY79TeOPLUPPW4hSA
+        wZY7pXvbqGHOduAzu9bt3Ks9tKq/nl9mqOfuoTFYA4PGucGyM
+        OSDWju0bq1tvVY63JFwHrRl
+        LtKzuaCh7zvOkztNU/DsFD8hnU+xJ94nad/I6JMBDheBx46nAHot8d9V
+        PduGu584NhdrMSOO
+        ic+0OXHHzRW6tzZwrnNi59FLcOrOowRKbkofxeNLg0Ib+f+68rzcWY+m4Ciu+lq
+        /StGH1js8
+        iTET1qN9HCgODVo9GvFQ3eXu2fB49i4dzHHwa/8OQhJbdO+R0XLKTqROFZbni8U32B++HU
+        uE
+        rjbnVg+YT6NpP86oVfJ5RbYrsj0Brch20VuR7UuKnpZspTIo3IrQTktcJV/uPQTQuK59IZlD
+        hQ7D
+        9HfVsdi+bhnmBVwW+OHqA1lHME2/AQIupr8=
+  recorded_at: 2026-02-19 02:55:56
+recorded_with: VCR-vcr/2.1.0

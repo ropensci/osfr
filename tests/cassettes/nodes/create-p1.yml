@@ -1,0 +1,57 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://api.test.osf.io/v2/nodes/
+    body:
+      string: '{"data":{"type":"nodes","attributes":{"title":"osfr-test-nodes","category":"project","description":"","public":false}}}'
+  response:
+    status: 201
+    headers:
+      status: 'HTTP/2 201 '
+      server: nginx
+      date: Thu, 19 Feb 2026 02:56:49 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      content-length: '4358'
+      vary: Accept, Cookie, origin
+      allow: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS
+      x-content-type-options: nosniff
+      referrer-policy: same-origin
+      cross-origin-opener-policy: same-origin
+      x-frame-options: DENY
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: |-
+        eJy1mNFu2zoMht+FwO6cuAtOilMDw4Bhj7C7YRAUmXa4ypZH0e2KIu8+SHbcJE5bZFPuEof8
+        flIUKSv
+        PUGrRUDwDlVDAujbVb8hAnjqEAlpXoocMtAjTphf0wVJIbPjV+YoXgl4We7sSvWHq
+        hFwLBUAGRgvWjp
+        +ggI7dTzQSHvZeXKMMiR4s297aLASCyjBqwRDK6mZ1u7hZLT7efbtZFevb
+        4r+75cfV/+u7WxhtG1dSR
+        e8bM9bkhUexSluPGXSMHVMr04PK8f30xThr0Rw5iK49FN9/ZKCN
+        Qe8V468evXiFrd7YEIZwj1lcNGXJ
+        YOtxn5vpmbEV1XtkZXSrjGsaDOqDz9HvHXJD3pNrgyDo
+        sqEWMnhkEozp6BJ+nPiQV8a1Q5Ucn8Uemyj
+        HqmbXd6rBZoOTyyPd02lGXb+xZKaV8P0mVDKu
+        xi7EY+PS+i11cX+YLdmSsQ2fLbX38WG0Cshn2DJWUM
+        BWpPNFnuuOlmEXLZ2vluTyh1Ue91Me
+        N2O+p+WQQYNxr+52u91UIywVpZKaqu7PqMWC+VRKAy3/XJEV5
+        A/rL6K5Rvmw/vpp34Qn+lPp
+        ksXwQpylu6GNJVez7rZkVHrx1/mzUKjpLBmSK0RxFj0LoCKLiQQjaibg
+        UYTaOpHGnnYsk707
+        6BejIwTjMAYSxRNR80V1fJ9IIKJmAuMYblOpvPBmUuEplmrzpIaDMIneCfQN0cP
+        zLbn4EXze
+        myW2Eg7hZB35ApyJ6aoiS3qY+F5I+oQZHxKPlEN72upy4NGx+Do+dibrSq5RxjPgmfgVZN
+        8X
+        dP9wYg/+Pu/fnnC9fxlvowtEeeckTZoXztdB3rpUcz6QXpsK6efQfAilaYxX8QfZXGGLniNf
+        L7u3
+        G+KB8FG51j6lPK5OoPP32en2lUJtT7ukJ6YIguH+OpYo+wk3f9cSx7rGNDIj7PI3rTGI
+        WAgsNavgHtw
+        Uo3FcJlqG8+z5mowXOhVutp2Eu9/f6+9hJypjN0feVhp7ADkETJN16L4LRjEx
+        vcWMaz3GAw/IfviPYr
+        W8gd3uD2UM+ZQ=
+  recorded_at: 2026-02-19 02:56:49
+recorded_with: VCR-vcr/2.1.0

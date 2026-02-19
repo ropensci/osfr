@@ -1,19 +1,14 @@
-context("Node creation")
-
-
 # setup -------------------------------------------------------------------
 
 vcr::vcr_configure(
   dir = cassette_dir("nodes")
 )
 
-setup({
-  if (has_pat()) {
-    vcr::use_cassette("create-p1", {
-      p1 <<- osf_create_project(title = "osfr-test-nodes")
-    })
-  }
-})
+if (has_pat()) {
+  vcr::use_cassette("create-p1", {
+    p1 <- osf_create_project(title = "osfr-test-nodes")
+  })
+}
 
 # teardown happens within node deletion tests
 
@@ -70,7 +65,7 @@ test_that("nested nodes can be created", {
 })
 
 
-context("Node categories")
+# Node categories ---------------------------------------------------------
 
 test_that("default project category is 'project'", {
   skip_if_no_pat()
@@ -102,7 +97,7 @@ test_that("a valid category can be specified", {
 })
 
 
-context("Node deletion")
+# Node deletion -----------------------------------------------------------
 
 test_that("deleting non-empty project/component fails", {
   skip_if_no_pat()

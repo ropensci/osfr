@@ -1,0 +1,57 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://api.test.osf.io/v2/nodes/
+    body:
+      string: '{"data":{"type":"nodes","attributes":{"title":"osfr-multifile-upload-test","category":"project","description":"","public":false}}}'
+  response:
+    status: 201
+    headers:
+      status: 'HTTP/2 201 '
+      server: nginx
+      date: Thu, 19 Feb 2026 02:57:24 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      content-length: '4369'
+      vary: Accept, Cookie, origin
+      allow: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS
+      x-content-type-options: nosniff
+      referrer-policy: same-origin
+      cross-origin-opener-policy: same-origin
+      x-frame-options: DENY
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: |-
+        eJy1mOFu2zgMx9+FwL45SRtc7nYGDgcc7hH2bRgEWaYTrrLkUXSLosi7D5IdN4nTFtmUb4lD
+        /v6kKFJ
+        WXqDWoqF8AaqhhMZVnzsoQJ47hBKcrzFAAVqEqeoFQ7QUEht/9aHhRdtboYYsLvrO
+        el0vBINAATUGw9
+        QJeQclQAFGC249P0MJHfvvaKKV6YP4VhkSPVi63toixoTKMGrBGNX6bv3n
+        4m69uP/7y9263PxVrv9Yr
+        u8/bzb3MNq2vqaGPjZm3FIQHsUabQMW0DF2TE6mB43nh+mL8dai
+        OXEQvQ1Qfv1WgDYGQ1CMP3oMEhQ6
+        XdkYhnCPRVo/ZcmgC3jIzfTM6ET1AVkZ7ZTxbYtRffA5
+        +b1DbikE8i4Kgq5bclDAE5NgSkfX8O3Mh4I
+        y3g0F83wRe2qiPKst+75TLbYVTi5P9EDnGXV9
+        ZclMKxH6KlYyrcY+xmPT0oYddWmrmB3ZmtHFz5bcQ3
+        qYrCLyBXaMDZSwE+lCuVrpjpZx/yx9
+        aJbkV4/rVdqCq7QvVwfaCgpoMW3b/X6/n2qEtaJcUlPVwwW1V
+        LCQS2mgrf5tyAryp81/onmL
+        8mnz/z+HfjzTn0qXLYZX4izdiipLfsu625FR+cXf5s9CobazZEhuEMVF
+        9CyAOOgyCSbUTCCg
+        CLltJo0D7VSm+HDmL0ZHiMZxDGSKJ6Hmi+r5IZNAQs0ExjHscqm88mZS8SnWqnp
+        Ww9mZRe8M
+        +o7o8fmWXfwEPu/NGl18E8BsHfkKnInppiFLepj4QUj6jBkfE0+UY3va5nrgybH4Nj51Ju
+        tG
+        blHGC+CZ+A1kPxb0v3FiD/5h1b8/4frwOt5GF0jy3kueNK+cr4O89bnmfCS9NRXyz6H5EMrT
+        GG/i
+        j7K5wRa9RL5ddu83xCPhk/LOPuc8rs6g8/fZ6faVQ+1Au6Ynpgii4eE6lin7CTd/1xLP
+        eot5ZEbY9W9
+        aYxCpEFhrVtE9uilG47nOtAyX2fM1GS90Kt5sO4l3v1/XP8DOVMZuTrydtPYI
+        cgyYJuvQfVeMYmJ6j5
+        nWeowHHpHD8B/FenkH+/1PW6b+AA==
+  recorded_at: 2026-02-19 02:57:24
+recorded_with: VCR-vcr/2.1.0

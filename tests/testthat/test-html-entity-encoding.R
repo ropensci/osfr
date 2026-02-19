@@ -1,27 +1,21 @@
-
 # setup -------------------------------------------------------------------
 
 vcr::vcr_configure(
   dir = cassette_dir("html-entity-encoding")
 )
 
-setup({
-  if (has_pat()) {
-    ugly_name <<- "> data & < files"
-    vcr::use_cassette("create-p1", {
-      p1 <<- osf_create_project(title = "osfr-test-html-entities")
-      c1 <<- osf_create_component(p1, title = ugly_name)
-    })
-  }
-})
+if (has_pat()) {
+  ugly_name <- "> data & < files"
+  vcr::use_cassette("create-p1", {
+    p1 <- osf_create_project(title = "osfr-test-html-entities")
+    c1 <- osf_create_component(p1, title = ugly_name)
+  })
+}
 
-teardown({
-  if (has_pat()) {
-    vcr::use_cassette("delete-p1", {
-      osf_rm(p1, recurse = TRUE, check = FALSE)
-    })
-  }
-})
+withr::defer(
+  if (has_pat()) try(osf_rm(p1, recurse = TRUE, check = FALSE), silent = TRUE),
+  testthat::teardown_env()
+)
 
 
 # tests -------------------------------------------------------------------

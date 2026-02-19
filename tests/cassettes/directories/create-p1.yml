@@ -1,0 +1,57 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://api.test.osf.io/v2/nodes/
+    body:
+      string: '{"data":{"type":"nodes","attributes":{"title":"osfr-test-directories","category":"project","description":"","public":false}}}'
+  response:
+    status: 201
+    headers:
+      status: 'HTTP/2 201 '
+      server: nginx
+      date: Thu, 19 Feb 2026 02:54:55 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      content-length: '4364'
+      vary: Accept, Cookie, origin
+      allow: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS
+      x-content-type-options: nosniff
+      referrer-policy: same-origin
+      cross-origin-opener-policy: same-origin
+      x-frame-options: DENY
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: |-
+        eJy1mG1v4zYMx78LgXvnPCy7DKiBYcCwj7B3w0GQZTrhKks+im5RFPnuB8mOm8Rpi9wp7xKH
+        /P1JUaS
+        svEKtRUP5ClRDCXrjTAUFyEuHUILzNQYoQIswVb1giJZCYuOvPjS8EAyyqInRiGdK
+        1jUGw9QJeQclQA
+        FGC+48v0AJHfv/0Uh82AfxrTIkerB0vbVFDAeVYdSCMaDNevPHYr1Z/Pbw
+        73pTbr+W2+1y/fD79usDj
+        Latr6mhz40ZdxSER7FG24AFdIwdk5PpQeP5cfpivLVozhxE7wKU
+        /30rQBuDISjG7z0GCQqdrmwMQ7jH
+        Ii2dsmTQBTzmZnpmdKL6gKyMdsr4tsWoPvic/d4htxQC
+        eRcFQdctOSjgmUkwpaNr+HbhQ0EZ74Zaeb6
+        KPTdRntWOfd+pFtsKJ5dneqTLjLq+smSmlQh9
+        FSuZVuMQ47FpacOeurRLzJ5szejiZ0vuMT1MVhH5Cn
+        vGBkrYi3ShXK10R8u4l5Y+NEvyq6fN
+        Ku2+VdqSqyNtBQW0mHbs4XA4TDXCWlEuqanq4YpaKljIpTTQV
+        n81ZAX5y/Zv0bxD+bL9589j
+        K17oT6XLFsMbcZZuRZUlv2Pd7cmo/OLv82ehUNtZMiR3iOIqehZAQxYz
+        CSbUTCCgCLldJo0j
+        7Vym+HTcL0ZHiMZxDGSKJ6Hmi+r5MZNAQs0ExjHscqm88WZS8SnWqnpRw7GZRe8
+        C+oHo6fmW
+        XfwMPu/NGp3EQzhbR74BZ2K6aciSHiZ+EJI+Y8anxDPl2J62uR14diy+j0+dybqRe5TxCn
+        gm
+        fgfZzwX9L5zYg39Y9R9PuD68jbfRBZK895InzRvn6yBvfa45H0nvTYX8c2g+hPI0xrv4k2zu
+        sEWv
+        ke+X3ccN8UT4rLyzLzmPqwvo/H12un3lUDvSbumJKYJoeLyOZcp+ws3ftcSz3mEemRF2
+        +5vWGEQqBNa
+        aVXSPborReK4zLcN19nxNxgudijfbTuLd7+f1j7ALlbGbE28vrT2BnAKmyTp0
+        3w2jmJg+Yqa1HuOBJ+
+        Qw/EexWa7hcPgBHXn4og==
+  recorded_at: 2026-02-19 02:54:55
+recorded_with: VCR-vcr/2.1.0

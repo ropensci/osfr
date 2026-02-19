@@ -1,37 +1,32 @@
-context("Moving files")
-
-
 # setup -------------------------------------------------------------------
 vcr::vcr_configure(
   dir = cassette_dir("files")
 )
 
-setup({
-  infile <<- file.path(tempdir(), "a.txt")
-  brio::writeLines("1", con = infile)
+testdir <- withr::local_tempdir(.local_envir = testthat::teardown_env())
+infile <- file.path(testdir, "a.txt")
+brio::writeLines("1", con = infile)
 
+if (has_pat()) {
+  vcr::use_cassette("setup-test-project", {
+    p1 <- osf_create_project(title = "osfr-test-files-1")
+    p2 <- osf_create_project(title = "osfr-test-files-2")
+    d1 <- osf_mkdir(p1, "d1")
+    d3 <- osf_mkdir(p2, "d3")
+    f1 <- osf_upload(p1, infile)
+  })
+}
+
+withr::defer(
   if (has_pat()) {
-    vcr::use_cassette("setup-test-project", {
-      p1 <<- osf_create_project(title = "osfr-test-files-1")
-      p2 <<- osf_create_project(title = "osfr-test-files-2")
-      d1 <<- osf_mkdir(p1, "d1")
-      d3 <<- osf_mkdir(p2, "d3")
-      f1 <<- osf_upload(p1, infile)
-    })
-  }
-})
-
-teardown({
-  if (has_pat()) {
-    vcr::use_cassette("teardown-test-project", {
-      osf_rm(p1, recurse = TRUE, check = FALSE)
-      osf_rm(p2, recurse = TRUE, check = FALSE)
-    })
-  }
-})
+    try(osf_rm(p1, recurse = TRUE, check = FALSE), silent = TRUE)
+    try(osf_rm(p2, recurse = TRUE, check = FALSE), silent = TRUE)
+  },
+  testthat::teardown_env()
+)
 
 
-# tests -------------------------------------------------------------------
+# Moving files ------------------------------------------------------------
 test_that("a file can be moved from node to subdirectory and back", {
   skip_if_no_pat()
 
@@ -110,7 +105,7 @@ test_that("moving a parent directory to a child directory errors", {
 })
 
 
-context("Copying files")
+# Copying files -----------------------------------------------------------
 
 test_that("a file can copy to new directory", {
   skip_if_no_pat()
@@ -166,7 +161,7 @@ test_that("copy respects overwrite values when copying to a new location", {
 })
 
 
-context("Deleting files")
+# Deleting files ----------------------------------------------------------
 
 test_that("a single file can be deleted", {
   skip_if_no_pat()

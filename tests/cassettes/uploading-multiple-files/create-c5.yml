@@ -1,0 +1,57 @@
+http_interactions:
+- request:
+    method: POST
+    uri: https://api.test.osf.io/v2/nodes/fnb8p/children/
+    body:
+      string: '{"data":{"type":"nodes","attributes":{"title":"parent-directories","category":"","description":"","public":false}}}'
+  response:
+    status: 201
+    headers:
+      status: 'HTTP/2 201 '
+      server: nginx
+      date: Thu, 19 Feb 2026 02:59:01 GMT
+      content-type: application/vnd.api+json; charset=utf-8
+      content-length: '4483'
+      vary: Accept, Cookie, origin
+      allow: GET, POST, HEAD, OPTIONS
+      x-content-type-options: nosniff
+      referrer-policy: same-origin
+      cross-origin-opener-policy: same-origin
+      x-frame-options: DENY
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      expires: '-1'
+      pragma: no-cache
+      via: 1.1 google
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      raw_gzip: |-
+        eJzFmNtu2zAMht+FwO7cOPPWHQwMA4Y9wu6GQpBlOuEqS55EtwiKvPsg2XGTOE3XVcHuYpv8
+        fpKSKCk
+        PUEuWUD4A1VDCeyw2LWTAmw6hBGNr9JCBZHZU9Yw+WDKxDl876dDwVU0OFVtH0bRG
+        rxx1TNZACZCBko
+        wr6zbjU+/ZtkIRy8HE9FpnIQgUyqFkDGEUy+LD1bK4evv5x7Iorz+Xy7eL
+        d8XHd8U1jLatramh540dr
+        sizG8UaqT1m0DnsHBmeXjTW3U4PymqN6sCB5cpD+fMmA6kUei8c
+        /u7RsxdoZKVDGOx6zGLBhCaFxuMu
+        N9W7UCfRe3RCSSOUbVsM6oPPwfcOXUvekzVBEGTdkoEM
+        7h0xxnRkDTdHPuSFsmYYIetOYg9NhHVi5Wz
+        fiRbbCieXe7ql44y6vtKkpkr4vvqFimM1tiEe
+        HUvr19TFuaHWpGuHJvzWZG7jy2gVkA+wdthACWvmzp
+        d5LjtaMHpeWN8syOZ3RR7nXB4nYr6j
+        5ZBBi3Gebrfb7TRGWAtKJTWNuj+hFgfMp1IaaPnXhjSje3P9j
+        aVbIb+5/v5ltwCP9KehSxbD
+        I3GWbkWVJrtysluTEunFn+bPQqG206SILxDFSfQsgIY0JhKMqJmAR2Yy
+        q0QaO9qhTPZsk78a
+        HSEYhzaQKJ6ImhfVuttEAhE1ExjbsEml8sibSYW3WItqI4bNMoneEfSM6P7+llz
+        8AD4LYtj+
+        X6vZmOpTd3a6RovjM0lsDjUaDqeAZC3hETjLVjYNaZLDluOZuE9Y8n3igXLoD7p5OfBgX3
+        4a
+        H2vtZMOXmEcnwDPxC8g+L2hfcWQY/H3en2+xvX+csKMLRHlr/+eK0TbVRhNIT7Wl9I1w3gXT
+        LIwn
+        8XvZXGCKniJfLrvzC+KO8F5Yozcp98sj6PxAPV3/UqjtaC859EwRxJ1svA8myn7CzQ97
+        bJ1cYRqZEfb
+        yo94YRBwIrKUTwT24CYfKujpRGU6z5zUZb5QiXK07DpfPf9ffwY5UxtUceWtu
+        9R5kHzDEDbvV97eJQg
+        bk6Bwz1nqMB+7Q+eHfkWKxhO32DwFhHMc=
+  recorded_at: 2026-02-19 02:59:01
+recorded_with: VCR-vcr/2.1.0

@@ -1,26 +1,18 @@
-context("Downloading files")
-
-
 # setup -------------------------------------------------------------------
 
-setup({
-  # Retrieve public OSF project and components required for tests
-  # (created using data-raw/create-test-project.R)
-  if (on_test_server()) {
-      guids <- get_guids()
-      p1 <<- osf_retrieve_node(guids[, "p1"])
-      c1 <<- osf_retrieve_node(guids[, "c1"])
-      f1 <<- osf_retrieve_file(guids[, "f1"])
-      d1 <<- osf_retrieve_file(guids[, "d1"])
-      d2 <<- osf_retrieve_file(guids[, "d2"])
-  }
-  outdir <<- as.character(fs::dir_create(".osfr-tests"))
-})
+if (on_test_server()) {
+  guids <- get_guids()
+  p1 <- osf_retrieve_node(guids[, "p1"])
+  c1 <- osf_retrieve_node(guids[, "c1"])
+  f1 <- osf_retrieve_file(guids[, "f1"])
+  d1 <- osf_retrieve_file(guids[, "d1"])
+  d2 <- osf_retrieve_file(guids[, "d2"])
+}
 
-
-teardown({
-  fs::dir_delete(outdir)
-})
+outdir <- normalizePath(
+  withr::local_tempdir(.local_envir = testthat::teardown_env()),
+  winslash = "/"
+)
 
 
 # tests -------------------------------------------------------------------
