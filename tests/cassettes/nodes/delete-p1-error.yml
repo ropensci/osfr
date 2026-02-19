@@ -1,13 +1,13 @@
 http_interactions:
 - request:
     method: DELETE
-    uri: https://api.test.osf.io/v2/nodes/5v73t/
+    uri: https://api.test.osf.io/v2/nodes/5gcfx/
   response:
     status: 400
     headers:
       status: 'HTTP/2 400 '
       server: nginx
-      date: Wed, 18 Feb 2026 16:52:09 GMT
+      date: Thu, 19 Feb 2026 02:56:56 GMT
       content-type: application/vnd.api+json; charset=utf-8
       content-length: '119'
       vary: Accept, Cookie, origin
@@ -23,5 +23,5 @@ http_interactions:
         eJwlzLEKAjEMANBfCZnlEMdufoc4aBu8SJscSRSO0n+/wq1veB3JTM0xPToWihdXTHiXHfLK
         tUDWtqm
         QhEP7ecCboFCloAKbsRqEnsDygVjZJ+uXciw4nhdsc8TU8U/mrDLr23LFMQ4DhCnr
-  recorded_at: 2026-02-18 16:52:09
+  recorded_at: 2026-02-19 02:56:56
 recorded_with: VCR-vcr/2.1.0

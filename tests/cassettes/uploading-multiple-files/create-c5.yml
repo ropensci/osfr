@@ -1,7 +1,7 @@
 http_interactions:
 - request:
     method: POST
-    uri: https://api.test.osf.io/v2/nodes/war2g/children/
+    uri: https://api.test.osf.io/v2/nodes/fnb8p/children/
     body:
       string: '{"data":{"type":"nodes","attributes":{"title":"parent-directories","category":"","description":"","public":false}}}'
   response:
@@ -9,7 +9,7 @@ http_interactions:
     headers:
       status: 'HTTP/2 201 '
       server: nginx
-      date: Wed, 18 Feb 2026 16:56:09 GMT
+      date: Thu, 19 Feb 2026 02:59:01 GMT
       content-type: application/vnd.api+json; charset=utf-8
       content-length: '4483'
       vary: Accept, Cookie, origin
@@ -25,33 +25,33 @@ http_interactions:
       alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       raw_gzip: |-
-        eJzFmOFu4zYMx9+FwH1z4zZou1uAYcCwR9i34SAoMu1wlSWPolv0irz7QbLjJnGaXu8U3LfY
-        Fn9/kqI
-        oKS9QadGwegGqYAWb2/a3r1CAPHcIK3C+wgAFaBGmdS8Y4kghsfFrpxmdXFXEaMQz
-        paEVBsPUCXkHK4
-        ACjBZsPD+PT30Q3ypDoochrre2iE6gMoxaMLqxvF7eX10vr24+/3Nzv7q7
-        X11/Xtze3t/8fgvj2NZXV
-        NP7gxkbCsKjWK1twAI6xo7JyfSi9vwwPRhvLZoDA9FNgNW/XwrQ
-        xmAIivH/HoMEhU6vbXRDuMciJUxZ
-        MugC7mIzPcc8qT4gK6OdMr5tMaoPNgffO+SWQiDvoiDo
-        qiUHBTwxCaZwdAVfjmwoKOPdMEOeT2IPhyj
-        PqmHfd6rFdo2TyRM90HFEXb+2ZKZMhH79HxpJ
-        2dhGf2xKbdhQl2rDbMhWjC7+tuQe0ss0KiJfYMNYxz
-        oT6cKqLHVHC8EgCx/qBfnycVmmmitT
-        IZY7WgkFtJjqdLvdbqc5wkpRLqlp1sMJtTRhIZfSQCv/rMkK8
-        qe7v0Rzg/Lp7u8/dgvwSH+a
-        umw+vBJn4a5pbck3rLsNGZVf/G3+zBVqO0uG5AJenETPHKjJYibBhJoJ
-        BBQh12TS2NEOZYp3
-        m/zVaAhxcGwDmfxJqHlSPT9kEkiomcDYhl0ulVfeTCq+xUqtn9WwWWbRO4KeEd3
-        f37KLH8Bn
-        Tgzb/89qPmleNmfLNY04PpOk5lChk3gKyNYSXoGzaHVdkyU9bDlBSPqMKd8nHijH/mDrjw
-        MP
-        9uW38SnXrGu5RB2dAM/ELyD7vqD/iSPDYB/K/nyL7cNrwY4mkOS9/5UrxvpcG00kvdWW8jfC
-        eRfM
-        szDexO9Fc4ESPUW+XHTnF8Qj4ZPyzj7n3C+PoPMD9XT9y6G2o33k0DN5kHay8T6YKfoJ
-        Nz/siWfdYB6
-        ZEfbxo97oRJoIrDSraB7NFKPxXGVKw2n2PCfjjVLFq3Un8fL54/o72JHKuJoT
-        byOt3YPsAwa/Ybf6vj
-        dQKICYzjFTrkd/4BE5DP+OLBfXsN1+Az38Hjs=
-  recorded_at: 2026-02-18 16:56:09
+        eJzFmNtu2zAMht+FwO7cOPPWHQwMA4Y9wu6GQpBlOuEqS55EtwiKvPsg2XGTOE3XVcHuYpv8
+        fpKSKCk
+        PUEuWUD4A1VDCeyw2LWTAmw6hBGNr9JCBZHZU9Yw+WDKxDl876dDwVU0OFVtH0bRG
+        rxx1TNZACZCBko
+        wr6zbjU+/ZtkIRy8HE9FpnIQgUyqFkDGEUy+LD1bK4evv5x7Iorz+Xy7eL
+        d8XHd8U1jLatramh540dr
+        sizG8UaqT1m0DnsHBmeXjTW3U4PymqN6sCB5cpD+fMmA6kUei8c
+        /u7RsxdoZKVDGOx6zGLBhCaFxuMu
+        N9W7UCfRe3RCSSOUbVsM6oPPwfcOXUvekzVBEGTdkoEM
+        7h0xxnRkDTdHPuSFsmYYIetOYg9NhHVi5Wz
+        fiRbbCieXe7ql44y6vtKkpkr4vvqFimM1tiEe
+        HUvr19TFuaHWpGuHJvzWZG7jy2gVkA+wdthACWvmzp
+        d5LjtaMHpeWN8syOZ3RR7nXB4nYr6j
+        5ZBBi3Gebrfb7TRGWAtKJTWNuj+hFgfMp1IaaPnXhjSje3P9j
+        aVbIb+5/v5ltwCP9KehSxbD
+        I3GWbkWVJrtysluTEunFn+bPQqG206SILxDFSfQsgIY0JhKMqJmAR2Yy
+        q0QaO9qhTPZsk78a
+        HSEYhzaQKJ6ImhfVuttEAhE1ExjbsEml8sibSYW3WItqI4bNMoneEfSM6P7+llz
+        8AD4LYtj+
+        X6vZmOpTd3a6RovjM0lsDjUaDqeAZC3hETjLVjYNaZLDluOZuE9Y8n3igXLoD7p5OfBgX3
+        4a
+        H2vtZMOXmEcnwDPxC8g+L2hfcWQY/H3en2+xvX+csKMLRHlr/+eK0TbVRhNIT7Wl9I1w3gXT
+        LIwn
+        8XvZXGCKniJfLrvzC+KO8F5Yozcp98sj6PxAPV3/UqjtaC859EwRxJ1svA8myn7CzQ97
+        bJ1cYRqZEfb
+        yo94YRBwIrKUTwT24CYfKujpRGU6z5zUZb5QiXK07DpfPf9ffwY5UxtUceWtu
+        9R5kHzDEDbvV97eJQg
+        bk6Bwz1nqMB+7Q+eHfkWKxhO32DwFhHMc=
+  recorded_at: 2026-02-19 02:59:01
 recorded_with: VCR-vcr/2.1.0
