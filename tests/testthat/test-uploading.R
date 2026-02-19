@@ -1,33 +1,24 @@
-context("Uploading files")
-
-
 # setup -------------------------------------------------------------------
 
 vcr::vcr_configure(
   dir = cassette_dir("uploading-single-files")
 )
 
-setup({
-  testdir <<- fs::dir_create(".osfr-tests")
-  infile <<- fs::path(testdir, "osfr-local-file.txt")
-  brio::writeLines("Lorem ipsum dolor sit amet, consectetur", infile)
+testdir <- withr::local_tempdir(.local_envir = testthat::teardown_env())
+infile <- fs::path(testdir, "osfr-local-file.txt")
+brio::writeLines("Lorem ipsum dolor sit amet, consectetur", infile)
 
-  if (has_pat()) {
-    vcr::use_cassette("create-p1", {
-      p1 <<- osf_create_project(title = "osfr-test-files-1")
-      d1 <<- osf_mkdir(p1, "data")
-    })
-  }
-})
+if (has_pat()) {
+  vcr::use_cassette("create-p1", {
+    p1 <- osf_create_project(title = "osfr-test-files-1")
+    d1 <- osf_mkdir(p1, "data")
+  })
+}
 
-teardown({
-  fs::dir_delete(testdir)
-  if (has_pat()) {
-    vcr::use_cassette("delete-p1", {
-      osf_rm(p1, recurse = TRUE, check = FALSE)
-    })
-  }
-})
+withr::defer(
+  if (has_pat()) try(osf_rm(p1, recurse = TRUE, check = FALSE), silent = TRUE),
+  testthat::teardown_env()
+)
 
 
 # tests -------------------------------------------------------------------

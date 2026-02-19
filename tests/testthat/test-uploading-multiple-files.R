@@ -1,30 +1,22 @@
-context("Uploading multiple files")
-
-
 # setup -------------------------------------------------------------------
 vcr::vcr_configure(
   dir = cassette_dir("uploading-multiple-files")
 )
 
-setup({
-  # create directory for testing multifile uploads
-  multidir <<- create_upload_test_files(".osfr-tests")
+testdir <- withr::local_tempdir(.local_envir = testthat::teardown_env())
+multidir <- file.path(testdir, ".osfr-tests")
+create_upload_test_files(multidir)
 
-  if (has_pat()) {
-    vcr::use_cassette("create-p1", {
-      p1 <<- osf_create_project(title = "osfr-multifile-upload-test")
-    })
-  }
-})
+if (has_pat()) {
+  vcr::use_cassette("create-p1", {
+    p1 <- osf_create_project(title = "osfr-multifile-upload-test")
+  })
+}
 
-teardown({
-  fs::dir_delete(multidir)
-  if (has_pat()) {
-    vcr::use_cassette("delete-p1", {
-      osf_rm(p1, recurse = TRUE, check = FALSE)
-    })
-  }
-})
+withr::defer(
+  if (has_pat()) try(osf_rm(p1, recurse = TRUE, check = FALSE), silent = TRUE),
+  testthat::teardown_env()
+)
 
 
 # tests -------------------------------------------------------------------

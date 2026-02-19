@@ -1,25 +1,18 @@
-context("Directories")
-
 # setup -------------------------------------------------------------------
 vcr::vcr_configure(
   dir = cassette_dir("directories")
 )
 
-setup({
-  if (has_pat()) {
-    vcr::use_cassette("create-p1", {
-      p1 <<- osf_create_project(title = "osfr-test-directories")
-    })
-  }
-})
+if (has_pat()) {
+  vcr::use_cassette("create-p1", {
+    p1 <- osf_create_project(title = "osfr-test-directories")
+  })
+}
 
-teardown({
-  if (has_pat()) {
-    vcr::use_cassette("delete-p1", {
-      osf_rm(p1, recurse = TRUE, check = FALSE)
-    })
-  }
-})
+withr::defer(
+  if (has_pat()) try(osf_rm(p1, recurse = TRUE, check = FALSE), silent = TRUE),
+  testthat::teardown_env()
+)
 
 
 # tests -------------------------------------------------------------------
