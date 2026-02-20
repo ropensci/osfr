@@ -1,10 +1,7 @@
 # setup -------------------------------------------------------------------
 if (on_test_server()) {
   user_tbl <- osf_retrieve_user("me")
-  user_tbl_with_foo <- user_tbl
-  user_tbl_with_foo$foo <- "bar"
 }
-#
 
 
 # tests -------------------------------------------------------------------
@@ -27,10 +24,10 @@ test_that("empty list returns empty osf_tbl", {
 
 test_that("valid osf_tbls are passed through validation", {
   skip_on_production_server()
+  user_tbl_with_foo <- user_tbl
+  user_tbl_with_foo$foo <- "bar"
 
-  user_tbl <<- osf_retrieve_user("dguxh")
-  user_tbl$foo <<- "bar"
-  expect_s3_class(rebuild_osf_tbl(user_tbl), "osf_tbl_user")
+  expect_s3_class(rebuild_osf_tbl(user_tbl_with_foo), "osf_tbl_user")
 })
 
 test_that("osf_tbls missing required columns are detected", {
@@ -53,7 +50,6 @@ test_that("can't combine osf_tbls with different subclasses", {
   skip_on_production_server()
 
   proj_tbl <- osf_retrieve_node("brfza")
-  proj_tbl$foo <- "bar"
   out <- rbind(user_tbl, proj_tbl)
   expect_identical(class(out), c("tbl_df", "tbl", "data.frame"))
 })
