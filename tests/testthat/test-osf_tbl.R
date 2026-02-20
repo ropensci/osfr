@@ -1,5 +1,5 @@
 # setup -------------------------------------------------------------------
-if (on_test_server()) {
+if (has_pat()) {
   user_tbl <- osf_retrieve_user("me")
 }
 
@@ -23,7 +23,7 @@ test_that("empty list returns empty osf_tbl", {
 # osf_tbl validation ------------------------------------------------------
 
 test_that("valid osf_tbls are passed through validation", {
-  skip_on_production_server()
+  skip_if_no_pat()
   user_tbl_with_foo <- user_tbl
   user_tbl_with_foo$foo <- "bar"
 
@@ -31,7 +31,7 @@ test_that("valid osf_tbls are passed through validation", {
 })
 
 test_that("osf_tbls missing required columns are detected", {
-  skip_on_production_server()
+  skip_if_no_pat()
 
   expect_true(has_osf_tbl_colnames(user_tbl))
   expect_false(has_osf_tbl_colnames(user_tbl[-1]))
@@ -40,14 +40,14 @@ test_that("osf_tbls missing required columns are detected", {
 })
 
 test_that("osf_tbls with incorrect column types are detected", {
-  skip_on_production_server()
+  skip_if_no_pat()
 
   user_tbl$id <- as.factor(user_tbl$id)
   expect_false(has_osf_tbl_coltypes(user_tbl))
 })
 
 test_that("can't combine osf_tbls with different subclasses", {
-  skip_on_production_server()
+  skip_if_no_pat()
 
   proj_tbl <- osf_retrieve_node("brfza")
   out <- rbind(user_tbl, proj_tbl)

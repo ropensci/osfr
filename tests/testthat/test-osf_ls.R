@@ -11,7 +11,7 @@ if (on_test_server()) {
 
 # tests -------------------------------------------------------------------
 test_that("`n_max` controls number of returned nodes", {
-  skip_on_production_server()
+  skip_if_not_test_server()
 
   out <- osf_ls_nodes(c1, n_max = 10)
   expect_s3_class(out, "osf_tbl_node")
@@ -22,7 +22,7 @@ test_that("`n_max` controls number of returned nodes", {
 })
 
 test_that("`pattern` filters nodes by name", {
-  skip_on_production_server()
+  skip_if_not_test_server()
 
   out <- osf_ls_nodes(c1, pattern = "component-01")
   expect_equal(nrow(out), 1)
@@ -32,7 +32,7 @@ test_that("`pattern` filters nodes by name", {
 })
 
 test_that("messages are printed with `verbose` enabled", {
-  skip_on_production_server()
+  skip_if_not_test_server()
 
   expect_message(
     osf_ls_nodes(c1, n_max = 20, verbose = TRUE),
@@ -44,7 +44,7 @@ test_that("messages are printed with `verbose` enabled", {
 # Listing files and directories -------------------------------------------
 
 test_that("both files and directories are listed", {
-  skip_on_production_server()
+  skip_if_not_test_server()
 
   out <- osf_ls_files(p1)
   expect_s3_class(out, "osf_tbl_file")
@@ -56,7 +56,7 @@ test_that("both files and directories are listed", {
 })
 
 test_that("`type` can filters for files", {
-  skip_on_production_server()
+  skip_if_not_test_server()
 
   out <- osf_ls_files(p1, type = "file")
   expect_equal(nrow(out), 1)
@@ -64,7 +64,7 @@ test_that("`type` can filters for files", {
 })
 
 test_that("`type` can filters for files", {
-  skip_on_production_server()
+  skip_if_not_test_server()
 
   out <- osf_ls_files(p1, type = "folder")
   expect_equal(nrow(out), 2)
@@ -72,7 +72,7 @@ test_that("`type` can filters for files", {
 })
 
 test_that("n_max controls number of returned files", {
-  skip_on_production_server()
+  skip_if_not_test_server()
 
   out <- osf_ls_files(d1, n_max = 10)
   expect_equal(nrow(out), 10)
@@ -82,7 +82,7 @@ test_that("n_max controls number of returned files", {
 })
 
 test_that("`pattern` filters files by name", {
-  skip_on_production_server()
+  skip_if_not_test_server()
 
   out <- osf_ls_files(d1, pattern = ".txt", n_max = 10)
   expect_match(out$name, "\\.txt$")
@@ -92,7 +92,7 @@ test_that("`pattern` filters files by name", {
 })
 
 test_that("messages are printed with `verbose` enabled", {
-  skip_on_production_server()
+  skip_if_not_test_server()
 
   expect_message(
     osf_ls_files(d1, n_max = 20, verbose = TRUE),
