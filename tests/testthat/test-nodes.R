@@ -8,9 +8,21 @@ if (has_pat()) {
   vcr::use_cassette("create-p1", {
     p1 <- osf_create_project(title = "osfr-test-nodes")
   })
+  vcr::use_cassette("create-c1", {
+    c1 <- osf_create_component(p1, title = "component-1")
+  })
+  vcr::use_cassette("create-p2-and-c2", {
+    p2 <- osf_create_project(
+      "osfr-project-category-test",
+      category = "Analysis"
+    )
+    c2 <- osf_create_component(
+      p2,
+      "osfr-component-category-test",
+      category = "Data"
+    )
+  })
 }
-
-# teardown happens within node deletion tests
 
 
 # tests -------------------------------------------------------------------
@@ -25,10 +37,6 @@ test_that("minimal project with default settings was created", {
 
 test_that("minimal component with default settings was created", {
   skip_if_no_pat()
-
-  vcr::use_cassette("create-c1", {
-    c1 <<- osf_create_component(p1, title = "component-1")
-  })
 
   expect_s3_class(c1, "osf_tbl_node")
   expect_false(get_meta(c1, "attributes", "public"))
@@ -86,11 +94,6 @@ test_that("an invalid or ambiguous category errors", {
 
 test_that("a valid category can be specified", {
   skip_if_no_pat()
-
-  vcr::use_cassette("create-p2-and-c2", {
-    p2 <<- osf_create_project("osfr-project-category-test", category = "Analysis")
-    c2 <- osf_create_component(p2, "osfr-component-category-test", category = "Data")
-  })
 
   expect_match(get_meta(p2, "attributes", "category"), "analysis")
   expect_match(get_meta(c2, "attributes", "category"), "data")
