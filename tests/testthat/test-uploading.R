@@ -13,6 +13,9 @@ if (has_pat()) {
     p1 <- osf_create_project(title = "osfr-test-files-1")
     d1 <- osf_mkdir(p1, "data")
   })
+  vcr::use_cassette("upload-infile", {
+    f1 <- osf_upload(p1, infile)
+  })
 }
 
 withr::defer(
@@ -29,13 +32,6 @@ test_that("nonexistent file is detected", {
 
 test_that("file is uploaded to project root", {
   skip_if_no_pat()
-
-  expect_message(
-    vcr::use_cassette("upload-infile", {
-      f1 <<- osf_upload(p1, infile, verbose = TRUE)
-    }),
-    sprintf("Uploaded new file '%s' to OSF", basename(infile))
-  )
 
   expect_s3_class(f1, "osf_tbl_file")
   expect_match(f1$name, basename(infile))
@@ -69,12 +65,12 @@ test_that("a file can be overwritten when conflicts='overwrite'", {
 
   expect_message(
     vcr::use_cassette("upload-conflict-overwrite", {
-      f1 <<- osf_upload(p1, infile, conflicts = "overwrite", verbose = TRUE)
+      f1_v2 <- osf_upload(p1, infile, conflicts = "overwrite", verbose = TRUE)
     }),
     sprintf("Uploaded new version of '%s' to OSF", basename(infile))
   )
 
-  version <- get_meta(f1, "attributes", "current_version")
+  version <- get_meta(f1_v2, "attributes", "current_version")
   expect_equal(version, 2)
 })
 
