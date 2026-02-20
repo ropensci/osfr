@@ -1,4 +1,4 @@
-context("Recursion utilities")
+# setup -------------------------------------------------------------------
 
 tree <- list(
   n0 = list(
@@ -16,6 +16,8 @@ tree <- list(
   )
 )
 
+# tests -------------------------------------------------------------------
+
 test_that("tree coercion to character vector", {
   stree <- simplify_tree(tree)
   expect_length(stree, 9)
@@ -31,7 +33,7 @@ test_that("coerce tree leaf", {
 })
 
 
-context("File system utilities")
+# File system utilities ---------------------------------------------------
 
 test_that("Reserved filenames are removed from osf-bound file paths", {
   expect_match(clean_osf_path("."),          ".")
@@ -42,7 +44,7 @@ test_that("Reserved filenames are removed from osf-bound file paths", {
 })
 
 
-context("URL Utilities")
+# URL utilities -----------------------------------------------------------
 
 test_that("url_path() doesn't drop trailing slashes", {
   expect_equal(url_path("a/"), "a/")

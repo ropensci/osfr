@@ -1,18 +1,13 @@
-context("Listing nodes")
-
-
 # setup -------------------------------------------------------------------
-setup({
-  # Retrieve public OSF project and components required for tests
-  # (created using data-raw/create-test-project.R)
-  if (on_test_server()) {
-    guids <- get_guids()
-    p1 <<- osf_retrieve_node(guids[, "p1"])
-    c1 <<- osf_retrieve_node(guids[, "c1"])
-    d1 <<- osf_retrieve_file(guids[, "d1"])
-  }
-})
 
+# Retrieve public OSF project and components required for tests
+# (created using data-raw/create-test-project.R)
+if (on_test_server()) {
+  guids <- get_guids()
+  p1 <- osf_retrieve_node(guids[, "p1"])
+  c1 <- osf_retrieve_node(guids[, "c1"])
+  d1 <- osf_retrieve_file(guids[, "d1"])
+}
 
 # tests -------------------------------------------------------------------
 test_that("`n_max` controls number of returned nodes", {
@@ -46,7 +41,7 @@ test_that("messages are printed with `verbose` enabled", {
 })
 
 
-context("Listing files and directories")
+# Listing files and directories -------------------------------------------
 
 test_that("both files and directories are listed", {
   skip_on_production_server()

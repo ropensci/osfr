@@ -1,5 +1,13 @@
-context("osf_tbl construction")
+# setup -------------------------------------------------------------------
+if (on_test_server()) {
+  user_tbl <- osf_retrieve_user("me")
+  user_tbl_with_foo <- user_tbl
+  user_tbl_with_foo$foo <- "bar"
+}
+#
 
+
+# tests -------------------------------------------------------------------
 test_that("NULL input returns empty osf_tbl", {
   out <- osf_tbl()
   expect_s3_class(out, "osf_tbl")
@@ -15,7 +23,7 @@ test_that("empty list returns empty osf_tbl", {
 })
 
 
-context("osf_tbl validation")
+# osf_tbl validation ------------------------------------------------------
 
 test_that("valid osf_tbls are passed through validation", {
   skip_on_production_server()
