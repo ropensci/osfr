@@ -48,6 +48,7 @@ test_that("osf_tbls with incorrect column types are detected", {
 
 test_that("can't combine osf_tbls with different subclasses", {
   skip_if_no_pat()
+  skip_if_not_test_server()
 
   proj_tbl <- osf_retrieve_node("brfza")
   out <- rbind(user_tbl, proj_tbl)
