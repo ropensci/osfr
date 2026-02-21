@@ -5,8 +5,7 @@ cassette_dir <- function(x) {
 }
 
 vcr::vcr_configure(
-  record = "once",
-  match_requests_on = c("method", "uri", "body")
+  record = "once"
 )
 
 if (nzchar(Sys.getenv("VCR_LOG"))) {
