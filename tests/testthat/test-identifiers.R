@@ -1,4 +1,4 @@
-context("Identifiers")
+# tests -------------------------------------------------------------------
 
 test_that("as_id() detects one or more valid OSF GUIDs", {
   expect_s3_class(as_id("aaaaa"), "osf_id")
@@ -22,6 +22,5 @@ test_that("GUIDs and Waterbutler IDs are detected in OSF URLs", {
 })
 
 test_that("special identifier 'me' is recognized", {
-  skip_if_no_pat()
   expect_match(id_type("me"), "users")
 })

@@ -7,23 +7,18 @@ testdir <- withr::local_tempdir(.local_envir = testthat::teardown_env())
 multidir <- file.path(testdir, ".osfr-tests")
 create_upload_test_files(multidir)
 
-if (has_pat()) {
-  vcr::use_cassette("create-p1", {
-    p1 <- osf_create_project(title = "osfr-multifile-upload-test")
-  })
-}
+vcr::use_cassette("create-p1", {
+  p1 <- osf_create_project(title = "osfr-multifile-upload-test")
+})
 
 withr::defer(
   if (has_pat()) try(osf_rm(p1, recurse = TRUE, check = FALSE), silent = TRUE),
   testthat::teardown_env()
 )
 
-
 # tests -------------------------------------------------------------------
 
 test_that("multiple files can be uploaded", {
-  skip_if_no_pat()
-
   infiles <- fs::dir_ls(multidir, type = "file")
 
   vcr::use_cassette("upload-infiles", {
@@ -35,8 +30,6 @@ test_that("multiple files can be uploaded", {
 })
 
 test_that("a directory can be uploaded", {
-  skip_if_no_pat()
-
   vcr::use_cassette("create-and-populate-c1", {
     c1 <- osf_create_component(p1, "dir-upload")
     out <- osf_upload(c1, multidir)
@@ -54,8 +47,6 @@ test_that("a directory can be uploaded", {
 })
 
 test_that("a subdirectory can be uploaded", {
-  skip_if_no_pat()
-
   # upload the subdirectory with no children
   indir <- file.path(multidir, "subdir1", "subdir1_1")
   vcr::use_cassette("create-and-populate-c2", {
@@ -85,10 +76,7 @@ test_that("a subdirectory can be uploaded", {
   )
 })
 
-
 test_that("recurse argument respects specified levels", {
-  skip_if_no_pat()
-
   vcr::use_cassette("create-and-populate-c3", {
     c3 <- osf_create_component(p1, "recurse=1")
     out <- osf_upload(c3, path = multidir, recurse = 1)
@@ -116,10 +104,7 @@ test_that("recurse argument respects specified levels", {
   expect_equal(nrow(sd1_1_files), 0)
 })
 
-
 test_that("recurse=TRUE uploads the entire OSF directory structure", {
-  skip_if_no_pat()
-
   vcr::use_cassette("create-and-populate-c4", {
     c4 <- osf_create_component(p1, "recurse=TRUE")
     out <- osf_upload(c4, path = multidir, recurse = TRUE)
@@ -139,7 +124,6 @@ test_that("files in parent directories can be uploaded", {
   cwd <- getwd()
   on.exit(setwd(cwd))
   setwd(fs::path(multidir, "subdir1/subdir1_1"))
-  skip_if_no_pat()
 
   vcr::use_cassette("create-c5", {
     c5 <- osf_create_component(p1, "parent-directories")
@@ -165,8 +149,6 @@ test_that("files in parent directories can be uploaded", {
 })
 
 test_that("conflicting files are skipped or overwritten", {
-  skip_if_no_pat()
-
   infiles <- fs::dir_ls(multidir, type = "file")
   vcr::use_cassette("create-and-populate-c6", {
     c6 <- osf_create_component(p1, "conflicts")

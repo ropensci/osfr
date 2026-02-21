@@ -3,21 +3,17 @@ vcr::vcr_configure(
   dir = cassette_dir("directories")
 )
 
-if (has_pat()) {
-  vcr::use_cassette("create-p1", {
-    p1 <- osf_create_project(title = "osfr-test-directories")
-  })
-}
+vcr::use_cassette("create-p1", {
+  p1 <- osf_create_project(title = "osfr-test-directories")
+})
 
 withr::defer(
   if (has_pat()) try(osf_rm(p1, recurse = TRUE, check = FALSE), silent = TRUE),
   testthat::teardown_env()
 )
 
-
 # tests -------------------------------------------------------------------
 test_that("empty project/folder returns an empty osf_tbl_file", {
-  skip_if_no_pat()
   vcr::use_cassette("list-empty-p1", {
     out <- osf_ls_files(p1)
   })
@@ -27,7 +23,6 @@ test_that("empty project/folder returns an empty osf_tbl_file", {
 })
 
 test_that("listing a non-existent folder errors", {
-  skip_if_no_pat()
   expect_error(
     vcr::use_cassette("list-nonexistent-dir", {
       osf_ls_files(p1, path = "nonexistent")
@@ -37,7 +32,6 @@ test_that("listing a non-existent folder errors", {
 })
 
 test_that("create a top-level directory", {
-  skip_if_no_pat()
   vcr::use_cassette("create-dir1", {
     d1 <- osf_mkdir(p1, path = "dir1")
   })
@@ -47,7 +41,6 @@ test_that("create a top-level directory", {
 })
 
 test_that("list a top-level directory", {
-  skip_if_no_pat()
   vcr::use_cassette("list-p1-with-one-dir", {
     out <- osf_ls_files(p1)
   })
@@ -57,9 +50,7 @@ test_that("list a top-level directory", {
   expect_equal(out$name, "dir1")
 })
 
-
 test_that("create a subdirectory within an existing directory", {
-  skip_if_no_pat()
   vcr::use_cassette("create-subdir-dir11", {
     d11 <- osf_mkdir(p1, path = "dir1/dir11")
   })
@@ -69,7 +60,6 @@ test_that("create a subdirectory within an existing directory", {
 })
 
 test_that("list within a subdirectory", {
-  skip_if_no_pat()
   vcr::use_cassette("list-within-subdir-dir1", {
     out <- osf_ls_files(p1, path = "dir1")
   })
@@ -79,7 +69,6 @@ test_that("list within a subdirectory", {
 })
 
 test_that("create a subdirectory within a non-existent parent directory", {
-  skip_if_no_pat()
   vcr::use_cassette("create-subdir-dir21", {
     d21 <- osf_mkdir(p1, path = "dir2/dir21")
   })
@@ -92,7 +81,6 @@ test_that("create a subdirectory within a non-existent parent directory", {
 })
 
 test_that("'path' isn't confused by dir names with a shared substring (#95)", {
-  skip_if_no_pat()
   vcr::use_cassette("create-dir", {
     d3 <- osf_mkdir(p1, path = "dir")
   })
@@ -104,7 +92,6 @@ test_that("'path' isn't confused by dir names with a shared substring (#95)", {
 })
 
 test_that("directory names can start with a dot", {
-  skip_if_no_pat()
   vcr::use_cassette("create-dir-with-dot-prefix", {
     dotdir <- osf_mkdir(p1, path = ".dir")
   })

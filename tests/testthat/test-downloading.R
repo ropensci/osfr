@@ -19,6 +19,7 @@ outdir <- normalizePath(
 
 test_that("a file can be downloaded from a project", {
   skip_if_no_pat()
+  skip_if_not_test_server()
   out <- osf_download(f1, path = outdir)
 
   expect_s3_class(out, "osf_tbl_file")
@@ -30,6 +31,7 @@ test_that("a file can be downloaded from a project", {
 
 test_that("by default an error is thrown if a conflicting file exists", {
   skip_if_no_pat()
+  skip_if_not_test_server()
 
   expect_error(
     out <- osf_download(f1, path = outdir),
@@ -39,6 +41,7 @@ test_that("by default an error is thrown if a conflicting file exists", {
 
 test_that("a file can be overwritten when conflicts='overwrite'", {
   skip_if_no_pat()
+  skip_if_not_test_server()
 
   expect_silent(
     out <- osf_download(f1, path = outdir, conflict = "overwrite")
@@ -48,6 +51,7 @@ test_that("a file can be overwritten when conflicts='overwrite'", {
 
 test_that("a non-existant path throws an error", {
   skip_if_no_pat()
+  skip_if_not_test_server()
   expect_error(
     osf_download(f1, path = "ddd"),
     "`path` must point to an existing local directory."
@@ -56,6 +60,7 @@ test_that("a non-existant path throws an error", {
 
 test_that("a file can be downloaded from an OSF directory", {
   skip_if_no_pat()
+  skip_if_not_test_server()
   f2 <- osf_ls_files(d1, pattern = "image-file-01.png")
   out <- osf_download(f2, path = outdir)
   expect_s3_class(out, "osf_tbl_file")
@@ -64,6 +69,7 @@ test_that("a file can be downloaded from an OSF directory", {
 
 test_that("by default only top-level files are downloaded from an OSF directory", {
   skip_if_no_pat()
+  skip_if_not_test_server()
 
   out <- osf_download(d2, path = outdir)
   expect_s3_class(out, "osf_tbl_file")
@@ -79,6 +85,7 @@ test_that("by default only top-level files are downloaded from an OSF directory"
 
 test_that("recurse argument respects specified levels", {
   skip_if_no_pat()
+  skip_if_not_test_server()
 
   out <- osf_download(d2, path = outdir, recurse = 2)
   d01_files <- osf_ls_files(d2, path = "d01", type = "file")
@@ -98,6 +105,7 @@ test_that("recurse argument respects specified levels", {
 
 test_that("recurse=TRUE downloads the entire OSF directory structure", {
   skip_if_no_pat()
+  skip_if_not_test_server()
   out <- osf_download(d2, path = outdir, recurse = TRUE)
   d03_files <- osf_ls_files(d2, path = "d01/d02/d03", type = "file")
 
@@ -110,6 +118,7 @@ test_that("recurse=TRUE downloads the entire OSF directory structure", {
 
 test_that("conflicting files are skipped or overwritten", {
   skip_if_no_pat()
+  skip_if_not_test_server()
   out <- osf_download(d2, path = outdir)
 
 # overwrite contents of first file and delete the second file

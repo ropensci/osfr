@@ -1,5 +1,11 @@
-context("osf_tbl construction")
+# setup -------------------------------------------------------------------
+vcr::vcr_configure(dir = cassette_dir("osf-tbl"))
 
+vcr::use_cassette("retrieve-user", {
+  user_tbl <- osf_retrieve_user("me")
+})
+
+# tests -------------------------------------------------------------------
 test_that("NULL input returns empty osf_tbl", {
   out <- osf_tbl()
   expect_s3_class(out, "osf_tbl")
@@ -14,20 +20,16 @@ test_that("empty list returns empty osf_tbl", {
   expect_true(is_valid_osf_tbl(out))
 })
 
-
-context("osf_tbl validation")
+# osf_tbl validation ------------------------------------------------------
 
 test_that("valid osf_tbls are passed through validation", {
-  skip_on_production_server()
+  user_tbl_with_foo <- user_tbl
+  user_tbl_with_foo$foo <- "bar"
 
-  user_tbl <<- osf_retrieve_user("dguxh")
-  user_tbl$foo <<- "bar"
-  expect_s3_class(rebuild_osf_tbl(user_tbl), "osf_tbl_user")
+  expect_s3_class(rebuild_osf_tbl(user_tbl_with_foo), "osf_tbl_user")
 })
 
 test_that("osf_tbls missing required columns are detected", {
-  skip_on_production_server()
-
   expect_true(has_osf_tbl_colnames(user_tbl))
   expect_false(has_osf_tbl_colnames(user_tbl[-1]))
   expect_false(has_osf_tbl_colnames(user_tbl[-2]))
@@ -35,17 +37,14 @@ test_that("osf_tbls missing required columns are detected", {
 })
 
 test_that("osf_tbls with incorrect column types are detected", {
-  skip_on_production_server()
-
   user_tbl$id <- as.factor(user_tbl$id)
   expect_false(has_osf_tbl_coltypes(user_tbl))
 })
 
 test_that("can't combine osf_tbls with different subclasses", {
-  skip_on_production_server()
-
-  proj_tbl <- osf_retrieve_node("brfza")
-  proj_tbl$foo <- "bar"
+  vcr::use_cassette("retrieve-node", {
+    proj_tbl <- osf_retrieve_node("brfza")
+  })
   out <- rbind(user_tbl, proj_tbl)
   expect_identical(class(out), c("tbl_df", "tbl", "data.frame"))
 })

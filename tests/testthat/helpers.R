@@ -3,13 +3,13 @@ on_test_server <- function() {
   Sys.getenv("OSF_SERVER") == "test"
 }
 
-skip_on_production_server <- function() {
+# for tests that require assets on test.osf.io (e.g. pre-created projects)
+skip_if_not_test_server <- function() {
   testthat::skip_if_not(
     on_test_server(),
     "OSF_SERVER not set to 'test'."
   )
 }
-
 
 # for tests that require authenticated access
 has_pat <- function() {

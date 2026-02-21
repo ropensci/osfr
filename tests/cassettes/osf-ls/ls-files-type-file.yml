@@ -1,0 +1,57 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/y8t6r/files/osfstorage/?filter%5Bkind%5D=file&page=1
+  response:
+    status: 200
+    headers:
+      allow: GET, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Sat, 21 Feb 2026 14:11:19 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJy9VttupDgQ/ZeSeCMN5o6l0WhXo/6CfdrRCBm73FgBjGzTyaTFv69MN51OlMmulOy8IVx1
+        zqnycdk
+        nEMwxoN9PoARQyEWGMq0wwzpGEsckK2QpMwIhuJ8TAgWperQQAnPOqHZ2aIGe4DCv
+        6S0+micIgXfI7/
+        XsgI5z34cwssHnqoEd8M4j3MVkNwkJIdyrUVxgIYSJuQ4oRO/osOoJgZZl
+        XIcwGX1UAg1Q0FZapw07e
+        JiBOTSK9eoJRbNhvsXeM+sap2feodjECuawGbRQUvmfkMSkvour
+        OxL/RQqaxTQrdmWcVGUCl2BukLl/
+        if0bQsBHZ5hvV8dsd27cIHLft6St8jzLkrIiRKaiKLmo
+        CZI2w6JISevL7liSF0AhrgXmVSuqPKuzVpZ
+        1glWVVi2RZcmkIISzLG2zMivSIuEVSSrJWy4Q
+        WRVzntWwhCD0w9hrJizQeAnBsYMF+v1HCHw2BkfXzB
+        ZNw9nYcD0MODqgzsz4vH5EY5UegRKv
+        TD80zDbzeFT44NsgWW9xCcFgz5zSo+3UtFY7sTVb6n7dtBP0a
+        rxfV9ZQn3uCzqAECp1zk6VR
+        xCa1c2jdTlu5Uzo6JtHqwbNHiKhJkRU59x5JU84wibwB0Lv6tCxLeHH4
+        rcHfSHptcJ94KdJ+
+        itA3zBxtBC8VLyFcuv4B5lELtNHPyhUm2tCir1L1Dk2Q/+mYOaAL8m9ftiP7gt9
+        nfw73e3ux
+        Rjw3fk1bG39W99kCXvPcyHmxEt6qW3cDBTONR/HxjUGujfj/XPE23SuPLOEzuRql/hCjh9
+        ZH
+        vMFYE3azfQlEIoNWz4Zfu7sNYBs9z9/3hvc8+bHzG4gE9uh+R0XbKL2humXYlqP1nPlOGxzP
+        N9YW
+        PkjzWtc55uts+i9rVJD+EST7INnfBAXJfgMPkv0K72PSvVAGuQuSYtACg/TbhTCEzg39
+        L2Seaz/b5L/
+        VbbGXHzWdMuoXes5TaVl+3NhcKmOvLwp/cW/fk8Hj9aWBj9f/13OvHevXq2pC
+        00z+iUBJ7I/QFnG9zi
+        DZxbAs/wDLBPj1
+  recorded_at: 2026-02-21 14:11:19
+recorded_with: VCR-vcr/2.1.0
