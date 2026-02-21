@@ -1,0 +1,59 @@
+http_interactions:
+- request:
+    method: GET
+    uri: https://api.test.osf.io/v2/nodes/brfza/
+  response:
+    status: 200
+    headers:
+      allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+      alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control: no-cache, no-store, max-age=0, must-revalidate
+      content-encoding: gzip
+      content-type: application/vnd.api+json; charset=utf-8
+      cross-origin-opener-policy: same-origin
+      date: Sat, 21 Feb 2026 14:11:27 GMT
+      expires: '-1'
+      pragma: no-cache
+      referrer-policy: same-origin
+      server: nginx
+      status: 'HTTP/2 200 '
+      vary:
+      - Accept-Encoding
+      - Accept, Cookie, origin
+      via: 1.1 google
+      x-content-type-options: nosniff
+      x-frame-options: DENY
+    body:
+      raw_gzip: |-
+        eJy1mNtu4zYQhl9FGGDRG/mUrJFGQFGg6CPkrlgQFDWyp6FIlRwlSAO/+4KULB/kZOFd+i6W
+        ON8/B85
+        QzDtUkiUU70AVFFC6+n8JOfBbi1CAsRV6yEEyOyo7Rh9WMrEOb62v3YzRM28lz1pn
+        /0XFkEOFXjlqma
+        yBAp625LPhZUY+q63LguVvPusMcRYAPpOmyvzWdrrKjOWsxKxCjYzVHHJQ
+        knFj3RsUcFBRnWfbCEUse
+        yXTaZ2HcFAoh5IxBHS3XD3OlqvZ8ven1dditSxW6/n9er18WMGw
+        trEV1XS0+H62fHxaPRZ398VqNV/f
+        Pdx/fYAcHG7IsxvEaqk95tA6bB0ZHh/U1j2PP5TVGtWJ
+        AcuNh+KfbzlIpdB74fC/LmRAoJGlDm6w6zC
+        PqReaFBqP+9hU5xwaFp1HJ5Q0QtmmwaDe25y8
+        b9E15D1ZEwRBVg0ZyOHVEWMMR1bw7cyGvFDW9LW27i
+        L2dImwTmyc7VrRYFPiaPJKz3QeUduV
+        mtT+l+/KUMiYjF1wR8fM+i21cZOpLenKoQl/azLP8WFcFYjvs
+        HVYQwFb5tYXi4VsaR520tz6
+        ek528XK3iJt3EXf0Yk9bQA4Nxg2/2+12Y4mwEpRKaiy6v6AW6+VTKfW0
+        xZ81aUb3Zf0XS7dB
+        /rL++499J5/pj5VL5sOBOAm3pFKT3TjZbkmJ9OIf8yeuUNNqUsQ38OIieuJATRo
+        TCUbURMAj
+        M5lNIo097VQm/+FpMRsMISwOUyCRPxE1Tap1z4kEImoiMExhk0rlwJtIhadYifJN9KduEr
+        0z
+        6Ceix8dbcvET+LQ3KzQczuBkHXkATsRkXZMm2U98z8RdwoiPiSfKoT11fT3w5Fj8GB8708ma
+        b1HG
+        C+CJ+A1kfyxof+HE7u39ovt8wnX+MN4GE4jy1nKaMK+cr728tqnmfCB9NBXSz6HpEErT
+        GB/ij6K5wRa
+        9RL5ddJ83xAvhq7BGv6U8rs6g0+/Z8fKVQm1Pu6YnRg/Cwv1tLFH0I276rcXW
+        yQ2mkRlg139pDU7EQm
+        AlnQjmwUw4VNZVidJwmT3NyXChE+Fi23K4+v28/h52pjJ0c+RtudFH
+        kGPAOFn77rtiFJOjz5gx14M/8
+        ILO9//iuJsvYbf7DniPG0w=
+  recorded_at: 2026-02-21 14:11:27
+recorded_with: VCR-vcr/2.1.0

@@ -1,41 +1,55 @@
 # setup -------------------------------------------------------------------
 
+vcr::vcr_configure(dir = cassette_dir("osf-ls"))
+
 # Retrieve public OSF project and components required for tests
 # (created using data-raw/create-test-project.R)
-if (on_test_server()) {
+if (has_pat()) {
   guids <- get_guids()
-  p1 <- osf_retrieve_node(guids[, "p1"])
-  c1 <- osf_retrieve_node(guids[, "c1"])
-  d1 <- osf_retrieve_file(guids[, "d1"])
+  vcr::use_cassette("retrieve-fixtures", {
+    p1 <- osf_retrieve_node(guids[, "p1"])
+    c1 <- osf_retrieve_node(guids[, "c1"])
+    d1 <- osf_retrieve_file(guids[, "d1"])
+  })
 }
 
 # tests -------------------------------------------------------------------
 test_that("`n_max` controls number of returned nodes", {
-  skip_if_not_test_server()
+  skip_if_no_pat()
 
-  out <- osf_ls_nodes(c1, n_max = 10)
+  vcr::use_cassette("ls-nodes-n-max-10", {
+    out <- osf_ls_nodes(c1, n_max = 10)
+  })
   expect_s3_class(out, "osf_tbl_node")
   expect_equal(nrow(out), 10)
 
-  out <- osf_ls_nodes(c1, n_max = 20)
+  vcr::use_cassette("ls-nodes-n-max-20", {
+    out <- osf_ls_nodes(c1, n_max = 20)
+  })
   expect_equal(nrow(out), 20)
 })
 
 test_that("`pattern` filters nodes by name", {
-  skip_if_not_test_server()
+  skip_if_no_pat()
 
-  out <- osf_ls_nodes(c1, pattern = "component-01")
+  vcr::use_cassette("ls-nodes-pattern-single", {
+    out <- osf_ls_nodes(c1, pattern = "component-01")
+  })
   expect_equal(nrow(out), 1)
 
-  out <- osf_ls_nodes(c1, pattern = "component-0")
+  vcr::use_cassette("ls-nodes-pattern-multi", {
+    out <- osf_ls_nodes(c1, pattern = "component-0")
+  })
   expect_equal(nrow(out), 9)
 })
 
 test_that("messages are printed with `verbose` enabled", {
-  skip_if_not_test_server()
+  skip_if_no_pat()
 
   expect_message(
-    osf_ls_nodes(c1, n_max = 20, verbose = TRUE),
+    vcr::use_cassette("ls-nodes-verbose", {
+      osf_ls_nodes(c1, n_max = 20, verbose = TRUE)
+    }),
     "Retrieving \\d{2} of \\d{2} available items"
   )
 })
@@ -44,9 +58,11 @@ test_that("messages are printed with `verbose` enabled", {
 # Listing files and directories -------------------------------------------
 
 test_that("both files and directories are listed", {
-  skip_if_not_test_server()
+  skip_if_no_pat()
 
-  out <- osf_ls_files(p1)
+  vcr::use_cassette("ls-files-all", {
+    out <- osf_ls_files(p1)
+  })
   expect_s3_class(out, "osf_tbl_file")
   expect_equal(nrow(out), 3)
   expect_identical(
@@ -56,46 +72,60 @@ test_that("both files and directories are listed", {
 })
 
 test_that("`type` can filters for files", {
-  skip_if_not_test_server()
+  skip_if_no_pat()
 
-  out <- osf_ls_files(p1, type = "file")
+  vcr::use_cassette("ls-files-type-file", {
+    out <- osf_ls_files(p1, type = "file")
+  })
   expect_equal(nrow(out), 1)
   expect_match(get_meta(out, "attributes", "kind"), "file")
 })
 
 test_that("`type` can filters for files", {
-  skip_if_not_test_server()
+  skip_if_no_pat()
 
-  out <- osf_ls_files(p1, type = "folder")
+  vcr::use_cassette("ls-files-type-folder", {
+    out <- osf_ls_files(p1, type = "folder")
+  })
   expect_equal(nrow(out), 2)
   expect_match(get_meta(out, "attributes", "kind"), "folder")
 })
 
 test_that("n_max controls number of returned files", {
-  skip_if_not_test_server()
+  skip_if_no_pat()
 
-  out <- osf_ls_files(d1, n_max = 10)
+  vcr::use_cassette("ls-files-n-max-10", {
+    out <- osf_ls_files(d1, n_max = 10)
+  })
   expect_equal(nrow(out), 10)
 
-  out <- osf_ls_files(d1, n_max = 20)
+  vcr::use_cassette("ls-files-n-max-20", {
+    out <- osf_ls_files(d1, n_max = 20)
+  })
   expect_equal(nrow(out), 20)
 })
 
 test_that("`pattern` filters files by name", {
-  skip_if_not_test_server()
+  skip_if_no_pat()
 
-  out <- osf_ls_files(d1, pattern = ".txt", n_max = 10)
+  vcr::use_cassette("ls-files-pattern-txt", {
+    out <- osf_ls_files(d1, pattern = ".txt", n_max = 10)
+  })
   expect_match(out$name, "\\.txt$")
 
-  out <- osf_ls_files(d1, pattern = ".png", n_max = 10)
+  vcr::use_cassette("ls-files-pattern-png", {
+    out <- osf_ls_files(d1, pattern = ".png", n_max = 10)
+  })
   expect_match(out$name, "\\.png$")
 })
 
 test_that("messages are printed with `verbose` enabled", {
-  skip_if_not_test_server()
+  skip_if_no_pat()
 
   expect_message(
-    osf_ls_files(d1, n_max = 20, verbose = TRUE),
+    vcr::use_cassette("ls-files-verbose", {
+      osf_ls_files(d1, n_max = 20, verbose = TRUE)
+    }),
     "Retrieving \\d{2} of \\d{2} available items"
   )
 })

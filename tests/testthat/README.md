@@ -16,7 +16,7 @@ Rscript --no-save --no-restore -e 'testthat::test_local()'
 
 ### Live test server
 
-Set `OSF_SERVER=test` and provide a PAT from [test.osf.io](https://test.osf.io) to run the full test suite, including tests that create or modify data. Some tests depend on pre-existing assets (projects, files) created by `data-raw/create-test-project.R`.
+Set `OSF_SERVER=test` and provide a PAT from [test.osf.io](https://test.osf.io) to run the full test suite, including tests that create or modify data. The downloading tests depend on pre-existing assets (projects, files) created by `data-raw/create-test-project.R`.
 
 ```sh
 export OSF_PAT=<personal access token from test.osf.io>
@@ -38,4 +38,4 @@ Rscript --no-save --no-restore -e 'testthat::test_local()'
 Skip helpers are defined in `helpers.R` and used throughout the test suite to manage which tests run in each mode.
 
 - `skip_if_no_pat()` -- skips tests that require authenticated API access
-- `skip_if_not_test_server()` -- skips tests that rely on pre-existing assets only available on test.osf.io
+- `skip_if_not_test_server()` -- skips tests that rely on pre-existing assets only available on test.osf.io (currently only `test-downloading.R`)
