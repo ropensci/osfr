@@ -4,19 +4,15 @@ vcr::vcr_configure(dir = cassette_dir("osf-ls"))
 
 # Retrieve public OSF project and components required for tests
 # (created using data-raw/create-test-project.R)
-if (has_pat()) {
-  guids <- get_guids()
-  vcr::use_cassette("retrieve-fixtures", {
-    p1 <- osf_retrieve_node(guids[, "p1"])
-    c1 <- osf_retrieve_node(guids[, "c1"])
-    d1 <- osf_retrieve_file(guids[, "d1"])
-  })
-}
+guids <- get_guids()
+vcr::use_cassette("retrieve-fixtures", {
+  p1 <- osf_retrieve_node(guids[, "p1"])
+  c1 <- osf_retrieve_node(guids[, "c1"])
+  d1 <- osf_retrieve_file(guids[, "d1"])
+})
 
 # tests -------------------------------------------------------------------
 test_that("`n_max` controls number of returned nodes", {
-  skip_if_no_pat()
-
   vcr::use_cassette("ls-nodes-n-max-10", {
     out <- osf_ls_nodes(c1, n_max = 10)
   })
@@ -30,8 +26,6 @@ test_that("`n_max` controls number of returned nodes", {
 })
 
 test_that("`pattern` filters nodes by name", {
-  skip_if_no_pat()
-
   vcr::use_cassette("ls-nodes-pattern-single", {
     out <- osf_ls_nodes(c1, pattern = "component-01")
   })
@@ -44,8 +38,6 @@ test_that("`pattern` filters nodes by name", {
 })
 
 test_that("messages are printed with `verbose` enabled", {
-  skip_if_no_pat()
-
   expect_message(
     vcr::use_cassette("ls-nodes-verbose", {
       osf_ls_nodes(c1, n_max = 20, verbose = TRUE)
@@ -54,12 +46,9 @@ test_that("messages are printed with `verbose` enabled", {
   )
 })
 
-
 # Listing files and directories -------------------------------------------
 
 test_that("both files and directories are listed", {
-  skip_if_no_pat()
-
   vcr::use_cassette("ls-files-all", {
     out <- osf_ls_files(p1)
   })
@@ -72,8 +61,6 @@ test_that("both files and directories are listed", {
 })
 
 test_that("`type` can filters for files", {
-  skip_if_no_pat()
-
   vcr::use_cassette("ls-files-type-file", {
     out <- osf_ls_files(p1, type = "file")
   })
@@ -82,8 +69,6 @@ test_that("`type` can filters for files", {
 })
 
 test_that("`type` can filters for files", {
-  skip_if_no_pat()
-
   vcr::use_cassette("ls-files-type-folder", {
     out <- osf_ls_files(p1, type = "folder")
   })
@@ -92,8 +77,6 @@ test_that("`type` can filters for files", {
 })
 
 test_that("n_max controls number of returned files", {
-  skip_if_no_pat()
-
   vcr::use_cassette("ls-files-n-max-10", {
     out <- osf_ls_files(d1, n_max = 10)
   })
@@ -106,8 +89,6 @@ test_that("n_max controls number of returned files", {
 })
 
 test_that("`pattern` filters files by name", {
-  skip_if_no_pat()
-
   vcr::use_cassette("ls-files-pattern-txt", {
     out <- osf_ls_files(d1, pattern = ".txt", n_max = 10)
   })
@@ -120,8 +101,6 @@ test_that("`pattern` filters files by name", {
 })
 
 test_that("messages are printed with `verbose` enabled", {
-  skip_if_no_pat()
-
   expect_message(
     vcr::use_cassette("ls-files-verbose", {
       osf_ls_files(d1, n_max = 20, verbose = TRUE)

@@ -1,12 +1,9 @@
 # setup -------------------------------------------------------------------
 vcr::vcr_configure(dir = cassette_dir("osf-tbl"))
 
-if (has_pat()) {
-  vcr::use_cassette("retrieve-user", {
-    user_tbl <- osf_retrieve_user("me")
-  })
-}
-
+vcr::use_cassette("retrieve-user", {
+  user_tbl <- osf_retrieve_user("me")
+})
 
 # tests -------------------------------------------------------------------
 test_that("NULL input returns empty osf_tbl", {
@@ -23,11 +20,9 @@ test_that("empty list returns empty osf_tbl", {
   expect_true(is_valid_osf_tbl(out))
 })
 
-
 # osf_tbl validation ------------------------------------------------------
 
 test_that("valid osf_tbls are passed through validation", {
-  skip_if_no_pat()
   user_tbl_with_foo <- user_tbl
   user_tbl_with_foo$foo <- "bar"
 
@@ -35,8 +30,6 @@ test_that("valid osf_tbls are passed through validation", {
 })
 
 test_that("osf_tbls missing required columns are detected", {
-  skip_if_no_pat()
-
   expect_true(has_osf_tbl_colnames(user_tbl))
   expect_false(has_osf_tbl_colnames(user_tbl[-1]))
   expect_false(has_osf_tbl_colnames(user_tbl[-2]))
@@ -44,15 +37,11 @@ test_that("osf_tbls missing required columns are detected", {
 })
 
 test_that("osf_tbls with incorrect column types are detected", {
-  skip_if_no_pat()
-
   user_tbl$id <- as.factor(user_tbl$id)
   expect_false(has_osf_tbl_coltypes(user_tbl))
 })
 
 test_that("can't combine osf_tbls with different subclasses", {
-  skip_if_no_pat()
-
   vcr::use_cassette("retrieve-node", {
     proj_tbl <- osf_retrieve_node("brfza")
   })

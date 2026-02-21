@@ -8,38 +8,30 @@ testdir <- withr::local_tempdir(.local_envir = testthat::teardown_env())
 infile <- fs::path(testdir, "osfr-local-file.txt")
 brio::writeLines("Lorem ipsum dolor sit amet, consectetur", infile)
 
-if (has_pat()) {
-  vcr::use_cassette("create-p1", {
-    p1 <- osf_create_project(title = "osfr-test-files-1")
-    d1 <- osf_mkdir(p1, "data")
-  })
-  vcr::use_cassette("upload-infile", {
-    f1 <- osf_upload(p1, infile)
-  })
-}
+vcr::use_cassette("create-p1", {
+  p1 <- osf_create_project(title = "osfr-test-files-1")
+  d1 <- osf_mkdir(p1, "data")
+})
+vcr::use_cassette("upload-infile", {
+  f1 <- osf_upload(p1, infile)
+})
 
 withr::defer(
   if (has_pat()) try(osf_rm(p1, recurse = TRUE, check = FALSE), silent = TRUE),
   testthat::teardown_env()
 )
 
-
 # tests -------------------------------------------------------------------
 test_that("nonexistent file is detected", {
-  skip_if_no_pat()
   expect_error(osf_upload(p1, "nonexistent-file"), "Can't find following")
 })
 
 test_that("file is uploaded to project root", {
-  skip_if_no_pat()
-
   expect_s3_class(f1, "osf_tbl_file")
   expect_match(f1$name, basename(infile))
 })
 
 test_that("uploaded file can be retrieved", {
-  skip_if_no_pat()
-
   vcr::use_cassette("retrieve-infile", {
     f2 <- osf_retrieve_file(as_id(f1))
   })
@@ -47,7 +39,6 @@ test_that("uploaded file can be retrieved", {
 })
 
 test_that("by default an error is thrown if a conflicting file exists", {
-  skip_if_no_pat()
   expect_error(
     vcr::use_cassette("upload-conflict-error", {
       out <- osf_upload(p1, infile)
@@ -61,7 +52,6 @@ test_that("a file can be overwritten when conflicts='overwrite'", {
     text = "Lorem ipsum dolor sit amet, consectetur, ea duo posse",
     con = infile
   )
-  skip_if_no_pat()
 
   expect_message(
     vcr::use_cassette("upload-conflict-overwrite", {
@@ -74,9 +64,7 @@ test_that("a file can be overwritten when conflicts='overwrite'", {
   expect_equal(version, 2)
 })
 
-
 test_that("a file can be uploaded to a directory", {
-  skip_if_no_pat()
   vcr::use_cassette("upload-to-directory", {
     f2 <- osf_upload(d1, infile)
   })
@@ -84,7 +72,6 @@ test_that("a file can be uploaded to a directory", {
 })
 
 test_that("conflicting files can be skipped when uploading to a dir", {
-  skip_if_no_pat()
   expect_message(
     vcr::use_cassette("upload-conflict-skip", {
       f2 <- osf_upload(d1, infile, conflicts = "skip")
@@ -95,7 +82,6 @@ test_that("conflicting files can be skipped when uploading to a dir", {
 })
 
 test_that("conflicting files can be overwritten when uploading to a dir", {
-  skip_if_no_pat()
   on.exit(vcr::eject_cassette())
   brio::writeLines(
     text = "Lorem ipsum dolor sit amet, consectetur, ea trio posse",
@@ -112,12 +98,10 @@ test_that("conflicting files can be overwritten when uploading to a dir", {
 })
 
 test_that("attempting to list an osf_tbl_file with a file errors", {
-  skip_if_no_pat()
   expect_error(osf_ls_files(f1), "Listing an `osf_tbl_file` requires a dir")
 })
 
 test_that("an empty directory can be uploaded", {
-  skip_if_no_pat()
   on.exit(fs::dir_delete(d))
   d <- fs::dir_create("empty")
 
