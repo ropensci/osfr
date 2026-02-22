@@ -19,7 +19,7 @@ get_meta <- function(x, ...) {
 get_relation <- function(x, field) {
   fields <- list(
     files = function(x) x$relationships$files$links$related$href,
-    root = function(x) x$relationships$node$data$id
+    root = function(x) x$relationships$target$data$id
   )
   stopifnot(field %in% names(fields))
   purrr::chuck(x$meta[[1]], fields[[field]])
@@ -31,7 +31,7 @@ get_parent_id <- function(x) {
   stopifnot(nrow(x) == 1)
 
   parent_id <- switch(class(x)[1],
-    osf_tbl_file = function(x) x$meta[[1]]$relationships$node$data$id,
+    osf_tbl_file = function(x) x$meta[[1]]$relationships$target$data$id,
     osf_tbl_node = function(x) x$meta[[1]]$relationships$parent$data$id
   )
   purrr::chuck(x, parent_id)
