@@ -1,5 +1,5 @@
 # setup -------------------------------------------------------------------
-vcr::vcr_configure(
+vcr::local_vcr_configure(
   dir = cassette_dir("uploading-multiple-files")
 )
 
@@ -21,9 +21,8 @@ withr::defer(
 test_that("multiple files can be uploaded", {
   infiles <- fs::dir_ls(multidir, type = "file")
 
-  vcr::use_cassette("upload-infiles", {
-    out <- osf_upload(p1, infiles)
-  })
+  vcr::local_cassette("upload-infiles")
+  out <- osf_upload(p1, infiles)
 
   expect_s3_class(out, "osf_tbl_file")
   expect_equal(out$name, basename(infiles))

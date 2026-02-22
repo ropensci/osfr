@@ -1,5 +1,5 @@
 # setup -------------------------------------------------------------------
-vcr::vcr_configure(
+vcr::local_vcr_configure(
   dir = cassette_dir("files")
 )
 
@@ -66,17 +66,15 @@ test_that("moving respects overwrite argument", {
 })
 
 test_that("moving destination can be a different node", {
-  vcr::use_cassette("move-f1-to-p2", {
-    f1 <- osf_mv(f1, p2)
-  })
+  vcr::local_cassette("move-f1-to-p2")
+  f1 <- osf_mv(f1, p2)
   expect_match(get_parent_id(f1), as_id(p2))
 })
 
 test_that("directories can be moved to a sibling directory", {
-  vcr::use_cassette("move-d2-to-d1", {
-    d2 <- osf_mkdir(p1, "d2")
-    d1 <- osf_mv(d1, d2)
-  })
+  vcr::local_cassette("move-d2-to-d1")
+  d2 <- osf_mkdir(p1, "d2")
+  d1 <- osf_mv(d1, d2)
   expect_match(
     paste0("/", file.path(d2$name, d1$name), "/"),
     get_meta(d1, "attributes", "materialized_path")
@@ -84,14 +82,13 @@ test_that("directories can be moved to a sibling directory", {
 })
 
 test_that("moving a parent directory to a child directory errors", {
-  vcr::use_cassette("move-parent-to-child", {
-    parent <- osf_mkdir(p1, "parent")
-    child <- osf_mkdir(parent, "child")
-    expect_error(
-      osf_mv(parent, child),
-      "Can't move a parent directory into its child"
-    )
-  })
+  vcr::local_cassette("move-parent-to-child")
+  parent <- osf_mkdir(p1, "parent")
+  child <- osf_mkdir(parent, "child")
+  expect_error(
+    osf_mv(parent, child),
+    "Can't move a parent directory into its child"
+  )
 })
 
 # Copying files -----------------------------------------------------------
@@ -108,17 +105,16 @@ test_that("a file can copy to new directory", {
 })
 
 test_that("a file cannot copy to same location with either overwrite option", {
-  vcr::use_cassette("copy-f1-to-p2", {
-    f1 <- osf_refresh(f1)
-    expect_error(
-      osf_cp(f1, p2, overwrite = FALSE),
-      "Cannot complete action:"
-    )
-    expect_error(
-      osf_cp(f1, p2, overwrite = TRUE),
-      "Unable to move or copy"
-    )
-  })
+  vcr::local_cassette("copy-f1-to-p2")
+  f1 <- osf_refresh(f1)
+  expect_error(
+    osf_cp(f1, p2, overwrite = FALSE),
+    "Cannot complete action:"
+  )
+  expect_error(
+    osf_cp(f1, p2, overwrite = TRUE),
+    "Unable to move or copy"
+  )
 })
 
 test_that("copy respects overwrite values when copying to a new location", {
@@ -149,26 +145,23 @@ test_that("copy respects overwrite values when copying to a new location", {
 # Deleting files ----------------------------------------------------------
 
 test_that("a single file can be deleted", {
-  vcr::use_cassette("delete-f1", {
-    f1 <- osf_refresh(f1)
-    expect_true(osf_rm(f1, check = FALSE))
-  })
+  vcr::local_cassette("delete-f1")
+  f1 <- osf_refresh(f1)
+  expect_true(osf_rm(f1, check = FALSE))
 })
 
 test_that("an empty directory can be deleted", {
-  vcr::use_cassette("delete-d2", {
-    d2 <- osf_mkdir(p1, "d2")
-    expect_true(
-      osf_rm(d2, check = FALSE)
-    )
-  })
+  vcr::local_cassette("delete-d2")
+  d2 <- osf_mkdir(p1, "d2")
+  expect_true(
+    osf_rm(d2, check = FALSE)
+  )
 })
 
 test_that("a non-empty directory can be deleted", {
-  vcr::use_cassette("delete-d3", {
-    d3 <- osf_mkdir(p1, "d1/d2/d3")
-    expect_true(
-      osf_rm(d3, check = FALSE)
-    )
-  })
+  vcr::local_cassette("delete-d3")
+  d3 <- osf_mkdir(p1, "d1/d2/d3")
+  expect_true(
+    osf_rm(d3, check = FALSE)
+  )
 })

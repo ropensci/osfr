@@ -1,5 +1,5 @@
 # setup -------------------------------------------------------------------
-vcr::vcr_configure(dir = cassette_dir("osf-tbl"))
+vcr::local_vcr_configure(dir = cassette_dir("osf-tbl"))
 
 vcr::use_cassette("retrieve-user", {
   user_tbl <- osf_retrieve_user("me")
@@ -42,9 +42,8 @@ test_that("osf_tbls with incorrect column types are detected", {
 })
 
 test_that("can't combine osf_tbls with different subclasses", {
-  vcr::use_cassette("retrieve-node", {
-    proj_tbl <- osf_retrieve_node("brfza")
-  })
+  vcr::local_cassette("retrieve-node")
+  proj_tbl <- osf_retrieve_node("brfza")
   out <- rbind(user_tbl, proj_tbl)
   expect_identical(class(out), c("tbl_df", "tbl", "data.frame"))
 })

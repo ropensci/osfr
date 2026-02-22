@@ -1,6 +1,6 @@
 # setup -------------------------------------------------------------------
 
-vcr::vcr_configure(
+vcr::local_vcr_configure(
   dir = cassette_dir("html-entity-encoding")
 )
 
@@ -22,16 +22,13 @@ test_that("html symbols are decoded when creating nodes", {
 })
 
 test_that("html symbols are decoded when retrieving nodes", {
-  vcr::use_cassette("retrieve-p1", {
-    c2 <- osf_retrieve_node(as_id(c1))
-  })
+  vcr::local_cassette("retrieve-p1")
+  c2 <- osf_retrieve_node(as_id(c1))
   expect_match(c2$name, ugly_name)
 })
 
 test_that("html symbols are encoded when searching nodes", {
-  on.exit(vcr::eject_cassette())
-
-  vcr::insert_cassette("search-with-html-symbols")
+  vcr::local_cassette("search-with-html-symbols")
   expect_equal(nrow(osf_ls_nodes(p1, pattern = "&")), 1)
   expect_equal(nrow(osf_ls_nodes(p1, pattern = "<")), 1)
   expect_equal(nrow(osf_ls_nodes(p1, pattern = ">")), 1)

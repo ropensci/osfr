@@ -1,6 +1,6 @@
 # setup -------------------------------------------------------------------
 
-vcr::vcr_configure(
+vcr::local_vcr_configure(
   dir = cassette_dir("uploading-single-files")
 )
 
@@ -32,17 +32,15 @@ test_that("file is uploaded to project root", {
 })
 
 test_that("uploaded file can be retrieved", {
-  vcr::use_cassette("retrieve-infile", {
-    f2 <- osf_retrieve_file(as_id(f1))
-  })
+  vcr::local_cassette("retrieve-infile")
+  f2 <- osf_retrieve_file(as_id(f1))
   expect_identical(f1, f2)
 })
 
 test_that("by default an error is thrown if a conflicting file exists", {
+  vcr::local_cassette("upload-conflict-error")
   expect_error(
-    vcr::use_cassette("upload-conflict-error", {
-      out <- osf_upload(p1, infile)
-    }),
+    osf_upload(p1, infile),
     sprintf("Can't upload file '%s'", basename(infile))
   )
 })
@@ -53,10 +51,9 @@ test_that("a file can be overwritten when conflicts='overwrite'", {
     con = infile
   )
 
+  vcr::local_cassette("upload-conflict-overwrite")
   expect_message(
-    vcr::use_cassette("upload-conflict-overwrite", {
-      f1_v2 <- osf_upload(p1, infile, conflicts = "overwrite", verbose = TRUE)
-    }),
+    f1_v2 <- osf_upload(p1, infile, conflicts = "overwrite", verbose = TRUE),
     sprintf("Uploaded new version of '%s' to OSF", basename(infile))
   )
 
@@ -65,30 +62,27 @@ test_that("a file can be overwritten when conflicts='overwrite'", {
 })
 
 test_that("a file can be uploaded to a directory", {
-  vcr::use_cassette("upload-to-directory", {
-    f2 <- osf_upload(d1, infile)
-  })
+  vcr::local_cassette("upload-to-directory")
+  f2 <- osf_upload(d1, infile)
   expect_s3_class(f2, "osf_tbl_file")
 })
 
 test_that("conflicting files can be skipped when uploading to a dir", {
+  vcr::local_cassette("upload-conflict-skip")
   expect_message(
-    vcr::use_cassette("upload-conflict-skip", {
-      f2 <- osf_upload(d1, infile, conflicts = "skip")
-    }),
+    f2 <- osf_upload(d1, infile, conflicts = "skip"),
     "Skipped 1 file\\(s\\) to avoid overwriting OSF copies"
   )
   expect_s3_class(f2, "osf_tbl_file")
 })
 
 test_that("conflicting files can be overwritten when uploading to a dir", {
-  on.exit(vcr::eject_cassette())
   brio::writeLines(
     text = "Lorem ipsum dolor sit amet, consectetur, ea trio posse",
     con = infile
   )
 
-  vcr::insert_cassette("upload-conflict-overwrite-within-directory")
+  vcr::local_cassette("upload-conflict-overwrite-within-directory")
   expect_silent(
     f2 <- osf_upload(d1, infile, conflicts = "overwrite")
   )
@@ -105,8 +99,7 @@ test_that("an empty directory can be uploaded", {
   on.exit(fs::dir_delete(d))
   d <- fs::dir_create("empty")
 
-  vcr::use_cassette("upload-empty-directory", {
-    out <- osf_upload(p1, path = d)
-  })
+  vcr::local_cassette("upload-empty-directory")
+  out <- osf_upload(p1, path = d)
   expect_s3_class(out, "osf_tbl_file")
 })

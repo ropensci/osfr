@@ -1,6 +1,6 @@
 # setup -------------------------------------------------------------------
 
-vcr::vcr_configure(
+vcr::local_vcr_configure(
   dir = cassette_dir("nodes")
 )
 

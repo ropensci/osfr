@@ -1,6 +1,6 @@
 # setup -------------------------------------------------------------------
 
-vcr::vcr_configure(dir = cassette_dir("osf-ls"))
+vcr::local_vcr_configure(dir = cassette_dir("osf-ls"))
 
 # Retrieve public OSF project and components required for tests
 # (created using data-raw/create-test-project.R)
@@ -38,10 +38,9 @@ test_that("`pattern` filters nodes by name", {
 })
 
 test_that("messages are printed with `verbose` enabled", {
+  vcr::local_cassette("ls-nodes-verbose")
   expect_message(
-    vcr::use_cassette("ls-nodes-verbose", {
-      osf_ls_nodes(c1, n_max = 20, verbose = TRUE)
-    }),
+    osf_ls_nodes(c1, n_max = 20, verbose = TRUE),
     "Retrieving \\d{2} of \\d{2} available items"
   )
 })
@@ -49,9 +48,8 @@ test_that("messages are printed with `verbose` enabled", {
 # Listing files and directories -------------------------------------------
 
 test_that("both files and directories are listed", {
-  vcr::use_cassette("ls-files-all", {
-    out <- osf_ls_files(p1)
-  })
+  vcr::local_cassette("ls-files-all")
+  out <- osf_ls_files(p1)
   expect_s3_class(out, "osf_tbl_file")
   expect_equal(nrow(out), 3)
   expect_identical(
@@ -61,17 +59,15 @@ test_that("both files and directories are listed", {
 })
 
 test_that("`type` can filters for files", {
-  vcr::use_cassette("ls-files-type-file", {
-    out <- osf_ls_files(p1, type = "file")
-  })
+  vcr::local_cassette("ls-files-type-file")
+  out <- osf_ls_files(p1, type = "file")
   expect_equal(nrow(out), 1)
   expect_match(get_meta(out, "attributes", "kind"), "file")
 })
 
 test_that("`type` can filters for files", {
-  vcr::use_cassette("ls-files-type-folder", {
-    out <- osf_ls_files(p1, type = "folder")
-  })
+  vcr::local_cassette("ls-files-type-folder")
+  out <- osf_ls_files(p1, type = "folder")
   expect_equal(nrow(out), 2)
   expect_match(get_meta(out, "attributes", "kind"), "folder")
 })
@@ -101,10 +97,9 @@ test_that("`pattern` filters files by name", {
 })
 
 test_that("messages are printed with `verbose` enabled", {
+  vcr::local_cassette("ls-files-verbose")
   expect_message(
-    vcr::use_cassette("ls-files-verbose", {
-      osf_ls_files(d1, n_max = 20, verbose = TRUE)
-    }),
+    osf_ls_files(d1, n_max = 20, verbose = TRUE),
     "Retrieving \\d{2} of \\d{2} available items"
   )
 })
