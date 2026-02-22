@@ -58,7 +58,7 @@ user_agent <- function(agent = "osfr") {
     out <- process_response(res)
     raise_error(out)
 
-    total <- out$links$meta$total
+    total <- out$meta$total
     n_max <- ifelse(is.infinite(n_max), total, n_max)
 
     retrieved <- retrieved + length(out$data)
