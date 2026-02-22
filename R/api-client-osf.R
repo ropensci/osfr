@@ -1,3 +1,7 @@
+# The OSF API version to pin requests to via the Accept header.
+# See api/base/versioning.py in the OSF source for version-specific behaviors.
+OSF_API_VERSION <- "2.20" # nolint: object_name_linter.
+
 # Return a version specific user agent
 user_agent <- function(agent = "osfr") {
   version <- system.file("DESCRIPTION", package = "osfr", mustWork = FALSE)
@@ -18,7 +22,7 @@ user_agent <- function(agent = "osfr") {
            query = list(),
            body = NULL,
            verbose = FALSE,
-           version = NULL,
+           version = OSF_API_VERSION,
            ...) {
 
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
@@ -54,7 +58,7 @@ user_agent <- function(agent = "osfr") {
     out <- process_response(res)
     raise_error(out)
 
-    total <- out$links$meta$total
+    total <- out$meta$total
     n_max <- ifelse(is.infinite(n_max), total, n_max)
 
     retrieved <- retrieved + length(out$data)

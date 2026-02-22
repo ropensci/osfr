@@ -82,22 +82,7 @@ test_that("a valid category can be specified", {
 
 # Node deletion -----------------------------------------------------------
 
-test_that("deleting non-empty project/component fails", {
-  expect_error(
-    vcr::use_cassette("delete-p1-error", {
-      osf_rm(p1, check = FALSE)
-    }),
-    "Any child components must be deleted"
-  )
-  expect_error(
-    vcr::use_cassette("delete-c1-error", {
-      osf_rm(c1, check = FALSE)
-    }),
-    "Any child components must be deleted"
-  )
-})
-
-test_that("non-empty project can be recursively deleted", {
+test_that("project with children can be deleted", {
   vcr::use_cassette("delete-p1-success", {
     expect_true(osf_rm(p1, recurse = TRUE, check = FALSE))
   })

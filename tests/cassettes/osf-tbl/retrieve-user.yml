@@ -11,7 +11,7 @@ http_interactions:
       content-encoding: gzip
       content-type: application/vnd.api+json; charset=utf-8
       cross-origin-opener-policy: same-origin
-      date: Sat, 21 Feb 2026 14:11:27 GMT
+      date: Sun, 22 Feb 2026 15:53:04 GMT
       expires: '-1'
       pragma: no-cache
       referrer-policy: same-origin
@@ -25,25 +25,25 @@ http_interactions:
       x-frame-options: DENY
     body:
       raw_gzip: |-
-        eJytlGFv0zAQhv8Kus9eEtIWdZEQIMQvYBMfEIq8+JyecOzIvmQtVf47srOWdoUJTf2UxDm/
+        eJytlGFv0zAQhv8Kus9eEtIWdZEQIMQvYBMSCEVefE5POHZkX7KWKv8d2dlKu8I0Tf2UxDm/
         z+u78+1
-        BSZZQ7YEUVKDaYbsBAbzrESoYAvoAAiSzp4eBMcRIPRhTW9nFiE/SO/vmmzNoQUBL
-        I9qzXyCgI6UMpt
-        UAFYAALTsyu0PcYXMYtKbtHKEkY+2xpcDoMTori7frm+L2pljflYtqua6K
-        IitvF8uyiP4aphGhYj+gA
-        KYOfzkbtb9wk9/ffQYBxjXSxCW09f3XiHMNSQPVfhKAXW/crkPL
-        UH3/IQDV0EgmZ+dPaYx7rMkq3JJt
-        obKDMQIaaeuR8LH2GB/hKbZpsGdUNaPvQu10HdCP1Bzd
-        4ZbRW2lqUmiZeHewIMlABTJm7eNjzEnWuA4
-        mAR5NMhM21KcCWKfmShiyP9NLCol52sPGo4YK
-        Nsx9qPJc9pQxBs5c0Bm5fCzzVNU8lTpPUnmsEqY2mK
-        YpEWPm/Uy9DuhM8gJINjDxcEXeqeIZ
-        TkBAo19zgJMq/Fs+AnqPvSfLVzrKUe4CpLzUXF8Z90z0Apo69
-        UqsgMxk25DPopcHRC0Hw2kU
-        xNv4Wua8P+TDM4Q4H39D+DP7nrbA3DGzzSsf+iUrf5nEN0cbKfxoZMOd
-        OaGfkmcgxJZ0mgzW
-        1MkWT4IDNoPHrPVylCx9HDn5/JqXxaooHpblElerYlHc6sV6oZfv4tpqpbT6oN7
-        PI6xJY36+
-        Vf+bAxBAnl5ynRL/lB4Y0YfUAFBmBUzTb1abVDM=
-  recorded_at: 2026-02-21 14:11:27
+        BSZZQ7YEUVKDaYbsBAbzrESoYAvoAAiSzp7uBMcRIPRhTW9nFiE/SO/vmmzNoQUBL
+        I9qTXyCgI6UMpt
+        UAFYAALTsyu8e4x81h0Jq2c4SSjLXHlgKjx+isLN6ur4rrq2J9Uy6q5boq
+        iqy8XizL4ns02DCNCBX7A
+        QUwdfjb2Sj+hZv89uYzCDCukSYuoa1vv0aea0gaqPaTAOx643Yd
+        Wobqx08BqIZGMjk7f0pj3H1NVuGW
+        bAuVHYwR0Ehbj4T3tcf4CA+xTYM9o6oZfRdqp+uAfqTm
+        4A63jN5KU5NCy8S7RwuSDFQgY9o+3sekZI3
+        rYBLg0SQzYUN9qoB1ai6FIfsrvaSQmKg9bDxq
+        qGDD3Icqz2VPGWPgzAWdkcvHMk9lzVOt8ySVxzJh6o
+        NpmhIxpt7P1MuATiTPgGQDEw8X5B0r
+        nuAEBDT6NQc4qsL/5SOg99h7snyhoxzkzkDKS831hXFPRM+gq
+        VMvxArITLYN+Sx6fkDUcjCc
+        ZkG8ja9lzvtDPjxBiNP5N4S/w+9hC8wdM9u88KGfs/KPUXx1sJHCD0Y2
+        3Jkj+jF5BkJsSafJ
+        YE2dbPEoOGAzeMxaL0fJ0seRk8+veVmsiuJuWS5xtSoWxbVerBd6+S6urVZKqw/
+        q/TzCmjTn
+        51v10hyAAPL0nOuU+If0wIg+pAaAMisLmKY/AMRUvw==
+  recorded_at: 2026-02-22 15:53:04
 recorded_with: VCR-vcr/2.1.0

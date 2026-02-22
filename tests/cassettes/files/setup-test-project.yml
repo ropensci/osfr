@@ -9,9 +9,9 @@ http_interactions:
     headers:
       status: 'HTTP/2 201 '
       server: nginx
-      date: Thu, 19 Feb 2026 02:55:45 GMT
+      date: Sun, 22 Feb 2026 15:51:36 GMT
       content-type: application/vnd.api+json; charset=utf-8
-      content-length: '4360'
+      content-length: '4541'
       vary: Accept, Cookie, origin
       allow: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS
       x-content-type-options: nosniff
@@ -25,35 +25,36 @@ http_interactions:
       alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       raw_gzip: |-
-        eJy1mNtu2zgQht9lgN7Jlutdd7ECFgsUfYTeFQVBUyN7GopUh6MEQeB3L0jJSmw5CdzSd7bM
-        +f45cIa
-        in6DWoqF6Aqqhgvsf2O+hAHnsECpwvsYABWgRpm0vGOJKIbHxVx8aXggGWTRkMSw+
-        QgE1BsPUCXkHFU
-        ABRgvuPD9CBR37H2gkPuyD+FYZEj2sdL21RXQFlWHUgtGZ9Wr9abFaLz7+
-        +3W1rjab6u/Ncr3+659PK
-        xjXtr6mht5fzLijIDyKNdoGLKBj7JicTA8az3fTF+OtRXNiIHoX
-        oPr2vQBtDIagGH/2GCQodHproxvC
-        PRYpbcqSQRfwGJvpmdGJ6gOyMtop49sWo/pgc/J7h9xS
-        CORdFARdt+SggAcmwRSOruH7mQ0FZbwb6uT
-        5IvZ0ifKsduz7TrXYbnEyeaA7Oo+o67eWzJSJ
-        0G9jJVM2DtEfm1Ib9tSlHWL2ZGtGFz9bcnfpYVoVkU
-        +wZ2yggr1IF6qy1B0t4z5a+tAsyZf3
-        6zLtvDJtx/JIK6GAFtNuPRwOh6lGWCvKJTVVPVxQSwULuZQGW
-        vl/Q1aQP2w+i+YdyofNl/+O
-        bXimP5Uumw/PxFm4W9pa8jvW3Z6Myi/+On/mCrWdJUNyAy8uomcOpPmW
-        RzChZgIBRcjtMmkc
-        aacyxbujfjEaQlwcx0AmfxJqnlTPd5kEEmomMI5hl0vlmTeTik+xVttHNRyZWfT
-        OoG+Ivjzf
-        soufwOe9WaOTeAhn68hn4ExMNw1Z0sPED0LSZ4z4JfFEObanba4HnhyLr+NTZ7Ju5BZlvA
-        Ce
-        id9A9n1B/wcn9mAfyv7tCdeH5/E2mkCS917yhHnlfB3krc815yPptamQfw7Nh1CexngV/yKa
-        G2zR
-        S+TbRfd2Q9wTPijv7GPO4+oMOn+fnW5fOdSOtGt6YvIgLjxexzJFP+Hm71riWe8wj8wI
-        u/5Na3QiFQJ
-        rzSqaRzPFaDzXmdJwmT3PyXihU/Fm20m8+/2+/hF2pjJ2c+LtpbUvICeA42Qd
-        uu+KUUxMbzFTrkd/4B
-        45DP9RrJcrOBx+AUS8BBk=
-  recorded_at: 2026-02-19 02:55:45
+        eJy1WNtu2zAM/RcCe3PiJl03wMAwYNgn7GnDICgynXCVLY+iWxRF/n2Q7LhJnHTLqjzGJs85
+        pHix8gy
+        lFg3FM1AJBTTvP94ayECeWgw/XYkeMtAiTKtO0AdLIbHhrfMVzwS9zCqy6GcLyKBE
+        b5haIddAAZCB0Y
+        Jrx09QQMvuFxoJDzsvrlaGRPeWTWdtFqSgMoxaMIhZ3iw/zG6Ws+Xy2+Ku
+        uFsUtx/mN4vFx9vFdxiMa
+        1dSRf9gzbgmLzzQVdp6zKBlbJkaGR9Uju/HH8ZZi+bAQfTaQ/Hj
+        ZwbaGPReMf7u0ItX2OiVDTqEO8xi
+        4pQlg43HXXSmY8ZGVOeRldGNMq6uMbD3PgfvW+SavCfX
+        BELQZU0NZPDIJBjD0SX8PPIhr4xr+pNyfBL
+        20EQ5Vmt2XatqrFc4ujzSPR1H1HYrS2bIxDYo
+        sDGZfkNtrIox2uehpELU2wzMhmzJ2PQ2zX00jt4B/B
+        k2jBUUsBFpfZHnuqV5qKm589WcXP6w
+        zGMV5rE08x1aDhnUGCt3u91ux9PCUlEqqvH8/Qm2eHQ+FVOPl
+        n+uyAryu7svonmN8u7u66dd
+        Sx7xj4eYTMML4iTcFa0suTXrdkNGpSc/jz+RQnVryZBcQcVJ6ImAOOvS
+        EEaoCYFHEWrWiTh2
+        aIc02V/H/mxwhGAcBkIiPRFqmlTH91iqil09GSCCdRvIVICZvA2eiaRFqIm0gIu
+        lWj1F/kRU
+        R6CvkO4vruTkB+ATEa3muJ6OMk4lNhK2brK+ewGcaNBVRZZ0P9e9kHQJE7GPeMAcmtBWlw
+        Me
+        LMXz8LH/WFdyjdM9ATwhvwLt3wndG/Zy7+/z7vU51vmXITa4QKR3TtKEeeEU7emtSzXNA9K5
+        YZF+
+        PE1nU5rGOAu/F80VSvQU8vWie70hHggflWvskxrjenuAR6DTr9bxvpWCbYd2SU+MCuJ+
+        Ga5fiaIf4aZ
+        fVOJYrzENzQB2+ffUICIeBJaaVXAPborROC4TpeE09jQn3Spcxr0KN9lWwl3v
+        //l3YGdZ0oR2kiZN05
+        6JYJhHUfZGarsHvw897oZeygXLhJhew4zVMuiBB2Tf/6+ynC9vYLv9
+        AxBpKNU=
+  recorded_at: 2026-02-22 15:51:36
 - request:
     method: POST
     uri: https://api.test.osf.io/v2/nodes/
@@ -64,9 +65,9 @@ http_interactions:
     headers:
       status: 'HTTP/2 201 '
       server: nginx
-      date: Thu, 19 Feb 2026 02:55:47 GMT
+      date: Sun, 22 Feb 2026 15:51:37 GMT
       content-type: application/vnd.api+json; charset=utf-8
-      content-length: '4360'
+      content-length: '4541'
       vary: Accept, Cookie, origin
       allow: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS
       x-content-type-options: nosniff
@@ -80,48 +81,49 @@ http_interactions:
       alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       raw_gzip: |-
-        eJy1mNtu2zgQht9lgN7Jlms0KSpgscBiH2HvFgVBUyN7NhSpHY6SBoHfvSAlK7blJHBL39ky
-        5/vnwBm
-        KfoFai4bqBaiGCtqv3bcfUIA8dwgVOF9jgAK0CNOmFwxxpZDY+KsPDS8EgywashgW
-        ayigxmCYOiHvoA
-        IowGjBrednqKBj/x8aiQ/7IL5VhkQPK11vbRFdQWUYtWB0Zr1a3y9W68Xn
-        b/+s1tXdXfXlfrn+8vV+9
-        RnGta2vqaGPFzNuKQiPYo22AQvoGDsmJ9ODxvPD9MV4a9GcGIje
-        Bqj+/V6ANgZDUIz/9xgkKHR6Y6Mb
-        wj0WKW3KkkEX8BCb6ZnRieoDsjLaKePbFqP6YHPye4fc
-        UgjkXRQEXbfkoIAnJsEUjq7h+5kNBWW8G+r
-        k+SL2dInyrLbs+0612G5wMnmiBzqPqOs3lsyU
-        idBvYiVTNvbRH5tSG3bUpR1idmRrRhc/W3IP6WFaFZ
-        EvsGNsoIKdSBeqstQdLeM+WvrQLMmX
-        j+sy7bwybcfyQCuhgBbTbt3v9/upRlgryiU1VT1cUEsFC7mUB
-        lr5Z0NWkD/d/SWatyif7v7+
-        49CGZ/pT6bL58EqchbuhjSW/Zd3tyKj84m/zZ65Q21kyJDfw4iJ65kCa
-        b3kEE2omEFCE3DaT
-        xoF2KlN8OOoXoyHExXEMZPInoeZJ9fyQSSChZgLjGHa5VF55M6n4FGu1eVbDkZl
-        F7wz6jujx
-        +ZZd/AQ+780ancRDOFtHvgJnYrppyJIeJn4Qkj5jxMfEE+XYnra5HnhyLL6NT53JupFblP
-        EC
-        eCZ+A9mPBf1vnNiDfSj79ydcH17H22gCSd57yRPmlfN1kLc+15yPpLemQv45NB9CeRrjTfxR
-        NDfY
-        opfIt4vu/YZ4JHxS3tnnnMfVGXT+PjvdvnKoHWjX9MTkQVx4uI5lin7Czd+1xLPeYh6Z
-        EXb9m9boRCo
-        E1ppVNI9mitF4rjOl4TJ7npPxQqfizbaTePf7df0D7Exl7ObE20lrjyDHgGmy
-        Dt13xSgmpveYKdejP/
-        CIHIb/KNbLFez3PwEu4vY/
-  recorded_at: 2026-02-19 02:55:47
+        eJy1WNuO2zgM/RcCfXPiqbeTxRpYLLDYT9inFoWgyHTCjmy5FD3TwSD/Xkh2PEmcTJtWeYxN
+        nnNI8WL
+        lBSotGsoXoApKWOniG0MG8twhlNC6Cj1koEWY1r2gD5ZCYsNb52teCHpZ1GTRLwrI
+        oEJvmDoh10IJkI
+        HRghvHz1BCx+4LGgkPey+uUYZED5Ztb20WpKAyjFowiCnuitXirlgUxf/v
+        78v79+Ufq+Wfqw+rvz58h
+        NG4cRXV9BPWjBvywiNdra3HDDrGjqmV6UHt+GH6YZy1aI4cRG88
+        lJ8+Z6CNQe8V49cevXiFrV7boEO4
+        xywmTlky2HrcR2d6ZmxF9R5ZGd0q45oGA/vgc/S+Q27I
+        e3JtIARdNdRCBk9MgjEcXcHnEx/yyrh2OCn
+        HZ2GPTZRjtWHXd6rBZo2TyxM90GlEXb+2ZMZM
+        7IICG5Ppt9TFqpiifRlLKkS9y8BsyVaM7WDTPkTj6B
+        3AX2DLWEMJW5HOl3muO1qGmlo6Xy/J
+        5Y9FHqswj6WZ79FyyKDBWLm73W43nRZWilJRTefvz7DFo/Opm
+        Aa0/J+arCC/u/9XNG9Q3t3/
+        9/e+JU/4p0NMpuEVcRbumtaW3IZ1tyWj0pNfxp9JoaazZEhuoOIs9ExA
+        nHVpCCPUjMCjCLWb
+        RBx7tGOa7IdjfzE6QjAOAyGRngg1T6rjB6xUza6ZDRDBpgtkKsDM3gbPRNIi1Ex
+        awMVKrZ8j
+        fyKqE9A3SA8XV3LyI/CZiE5zXE8nGacKWwlbN1nfvQLONOi6Jkt6mOteSPqEiThEPGIOTW
+        jr
+        6wGPluJl+Nh/rGu5xemeAZ6R34D2x4TuN/by4O/z/u051vvXITa6QKR3TtKEeeUUHeitSzXN
+        A9Kl
+        YZF+PM1nU5rGuAh/EM0NSvQc8u2ie7shHgmflGvts5ri+v0AT0DnX63TfSsF2x7tmp6Y
+        FMT9Ml6/EkU
+        /wc2/qMSx3mAamhHs+u+pUUQ8CKw0q+Ae3BSjcVwlSsN57HlO+nW4jHsVbrKd
+        hLver/PvwS6ypAntLE
+        2apr0QwTiPouytNPYA/hB62g2DlCuWCTG9hRmrZdQDj8h++F+lWBZ3
+        sNt9Bz/gM2A=
+  recorded_at: 2026-02-22 15:51:37
 - request:
     method: GET
-    uri: https://api.test.osf.io/v2/nodes/vjeuh/files/osfstorage/?filter%5Bkind%5D=folder&filter%5Bname%5D=d1&page=1
+    uri: https://api.test.osf.io/v2/nodes/n473c/files/osfstorage/?filter%5Bkind%5D=folder&filter%5Bname%5D=d1&page=1
   response:
     status: 200
     headers:
       allow: GET, HEAD, OPTIONS
       alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       cache-control: no-cache, no-store, max-age=0, must-revalidate
-      content-length: '128'
+      content-length: '230'
       content-type: application/vnd.api+json; charset=utf-8
       cross-origin-opener-policy: same-origin
-      date: Thu, 19 Feb 2026 02:55:47 GMT
+      date: Sun, 22 Feb 2026 15:51:37 GMT
       expires: '-1'
       pragma: no-cache
       referrer-policy: same-origin
@@ -135,39 +137,42 @@ http_interactions:
       x-frame-options: DENY
     body:
       raw_gzip: |-
-        eJxFjEEKgCAUBe/y1hHW8l8lIj70C8ks1CQQ754tyt0wDJMwc2DQMDYw2m4elLBo5wPIXsYU
-        y5VPJ/F
-        jK/fvd3kfCeEIbECqlOKmk1cBdSrnWkRxXh8WhL5VyPkB01MqVg==
-  recorded_at: 2026-02-19 02:55:47
+        eJxFjlsKwjAQRfcyoF8laatFCIgg7kJEgploaJqEzFiE0r2bgo+/M2e4lzuB0axBnS8VDLjQ
+        BBxZe1B
+        1BQnzNek7gmrKNWImFwMoaEVbw1yBd6GnJULobfEP5kRKSp2cYCQWkaxwUY6tDNEg
+        ybDdbW7SOl+4/I
+        hjLvXyUAxjXnXH3gWz6k57G73BvP75oAdcvGmgAusyMajw9L5s0H9OGccv
+        B3x9/Dy/AdxgTMM=
+  recorded_at: 2026-02-22 15:51:37
 - request:
     method: PUT
-    uri: https://files.us.test.osf.io/v1/resources/vjeuh/providers/osfstorage/?kind=folder&name=d1
+    uri: https://files.us.test.osf.io/v1/resources/n473c/providers/osfstorage/?kind=folder&name=d1
   response:
     status: 201
     headers:
       status: 'HTTP/2 201 '
       server: nginx
-      date: Thu, 19 Feb 2026 02:55:48 GMT
+      date: Sun, 22 Feb 2026 15:51:38 GMT
       content-type: application/json; charset=UTF-8
       content-length: '817'
-      x-waterbutler-request-id: 09048260-b0a2-4503-bb5b-6caed84926f6
+      x-waterbutler-request-id: 4158a8c2-5b34-42cb-b9f3-b73fff1a48ff
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       expires: '-1'
       pragma: no-cache
       via: 1.1 google
       alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
-      string: '{"data": {"id": "osfstorage/69967bb4d957f4745b0caad6/", "type": "files",
-        "attributes": {"extra": {}, "kind": "folder", "name": "d1", "path": "/69967bb4d957f4745b0caad6/",
+      string: '{"data": {"id": "osfstorage/699b260a75ac7374d22323cf/", "type": "files",
+        "attributes": {"extra": {}, "kind": "folder", "name": "d1", "path": "/699b260a75ac7374d22323cf/",
         "provider": "osfstorage", "materialized": "/d1/", "etag": "5caf8ab73c068565297e455ebce37fd64b6897a2284ec9d7ecba8b6093082bcd",
-        "resource": "vjeuh", "size": null, "sizeInt": null}, "links": {"move": "https://files.us.test.osf.io/v1/resources/vjeuh/providers/osfstorage/69967bb4d957f4745b0caad6/",
-        "upload": "https://files.us.test.osf.io/v1/resources/vjeuh/providers/osfstorage/69967bb4d957f4745b0caad6/?kind=file",
-        "delete": "https://files.us.test.osf.io/v1/resources/vjeuh/providers/osfstorage/69967bb4d957f4745b0caad6/",
-        "new_folder": "https://files.us.test.osf.io/v1/resources/vjeuh/providers/osfstorage/69967bb4d957f4745b0caad6/?kind=folder"}}}'
-  recorded_at: 2026-02-19 02:55:48
+        "resource": "n473c", "size": null, "sizeInt": null}, "links": {"move": "https://files.us.test.osf.io/v1/resources/n473c/providers/osfstorage/699b260a75ac7374d22323cf/",
+        "upload": "https://files.us.test.osf.io/v1/resources/n473c/providers/osfstorage/699b260a75ac7374d22323cf/?kind=file",
+        "delete": "https://files.us.test.osf.io/v1/resources/n473c/providers/osfstorage/699b260a75ac7374d22323cf/",
+        "new_folder": "https://files.us.test.osf.io/v1/resources/n473c/providers/osfstorage/699b260a75ac7374d22323cf/?kind=folder"}}}'
+  recorded_at: 2026-02-22 15:51:38
 - request:
     method: GET
-    uri: https://api.test.osf.io/v2/files/69967bb4d957f4745b0caad6/
+    uri: https://api.test.osf.io/v2/files/699b260a75ac7374d22323cf/
   response:
     status: 200
     headers:
@@ -177,7 +182,7 @@ http_interactions:
       content-encoding: gzip
       content-type: application/vnd.api+json; charset=utf-8
       cross-origin-opener-policy: same-origin
-      date: Thu, 19 Feb 2026 02:55:48 GMT
+      date: Sun, 22 Feb 2026 15:51:38 GMT
       expires: '-1'
       pragma: no-cache
       referrer-policy: same-origin
@@ -191,38 +196,38 @@ http_interactions:
       x-frame-options: DENY
     body:
       raw_gzip: |-
-        eJy9Ve1u2zAMfBf+FuI4n4iBYQ8yDAZj0bEWWTIkytka+N0HKXWcpl0xrFn/WSKPdyLP0hkk
-        MkJxBiW
-        hgM1ut9nu9yu5W2/r1Xa13s8rRLkBAfyrIyigVpo8CEBmp/aByUfwIUS4CVoLqBqq
-        jjbwuDbYRqDMQc
-        BRmUhTWy3JgYAOuYECsj/xZiDAqycaa3XO9ipCC7C+9mwdHggEtMjkFGr1
-        RLIci8o8wjV6LtmGqqGrR
-        IlMZWulqtXdZuUIedqjn+xSdxr0zeWorVyPUd/gYr25rIZBAOPB
-        Q/Htu4AqOEeGy+DJlRWasrJtS4ah
-        YBdoivfkvLIGijxWs6cSfRlMr+gUNdSoPQ0CHGlkZY1v
-        VJc0dJjQz20szqCVOaZISo3YMzSOaiigYe5
-        8kWXYqRmT55n19UzZrF9kaZZj7/PlAhElrZfL
-        fL7MF7vYvJaSOYZ4ureM8gp0b5QIvHz9s0pjJfms/0
-        GheVY8jf5d40ziBwGxymM0vNeWlDH1
-        IMHgYg13IH60gHueGzkvIuJWXcyqSKIrY5WYXzqqrJP+QU56P
-        Yy36e5mNIiJXJnafogxlrY9
-        3dRIgFnwLwvlmSNvg6uu3R2vmL+2Wei0RfkZTJI08aecydDperv8Z7av
-        8U34cn0RPOmPeS35
-        e/w/rvcrLGZzGIbfjc1TWA==
-  recorded_at: 2026-02-19 02:55:48
+        eJy9VNuO2yAQ/Zd5RvHGzmVjqeqHVJU1gXGMgsGCIWk38r9XkHXSZLdV1b28AcM5c+bMwAkU
+        MkJ9Aq2
+        ghtVmsy1XD7heolxX64Uqy6qsZAsC+OdAUEOrDQUQgMxebyNTSOBdTHAbjREgO5J7
+        F3naW+wTUM1BwF
+        7blKZ1RpEHAQNyBzUUf8pbgICgn2jiGrw76AStwYU2sPO4IxDQI5PXaPQT
+        qWYiVfMENxi4YRdlRxeJC
+        pma3ind6rtD6Qn5ekY/2Gd3OgzdudReLado6LBcrs67cRTAuAtQ
+        f/suQEbvyXITA/lGom2k63uyDDX7
+        SNf4gXzQzkI9T2zu2GBooj1oOiYNLZpAowBPBlk7Gzo9
+        ZA0DZvSzjfUJjLb7HMlXE/YEnacWauiYh1A
+        XBQ56xhR45kI70644lEXu5eT9Y4WP26qqysUG
+        ZUtzSub1lIdjTNW9NigvQPeDkoDn1X+rtE5RKOxiXc
+        lnxdfW/3VwruJzb/yO+H1UXLmnYnMU
+        bmy6iYizaxmePZGk0DeJJd1vPEnnVXinVr504/V0dyaN4ppc2
+        9a9KWOidgf6jSMDZjHcEs0L
+        T8FFLy/uTm/8n/scB+NQfUYmRYb4U2qydLw87w/O9jV9yl8uX3Ig87ZZ
+        y/M9vY/LBwflrHyA
+        cfwFghkgGQ==
+  recorded_at: 2026-02-22 15:51:38
 - request:
     method: GET
-    uri: https://api.test.osf.io/v2/nodes/m7p9x/files/osfstorage/?filter%5Bkind%5D=folder&filter%5Bname%5D=d3&page=1
+    uri: https://api.test.osf.io/v2/nodes/6a2xr/files/osfstorage/?filter%5Bkind%5D=folder&filter%5Bname%5D=d3&page=1
   response:
     status: 200
     headers:
       allow: GET, HEAD, OPTIONS
       alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       cache-control: no-cache, no-store, max-age=0, must-revalidate
-      content-length: '128'
+      content-length: '230'
       content-type: application/vnd.api+json; charset=utf-8
       cross-origin-opener-policy: same-origin
-      date: Thu, 19 Feb 2026 02:55:49 GMT
+      date: Sun, 22 Feb 2026 15:51:39 GMT
       expires: '-1'
       pragma: no-cache
       referrer-policy: same-origin
@@ -236,39 +241,42 @@ http_interactions:
       x-frame-options: DENY
     body:
       raw_gzip: |-
-        eJxFjEEKgCAUBe/y1hHW8l8lIj70C8ks1CQQ754tyt0wDJMwc2DQMDYw2m4elLBo5wPIXsYU
-        y5VPJ/F
-        jK/fvd3kfCeEIbECqlOKmk1cBdSrnWkRxXh8WhL5VyPkB01MqVg==
-  recorded_at: 2026-02-19 02:55:49
+        eJxFjlsKwjAQRfcyoF8lqZH6ERBB3IWIBDLR0DQJmbEUSvduCj7+zpzhXu4M1rABfb01MOBK
+        M3BiE0C
+        3DWQs92weCHpXrxEL+RRBgxKqhaWB4GNPa4QwuOqfzJm0lCZ7wUgsEjnhkxyVjMki
+        yYNRU5HOh8r1R5
+        xKrZenahjLpjv3PtpNdzm6FCyW7c9HM+Dq7R4acL4Qg46vEOoG8+dccPxy
+        xOnjl+UN+zhNCQ==
+  recorded_at: 2026-02-22 15:51:39
 - request:
     method: PUT
-    uri: https://files.us.test.osf.io/v1/resources/m7p9x/providers/osfstorage/?kind=folder&name=d3
+    uri: https://files.us.test.osf.io/v1/resources/6a2xr/providers/osfstorage/?kind=folder&name=d3
   response:
     status: 201
     headers:
       status: 'HTTP/2 201 '
       server: nginx
-      date: Thu, 19 Feb 2026 02:55:50 GMT
+      date: Sun, 22 Feb 2026 15:51:40 GMT
       content-type: application/json; charset=UTF-8
       content-length: '817'
-      x-waterbutler-request-id: 8cc8294d-84e2-4e7e-b77c-9d5ae1997f8c
+      x-waterbutler-request-id: 6d11159f-432a-4606-aeea-7b126593bbc9
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       expires: '-1'
       pragma: no-cache
       via: 1.1 google
       alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
-      string: '{"data": {"id": "osfstorage/69967bb6d957f4745b0caad7/", "type": "files",
-        "attributes": {"extra": {}, "kind": "folder", "name": "d3", "path": "/69967bb6d957f4745b0caad7/",
+      string: '{"data": {"id": "osfstorage/699b260c75ac7374d22323d0/", "type": "files",
+        "attributes": {"extra": {}, "kind": "folder", "name": "d3", "path": "/699b260c75ac7374d22323d0/",
         "provider": "osfstorage", "materialized": "/d3/", "etag": "5caf8ab73c068565297e455ebce37fd64b6897a2284ec9d7ecba8b6093082bcd",
-        "resource": "m7p9x", "size": null, "sizeInt": null}, "links": {"move": "https://files.us.test.osf.io/v1/resources/m7p9x/providers/osfstorage/69967bb6d957f4745b0caad7/",
-        "upload": "https://files.us.test.osf.io/v1/resources/m7p9x/providers/osfstorage/69967bb6d957f4745b0caad7/?kind=file",
-        "delete": "https://files.us.test.osf.io/v1/resources/m7p9x/providers/osfstorage/69967bb6d957f4745b0caad7/",
-        "new_folder": "https://files.us.test.osf.io/v1/resources/m7p9x/providers/osfstorage/69967bb6d957f4745b0caad7/?kind=folder"}}}'
-  recorded_at: 2026-02-19 02:55:50
+        "resource": "6a2xr", "size": null, "sizeInt": null}, "links": {"move": "https://files.us.test.osf.io/v1/resources/6a2xr/providers/osfstorage/699b260c75ac7374d22323d0/",
+        "upload": "https://files.us.test.osf.io/v1/resources/6a2xr/providers/osfstorage/699b260c75ac7374d22323d0/?kind=file",
+        "delete": "https://files.us.test.osf.io/v1/resources/6a2xr/providers/osfstorage/699b260c75ac7374d22323d0/",
+        "new_folder": "https://files.us.test.osf.io/v1/resources/6a2xr/providers/osfstorage/699b260c75ac7374d22323d0/?kind=folder"}}}'
+  recorded_at: 2026-02-22 15:51:40
 - request:
     method: GET
-    uri: https://api.test.osf.io/v2/files/69967bb6d957f4745b0caad7/
+    uri: https://api.test.osf.io/v2/files/699b260c75ac7374d22323d0/
   response:
     status: 200
     headers:
@@ -278,7 +286,7 @@ http_interactions:
       content-encoding: gzip
       content-type: application/vnd.api+json; charset=utf-8
       cross-origin-opener-policy: same-origin
-      date: Thu, 19 Feb 2026 02:55:50 GMT
+      date: Sun, 22 Feb 2026 15:51:40 GMT
       expires: '-1'
       pragma: no-cache
       referrer-policy: same-origin
@@ -292,38 +300,38 @@ http_interactions:
       x-frame-options: DENY
     body:
       raw_gzip: |-
-        eJy9VdFu4jAQ/Jd9tggkBUSk033I6RQt8YZYOHZkr6FXlH8/2TSE0l51amnfYu/Oznh3Yp9A
-        IiOUJ1A
-        SSlhtNqv1druSm+W6eVg/LLfzGlGuQQD/6QlKaJQmDwKQ2altYPIRvAsRboLWAuqW
-        6r0NPK4NdhEoCx
-        CwVybSNFZLciCgR26hhOxfvBkI8OqJxlq9swcVoSVY33i2DncEAjpkcgq1
-        eiJZjUVlEeEaPVdsQ93SR
-        aJEpqqzUjXqZrN2hDzt0SO71J0WfXs+aieXY9S3mC9X59UwCGDc
-        eSh//RZQB+fIcBU8uapGU9W268gw
-        lOwCTfEDOa+sgXIRq9ljhb4K5qDoGDU0qD0NAhxpZGWN
-        b1WfNPSY0M9tLE+gldmnSEqN2BO0jhoooWX
-        ufZll2KsZk+eZ9c1M2eyQZ2mWY+/zIkdEScui
-        WMyLRS5j8zpK5hji6d4yyivQrVEi8Pz1YZXGSvJZt+
-        43j8+Kp9G/a5xJ/CAgVrmPhvfakjKm
-        HiQYnK3hdsT3FnDLcyXnRURcq4tZNUl0VawS8ytHtXXS38lJr
-        4fxNt3NjAYxkSvT2E8xxtL2
-        QFc1EmAW/MtCi8yRt8HVl+6OV8x/2yz02qL8DiZJmvhbzmToeLldvpjt
-        Z3wTflxeBE/6c15L
-        /h7/j8v9CvlsDsPwF0QkUI0=
-  recorded_at: 2026-02-19 02:55:50
+        eJy9VNFu2zAM/Bc+G3EqN0ljYNiHDIPBSHQsRJYMiUq6Bv73QUqcLGk3DGvXN0nUHY9HSkdQ
+        yAj1EbS
+        CGpbr9UYs53K1QLmqVo9KiEpUag4F8I+BoIZWGwpQADJ7vYlMIYG3McFtNKYA2ZHc
+        ucjT3mKfgKqCAn
+        bapjStM4o8FDAgd1BD+bu8JRQQ9AtNXIN3e52gNbjQBnYetwQF9MjkNRr9
+        QqqZSFWV4AYDN+yi7OgiU
+        SFT0zulW313KD0hX8/omX12p8PQnUrt1WKKhg7FYnnajWMBjNsA
+        9bfvBcjoPVluYiDfSLSNdH1PlqFm
+        H+ka35MP2lmoHxKbOzQYmmj3mg5JQ4sm0FiAJ4OsnQ2d
+        HrKGATP6bGN9BKPtLkfy1YQ9QuephRo65iH
+        UZYmDnjEFnrnQzrQr96LMvZy8f6rwaVNVlXhc
+        o2xJiGReT3k4xlTdW4PyCnQ/KAl4Wv2zSutUUoni2Z
+        8VX1v/x8G5is+98Vvij1Fx5Z6KzVG4
+        sekmUpxdS/DsiSSFvkks6X7jSTqvwge18rUbb6e7M2ksrsm1b
+        d27MiZqt6dfODJgFsMt0UPp
+        Kbjo5cXd6Y3/dZ/jYByqz8ikyBB/Sk2WDpfn/Z+zfU2f8pfLlxzIvG/W
+        8nxP7+PywYGYiTmM
+        40/+yh+X
+  recorded_at: 2026-02-22 15:51:40
 - request:
     method: GET
-    uri: https://api.test.osf.io/v2/nodes/vjeuh/files/osfstorage/?filter%5Bkind%5D=file&page=1
+    uri: https://api.test.osf.io/v2/nodes/n473c/files/osfstorage/?filter%5Bkind%5D=file&page=1
   response:
     status: 200
     headers:
       allow: GET, HEAD, OPTIONS
       alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       cache-control: no-cache, no-store, max-age=0, must-revalidate
-      content-length: '128'
+      content-length: '208'
       content-type: application/vnd.api+json; charset=utf-8
       cross-origin-opener-policy: same-origin
-      date: Thu, 19 Feb 2026 02:55:50 GMT
+      date: Sun, 22 Feb 2026 15:51:40 GMT
       expires: '-1'
       pragma: no-cache
       referrer-policy: same-origin
@@ -337,13 +345,15 @@ http_interactions:
       x-frame-options: DENY
     body:
       raw_gzip: |-
-        eJxFjEEKgCAUBe/y1hHW8l8lIj70C8ks1CQQ754tyt0wDJMwc2DQMDYw2m4elLBo5wPIXsYU
-        y5VPJ/F
-        jK/fvd3kfCeEIbECqlOKmk1cBdSrnWkRxXh8WhL5VyPkB01MqVg==
-  recorded_at: 2026-02-19 02:55:50
+        eJxFjdEKwjAMRf8l4Ftp53QIBRHEvxCR4lItq21p4hDG/t0MFN9OTpJ7J+gdO7Dni4InLjQB
+        Z3YRbKO
+        gYL0Wd0ewa5lGrBRyAgutbhuYFcSQBlpeCKMX/2AuZI1xJWhGYp3J65DN2JqUeyST
+        trvNzfgQhWVHnK
+        vEm4MYxrrqjkNI/ao77ZcTUOBDJQabXjFKm/tzqTj+OOH76+f5A57+RY4=
+  recorded_at: 2026-02-22 15:51:40
 - request:
     method: PUT
-    uri: https://files.us.test.osf.io/v1/resources/vjeuh/providers/osfstorage/?kind=file&name=a.txt
+    uri: https://files.us.test.osf.io/v1/resources/n473c/providers/osfstorage/?kind=file&name=a.txt
     body:
       string: 'upload, file size: 2'
   response:
@@ -351,32 +361,32 @@ http_interactions:
     headers:
       status: 'HTTP/2 201 '
       server: nginx
-      date: Thu, 19 Feb 2026 02:55:53 GMT
+      date: Sun, 22 Feb 2026 15:51:43 GMT
       content-type: application/json; charset=UTF-8
       content-length: '1171'
-      x-waterbutler-request-id: e51021d2-c743-4150-b7ed-6a168f308379
+      x-waterbutler-request-id: 0db150c4-5d04-4499-8335-db43299527b7
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       expires: '-1'
       pragma: no-cache
       via: 1.1 google
       alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
-      string: '{"data": {"id": "osfstorage/69967bb9d957f4745b0caad9", "type": "files",
+      string: '{"data": {"id": "osfstorage/699b260f3db11be7f32889ab", "type": "files",
         "attributes": {"extra": {"guid": null, "version": 1, "downloads": 0, "checkout":
         null, "latestVersionSeen": null, "hashes": {"md5": "b026324c6904b2a9cb4b88d6d61c81d1",
         "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"}},
-        "kind": "file", "name": "a.txt", "path": "/69967bb9d957f4745b0caad9", "provider":
-        "osfstorage", "materialized": "/a.txt", "etag": "c8913faa05837ccb8e34e8d3158d1c605501ba48ca668fcb87f1cc4f762c921f",
-        "contentType": "application/octet-stream", "modified": "2026-02-19T02:55:53.420189+00:00",
-        "modified_utc": "2026-02-19T02:55:53+00:00", "created_utc": null, "size":
-        2, "sizeInt": 2, "resource": "vjeuh"}, "links": {"move": "https://files.us.test.osf.io/v1/resources/vjeuh/providers/osfstorage/69967bb9d957f4745b0caad9",
-        "upload": "https://files.us.test.osf.io/v1/resources/vjeuh/providers/osfstorage/69967bb9d957f4745b0caad9?kind=file",
-        "delete": "https://files.us.test.osf.io/v1/resources/vjeuh/providers/osfstorage/69967bb9d957f4745b0caad9",
-        "download": "https://files.us.test.osf.io/v1/resources/vjeuh/providers/osfstorage/69967bb9d957f4745b0caad9"}}}'
-  recorded_at: 2026-02-19 02:55:53
+        "kind": "file", "name": "a.txt", "path": "/699b260f3db11be7f32889ab", "provider":
+        "osfstorage", "materialized": "/a.txt", "etag": "8e6591928d0fc3abf5cefe7cd7a1248f19e6af01f2dc6c5feb1186fd671d9129",
+        "contentType": "application/octet-stream", "modified": "2026-02-22T15:51:43.185492+00:00",
+        "modified_utc": "2026-02-22T15:51:43+00:00", "created_utc": null, "size":
+        2, "sizeInt": 2, "resource": "n473c"}, "links": {"move": "https://files.us.test.osf.io/v1/resources/n473c/providers/osfstorage/699b260f3db11be7f32889ab",
+        "upload": "https://files.us.test.osf.io/v1/resources/n473c/providers/osfstorage/699b260f3db11be7f32889ab?kind=file",
+        "delete": "https://files.us.test.osf.io/v1/resources/n473c/providers/osfstorage/699b260f3db11be7f32889ab",
+        "download": "https://files.us.test.osf.io/v1/resources/n473c/providers/osfstorage/699b260f3db11be7f32889ab"}}}'
+  recorded_at: 2026-02-22 15:51:43
 - request:
     method: GET
-    uri: https://api.test.osf.io/v2/files/69967bb9d957f4745b0caad9/
+    uri: https://api.test.osf.io/v2/files/699b260f3db11be7f32889ab/
   response:
     status: 200
     headers:
@@ -386,7 +396,7 @@ http_interactions:
       content-encoding: gzip
       content-type: application/vnd.api+json; charset=utf-8
       cross-origin-opener-policy: same-origin
-      date: Thu, 19 Feb 2026 02:55:53 GMT
+      date: Sun, 22 Feb 2026 15:51:43 GMT
       expires: '-1'
       pragma: no-cache
       referrer-policy: same-origin
@@ -400,29 +410,29 @@ http_interactions:
       x-frame-options: DENY
     body:
       raw_gzip: |-
-        eJy9Ve1umzAUfZcr5Z8XwHwELE3TpClPsF+bJmTsS/EKGNkm7Rrx7pNJadK0zaa168/E59xz
-        7id7kNx
-        xYHtQEhhkRZFtqqqQRbqpk02SVqHgXBZAwP0aEBjUqkULBLhzRlWjQ+vJV6On92Pb
-        EhANims9uuV3zz
-        tP5Gt364DAterlfRwgMHDXAIPggrBVdwiMEhiM3imJBhhoW1unDb/yMTru
-        0CjeqjuU5RJwkWu5daXTo
-        2jwwaHkDstOS1Ur/yfQkGYfQvohKr6GlKUpS+N1QsMo9/IzWBjk
-        7g/Yb0AAb52Zq9lw2xxK08kUGFQh
-        zWKaiKwIk4ryQlRJlecyk1kk8khGPs+G0zQDBkmcpjzJ
-        qqiQcZJLQet0I8Ikq3Oss1gmaZxjVRVxFoZ
-        hHYsCsUgTTjdJFkqZZylMBKS+6VvNpQUWTgQc
-        v7LAvv8gIEZjsHflaNGUgvel0F2HvQPmzIjH9x0aq3
-        QPLPLO9E3JbTn2O4U3vgw1by1OBAy2
-        3Cnd20YNc7YDn9m1budG7aFV/fX8MkM9dw+NwRoYNM4NlgUBH
-        9TaoXVrbeu10sGOBvOULUMR
-        xZRzLjGN4yiMI1oEvuk4j+00TeTZEX5COh9hT7xP0r6R0SfTGywCjx1P
-        BHot8d9VPdsGu584
-        NhdrMSOOic+0OXHHzRW6tzZwrnNi59ELOXXnUQIlN6WP4vGlQaGN/H9deV7urEc
-        TOYqrvtav
-        UvSh9Q5PYsyE9WgfB4oCg1aPRjxUdzl6NjjevEvXchz82r+DkMQW3XtktJyyE6lTheX5Yv
-        EN
-        9ocPxxKhq8251QPm02jajzNqFX9e0e2Kbk9AK7pd9FZ0+5Kip8VbqQwKt6JZpyWu4i/3Hgg0
-        rmtf
-        SOZQocMw/V11LLavW4Z5AZcFfrj6QNchTNNvh6OlBQ==
-  recorded_at: 2026-02-19 02:55:53
+        eJy9VNtunDAQ/ZeR9o0uYAMBpKqqVO0X9KlVhYw9XqwAXtlmk2bFv1f2LsluboqaNo8wc+bM
+        HJ+ZAwj
+        mGNQHUAJqKKqqJUUiqWjTtMUrSUlZVqyFCNzvHUINUvVoIQLmnFHt5NB68Hby8HHq
+        +wh4h/xaT275Ht
+        nggWztbh1EcK1GcaoDEeyY66CG+BViq+4QahLBzui9EmigBm2lddqwra8x
+        MIdGsV7doWiWggtdz6xrn
+        J54h/cdCuawGbRQUvmfQBJSfErIJ0K+p3mdp3VG12mZZxX5Aads
+        bpC5NyTjrTNBzo7Z7qjNIHKooU1I
+        QUnGiyrJWsIq3mZtWYpCFCkvU5H6QTtG8gJqyGies6xo
+        00rQrBScyPyKJ1khS5QFFVlOS2zbihZJkkj
+        KK8Qqzxi5yopEiLLIYY5A6Jux10xYqJM5Ase2
+        FuqfvyLgkzE4umayaBrOxobrYcDRQe3MhA/xPRqr9A
+        h16jvTNw2zzTTuFd54GSTrLc4RGOyZ
+        U3q0ndqFaXcsoKXuw0sdoFfjdYiEVI89QGdQQg2dcztbxzHbq
+        bVD69bayrXS8Z7EwWaLK0rK
+        ypZSSrKKcYkpxv7VMfh2nufoWQ8/AT32sAeehrT/qNEn9o0XgsuO5whO
+        qgfCY/vem+GlzBbd
+        3zc0aoE2HrMrys9Il9FDFC5Eu4hERw0DPCjEUTDT+Co+vzHItRH/T6/n6R6pN0c
+        P5GqU+l2M
+        vrTe41mNAFhP9rJQGhu0ejL8Xt3lHtn44Ry9dsimnV/IDyAS2KP7iImWI3NGdc6whF8V3+
+        B4
+        vOlLhUGax60ec75Mpv8cslb064psVmRzlrQim4VvRTYvMXoY3QhlkLsVKQYtcEW/nXqIoHND
+        /8Iw
+        R4WOZnqbOhb79y1DWMBlge/vMZA1SWCe/wAGjn8+
+  recorded_at: 2026-02-22 15:51:43
 recorded_with: VCR-vcr/2.1.0

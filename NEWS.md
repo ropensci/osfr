@@ -2,9 +2,13 @@
 
 ## Fixes
 
-* Fixed the `Accept` header name in `.build_client()`. The header was incorrectly set as `Accept-Header`, which meant API version pinning never actually worked. Version pinning is now disabled by default (the header requests JSON:API content without specifying a version) to match the package's historical behavior.
+* Fixed the `Accept` header name in `.build_client()`. The header was incorrectly set as `Accept-Header`, which meant API version pinning never actually worked.
 
 * Fixed `osf_mv()` and `osf_cp()` failing with an uninformative error when a conflict is encountered. Waterbutler dropped the `code` field from conflict (409) responses, which prevented the error message from being extracted and surfaced correctly.
+
+## API compatibility
+
+* API requests are now pinned to OSF API version 2.20.
 
 ## Build and test infrastructure
 

@@ -1,7 +1,7 @@
 http_interactions:
 - request:
     method: GET
-    uri: https://api.test.osf.io/v2/nodes/4e2ym/files/osfstorage/?page=1
+    uri: https://api.test.osf.io/v2/nodes/mgr4u/files/osfstorage/?page=1
   response:
     status: 200
     headers:
@@ -11,7 +11,7 @@ http_interactions:
       content-encoding: gzip
       content-type: application/vnd.api+json; charset=utf-8
       cross-origin-opener-policy: same-origin
-      date: Thu, 19 Feb 2026 02:59:13 GMT
+      date: Sun, 22 Feb 2026 15:54:57 GMT
       expires: '-1'
       pragma: no-cache
       referrer-policy: same-origin
@@ -25,41 +25,41 @@ http_interactions:
       x-frame-options: DENY
     body:
       raw_gzip: |-
-        eJztllFvozgQx7/LSHljgzEYMNJqddKpn+CebrWKjD00qAQi26TdjfjuJ5NA04bm2m3Y3Ye+
-        JXhm/uP
-        xeH7egxJWQPZ1D6WCDGLO40QmXHGWFFESsZxIkQcKPLDftwgZFGWFBjwQ1uoyby0a
-        yPZw2zr3uq0qD+
-        Qa5V3T2uF/LTbOUS3tgwUP7spaHeOAB1th15CBf0HYlD8QMurBVje7UqGG
-        DBpTGNtocetibIRFXYqq/
-        IFqNQQc5Cph7Mo2rVzjmKESFlebRpVF6T4CJTT+ROingP9DaMZ4
-        RtgyiUgYUTgaS43C/o/tv+ABPlgt
-        XEHWwqwPpdkoBhlEqaBRnhBB8jCJWchYRHPOY1GwIAl5
-        6va5FpTFkEGiMGCMqYJImhASUo5pwHIe5iG
-        VLAlkiIJFSvI4yVO3JvIkzDlPaJ5QFSjoPFDN
-        fV01QhnISOeBFbcGsq/fPJCt1ljbVWtQr6SoV7LZbL
-        C2kFnd4uP6DrUpmxqywGXW3K+EWbX1
-        rsR7V4ZCVAY7DzRWwpZNbdbltt/tVvTeRVP1B7WHqqzv+pXe1
-        PnuYa2xgAzW1m5N5vtiWy4t
-        GrtsTLEsG39H/b7LhqZgUklUHCOJLEIVpL47dHR9u++6zjv28NMWPnN6
-        3sLO8bhJc6VEz7rX
-        HwSeZtx5UDcKf17VeRs/Qvp9c7EWvcXjxnu3fuNW6Fu0107guc5JOk9WvNPsnJV
-        EJfTKRXH2
-        K42y0Wq+U5mWe3ZGnfcoXtZF8y5FF7rZ4UmM3mHZmqeBAl+jaVotx+oOQ8/4jzPv0rRst+
-        7a
-        /wIhhRXaX7GjYZSdSJ0qDMsXi6+xPoBjiLAp9PNUDzZfWl197q0W4V8LerOgNydGC3oz6C3o
-        zUuK
-        zi28UaVGaRc03jQKF+Hfxxw8WNtN9cJmDhU6NNPrqmOwet9lcBfw6ejMn9kUV6C/eA39
-        p4R/jv7iXfR
-        PljzhJE5fQ//B9iL9c0LjkEYy5iTKqeAyj/I0VbGKA5kGKjilfxQyJqI4D7gK
-        o1RJWrBEkiguUiziUE
-        UsTDHPeRgTQopQckTOIkGTKCZKpTH7oP9vov9Z937Q/w+g//mpzE3/
-        c8V56D81LWeh/5TQLPSfFHob/
-        SeLPyv9zxTnov8kHd9G/4nqnNFfyZgWQUALFEWikpxcgf6m
-        zVWp6Qn/D4Q4ewGcifvjE+AQ8E2vgKOs
-        /7qHwMnHEfiHby9x/bA6kNv96z5o+xJtD7+uwpyX
-        bshk93yA9/eA9/ww5gbv9PFfH7yTOrOQd1JpFvR
-        OKtV4P06XmdW+ODB8HrHwRq5NZN913046
-        qSi1GaHkWPDIE9yNsMKH8ft4tRorKshCD7aoV1sHmywgrk
-        sHi3F4A10S6Lr/AKGlpXs=
-  recorded_at: 2026-02-19 02:59:13
+        eJztl9tu2zgQht9lAN+plkTqDBTFAos8wV5tURg8jGIhsmiQlJOtoXdfULIcO5bTpInai+bO
+        FofzD38
+        N57P3IJllUHzdQyWhgCTPOUlESiUPQ45pSUmW5UjAA/vfFqGAsqrRgAfMWl3x1qKB
+        Yg+3rdvetHXtgV
+        ijuFOtHb83bOM2yqV9sODBXdXIQx7wYMvsGgrwnxE21XeEgniw1WpXSdRQ
+        gDKlsUqzW5djwyzqitXVd
+        5SrMeEoVzNjV1a1Yo3HCiWzuNooWZWVewgkIMmngHwi5J8wLuKo
+        iNJlHoRJEPwLh2ihkdkXBOOD1cw5
+        smZmPXizkTEUEGWMRDwNWMBpmsQ0jiPC8zxhZRymNM/c
+        QdeMxAkUkEoM4ziWZSBIGgSU5JiFMc8pp0T
+        EaSgosjiSIk9Snrk1xlPK8zwlPCUylNB5INV9
+        UysmDRRB54FltwaKr988EK3W2NhVa1CvBGtWQm022F
+        gorG7xcX2H2lSqgSJ0lan7FTOrttlV
+        eO9sKFltsPNAY81spRqzrrb9abes312qun9Te6ir5q5f6UPd3
+        j2sNZZQwNrarSl8n22rpUVj
+        l8qUy0r5O+L3bTZ2BaUs45RSEuVMlBgJ3711dI2777rOOzTxeQ9fbHra
+        w27j4ZDmnQq9aF9/
+        FDivuPPg4HovOJTverN/U/oW7c8X1CiJxt/c6qg9ER2P3q/CmWlnK97gYb+9d0i
+        gZHrlsrj4
+        lUahtJzPr2m5J+513qN41ZTqTYoutdrhSY5+w7I154lCX6NRrRZHd8d5ZPzHcfTcIGu37k
+        L+
+        AiGJNdpfcaJxyJxInSqMy8+ar7EZZvqYYVPqp6UOMV9aXX/uoxb0rwW5WZCbk6AFuRn1FuTm
+        mqLb
+        Rm9kpVHYBUk2SuKC/n2owYO13dRXDjM4NDTTy9wxWL/tMrgLeD7U+JOY6B3AzF4C5inh
+        nwMzewuY43C
+        ZBBkJ4peA+Sz4Kph5QBJKIpHkQcQJywWPeJbJRCahyEIZnoI5onHMooSHuaRR
+        JgUp41QEUVJmWCZURj
+        HNkPOcJkEQlFTkiHkcMZJGSSBllsQfYP5NYL5o3w8wv9KvucF8qTgP
+        mKcG2SxgnhKaBcyTQq8D86T5s
+        4L5QnEuME+C63VgnnDnAszySUz6DmA2LZeVJidoHmb3BZwv
+        xP0jnYeErwL0QdZ/GaNPHh5RPDy7Rtxh
+        dWRqP1w/OHiNg8Ond2HOtRsy2T1nSPyTyHfpxtzk
+        m/b//ck3qTML+iaVZmHfpFKD98frPbPaFzeZPx/
+        n8ivBMlF91307uSDKshoK6sEW9WrrZnYR
+        Bscfx+4/z5IEcNp7P67g2ZEAbuJocySRA8AjRHB3JBQ+HJ
+        533f/ufE3v
+  recorded_at: 2026-02-22 15:54:58
 recorded_with: VCR-vcr/2.1.0

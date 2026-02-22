@@ -1,17 +1,17 @@
 http_interactions:
 - request:
     method: GET
-    uri: https://api.test.osf.io/v2/nodes/a2ncb/files/osfstorage/?page=1
+    uri: https://api.test.osf.io/v2/nodes/ug3j4/files/osfstorage/?page=1
   response:
     status: 200
     headers:
       allow: GET, HEAD, OPTIONS
       alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       cache-control: no-cache, no-store, max-age=0, must-revalidate
-      content-length: '128'
+      content-length: '186'
       content-type: application/vnd.api+json; charset=utf-8
       cross-origin-opener-policy: same-origin
-      date: Thu, 19 Feb 2026 02:54:56 GMT
+      date: Sun, 22 Feb 2026 15:50:48 GMT
       expires: '-1'
       pragma: no-cache
       referrer-policy: same-origin
@@ -25,8 +25,10 @@ http_interactions:
       x-frame-options: DENY
     body:
       raw_gzip: |-
-        eJxFjEEKgCAUBe/y1hHW8l8lIj70C8ks1CQQ754tyt0wDJMwc2DQMDYw2m4elLBo5wPIXsYU
-        y5VPJ/F
-        jK/fvd3kfCeEIbECqlOKmk1cBdSrnWkRxXh8WhL5VyPkB01MqVg==
-  recorded_at: 2026-02-19 02:54:56
+        eJxFjFEKwjAQRO8y3yGr1a9cRUQC3dRoTEJ2W4TSu5uC4t+bGeatGL16uMvV4MU7rdCiPsEd
+        DCq3W/U
+        Twx17WrhJLBkOgx0O2AxSzE/ZL8Ip9P6uWsUR+RqtsqgtEmwstAyUy8hC83R6nCnE
+        1LlvoqV1PcEgxC
+        YKl+eUutf/uTZefpz5/e237QMK1j5K
+  recorded_at: 2026-02-22 15:50:48
 recorded_with: VCR-vcr/2.1.0
