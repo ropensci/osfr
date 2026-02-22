@@ -34,7 +34,7 @@
            path,
            query = list(),
            body = NULL,
-           version = 1,
+           version = "1",
            verbose = FALSE,
            progress = FALSE,
            ...) {
