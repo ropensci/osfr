@@ -1,17 +1,17 @@
 http_interactions:
 - request:
     method: GET
-    uri: https://api.test.osf.io/v2/nodes/vpnmr/files/osfstorage/?filter%5Bkind%5D=folder&filter%5Bname%5D=empty&page=1
+    uri: https://api.test.osf.io/v2/nodes/8yv6z/files/osfstorage/?filter%5Bkind%5D=folder&filter%5Bname%5D=empty&page=1
   response:
     status: 200
     headers:
       allow: GET, HEAD, OPTIONS
       alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       cache-control: no-cache, no-store, max-age=0, must-revalidate
-      content-length: '128'
+      content-length: '233'
       content-type: application/vnd.api+json; charset=utf-8
       cross-origin-opener-policy: same-origin
-      date: Thu, 19 Feb 2026 02:59:39 GMT
+      date: Sun, 22 Feb 2026 15:55:29 GMT
       expires: '-1'
       pragma: no-cache
       referrer-policy: same-origin
@@ -25,39 +25,42 @@ http_interactions:
       x-frame-options: DENY
     body:
       raw_gzip: |-
-        eJxFjEEKgCAUBe/y1hHW8l8lIj70C8ks1CQQ754tyt0wDJMwc2DQMDYw2m4elLBo5wPIXsYU
-        y5VPJ/F
-        jK/fvd3kfCeEIbECqlOKmk1cBdSrnWkRxXh8WhL5VyPkB01MqVg==
-  recorded_at: 2026-02-19 02:59:39
+        eJxFjlsKwjAQRfcyoF+lqYWKBEQQdyEigUw0NE1CZgzW0r2bgo+/M2e4lzuBVqxAni8VDLjQ
+        BBxYOZB
+        NBRHTNaobgtyUK2MiGzxIaOu2gbkCZ31PS4TQmeLvzJGkECrampG4DmRqG0RuhQ8a
+        SezGvH0JY13h8i
+        MOqdSLQzGMadUde+v1qjvtTXAa0/rnvRpw8ThEHqECYxMxSP9wrsxQf44J
+        85c9Pj9+nt8UBU7F
+  recorded_at: 2026-02-22 15:55:30
 - request:
     method: PUT
-    uri: https://files.us.test.osf.io/v1/resources/vpnmr/providers/osfstorage/?kind=folder&name=empty
+    uri: https://files.us.test.osf.io/v1/resources/8yv6z/providers/osfstorage/?kind=folder&name=empty
   response:
     status: 201
     headers:
       status: 'HTTP/2 201 '
       server: nginx
-      date: Thu, 19 Feb 2026 02:59:40 GMT
+      date: Sun, 22 Feb 2026 15:55:30 GMT
       content-type: application/json; charset=UTF-8
       content-length: '823'
-      x-waterbutler-request-id: 40d60371-a62c-4fa8-b714-e14016f945a2
+      x-waterbutler-request-id: c8bd79d2-4ca6-4783-9ff8-269dc9ee3158
       cache-control: no-cache, no-store, max-age=0, must-revalidate
       expires: '-1'
       pragma: no-cache
       via: 1.1 google
       alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
-      string: '{"data": {"id": "osfstorage/69967c9cd957f4745b0cab2d/", "type": "files",
-        "attributes": {"extra": {}, "kind": "folder", "name": "empty", "path": "/69967c9cd957f4745b0cab2d/",
+      string: '{"data": {"id": "osfstorage/699b26f23db11be7f32889f7/", "type": "files",
+        "attributes": {"extra": {}, "kind": "folder", "name": "empty", "path": "/699b26f23db11be7f32889f7/",
         "provider": "osfstorage", "materialized": "/empty/", "etag": "5caf8ab73c068565297e455ebce37fd64b6897a2284ec9d7ecba8b6093082bcd",
-        "resource": "vpnmr", "size": null, "sizeInt": null}, "links": {"move": "https://files.us.test.osf.io/v1/resources/vpnmr/providers/osfstorage/69967c9cd957f4745b0cab2d/",
-        "upload": "https://files.us.test.osf.io/v1/resources/vpnmr/providers/osfstorage/69967c9cd957f4745b0cab2d/?kind=file",
-        "delete": "https://files.us.test.osf.io/v1/resources/vpnmr/providers/osfstorage/69967c9cd957f4745b0cab2d/",
-        "new_folder": "https://files.us.test.osf.io/v1/resources/vpnmr/providers/osfstorage/69967c9cd957f4745b0cab2d/?kind=folder"}}}'
-  recorded_at: 2026-02-19 02:59:40
+        "resource": "8yv6z", "size": null, "sizeInt": null}, "links": {"move": "https://files.us.test.osf.io/v1/resources/8yv6z/providers/osfstorage/699b26f23db11be7f32889f7/",
+        "upload": "https://files.us.test.osf.io/v1/resources/8yv6z/providers/osfstorage/699b26f23db11be7f32889f7/?kind=file",
+        "delete": "https://files.us.test.osf.io/v1/resources/8yv6z/providers/osfstorage/699b26f23db11be7f32889f7/",
+        "new_folder": "https://files.us.test.osf.io/v1/resources/8yv6z/providers/osfstorage/699b26f23db11be7f32889f7/?kind=folder"}}}'
+  recorded_at: 2026-02-22 15:55:30
 - request:
     method: GET
-    uri: https://api.test.osf.io/v2/files/69967c9cd957f4745b0cab2d/
+    uri: https://api.test.osf.io/v2/files/699b26f23db11be7f32889f7/
   response:
     status: 200
     headers:
@@ -67,7 +70,7 @@ http_interactions:
       content-encoding: gzip
       content-type: application/vnd.api+json; charset=utf-8
       cross-origin-opener-policy: same-origin
-      date: Thu, 19 Feb 2026 02:59:40 GMT
+      date: Sun, 22 Feb 2026 15:55:31 GMT
       expires: '-1'
       pragma: no-cache
       referrer-policy: same-origin
@@ -81,38 +84,38 @@ http_interactions:
       x-frame-options: DENY
     body:
       raw_gzip: |-
-        eJy9VduO2jAQ/Zd5tsgu4lIiVf2QqooGe0IsHDuyx6G7KP9e2RDCUrqqunTf4su5eObEPoJC
-        RiiPoBW
-        UsNpsVmu5kWqzXNeL9WK5fZK4nSsQwC8dQQm1NhRAADJ7vY1MIYF3McFtNEaAbEju
-        XeRxbLFNQGo7fg
-        EBe22TUu2MIg8COuQGSij+JF2AgKBfaaTrvOt1gpbgQh3YedwRCGiRyWs0
-        +pVUNZJm0cRgMHDFLsqGL
-        kYVMlWtU7rWN5PSE/I0Rz/Z5xo1GJrTgVu1HFdDg/Pl6jQaBgGM
-        uwDl9x8CZPSeLFcxkK8k2kq6tiXL
-        ULKPNK335IN2FsrnxOYOFYYq2l7TIXmo0QQaBHgyyNrZ
-        0Ogue+gwo8+VLI9gtN3nlbw1YY/QeKqhhIa
-        5C2VRYKdnTIFnLtQz7Yp+XuSOnsv/ZSuVJLWh
-        haTlgtT8ORWvpRyRIZ3uTlx+B93GJQFPX//s0jpFoe
-        g72/qz46n772ZnMj8ISCyP8fBeWfKO
-        qQYZBqdo+B3xow3c6lzZebMirt2lXZIU+iqxpP2VJ+m8Co9J0
-        p1m3Je76dEgJnFta/chxUTt
-        erriyIBZDG+JngtPwUUvL9Udb5m/jlnsjEP1GUqKDPGnnMnS4XK7/Ge1
-        b+lZ+Hp5FAKZj2Ut
-        53v8Py73K8xnTzAMvwDySFlp
-  recorded_at: 2026-02-19 02:59:40
+        eJy9VNGO2yAQ/Jd9RvHF1ziJpaofUlUWNkuMgsGCxWkS+d8rSBw3aVpVveu9AcvM7M4unEFw
+        4lCeQQk
+        oodhu67yQ+auol8sa1/I132y2cg0M6NgjlCCVRg8MOJFTdSD0EbwLEW6C1gyaFpu9
+        DTTtDe8iELuejs
+        Bgr0xUklYLdMCg59RCCdnvpDNg4NUJJ7re2UFFaAnWS0/W8R0Cg44TOsW1
+        OqGoJtIkGhk091SRDU2Lt
+        0QFJ6w6K5RUD4eNQ07zGX4nlzxquW8vBXdiNUV9y/NVcdmNIwPi
+        Ow/l128MmuAcGqqCR1c13FSN7To0
+        BCW5gHN8QOeVNVAuI5s9VNxXwQwKDzEHybXHkYFDzUlZ
+        41vVpxx6ntBXJ8szaGX2KZKuRuwZWocSSmi
+        Jel9mGe/VgtDTwnq5UDYb8ix19Gq/qHGDRZ03
+        61f5svq0lEU0r8M0ImOs7sm4/Ap6HJcIvKz+OUtjBf
+        pscxyK0zXjuft/nJ05+dQbt0N6nyxm
+        7qnYFIU7m+4i7OJagidPGhTcVZEl3q8cNtYJ/z6tfOLGc7kHk
+        0Y2iysj7ZsUI7Ud8CeOBFgE
+        f0+0zBx6G1xzc3d65n/d59Bry8VHKAnUSB9Sk8HD7Xn/Z7Uv8V/+fPuV
+        Peq3zVqa7+l93D44
+        yBf5C4zjDwgYKTM=
+  recorded_at: 2026-02-22 15:55:31
 - request:
     method: GET
-    uri: https://api.test.osf.io/v2/nodes/vpnmr/files/osfstorage/69967c9cd957f4745b0cab2d/?filter%5Bkind%5D=file&page=1
+    uri: https://api.test.osf.io/v2/nodes/8yv6z/files/osfstorage/699b26f23db11be7f32889f7/?filter%5Bkind%5D=file&page=1
   response:
     status: 200
     headers:
       allow: GET, HEAD, OPTIONS
       alt-svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
       cache-control: no-cache, no-store, max-age=0, must-revalidate
-      content-length: '128'
+      content-length: '233'
       content-type: application/vnd.api+json; charset=utf-8
       cross-origin-opener-policy: same-origin
-      date: Thu, 19 Feb 2026 02:59:41 GMT
+      date: Sun, 22 Feb 2026 15:55:31 GMT
       expires: '-1'
       pragma: no-cache
       referrer-policy: same-origin
@@ -126,8 +129,12 @@ http_interactions:
       x-frame-options: DENY
     body:
       raw_gzip: |-
-        eJxFjEEKgCAUBe/y1hHW8l8lIj70C8ks1CQQ754tyt0wDJMwc2DQMDYw2m4elLBo5wPIXsYU
-        y5VPJ/F
-        jK/fvd3kfCeEIbECqlOKmk1cBdSrnWkRxXh8WhL5VyPkB01MqVg==
-  recorded_at: 2026-02-19 02:59:41
+        eJxFjlEKwjAQRO+y4F9pbMTaBkQQbyEiKd1oMCYhuxa19O6moPj3dnZmmBF6zRrU8VTAHWca
+        gQNrB2p
+        ZQMR0jvqCoKp8DZjIBg8KZCmXMBXgrL/RHCF0JutX5khKCB1tyUhcBjKlDWKQwoce
+        STSvoX4LY13m/C
+        MOKdeLum07WRu56ruq6nBjVrJpWrMRu2xlTIv1/mZ9v1gftnMWCjA2EYPy
+        D+fyDP3nmHD4scfnV5+mD
+        14qTJk=
+  recorded_at: 2026-02-22 15:55:31
 recorded_with: VCR-vcr/2.1.0
