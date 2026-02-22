@@ -18,7 +18,7 @@ user_agent <- function(agent = "osfr") {
            query = list(),
            body = NULL,
            verbose = FALSE,
-           version = 2.8,
+           version = NULL,
            ...) {
 
   method <- match.arg(method, c("get", "put", "patch", "post", "delete"))
@@ -26,7 +26,7 @@ user_agent <- function(agent = "osfr") {
 
   cli$retry(
     method,
-    prepend_version(path, version),
+    prepend_version(path, "2"),
     query,
     body = body,
     times = 3,

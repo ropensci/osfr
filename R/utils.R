@@ -21,13 +21,14 @@ url_path <- function(...) {
 #' links (rather than using the endpoint functions), which already include the
 #' API version.
 #' @param path A URL path
-#' @param version Positive number indicating the specific API version
+#' @param version String indicating the API version (e.g., `"2.20"`, `"1"`)
 #' @noRd
 prepend_version <- function(path, version) {
   stopifnot(is.character(path))
-  stopifnot(is.numeric(version))
+  stopifnot(is.character(version))
+  major <- sub("\\..*", "", version)
   path <- sub("^\\/?v\\d\\/", "", path)
-  url_path(paste0("v", floor(version)), path)
+  url_path(paste0("v", major), path)
 }
 
 #' Stop execution with HTTP status code
