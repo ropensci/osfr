@@ -33,12 +33,14 @@ prepend_version <- function(path, version) {
 
 #' Stop execution with HTTP status code
 #' @param code HTTP status code
-#' @inheritParams base::stop
+#' @param detail Optional detail message from the API response
 #' @noRd
-http_error <- function(code, ...) {
-  args <- list(...)
-  msg <- sprintf("\n       HTTP status code %i.", code)
-  stop(args, msg, call. = FALSE)
+http_error <- function(code, detail = NULL) {
+  msg <- sprintf("HTTP status code %i.", code)
+  if (!is.null(detail) && nzchar(detail)) {
+    msg <- paste0(msg, "\n", detail)
+  }
+  stop(msg, call. = FALSE)
 }
 
 #' Inform user the API request failed and will be retried

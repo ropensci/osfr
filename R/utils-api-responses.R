@@ -78,7 +78,25 @@ process_response <- function(res) {
 #' @param x list returned by \code{process_response()}
 #' @noRd
 raise_error <- function(x) {
-  if (!is.null(x$errors)) http_error(x$status_code, x$errors[[1]]$detail)
+  if (is.null(x$errors)) return(invisible())
+
+  detail <- x$errors[[1]]$detail
+  code <- x$status_code
+
+  if (code %in% c(401L, 403L)) {
+    auth_hint <- paste0(
+      "Authentication failed (HTTP ", code, ").",
+      if (!is.null(detail) && nzchar(detail)) paste0("\n\n", detail, "."),
+      "\n\nTroubleshooting steps:",
+      "\n- Verify your PAT is correct with Sys.getenv(\"OSF_PAT\")",
+      "\n- Generate a new token at https://osf.io/settings/tokens/",
+      "\n- Re-authenticate with osf_auth()",
+      "\n- Ensure your token has the required scopes for this operation\n\n"
+    )
+    stop(auth_hint, call. = FALSE)
+  }
+
+  http_error(code, detail)
 }
 
 # Convert datetime attributes to POSIXct objects
