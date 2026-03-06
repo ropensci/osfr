@@ -1,5 +1,7 @@
 Meta
 doc
+*.Rcheck/
+*.tar.gz
 # History files
 .Rhistory
 .Rapp.history
