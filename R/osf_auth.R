@@ -78,9 +78,24 @@ osf_auth <- function(token = NULL) {
   if (is.null(token)) {
     warning("No PAT found. See ?osf_auth for help")
   } else {
+    validate_pat_format(token)
     message("Registered PAT from the ", source)
   }
 
   options(osfr.pat = token)
   invisible(token)
+}
+
+#' Warn if a PAT has an unexpected format
+#'
+#' @param pat A personal access token string
+#' @noRd
+validate_pat_format <- function(pat) {
+  if (nchar(pat) != 70) {
+    warning(
+      "PAT has an unexpected length (", nchar(pat), " chars, expected 70). ",
+      "Verify your token was copied correctly.",
+      call. = FALSE
+    )
+  }
 }
