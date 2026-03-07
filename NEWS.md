@@ -1,9 +1,14 @@
 # osfr (development version)
 
+## Improvements
+
+* Authentication errors (401/403) now include troubleshooting hints.
+* Non-auth API errors now include the detail message from the API response.
+* `osf_auth()` warns if the provided PAT has an unexpected length.
+
 ## Fixes
 
 * Fixed the `Accept` header name in `.build_client()`. The header was incorrectly set as `Accept-Header`, which meant API version pinning never actually worked.
-
 * Fixed `osf_mv()` and `osf_cp()` failing with an uninformative error when a conflict is encountered. Waterbutler dropped the `code` field from conflict (409) responses, which prevented the error message from being extracted and surfaced correctly.
 
 ## API compatibility
