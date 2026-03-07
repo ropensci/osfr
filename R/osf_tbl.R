@@ -72,15 +72,19 @@ new_osf_tbl <- function(x, subclass = NULL) {
 }
 
 # expects a list, where each item is OSF entity represented as a list
+#' @noRd
 as_osf_tbl <- function(x, subclass = NULL) UseMethod("as_osf_tbl")
 
+#' @noRd
 as_osf_tbl.default <- function(x, subclass = NULL)
   abort("No methods available to coerce this object into an osf_tbl")
 
 # nolint start
+#' @noRd
 as_osf_tbl.data.frame <- function(x, subclass = NULL) new_osf_tbl(x, subclass)
 # nolint end
 
+#' @noRd
 as_osf_tbl.list <- function(x, subclass = NULL) {
 
   # handle empty lists returned by e.g. .osf_node_children() for childless nodes
