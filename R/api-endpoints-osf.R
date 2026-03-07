@@ -100,7 +100,7 @@
 #' @param n_max max number of pages to retrieve from the API
 #' @param query a list of query params to include in the call. This is necessary
 #'   for filtering.
-#' @param verbose Logical passed to [`.osf_paginated_request()`]
+#' @param verbose Logical passed to `.osf_paginated_request()`
 #' @return An entity collection with entities sorted by `date_modified`
 #' @references
 #' https://developer.osf.io/#operation/nodes_list
