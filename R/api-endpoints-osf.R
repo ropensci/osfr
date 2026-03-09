@@ -121,3 +121,15 @@
   path <- sprintf("users/%s/nodes/", id)
   .osf_paginated_request("get", path, query, n_max = n_max, verbose = verbose)
 }
+
+#' List the preprints a user is a contributor to
+#' @param id a user's GUID
+#' @inheritParams .osf_node_children
+#' @return An entity collection with entities sorted by `date_modified`
+#' @references
+#' https://developer.osf.io/#operation/users_preprints_list
+#' @noRd
+.osf_user_preprints <- function(id, n_max, query = list(), verbose = FALSE) {
+  path <- sprintf("users/%s/preprints/", id)
+  .osf_paginated_request("get", path, query, n_max = n_max, verbose = verbose)
+}
